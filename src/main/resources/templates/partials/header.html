@@ -10,8 +10,12 @@
 </head>
 <body>
 <ul>
-  <li sec:authorize="isAnonymous">로그인</li>
-  <li sec:authorize="isAuthenticated">로그아웃</li>
+  <li sec:authorize="isAnonymous">
+    <a th:href="@{/login}">로그인</a>
+  </li>
+  <li sec:authorize="isAuthenticated">
+    <a th:href="@{/logout}">로그아웃</a>
+  </li>
 </ul>
 </body>
 </html>

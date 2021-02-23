@@ -24,21 +24,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//    auth.authenticationProvider(authenticationProvider);
-    auth.inMemoryAuthentication().withUser("user").password("{noop}1234").roles("USER");
-    auth.inMemoryAuthentication().withUser("admin").password("{noop}1234").roles("ADMIN");
+    auth.authenticationProvider(authenticationProvider);
+//    auth.inMemoryAuthentication().withUser("user").password("{noop}1234").roles("USER");
+//    auth.inMemoryAuthentication().withUser("admin").password("{noop}1234").roles("ADMIN");
   }
 
   @Override
   public void configure(WebSecurity web) throws Exception {
-    web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+    web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations())
+      .and().ignoring().antMatchers("/favicon.ico");
+
   }
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http
       .authorizeRequests()
-      .antMatchers("/", "/login", "/join", "/room/detail/**").permitAll()
+      .antMatchers("/", "/error", "/login", "/join", "/room/detail/**").permitAll()
       .antMatchers("/member/**").hasAnyRole("MEMBER", "ADMIN")
       .antMatchers("/admin/**").hasRole("ADMIN")
       .anyRequest().authenticated()
@@ -51,12 +53,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         RequestCache requestCache = new HttpSessionRequestCache();
         SavedRequest savedRequest = requestCache.getRequest(request, response);
         response.sendRedirect(savedRequest == null ? "/" : savedRequest.getRedirectUrl());
-      })
-      .and()
-      .rememberMe()
-      .rememberMeParameter("remember")
-      .tokenValiditySeconds(60 * 60 * 24)
-      .alwaysRemember(false)
-      .userDetailsService(userDetailsService());
+      });
   }
 }
