@@ -1,4 +1,4 @@
-package com.yts8.sixuniverse.member;
+package com.yts8.sixuniverse.member.domain;
 
 import lombok.Data;
 

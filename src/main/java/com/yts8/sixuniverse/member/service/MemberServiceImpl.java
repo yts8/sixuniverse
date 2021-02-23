@@ -1,12 +1,14 @@
 package com.yts8.sixuniverse.member.service;
 
-import com.yts8.sixuniverse.member.Member;
+import com.yts8.sixuniverse.member.domain.Member;
 import com.yts8.sixuniverse.member.repository.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class MemberServiceImpl implements MemberService {
 
   private final MemberMapper memberMapper;
