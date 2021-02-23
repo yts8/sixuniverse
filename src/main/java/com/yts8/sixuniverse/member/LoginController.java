@@ -19,7 +19,6 @@ public class LoginController {
 
   @GetMapping("/login")
   public String login(Principal principal) {
-    System.out.println("principal = " + principal);
     if (principal != null) {
       return "redirect:/";
     }
