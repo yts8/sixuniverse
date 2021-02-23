@@ -1,13 +1,13 @@
-package com.yts8.sixuniverse.security;
+package com.yts8.sixuniverse.home;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class SecurityController {
+public class HomeController {
 
   @GetMapping("/")
-  public String index() {
+  public String home() {
     return "index";
   }
 }
