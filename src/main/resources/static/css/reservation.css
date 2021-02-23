@@ -1,0 +1,246 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+
+
+
+
+
+
+
+
+#logo {
+    height: 50px;
+}
+
+#logo>a {
+    padding-left: 10px;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: #D5D5D5;
+}
+
+#box {
+    width: 85%;
+    margin: 50px auto;
+}
+
+.content {
+    max-width: 1280px;
+    padding-left: 80px;
+    padding-right: 80px;
+    margin: 0 auto;
+}
+
+.content-info {
+    margin: 0 auto;
+    display: flex;
+
+}
+
+.first {
+    display: flex;
+}
+
+.back {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.back:hover {
+
+    background-color: #c3c3c3;
+}
+
+.back>a {
+    color: black;
+    font-size: 25px;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px 0 30px 0;
+}
+
+h4 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.re-title {
+    margin-left: 20px;
+    font-size: 32px !important;
+    line-height: 36px !important;
+    font-weight: 800 !important;
+}
+
+.update-btn {
+    float: right;
+    padding: 0;
+    height: 20px;
+    background-color: transparent;
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.re-info {
+    width: 50%;
+
+}
+
+.box2 {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.small-box {
+    width: 90%;
+}
+
+.line {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-top: 1px solid;
+    border-top-color: rgb(221, 221, 221);
+}
+
+.host-msg {
+    font-weight: bold;
+}
+
+.host-info {
+    display: flex;
+    background-color: #EAEAEA;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.host_name {
+    padding-left: 10px;
+}
+
+.msg {
+    width: 100%;
+    height: 50px;
+    margin-top: 10px;
+    resize : vertical;
+}
+
+.refund {
+    border-left: 8px solid #FFB2D9;
+    padding-left: 24px;
+}
+
+.wait-info {
+    display: flex;
+}
+
+.wait-content {
+    margin-left: 10px;
+}
+
+.wait {
+    font-weight: bold;
+}
+
+.room-box {
+    box-sizing: border-box;
+    width: 40%;
+    height: max-content;
+    border: 1px solid #D5D5D5;
+    margin-left: 70px;
+    padding: 30px;
+    border-radius: 15px;
+    top: 80px;
+    position: sticky;
+}
+
+.room-info {
+    display: flex;
+}
+
+.room-info2 {
+    margin-left: 10px;
+}
+
+.table {
+    display: table;
+    width: 100%;
+    height: 30%;
+}
+
+.price {
+    display: table-cell;
+
+}
+
+.price2 {
+    display: table-cell;
+    float: right;
+
+}
+
+.total {
+    display: table-cell;
+    font-weight: bold;
+}
+
+.total2 {
+    display: table-cell;
+    float: right;
+    font-weight: bold;
+}
