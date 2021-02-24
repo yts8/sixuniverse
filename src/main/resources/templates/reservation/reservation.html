@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+<div layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/reservation/reservation.css}">
+
+</div>
+
+<div layout:fragment="js">
+    <script th:src="@{/js/jquery-3.5.1.js}"></script>
+
+    <script type="text/javascript">
+
+        jQuery(document).ready(function() {
+            $('#update-guest').bind('click', function () {
+                $('#myModal').show();
+            });
+
+        });
+        //팝업 Close 기능
+        function close_pop(flag) {
+            $('#myModal').hide();
+        };
+
+    </script>
+
+
+</div>
+
+<head>
+    <meta charset="UTF-8">
+    <title>예약하기</title>
+</head>
+
+<body>
+<div layout:fragment="content">
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div onclick="close_pop()">x</div>
+            <h2>게스트</h2>
+            <div class="guest">
+                <div class="guest-title">성인</div>
+                <div class="number-right">
+                <div class="number">
+                    <button class="decrease">-</button><div>숫자</div><button class="increase">+</button>
+                </div>
+                </div>
+            </div>
+
+            <div class="guest">
+                <div>
+                    <div class="guest-title">어린이</div>
+                    <div class="guest-age">2~12세</div>
+                </div>
+                <div class="number-right">
+                    <div class="number">
+                        <button class="decrease">-</button><div>숫자</div><button class="increase">+</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="guest">
+                <div>
+                    <div class="guest-title">유아</div>
+                    <div class="guest-age">2세 미만</div>
+                </div>
+                <div class="number-right">
+                    <div class="number">
+                        <button class="decrease">-</button><div>숫자</div><button class="increase">+</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div>최대 [2]명. 유아는 숙박인원에 포함되지 않습니다.</div>
+
+            <div onClick="close_pop();">
+                <span class="pop_bt" >
+                     취소
+                </span>
+            </div>
+        </div>
+
+    </div>
+
+<div id="logo">
+    <a href="#">로고</a>
+</div>
+
+<hr>
+
+<div id="box">
+    <div class="content">
+        <div class="first">
+                 <div class="back">
+                 <a href="#"> < </a>
+                 </div>
+
+                <div class="re-title">예약요청하기</div>
+        </div>
+
+        <div class="content-info">
+            <div class="re-info">
+                <h2 class="info">예약정보</h2>
+                <div class="box2">
+                    <div class="small-box">
+                        <h4>날짜</h4>
+                        <div>[2021.2.24-2021.2.25]</div>
+                        <div>[<img th:src="@{/images/reservation/clock.png}" width="15"> 체크인: 오후2:00 이후]</div>
+                    </div>
+                    <button class="update-btn">수정</button>
+                </div>
+
+
+                <div class="box2">
+                    <div class="small-box">
+                        <h4>게스트</h4>
+                        <div>[게스트 1명]</div>
+                    </div>
+                    <button id="update-guest" class="update-btn">수정</button>
+                </div>
+
+
+                <div class="line"></div>
+
+                <h2 class="info">할인</h2>
+                <div>
+                    <div class="coupon-info">
+                        <h4>쿠폰 할인</h4>
+                        <span>쿠폰</span> <span>사용된 쿠폰</span>
+                        <button>쿠폰입력</button>
+                        <span>사용가능 : 1장 | 보유 : 15장</span>
+                    </div>
+
+                    <div class="mileage-info">
+                        <h4>마일리지 할인</h4>
+                        <span>보유 마일리지</span> <span>user-mileage</span>
+                        <div>
+                        <span>사용 마일리지</span> <input type="text" name="mileage" value="">
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+                <div class="line"></div>
+
+                <div>
+                    <h2 class="info">필수 입력 정보</h2>
+                    <div>
+                        <div class="host-msg">호스트에게 메시지 보내기</div>
+                        <div>호스트에게 여행 목적과 도착 예정 시간을 알려주세요.</div>
+                    </div>
+
+                    <div>
+                        <div class="host-info">
+                            <div class="host-img">사진</div>
+                            <div class="host-name">이름</div>
+                        </div>
+                        <textarea class="msg"></textarea>
+
+                    </div>
+
+
+                </div>
+
+                <div class="line"></div>
+
+                    <div class="refund">
+                        <h2 class="info">환불 정책</h2>
+                        <div>[2월 24일 12:00 PM 전에 예약을 취소하면 총 숙박 요금의 50% 및 서비스 수수료 전액이 환불됩니다.]</div>
+                    </div>
+
+
+                <div class="line"></div>
+
+                <div class="wait-info">
+                    <img th:src="@{/images/reservation/calendar.png}" width="50" height="50">
+                    <div class="wait-content">
+                    <div class="wait">호스트가 24시간 이내 예약 요청을 수락하기 전까지는 예약이 아직 확정된 것이 아닙니다.</div>
+                    <div>예약 확정 전까지는 요금이 청구되지 않습니다.</div>
+                    </div>
+                </div>
+
+                <div class="line"></div>
+
+                <button>예약요청하기</button>
+                <button>예약 및 결제</button>
+            </div>
+
+
+
+            <div class="room-box">
+                <div class="room-info">
+                    <div class="room-img">
+                        숙소사진
+                    </div>
+                    <div class="room-info2">
+                        <div>주소</div>
+                        <div>제목</div>
+                        <div>침대 | 욕실</div>
+                        <div>별점</div>
+                        <div>슈퍼호스트?</div>
+                    </div>
+                </div>
+
+
+                <div class="line"></div>
+
+                <h2>요금 세부 정보</h2>
+
+                <div class="price-info">
+                    <div class="table">
+                    <div class="price">1박당요금</div>
+                    <span class="price2">￦40000</span>
+                    </div>
+
+                    <div class="table">
+                        <div class="price">수수료</div>
+                        <span class="price2">￦1000</span>
+                    </div>
+
+                    <div class="table">
+                        <div class="price">할인금액</div>
+                        <span class="price2">￦30000</span>
+                    </div>
+
+                    <div class="table">
+                        <div class="total">총 합계</div>
+                        <span class="total2">￦11000</span>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

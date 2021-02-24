@@ -1,0 +1,265 @@
+@charset "UTF-8";
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed !important; /* Stay in place */
+    z-index: 1 !important; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100% !important; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgb(0,0,0) !important; /* Fallback color */
+    background-color: rgba(0,0,0,0.4) !important; /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 20px;
+    max-width: 400px; /* Could be more or less, depending on screen size */
+}
+
+.guest {
+    width: 100%;
+    display: table;
+    margin-bottom: 20px;
+}
+
+.guest-title {
+    display: table-cell;
+    font-weight: bold;
+}
+
+.guest-age {
+float: left;
+}
+
+.number-right {
+    margin-left: 40px;
+    display: table-cell;
+    float: right;
+}
+
+.number {
+    margin-left: 10px;
+    display: flex;
+}
+
+.decrease, .increase {
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: 1px solid #c3c3c3;
+    border-radius: 30px;
+    margin: 0 5px 0 5px;
+}
+
+.decrease:hover, .increase:hover {
+   border-color: #888888;
+}
+
+#logo {
+    height: 50px;
+}
+
+#logo>a {
+    padding-left: 10px;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: #D5D5D5;
+}
+
+#box {
+    width: 85%;
+    margin: 50px auto;
+}
+
+.content {
+    max-width: 1280px;
+    padding-left: 80px;
+    padding-right: 80px;
+    margin: 0 auto;
+}
+
+.content-info {
+    margin: 0 auto;
+    display: flex;
+
+}
+
+.first {
+    display: flex;
+}
+
+.back {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.back:hover {
+
+    background-color: #c3c3c3;
+}
+
+.back>a {
+    color: black;
+    font-size: 25px;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+h2 {
+    font-size: 20px !important;
+    font-weight: bold !important;
+    margin: 20px 0 30px 0 !important;
+}
+
+h4 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.re-title {
+    margin-left: 20px;
+    font-size: 32px !important;
+    line-height: 36px !important;
+    font-weight: 800 !important;
+}
+
+.update-btn {
+    float: right;
+    padding: 0;
+    height: 20px;
+    background-color: transparent;
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.re-info {
+    width: 50%;
+
+}
+
+.box2 {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.small-box {
+    width: 90%;
+}
+
+.small-box>div {
+    margin-bottom: 5px;
+}
+
+.line {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-top: 1px solid;
+    border-top-color: rgb(221, 221, 221);
+}
+
+.mileage-info {
+    margin-top: 20px;
+}
+
+.host-msg {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.host-info {
+    display: flex;
+    background-color: #EAEAEA;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.host_name {
+    padding-left: 10px;
+}
+
+.msg {
+    width: 99%;
+    height: 70px;
+    margin-top: 20px;
+    border-color: #c3c3c3;
+    border-radius: 10px;
+    resize : vertical;
+}
+
+.refund {
+    border-left: 8px solid #FFB2D9;
+    padding-left: 24px;
+}
+
+.wait-info {
+    display: flex;
+}
+
+.wait-content {
+    margin-left: 10px;
+}
+
+.wait {
+    font-weight: bold;
+}
+
+.room-box {
+    box-sizing: border-box;
+    width: 40%;
+    height: max-content;
+    border: 1px solid #D5D5D5;
+    margin-left: 70px;
+    padding: 30px;
+    border-radius: 15px;
+    top: 80px;
+    position: sticky;
+}
+
+.room-info {
+    display: flex;
+}
+
+.room-info2 {
+    margin-left: 10px;
+}
+
+.table {
+    display: table;
+    width: 100% !important;
+    height: 30px !important;
+}
+
+.price {
+    display: table-cell;
+}
+
+.price2 {
+    display: table-cell;
+    float: right;
+
+}
+
+.total {
+    display: table-cell;
+    font-weight: bold;
+}
+
+.total2 {
+    display: table-cell;
+    float: right;
+    font-weight: bold;
+}
