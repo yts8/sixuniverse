@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="../../static/css/reset.css">
     <link rel="stylesheet" href="../../static/css/reservation.css">
 </head>
 <body>
@@ -47,13 +48,24 @@
                 <div class="line"></div>
 
                 <h2 class="info">할인</h2>
-                쿠폰 <input type="text" name="coupon" value="">
+                <div>
+                    <div class="coupon-info">
+                        <h4>쿠폰 할인</h4>
+                        <span>쿠폰</span> <span>사용된 쿠폰</span>
+                        <button>쿠폰입력</button>
+                        <span>사용가능 : 1장 | 보유 : 15장</span>
+                    </div>
 
-                <button>쿠폰입력</button> <br>
-                <div>사용가능 : 1장 | 보유 : 15장</div>
-                마일리지
+                    <div class="mileage-info">
+                        <h4>마일리지 할인</h4>
+                        <span>보유 마일리지</span> <span>user-mileage</span>
+                        <div>
+                        <span>사용 마일리지</span> <input type="text" name="mileage" value="">
+                        </div>
+                    </div>
 
-                <input type="text" name="mileage" value="">
+
+                </div>
 
 
                 <div class="line"></div>
@@ -80,7 +92,7 @@
                 <div class="line"></div>
 
                     <div class="refund">
-                        <h2 class="info">환불정책</h2>
+                        <h2 class="info">환불 정책</h2>
                         <div>[2월 24일 12:00 PM 전에 예약을 취소하면 총 숙박 요금의 50% 및 서비스 수수료 전액이 환불됩니다.]</div>
                     </div>
 
