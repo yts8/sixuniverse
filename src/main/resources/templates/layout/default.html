@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Common CSS -->
+  <link rel="stylesheet" th:href="@{/css/reset.css}"/>
+  <link rel="stylesheet" th:href="@{/css/variables.css}"/>
+
+  <!-- Common JS -->
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+  <title th:text="${title} + ' | Sixunsiverse'"></title>
+</head>
+<body>
+<!-- Header -->
+<div th:replace="partials/header :: header"></div>
+
+<!-- 각 페이지가 구현 해야할 부분 -->
+<div layout:fragment="content"></div>
+
+<!-- Footer -->
+<div th:replace="partials/footer :: footer"></div>
+</body>
+</html>

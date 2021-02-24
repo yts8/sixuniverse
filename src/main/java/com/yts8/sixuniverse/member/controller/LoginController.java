@@ -1,4 +1,4 @@
-package com.yts8.sixuniverse.member;
+package com.yts8.sixuniverse.member.controller;
 
 import com.yts8.sixuniverse.member.domain.Member;
 import com.yts8.sixuniverse.member.service.MemberService;
