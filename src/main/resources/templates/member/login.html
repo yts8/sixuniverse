@@ -1,18 +1,16 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>로그인 | sixuniverse</title>
-</head>
-<body>
-<form th:action="@{/login}" method="post">
-  <input type="hidden" th:name="${_csrf.getParameterName()}" th:value="${_csrf.token}"/>
-  <input type="text" name="email" placeholder="sample@gmail.com"/>
-  <input type="password" name="password" placeholder="비밀번호"/>
-  <button>로그인</button>
-</form>
-</body>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<div layout:fragment="content">
+  <section>
+    <h2>로그인</h2>
+    <form th:action="@{/login}" method="post">
+      <input type="text" name="email" placeholder="sample@gmail.com"/>
+      <input type="password" name="password" placeholder="비밀번호"/>
+      <button>로그인</button>
+    </form>
+  </section>
+</div>
 </html>
