@@ -1,0 +1,66 @@
+div {
+    display: block;
+}
+
+.reservation__list-container {
+    font-size: 14px;
+    line-height: 1.43;
+    color: #484848;
+    background-color: #ffffff;
+    margin: 0 auto;
+    padding-right: 24px;
+    padding-left: 24px;
+}
+
+.reservation__list-subject {
+    display: inherit;
+}
+
+.reservation__list-subject {
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 1.125em;
+    color: #484848;
+    margin-top: 32px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.reservation__menu-list {
+    margin-top: 32px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ebebeb;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    min-width: 100%;
+}
+
+.reservation__plan, .reservation__finish, .reservation__cancel, .reservation__All {
+    display: inline-block;
+}
+
+.reservation__plan-sub {
+    font-size: 16px;
+    line-height: 22px;
+    color: var(--host-color);
+    background-color: transparent;
+    border-bottom-color: var(--host-color);
+    border-bottom-width: 2px;
+    margin-right: 32px;
+    padding: 24px 0px 12px 0px;
+    text-align: center;
+}
+
+.reservation__finish-sub {
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: normal;
+    color: #484848;
+    background-color: transparent;
+    font-weight: 600;
+    border-bottom-color: transparent;
+    border-bottom-width: 2px;
+    margin-right: 32px;
+    padding: 24px 0px 12px 0px;
+}
