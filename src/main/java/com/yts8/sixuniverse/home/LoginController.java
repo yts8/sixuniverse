@@ -1,4 +1,4 @@
-package com.yts8.sixuniverse.member.controller;
+package com.yts8.sixuniverse.home;
 
 import com.yts8.sixuniverse.member.domain.Member;
 import com.yts8.sixuniverse.member.service.MemberService;
@@ -25,7 +25,7 @@ public class LoginController {
     if (authentication != null) {
       return "redirect:/";
     }
-    return "member/login";
+    return "home/login";
   }
 
   @GetMapping("/logout")
@@ -41,7 +41,7 @@ public class LoginController {
     if (authentication != null) {
       return "redirect:/";
     }
-    return "member/join";
+    return "home/join";
   }
 
   @PostMapping("/join")

@@ -49,4 +49,6 @@ public class MemberController {
     return "redirect:/member/profile";
   }
 
+  // TODO: 비밀번호 수정
+  // TODO: 회원탈퇴
 }

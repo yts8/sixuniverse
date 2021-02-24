@@ -7,8 +7,15 @@
   <section>
     <h2>로그인</h2>
     <form th:action="@{/login}" method="post">
-      <input type="text" name="email" placeholder="sample@gmail.com"/>
-      <input type="password" name="password" placeholder="비밀번호"/>
+
+      <input type="text"
+             name="email"
+             placeholder="sample@gmail.com"/>
+
+      <input type="password"
+             name="password"
+             placeholder="비밀번호"/>
+
       <button>로그인</button>
     </form>
   </section>
