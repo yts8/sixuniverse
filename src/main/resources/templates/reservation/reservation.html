@@ -1,12 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+<div layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/reservation/reservation.css}">
+
+</div>
+
+<div layout:fragment="js">
+    <script th:src="@{/js/jquery-3.5.1.js}"></script>
+
+    <script type="text/javascript">
+
+        jQuery(document).ready(function() {
+            $('#update-guest').bind('click', function () {
+                $('#myModal').show();
+            });
+
+        });
+        //팝업 Close 기능
+        function close_pop(flag) {
+            $('#myModal').hide();
+        };
+
+    </script>
+
+
+</div>
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="../../static/css/reset.css">
-    <link rel="stylesheet" href="../../static/css/reservation.css">
+    <title>예약하기</title>
 </head>
+
 <body>
+<div layout:fragment="content">
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div onclick="close_pop()">x</div>
+            <h2>게스트</h2>
+            <div class="guest">
+                <div class="guest-title">성인</div>
+                <div class="number-right">
+                <div class="number">
+                    <button class="decrease">-</button><div>숫자</div><button class="increase">+</button>
+                </div>
+                </div>
+            </div>
+
+            <div class="guest">
+                <div>
+                    <div class="guest-title">어린이</div>
+                    <div class="guest-age">2~12세</div>
+                </div>
+                <div class="number-right">
+                    <div class="number">
+                        <button class="decrease">-</button><div>숫자</div><button class="increase">+</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="guest">
+                <div>
+                    <div class="guest-title">유아</div>
+                    <div class="guest-age">2세 미만</div>
+                </div>
+                <div class="number-right">
+                    <div class="number">
+                        <button class="decrease">-</button><div>숫자</div><button class="increase">+</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div>최대 [2]명. 유아는 숙박인원에 포함되지 않습니다.</div>
+
+            <div onClick="close_pop();">
+                <span class="pop_bt" >
+                     취소
+                </span>
+            </div>
+        </div>
+
+    </div>
+
 <div id="logo">
     <a href="#">로고</a>
 </div>
@@ -30,7 +111,7 @@
                     <div class="small-box">
                         <h4>날짜</h4>
                         <div>[2021.2.24-2021.2.25]</div>
-                        <div>[<img src="../../static/img/clock.png" width="15"> 체크인: 오후2:00 이후]</div>
+                        <div>[<img th:src="@{/images/reservation/clock.png}" width="15"> 체크인: 오후2:00 이후]</div>
                     </div>
                     <button class="update-btn">수정</button>
                 </div>
@@ -41,7 +122,7 @@
                         <h4>게스트</h4>
                         <div>[게스트 1명]</div>
                     </div>
-                    <button class="update-btn">수정</button>
+                    <button id="update-guest" class="update-btn">수정</button>
                 </div>
 
 
@@ -100,7 +181,7 @@
                 <div class="line"></div>
 
                 <div class="wait-info">
-                    <img src="../../static/img/calendar.png" width="50" height="50">
+                    <img th:src="@{/images/reservation/calendar.png}" width="50" height="50">
                     <div class="wait-content">
                     <div class="wait">호스트가 24시간 이내 예약 요청을 수락하기 전까지는 예약이 아직 확정된 것이 아닙니다.</div>
                     <div>예약 확정 전까지는 요금이 청구되지 않습니다.</div>
@@ -161,6 +242,7 @@
 
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>

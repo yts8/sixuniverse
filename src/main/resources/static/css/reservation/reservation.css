@@ -1,3 +1,64 @@
+@charset "UTF-8";
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed !important; /* Stay in place */
+    z-index: 1 !important; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100% !important; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgb(0,0,0) !important; /* Fallback color */
+    background-color: rgba(0,0,0,0.4) !important; /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 20px;
+    max-width: 400px; /* Could be more or less, depending on screen size */
+}
+
+.guest {
+    width: 100%;
+    display: table;
+    margin-bottom: 20px;
+}
+
+.guest-title {
+    display: table-cell;
+    font-weight: bold;
+}
+
+.guest-age {
+float: left;
+}
+
+.number-right {
+    margin-left: 40px;
+    display: table-cell;
+    float: right;
+}
+
+.number {
+    margin-left: 10px;
+    display: flex;
+}
+
+.decrease, .increase {
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: 1px solid #c3c3c3;
+    border-radius: 30px;
+    margin: 0 5px 0 5px;
+}
+
+.decrease:hover, .increase:hover {
+   border-color: #888888;
+}
 
 #logo {
     height: 50px;
