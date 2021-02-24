@@ -11,9 +11,11 @@
   <!-- Common CSS -->
   <link rel="stylesheet" th:href="@{/css/reset.css}"/>
   <link rel="stylesheet" th:href="@{/css/variables.css}"/>
+  <div layout:fragment="css"></div>
 
   <!-- Common JS -->
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <div layout:fragment="js"></div>
 
   <title th:text="${title} + ' | Sixunsiverse'"></title>
 </head>

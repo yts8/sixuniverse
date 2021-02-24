@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<div layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/performance/super-host.css}" />
+</div>
+<div layout:fragment="content">
+  <section>
+
+    <div class="container">
+      <div class="menu_container">
+        <div class="main-menu_container">실적</div>
+        <div class="sub-menu-container">
+          <div class="sub1"><a href="./income" class="sub_a1">수입</a></div>
+          <div class="sub2"><a href="주소" class="sub_a2">조회수</a></div>
+          <div class="sub3"><a href="./super-host" class="sub_a3">슈퍼호스트</a></div>
+          <div class="sub4"><a href="주소" class="sub_a4">후기관리</a></div>
+        </div>
+      </div>
+      <div class="superhost_container">
+        <div class="super_subject">슈퍼호스트 통계</div>
+        <div class="super_date">
+          <div class="super_date_select">
+            <select class="date">
+              <option value="">기간 선택</option>
+              <option value="2022년 3월">2022년 3월</option>
+              <option value="2022년 1월">2022년 2월</option>
+              <option value="2022년 1월">2022년 1월</option>
+            </select>
+          </div>
+          <div class="super_date_detail">에어비앤비는 3개월마다 평가를 실시하여 호스트가 지난 1년 동안 슈퍼호스트 기준을 만족했는지 확인합니다. 조건을 충족하시면 슈퍼호스트가 됩니다.</div>
+        </div>
+        <div class="super_result_container">
+
+          <div class="super_result1">
+            <div class="result1_0">-★</div>
+            <div class="result1_1">전체 평점</div>
+            <div class="result1_2">기준 : 4.8점</div>
+            <div class="result1_3">아쉽네요.</div>
+          </div>
+          <div class="super_result2">
+            <div class="result2_0">-%</div>
+            <div class="result2_1">응답률</div>
+            <div class="result2_2">기준 : 90 %</div>
+            <div class="result2_3">아쉽네요.</div>
+          </div>
+          <div class="super_result3">
+            <div class="result3_0">-만원</div>
+            <div class="result3_1">월 매출</div>
+            <div class="result3_2">기준 : 190만 원</div>
+            <div class="result3_3"><div><img alt="icon" src="icon.jpg"></div><div>아쉽네요.</div></div>
+          </div>
+          <div class="super_result4">
+            <div class="result4_0">0.0%</div>
+            <div class="result4_1">예약 취소율</div>
+            <div class="result4_2">기준 : 1.0% 미만</div>
+            <div class="result4_3">대단해요!</div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</html>
