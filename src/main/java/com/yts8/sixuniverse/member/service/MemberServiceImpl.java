@@ -19,6 +19,11 @@ public class MemberServiceImpl implements MemberService {
   }
 
   @Override
+  public void updateMember(Member member) {
+    memberMapper.updateMember(member);
+  }
+
+  @Override
   public Member findByEmail(String email) {
     return memberMapper.findByEmail(email);
   }
