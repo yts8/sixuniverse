@@ -24,9 +24,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth.authenticationProvider(authenticationProvider);
-//    auth.inMemoryAuthentication().withUser("user").password("{noop}1234").roles("USER");
-//    auth.inMemoryAuthentication().withUser("admin").password("{noop}1234").roles("ADMIN");
+//    auth.authenticationProvider(authenticationProvider);
+    auth.inMemoryAuthentication().withUser("user").password("{noop}1234").roles("MEMBER");
+    auth.inMemoryAuthentication().withUser("admin").password("{noop}1234").roles("ADMIN");
   }
 
   @Override
@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     http
         .authorizeRequests()
-        .antMatchers("/", "/error", "/login", "/join", "/room/detail/**", "/performance/**").permitAll()
+        .antMatchers("/", "/error", "/login", "/join", "/room/detail/**").permitAll()
         .antMatchers("/member/**").hasAnyRole("MEMBER", "ADMIN")
         .antMatchers("/admin/**").hasRole("ADMIN")
         .anyRequest().authenticated()
