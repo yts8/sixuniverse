@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+.container{
+
+  display: flex;
+  position:relative;
+  flex-direction: column;
+
+}
+.main_manu_container{
+  margin: 20px;
+  display:flex;
+  font-size: 30px;
+  font-weight: bold;
+  flex-direction: row;
+}
+
+.subManu_container{
+  padding-bottom: 30px;
+  margin-bottom: -30px ;
+  display:flex;
+  flex-direction: row;
+  /* 	font-family: var(--font-text-small-font-family, Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif); */
+}
+
+.sub1, .sub2, .sub3,.sub4{
+  margin: 20px;
+  margin-right: 24px;
+  display: inline-block ;
+}
+
+a{
+  color: inherit;
+  text-decoration: none;
+}
+
+.chart_container{
+  position:relative;
+
+}
