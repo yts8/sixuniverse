@@ -8,6 +8,12 @@
     where email = #{email}
   </select>
 
+  <select id="findById" resultType="Member">
+    select *
+    from member
+    where member_id = #{memberId}
+  </select>
+
   <insert id="save" parameterType="Member">
     insert into member
     (email,
@@ -43,6 +49,12 @@
         phone=#{phone},
         bio=#{bio}
     where email = #{email}
+  </update>
+
+  <update id="updatePassword" parameterType="Member">
+    update member
+    set password=#{password}
+    where member_id = #{memberId}
   </update>
 
 </mapper>

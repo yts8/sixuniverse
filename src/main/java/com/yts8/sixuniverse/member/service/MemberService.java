@@ -6,7 +6,11 @@ public interface MemberService {
 
   Member findByEmail(String email);
 
+  Member findById(int memberId);
+
   void save(Member member);
 
   void updateMember(Member member);
+
+  void updatePassword(Member member);
 }
