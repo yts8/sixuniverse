@@ -10,40 +10,43 @@
         <link rel="stylesheet" th:href="@{/css/chat/chat.css}"/>
     </div>
 
+    <!-- Common JS -->
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <div layout:fragment="js"></div>
 
 
 <!-- 각 페이지가 구현 해야할 부분 -->
 <div layout:fragment="content">
-    <div id="header">
+    <div id="chat_header">
         헤더자리
     </div>
-    <div class="chat-frame">
+    <div class="chat_chat-frame">
         <!--채팅페이지 전체영역-->
-        <div class="chat-container">
+        <div class="chat_chat-container">
             <!--채팅페이지 주요 컨텐츠-->
-            <section class="chatroom-list">
+            <section class="chat_chatroom-list">
                 <!--채팅목록-->
-                <div class="chatroom-list-header">
-                    <h3 class="chatroom-list-header-name">메시지</h3>
+                <div class="chat_chatroom-list-header">
+                    <h3 class="chat_chatroom-list-header-name" th:text="${chat}">메시지</h3>
                 </div>
                 <!--채팅리스트 스크롤-->
-                <div class="chatroom-list-scroll">
-                    <div class="chatroom-list-frame">
-                        <div class="chatroom-list-content">
+                <div class="chat_chatroom-list-scroll">
+                    <div class="chat_chatroom-list-frame">
+                        <div class="chat_chatroom-list-content">
                             <a href="#"></a>
-                            <div class="member-img-frame">
+                            <div class="chat_member-img-frame">
                                 <div>
-                                    <img class="member-img" src="https://a0.muscache.com/defaults/user_pic-225x225.png?v=3">
+                                    <img class="chat_member-img" src="https://a0.muscache.com/defaults/user_pic-225x225.png?v=3">
                                 </div>
                             </div>
-                            <div class="member-info-frame">
-                                <div class="member-name">
+                            <div class="chat_member-info-frame">
+                                <div class="chat_member-name">
                                     발신자
                                 </div>
-                                <div class="message-content">
+                                <div class="chat_message-content">
                                     메시지 내용
                                 </div>
-                                <div class="message-date">
+                                <div class="chat_message-date">
                                     시간
                                 </div>
                             </div>
@@ -54,86 +57,64 @@
 
 
 
-            <section class="chatroom">
+            <section class="chat_chatroom">
                 <!--세부채팅방-->
-                <div class="chatroom-header">
+                <div class="chat_chatroom-header">
                     <!-- 채팅방이름-->
-                    <div class="chatroom-wrap">
-                        <h3 class="chatroom-name">채팅방이름</h3>
-                        <img class="chatroom-name-setting" src="data:image/png;base64,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">
+                    <div class="chat_chatroom-wrap">
+                        <h3 class="chat_chatroom-name">채팅방이름</h3>
+                        <img class="chat_chatroom-name-setting" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAkFBMVEX///8jHyAAAAAgHB0kHyAeGhsIAAAdGBkZFBUXERMcFxglISL8/PwRCgwUDhD4+PgNAwahoKDy8vLa2dmamZnk5OTr6+spJSa4t7fQz898entQTU4vKyysq6s+OzxIRUZbWVlmZGS/vr7Kyck3NDSSkZF1c3OFg4SnpqZKSEh5d3hqaGiLiopWVFSVlJTMzMxQZ6sOAAAT+klEQVR4nNVd12KrMAxN7DILhIRA9iarbdr//7sbOpFsjGxIm3te+lBiLGxrS+50bolkuM5HXQVGq+m4d9Mp3BS7GQsdriKw2+Uei/aDv56pIabMV1P3RaSdT/56riYILjaJvgIO2/31dA2wickEXpeR/X+reGIaBF5XMf/f+E2P1XAYDPv1r6esiaHOHi3Avf9sEZeOJoVdNv7rOWsh9TQ3abcbTf960lp40+MzBfjoryethb7uMbyC/VeazTQCy1MFSOF/JfXXbpnAh+6DHIDEcPjXs9ZALy/P3U2rnhuGpcf89S/OsCmy8jHk80pJBxiS4rn7Q1KeuXOufC6LymsdJ784RTWCZJJkqgcWZbPCO1QPdC4rBvci87P+khUID2+Vz+zL5ys+VQ/25JUeVMv8bNzfv552N9/JwQuLP7771TifVW2r5zIrVUkBsNj+rPrB8YWxOAzj64e97V5OV+UpuXZf/hhgpaySlV4PbHk47lbJ/OTy7S7gETvecB3TUXlxCsN1I3tbAHQ2phhwMALfosIMHtrgtfFKyQSaIIkEiyF6lJxGwEqtXDXkrOzKiaUyP51hW9N9VGyLJpi4EpPIYuJO3ZYpVLDSK17KPMl9ljxx8lz8zq4/uslhfJMRWOytDT4+QO+OK87qB8DH4Fz4f7aWOgv87g1I3FX6JaJHdH6eyzKAbVWjpvDI4t23iLyuFE7cuutqq3C8cLRTl5Zq1hAxYDVQ5meb6pfytk2RsdqzxJ7LO9UtPVvnf9mUT1l0BO98jIQXlQa2lZujZQKvc5v/HIy0zD2cc6AcGZxZZ/nzj95zzTt5m1oewflZ4qk7wEqf1END8yL63gpbW7WAnyQq9EE99Elel++dClSxsMYP2gNj25/8Y/BE8rdKJJURXkUCQxmLi+Yf8wMuDDUrvQKYF59a+m4e4sELiESzfRsEHkUC2VD6jT936rqsp9Sw0uvw5e/xLvODKbPw0AVCR9y47FgzPAFTCYH9QlLJQmdX6b/dlP/BR3U6JNjTXXeznYykC+jYL50XyVxqzrkZgYviH8lS5jH0QgaULIWB/4kEvsBl8hMY54X8kxwYW6kV1uMgBAH5B4HXzXQgcAOpqgkwmBN4Cv8ymSRMz940IXAtIfBHCi3C2iBvWM8K1vWR4nD0rcAsxM8az9QiV4FgLWxEHpd5o3ynllHLSpF5IQNnTyW9SKJ8hGdDd3lPQiDSBnuHGlFJ8J9ta4aIulv0vEBidDayiXsz4eNaorq7YKo4mks4IxNlvJ9DlbeAxMrx5gYkDpaC9HG4ZEXSXLHLKAZA8KBgNRGXKJ8TX5CXvq9t9vdmIoFys7NXzVPVHowv7CsX8bqA0rVJuLBx/JEuiUfhtf5D1RgLuQ5CDScFeYWZ64ZV1kPSFRiwu9RzwSXC8Xfn1R8pleqRFiNGk7KlLflEnF2qD1c6F7w3sV4QeYMH8JaqsyxKfytkS7L9FgxzFqEBPF9pG2VLYeFrVeAyBngJvbxG5ECe6rHly0RHDvfejnMG3DuXmvmKnFArEwDLqGhZK1OT0dcELZs9aZH3gWB3YF+7lbP69JreGR0NPtJ4KdIzwhnhFGdn5nLOPZYvTLWo3ilnnmO5sbcgPC2oXDrhORBa6XoX2pQX63k3f27mINoeZqv1kCi/N5DhE1TEn5+COPyc/LtB1kJChcYOANG5rk1Z+U8cwC/vN3FwCxZRx/kG82FoqskfYGADEcOqY7YCJpCX2neaCLIBW417OgIRyl/u3Cic1QxjuA7Wsv4nPxhCLhXVOiP+ABlOqtJyEPfmUFPUYcS/hTXU27ivJ4bRDrjDzMEF0ru0wxhrqHvHrXiXW0SGdH39g5SiRbyjjKV3XFDSxEhf10Cmt7tuf5YNgB2nJowiwMzmTpKy3oHTrCMjzzcyobh1R7mDM7RHudncnqGNGd5PrvkQ71HDoH7qIpF6L8wGe5HMvz36VKrUul/FGXrarAa5t3Pol2wvcN4IOMbWxLpDNgZ3bpYzpwG8R+NGceAn6LAxY8otI4cby9F0BSNkKD3gDsz9F+SNbzolpN86f27u44Iju7HCjPjWX5v7vSXeo42HROeah38rFHGgqg0ZfYR+1wbMJkh32/FiMR5vJ6ZOx16M+EIbpafI3Oe2CesavA03o6KIwb7i/e/sOE71feM7lJvSjg4yhouoFeJ5R7rY+CxGKqAT2Wx11OWDML+Iy4LSJliBRdTd+bu1b7vyKHERgqN68D8AKWyrGGyC1lDnDAWLOasg73MpY3bQ2BSI77XkeABp23rq93heFQAvwdOhMQfjqQsBqEAOGw1TfzIj0Fcgil6pTAdpIHYbruojUE39Ff2HxM4f3YJBL4n7LYASP3wxpKqEHlpCqscnyemdP7pF8w+iZIO+Fc6Mc9q+cYLci3oKFzF5Ab++nVCZIscKLKJOzFBE+rY4rh9hAIu4hHvdvhhXhDnpUKFFHG1exhN9szXbnZ6WfsjsyAczpUYS6xL65PBpOi9MSOVuMc3Rej+ekJStQbodTldXvSr2LMkqEBnpRusIlmZLsvVwwOL9l354nfR1PReTrJLQZDc8zEbvtFXOgObyea4i8Pq94ytCryqf0XIJq9h7rDoB1/FtZuebaX8ibPjBSx6y0PPVp4fGmyXJ/d13Da34xv3TqT98Wl1Vb6mqY3HCWTyqc265G8XMWfUBlx2ykCKbIworwN7aj1/a+QuoUk4Wa0eWzeaP6rdJSui6wR27xGZ7FxpjICm6O8lYUfwkOWDZaSnReSJC0u2FJIk4e/5cxkBMBpaDInsGYmcan00r1j4YS9QCQkbjgsjJ7PXH8wdiqxUeE0TyGqcMcnZWcY+9oNpxu5bbDKi82n53pdZlkn+D4nkVOLklL1/+QbrCH9ivdy4diLvuI2SzIqpXLkFUZJiRu/NaCRcIZTn1+3TAiZMutEwxG1gKzig6FebjXk7Rp3Acgtcb2QkPaWohS2CPGCltvhezcDQkKPHIlOx6RIc7ruCM6su1BlPvqqy5MsULIBx21tX1Ety/is44vxz6O5r1Br0BXZ+0ggXQKnKK4B1MrnbB0md26CpkubOGPSx+/nGljfHZsb9L6W4ZnL6hUQOB+HlIDSf1smTx8rxkBZ1SQnjegQ1U+XXdCn/m+XjaVauwFTjCqLhOakOQA9bBPS2XcdBLxq9rq+gpI+zbx84jJDC/HMc7syjhADJSvdBzAjlHVdcUJYJku98sH5FbHFDIKXpvJaAs5A96nvt9WymtWQIz+iCFD8bjdnCNhm76TQAN2yYRl1tRmMFFWOq6iOAWIJRmVuJWFMJsRls/gwo0VW6SeQ0ofGyPwmlZGPK5vpcP9jwNzVmCisKu8ajIQRQZeGpRJxfznN0brSEslTJiFOvqPidauBGFwLbnockQoAaiQeTMug2FwO6uL8OXAXbQMk+TudEaApVN1WevGln5KHNunH91ozWE/T7MsiFnoI2iMTO9EYUgYMLMvj/sRmic63QjCoGwMMrXQDvdXFzciMJHcIbMKAQ9M83zyn+DQoLjWgbgUTGPDKoofDQdFFH4aEbhK6DQeA2d26xhuYulaZP8F3AO741CkAZi2H0clK6aN9VTUdhgl4I+nYb267qFMTo3oxB8f7Mz1AMNF0mhPCluRCHgg2ZpLmn5GPK5cVk4orBbHrUBhcDEN7PQQYzIMU+svBGFMP5hxGpAs74GKWv+bSjsQDeNgbgOQNtk27x6RUVhk1pYwAhNCohgINM2LzJQ7NIuf9X35X8BdikwyPyEV0Z0DRPWBskJxJoQhd2Q2cvDKTE5RfAg6ie8w98beQnS3X4zZzDI89gRrrazPNsenY9bXRMvANKsG+uKs+dGLvPOZPGcu0yMQI06K1lQijsRY/HmREsV+wRsaqNbN4yyVDSyKoNs/FKkIEnz1PiqMxUbgn/9041ZeDmOUyKZCcoH17JgA5hUWdec9wvZpH+YMxZWhnm9KW4tgKn0IxYvN0MSY5vBGKClc5pRvRbFhZGOp7Mui9VXS113+yBWPlHAui5mTuiMgvJWvDWdQLRHCcImWcUsqrs/ssvD6wZ8ISUMOZSuxKgVqU12Wyco4baezyxoSeTvlW2DOe2ONIK9hnc8NXc7RaX/Tm26fHUPfADrownbhPp0/VTxhXI0EtMccbt6JpWTVuU7I3er7ND58976oygkJlJ6NSc22nDupe4ntHvdrJ8vNcltwjJSokEH3AjPVjQ//MAJbyFe7+0+1jZsxxe49oYWi+pyaCmWRyZwN+9ByTUysX0+If1S1fL0Y64ei9ElvL3tMb+qMar0IpKQEjMdOVtXr0k/FFaDUFM4UW1S7oeM8YP0IuXeW3+TeyyqyvYmtV6cirmfLtvIe7ueuHg6KDX/04pNyp2rTj2/vKoTgtLty4XLNQWS6ySYSfqtumzWRws5eDs6stNPEErSFuBF3UU0e1rQ7KJB8qntoZFICn8mla9+HJ6ni0mSDXqDNNnu13OhY+nHKwiKhaBoWpHN/OfhW6ZnU2bb/TmCjJxmL6QVef/FFgo913ev86nIs+syipMOtrDyWbicjk1dj0EC0+JpXtpExZbx1ZWQQMpJh6ayfzEuDP8A7L1IdIBJGhmTQLvLAbatbHzdTAA/OdFLmD5WtHdWgdPu44BpLZw3LkAE8SByamvvrF3c5cQ0xwXUZ1ooIoW7nkdU981RswIxnNO8c/Dey1a6RkBeQ85P7mx9gvL4/eXYgcgvoDfIr1XSKTOFi+iSfXCDZ2qpM485lV8MoEraSsfKALZU0PG2T84Uu4yHPj2ZFNpnVu0lLyQsgJtDL6NuvGKVvryv9QuPGq5ZVHjd6AaWb0AKqX6+TwTbtaK2kbuMvzZojNFljUq5P5FBU0OfPafDpS2pGC28zu5G9xzhhkCG2VcAyGw3OtvJaZPbLI4833Es66qZhjZ7mB0N7r6FkfBWOtQga9M4KbKXbofHw/q8Wq5mm+l+ob4zuRrYsGjeuAq5z5r2+AyuaDYCbh/ctHEV6oR6B31asZPe1657ABA6St9BY2/sCrIbqaaoHLV5+7c2gGtkW+wMaeV30YZ2gIMADaZ1p33LsWtd8xKdEhCb8drRkVrAFMXLTD99Zt0fm/lAABtidXnXbJ8ibeY+2MwHsNfb7GoDtNstg2Kt2+EVd4g00USwNnMnbOYTqFEC7+prgXfLZj6Aa/8pPVEg0N0Delec/AaEzvq6qX6YzbTRKLRdYBVc01REbOYOb/DopCgKqHXvmnCQ276NvhWgVjHc1QlgIP39Lm/S6XQ25k0cUG29ToeL3wRq2aTlBvw/brRCW41yc+0XoEfrbm8lQw2AdUqHISe9SzZTIFiDg6jjYoEUttPLtn0EF2hE6cwTqe4xbYNnu10bHGnXf+lT/BLCpdM6IZUeNqIJ13Rul0Un8rk0U0fjzQvO4jBm89qTIV61qlUfgCzMbrSqmXgw/QgzWSzvmzvas/78Ux122FH9xoFwT7JejccQp9VGK6XCkJ6/f8Dt7tTMSZtMyzlSca5aRtl9wBoXPBbNZoQMPFXjrnEMqkEiOz/pLuTgtEQ5RA6bVtrcsjudNfkhtqGvvLjybu9AjNlbNrss6GriYLFmthhMjatOY/ogRJejsyYDCM7CLvAf5ZsvnUnzLnzmUNtZDd2KOKolP42SfB1vpX36My681JFeRbD1q6K8nNGiqWKK6Q/iXBQcksvjCZdOS0gUL3W3JNrNiyqrhGR375UpzeJpfBP7uoYzIy9ZdhbSRTh2R2VrdUEKwY+Z1fV4jGGthyRNP14bCuGB2JyWwxrmXV12F0GlrW8o69jHnyXaihUw8cbYzxnMhGoTXjYzh7V3HxCakh0IKXDxdxvUsbiCX710zSDpPf59tgbqHfqO+jJClK5TgS+mKiOwoV1wqGxlPJkTsrqc2pQefBtlFd5Po6QdOyklVU2iZNBi6/VjybcXsmP5qE5Mid2xeSwVPw7bYxdpKwR2OkKb3yLTNdjIhIQ7mmPRXRuv2iNu5rJ5v0JARmK7XFLWdC0k8ip0ZeyBXbLOdh3Bate6aAf0eYXhuvjBokvLa2zlQquO6D+Xg39+zxTMOayZA8xB9l4+lzyT7hGBQJMup1IIpUkS+N8J1+Myc6pLgwM+Lx79SO4xq5UibV6pKWHSCPGP5jspU1jHTIG8BxfhDWqWkbeStfeNrbq4jZeVx6zMEOraDYGOmcilO/YVy8jbvoFZWbTpQF0OHK0aZgp6YeBJK06joCE3x1tcme4bziEVsHWeciaoY6bwNcaxfBn5LXy4yaM8a5uzA1J8YQtFJb+DHTMd8YGr8SJZRsvT8slQkYxkJFrigQfcQ+2mBZ2J5ErswhVUHMu70YWv6YOoTkUj0e4HC6MOeoCWLxUXRWQztIx+S1fmyd6FnbCcPUtYJTpcigFhi+tKd+ApKr2X28sbxvoG0OnkV8hcl8pMEyhYKn0t6fNn6wvu297+pnk9wZF9f06LLSuOw4XayxSkNDsqZ0tStC9hLFw38KgTkRyKiwiKqxPyRdWMyP1oQUFvXaZBL000i0RNEewW++Nwq9h8p7LzQ8VMQTcU81aQvw/ATBWaKSzluB2HbB8ZkOPVN/BMiM/dH2A5uVu5n4G8b6XQ7tcABDl/6D7IAcuN7i+vTIEnoC/zKpQfut98CCmEACsBhl1d/wiyC/Rq0Ox+lF9Hql+srlnX+OfA7ZTq0bZT4tbQPohlN9t/gZ7ufcB3mINcA3xZXA2alC79FTY6+5R2EfCdIbjQO2M4/5e0/8aU2FIBth37r7CbiY2YBPI8Fr3+f2fwG8lwnQtNbkt4nK+mDZMZa/EP2SAwEobDZmoAAAAASUVORK5CYII=">
                     </div>
                     <!--채팅방 영역(스크롤적용)-->
-                    <div class="chatroom-content">
-                        <h3 class="chatroom-date">YYYY-MM-DD</h3>
+                    <div class="chat_chatroom-content">
+                        <h3 class="chat_chatroom-date">YYYY-MM-DD</h3>
                         <!--채팅 내용-->
-                        <div class="chat-content">
-                            <div class="send-chat-container">
+                        <div class="chat_chat-content">
+                            <div class="chat_send-chat-container">
                                 <!--보내는 메세지 출력-->
                                 <!--보내는사람 이미지-->
-                                <img class="sender-img" src="https://a0.muscache.com/defaults/user_pic-225x225.png?v=3">
+                                <img class="chat_sender-img" src="https://a0.muscache.com/defaults/user_pic-225x225.png?v=3">
 
                                 <!--보내는 메세지 내용 영역(사진 제외)-->
-                                <div class="send-chat-content">
-                                <span class="sender">
+                                <div class="chat_send-chat-content">
+                                <span class="chat_sender">
                                     내메세지
                                 </span>
-                                    <span class="send-time">
+                                    <span class="chat_send-time">
                                     AM HH:MM
                                 </span>
-                                    <div class="send-chat">
+                                    <div class="chat_send-chat send-chat-js">
                                         보내는 메세지보내는 메세지보내는 메세지보내는 메세지보내는 메세지보내는 메세지보내는 메세지보내는 메세지보내는 메세지
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="receive-chat-container">
+                            <div class="chat_receive-chat-container">
                                 <!--받은 메세지 출력-->
                                 <!--받은 메세지 내용 영역(사진 제외)-->
-                                <div class="receive-chat-content">
+                                <div class="chat_receive-chat-content">
 
-                                    <span class="receive-time">
+                                    <span class="chat_receive-time">
                                     AM HH:MM
                                      </span>
-                                    <span class="receiver">
+                                    <span class="chat_receiver">
                                     받은메세지
                                     </span>
-                                    <div class="receive-chat">
+                                    <div class="chat_receive-chat">
                                         받은메세지 받은메세지받은메세지받은메세지받은메세지받은메세지받은메세지받은메세지받은메세지받은메세지받은메세지
                                     </div>
                                 </div>
-
                                 <!--상대방 이미지-->
-                                <img class="receiver-img" src="https://a0.muscache.com/defaults/user_pic-225x225.png?v=3">
+                                <img class="chat_receiver-img" src="https://a0.muscache.com/defaults/user_pic-225x225.png?v=3">
                             </div>
 
-
-                            <!--연습-->
-                            <div class="receive-chat-container">
-                                <!--받은 메세지 출력-->
-                                <!--받은 메세지 내용 영역(사진 제외)-->
-                                <div class="receive-chat-content">
-
-                                    <span class="receive-time">
-                                    AM HH:MM
-                                     </span>
-                                    <span class="receiver">
-                                    받은메세지
-                                    </span>
-                                    <div class="receive-chat">
-                                        또 받은메세지 받은메세지받은메세지받은메세지받은메세지받은메세지받은메세지받은메세지받은메세지받은메세지받은메세지
-                                    </div>
-                                </div>
-
-                                <!--상대방 이미지-->
-                                <img class="receiver-img" src="https://a0.muscache.com/defaults/user_pic-225x225.png?v=3">
-                            </div>
                         </div>
 
                     </div>
                     <!--채팅입력창-->
-                    <div class="input-chat">
-                        <input type="text" class="message" placeholder="여기도스크롤적용해야해!!">
-                        <img class="send-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlIcdOy2ImPo3QJ38_FnB_IRKgVJq94Q35Ag&usqp=CAU>"
+                    <div class="chat_input-chat">
+                        <input type="text" class="chat_message message-js" placeholder="여기도스크롤적용해야해!!">
+                        <img class="chat_send-img send-img-js" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlIcdOy2ImPo3QJ38_FnB_IRKgVJq94Q35Ag&usqp=CAU>"
                     </div>
 
                 </div>
