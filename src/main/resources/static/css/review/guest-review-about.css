@@ -1,0 +1,147 @@
+@media screen and (min-width: 50px) {
+
+  .g-review-about__main {
+    padding: 50px 15px;
+  }
+
+  .g-review-about__tabs, .  .g-review-about__panel {
+    width: 930px;
+  }
+
+}
+
+@media screen and (min-width: 1080px) {
+
+  .g-review-about__main {
+    padding-top: 50px;
+    padding-left: 320px;
+  }
+
+  .g-review-about__tabs, .  .g-review-about__panel {
+    width: 1020px;
+  }
+
+}
+
+.g-review-about__title {
+  color: #484848;
+  font-size: 42px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 85px;
+}
+
+.g-review-about__tabs {
+  border-bottom: 1px solid #dce0e0;
+  word-spacing: -2px;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+}
+
+.g-review-about__panel {
+  border: 1px solid #dce0e0;
+}
+
+.g-review-about__panel-header {
+  color: #484848;
+  font-size: 20px;
+  padding: 20px 25px;
+  border-bottom: 1px solid #dce0e0;
+  background-color: #edefed;
+}
+
+.g-review-about__panel-body {
+  font-size: 20px;
+  color: #484848;
+  padding: 25px;
+  line-height: 30px;
+}
+
+.g-review-about__panel-body-container {
+  display: flex;
+  padding-top: 30px;
+}
+
+.g-review-about__panel-body-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.g-review-about__panel-body-right {
+  flex: 2;
+}
+
+.g-review-about__panel-body-p-comment {
+  font-size: 18px;
+}
+
+.g-review-about__panel-body-p-date {
+  font-size: 18px;
+  word-spacing: -3px;
+  font-weight: lighter;
+  color: #484848;
+}
+
+.g-review-about__profile-box {
+  width: 90px;
+  height: 90px;
+  border-radius: 70%;
+  overflow: hidden;
+}
+
+.g-review-about__profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.g-review-about__main-top a {
+  text-decoration: none;
+  color: #484848;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.g-review-about__main-top a:hover {
+  text-decoration: underline;
+  color: #484848;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.g-review-about__tabs a {
+  text-decoration: none;
+  color: #969696;
+  font-size: 19px;
+  margin-right: 20px;
+}
+
+.g-review-about__tabs a:active {
+  text-decoration: none;
+  color: #484848;
+  font-size: 19px;
+  margin-right: 20px;
+}
+
+.g-review-about__panel-body-left a {
+  text-decoration: none;
+  font-weight: lighter;
+  color: #484848;
+  font-size: 20px;
+}
+
+.g-review-about__main-top nav {
+  text-decoration: none;
+  color: #484848;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.g-review-about__hr {
+  height: 1px;
+  background-color: #dbdbdb;
+  border: none;
+  margin: 20px 0;
+}
