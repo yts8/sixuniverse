@@ -1,26 +1,9 @@
-@media screen and (min-width: 50px) {
-
-  .g-review-about__main {
-    padding: 50px 15px;
-  }
-
-  .g-review-about__tabs, .  .g-review-about__panel {
-    width: 930px;
-  }
-
+.g-review-about__main {
+  margin: 55px 320px;
 }
 
-@media screen and (min-width: 1080px) {
-
-  .g-review-about__main {
-    padding-top: 50px;
-    padding-left: 320px;
-  }
-
-  .g-review-about__tabs, .  .g-review-about__panel {
-    width: 1020px;
-  }
-
+.g-review-about__main-top span {
+  display: inline-block;
 }
 
 .g-review-about__title {
@@ -32,10 +15,15 @@
 }
 
 .g-review-about__tabs {
+  max-width: 1020px;
   border-bottom: 1px solid #dce0e0;
   word-spacing: -2px;
   margin-bottom: 30px;
   padding-bottom: 20px;
+}
+
+.g-review-about__container {
+  max-width: 1020px;
 }
 
 .g-review-about__panel {
@@ -112,6 +100,7 @@
 }
 
 .g-review-about__tabs a {
+  display: inline-block;
   text-decoration: none;
   color: #969696;
   font-size: 19px;

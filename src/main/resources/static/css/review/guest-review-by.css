@@ -1,10 +1,9 @@
-@media screen and (max-width: 800px) {
-  .g-review-by__panel {
-  }
+.g-review-by__main {
+  margin: 55px 320px;
 }
 
-.g-review-by__main {
-  margin: 55px;
+.g-review-by__main-top span {
+  display: inline-block;
 }
 
 .g-review-by__title {
@@ -16,6 +15,7 @@
 }
 
 .g-review-by__tabs {
+  max-width: 1020px;
   border-bottom: 1px solid #dce0e0;
   width: 100%;
   word-spacing: -2px;
@@ -24,7 +24,7 @@
 }
 
 .g-review-by__container {
-  max-width: 800px;
+  max-width: 1020px;
 }
 
 .g-review-by__panel {
@@ -62,6 +62,7 @@
 }
 
 .g-review-by__tabs a {
+  display: inline-block;
   text-decoration: none;
   color: #969696;
   font-size: 19px;
