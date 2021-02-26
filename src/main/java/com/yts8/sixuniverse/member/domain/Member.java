@@ -9,13 +9,13 @@ public class Member {
   private int memberId;
   private String email;
   private String password;
-  private String name;
+  private String username;
   private String birthdate;
   private String profileImg;
   private String zipcode;
   private String address;
   private String subAddress;
-  private String phone;
+  private String mobile;
   private String bio;
   private int mileage;
   private String hostGrade;
@@ -23,5 +23,6 @@ public class Member {
   private String social;
   private String role;
   private LocalDateTime createDate;
+  private LocalDateTime updateDate;
   private LocalDateTime deleteDate;
 }

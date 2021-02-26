@@ -41,7 +41,7 @@ public class MemberSettingController {
   @PostMapping("/personal-info/update")
   public String updatePersonalInfo(Member member, Authentication authentication) {
     Member authMember = (Member) authentication.getPrincipal();
-    member.setEmail(authMember.getEmail());
+    member.setMemberId(authMember.getMemberId());
     memberService.updateMember(member);
 
     MemberContext memberContext = (MemberContext) userDetailsService.loadUserByUsername(authMember.getEmail());
