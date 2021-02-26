@@ -1,0 +1,145 @@
+body {
+  height: 100vh;
+}
+
+.login__container {
+  min-height: 100%;
+  background-color: #fafafa;
+  padding: 3rem 0;
+  color: #2d2d2d;
+}
+
+.login__wrap {
+  width: 22rem;
+  height: 30rem;
+  margin: 0 auto;
+}
+
+.login__box {
+  padding: 2rem 3rem;
+  border: 1px solid #d9d9d9;
+  font-size: 0.9rem;
+  background-color: white;
+}
+
+.login__box:first-of-type {
+  margin-bottom: 1rem;
+}
+
+.login__title {
+  margin-bottom: 3rem;
+  font-size: 2rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login__form > input {
+  height: 2.3rem;
+  padding: 0.8rem;
+  border: 1px solid #d9d9d9;
+  border-radius: 3px;
+  background-color: #fafafa;
+}
+
+.login__form > input:last-of-type {
+  margin: 0.5rem 0 1rem;
+}
+
+.login__form > button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  height: 2rem;
+  color: white;
+  background-color: var(--light-guest-color);
+  font-weight: bold;
+}
+
+.login__form > button:hover {
+  background-color: var(--guest-color);
+}
+
+.login__hr-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1.5rem 0;
+}
+
+.login__hr-container > .login__hr {
+  flex: 1;
+  height: 2px;
+  background-color: #d9d9d9;
+}
+
+.login__hr-container > .login__hr-text {
+  margin: 0 1rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #999999;
+}
+
+.login__social-container > a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+  border-radius: 3px;
+  color: white;
+  font-weight: bold;
+}
+
+.login__social-container > a > span {
+  margin-left: 1rem;
+}
+
+.login__social-container > a:not(:last-of-type) {
+  margin-bottom: 1rem;
+}
+
+.login__social-container > a.login__social-google {
+  color: #2d2d2d;
+  border: 1px solid #2d2d2d;
+}
+
+.login__social-kakao {
+  background-color: #fee100;
+}
+
+.login__social-github {
+  background-color: #24292e;
+}
+
+.login__join-question {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.login__join-text {
+  margin-left: 0.5rem;
+  color: var(--guest-color);
+}
+
+.login__join-text:hover {
+  font-weight: bold;
+}
+
+.login__password-reset {
+  display: flex;
+  justify-content: center;
+  font-size: 0.8rem;
+  color: var(--guest-color);
+}
+
+.login__password-reset:hover {
+  font-weight: bold;
+}
+

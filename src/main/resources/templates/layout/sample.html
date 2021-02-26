@@ -24,19 +24,45 @@
 <!-- <div layout:fragment="content"></div> -->
 <!-- 내부에 작성하면 됩니다. -->
 
-<!-- 여기 코드 전체 복사 후 -->
+<!--위와 동일하게 쓰되, content 대신 css로 넣고 내부에 css 링크를 넣어주시면 됩니다-->
+<th:block layout:fragment="css"></th:block>
+
+위와 동일하게 쓰되, content 대신 js로 넣고 내부에 js 링크를 넣어주시면 됩니다
+<th:block layout:fragment="js"></th:block>
+
 <!-- <div layout:fragment="content"> 내부에 -->
 <!-- 각 페이지 별 내용을 작성하면 됩니다. -->
-<div layout:fragment="content">
+<th:block layout:fragment="content">
   <!-- section 아니여도 됩니다. -->
   <section>
     <h2>레이아웃 샘플</h2>
     <span>이곳에 작성하면됩니다.</span>
   </section>
-</div>
+</th:block>
 <!-- layout/default.html 에 보면 -->
 <!-- <title th:text="${title} + ' | Sixunsiverse'"></title> 부분이 있는데 -->
 <!-- 해당 페이지로 오는 Controller에서 -->
 <!-- model.addAttribute("title", "sample") 값 하나만 넣어주시면 -->
 <!-- sample | Sixunsiverse 가 적히도록 해뒀습니다. -->
+</html>
+
+
+<!-- =================== 여기 아래꺼 복붙하면 됩니다 ===================-->
+
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+<th:block layout:fragment="css"></th:block>
+<th:block layout:fragment="js"></th:block>
+
+<th:block layout:fragment="content">
+  <section>
+    <h2>레이아웃 샘플</h2>
+    <span>이곳에 작성하면됩니다.</span>
+  </section>
+</th:block>
+
 </html>
