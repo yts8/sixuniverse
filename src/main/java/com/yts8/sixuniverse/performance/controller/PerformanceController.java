@@ -31,4 +31,13 @@ public class PerformanceController {
     return "performance/super-host";
   }
 
+  @GetMapping ("/views")
+  public String views() {
+    return "performance/views";
+  }
+
+//  @GetMapping ("/#") //후기관리 위치
+//  public String review() { return "performance/#";
+//  }
+
 }

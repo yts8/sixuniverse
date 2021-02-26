@@ -4,11 +4,11 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
 <div layout:fragment="css">
-  <link rel="stylesheet" th:href="@{/css/performance/income.css}" />
+  <link rel="stylesheet" th:href="@{/css/performance/views.css}" />
 </div>
 <div layout:fragment="js">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-  <script type="text/javascript" defer th:src="@{/js/performance/income.js}"></script>
+  <script type="text/javascript" defer th:src="@{/js/performance/views.js}"></script>
 
 </div>
 <div layout:fragment="content">
@@ -27,25 +27,29 @@
         </div>
       </div>
 
-    <div class="performance__income-container">
+      <div class="performance__views-container">
 
-      <select class="performance__income-date-select">
-        <option value="">기간 선택</option>
-        <option value="2022년 3월">2022년 3월</option>
-        <option value="2022년 1월">2022년 2월</option>
-        <option value="2022년 1월">2022년 1월</option>
-      </select>
+        <div class="performance__views-detail-container">
+          <div class="performance__views-datail">
+            <div class="performance__views-datail-big">534</div>
+            <div class="performance__views-datail-small">지난 30일간 조회수</div>
+          </div>
+          <div class="performance__views-datail">
+            <div class="performance__views-datail-big">2</div>
+            <div class="performance__views-datail-small">지난 30일간 받은 새 예약</div>
+          </div>
+          <div class="performance__views-datail">
+            <div class="performance__views-datail-big">5.7%</div>
+            <div class="performance__views-datail-small">예약률</div>
+          </div>
+        </div>
 
-      <div class="performance__expected-income-year">1,832,780 원</div>
-      <div class="performance__expected-income-year-detail">2021 수입</div><!-- 여유있으면 지급예정/지급완료로 나누기 -->
-
-      <div class="performance__chart-container">
-        <div style="width:800px">
-          <canvas id="myChart"></canvas>
+        <div class="performance__views-chart-container">
+          <div style="width:800px">
+            <canvas id="viewsChart"></canvas>
+          </div>
         </div>
       </div>
-
-    </div>
     </div>
   </section>
 </div>

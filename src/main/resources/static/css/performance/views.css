@@ -1,0 +1,71 @@
+@charset "UTF-8";
+
+
+.performance__container{
+    margin: auto 0;
+    display: flex;
+    position:relative;
+    flex-direction: column;
+
+}
+.performance__main-menu-container{
+    margin: 20px;
+    display:flex;
+    font-size: 30px;
+    font-weight: bold;
+    flex-direction: row;
+}
+
+.performance__sub-menu-container{
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 10px;
+    display:flex;
+    flex-direction: row;
+    font-weight: bold;
+    border-bottom-color: #999999;
+    border-bottom: 1px solid;
+}
+
+.performance__sub3{
+}
+
+.performance__sub1, .performance__sub2, .performance__sub3,.performance__sub4{
+    margin: 20px;
+    margin-right: 24px;
+    display: inline-block ;
+}
+
+.performance__a{
+    color: inherit;
+    text-decoration: none;
+}
+
+/*공통*/
+
+.performance__views-container{
+    display:flex;
+    flex-direction: column;
+    margin: 50px;
+}
+
+.performance__views-detail-container{
+    display: flex;
+    flex-direction: row;
+}
+.performance__views-datail{
+    display: flex;
+    flex-direction: column;
+
+    margin-right: 100px;
+}
+.performance__views-datail-big{
+    font-size: 40px;
+    margin-bottom: 10px;
+    font-weight: bold;
+
+}
+.performance__views-datail-small{
+    font-size: 15px;
+    color: #888888;
+}

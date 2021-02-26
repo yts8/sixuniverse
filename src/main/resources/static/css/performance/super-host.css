@@ -1,14 +1,14 @@
 @charset "UTF-8";
 
 
-.container{
+.performance__container{
   margin: auto 0;
   display: flex;
   position:relative;
   flex-direction: column;
 
 }
-.main-menu-container{
+.performance__main-menu-container{
   margin: 20px;
   display:flex;
   font-size: 30px;
@@ -16,56 +16,84 @@
   flex-direction: row;
 }
 
-.sub-menu-container{
-  padding-bottom: 30px;
-  margin-bottom: -30px ;
+.performance__sub-menu-container{
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-bottom: 10px;
   display:flex;
   flex-direction: row;
+  font-weight: bold;
+  border-bottom-color: #999999;
+  border-bottom: 1px solid;
 }
 
-.sub1, .sub2, .sub3,.sub4{
+.performance__sub3{
+}
+
+.performance__sub1, .performance__sub2, .performance__sub3,.performance__sub4{
   margin: 20px;
   margin-right: 24px;
   display: inline-block ;
 }
 
-a{
+.performance__a{
   color: inherit;
   text-decoration: none;
 }
 
-.super-host-container{
+.performance__super-host-container{
   display:flex;
   flex-direction: column;
-  background-color: rgb(247, 247, 247);
   margin: 50px;
 }
 
-.super-subject{
+.performance__super-main-container{
+  margin-bottom: 50px;
+}
+.performance__super-guide1{
+  color: #EB4C60;
+  font-size: 43px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.performance__super-guide2{
+  font-size: 25px;
+  line-height: 1.5;
+}
+
+.performance__statistics-container{
+  background-color: rgb(247, 247, 247);
+}
+
+.performance__super-subject{
   margin:30px;
   font-size: 20px;
   font-weight: bold;
 }
 
-.super-date{
+.performance__super-date{
   margin: 20px;
   margin-right: 24px;
   display:flex;
-  flex-direction: row;
+  flex-direction: column;
 }
-.date{
-  color: rgb(34,34,34);
+.performance__date{
+  /*color: rgb(34,34,34);*/
   border-radius: 8px;
-  box-shadow: rgb(176, 176, 176) 0px 0px 0px 1px inset;
-  font-size: 16px ;
-  line-height: 20px ;
-  font-weight: 400 ;
+  /*box-shadow: rgb(176, 176, 176) 0px 0px 0px 1px inset;*/
+  font-size: 20px ;
+  margin-bottom: 10px;
+  padding: 5px;
+  width: 200px;
 }
-.super-result-container{
+.performance__super-date-detail{
+  font-size: 15px;
+}
+.performance__super-result-container{
   display: flex;
   flex-direction: row;
 }
-.super-result1,.super-result2,.super-result3,.super-result4{
+.performance__super-result1,.performance__super-result2,.performance__super-result3,.performance__super-result4{
   background-color: white;
   border: 1px solid rgb(235, 235, 235);
   margin:20px;
@@ -83,10 +111,29 @@ a{
   -ms-flex-align: center;
   align-items: center;
 }
-.result3-3{
+.performance__result-sub1{
+ font-size: 40px;
+  margin-bottom: 10px;
+}
+.performance__result-sub2{
+  font-size: 20px;
+  margin-bottom: 10px;
+
+}
+.performance__result-sub3{
+  font-size: 18px;
+  color: #bdbdbd;
+
+}
+.performance__result-sub4{
+  margin-top: 50px;
   display: flex;
   vertical-align: middle;
 
   align-items: center;
   /*   헉헉 이거당 */
+}
+.performance__img{
+  width: 20px;
+  height: 20px;
 }

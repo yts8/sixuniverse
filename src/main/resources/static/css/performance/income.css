@@ -1,13 +1,12 @@
 @charset "UTF-8";
 
-.container{
-
+.performance__container{
   display: flex;
   position:relative;
   flex-direction: column;
 
 }
-.main-menu-container{
+.performance__main-menu-container{
   margin: 20px;
   display:flex;
   font-size: 30px;
@@ -15,25 +14,55 @@
   flex-direction: row;
 }
 
-.sub-menu-container{
-  padding-bottom: 30px;
-  margin-bottom: -30px ;
+.performance__sub-menu-container{
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-bottom: 10px;
   display:flex;
   flex-direction: row;
+  font-weight: bold;
+  border-bottom-color: #999999;
+  border-bottom: 1px solid;
 }
 
-.sub1, .sub2, .sub3,.sub4{
+.performance__sub1, .performance__sub2, .performance__sub3,.performance__sub4{
   margin: 20px;
   margin-right: 24px;
   display: inline-block ;
 }
 
-a{
+.performance__a{
   color: inherit;
   text-decoration: none;
 }
+/* ------------------------------여기까지 성과 공통*/
 
-.chart-container{
+.performance__income-container{
+  display:flex;
+  flex-direction: column;
+  margin: 50px;
+}
+
+.performance__income-date-select{
+  width: 500px;
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.performance__expected-income-year{
+  font-size: 50px;
+  font-weight: bold;
+  margin-bottom:20px;
+}
+.performance__expected-income-year-detail{
+  margin-bottom: 30px;
+}
+
+
+
+
+
+.performance__chart-container{
   position:relative;
 
 }
