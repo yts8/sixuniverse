@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<div layout:fragment="content">
+  <section>
+    <h2>회원가입</h2>
+    <form th:action="@{/join}" method="post">
+
+      <input type="email"
+             name="email"
+             placeholder="sample@gmail.com"
+             required/>
+
+      <input type="password"
+             name="password"
+             placeholder="비밀번호"
+             required/>
+
+      <input type="text"
+             name="name"
+             placeholder="이름"
+             required/>
+
+      <input type="text"
+             name="birthdate"
+             placeholder="생년월일"
+             required/>
+
+      <input type="text"
+             name="zipcode"
+             placeholder="우편번호"
+             required/>
+
+      <input type="text"
+             name="address"
+             placeholder="주소"
+             required/>
+
+      <input type="text"
+             name="subAddress"
+             placeholder="상세 주소"/>
+
+      <input type="text"
+             name="phone"
+             placeholder="- 없이 11자리 입력"
+             required/>
+
+      <button>회원가입</button>
+    </form>
+  </section>
+</div>
+</html>
+
+

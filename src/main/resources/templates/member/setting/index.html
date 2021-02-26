@@ -3,14 +3,10 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
+
 <div layout:fragment="content">
   <section>
-    <h2>로그인</h2>
-    <form th:action="@{/login}" method="post">
-      <input type="text" name="email" placeholder="sample@gmail.com"/>
-      <input type="password" name="password" placeholder="비밀번호"/>
-      <button>로그인</button>
-    </form>
+    <h2>계정 관리</h2>
   </section>
 </div>
 </html>

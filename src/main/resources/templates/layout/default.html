@@ -11,22 +11,23 @@
   <!-- Common CSS -->
   <link rel="stylesheet" th:href="@{/css/reset.css}"/>
   <link rel="stylesheet" th:href="@{/css/variables.css}"/>
-  <div layout:fragment="css"></div>
+  <th:block layout:fragment="css"></th:block>
 
   <!-- Common JS -->
+  <script src="https://kit.fontawesome.com/72ec3ada60.js" crossorigin="anonymous"></script>
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-  <div layout:fragment="js"></div>
+  <th:block layout:fragment="js"></th:block>
 
   <title th:text="${title} + ' | Sixunsiverse'"></title>
 </head>
 <body>
 <!-- Header -->
-<div th:replace="partials/header :: header"></div>
+<th:block th:replace="partials/header :: header"/>
 
 <!-- 각 페이지가 구현 해야할 부분 -->
-<div layout:fragment="content"></div>
+<th:block layout:fragment="content"/>
 
 <!-- Footer -->
-<div th:replace="partials/footer :: footer"></div>
+<th:block th:replace="partials/footer :: footer"/>
 </body>
 </html>

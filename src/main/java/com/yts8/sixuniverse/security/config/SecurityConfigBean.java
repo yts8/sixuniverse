@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class SecurityConfigBean {
+
   @Bean
   public PasswordEncoder passwordEncoder() {
     return PasswordEncoderFactories.createDelegatingPasswordEncoder();

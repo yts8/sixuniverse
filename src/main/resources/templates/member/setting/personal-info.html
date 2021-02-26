@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+<div layout:fragment="content">
+  <section>
+    <h2>회원수정</h2>
+    <form th:action="@{/member/setting/personal-info/update}" method="post">
+
+      <input type="text"
+             name="name"
+             th:value="${#authentication.principal.name}"
+             placeholder="이름"
+             required/>
+
+      <input type="text"
+             name="birthdate"
+             th:value="${#authentication.principal.birthdate}"
+             placeholder="생년월일"
+             required/>
+
+      <input type="text"
+             name="profileImg"
+             th:value="${#authentication.principal.profileImg}"
+             placeholder="이미지"
+             required/>
+
+      <input type="text"
+             name="zipcode"
+             th:value="${#authentication.principal.zipcode}"
+             placeholder="우편번호"
+             required/>
+
+      <input type="text"
+             name="address"
+             th:value="${#authentication.principal.address}"
+             placeholder="주소"
+             required/>
+
+      <input type="text"
+             name="subAddress"
+             th:value="${#authentication.principal.subAddress}"
+             placeholder="상세 주소"/>
+
+      <input type="text"
+             name="phone"
+             th:value="${#authentication.principal.phone}"
+             placeholder="- 없이 11자리 입력"
+             required/>
+
+      <input type="text"
+             name="bio"
+             th:value="${#authentication.principal.bio}"
+             placeholder="소개"/>
+
+      <button>수정</button>
+    </form>
+  </section>
+
+</div>
+</html>
