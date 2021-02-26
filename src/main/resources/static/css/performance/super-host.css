@@ -8,7 +8,7 @@
   flex-direction: column;
 
 }
-.main_menu_container{
+.main-menu-container{
   margin: 20px;
   display:flex;
   font-size: 30px;
@@ -16,7 +16,7 @@
   flex-direction: row;
 }
 
-.sub-menu_container{
+.sub-menu-container{
   padding-bottom: 30px;
   margin-bottom: -30px ;
   display:flex;
@@ -34,20 +34,20 @@ a{
   text-decoration: none;
 }
 
-.super-host_container{
+.super-host-container{
   display:flex;
   flex-direction: column;
   background-color: rgb(247, 247, 247);
   margin: 50px;
 }
 
-.super_subject{
+.super-subject{
   margin:30px;
   font-size: 20px;
   font-weight: bold;
 }
 
-.super_date{
+.super-date{
   margin: 20px;
   margin-right: 24px;
   display:flex;
@@ -61,15 +61,16 @@ a{
   line-height: 20px ;
   font-weight: 400 ;
 }
-.super_result_container{
+.super-result-container{
   display: flex;
   flex-direction: row;
 }
-.super_result1,.super_result2,.super_result3,.super_result4{
+.super-result1,.super-result2,.super-result3,.super-result4{
   background-color: white;
   border: 1px solid rgb(235, 235, 235);
   margin:20px;
   width:100%;
+  height: 200px;
   font-weight: bold;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -82,7 +83,7 @@ a{
   -ms-flex-align: center;
   align-items: center;
 }
-.result3_3{
+.result3-3{
   display: flex;
   vertical-align: middle;
 

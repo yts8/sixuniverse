@@ -7,7 +7,7 @@
   flex-direction: column;
 
 }
-.main_manu_container{
+.main-menu-container{
   margin: 20px;
   display:flex;
   font-size: 30px;
@@ -15,12 +15,11 @@
   flex-direction: row;
 }
 
-.subManu_container{
+.sub-menu-container{
   padding-bottom: 30px;
   margin-bottom: -30px ;
   display:flex;
   flex-direction: row;
-  /* 	font-family: var(--font-text-small-font-family, Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif); */
 }
 
 .sub1, .sub2, .sub3,.sub4{
@@ -34,7 +33,7 @@ a{
   text-decoration: none;
 }
 
-.chart_container{
+.chart-container{
   position:relative;
 
 }
