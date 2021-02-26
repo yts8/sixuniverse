@@ -10,8 +10,8 @@
     <form th:action="@{/member/setting/personal-info/update}" method="post">
 
       <input type="text"
-             name="name"
-             th:value="${#authentication.principal.name}"
+             name="username"
+             th:value="${#authentication.principal.username}"
              placeholder="이름"
              required/>
 
@@ -45,8 +45,8 @@
              placeholder="상세 주소"/>
 
       <input type="text"
-             name="phone"
-             th:value="${#authentication.principal.phone}"
+             name="mobile"
+             th:value="${#authentication.principal.mobile}"
              placeholder="- 없이 11자리 입력"
              required/>
 

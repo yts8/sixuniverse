@@ -1,7 +1,3 @@
-body {
-  height: 100vh;
-}
-
 .login__container {
   min-height: 100%;
   background-color: #fafafa;
@@ -11,7 +7,6 @@ body {
 
 .login__wrap {
   width: 22rem;
-  height: 30rem;
   margin: 0 auto;
 }
 
@@ -38,16 +33,36 @@ body {
   flex-direction: column;
 }
 
-.login__form > input {
+.login__form > .login__input-box {
+  display: flex;
+  justify-content: space-between;
   height: 2.3rem;
-  padding: 0.8rem;
   border: 1px solid #d9d9d9;
   border-radius: 3px;
   background-color: #fafafa;
 }
 
-.login__form > input:last-of-type {
-  margin: 0.5rem 0 1rem;
+.login__form > .login__input-box:not(:last-of-type) {
+  margin-bottom: 0.5rem;
+}
+
+.login__form > .login__input-box:last-of-type {
+  margin-bottom: 1rem;
+}
+
+.login__form > .login__input-box > input {
+  flex: 4;
+  padding: 0.8rem;
+  border: none;
+}
+
+.login__form > .login__input-box > .login__input-status {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #b3b3b3;
+  background-color: white;
 }
 
 .login__form > button {
@@ -120,7 +135,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 1rem;
 }
 
 .login__join-text {
@@ -135,6 +149,7 @@ body {
 .login__password-reset {
   display: flex;
   justify-content: center;
+  margin-top: 1rem;
   font-size: 0.8rem;
   color: var(--guest-color);
 }

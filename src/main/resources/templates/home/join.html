@@ -3,54 +3,114 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
-<div layout:fragment="content">
-  <section>
-    <h2>회원가입</h2>
-    <form th:action="@{/join}" method="post">
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/home/login.css}"/>
+</th:block>
 
-      <input type="email"
-             name="email"
-             placeholder="sample@gmail.com"
-             required/>
+<th:block layout:fragment="content">
+  <div class="login__container">
+    <article class="login__wrap">
+      <div class="login__box">
+        <h1 class="login__title">Sixuniverse</h1>
 
-      <input type="password"
-             name="password"
-             placeholder="비밀번호"
-             required/>
+        <div class="login__social-container">
+          <a href="#" class="login__social-google">
+            <i class="fab fa-google"></i>
+            <span>Google</span>
+          </a>
+          <a href="#" class="login__social-kakao">
+            <i class="fas fa-comment"></i>
+            <span>Kakao</span>
+          </a>
+          <a href="#" class="login__social-github">
+            <i class="fab fa-github"></i>
+            <span>Github</span>
+          </a>
+        </div>
 
-      <input type="text"
-             name="name"
-             placeholder="이름"
-             required/>
+        <div class="login__hr-container">
+          <div class="login__hr"></div>
+          <span class="login__hr-text">또는</span>
+          <div class="login__hr"></div>
+        </div>
 
-      <input type="text"
-             name="birthdate"
-             placeholder="생년월일"
-             required/>
+        <form th:action="@{/join}" method="post" class="login__form">
 
-      <input type="text"
-             name="zipcode"
-             placeholder="우편번호"
-             required/>
+          <div class="login__input-box">
+            <input type="email"
+                   name="email"
+                   placeholder="* 이메일"
+                   required/>
 
-      <input type="text"
-             name="address"
-             placeholder="주소"
-             required/>
+            <div class="login__input-status">
+              <i class="fas fa-envelope"></i>
+            </div>
+          </div>
 
-      <input type="text"
-             name="subAddress"
-             placeholder="상세 주소"/>
+          <div class="login__input-box">
+            <input type="password"
+                   name="password"
+                   placeholder="* 비밀번호"
+                   maxlength="20"
+                   required/>
 
-      <input type="text"
-             name="phone"
-             placeholder="- 없이 11자리 입력"
-             required/>
+            <div class="login__input-status">
+              <i class="fas fa-lock"></i>
+            </div>
+          </div>
 
-      <button>회원가입</button>
-    </form>
-  </section>
-</div>
+          <div class="login__input-box">
+            <input type="text"
+                   name="username"
+                   placeholder="* 성명"
+                   required/>
+
+            <div class="login__input-status">
+              <i class="fas fa-user"></i>
+            </div>
+          </div>
+
+          <div class="login__input-box">
+            <input type="text"
+                   name="birthdate"
+                   placeholder="* 생년월일"
+                   minlength="6"
+                   maxlength="6"
+                   required/>
+
+            <div class="login__input-status">
+              <i class="fas fa-birthday-cake"></i>
+            </div>
+          </div>
+
+          <div class="login__input-box">
+            <input type="text"
+                   name="mobile"
+                   placeholder="* - 없이 11자리 입력"
+                   minlength="11"
+                   maxlength="11"
+                   required/>
+
+            <div class="login__input-status">
+              <i class="fas fa-mobile"></i>
+            </div>
+          </div>
+
+          <button>가입</button>
+
+        </form>
+      </div>
+
+      <div class="login__box">
+        <div class="login__join-question">
+          <span>계정이 있으신가요?</span>
+          <a th:href="@{/login}" class="login__join-text">로그인</a>
+        </div>
+      </div>
+
+    </article>
+  </div>
+</th:block>
 </html>
 
 
