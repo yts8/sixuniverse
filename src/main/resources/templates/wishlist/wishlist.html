@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
 
-</body>
+<th:block layout:fragment="css"></th:block>
+<th:block layout:fragment="js"></th:block>
+
+<th:block layout:fragment="content">
+  <section>
+    <h2>레이아웃 샘플</h2>
+    <span>이곳에 작성하면됩니다.</span>
+  </section>
+</th:block>
+
 </html>
