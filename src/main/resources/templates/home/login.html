@@ -3,10 +3,10 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
-<div layout:fragment="css">
+<th:block layout:fragment="css">
   <link rel="stylesheet" th:href="@{/css/home/login.css}"/>
+</th:block>
 
-</div>
 <th:block layout:fragment="content">
   <div class="login__container">
     <article class="login__wrap">
@@ -14,13 +14,25 @@
         <h1 class="login__title">Sixuniverse</h1>
         <form th:action="@{/login}" method="post" class="login__form">
 
-          <input type="text"
-                 name="email"
-                 placeholder="이메일"/>
+          <div class="login__input-box">
+            <input type="text"
+                   name="email"
+                   placeholder="이메일"/>
 
-          <input type="password"
-                 name="password"
-                 placeholder="비밀번호"/>
+            <div class="login__input-status">
+              <i class="fas fa-envelope"></i>
+            </div>
+          </div>
+
+          <div class="login__input-box">
+            <input type="password"
+                   name="password"
+                   placeholder="비밀번호"/>
+
+            <div class="login__input-status">
+              <i class="fas fa-lock"></i>
+            </div>
+          </div>
 
           <button>로그인</button>
 
@@ -54,7 +66,10 @@
           <span>계정이 없으신가요?</span>
           <a th:href="@{/join}" class="login__join-text">가입하기</a>
         </div>
-        <a th:href="@{/member/setting/password/reset}" class="login__password-reset">비밀번호를 잊으셨나요?</a>
+        <a th:href="@{/member/setting/password/reset}"
+           class="login__password-reset">
+          비밀번호를 잊으셨나요?
+        </a>
       </div>
 
     </article>
