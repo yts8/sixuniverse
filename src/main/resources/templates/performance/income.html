@@ -4,7 +4,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
 <div layout:fragment="css">
-  <link rel="stylesheet" th:href="@{/css/performance/income.css}" />
+  <link rel="stylesheet" th:href="@{/css/performance/income.css}"/>
 </div>
 <div layout:fragment="js">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
@@ -13,12 +13,9 @@
 </div>
 <div layout:fragment="content">
   <section>
-
-
     <div class="performance__container">
 
       <div class="menu-container">
-        <div class="performance__main-menu-container">실적</div>
         <div class="performance__sub-menu-container">
           <div class="performance__sub1"><a href="./income" class="performance__a">수입</a></div>
           <div class="performance__sub2"><a href="./views" class="performance__a">조회수</a></div>
@@ -26,26 +23,25 @@
           <div class="performance__sub4"><a href="#" class="performance__a">후기관리</a></div>
         </div>
       </div>
+      <div class="performance__income-container">
 
-    <div class="performance__income-container">
+        <select class="performance__income-date-select">
+          <option value="">기간 선택</option>
+          <option value="2022년 3월">2022년 3월</option>
+          <option value="2022년 1월">2022년 2월</option>
+          <option value="2022년 1월">2022년 1월</option>
+        </select>
 
-      <select class="performance__income-date-select">
-        <option value="">기간 선택</option>
-        <option value="2022년 3월">2022년 3월</option>
-        <option value="2022년 1월">2022년 2월</option>
-        <option value="2022년 1월">2022년 1월</option>
-      </select>
+        <div class="performance__expected-income-year">1,832,780 원</div>
+        <div class="performance__expected-income-year-detail">2021 수입</div><!-- 여유있으면 지급예정/지급완료로 나누기 -->
 
-      <div class="performance__expected-income-year">1,832,780 원</div>
-      <div class="performance__expected-income-year-detail">2021 수입</div><!-- 여유있으면 지급예정/지급완료로 나누기 -->
-
-      <div class="performance__chart-container">
-        <div style="width:800px">
-          <canvas id="myChart"></canvas>
+        <div class="performance__chart-container">
+          <div style="width:800px">
+            <canvas id="myChart"></canvas>
+          </div>
         </div>
-      </div>
 
-    </div>
+      </div>
     </div>
   </section>
 </div>
