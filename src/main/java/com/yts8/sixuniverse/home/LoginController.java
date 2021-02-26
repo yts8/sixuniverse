@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -21,10 +22,11 @@ public class LoginController {
   private final PasswordEncoder passwordEncoder;
 
   @GetMapping("/login")
-  public String login(Authentication authentication) {
+  public String login(Model model, Authentication authentication) {
     if (authentication != null) {
       return "redirect:/";
     }
+    model.addAttribute("title", "로그인");
     return "home/login";
   }
 
@@ -37,10 +39,11 @@ public class LoginController {
   }
 
   @GetMapping("/join")
-  public String join(Authentication authentication) {
+  public String join(Model model, Authentication authentication) {
     if (authentication != null) {
       return "redirect:/";
     }
+    model.addAttribute("title", "회원가입");
     return "home/join";
   }
 

@@ -56,7 +56,7 @@ public class MemberSettingController {
   @GetMapping("/password")
   public String getPassword(Model model) {
     model.addAttribute("title", "비밀번호 변경");
-    return "member/setting/password";
+    return "member/setting/password/update";
   }
 
   @PostMapping("/password/update")
@@ -70,5 +70,11 @@ public class MemberSettingController {
     member.setPassword(encodeNewPassword);
     memberService.updatePassword(member);
     return "redirect:/member/setting";
+  }
+
+  @GetMapping("/password/reset")
+  public String getPasswordReset(Model model) {
+    model.addAttribute("title", "비밀번호 재설정");
+    return "member/setting/password/reset";
   }
 }

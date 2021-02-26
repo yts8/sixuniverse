@@ -3,21 +3,61 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
-<div layout:fragment="content">
-  <section>
-    <h2>로그인</h2>
-    <form th:action="@{/login}" method="post">
+<div layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/home/login.css}"/>
 
-      <input type="text"
-             name="email"
-             placeholder="sample@gmail.com"/>
-
-      <input type="password"
-             name="password"
-             placeholder="비밀번호"/>
-
-      <button>로그인</button>
-    </form>
-  </section>
 </div>
+<th:block layout:fragment="content">
+  <div class="login__container">
+    <article class="login__wrap">
+      <div class="login__box">
+        <h1 class="login__title">Sixuniverse</h1>
+        <form th:action="@{/login}" method="post" class="login__form">
+
+          <input type="text"
+                 name="email"
+                 placeholder="이메일"/>
+
+          <input type="password"
+                 name="password"
+                 placeholder="비밀번호"/>
+
+          <button>로그인</button>
+
+        </form>
+
+        <div class="login__hr-container">
+          <div class="login__hr"></div>
+          <span class="login__hr-text">또는</span>
+          <div class="login__hr"></div>
+        </div>
+
+        <div class="login__social-container">
+          <a href="#" class="login__social-google">
+            <i class="fab fa-google"></i>
+            <span>Google</span>
+          </a>
+          <a href="#" class="login__social-kakao">
+            <i class="fas fa-comment"></i>
+            <span>Kakao</span>
+          </a>
+          <a href="#" class="login__social-github">
+            <i class="fab fa-github"></i>
+            <span>Github</span>
+          </a>
+        </div>
+
+      </div>
+
+      <div class="login__box">
+        <div class="login__join-question">
+          <span>계정이 없으신가요?</span>
+          <a th:href="@{/join}" class="login__join-text">가입하기</a>
+        </div>
+        <a th:href="@{/member/setting/password/reset}" class="login__password-reset">비밀번호를 잊으셨나요?</a>
+      </div>
+
+    </article>
+  </div>
+</th:block>
 </html>
