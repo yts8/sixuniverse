@@ -4,8 +4,9 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
 
-<th:block layout:fragment="css"><link rel="stylesheet" th:href=@{/css/review/guest-review-about.css}/></th:block>
-<th:block layout:fragment="css"><link rel="stylesheet" th:href=@{/css/reset.css}/></th:block>
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/review/guest-review-about.css}"/>
+</th:block>
 <th:block layout:fragment="js"></th:block>
 
 <th:block layout:fragment="content">
@@ -47,7 +48,7 @@
                   <a  class="g-review-about__profile-name" href="#">sungeun park[이름]</a>
                 </div>
                 <div class="g-review-about__panel-body-right">
-                  <p class="g-review-about__panel-body-p-comment">후후,,,어몽어몽은 시민이다,,,[호스트 후기]</p>
+                  <p class="g-review-about__panel-body-p-comment">thank you[호스트 후기]</p>
                   <hr class="g-review-about__hr">
                   <p class="g-review-about__panel-body-p-date">2021년 2월[날짜]</p>
                 </div>
@@ -60,5 +61,4 @@
     </div>
   </div>
 </th:block>
-
 </html>
