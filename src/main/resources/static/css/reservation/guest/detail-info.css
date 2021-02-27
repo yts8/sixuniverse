@@ -1,0 +1,253 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.guest-reservation-detail-info__box {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+}
+
+.guest-reservation-detail-info__content {
+    display: flex;
+    height: 100%;
+    overflow: hidden;
+    background-color: #F6F6F6;
+}
+
+.guest-reservation-detail-info__detail-room-box {
+    width: 800px;
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid #bdbdbd;
+}
+
+.guest-reservation-detail-info__detail-room {
+    width: 95%;
+    height: 100%;
+    overflow: hidden;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #c3c3c3;
+
+}
+
+.guest-reservation-detail-info__detail-room-title {
+    display: flex;
+    line-height: 50px;
+    border-bottom: 1px solid #c3c3c3;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: white;
+    position: relative;
+}
+
+.guest-reservation-detail-info__close > .fa-times {
+    width: 30px;
+    margin: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    background-color: white;
+    font-size: 20px;
+    vertical-align: middle;
+    box-shadow: 0 0 10px #c3c3c3;
+    border-radius: 35px;
+    padding: 5px;
+}
+
+.guest-reservation-detail-info__title {
+    width: 100%;
+    text-align: center;
+    line-height: 50px;
+}
+
+.guest-reservation-detail-info__title > .fas fa-times {
+    float: left;
+    vertical-align: middle;
+}
+
+.guest-reservation-detail-info__title-content {
+    text-align: center;
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+.guest-reservation-detail-info__scroll {
+    height: 80%;
+    overflow-y: scroll;
+}
+
+.guest-reservation-detail-info__detail-room-content {
+    width: 100%;
+    height: 100%;
+}
+
+.guest-reservation-detail-info__detail-room-reservation-info {
+    background-color: white;
+    padding: 20px;
+}
+
+.guest-reservation-detail-info__reservation-date {
+    font-size: 13px;
+}
+
+.guest-reservation-detail-info__room-owner {
+    margin-top: 20px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.guest-reservation-detail-info__detail-room-date {
+    margin-top: 30px;
+    border-bottom: 1px solid #c3c3c3;
+}
+
+.guest-reservation-detail-info__sub-title1 {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 20px 0 20px 0;
+}
+
+.guest-reservation-detail-info__sub-title2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0 20px 0;
+}
+
+.guest-reservation-detail-info__detail-room-info,
+.guest-reservation-detail-info__reservation-detail-info,
+.guest-reservation-detail-info__room-address-info,
+.guest-reservation-detail-info__host-info,
+.guest-reservation-detail-info__payment-info {
+    margin-top: 10px;
+    background-color: white;
+    padding: 20px;
+
+}
+
+.guest-reservation-detail-info__detail-room-date,
+.guest-reservation-detail-info__basic-info,
+.guest-reservation-detail-info__host-info-content {
+    display: flex;
+}
+
+.guest-reservation-detail-info__check-in-out,
+.guest-reservation-detail-info__basic-info-content,
+.guest-reservation-detail-info__host-content {
+    width: 50%;
+}
+
+.guest-reservation-detail-info__room-img {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+
+.guest-reservation-detail-info__room-img > img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 10px;
+    object-fit: cover;
+
+}
+
+.guest-reservation-detail-info__info-align {
+    margin-top: 20px;
+}
+
+
+.guest-reservation-detail-info__room-name {
+    margin: 20px 0 20px 0;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.guest-reservation-detail-info__margin {
+    font-size: 13px;
+    border-top: 1px solid #c3c3c3;
+    padding-top: 20px;
+    margin: 20px 0 20px 0;
+    cursor: pointer;
+}
+
+.guest-reservation-detail-info__margin > .fa-chevron-right {
+    float: right;
+    color: #c3c3c3;
+}
+
+.guest-reservation-detail-info__margin > span {
+    margin-left: 10px;
+}
+
+.guest-reservation-detail-info__check-in-out {
+    margin-bottom: 20px;
+}
+
+.guest-reservation-detail-info__Y-line {
+    margin-right: 10px;
+    border-right: 1px solid #c3c3c3;
+}
+
+.guest-reservation-detail-info__check-title {
+    font-size: 11px;
+    color: #c3c3c3;
+}
+
+.guest-reservation-detail-info__check-reservation-date {
+    font-size: 15px;
+    margin: 20px 0 10px 0;
+}
+
+.guest-reservation-detail-info__check-time {
+    font-size: 17px;
+}
+
+.guest-reservation-detail-info__basic-info-content > div {
+    margin-bottom: 8px;
+}
+
+.guest-reservation-detail-info__host-profile-img {
+    margin: 0 auto;
+    text-align: center;
+    vertical-align: middle;
+
+}
+
+.guest-reservation-detail-info__guest-info {
+    margin-bottom: 20px;
+}
+
+.guest-reservation-detail-info__reservation-detail-info-number {
+    border-top: 1px solid #c3c3c3;
+}
+
+.guest-reservation-detail-info__host-profile {
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+
+.map-box {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+}

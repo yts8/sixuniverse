@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<th:block layout:fragment="css"></th:block>
+<th:block layout:fragment="js"></th:block>
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+
+  <form th:action="@{/reservation}" method="get" th:each="room : ${roomList}">
+    <div  style="border: 1px solid #c3c3c3">
+
+    <input type="hidden" name="roomId" th:value="${room.getRoomId()}">
+
+      <div th:text="${room.getTitle()}"></div>
+
+      <div th:text="${room.getContent()}"></div>
+
+      <button type="submit">예약하기</button>
+
+    </div>
+
+  </form>
+</th:block>
+</body>
+</html>

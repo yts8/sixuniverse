@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default"
+>
+
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/reservation/guest/detail-info.css}">
+</th:block>
+
+<th:block layout:fragment="js">
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=34aa0f04a8c02352b695cb5574769930"></script>
+  <script type="text/javascript" defer th:src="@{/js/common/map.js}"></script>
+  <script type="text/javascript" defer th:src="@{/js/reservation/guest/simple-info.js}"></script>
+</th:block>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+
+<body>
+
+<th:block layout:fragment="content" class="guest-reservation-detail-info__box">
+
+  <div class="guest-reservation-detail-info__box">
+
+    <div class="guest-reservation-detail-info__content">
+      <div class="guest-reservation-detail-info__detail-room-box">
+        <div class="guest-reservation-detail-info__detail-room">
+          <div class="guest-reservation-detail-info__detail-room-title">
+            <a href="./guest-reservation-simple-info?status=complete">
+              <div class="guest-reservation-detail-info__close">
+                <i class="fas fa-times"></i>
+              </div>
+            </a>
+            <div class="guest-reservation-detail-info__title">
+              <div class="guest-reservation-detail-info__title-content">숙소 예약</div>
+            </div>
+          </div>
+            <div class="guest-reservation-detail-info__scroll">
+
+              <div class="guest-reservation-detail-info__detail-room-content">
+                <div class="guest-reservation-detail-info__detail-room-reservation-info">
+                  <div class="guest-reservation-detail-info__reservation-date">예약날짜</div>
+                  <div class="guest-reservation-detail-info__room-owner">호스트 님의 숙소</div>
+                </div>
+
+                <div class="guest-reservation-detail-info__detail-room-info">
+                  <div class="guest-reservation-detail-info__room-img"><img th:src="@{/images/reservation/sample.jpg}"></div>
+                  <div class="guest-reservation-detail-info__info-align">
+                    <div class="guest-reservation-detail-info__room-name">숙소이름</div>
+                    <div class="guest-reservation-detail-info__margin">
+                      <i class="fas fa-comment-alt"></i><span>호스트에게 메시지 보내기</span><i class="fas fa-chevron-right"></i></div>
+                    <div class="guest-reservation-detail-info__margin">
+                      <i class="fas fa-mobile-alt"></i><span>호스트에게 연락하기</span><i class="fas fa-chevron-right"></i></div>
+                    <a th:href="@{/reservation/guest/update}">
+                      <div class="guest-reservation-detail-info__margin">
+                      <i class="fas fa-pen"></i><span>예약 변경</span> <i class="fas fa-chevron-right"></i></div>
+                    </a>
+
+                    <a th:href="@{/reservation/guest/cancel}">
+                      <div class="guest-reservation-detail-info__margin">
+                        <i class="far fa-window-close"></i><span>예약 취소</span> <i class="fas fa-chevron-right"></i>
+                      </div>
+                    </a>
+                  </div>
+
+                  <div class="guest-reservation-detail-info__detail-room-date">
+                    <div class="guest-reservation-detail-info__check-in-out guest-reservation-detail-info__Y-line">
+                      <div class="guest-reservation-detail-info__check-title">체크인</div>
+                      <div class="guest-reservation-detail-info__check-reservation-date">예약날짜</div>
+                      <div class="guest-reservation-detail-info__check-time">체크인시간</div>
+                    </div>
+                    <div class="guest-reservation-detail-info__check-in-out">
+                      <div class="guest-reservation-detail-info__check-title">체크아웃</div>
+                      <div class="guest-reservation-detail-info__check-reservation-date">예약날짜</div>
+                      <div class="guest-reservation-detail-info__check-time">체크인시간</div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="guest-reservation-detail-info__sub-title1">간략정보</div>
+                    <div class="guest-reservation-detail-info__basic-info">
+                      <div class="guest-reservation-detail-info__basic-info-content">
+                        <div>호스트 : 이름 님</div>
+                        <div>게스트 : 몇 명</div>
+                        <div>금액</div>
+                      </div>
+                      <div class="guest-reservation-detail-info__basic-info-content">
+                        <div class="guest-reservation-detail-info__host-profile-img">호스트 사진</div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+
+                <div class="guest-reservation-detail-info__reservation-detail-info">
+                  <div class="guest-reservation-detail-info__guest-info">
+                    <div class="guest-reservation-detail-info__sub-title2">게스트</div>
+                    <div>게스트 : 몇 명</div>
+                  </div>
+                  <div class="guest-reservation-detail-info__reservation-detail-info-number">
+                    <div class="guest-reservation-detail-info__sub-title2">예약번호</div>
+                    <div>111111</div>
+                  </div>
+                </div>
+
+                <div class="guest-reservation-detail-info__room-address-info">
+                  <div class="guest-reservation-detail-info__sub-title2">주소</div>
+                  <div>숙소 주소</div>
+                </div>
+
+                <div class="guest-reservation-detail-info__host-info">
+                  <div class="guest-reservation-detail-info__host-info-content">
+                    <div class="guest-reservation-detail-info__host-content">
+                      <div class="guest-reservation-detail-info__sub-title2">호스트 누구님</div>
+                      <div class="guest-reservation-detail-info__host-profile">프로필 보기</div>
+                    </div>
+                    <div class="guest-reservation-detail-info__host-content">
+                      <div class="guest-reservation-detail-info__host-profile-img">호스트 사진</div>
+                    </div>
+                  </div>
+
+                  <div class="guest-reservation-detail-info__margin">
+                    <i class="fas fa-mobile-alt"></i><span>호스트에게 연락하기</span> <i class="fas fa-chevron-right"></i></div>
+                  <div class="guest-reservation-detail-info__margin">
+                    <i class="fas fa-comment-alt"></i><span>호스트에게 메시지 보내기</span> <i class="fas fa-chevron-right"></i></div>
+                </div>
+
+                <div class="guest-reservation-detail-info__payment-info">
+                  <div class="guest-reservation-detail-info__sub-title2">결제정보</div>
+                  <div class="guest-reservation-detail-info__sub-title1">총 비용</div>
+                  <div>￦ 111111</div>
+                </div>
+
+
+              </div>
+
+            </div>
+
+      </div>
+
+      </div>
+
+      <div class="map-box">
+
+        <div id="map">지도</div>
+
+      </div>
+
+  </div>
+
+  </div>
+
+</th:block>
+
+</body>
+</html>

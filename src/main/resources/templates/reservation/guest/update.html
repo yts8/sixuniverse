@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default"
+>
+
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/reservation/guest/update.css}">
+</th:block>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+
+<th:block layout:fragment="content">
+
+  <div class="guest-reservation-update__box">
+    <div class="guest-reservation-update__box2">
+
+      <div class="guest-reservation-update__content">
+        <div class="guest-reservation-update__title">무엇을 변경하고 싶으세요?</div>
+
+        <form th:action="@{/reservation/guest/update}" method="post">
+          <div class="guest-reservation-update__small-box">
+            <div class="guest-reservation-update__sub-title">날짜</div>
+            <div class="guest-reservation-update__reservation-date">
+              <div>체크인날짜</div>
+              <i class="fas fa-arrow-right"></i>
+              <div>체크아웃날짜</div>
+              <div class="guest-reservation-update__i-calendar">
+                <i class="far fa-calendar"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="guest-reservation-update__small-box">
+            <div class="guest-reservation-update__sub-title">인원</div>
+            <div class="guest-reservation-update__guest">
+              <div>게스트 몇 명</div>
+              <i class="fas fa-angle-down"></i>
+            </div>
+          </div>
+
+          <input type="submit" value="계속" class="guest-reservation-update__next-btn">
+
+        </form>
+
+
+      </div>
+
+
+      <div class="guest-reservation-update__reservation-box">
+        <div class="guest-reservation-update__room-info">
+          <div class="guest-reservation-update__room-address">숙소주소</div>
+          <div>숙소사진</div>
+        </div>
+        <div class="guest-reservation-update__info-align">
+          <i class="fas fa-user-friends"></i>
+          <div class="guest-reservation-update__content">인원 몇 명</div>
+        </div>
+        <div class="guest-reservation-update__info-align">
+          <i class="far fa-calendar-alt"></i>
+          <div class="guest-reservation-update__content">예약날짜</div>
+        </div>
+        <div class="guest-reservation-update__info-align">
+          <span>기존 금액</span>
+          <span>￦ 111111</span>
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+</th:block>
+
+<body>
+
+</body>
+</html>

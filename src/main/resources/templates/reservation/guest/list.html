@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/reservation/guest/list.css}">
+</th:block>
+
+<th:block layout:fragment="js">
+  <script type="text/javascript" defer th:src="@{/js/reservation/guest/list.js}"></script>
+</th:block>
+
+
+<head>
+  <meta charset="UTF-8">
+  <title>게스트 예약 내역</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+<div class="guest-reservation__box">
+  <div class="guest-reservation__content">
+  <div class="guest-reservation__title">여행</div>
+  <nav class="guest-reservation__nav">
+    <button class="guest-reservation__upcoming"><div>예정된 예약</div></button>
+    <button class="guest-reservation__complete">완료된 예약</button>
+    <button class="guest-reservation__cancel">취소된 예약</button>
+  </nav>
+
+    <div class="guest-reservation__room-info">
+      <form th:action="@{/reservation/guest/simple-info}" method="get" th:each="test : ${testList}">
+        <input type="hidden" name="status" th:value="${test}">
+        <table class="guest-reservation__room-info-table">
+          <tr><td>
+            <div class="guest-reservation__room-img-box">
+              <img th:src="@{/images/reservation/sample.jpg}" class="guest-reservation__room-img">
+            </div>
+          </td></tr>
+          <tr>
+            <td class="guest-reservation__room-simple-info">
+              <div class="guest-reservation__reservation-date">예약날짜</div>
+              <div class="guest-reservation__room-simple-address">간단주소</div>
+            </td>
+          </tr>
+          <tr><td class="guest-reservation__room-simple-info-room-name">
+            <div class="guest-reservation__room-name">숙소이름</div>
+            <i class="fas fa-angle-right"></i>
+          </td></tr>
+          <tr><td th:text="${test}"></td></tr>
+          <tr><td class="guest-reservation__detail">
+            <input type="submit" value="더보기" class="guest-reservation__detail-btn">
+          </td></tr>
+        </table>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+</th:block>
+</body>
+</html>
