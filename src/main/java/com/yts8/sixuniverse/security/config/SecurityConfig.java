@@ -24,9 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//    auth.authenticationProvider(authenticationProvider);
-    auth.inMemoryAuthentication().withUser("user").password("{noop}1234").roles("MEMBER");
-    auth.inMemoryAuthentication().withUser("admin").password("{noop}1234").roles("ADMIN");
+    auth.authenticationProvider(authenticationProvider);
   }
 
   @Override
@@ -39,10 +37,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     http
         .authorizeRequests()
-        .antMatchers("/", "/error").permitAll()
-        .antMatchers("/login", "/join", "/member/setting/password/reset").permitAll()
-        .antMatchers("/room/detail/**").permitAll()
-        .antMatchers("/member/**").hasAnyRole("MEMBER", "ADMIN")
+        .antMatchers("/",
+            "/error",
+            "/login",
+            "/api/login/**",
+            "/join",
+            "/member/setting/password/reset",
+            "/room/detail/**").permitAll()
+        .antMatchers("/member/**", "/api/member/**").hasAnyRole("GUEST", "HOST", "ADMIN")
+        .antMatchers("/host/**", "/api/host/**").hasAnyRole("HOST", "ADMIN")
         .antMatchers("/admin/**").hasRole("ADMIN")
         .anyRequest().authenticated()
         .and()

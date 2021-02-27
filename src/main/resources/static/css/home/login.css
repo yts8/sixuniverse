@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 .login__container {
   min-height: 100%;
   background-color: #fafafa;
@@ -56,6 +58,10 @@
   border: none;
 }
 
+.login__form > .login__input-box > input::placeholder {
+  font-size: 0.8em;
+}
+
 .login__form > .login__input-box > .login__input-status {
   flex: 1;
   display: flex;
@@ -65,10 +71,16 @@
   background-color: white;
 }
 
-.login__form > button {
+.login__form > .login__input-box.join__auth-container {
+  display: none;
+}
+
+.login__form > button,
+.login__form .join__auth-btn {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
   border-radius: 3px;
   height: 2rem;
   color: white;
@@ -76,7 +88,8 @@
   font-weight: bold;
 }
 
-.login__form > button:hover {
+.login__form .join__auth-btn {
+  height: 100%;
   background-color: var(--guest-color);
 }
 
