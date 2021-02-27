@@ -1,0 +1,79 @@
+.guest-reservation__box {
+  width: 85%;
+  margin: 50px auto;
+}
+
+.guest-reservation__content {
+    max-width: 1280px;
+    padding-left: 80px;
+    padding-right: 80px;
+    margin: 0 auto;
+}
+
+.guest-reservation__title {
+  font-size: 32px;
+  font-weight: bold;
+
+}
+
+.guest-reservation__nav {
+  display: flex;
+  border-bottom: 1px solid #c3c3c3;
+  margin-top: 30px;
+  height: 50px;
+}
+
+.guest-reservation__upcoming, .guest-reservation__complete {
+  background-color: transparent;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  height: 50px;
+  vertical-align: top;
+  cursor: pointer;
+}
+
+.guest-reservation__active {
+  border-bottom: 2px solid black;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.guest-reservation__complete {
+  margin-left: 30px;
+}
+
+.guest-reservation__room-info {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  grid-auto-rows: minmax(50%, auto);
+}
+
+.guest-reservation__room-info-table {
+  min-width: 80%;
+  min-height: 300px;
+  margin: 20px auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #c3c3c3;
+}
+
+.guest-reservation__detail {
+  height: 40px;
+  border-top: 1px solid #c3c3c3;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.guest-reservation__detail-btn {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  cursor: pointer;
+}
