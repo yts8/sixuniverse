@@ -7,6 +7,10 @@
   <link rel="stylesheet" th:href="@{/css/home/login.css}"/>
 </th:block>
 
+<th:block layout:fragment="js">
+  <script defer th:src="@{/js/home/login.js}"></script>
+</th:block>
+
 <th:block layout:fragment="content">
   <div class="login__container">
     <article class="login__wrap">
@@ -15,11 +19,12 @@
         <form th:action="@{/login}" method="post" class="login__form">
 
           <div class="login__input-box">
-            <input type="text"
+            <input type="email"
                    name="email"
+                   class="login-email-input-js"
                    placeholder="이메일"/>
 
-            <div class="login__input-status">
+            <div class="login__input-status login-email-icon-js">
               <i class="fas fa-envelope"></i>
             </div>
           </div>
@@ -27,14 +32,16 @@
           <div class="login__input-box">
             <input type="password"
                    name="password"
+                   class="login-password-input-js"
+                   maxlength="20"
                    placeholder="비밀번호"/>
 
-            <div class="login__input-status">
+            <div class="login__input-status login-password-icon-js">
               <i class="fas fa-lock"></i>
             </div>
           </div>
 
-          <button>로그인</button>
+          <button class="login-submit-btn-js">로그인</button>
 
         </form>
 

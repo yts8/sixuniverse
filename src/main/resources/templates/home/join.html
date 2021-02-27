@@ -7,6 +7,10 @@
   <link rel="stylesheet" th:href="@{/css/home/login.css}"/>
 </th:block>
 
+<th:block layout:fragment="js">
+  <script defer th:src="@{/js/home/join.js}"></script>
+</th:block>
+
 <th:block layout:fragment="content">
   <div class="login__container">
     <article class="login__wrap">
@@ -39,22 +43,36 @@
           <div class="login__input-box">
             <input type="email"
                    name="email"
-                   placeholder="* 이메일"
-                   required/>
+                   class="join-email-input-js"
+                   placeholder="* 이메일"/>
 
-            <div class="login__input-status">
+            <div class="login__input-status join-email-icon">
               <i class="fas fa-envelope"></i>
+            </div>
+          </div>
+
+          <div class="login__input-box join__auth-container join-auth-btn-container-js">
+            <button class="join__auth-btn join-auth-btn-js" type="button">인증코드 받기</button>
+          </div>
+
+          <div class="login__input-box join__auth-container join-auth-input-container-js">
+            <input type="text"
+                   class="join-auth-input-js"
+                   placeholder="* 인증코드"/>
+
+            <div class="login__input-status join-auth-icon-js">
+              <i class="fas fa-check-circle"></i>
             </div>
           </div>
 
           <div class="login__input-box">
             <input type="password"
                    name="password"
-                   placeholder="* 비밀번호"
-                   maxlength="20"
-                   required/>
+                   class="join-password-input-js"
+                   placeholder="* 영문, 숫자, 특수문자 조합 (8~20)"
+                   maxlength="20"/>
 
-            <div class="login__input-status">
+            <div class="login__input-status join-password-icon-js">
               <i class="fas fa-lock"></i>
             </div>
           </div>
@@ -62,10 +80,10 @@
           <div class="login__input-box">
             <input type="text"
                    name="username"
-                   placeholder="* 성명"
-                   required/>
+                   class="join-username-input-js"
+                   placeholder="* 성명"/>
 
-            <div class="login__input-status">
+            <div class="login__input-status join-username-icon-js">
               <i class="fas fa-user"></i>
             </div>
           </div>
@@ -73,12 +91,11 @@
           <div class="login__input-box">
             <input type="text"
                    name="birthdate"
+                   class="join-birthdate-input-js"
                    placeholder="* 생년월일"
-                   minlength="6"
-                   maxlength="6"
-                   required/>
+                   maxlength="6"/>
 
-            <div class="login__input-status">
+            <div class="login__input-status join-birthdate-icon-js">
               <i class="fas fa-birthday-cake"></i>
             </div>
           </div>
@@ -86,17 +103,16 @@
           <div class="login__input-box">
             <input type="text"
                    name="mobile"
+                   class="join-mobile-input-js"
                    placeholder="* - 없이 11자리 입력"
-                   minlength="11"
-                   maxlength="11"
-                   required/>
+                   maxlength="11"/>
 
-            <div class="login__input-status">
+            <div class="login__input-status join-mobile-icon-js">
               <i class="fas fa-mobile"></i>
             </div>
           </div>
 
-          <button>가입</button>
+          <button type="submit" class="join-form-submit-btn">가입</button>
 
         </form>
       </div>
