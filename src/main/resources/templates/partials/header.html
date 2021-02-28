@@ -7,19 +7,23 @@
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link th:fragment="headerCss" rel="stylesheet" th:href="@{/css/partials/header.css}">
   <title>header</title>
 </head>
 <body>
-<header th:fragment="header">
-  <ul>
-    <li sec:authorize="isAnonymous">
-      <a th:href="@{/login}">로그인</a>
-    </li>
-    <li sec:authorize="isAuthenticated">
-      <a th:href="@{/logout}">로그아웃</a>
-    </li>
-  </ul>
-</header>
+<th:block th:fragment="header">
+  <div class="header__hide"></div>
+  <header class="header__container">
+    <ul>
+      <li sec:authorize="isAnonymous">
+        <a th:href="@{/login}">로그인</a>
+      </li>
+      <li sec:authorize="isAuthenticated">
+        <a th:href="@{/logout}">로그아웃</a>
+      </li>
+    </ul>
+  </header>
+</th:block>
 
 </body>
 </html>
