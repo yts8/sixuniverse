@@ -13,4 +13,12 @@ public class ReservationController {
 
     return "reservation/index";
   }
+
+  @GetMapping("/host-reservation-list")
+  public String reservationHost() {
+
+    return "reservation/host-reservation-list";
+  }
+
+
 }

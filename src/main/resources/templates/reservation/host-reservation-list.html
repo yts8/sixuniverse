@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+<head>
+  <meta charset="UTF-8">
+  <th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/reservation/host-reservation-list.css}"/>
+  </th:block>
+  <th:block layout:fragment="js"></th:block>
+</head>
+
+<th:block layout:fragment="content">
+  <div>
+    <div class="reservation__list-container">
+      <section>
+        <div class="reservation__list-subject">
+          <h1 class="reservation__list-h1">예약</h1>
+        </div>
+        <div class="reservation__menu-list">
+          <div class="reservation__plan">
+            <button type="button" class="reservation__plan-sub">예정된 여행</button>
+          </div>
+          <div class="reservation__finish">
+            <button type="button" class="reservation__finish-sub">완료</button>
+          </div>
+          <div class="reservation__cancel">
+            <button type="button" class="reservation__cancel-sub">취소됨</button>
+          </div>
+          <div class="reservation__All">
+            <button type="button" class="reservation__All-sub">모두</button>
+          </div>
+        </div>
+        <div class="reservation__content">
+          <table class="reservation__list-table">
+            <thead>
+            <tr>
+              <th class="reservation__status-sub">
+                <button class="reservation__status-btn" disabled type="button">
+                  <span class="reservation__status-char">상태</span>
+                </button>
+              </th>
+              <th class="reservation__guest-sub">
+                <button class="reservation__guest-btn" disabled type="button">
+                  <span class="reservation__guest-char">게스트</span>
+                </button>
+              </th>
+              <th class="reservation__check-in-sub">
+                <button class="reservation__check-in-btn" type="button">
+                  <span class="reservation__check-in-char">체크인</span>
+                </button>
+              </th>
+              <th class="reservation__check-out-sub">
+                <button class="reservation__check-out-btn" type="button">
+                  <span class="reservation__check-out-char">체크아웃</span>
+                </button>
+              </th>
+              <th class="reservation__date-sub">
+                <button class="reservation__reserve-btn" disabled type="button">
+                  <span class="reservation__reserve-char">예약 날짜</span>
+                </button>
+              </th>
+              <th class="reservation__price-sub">
+                <button class="reservation__price-btn" disabled type="button">
+                  <span class="reservation__price-char">총 수령 대금</span>
+                </button>
+              </th>
+              <th class="reservation__empty-sub">
+                <span class="reservation__empty-char"></span>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td class="reservation__request">
+                <div class="reservation__request-sub">
+                  <span class="reservation__request-char">확정</span>
+                </div>
+              </td>
+              <td class="reservation__guest-con">
+                <div class="reservation__guest-con-name">
+                  <a href="#" class="reservation__guest-name-link">SungEun Park</a>
+                </div>
+                <div class="reservation__guest-con-num">
+                  <ul>
+                    <li>성인 1명</li>
+                  </ul>
+                </div>
+              </td>
+              <td class="reservation__check-in-con">
+                <div class="reservation__check-in-con-date">2021년 2월 26일</div>
+              </td>
+              <td class="reservation__check-out-con">
+                <div class="reservation__check-out-con-date">2021년 2월 27일</div>
+              </td>
+              <td class="reservation__reserve-con">
+                <div class="reservation__reserve-con-date">2021년 2월 26일
+                  <div class="reservation__reserve-con-time">오후 8:46</div>
+                </div>
+              </td>
+              <td class="reservation__price-con">
+                <div class="reservation__price-detail">11,640</div>
+              </td>
+              <td class="reservation__detail-btn">
+                <div class="reservation__detail-con">
+                  <a href="#" class="reservation__detail-link" target="_blank">
+                    <span class="reservation__detail-char">세부사항</span>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </div>
+</th:block>
+<!-- layout/default.html 에 보면 -->
+<!-- <title th:text="${title} + ' | Sixuniverse'"></title> 부분이 있는데 -->
+<!-- 해당 페이지로 오는 Controller에서 -->
+<!-- model.addAttribute("title", "sample") 값 하나만 넣어주시면 -->
+<!-- sample | Sixuniverse 가 적히도록 해뒀습니다. -->
+</html>
