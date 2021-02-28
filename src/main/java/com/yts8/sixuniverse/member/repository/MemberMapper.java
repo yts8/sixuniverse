@@ -1,18 +1,18 @@
 package com.yts8.sixuniverse.member.repository;
 
-import com.yts8.sixuniverse.member.domain.Member;
+import com.yts8.sixuniverse.member.dto.MemberDto;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface MemberMapper {
 
-  Member findByEmail(String email);
+  MemberDto findByEmail(String email);
 
-  Member findById(int memberId);
+  MemberDto findById(int memberId);
 
-  void save(Member member);
+  void save(MemberDto memberDto);
 
-  void updateMember(Member member);
+  void updateMember(MemberDto member);
 
-  void updatePassword(Member member);
+  void updatePassword(MemberDto member);
 }

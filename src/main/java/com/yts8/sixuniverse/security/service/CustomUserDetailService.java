@@ -1,6 +1,6 @@
 package com.yts8.sixuniverse.security.service;
 
-import com.yts8.sixuniverse.member.domain.Member;
+import com.yts8.sixuniverse.member.dto.MemberDto;
 import com.yts8.sixuniverse.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,15 +21,14 @@ public class CustomUserDetailService implements UserDetailsService {
 
   @Override
   public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-    Member member = memberService.findByEmail(email);
-    if (member == null) {
+    MemberDto memberDto = memberService.findByEmail(email);
+    if (memberDto == null) {
       throw new UsernameNotFoundException("UsernameNotFoundException");
     }
 
     List<GrantedAuthority> roles = new ArrayList<>();
-    roles.add(new SimpleGrantedAuthority("ROLE_" + member.getRole()));
+    roles.add(new SimpleGrantedAuthority("ROLE_" + memberDto.getRole()));
 
-    return new MemberContext(member, roles);
+    return new MemberContext(memberDto, roles);
   }
-
 }

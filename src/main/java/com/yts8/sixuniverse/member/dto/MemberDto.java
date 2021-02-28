@@ -1,11 +1,11 @@
-package com.yts8.sixuniverse.member.domain;
+package com.yts8.sixuniverse.member.dto;
 
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
-public class Member {
+public class MemberDto {
   private int memberId;
   private String email;
   private String password;

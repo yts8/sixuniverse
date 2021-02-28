@@ -24,11 +24,11 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     String password = (String) authentication.getCredentials();
 
     MemberContext memberContext = (MemberContext) userDetailsService.loadUserByUsername(email);
-    if (!passwordEncoder.matches(password, memberContext.getMember().getPassword())) {
+    if (!passwordEncoder.matches(password, memberContext.getMemberDto().getPassword())) {
       throw new BadCredentialsException("BadCredentialsException");
     }
 
-    return new UsernamePasswordAuthenticationToken(memberContext.getMember(), null, memberContext.getAuthorities());
+    return new UsernamePasswordAuthenticationToken(memberContext.getMemberDto(), null, memberContext.getAuthorities());
   }
 
   @Override
