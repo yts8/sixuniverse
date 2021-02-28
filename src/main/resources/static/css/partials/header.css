@@ -1,0 +1,6 @@
+.header__container {
+  position: fixed;
+  width: 100%;
+  height: var(-he);
+  background-color: var(--guest-color);
+}
