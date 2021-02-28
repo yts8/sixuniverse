@@ -1,6 +1,6 @@
 package com.yts8.sixuniverse.member.service;
 
-import com.yts8.sixuniverse.member.domain.Member;
+import com.yts8.sixuniverse.member.dto.MemberDto;
 import com.yts8.sixuniverse.member.repository.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,27 +14,27 @@ public class MemberServiceImpl implements MemberService {
   private final MemberMapper memberMapper;
 
   @Override
-  public void save(Member member) {
-    memberMapper.save(member);
+  public void save(MemberDto memberDto) {
+    memberMapper.save(memberDto);
   }
 
   @Override
-  public void updateMember(Member member) {
-    memberMapper.updateMember(member);
+  public void updateMember(MemberDto memberDto) {
+    memberMapper.updateMember(memberDto);
   }
 
   @Override
-  public void updatePassword(Member member) {
-    memberMapper.updatePassword(member);
+  public void updatePassword(MemberDto memberDto) {
+    memberMapper.updatePassword(memberDto);
   }
 
   @Override
-  public Member findByEmail(String email) {
+  public MemberDto findByEmail(String email) {
     return memberMapper.findByEmail(email);
   }
 
   @Override
-  public Member findById(int memberId) {
+  public MemberDto findById(int memberId) {
     return memberMapper.findById(memberId);
   }
 
