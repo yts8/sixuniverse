@@ -2,7 +2,7 @@ package com.yts8.sixuniverse.member.controller;
 
 import com.yts8.sixuniverse.member.dto.MemberDto;
 import com.yts8.sixuniverse.member.service.MemberService;
-import com.yts8.sixuniverse.security.service.MemberContext;
+import com.yts8.sixuniverse.config.auth.service.MemberContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

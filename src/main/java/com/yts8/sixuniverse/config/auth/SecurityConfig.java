@@ -1,4 +1,4 @@
-package com.yts8.sixuniverse.security.config;
+package com.yts8.sixuniverse.config.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;

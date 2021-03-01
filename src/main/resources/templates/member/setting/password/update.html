@@ -4,7 +4,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
 
-<div layout:fragment="content">
+<th:block layout:fragment="content">
   <section>
     <h2>비밀번호 수정</h2>
     <form th:action="@{/member/setting/password/update}" method="post">
@@ -27,5 +27,5 @@
 
     </form>
   </section>
-</div>
+</th:block>
 </html>

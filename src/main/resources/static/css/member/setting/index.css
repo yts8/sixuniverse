@@ -1,0 +1,67 @@
+.member-setting__container {
+  width: 1032px;
+  margin: 0 auto;
+  color: #484848;
+  padding-bottom: 5rem;
+}
+
+.member-setting__title-container {
+  padding: 5rem 1rem;
+}
+
+.member-setting__title-container > h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.member-setting__title-container > .member-setting__profile-container {
+  display: flex;
+  margin-top: 1rem;
+}
+
+.member-setting__profile-container > span {
+  margin-right: 0.5rem;
+}
+
+.member-setting__profile-name {
+  font-weight: bold;
+}
+
+.member-setting__profile-container > a {
+  color: var(--host-color);
+  font-weight: bold;
+}
+
+.member-setting__content-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 12rem;
+  grid-gap: 1rem;
+  line-height: 1.5;
+}
+
+.member-setting__content-container > a {
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+  border-radius: 0.5rem;
+}
+
+.member-setting__content-container > a > article > .member-setting__content-icon {
+  font-size: 1.5rem;
+  color: var(--host-color);
+  margin-bottom: 1rem;
+}
+
+.member-setting__content-container > a > article > .member-setting__content-icon.member-setting__content-icon--yellow {
+  color: #ffb605;
+}
+
+.member-setting__content-container > a > article > h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+
+
+
