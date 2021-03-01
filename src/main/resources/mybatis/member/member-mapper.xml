@@ -18,37 +18,31 @@
     insert into member
     (email,
      password,
-     name,
+     username,
      birthdate,
-     zipcode,
-     address,
-     sub_address,
-     phone,
+     mobile,
      social,
      role)
     values (#{email},
             #{password},
-            #{name},
+            #{username},
             #{birthdate},
-            #{zipcode},
-            #{address},
-            #{subAddress},
-            #{phone},
+            #{mobile},
             #{social},
             #{role})
   </insert>
 
   <update id="updateMember" parameterType="Member">
     update member
-    set name=#{name},
+    set username=#{username},
         birthdate=#{birthdate},
         profile_img=#{profileImg},
         zipcode=#{zipcode},
         address=#{address},
         sub_address=#{subAddress},
-        phone=#{phone},
+        mobile=#{mobile},
         bio=#{bio}
-    where email = #{email}
+    where member_id = #{memberId}
   </update>
 
   <update id="updatePassword" parameterType="Member">

@@ -20,7 +20,6 @@
   display: flex;
   border-bottom: 1px solid #c3c3c3;
   margin-top: 30px;
-  height: 50px;
 }
 
 .guest-reservation__upcoming, .guest-reservation__complete {
@@ -56,7 +55,7 @@
 .guest-reservation__room-info-table {
   min-width: 80%;
   min-height: 300px;
-  margin: 20px auto;
+  margin: 30px auto;
   border-radius: 10px;
   box-shadow: 0 0 10px #c3c3c3;
 }

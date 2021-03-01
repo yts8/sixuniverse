@@ -1,0 +1,84 @@
+.g-review-by__main {
+  margin: 55px 320px;
+}
+
+.g-review-by__main-top span {
+  display: inline-block;
+}
+
+.g-review-by__title {
+  color: #484848;
+  font-size: 42px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 85px;
+}
+
+.g-review-by__tabs {
+  max-width: 1020px;
+  border-bottom: 1px solid #dce0e0;
+  width: 100%;
+  word-spacing: -2px;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+}
+
+.g-review-by__container {
+  max-width: 1020px;
+}
+
+.g-review-by__panel {
+  border: 1px solid #dce0e0;
+  margin-bottom: 30px;
+}
+
+.g-review-by__panel-header {
+  color: #484848;
+  font-size: 20px;
+  padding: 20px 25px;
+  border-bottom: 1px solid #dce0e0;
+  background-color: #edefed;
+}
+
+.g-review-by__panel-body {
+  font-size: 20px;
+  color: #484848;
+  padding: 25px;
+  line-height: 30px;
+}
+
+.g-review-by__main-top a {
+  text-decoration: none;
+  color: #484848;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.g-review-by__main-top a:hover {
+  text-decoration: underline;
+  color: #484848;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.g-review-by__tabs a {
+  display: inline-block;
+  text-decoration: none;
+  color: #969696;
+  font-size: 19px;
+  margin-right: 20px;
+}
+
+.g-review-by__tabs a:active {
+  text-decoration: none;
+  color: #484848;
+  font-size: 19px;
+  margin-right: 20px;
+}
+
+.g-review-by__main-top nav {
+  text-decoration: none;
+  color: #484848;
+  font-weight: bold;
+  font-size: 20px;
+}

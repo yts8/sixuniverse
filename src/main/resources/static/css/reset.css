@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -47,8 +49,28 @@ table {
   border-spacing: 0;
 }
 
-a {
+/* === Custom === */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+}
+
+a, button {
   all: unset;
+  display: block;
   color: black;
   cursor: pointer;
+  outline: none;
+}
+
+input {
+  outline: none;
 }
