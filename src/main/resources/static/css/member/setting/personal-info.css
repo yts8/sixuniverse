@@ -1,0 +1,94 @@
+.member-personal-info__container {
+  width: 1080px;
+  margin: 0 auto;
+  color: #484848;
+  padding-bottom: 5rem;
+}
+
+.member-personal-info__title-container {
+  padding: 3rem 1rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.member-personal-info__title-container > .member-personal-info__title-list {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.member-personal-info__title-container > .member-personal-info__title-list > .member-personal-info__title-list-icon {
+  margin: 0 1rem;
+}
+
+.member-personal-info__title-container > h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.member-personal-info__content-container {
+  display: flex;
+  padding: 0 0.5rem;
+}
+
+.member-personal-info__update-container {
+  flex: 2;
+  padding-right: 10rem;
+  line-height: 1.5;
+}
+
+.member-personal-info__update-container > .member-personal-info__update-wrap {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 0;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.member-personal-info__update-wrap > .member-personal-info__update-box {
+  flex: 1;
+  padding-right: 2rem;
+}
+
+.member-personal-info__update-wrap > .member-personal-info__update-box > .member-personal-info__update-title {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.member-personal-info__update-wrap > div > .member-personal-info__update-btn {
+  font-weight: bold;
+  color: var(--host-color);
+  cursor: pointer;
+}
+
+.member-personal-info__update-wrap > div > .member-personal-info__update-btn:hover {
+  border-bottom: 2px solid var(--host-color);
+}
+
+.member-personal-info__qna-container {
+  flex: 1;
+  word-break: keep-all;
+  line-height: 1.3;
+}
+
+.member-personal-info__qna-container > .member-personal-info__qna-wrap {
+  position: sticky;
+  top: calc(var(--header-height) + 2rem);
+  padding: 1.5rem;
+  border: 1px solid #d9d9d9;
+}
+
+.member-personal-info__qna-wrap > .member-personal-info__qna-box:first-of-type {
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.member-personal-info__qna-box > .member-personal-info__qna-icon {
+  font-size: 2rem;
+  color: var(--host-color);
+}
+
+.member-personal-info__qna-box > .member-personal-info__qna-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 1rem 0;
+}
