@@ -5,6 +5,8 @@
   padding-bottom: 5rem;
 }
 
+/* === Title === */
+
 .member-personal-info__title-container {
   padding: 3rem 1rem;
   font-size: 0.9rem;
@@ -36,6 +38,8 @@
   line-height: 1.5;
 }
 
+/* === Update === */
+
 .member-personal-info__update-container > .member-personal-info__update-wrap {
   display: flex;
   justify-content: space-between;
@@ -53,15 +57,64 @@
   margin-bottom: 1rem;
 }
 
-.member-personal-info__update-wrap > div > .member-personal-info__update-btn {
+.member-personal-info__update-wrap > div > .member-personal-info__update-toggle-btn {
   font-weight: bold;
   color: var(--host-color);
-  cursor: pointer;
 }
 
-.member-personal-info__update-wrap > div > .member-personal-info__update-btn:hover {
+.member-personal-info__update-wrap > div > .member-personal-info__update-toggle-btn:hover {
   border-bottom: 2px solid var(--host-color);
 }
+
+/* === Toggle === */
+.member-personal-info__update-box > .member-personal-info__update-hide {
+  display: none;
+}
+
+/* === Update Input === */
+
+.member-personal-info__update-input-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.member-personal-info__update-input-wrap input,
+.member-personal-info__update-input-wrap textarea {
+  padding: 1rem;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  margin: 1rem 0;
+}
+
+.member-personal-info__update-input-wrap > button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5rem;
+  height: 3rem;
+  border-radius: 5px;
+  font-weight: bold;
+  color: white;
+  background-color: var(--host-color);
+}
+
+.member-personal-info__update-input-wrap > .member-personal-info__zipcode-box {
+  display: flex;
+  align-items: center;
+}
+
+.member-personal-info__update-input-wrap > .member-personal-info__zipcode-box > button {
+  height: 3rem;
+  padding: 0 1rem;
+  border-radius: 5px;
+  margin-left: 2rem;
+  font-weight: bold;
+  color: white;
+  background-color: var(--host-color);
+
+}
+
+/* === Q&A === */
 
 .member-personal-info__qna-container {
   flex: 1;

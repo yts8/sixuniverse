@@ -1,10 +1,10 @@
 (() => {
 
   // Element
-  const loginEmailInputEl = document.querySelector(".login-email-input-js");
+  const loginEmailInputEl = document.querySelector("#email");
   const loginEmailIconEl = document.querySelector(".login-email-icon-js");
 
-  const loginPasswordInputEl = document.querySelector(".login-password-input-js");
+  const loginPasswordInputEl = document.querySelector("#password");
   const loginPasswordIconEl = document.querySelector(".login-password-icon-js");
 
   const loginSubmitBtnEl = document.querySelector(".login-submit-btn-js");
