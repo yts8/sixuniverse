@@ -1,19 +1,19 @@
 (() => {
 
     // Element
-    const joinEmailInputEl = document.querySelector(".join-email-input-js");
+    const joinEmailInputEl = document.querySelector("#email");
     const joinEmailIconEl = document.querySelector(".join-email-icon");
 
-    const joinPasswordInputEl = document.querySelector(".join-password-input-js");
+    const joinPasswordInputEl = document.querySelector("#password");
     const joinPasswordIconEl = document.querySelector(".join-password-icon-js");
 
-    const joinUsernameInputEl = document.querySelector(".join-username-input-js")
+    const joinUsernameInputEl = document.querySelector("#username")
     const joinUsernameIconEl = document.querySelector(".join-username-icon-js")
 
-    const joinBirthdateInputEl = document.querySelector(".join-birthdate-input-js")
+    const joinBirthdateInputEl = document.querySelector("#birthdate")
     const joinBirthdateIconEl = document.querySelector(".join-birthdate-icon-js")
 
-    const joinMobileInputEl = document.querySelector(".join-mobile-input-js")
+    const joinMobileInputEl = document.querySelector("#mobile")
     const joinMobileIconEl = document.querySelector(".join-mobile-icon-js")
 
     const joinAuthBtnContainerEl = document.querySelector(".join-auth-btn-container-js");
@@ -29,7 +29,7 @@
     const emailRgx = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
     const passwordRgx = /^.*(?=^.{8,20}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/
     const usernameRgx = /.+/;
-    const birthdateRgx = /\d{6}/i;
+    const birthdateRgx = /\d{8}/i;
     const mobileRgx = /(01[01])\d{8}/i;
 
     const activeColor = "#EB4C60";
