@@ -32,8 +32,8 @@
     const birthdateRgx = /\d{8}/i;
     const mobileRgx = /(01[01])\d{8}/i;
 
-    const activeColor = "#EB4C60";
-    const disableColor = "#b3b3b3";
+    const activeColor = "var(--guest-color)";
+    const disableColor = "var(--disable-color)";
 
     // Status
     let emailStatus = false;
@@ -53,7 +53,7 @@
       if (submitStatus) {
         joinSubmitBtnEl.style.backgroundColor = activeColor;
       } else {
-        joinSubmitBtnEl.style.backgroundColor = "#ffb3b3";
+        joinSubmitBtnEl.style.backgroundColor = "var(--light-guest-color)";
       }
     }
 

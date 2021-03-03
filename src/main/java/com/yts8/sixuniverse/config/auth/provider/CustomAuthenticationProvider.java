@@ -11,12 +11,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpSession;
+
 @Component
 @RequiredArgsConstructor
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
   private final UserDetailsService userDetailsService;
   private final PasswordEncoder passwordEncoder;
+  private final HttpSession httpSession;
 
   @Override
   public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -28,7 +31,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
       throw new BadCredentialsException("BadCredentialsException");
     }
 
-    return new UsernamePasswordAuthenticationToken(memberContext.getMemberDto(), null, memberContext.getAuthorities());
+    httpSession.setAttribute("member", memberContext.getMemberDto());
+
+    return new UsernamePasswordAuthenticationToken(memberContext.getMemberDto().getEmail(), null, memberContext.getAuthorities());
   }
 
   @Override

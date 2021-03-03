@@ -32,16 +32,35 @@
             #{role})
   </insert>
 
-  <update id="updateMember" parameterType="MemberDto">
+  <update id="updateUsername" parameterType="MemberDto">
     update member
-    set username=#{username},
-        birthdate=#{birthdate},
-        profile_img=#{profileImg},
-        zipcode=#{zipcode},
+    set username=#{username}
+    where member_id = #{memberId}
+  </update>
+
+  <update id="updateBirthdate" parameterType="MemberDto">
+    update member
+    set birthdate=#{birthdate}
+    where member_id = #{memberId}
+  </update>
+
+  <update id="updateMobile" parameterType="MemberDto">
+    update member
+    set mobile=#{mobile}
+    where member_id = #{memberId}
+  </update>
+
+  <update id="updateAddress" parameterType="MemberDto">
+    update member
+    set zipcode=#{zipcode},
         address=#{address},
-        sub_address=#{subAddress},
-        mobile=#{mobile},
-        bio=#{bio}
+        sub_address=#{subAddress}
+    where member_id = #{memberId}
+  </update>
+
+  <update id="updateBio" parameterType="MemberDto">
+    update member
+    set bio=#{bio}
     where member_id = #{memberId}
   </update>
 

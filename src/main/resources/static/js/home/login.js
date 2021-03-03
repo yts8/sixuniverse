@@ -14,8 +14,8 @@
   const passwordRgx = /^.*(?=^.{8,20}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 
   // Color
-  const activeColor = "#EB4C60";
-  const disableColor = "#b3b3b3";
+  const activeColor = "var(--guest-color)";
+  const disableColor = "var(--disable-color)";
 
   // Status
   let emailStatus = false;
@@ -26,7 +26,7 @@
     if (emailStatus && passwordStatus) {
       loginSubmitBtnEl.style.backgroundColor = activeColor;
     } else {
-      loginSubmitBtnEl.style.backgroundColor = "#ffb3b3";
+      loginSubmitBtnEl.style.backgroundColor = "var(--light-guest-color)";
     }
   }
 
