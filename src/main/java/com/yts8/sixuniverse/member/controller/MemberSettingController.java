@@ -2,12 +2,8 @@ package com.yts8.sixuniverse.member.controller;
 
 import com.yts8.sixuniverse.member.dto.MemberDto;
 import com.yts8.sixuniverse.member.service.MemberService;
-import com.yts8.sixuniverse.config.auth.service.MemberContext;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemberSettingController {
 
   private final MemberService memberService;
-  private final UserDetailsService userDetailsService;
   private final PasswordEncoder passwordEncoder;
 
   @GetMapping("")
@@ -34,21 +29,6 @@ public class MemberSettingController {
   public String getPersonalInfo(Model model) {
     model.addAttribute("title", "개인정보");
     return "member/setting/personal-info";
-  }
-
-  @PostMapping("/personal-info/update")
-  public String updatePersonalInfo(MemberDto memberDto, Authentication authentication) {
-    MemberDto authMember = (MemberDto) authentication.getPrincipal();
-    memberDto.setMemberId(authMember.getMemberId());
-    memberService.updateMember(memberDto);
-
-    MemberContext memberContext = (MemberContext) userDetailsService.loadUserByUsername(authMember.getEmail());
-    SecurityContextHolder
-        .getContext()
-        .setAuthentication(
-            new UsernamePasswordAuthenticationToken(memberContext.getMemberDto(), null, memberContext.getAuthorities()));
-
-    return "redirect:/member/setting/personal-info";
   }
 
   @GetMapping("/password")

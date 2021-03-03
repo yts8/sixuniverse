@@ -12,7 +12,15 @@ public interface MemberMapper {
 
   void save(MemberDto memberDto);
 
-  void updateMember(MemberDto member);
+  void updateUsername(MemberDto memberDto);
+
+  void updateBirthdate(MemberDto memberDto);
+
+  void updateMobile(MemberDto memberDto);
+
+  void updateAddress(MemberDto memberDto);
+
+  void updateBio(MemberDto memberDto);
 
   void updatePassword(MemberDto member);
 }
