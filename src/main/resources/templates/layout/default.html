@@ -11,12 +11,14 @@
   <!-- Common CSS -->
   <link rel="stylesheet" th:href="@{/css/reset.css}"/>
   <link rel="stylesheet" th:href="@{/css/variables.css}"/>
-  <th:block layout:fragment="css"></th:block>
+  <th:block th:replace="partials/header :: headerCss"/>
+  <th:block th:replace="partials/footer :: footerCss"/>
+  <th:block layout:fragment="css"/>
 
   <!-- Common JS -->
   <script src="https://kit.fontawesome.com/72ec3ada60.js" crossorigin="anonymous"></script>
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-  <th:block layout:fragment="js"></th:block>
+  <th:block layout:fragment="js"/>
 
   <title th:text="${title} + ' | Sixunsiverse'"></title>
 </head>

@@ -1,6 +1,6 @@
 package com.yts8.sixuniverse.member.controller;
 
-import com.yts8.sixuniverse.member.domain.Member;
+import com.yts8.sixuniverse.member.dto.MemberDto;
 import com.yts8.sixuniverse.member.service.MemberService;
 import com.yts8.sixuniverse.security.service.MemberContext;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequiredArgsConstructor
@@ -39,16 +37,16 @@ public class MemberSettingController {
   }
 
   @PostMapping("/personal-info/update")
-  public String updatePersonalInfo(Member member, Authentication authentication) {
-    Member authMember = (Member) authentication.getPrincipal();
-    member.setMemberId(authMember.getMemberId());
-    memberService.updateMember(member);
+  public String updatePersonalInfo(MemberDto memberDto, Authentication authentication) {
+    MemberDto authMember = (MemberDto) authentication.getPrincipal();
+    memberDto.setMemberId(authMember.getMemberId());
+    memberService.updateMember(memberDto);
 
     MemberContext memberContext = (MemberContext) userDetailsService.loadUserByUsername(authMember.getEmail());
     SecurityContextHolder
         .getContext()
         .setAuthentication(
-            new UsernamePasswordAuthenticationToken(memberContext.getMember(), null, memberContext.getAuthorities()));
+            new UsernamePasswordAuthenticationToken(memberContext.getMemberDto(), null, memberContext.getAuthorities()));
 
     return "redirect:/member/setting/personal-info";
   }
@@ -60,15 +58,15 @@ public class MemberSettingController {
   }
 
   @PostMapping("/password/update")
-  public String updatePassword(String oldPassword, String newPassword, Authentication authentication, HttpServletResponse response) {
-    Member member = (Member) authentication.getPrincipal();
+  public String updatePassword(String oldPassword, String newPassword, Authentication authentication) {
+    MemberDto memberDto = (MemberDto) authentication.getPrincipal();
 
-    if (!passwordEncoder.matches(oldPassword, member.getPassword())) {
+    if (!passwordEncoder.matches(oldPassword, memberDto.getPassword())) {
       return "redirect:/member/setting/password";
     }
     String encodeNewPassword = passwordEncoder.encode(newPassword);
-    member.setPassword(encodeNewPassword);
-    memberService.updatePassword(member);
+    memberDto.setPassword(encodeNewPassword);
+    memberService.updatePassword(memberDto);
     return "redirect:/member/setting";
   }
 

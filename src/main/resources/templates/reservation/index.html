@@ -6,10 +6,15 @@
 
 <div layout:fragment="css">
   <link rel="stylesheet" th:href="@{/css/reservation/index.css}">
+  <link rel="stylesheet" th:href="@{/css/reservation/datepicker.css}">
 </div>
 
 <div layout:fragment="js">
   <script type="text/javascript" defer th:src="@{/js/reservation/reservation-modal.js}"></script>
+  <script type="text/javascript" defer th:src="@{/js/reservation/reservation-date-modal.js}"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </div>
 
 <head>
@@ -22,44 +27,50 @@
 
   <div id="my-modal" class="reservation__modal">
     <div class="reservation__modal-content">
-      <div class="reservation__modal-cancel">x</div>
+      <div class="reservation__modal-cancel"><i class="fas fa-times"></i></div>
       <h2 class="reservation__sub-title">게스트</h2>
       <div class="reservation__guest">
-        <div class="reservation__guest-title">성인</div>
+        <span>
+         <div class="reservation__guest-title">성인</div>
+        </span>
         <div class="reservation__number-right">
           <div class="reservation__guest-number">
-            <button class="reservation__decrease">-</button>
+            <button class="reservation__decrease"><i class="fas fa-minus"></i></button>
             <div>숫자</div>
-            <button class="reservation__increase">+</button>
+            <button class="reservation__increase"><i class="fas fa-plus"></i></button>
           </div>
         </div>
       </div>
 
       <div class="reservation__guest">
-        <div>
-          <div class="reservation__guest-title">어린이</div>
-          <div class="reservation__guest-age">2~12세</div>
-        </div>
+        <span>
+          <div>
+            <div class="reservation__guest-title">어린이</div>
+            <div class="reservation__guest-age">2~12세</div>
+          </div>
+        </span>
         <div class="reservation__number-right">
           <div class="reservation__guest-number">
-            <button class="reservation__decrease">-</button>
+            <button class="reservation__decrease"><i class="fas fa-minus"></i></button>
             <div>숫자</div>
-            <button class="reservation__increase">+</button>
+            <button class="reservation__increase"><i class="fas fa-plus"></i></button>
           </div>
         </div>
 
       </div>
 
       <div class="reservation__guest">
-        <div>
-          <div class="reservation__guest-title">유아</div>
-          <div class="reservation__guest-age">2세 미만</div>
-        </div>
+        <span>
+          <div>
+            <div class="reservation__guest-title">유아</div>
+            <div class="reservation__guest-age">2세 미만</div>
+          </div>
+        </span>
         <div class="reservation__number-right">
           <div class="reservation__guest-number">
-            <button class="reservation__decrease">-</button>
+            <button class="reservation__decrease"><i class="fas fa-minus"></i></button>
             <div>숫자</div>
-            <button class="reservation__increase">+</button>
+            <button class="reservation__increase"><i class="fas fa-plus"></i></button>
           </div>
         </div>
 
@@ -67,10 +78,11 @@
 
       <div>최대 [2]명. 유아는 숙박인원에 포함되지 않습니다.</div>
 
-      <div>
-        <span class="reservation__modal-cancel pop_bt">
-          취소
-        </span>
+      <div class="reservation__guest-update-btn">
+          <span class="reservation__modal-cancel pop_bt">
+            취소
+          </span>
+          <button class="reservation__guest-update">저장하기</button>
       </div>
     </div>
 
@@ -81,10 +93,10 @@
     <div class="reservation__content">
       <div class="reservation__first">
         <div class="reservation__back">
-          <a href="#"> < </a>
+          <a href="#"> <i class="fas fa-chevron-left"></i> </a>
         </div>
 
-        <div class="reservation__re-title">예약요청하기</div>
+        <div class="reservation__re-title">예약하기</div>
       </div>
 
       <div class="reservation__content-info">
@@ -96,14 +108,65 @@
               <div>[2021.2.24-2021.2.25]</div>
               <div>[<img th:src="@{/images/reservation/clock.png}" class="reservation__img"> 체크인: 오후2:00 이후]</div>
             </div>
-            <button class="reservation__update-btn">수정</button>
+            <button id="update-date" class="reservation__update-btn">수정</button>
           </div>
+
+          <!-- 날짜 modal -->
+          <div id="date-modal" class="reservation__modal">
+            <div class="reservation__date-modal-content">
+              <div class="reservation__modal-cancel"><i class="fas fa-times"></i></div>
+                <div class="reservation__choose-date">
+                  <h2 class="reservation__sub-title">날짜 선택</h2>
+                  <div class="reservation__ch-date">
+                    <div class="reservation__ch-in-out-date">
+                      <div class="reservation__check-title">체크인</div>
+                      <input type="text" id="check-in" class="reservation__date-value" readonly>
+                    </div>
+                    <div class="reservation__ch-in-out-date">
+                      <div class="reservation__check-title">체크아웃</div>
+                      <input type="text" id="check-out" class="reservation__date-value" readonly>
+
+                    </div>
+                  </div>
+                </div>
+
+
+              <div class="reservation__date-wrapper">
+                <div id="range-date" class="dates">
+                  <div></div>
+                </div>
+              </div>
+
+              <div class="reservation__date-done">
+                <button class="reservation__delete-date">날짜지우기</button>
+                <button class="reservation__save-date">저장</button>
+              </div>
+
+
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
 
 
           <div class="reservation__box2">
             <div class="reservation__small-box">
               <h4 class="reservation__sub-title2">게스트</h4>
-              <div>[게스트 1명]</div>
+              <div>
+                <span>성인 : 몇 명</span>
+                <span>아동 : 몇 명</span>
+                <span>유아 : 몇 명</span>
+              </div>
+              <div>총 인원 : 몇 명</div>
             </div>
             <button id="update-guest" class="reservation__update-btn">수정</button>
           </div>
@@ -115,16 +178,23 @@
           <div>
             <div class="reservation__coupon-info">
               <h4 class="reservation__sub-title2">쿠폰 할인</h4>
-              <span>쿠폰</span> <span>사용된 쿠폰</span>
-              <button>쿠폰입력</button>
-              <span>사용가능 : 1장 | 보유 : 15장</span>
+              <div class="reservation__coupon-box">
+                <span>쿠폰</span> <span class="reservation__coupon-discount">-2000원</span>
+                <button class="reservation__coupon-btn">쿠폰입력</button>
+                <span>사용가능 : 1장</span>
+                <span>|  보유 : 15장</span>
+              </div>
             </div>
 
             <div class="reservation__mileage-info">
               <h4 class="reservation__sub-title2">마일리지 할인</h4>
-              <span>보유 마일리지</span> <span>user-mileage</span>
               <div>
-                <span>사용 마일리지</span> <input type="text" name="mileage" value="">
+                <div class="reservation__mileage-box">
+                  <span>보유 마일리지</span> <span class="reservation__user-mileage">3000 마일리지</span>
+                </div>
+                <div class="reservation__mileage">
+                  <span>사용 마일리지</span> <input type="text" name="mileage" placeholder="입력하세요." class="reservation__input-mileage">
+                </div>
               </div>
             </div>
 
@@ -132,26 +202,26 @@
           </div>
 
 
-          <div class="reservation__line"></div>
+<!--          <div class="reservation__line"></div>-->
 
-          <div>
-            <h2 class="reservation__sub-title">필수 입력 정보</h2>
-            <div>
-              <div class="reservation__host-msg">호스트에게 메시지 보내기</div>
-              <div>호스트에게 여행 목적과 도착 예정 시간을 알려주세요.</div>
-            </div>
+<!--          <div>-->
+<!--            <h2 class="reservation__sub-title">필수 입력 정보</h2>-->
+<!--            <div>-->
+<!--              <div class="reservation__host-msg">호스트에게 메시지 보내기</div>-->
+<!--              <div>호스트에게 여행 목적과 도착 예정 시간을 알려주세요.</div>-->
+<!--            </div>-->
 
-            <div>
-              <div class="reservation__host-info">
-                <div class="reservation__host-img">사진</div>
-                <div class="reservation__host-name">이름</div>
-              </div>
-              <textarea class="reservation__msg"></textarea>
+<!--            <div>-->
+<!--              <div class="reservation__host-info">-->
+<!--                <div class="reservation__host-img">사진</div>-->
+<!--                <div class="reservation__host-name">이름</div>-->
+<!--              </div>-->
+<!--              <textarea class="reservation__msg"></textarea>-->
 
-            </div>
+<!--            </div>-->
 
 
-          </div>
+<!--          </div>-->
 
           <div class="reservation__line"></div>
 
@@ -173,8 +243,7 @@
 
           <div class="reservation__line"></div>
 
-          <button>예약요청하기</button>
-          <button>예약 및 결제</button>
+          <button class="reservation__btn">예약 및 결제하기</button>
         </div>
 
 

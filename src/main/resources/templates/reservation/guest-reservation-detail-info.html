@@ -33,9 +33,11 @@
       <div class="guest-reservation-detail-info__detail-room-box">
         <div class="guest-reservation-detail-info__detail-room">
           <div class="guest-reservation-detail-info__detail-room-title">
-            <div class="guest-reservation-detail-info__close">
-            <i class="fas fa-times"></i>
-            </div>
+            <a href="./guest-reservation-simple-info?status=complete">
+              <div class="guest-reservation-detail-info__close">
+                <i class="fas fa-times"></i>
+              </div>
+            </a>
             <div class="guest-reservation-detail-info__title">
               <div class="guest-reservation-detail-info__title-content">숙소 예약</div>
             </div>
@@ -56,35 +58,42 @@
                       <i class="fas fa-comment-alt"></i><span>호스트에게 메시지 보내기</span><i class="fas fa-chevron-right"></i></div>
                     <div class="guest-reservation-detail-info__margin">
                       <i class="fas fa-mobile-alt"></i><span>호스트에게 연락하기</span><i class="fas fa-chevron-right"></i></div>
-                    <div class="guest-reservation-detail-info__margin">
+                    <a href="./update">
+                      <div class="guest-reservation-detail-info__margin">
                       <i class="fas fa-pen"></i><span>예약 변경</span> <i class="fas fa-chevron-right"></i></div>
-                    <div class="guest-reservation-detail-info__margin">
-                      <i class="far fa-window-close"></i><span>예약 취소</span> <i class="fas fa-chevron-right"></i></div>
+                    </a>
+
+                    <a href="./cancel">
+                      <div class="guest-reservation-detail-info__margin">
+                        <i class="far fa-window-close"></i><span>예약 취소</span> <i class="fas fa-chevron-right"></i>
+                      </div>
+                    </a>
                   </div>
 
                   <div class="guest-reservation-detail-info__detail-room-date">
-                    <div class="guest-reservation-detail-info__check-in-out">
+                    <div class="guest-reservation-detail-info__check-in-out guest-reservation-detail-info__Y-line">
                       <div class="guest-reservation-detail-info__check-title">체크인</div>
-                      <div>예약날짜</div>
-                      <div>체크인시간</div>
+                      <div class="guest-reservation-detail-info__check-reservation-date">예약날짜</div>
+                      <div class="guest-reservation-detail-info__check-time">체크인시간</div>
                     </div>
-
                     <div class="guest-reservation-detail-info__check-in-out">
                       <div class="guest-reservation-detail-info__check-title">체크아웃</div>
-                      <div>예약날짜</div>
-                      <div>체크인시간</div>
+                      <div class="guest-reservation-detail-info__check-reservation-date">예약날짜</div>
+                      <div class="guest-reservation-detail-info__check-time">체크인시간</div>
                     </div>
                   </div>
 
                   <div>
-                    <div class="guest-reservation-detail-info__sub-title">간략정보</div>
+                    <div class="guest-reservation-detail-info__sub-title1">간략정보</div>
                     <div class="guest-reservation-detail-info__basic-info">
                       <div class="guest-reservation-detail-info__basic-info-content">
                         <div>호스트 : 이름 님</div>
                         <div>게스트 : 몇 명</div>
                         <div>금액</div>
                       </div>
-                      <div class="guest-reservation-detail-info__basic-info-content">호스트 사진</div>
+                      <div class="guest-reservation-detail-info__basic-info-content">
+                        <div class="guest-reservation-detail-info__host-profile-img">호스트 사진</div>
+                      </div>
                     </div>
                   </div>
 
@@ -92,35 +101,41 @@
 
 
                 <div class="guest-reservation-detail-info__reservation-detail-info">
-                  <div class="guest-reservation-detail-info__sub-title">게스트</div>
-                  <div>게스트 : 몇 명</div>
+                  <div class="guest-reservation-detail-info__guest-info">
+                    <div class="guest-reservation-detail-info__sub-title2">게스트</div>
+                    <div>게스트 : 몇 명</div>
+                  </div>
                   <div class="guest-reservation-detail-info__reservation-detail-info-number">
-                    <div class="guest-reservation-detail-info__sub-title">예약번호</div>
+                    <div class="guest-reservation-detail-info__sub-title2">예약번호</div>
                     <div>111111</div>
                   </div>
                 </div>
 
                 <div class="guest-reservation-detail-info__room-address-info">
-                  <div class="guest-reservation-detail-info__sub-title">주소</div>
+                  <div class="guest-reservation-detail-info__sub-title2">주소</div>
                   <div>숙소 주소</div>
                 </div>
 
                 <div class="guest-reservation-detail-info__host-info">
                   <div class="guest-reservation-detail-info__host-info-content">
                     <div class="guest-reservation-detail-info__host-content">
-                      <div>호스트 누구님</div>
-                      <div>프로필 보기</div>
+                      <div class="guest-reservation-detail-info__sub-title2">호스트 누구님</div>
+                      <div class="guest-reservation-detail-info__host-profile">프로필 보기</div>
                     </div>
-                    <div class="guest-reservation-detail-info__host-content">프로필 사진</div>
+                    <div class="guest-reservation-detail-info__host-content">
+                      <div class="guest-reservation-detail-info__host-profile-img">호스트 사진</div>
+                    </div>
                   </div>
 
-                  <div>호스트에게 전화하기</div>
-                  <div>호스트에게 메시지 보내기</div>
+                  <div class="guest-reservation-detail-info__margin">
+                    <i class="fas fa-mobile-alt"></i><span>호스트에게 연락하기</span> <i class="fas fa-chevron-right"></i></div>
+                  <div class="guest-reservation-detail-info__margin">
+                    <i class="fas fa-comment-alt"></i><span>호스트에게 메시지 보내기</span> <i class="fas fa-chevron-right"></i></div>
                 </div>
 
                 <div class="guest-reservation-detail-info__payment-info">
-                  <div class="guest-reservation-detail-info__sub-title">결제정보</div>
-                  <div>총 비용</div>
+                  <div class="guest-reservation-detail-info__sub-title2">결제정보</div>
+                  <div class="guest-reservation-detail-info__sub-title1">총 비용</div>
                   <div>￦ 111111</div>
                 </div>
 

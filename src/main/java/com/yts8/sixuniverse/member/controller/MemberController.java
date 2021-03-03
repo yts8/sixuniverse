@@ -1,6 +1,6 @@
 package com.yts8.sixuniverse.member.controller;
 
-import com.yts8.sixuniverse.member.domain.Member;
+import com.yts8.sixuniverse.member.dto.MemberDto;
 import com.yts8.sixuniverse.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -18,9 +18,9 @@ public class MemberController {
 
   @GetMapping("/profile/{memberId}")
   public String profile(Model model, @PathVariable int memberId) {
-    Member member = memberService.findById(memberId);
+    MemberDto memberDto = memberService.findById(memberId);
 
-    model.addAttribute("member", member);
+    model.addAttribute("memberDto", memberDto);
     model.addAttribute("title", "프로필");
     return "member/profile";
   }

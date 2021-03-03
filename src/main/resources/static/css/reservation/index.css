@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+
 .reservation__modal {
   display: none;
   position: fixed;
@@ -12,13 +13,95 @@
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-.reservation__modal-content {
+.reservation__modal-content, .reservation__date-modal-content {
   background-color: #fefefe;
-  margin: 15% auto;
+  margin: 10% auto;
   padding: 20px;
   border: 1px solid #888;
   border-radius: 20px;
   max-width: 400px;
+}
+
+.reservation__date-modal-content {
+  max-width: 650px;
+  margin:6% auto;
+}
+
+.reservation__guest-update-btn {
+  margin-top: 20px;
+  padding: 30px;
+  border-top: 1px solid #c3c3c3;
+}
+
+.reservation__modal-cancel {
+  width: max-content;
+  vertical-align: middle;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.reservation__choose-date {
+  vertical-align: middle;
+  display: flex;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+
+.reservation__ch-date {
+  display: flex;
+  justify-content: flex-end;
+
+}
+
+.reservation__ch-in-out-date {
+  height: max-content;
+  justify-content: flex-end;
+  border: 2px solid black;
+  border-radius: 10px;
+  margin-top: 15px;
+  padding: 13px;
+}
+
+.reservation__check-title {
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.reservation__date-value {
+  width: 120px;
+  margin-top: 8px;
+  border: none;
+  font-size: 14px;
+}
+
+.reservation__date-done {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.reservation__delete-date {
+  font-weight: bold;
+  text-decoration: underline;
+  margin-right: 20px;
+}
+
+.reservation__save-date {
+  padding: 14px;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.reservation__guest-update {
+  float: right;
+  padding: 15px;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
 }
 
 .reservation__guest {
@@ -54,6 +137,11 @@
   border: 1px solid #c3c3c3;
   border-radius: 30px;
   margin: 0 5px 0 5px;
+  text-align: center;
+}
+
+.fa-minus, .fa-plus {
+  color: #c3c3c3;
 }
 
 .reservation__decrease:hover, .reservation__increase:hover {
@@ -89,22 +177,30 @@
   text-align: center;
 }
 
+.fa-chevron-left {
+  /*float: inherit;*/
+  margin: 0 auto;
+}
+
 .reservation__back:hover {
 
   background-color: #c3c3c3;
 }
 
 .reservation__back > a {
-  color: black;
   font-size: 25px;
   text-decoration: none;
+  vertical-align: middle;
+  width: 100%;
+  height: 100%;
+  text-align: center;
   vertical-align: middle;
 }
 
 .reservation__sub-title {
-  font-size: 20px;
+  font-size: 23px;
   font-weight: bold;
-  margin: 20px 0 30px 0;
+  margin: 30px 0 40px 0;
 }
 
 .reservation__sub-title2 {
@@ -132,6 +228,56 @@
   cursor: pointer;
 }
 
+.reservation__coupon-box {
+  display: flex;
+}
+
+.reservation__coupon-box > span {
+  margin-right: 20px;
+}
+
+.reservation__coupon-btn {
+  font-size: 10px;
+  padding: 5px;
+  margin-right: 20px;
+  background-color: black;
+  color: white;
+}
+
+.reservation__coupon-discount {
+  width: 150px;
+  padding-bottom: 5px;
+  text-align: right;
+  border-bottom: 1px solid #c3c3c3;
+}
+
+.reservation__mileage-box {
+  display: flex;
+}
+
+.reservation__mileage-box > span {
+  margin-right: 20px;
+  padding-bottom: 5px;
+}
+
+.reservation__user-mileage {
+  width: 150px;
+  text-align: right;
+  border-bottom: 1px solid #c3c3c3;
+}
+
+.reservation__mileage {
+  margin-top: 10px;
+}
+
+.reservation__input-mileage {
+  width: 150px;
+  border: none;
+  border-bottom: 1px solid #c3c3c3;
+  margin-left: 15px;
+
+}
+
 .reservation__re-info {
   width: 50%;
 
@@ -144,6 +290,10 @@
 
 .reservation__small-box {
   width: 90%;
+}
+
+.reservation__small-box > div {
+  margin-bottom: 10px;
 }
 
 .reservation__img {
@@ -212,6 +362,16 @@
   font-weight: bold;
 }
 
+.reservation__btn {
+  width: max-content;
+  height: max-content;
+  padding: 20px;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
 .reservation__room-box {
   box-sizing: border-box;
   width: 40%;
@@ -220,8 +380,9 @@
   margin-left: 70px;
   padding: 30px;
   border-radius: 15px;
-  top: 80px;
+  top: 150px;
   position: sticky;
+  z-index: 0;
 }
 
 .reservation__room-info {

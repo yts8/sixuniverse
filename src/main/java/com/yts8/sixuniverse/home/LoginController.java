@@ -1,10 +1,8 @@
 package com.yts8.sixuniverse.home;
 
-import com.yts8.sixuniverse.member.domain.Member;
-import com.yts8.sixuniverse.member.dto.JoinDto;
+import com.yts8.sixuniverse.member.dto.MemberDto;
 import com.yts8.sixuniverse.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 
 @Controller
 @RequiredArgsConstructor
@@ -53,13 +50,11 @@ public class LoginController {
   }
 
   @PostMapping("/join")
-  public String join(@Valid JoinDto joinDto) {
-    ModelMapper modelMapper = new ModelMapper();
-    Member member = modelMapper.map(joinDto, Member.class);
-    member.setRole("MEMBER");
-    member.setSocial("LOCAL");
-    member.setPassword(passwordEncoder.encode(member.getPassword()));
-    memberService.save(member);
+  public String join(MemberDto memberDto) {
+    memberDto.setRole("GUEST");
+    memberDto.setSocial("LOCAL");
+    memberDto.setPassword(passwordEncoder.encode(memberDto.getPassword()));
+    memberService.save(memberDto);
     return "redirect:/login";
   }
 
