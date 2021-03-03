@@ -3,61 +3,267 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
+<!--삭제하면 됨-->
+<!--<head>-->
+<!--  <meta charset="UTF-8">-->
+<!--  <link rel="stylesheet" href="../../../static/css/reset.css"/>-->
+<!--  <link rel="stylesheet" href="../../../static/css/variables.css"/>-->
+<!--  <link rel="stylesheet" href="../../../static/css/member/setting/personal-info.css"/>-->
+<!--  <link rel="stylesheet" href="../../../static/css/partials/header.css"/>-->
+<!--  <script src="https://kit.fontawesome.com/72ec3ada60.js" crossorigin="anonymous"></script>-->
+<!--</head>-->
+<!--<div class="header__hide"></div>-->
+<!--<header class="header__container">-->
+<!--  <ul>-->
+<!--    <li sec:authorize="isAnonymous">-->
+<!--      <a th:href="@{/login}">로그인</a>-->
+<!--    </li>-->
+<!--    <li sec:authorize="isAuthenticated">-->
+<!--      <a th:href="@{/logout}">로그아웃</a>-->
+<!--    </li>-->
+<!--  </ul>-->
+<!--</header>-->
+<!--삭제하면됨-->
 
-<div layout:fragment="content">
-  <section>
-    <h2>회원수정</h2>
-    <form th:action="@{/member/setting/personal-info/update}" method="post">
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/member/setting/personal-info.css}"/>
+</th:block>
 
-      <input type="text"
-             name="username"
-             th:value="${#authentication.principal.username}"
-             placeholder="이름"
-             required/>
+<th:block layout:fragment="js">
+  <script defer src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script defer th:src="@{/js/common/daum-postcode.js}"></script>
+  <script defer th:src="@{/js/member/setting/personal-info.js}"></script>
+</th:block>
 
-      <input type="text"
-             name="birthdate"
-             th:value="${#authentication.principal.birthdate}"
-             placeholder="생년월일"
-             required/>
+<th:block layout:fragment="content">
+  <section class="member-personal-info__container">
+    <div class="member-personal-info__title-container">
+      <div class="member-personal-info__title-list">
+        <span>계정</span>
+        <div class="member-personal-info__title-list-icon">
+          <i class="fas fa-chevron-right"></i>
+        </div>
+        <span>개인정보</span>
+      </div>
+      <h1>개인정보</h1>
+    </div>
+    <div class="member-personal-info__content-container">
 
-      <input type="text"
-             name="profileImg"
-             th:value="${#authentication.principal.profileImg}"
-             placeholder="이미지"
-             required/>
+      <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
 
-      <input type="text"
-             name="zipcode"
-             th:value="${#authentication.principal.zipcode}"
-             placeholder="우편번호"
-             required/>
+      <div class="member-personal-info__update-container">
+        <div class="member-personal-info__update-wrap">
+          <div class="member-personal-info__update-box">
+            <div class="member-personal-info__update-title">실명</div>
+            <div class="update-username-text-box-js"
+                 th:text="${session.member.getUsername()}">
+              지헌 조
+            </div>
 
-      <input type="text"
-             name="address"
-             th:value="${#authentication.principal.address}"
-             placeholder="주소"
-             required/>
+            <div class="member-personal-info__update-input-wrap
+                      member-personal-info__update-hide
+                      update-username-input-box-js">
+              <div>허가증이나 여권 등 여행 서류에 기재되어 있는 이름을 말합니다.</div>
 
-      <input type="text"
-             name="subAddress"
-             th:value="${#authentication.principal.subAddress}"
-             placeholder="상세 주소"/>
+              <input type="text"
+                     id="username"
+                     th:value="${session.member.getUsername()}"
+                     placeholder="* 이름"/>
 
-      <input type="text"
-             name="mobile"
-             th:value="${#authentication.principal.mobile}"
-             placeholder="- 없이 11자리 입력"
-             required/>
+              <button type="button" class="update-btn-js" data-id="username">저장</button>
+            </div>
 
-      <input type="text"
-             name="bio"
-             th:value="${#authentication.principal.bio}"
-             placeholder="소개"/>
+          </div>
+          <div>
+            <button class="member-personal-info__update-toggle-btn
+                            update-toggle-btn-js
+                            update-toggle-username-btn-js"
+                    data-id="username">
+              수정
+            </button>
+          </div>
+        </div>
 
-      <button>수정</button>
-    </form>
+        <div class="member-personal-info__update-wrap">
+          <div class="member-personal-info__update-box">
+            <div class="member-personal-info__update-title">생년월일</div>
+            <div class="update-birthdate-text-box-js"
+                 th:text="${session.member.getBirthdate()}">
+            </div>
+
+            <div class="member-personal-info__update-input-wrap
+                      member-personal-info__update-hide
+                      update-birthdate-input-box-js">
+
+              <input type="text"
+                     id="birthdate"
+                     th:value="${session.member.getBirthdate()}"
+                     maxlength="8"
+                     placeholder="생년월일 8자리"/>
+
+              <button type="button" class="update-btn-js" data-id="birthdate">저장</button>
+            </div>
+
+          </div>
+          <div>
+            <button class="member-personal-info__update-toggle-btn
+                            update-toggle-btn-js
+                            update-toggle-birthdate-btn-js"
+                    data-id="birthdate">
+              수정
+            </button>
+          </div>
+        </div>
+
+        <div class="member-personal-info__update-wrap">
+          <div class="member-personal-info__update-box">
+            <div class="member-personal-info__update-title">이메일 주소</div>
+
+            <div th:text="${session.member.getEmail()}"></div>
+
+          </div>
+        </div>
+
+        <div class="member-personal-info__update-wrap">
+          <div class="member-personal-info__update-box">
+            <div class="member-personal-info__update-title">전화번호</div>
+
+            <div class="update-mobile-text-box-js"
+                 th:text="${session.member.getMobile()}"></div>
+
+            <div class="member-personal-info__update-input-wrap
+                      member-personal-info__update-hide
+                      update-mobile-input-box-js">
+
+              <input type="text"
+                     id="mobile"
+                     th:value="${session.member.getMobile()}"
+                     maxlength="11"
+                     placeholder="- 없이 11자리"/>
+
+              <button type="button" class="update-btn-js" data-id="mobile">저장</button>
+            </div>
+
+          </div>
+          <div>
+            <button class="member-personal-info__update-toggle-btn
+                            update-toggle-btn-js
+                            update-toggle-mobile-btn-js"
+                    data-id="mobile">
+              수정
+            </button>
+          </div>
+        </div>
+
+        <div class="member-personal-info__update-wrap">
+          <div class="member-personal-info__update-box">
+            <div class="member-personal-info__update-title">주소</div>
+            <div class="update-address-text-box-js">
+
+              <div class="update-address-text-js"
+                   th:text="${session.member.getAddress()}"></div>
+              <div class="update-sub-address-text-js"
+                   th:text="${session.member.getSubAddress()}"></div>
+
+            </div>
+
+            <div class="member-personal-info__update-input-wrap
+                      member-personal-info__update-hide
+                      update-address-input-box-js">
+
+              <div class="member-personal-info__zipcode-box">
+                <input type="text"
+                       id="zipcode"
+                       th:value="${session.member.getZipcode()}"
+                       maxlength="5"
+                       placeholder="우편번호"
+                       readonly/>
+                <button type="button" class="postcode-search-btn">우편번호 검색</button>
+              </div>
+
+              <input type="text"
+                     id="address"
+                     th:value="${session.member.getAddress()}"
+                     placeholder="주소"
+                     readonly/>
+
+              <input type="text"
+                     id="sub-address"
+                     th:value="${session.member.getSubAddress()}"
+                     placeholder="상세주소"/>
+
+              <button type="button" class="update-address-btn-js" data-id="address">저장</button>
+
+            </div>
+
+          </div>
+          <div>
+            <button class="member-personal-info__update-toggle-btn
+                            update-toggle-btn-js
+                            update-toggle-address-btn-js"
+                    data-id="address">
+              수정
+            </button>
+          </div>
+        </div>
+
+        <div class="member-personal-info__update-wrap">
+          <div class="member-personal-info__update-box">
+            <div class="member-personal-info__update-title">소개</div>
+            <div class="update-bio-text-box-js"
+                 th:text="${session.member.getBio()}"></div>
+            <div class="member-personal-info__update-input-wrap
+                      member-personal-info__update-hide
+                      update-bio-input-box-js">
+
+              <textarea id="bio"
+                        th:text="${session.member.getBio()}"
+                        rows="10"
+                        placeholder="자기소개"></textarea>
+
+              <button type="button" class="update-btn-js" data-id="bio">저장</button>
+            </div>
+          </div>
+          <div>
+            <button class="member-personal-info__update-toggle-btn
+                            update-toggle-btn-js
+                            update-toggle-bio-btn-js"
+                    data-id="bio">
+              수정
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="member-personal-info__qna-container">
+        <div class="member-personal-info__qna-wrap">
+          <div class="member-personal-info__qna-box">
+            <div class="member-personal-info__qna-icon">
+              <i class="fas fa-lock"></i>
+            </div>
+            <div class="member-personal-info__qna-title">수정할 수 있는 세부 정보는 무엇인가요?</div>
+            <div>
+              Sixuniverse에서 본인 인증 시 사용하는 세부 정보는 변경할 수 없습니다. 연락처 정보와 일부 개인정보는 수정할 수 있지만, 다음번 예약 또는 숙소를 등록할 때 본인 인증 절차를
+              거쳐야
+              할 수도 있습니다.
+            </div>
+          </div>
+          <div class="member-personal-info__qna-box">
+            <div class="member-personal-info__qna-icon">
+              <i class="far fa-id-card"></i>
+            </div>
+            <div class="member-personal-info__qna-title">
+              다른 사람에게 어떤 정보가 공개되나요?
+            </div>
+            <div>
+              Sixuniverse는 예약이 확정된 후에만 호스트 및 게스트의 연락처 정보를 공개합니다.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
-</div>
+</th:block>
 </html>

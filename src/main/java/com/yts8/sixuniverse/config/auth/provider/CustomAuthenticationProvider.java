@@ -1,6 +1,6 @@
-package com.yts8.sixuniverse.security.provider;
+package com.yts8.sixuniverse.config.auth.provider;
 
-import com.yts8.sixuniverse.security.service.MemberContext;
+import com.yts8.sixuniverse.config.auth.service.MemberContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -11,12 +11,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpSession;
+
 @Component
 @RequiredArgsConstructor
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
   private final UserDetailsService userDetailsService;
   private final PasswordEncoder passwordEncoder;
+  private final HttpSession httpSession;
 
   @Override
   public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -28,7 +31,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
       throw new BadCredentialsException("BadCredentialsException");
     }
 
-    return new UsernamePasswordAuthenticationToken(memberContext.getMemberDto(), null, memberContext.getAuthorities());
+    httpSession.setAttribute("member", memberContext.getMemberDto());
+
+    return new UsernamePasswordAuthenticationToken(memberContext.getMemberDto().getEmail(), null, memberContext.getAuthorities());
   }
 
   @Override

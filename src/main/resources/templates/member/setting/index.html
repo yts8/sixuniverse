@@ -4,9 +4,57 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
 
-<div layout:fragment="content">
-  <section>
-    <h2>계정 관리</h2>
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/member/setting/index.css}">
+</th:block>
+<th:block layout:fragment="content">
+  <section class="member-setting__container">
+    <div class="member-setting__title-container">
+      <h1>계정</h1>
+      <div class="member-setting__profile-container">
+        <span class="member-setting__profile-name">지헌 조,</span>
+        <span>joooooojih@gmail.com</span>
+        <a href="#">프로필로 이동</a>
+      </div>
+    </div>
+    <div class="member-setting__content-container">
+      <a th:href="@{/member/setting/personal-info}">
+        <article>
+          <div class="member-setting__content-icon">
+            <i class="far fa-id-card"></i>
+          </div>
+          <h2>개인정보</h2>
+          <span>개인정보 및 연락처를 알려주세요</span>
+        </article>
+      </a>
+      <a href="#">
+        <article>
+          <div class="member-setting__content-icon member-setting__content-icon--yellow">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h2>로그인 및 보안</h2>
+          <span>비밀번호를 변경하고 계정을 안전하게 보호하세요</span>
+        </article>
+      </a>
+      <a href="#">
+        <article>
+          <div class="member-setting__content-icon">
+            <i class="fas fa-gift"></i>
+          </div>
+          <h2>쿠폰</h2>
+          <span>쿠폰을 등록하세요</span>
+        </article>
+      </a>
+      <a href="#">
+        <article>
+          <div class="member-setting__content-icon member-setting__content-icon--yellow">
+            <i class="fas fa-bullhorn"></i>
+          </div>
+          <h2>알림</h2>
+          <span>알림 환경설정 및 연락 방식을 선택하세요</span>
+        </article>
+      </a>
+    </div>
   </section>
-</div>
+</th:block>
 </html>

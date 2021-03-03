@@ -19,8 +19,28 @@ public class MemberServiceImpl implements MemberService {
   }
 
   @Override
-  public void updateMember(MemberDto memberDto) {
-    memberMapper.updateMember(memberDto);
+  public void updateUsername(MemberDto memberDto) {
+    memberMapper.updateUsername(memberDto);
+  }
+
+  @Override
+  public void updateBirthdate(MemberDto memberDto) {
+    memberMapper.updateBirthdate(memberDto);
+  }
+
+  @Override
+  public void updateMobile(MemberDto memberDto) {
+    memberMapper.updateMobile(memberDto);
+  }
+
+  @Override
+  public void updateAddress(MemberDto memberDto) {
+    memberMapper.updateAddress(memberDto);
+  }
+
+  @Override
+  public void updateBio(MemberDto memberDto) {
+    memberMapper.updateBio(memberDto);
   }
 
   @Override

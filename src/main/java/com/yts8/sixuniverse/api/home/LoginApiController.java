@@ -1,6 +1,5 @@
 package com.yts8.sixuniverse.api.home;
 
-import com.yts8.sixuniverse.member.dto.MemberDto;
 import com.yts8.sixuniverse.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +16,6 @@ public class LoginApiController {
 
   @GetMapping("/email/{email}")
   public boolean getEmail(@PathVariable String email) {
-    MemberDto member = memberService.findByEmail(email);
-    return member == null;
+    return memberService.findByEmail(email) == null;
   }
 }

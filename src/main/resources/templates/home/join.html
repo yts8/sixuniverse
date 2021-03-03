@@ -42,8 +42,8 @@
 
           <div class="login__input-box">
             <input type="email"
+                   id="email"
                    name="email"
-                   class="join-email-input-js"
                    placeholder="* 이메일"/>
 
             <div class="login__input-status join-email-icon">
@@ -67,6 +67,7 @@
 
           <div class="login__input-box">
             <input type="password"
+                   id="password"
                    name="password"
                    class="join-password-input-js"
                    placeholder="* 영문, 숫자, 특수문자 조합 (8~20)"
@@ -79,6 +80,7 @@
 
           <div class="login__input-box">
             <input type="text"
+                   id="username"
                    name="username"
                    class="join-username-input-js"
                    placeholder="* 성명"/>
@@ -90,10 +92,11 @@
 
           <div class="login__input-box">
             <input type="text"
+                   id="birthdate"
                    name="birthdate"
                    class="join-birthdate-input-js"
-                   placeholder="생년월일"
-                   maxlength="6"/>
+                   placeholder="생년월일 8자리"
+                   maxlength="8"/>
 
             <div class="login__input-status join-birthdate-icon-js">
               <i class="fas fa-birthday-cake"></i>
@@ -102,9 +105,10 @@
 
           <div class="login__input-box">
             <input type="text"
+                   id="mobile"
                    name="mobile"
                    class="join-mobile-input-js"
-                   placeholder="- 없이 11자리 입력"
+                   placeholder="- 없이 11자리"
                    maxlength="11"/>
 
             <div class="login__input-status join-mobile-icon-js">

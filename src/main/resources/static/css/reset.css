@@ -72,6 +72,15 @@ a, button {
   outline: none;
 }
 
-input {
+input, textarea {
   outline: none;
+}
+
+input:focus,
+textarea:focus {
+  border: 2px solid var(--host-color) !important;
+}
+
+textarea {
+  resize: none;
 }
