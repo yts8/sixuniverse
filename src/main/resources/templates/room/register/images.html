@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<th:block layout:fragment="content">
+  <h1>멋진 사진으로 숙소가 돋보이게 해주세요.</h1>
+  <form th:action="@{/host/room/register/images}" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="roomId" th:value="${roomId}"/>
+    <input multiple type="file" name="files">
+    <input multiple type="file" name="files">
+    <input multiple type="file" name="files">
+    <input multiple type="file" name="files">
+    <input multiple type="file" name="files">
+    <button>저장</button>
+  </form>
+</th:block>
+</html>

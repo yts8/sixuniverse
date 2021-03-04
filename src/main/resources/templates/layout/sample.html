@@ -66,3 +66,23 @@
 </th:block>
 
 </html>
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../../../static/css/reset.css"/>
+  <link rel="stylesheet" href="../../../static/css/variables.css"/>
+  <link rel="stylesheet" href="../../../static/css/partials/header.css"/>
+  <script src="https://kit.fontawesome.com/72ec3ada60.js" crossorigin="anonymous"></script>
+</head>
+<div class="header__hide"></div>
+<header class="header__container">
+  <ul>
+    <li sec:authorize="isAnonymous">
+      <a th:href="@{/login}">로그인</a>
+    </li>
+    <li sec:authorize="isAuthenticated">
+      <a th:href="@{/logout}">로그아웃</a>
+    </li>
+  </ul>
+</header>

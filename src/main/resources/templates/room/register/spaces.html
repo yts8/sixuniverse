@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<th:block layout:fragment="content">
+  <h1>게스트가 어떤 공간을 사용할 수 있나요?</h1>
+  <form th:action="@{/host/room/register/spaces}" method="post">
+
+    <input type="hidden" name="roomId" th:value="${roomId}"/>
+
+    <div>
+      <label>세탁공간 - 건조기</label>
+      <input type="checkbox" name="name" value="건조기"/>
+    </div>
+    <div>
+      <label>세탁공간 - 세탁기</label>
+      <input type="checkbox" name="name" value="세탁기"/>
+    </div>
+    <div>
+      <label>자쿠지</label>
+      <input type="checkbox" name="name" value="자쿠지"/>
+    </div>
+    <div>
+      <label>주방</label>
+      <input type="checkbox" name="name" value="주방"/>
+    </div>
+    <div>
+      <label>수영장</label>
+      <input type="checkbox" name="name" value="수영장"/>
+    </div>
+    <div>
+      <label>주차</label>
+      <input type="checkbox" name="name" value="주차"/>
+    </div>
+    <div>
+      <label>헬스장</label>
+      <input type="checkbox" name="name" value="헬스장"/>
+    </div>
+
+    <button type="submit">등록</button>
+  </form>
+</th:block>
+</html>
