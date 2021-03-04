@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/member/setting/detail.css}"/>
+</th:block>
+
+<th:block layout:fragment="js">
+  <script defer th:src="@{/js/member/setting/detail.js}"></script>
+</th:block>
+
+<th:block layout:fragment="content">
+  <section class="member-setting__container">
+    <div class="member-setting__title-container">
+      <div class="member-setting__title-list">
+        <span>계정</span>
+        <div class="member-setting__title-list-icon">
+          <i class="fas fa-chevron-right"></i>
+        </div>
+        <span>로그인 및 보안</span>
+      </div>
+      <h1>로그인 및 보안</h1>
+    </div>
+    <div class="member-setting__content-container">
+
+      <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
+
+      <div class="member-setting__update-container">
+        <div class="member-setting__update-wrap">
+          <div class="member-setting__update-box">
+            <div class="member-setting__update-title">비밀번호</div>
+            <div class="update-password-text-box-js"
+                 th:text="|최종 수정일: ${session.member.getUpdateDate()}|">
+            </div>
+
+            <div class="member-setting__update-input-wrap
+                      member-setting__update-hide
+                      update-password-input-box-js">
+              <div>현재 비밀번호</div>
+              <input type="password"
+                     id="old-password"
+                     placeholder="현재 비밀번호"
+                     required/>
+
+              <div>새 비밀번호</div>
+              <input type="password"
+                     id="new-password"
+                     placeholder="새 비밀번호"
+                     required/>
+
+              <div>비밀번호 확인</div>
+              <input type="password"
+                     id="confirm-password"
+                     placeholder="새 비밀번호 확인"
+                     required/>
+
+              <button type="button" class="update-password-btn-js" data-id="password">저장</button>
+            </div>
+
+          </div>
+          <div>
+            <button class="member-setting__update-toggle-btn
+                            update-toggle-btn-js
+                            update-toggle-password-btn-js"
+                    data-id="password">
+              수정
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="member-setting__qna-container">
+        <div class="member-setting__qna-wrap">
+          <div class="member-setting__qna-box">
+            <div class="member-personal-info__qna-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="member-setting__qna-title">계정 보안을 강화하세요</div>
+            <div>
+              Sixuniverse는 더욱 안전한 커뮤니티를 만들기 위해 항상 노력하고 있으며, 보안을 위해 모든 계정을 확인하고 있습니다.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</th:block>
+</html>

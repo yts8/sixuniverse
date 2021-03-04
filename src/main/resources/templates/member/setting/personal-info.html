@@ -3,65 +3,44 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
-<!--삭제하면 됨-->
-<!--<head>-->
-<!--  <meta charset="UTF-8">-->
-<!--  <link rel="stylesheet" href="../../../static/css/reset.css"/>-->
-<!--  <link rel="stylesheet" href="../../../static/css/variables.css"/>-->
-<!--  <link rel="stylesheet" href="../../../static/css/member/setting/personal-info.css"/>-->
-<!--  <link rel="stylesheet" href="../../../static/css/partials/header.css"/>-->
-<!--  <script src="https://kit.fontawesome.com/72ec3ada60.js" crossorigin="anonymous"></script>-->
-<!--</head>-->
-<!--<div class="header__hide"></div>-->
-<!--<header class="header__container">-->
-<!--  <ul>-->
-<!--    <li sec:authorize="isAnonymous">-->
-<!--      <a th:href="@{/login}">로그인</a>-->
-<!--    </li>-->
-<!--    <li sec:authorize="isAuthenticated">-->
-<!--      <a th:href="@{/logout}">로그아웃</a>-->
-<!--    </li>-->
-<!--  </ul>-->
-<!--</header>-->
-<!--삭제하면됨-->
+
 
 <th:block layout:fragment="css">
-  <link rel="stylesheet" th:href="@{/css/member/setting/personal-info.css}"/>
+  <link rel="stylesheet" th:href="@{/css/member/setting/detail.css}"/>
 </th:block>
 
 <th:block layout:fragment="js">
   <script defer src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script defer th:src="@{/js/common/daum-postcode.js}"></script>
-  <script defer th:src="@{/js/member/setting/personal-info.js}"></script>
+  <script defer th:src="@{/js/member/setting/detail.js}"></script>
 </th:block>
 
 <th:block layout:fragment="content">
-  <section class="member-personal-info__container">
-    <div class="member-personal-info__title-container">
-      <div class="member-personal-info__title-list">
+  <section class="member-setting__container">
+    <div class="member-setting__title-container">
+      <div class="member-setting__title-list">
         <span>계정</span>
-        <div class="member-personal-info__title-list-icon">
+        <div class="member-setting__title-list-icon">
           <i class="fas fa-chevron-right"></i>
         </div>
         <span>개인정보</span>
       </div>
       <h1>개인정보</h1>
     </div>
-    <div class="member-personal-info__content-container">
+    <div class="member-setting__content-container">
 
       <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
 
-      <div class="member-personal-info__update-container">
-        <div class="member-personal-info__update-wrap">
-          <div class="member-personal-info__update-box">
-            <div class="member-personal-info__update-title">실명</div>
+      <div class="member-setting__update-container">
+        <div class="member-setting__update-wrap">
+          <div class="member-setting__update-box">
+            <div class="member-setting__update-title">실명</div>
             <div class="update-username-text-box-js"
                  th:text="${session.member.getUsername()}">
-              지헌 조
             </div>
 
-            <div class="member-personal-info__update-input-wrap
-                      member-personal-info__update-hide
+            <div class="member-setting__update-input-wrap
+                      member-setting__update-hide
                       update-username-input-box-js">
               <div>허가증이나 여권 등 여행 서류에 기재되어 있는 이름을 말합니다.</div>
 
@@ -75,7 +54,7 @@
 
           </div>
           <div>
-            <button class="member-personal-info__update-toggle-btn
+            <button class="member-setting__update-toggle-btn
                             update-toggle-btn-js
                             update-toggle-username-btn-js"
                     data-id="username">
@@ -84,15 +63,15 @@
           </div>
         </div>
 
-        <div class="member-personal-info__update-wrap">
-          <div class="member-personal-info__update-box">
-            <div class="member-personal-info__update-title">생년월일</div>
+        <div class="member-setting__update-wrap">
+          <div class="member-setting__update-box">
+            <div class="member-setting__update-title">생년월일</div>
             <div class="update-birthdate-text-box-js"
                  th:text="${session.member.getBirthdate()}">
             </div>
 
-            <div class="member-personal-info__update-input-wrap
-                      member-personal-info__update-hide
+            <div class="member-setting__update-input-wrap
+                      member-setting__update-hide
                       update-birthdate-input-box-js">
 
               <input type="text"
@@ -106,7 +85,7 @@
 
           </div>
           <div>
-            <button class="member-personal-info__update-toggle-btn
+            <button class="member-setting__update-toggle-btn
                             update-toggle-btn-js
                             update-toggle-birthdate-btn-js"
                     data-id="birthdate">
@@ -115,24 +94,24 @@
           </div>
         </div>
 
-        <div class="member-personal-info__update-wrap">
-          <div class="member-personal-info__update-box">
-            <div class="member-personal-info__update-title">이메일 주소</div>
+        <div class="member-setting__update-wrap">
+          <div class="member-setting__update-box">
+            <div class="member-setting__update-title">이메일 주소</div>
 
             <div th:text="${session.member.getEmail()}"></div>
 
           </div>
         </div>
 
-        <div class="member-personal-info__update-wrap">
-          <div class="member-personal-info__update-box">
-            <div class="member-personal-info__update-title">전화번호</div>
+        <div class="member-setting__update-wrap">
+          <div class="member-setting__update-box">
+            <div class="member-setting__update-title">전화번호</div>
 
             <div class="update-mobile-text-box-js"
                  th:text="${session.member.getMobile()}"></div>
 
-            <div class="member-personal-info__update-input-wrap
-                      member-personal-info__update-hide
+            <div class="member-setting__update-input-wrap
+                      member-setting__update-hide
                       update-mobile-input-box-js">
 
               <input type="text"
@@ -146,7 +125,7 @@
 
           </div>
           <div>
-            <button class="member-personal-info__update-toggle-btn
+            <button class="member-setting__update-toggle-btn
                             update-toggle-btn-js
                             update-toggle-mobile-btn-js"
                     data-id="mobile">
@@ -155,9 +134,9 @@
           </div>
         </div>
 
-        <div class="member-personal-info__update-wrap">
-          <div class="member-personal-info__update-box">
-            <div class="member-personal-info__update-title">주소</div>
+        <div class="member-setting__update-wrap">
+          <div class="member-setting__update-box">
+            <div class="member-setting__update-title">주소</div>
             <div class="update-address-text-box-js">
 
               <div class="update-address-text-js"
@@ -167,11 +146,11 @@
 
             </div>
 
-            <div class="member-personal-info__update-input-wrap
-                      member-personal-info__update-hide
+            <div class="member-setting__update-input-wrap
+                      member-setting__update-hide
                       update-address-input-box-js">
 
-              <div class="member-personal-info__zipcode-box">
+              <div class="member-setting__zipcode-box">
                 <input type="text"
                        id="zipcode"
                        th:value="${session.member.getZipcode()}"
@@ -198,7 +177,7 @@
 
           </div>
           <div>
-            <button class="member-personal-info__update-toggle-btn
+            <button class="member-setting__update-toggle-btn
                             update-toggle-btn-js
                             update-toggle-address-btn-js"
                     data-id="address">
@@ -207,13 +186,13 @@
           </div>
         </div>
 
-        <div class="member-personal-info__update-wrap">
-          <div class="member-personal-info__update-box">
-            <div class="member-personal-info__update-title">소개</div>
+        <div class="member-setting__update-wrap">
+          <div class="member-setting__update-box">
+            <div class="member-setting__update-title">소개</div>
             <div class="update-bio-text-box-js"
                  th:text="${session.member.getBio()}"></div>
-            <div class="member-personal-info__update-input-wrap
-                      member-personal-info__update-hide
+            <div class="member-setting__update-input-wrap
+                      member-setting__update-hide
                       update-bio-input-box-js">
 
               <textarea id="bio"
@@ -225,7 +204,7 @@
             </div>
           </div>
           <div>
-            <button class="member-personal-info__update-toggle-btn
+            <button class="member-setting__update-toggle-btn
                             update-toggle-btn-js
                             update-toggle-bio-btn-js"
                     data-id="bio">
@@ -236,24 +215,24 @@
 
       </div>
 
-      <div class="member-personal-info__qna-container">
-        <div class="member-personal-info__qna-wrap">
-          <div class="member-personal-info__qna-box">
+      <div class="member-setting__qna-container">
+        <div class="member-setting__qna-wrap">
+          <div class="member-setting__qna-box">
             <div class="member-personal-info__qna-icon">
               <i class="fas fa-lock"></i>
             </div>
-            <div class="member-personal-info__qna-title">수정할 수 있는 세부 정보는 무엇인가요?</div>
+            <div class="member-setting__qna-title">수정할 수 있는 세부 정보는 무엇인가요?</div>
             <div>
               Sixuniverse에서 본인 인증 시 사용하는 세부 정보는 변경할 수 없습니다. 연락처 정보와 일부 개인정보는 수정할 수 있지만, 다음번 예약 또는 숙소를 등록할 때 본인 인증 절차를
               거쳐야
               할 수도 있습니다.
             </div>
           </div>
-          <div class="member-personal-info__qna-box">
+          <div class="member-setting__qna-box">
             <div class="member-personal-info__qna-icon">
               <i class="far fa-id-card"></i>
             </div>
-            <div class="member-personal-info__qna-title">
+            <div class="member-setting__qna-title">
               다른 사람에게 어떤 정보가 공개되나요?
             </div>
             <div>
