@@ -3,12 +3,11 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
-
 <th:block layout:fragment="content">
   <h1>유형을 선택해주세요</h1>
   <form th:action="@{/host/room/register/types}" method="post">
 
-    <input type="hidden" name="roomId" th:value="${roomDto.getRoomId()}"/>
+    <input type="hidden" name="roomId" th:value="${roomDto.roomId}"/>
 
     <label for="building-type">숙소의 건물유형을 선택해주세요</label>
     <select id="building-type" name="buildingType" th:value="${roomDto.getBuildingType()}">

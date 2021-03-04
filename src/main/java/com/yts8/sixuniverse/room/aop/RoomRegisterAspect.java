@@ -20,7 +20,10 @@ public class RoomRegisterAspect {
 
   @Around("execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.get*(..)) && " +
       "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.getAddress(..)) &&" +
-      "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.getAmenities(..))")
+      "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.getAmenities(..)) &&" +
+      "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.getSafety(..)) &&" +
+      "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.getSpaces(..)) &&" +
+      "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.getImages(..))")
   public Object getCheckUser(ProceedingJoinPoint joinPoint) throws Throwable {
 
     Object[] methodArgs = joinPoint.getArgs();
@@ -39,7 +42,10 @@ public class RoomRegisterAspect {
 
   @Around("execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.post*(..)) && " +
       "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.postAddress(..)) &&" +
-      "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.postAmenities(..))")
+      "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.postAmenities(..)) &&" +
+      "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.getSafety(..)) &&" +
+      "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.getSpaces(..)) &&" +
+      "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.postImages(..))")
   public Object postCheckUser(ProceedingJoinPoint joinPoint) throws Throwable {
 
     HttpSession httpSession = (HttpSession) joinPoint.getArgs()[0];

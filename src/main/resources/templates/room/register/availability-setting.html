@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<th:block layout:fragment="content">
+  <h1>숙소의 예약정보를 정해주세요.</h1>
+  <form th:action="@{/host/room/register/availability-settings}" method="post">
+    <input type="hidden" name="roomId" th:value="${roomDto.roomId}"/>
+    <div>얼마나 먼 날짜까지 예약할 수 있나요?</div>
+    <div>
+      <input type="radio" name="expiryDate" value="0">항상
+      <input type="radio" name="expiryDate" value="3">3개월
+      <input type="radio" name="expiryDate" value="6">6개월
+      <input type="radio" name="expiryDate" value="9">9개월
+    </div>
+
+    <div>게스트가 얼마 동안 숙박할 수 있나요?</div>
+    <div>숙박 기간이 짧으면 예약을 더 많이 받을 수 있지만, 새로운 게스트를 맞이하기 위한 호스팅 준비도 더 자주 해야 합니다.</div>
+    <input type="number" name="maxDateNumber" placeholder="박 (최대)">
+
+    <div>체크인 시간을 선택해 주세요.</div>
+    <select name="checkInTime">
+      <option value="10">오전 10시</option>
+      <option value="11">오전 11시</option>
+      <option value="12">오후 12시</option>
+      <option value="13">오후 1시</option>
+      <option value="14">오후 2시</option>
+      <option value="15">오후 3시</option>
+      <option value="16">오후 4시</option>
+      <option value="17">오후 5시</option>
+      <option value="18">오후 6시</option>
+      <option value="19">오후 7시</option>
+      <option value="20">오후 8시</option>
+      <option value="21">오후 9시</option>
+    </select>
+    <div>체크아웃 시간을 선택해 주세요.</div>
+    <select name="checkOutTime">
+      <option value="10">오전 10시</option>
+      <option value="11">오전 11시</option>
+      <option value="12">오후 12시</option>
+      <option value="13">오후 1시</option>
+      <option value="14">오후 2시</option>
+      <option value="15">오후 3시</option>
+      <option value="16">오후 4시</option>
+      <option value="17">오후 5시</option>
+      <option value="18">오후 6시</option>
+      <option value="19">오후 7시</option>
+      <option value="20">오후 8시</option>
+      <option value="21">오후 9시</option>
+    </select>
+
+    <button type="submit">등록</button>
+  </form>
+</th:block>
+</html>
