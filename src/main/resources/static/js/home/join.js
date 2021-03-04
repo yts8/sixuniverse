@@ -94,7 +94,7 @@
       if (emailRgx.test(email)) {
         const res = await fetch(`http://localhost:8080/api/login/email/${email}`);
         const isNotEmail = await res.json();
-        if (isNotEmail === true) {
+        if (isNotEmail) {
           joinEmailIconEl.style.color = activeColor;
           joinAuthBtnContainerEl.style.display = "flex";
           emailStatus = true;

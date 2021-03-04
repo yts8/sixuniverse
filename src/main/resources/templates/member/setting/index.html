@@ -8,28 +8,28 @@
   <link rel="stylesheet" th:href="@{/css/member/setting/index.css}">
 </th:block>
 <th:block layout:fragment="content">
-  <section class="member-setting__container">
-    <div class="member-setting__title-container">
+  <section class="member-setting-index__container">
+    <div class="member-setting-index__title-container">
       <h1>계정</h1>
-      <div class="member-setting__profile-container">
-        <span class="member-setting__profile-name">지헌 조,</span>
-        <span>joooooojih@gmail.com</span>
+      <div class="member-setting-index__profile-container">
+        <span class="member-setting-index__profile-name" th:text="${session.member.getUsername()}"></span>
+        <span th:text="${session.member.getEmail()}"></span>
         <a href="#">프로필로 이동</a>
       </div>
     </div>
-    <div class="member-setting__content-container">
+    <div class="member-setting-index__content-container">
       <a th:href="@{/member/setting/personal-info}">
         <article>
-          <div class="member-setting__content-icon">
+          <div class="member-setting-index__content-icon">
             <i class="far fa-id-card"></i>
           </div>
           <h2>개인정보</h2>
           <span>개인정보 및 연락처를 알려주세요</span>
         </article>
       </a>
-      <a href="#">
+      <a th:href="@{/member/setting/password}">
         <article>
-          <div class="member-setting__content-icon member-setting__content-icon--yellow">
+          <div class="member-setting-index__content-icon member-setting-index__content-icon--yellow">
             <i class="fas fa-shield-alt"></i>
           </div>
           <h2>로그인 및 보안</h2>
@@ -38,7 +38,7 @@
       </a>
       <a href="#">
         <article>
-          <div class="member-setting__content-icon">
+          <div class="member-setting-index__content-icon">
             <i class="fas fa-gift"></i>
           </div>
           <h2>쿠폰</h2>
@@ -47,7 +47,7 @@
       </a>
       <a href="#">
         <article>
-          <div class="member-setting__content-icon member-setting__content-icon--yellow">
+          <div class="member-setting-index__content-icon member-setting-index__content-icon--yellow">
             <i class="fas fa-bullhorn"></i>
           </div>
           <h2>알림</h2>

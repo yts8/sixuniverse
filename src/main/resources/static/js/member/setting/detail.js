@@ -4,10 +4,14 @@
   const updateToggleBtnEls = document.querySelectorAll(".update-toggle-btn-js");
   const updateBtnEls = document.querySelectorAll(".update-btn-js");
   const updateAddressBtnEl = document.querySelector(".update-address-btn-js");
+  const updatePasswordBtnEl = document.querySelector(".update-password-btn-js");
 
   const usernameInputEl = document.querySelector("#username");
   const birthdateInputEl = document.querySelector("#birthdate");
   const mobileInputEl = document.querySelector("#mobile");
+  const oldPasswordInputEl = document.querySelector("#old-password");
+  const newPasswordInputEl = document.querySelector("#new-password");
+  const confirmPasswordInputEl = document.querySelector("#confirm-password");
 
 
   // Color
@@ -20,12 +24,13 @@
     birthdate: /\d{8}/i,
     mobile: /(01[01])\d{8}/i,
     zipcode: /\d{5}/,
-    bio: /.+/
+    bio: /.+/,
+    password: /^.*(?=^.{8,20}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/
   }
 
   // Toggle Flag
   const toggleBtnFlag = (id) => {
-    const hide = "member-personal-info__update-hide";
+    const hide = "member-setting__update-hide";
 
     const updateTextEl = document.querySelector(`.update-${id}-text-box-js`);
     const updateInputBoxEl = document.querySelector(`.update-${id}-input-box-js`);
@@ -69,18 +74,14 @@
 
     const csrf = document.querySelector("#csrf").value;
 
-    console.log(csrf);
-    console.log(id);
-    console.log(data);
-
-    await fetch(`http://localhost:8080/api/member/update/${id}`, {
+    return await fetch(`http://localhost:8080/api/member/update/${id}`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
         "X-CSRF-TOKEN": csrf
       },
       body: JSON.stringify(data)
-    })
+    });
   }
 
   // Handler
@@ -152,6 +153,41 @@
     toggleBtnFlag(id);
   }
 
+  const handleUpdatePasswordBtnClick = async (e) => {
+    const {
+      dataset: {id}
+    } = e.target;
+
+    if (!checkRgx(oldPasswordInputEl, rgxs.password) ||
+      !checkRgx(newPasswordInputEl, rgxs.password) ||
+      newPasswordInputEl.value !== confirmPasswordInputEl.value) {
+      return;
+    }
+
+    const data = {
+      "oldPassword": oldPasswordInputEl.value,
+      "newPassword": newPasswordInputEl.value
+    }
+    const res = await sendAjax(id, data)
+    const isUpdate = await res.json();
+
+    if (!isUpdate) {
+      alert("비밀번호 변경 실패");
+      return;
+    }
+
+    oldPasswordInputEl.value = "";
+    newPasswordInputEl.value = "";
+    confirmPasswordInputEl.value = "";
+
+    setResetInputColor(oldPasswordInputEl);
+    setResetInputColor(newPasswordInputEl);
+    setResetInputColor(confirmPasswordInputEl);
+
+    toggleBtnFlag(id);
+
+  }
+
   const handleInputKeyup = (e, rgx) => {
     if (!rgx.test(e.target.value)) {
       setFailInputColor(e.target)
@@ -160,15 +196,28 @@
     }
   }
 
+  const handleConfirmPasswordKeyup = () => {
+    if (newPasswordInputEl.value !== confirmPasswordInputEl.value) {
+      setFailInputColor(confirmPasswordInputEl);
+    } else {
+      setResetInputColor(confirmPasswordInputEl);
+    }
+  }
+
   // Initialize
   const init = () => {
-    updateToggleBtnEls.forEach(el => el.addEventListener("click", e => toggleBtnFlag(e.target.dataset.id)));
-    updateAddressBtnEl.addEventListener("click", handleUpdateAddressBtnClick);
-    updateBtnEls.forEach(el => el.addEventListener("click", handleUpdateBtnClick));
+    updateToggleBtnEls && updateToggleBtnEls.forEach(el => el.addEventListener("click", e => toggleBtnFlag(e.target.dataset.id)));
+    updateBtnEls && updateBtnEls.forEach(el => el.addEventListener("click", handleUpdateBtnClick));
+    updateAddressBtnEl && updateAddressBtnEl.addEventListener("click", handleUpdateAddressBtnClick);
+    updatePasswordBtnEl && updatePasswordBtnEl.addEventListener("click", handleUpdatePasswordBtnClick);
 
-    usernameInputEl.addEventListener("keyup", e => handleInputKeyup(e, rgxs.username));
-    birthdateInputEl.addEventListener("keyup", e => handleInputKeyup(e, rgxs.birthdate));
-    mobileInputEl.addEventListener("keyup", e => handleInputKeyup(e, rgxs.mobile));
+    usernameInputEl && usernameInputEl.addEventListener("keyup", e => handleInputKeyup(e, rgxs.username));
+    birthdateInputEl && birthdateInputEl.addEventListener("keyup", e => handleInputKeyup(e, rgxs.birthdate));
+    mobileInputEl && mobileInputEl.addEventListener("keyup", e => handleInputKeyup(e, rgxs.mobile));
+
+    oldPasswordInputEl && oldPasswordInputEl.addEventListener("keyup", e => handleInputKeyup(e, rgxs.password));
+    newPasswordInputEl && newPasswordInputEl.addEventListener("keyup", e => handleInputKeyup(e, rgxs.password));
+    confirmPasswordInputEl && confirmPasswordInputEl.addEventListener("keyup", handleConfirmPasswordKeyup);
   }
 
   init();
