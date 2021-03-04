@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<th:block layout:fragment="content">
+  <h1>숙소 요금 설정하기</h1>
+  <form th:action="@{/host/room/register/price}" method="post">
+
+    <input type="hidden" name="roomId" th:value="${roomId}"/>
+
+    <div>기본 요금</div>
+    <div>이 요금이 기본 요금이 됩니다.</div>
+    <input type="text" name="price" value="">
+
+
+    <button type="submit">등록</button>
+  </form>
+</th:block>
+</html>
