@@ -17,7 +17,7 @@ public class MemberController {
   private final MemberService memberService;
 
   @GetMapping("/profile/{memberId}")
-  public String profile(Model model, @PathVariable int memberId) {
+  public String profile(Model model, @PathVariable Long memberId) {
     MemberDto memberDto = memberService.findById(memberId);
 
     model.addAttribute("memberDto", memberDto);

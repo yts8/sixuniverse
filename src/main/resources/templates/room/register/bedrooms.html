@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<th:block layout:fragment="content">
+  <h1>숙소를 등록하시겠습니까?</h1>
+  <form th:action="@{/host/room/register/bedrooms}" method="post">
+
+    <input type="hidden" name="roomId" th:value="${roomDto.getRoomId()}"/>
+
+    <input type="number" name="maxPeople" th:value="${roomDto.getMaxPeople()}"/>
+    <input type="number" name="bedroomCount" th:value="${roomDto.getBedroomCount()}"/>
+    <input type="number" name="bedCount" th:value="${roomDto.getBedCount()}"/>
+    <input type="number" name="bathCount" th:value="${roomDto.getBathCount()}"/>
+    <button>저장</button>
+  </form>
+</th:block>
+</html>

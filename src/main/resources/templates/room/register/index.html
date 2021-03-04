@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<th:block layout:fragment="js">
+  <script defer src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script defer th:src="@{/js/common/daum-postcode.js}"></script>
+</th:block>
+<th:block layout:fragment="content">
+  <h1>숙소를 등록하시겠습니까?</h1>
+  <form th:action="@{/host/room/register/address}" method="post">
+    <input type="text" id="zipcode" name="zipcode" readonly/>
+    <button type="button" class="postcode-search-btn">우편번호 검색</button>
+    <input type="text" id="address" name="address" readonly/>
+    <input type="text" id="sub-address" name="subAddress"/>
+    <button type="submit">등록</button>
+  </form>
+</th:block>
+</html>

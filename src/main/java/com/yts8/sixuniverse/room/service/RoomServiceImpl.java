@@ -1,5 +1,6 @@
 package com.yts8.sixuniverse.room.service;
 
+import com.yts8.sixuniverse.room.dto.RoomDto;
 import com.yts8.sixuniverse.room.repository.RoomMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,8 +14,22 @@ public class RoomServiceImpl implements RoomService {
   private final RoomMapper roomMapper;
 
   @Override
-  public void RoomRegi() {
-    System.out.println("roomtest");
+  public RoomDto findById(Long roomId) {
+    return roomMapper.findById(roomId);
   }
 
+  @Override
+  public void save(RoomDto roomDto) {
+    roomMapper.save(roomDto);
+  }
+
+  @Override
+  public void updateTypes(RoomDto roomDto) {
+    roomMapper.updateTypes(roomDto);
+  }
+
+  @Override
+  public void updateBedrooms(RoomDto roomDto) {
+    roomMapper.updateBedrooms(roomDto);
+  }
 }
