@@ -24,28 +24,31 @@ public class ReservationController {
   public String guestReservation(HttpServletRequest request, Model model) {
 
     String status = request.getParameter("status");
-
+    List<String> testList = null;
       if(status==null || status.equals("upcoming")) {
-        List<String> testList = new ArrayList<String>();
+        testList = new ArrayList<String>();
         testList.add("upcoming");
         testList.add("upcoming");
         testList.add("upcoming");
         testList.add("upcoming");
 
-        model.addAttribute("testList", testList);
+      } else if(status.equals("complete")) {
+        testList = new ArrayList<String>();
+        testList.add("complete");
+        testList.add("complete");
+        testList.add("complete");
+        testList.add("complete");
+        testList.add("complete");
+        testList.add("complete");
 
       } else {
-        List<String> testList = new ArrayList<String>();
-        testList.add("complete");
-        testList.add("complete");
-        testList.add("complete");
-        testList.add("complete");
-        testList.add("complete");
-        testList.add("complete");
-
-        model.addAttribute("testList", testList);
+        testList = new ArrayList<String>();
+        testList.add("cancel");
+        testList.add("cancel");
+        testList.add("cancel");
       }
 
+    model.addAttribute("testList", testList);
     return "reservation/guest-reservation-list";
   }
 
@@ -101,11 +104,12 @@ public class ReservationController {
     return "reservation/guest-reservation-cancel";
   }
 
-  @GetMapping("/test")
-  public String test() {
+  @GetMapping("/cancel/next")
+  public String guestReservationCancelNext() {
 
-    return "reservation/test";
+    return "reservation/guest-reservation-cancel";
   }
+
 
 
 }

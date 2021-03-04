@@ -17,8 +17,10 @@
 
 .ui-state-active, .ui-widget-content .ui-state-active,
 .ui-start, .ui-end{
-    background-color: black !important;
-    border-radius: 20px !important;
+    /*background-color: black !important;*/
+    /*border-radius: 20px !important;*/
+    background-color: rgba(216,216,216,0.7);
+    border-radius: 20px;
 }
 
 .ui-widget-content {
@@ -35,3 +37,30 @@
     border-radius: 20px;
 }
 
+
+.testblack {
+    background-color: black !important;
+    border-radius: 20px !important;
+}
+
+.ui-datepicker-prev span.ui-icon,
+.ui-datepicker-next span.ui-icon {
+    background-image: url("../../images/reservation/right-arrow.png") !important;
+    background-size: contain !important;
+    background-position: center !important;
+}
+
+.ui-datepicker-prev span.ui-icon {
+    transform: rotate(180deg) !important;
+}
+
+.ui-datepicker-prev span.ui-icon:focus,
+.ui-datepicker-next span.ui-icon:focus {
+    outline: none !important;
+}
+
+.ui-state-hover {
+    background-color: #F6F6F6 !important;
+    border: none !important;
+    border-radius: 30px !important;
+}

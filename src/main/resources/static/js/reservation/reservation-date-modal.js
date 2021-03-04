@@ -15,6 +15,7 @@
             [(inst.input ? inst.input.val() : ''), inst]);
       }
 
+
       $(function() {
 
         var cur = -1, prv = -1;
@@ -27,35 +28,27 @@
             numberOfMonths: 2,
             showMonthAfterYear: true,
             dateFormat: 'yy-mm-dd',
+            yearSuffix: "년",
             monthNames: [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월' ],
             dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
             minDate: minDate,
-            useRange: true,
-
-
 
             beforeShowDay: function ( date ) {
-              // var date1 = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $('#check-in').val());
-              //
-              // var date2 = $.datepicker.parseDate($.datepicker._defaults.dateFormat, $('#check-out').val());
-              // if (date1 && date && (date1.getTime() == date.getTime())) {
-              //   return [true, 'ui-start', ''];
-              // }
-              // if (date2 && date && (date2.getTime() == date.getTime())) {
-              //   return [true, 'ui-end', ''];
-              // }
-              return [true, ( (date.getTime() >= Math.min(prv, cur) && date.getTime() <= Math.max(prv, cur)) ? 'date-range-selected' : '')];
 
+              return [true, ( (date.getTime() >= Math.min(prv, cur) && date.getTime() <= Math.max(prv, cur)) ? 'date-range-selected' : '')];
             },
 
-            onSelect: function ( dateText, inst ) {
 
+
+            onSelect: function ( dateText, inst ) {
 
               prv = cur;
               cur = (new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay)).getTime();
               if ( prv == -1 || prv == cur ) {
                 prv = cur;
                 $('#check-in').val( dateText );
+                $('#check-out').val('');
+
               } else {
                 d1 = $.datepicker.formatDate( 'yy-mm-dd', new Date(Math.min(prv,cur)), {} );
                 d2 = $.datepicker.formatDate( 'yy-mm-dd', new Date(Math.max(prv,cur)), {} );
@@ -74,7 +67,7 @@
             //     .appendTo($('#range-date div .ui-datepicker-buttonpane'))
             //     .on('click', function () { $('#date-modal').hide(); });
             // }
-          });
+          }).showAnim();
           // .position({
           //   my: 'left top',
           //   at: 'left bottom',
@@ -108,14 +101,26 @@
       });
 
 
+
+
     });
 
 
     $('.reservation__delete-date').click(function () {
       $('#check-in').val('');
       $('#check-out').val('');
+      $(".ui-state-default").removeClass("ui-state-active");
+      $(".ui-datepicker-calendar td").removeClass("date-range-selected");
+
+
+
     });
 
+    $('.reservation__save-date').click(function () {
+      $('.reservation__date').html($('#check-in').val() + ' ~ ' + $('#check-out').val());
+
+      $('#date-modal').hide();
+    });
 
 
   $('.reservation__modal-cancel').bind('click', function () {

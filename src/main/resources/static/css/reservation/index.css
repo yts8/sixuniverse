@@ -1,5 +1,13 @@
 @charset "UTF-8";
 
+/* === header === */
+.header__hide {
+  display: none;
+}
+
+.header__container {
+  position: static;
+}
 
 .reservation__modal {
   display: none;
@@ -24,7 +32,7 @@
 
 .reservation__date-modal-content {
   max-width: 650px;
-  margin:6% auto;
+  margin: 6% auto;
 }
 
 .reservation__guest-update-btn {
@@ -380,7 +388,7 @@
   margin-left: 70px;
   padding: 30px;
   border-radius: 15px;
-  top: 150px;
+  top: 100px;
   position: sticky;
   z-index: 0;
 }

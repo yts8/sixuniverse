@@ -27,6 +27,7 @@
   <nav class="guest-reservation__nav">
     <button class="guest-reservation__upcoming"><div>예정된 예약</div></button>
     <button class="guest-reservation__complete">완료된 예약</button>
+    <button class="guest-reservation__cancel">취소된 예약</button>
   </nav>
 
     <div class="guest-reservation__room-info">
@@ -34,6 +35,11 @@
         <input type="hidden" name="status" th:value="${test}">
         <input type="hidden" name="reservation_id" value="1">
         <table class="guest-reservation__room-info-table" >
+          <tr><td>
+            <div class="guest-reservation__room-img-box">
+              <img th:src="@{/images/reservation/sample.jpg}" class="guest-reservation__room-img">
+            </div>
+          </td></tr>
           <tr><td th:text="${test}"></td></tr>
           <tr><td class="guest-reservation__detail">
             <input type="submit" value="더보기" class="guest-reservation__detail-btn"></a>

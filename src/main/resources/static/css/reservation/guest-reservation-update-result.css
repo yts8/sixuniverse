@@ -1,12 +1,14 @@
 .guest-reservation-update__box {
     display: flex;
-    width: 60%;
+    width: 70%;
     margin: 50px auto;
 }
 
 .guest-reservation-update__box2 {
     display: flex;
+    width: 100%;
     margin: 0 auto;
+    justify-content: center;
 
 }
 
@@ -74,7 +76,7 @@
 }
 
 .guest-reservation-update__reservation-box {
-    width: max-content;
+    width: 300px;
     height: 90%;
     border: 1px solid #c3c3c3;
     padding: 20px;

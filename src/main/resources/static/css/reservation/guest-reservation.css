@@ -22,7 +22,7 @@
   margin-top: 30px;
 }
 
-.guest-reservation__upcoming, .guest-reservation__complete {
+.guest-reservation__upcoming, .guest-reservation__complete, .guest-reservation__cancel {
   background-color: transparent;
   border: none;
   padding: 10px;
@@ -38,7 +38,7 @@
   cursor: pointer;
 }
 
-.guest-reservation__complete {
+.guest-reservation__complete, .guest-reservation__cancel {
   margin-left: 30px;
 }
 
@@ -75,4 +75,23 @@
   background: transparent;
   font-weight: bold;
   cursor: pointer;
+}
+
+.guest-reservation__room-img-box {
+  width: 350px;
+  height: 200px;
+  overflow: hidden;
+  display: flex;
+  position: relative;
+  /*align-items: center;*/
+  /*justify-content: center;*/
+}
+
+.guest-reservation__room-img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  object-fit: cover;
 }
