@@ -32,4 +32,19 @@ public class RoomServiceImpl implements RoomService {
   public void updateBedrooms(RoomDto roomDto) {
     roomMapper.updateBedrooms(roomDto);
   }
+
+  @Override
+  public void updateInfo(RoomDto roomDto) {
+    roomMapper.updateInfo(roomDto);
+  }
+
+  @Override
+  public void updateAvailabilitySettings(RoomDto roomDto) {
+    roomMapper.updateAvailabilitySettings(roomDto);
+  }
+
+  @Override
+  public void updatePrice(RoomDto roomDto) {
+    roomMapper.updatePrice(roomDto);
+  }
 }
