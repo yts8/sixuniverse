@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<th:block layout:fragment="content">
+  <h1>어떤 편의시설을 제공하나요?</h1>
+  <form th:action="@{/host/room/register/amenities}" method="post">
+
+    <input type="hidden" name="roomId" th:value="${roomId}"/>
+
+    <div>
+      <label>
+        <span>필수 품목</span>
+        <span>수건, 침대 시트, 비누, 화장지, 배게</span>
+      </label>
+      <input type="checkbox" name="name" value="필수 품목"/>
+    </div>
+    <div>
+      <label>무선인터넷</label>
+      <input type="checkbox" name="name" value="무선인터넷"/>
+    </div>
+    <div>
+      <label>TV</label>
+      <input type="checkbox" name="name" value="TV"/>
+    </div>
+    <div>
+      <label>난방</label>
+      <input type="checkbox" name="name" value="난방"/>
+    </div>
+    <div>
+      <label>에어컨</label>
+      <input type="checkbox" name="name" value="에어컨"/>
+    </div>
+
+    <button type="submit">등록</button>
+  </form>
+</th:block>
+</html>

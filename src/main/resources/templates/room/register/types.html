@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+<th:block layout:fragment="content">
+  <h1>유형을 선택해주세요</h1>
+  <form th:action="@{/host/room/register/types}" method="post">
+
+    <input type="hidden" name="roomId" th:value="${roomDto.getRoomId()}"/>
+
+    <label for="building-type">숙소의 건물유형을 선택해주세요</label>
+    <select id="building-type" name="buildingType" th:value="${roomDto.getBuildingType()}">
+      <option value="아파트">아파트</option>
+      <option value="주택">주택</option>
+      <option value="별채">별채</option>
+      <option value="독특한 장소">독특한 장소</option>
+      <option value="부티크호텔">부티크호텔</option>
+    </select>
+
+    <label for="room-type">게스트가 이용할 숙소유형을 선택해주세요</label>
+    <select id="room-type" name="roomType" th:value="${roomDto.getRoomType()}">
+      <option value="집 전체">집 전체</option>
+      <option value="개인실">개인실</option>
+      <option value="다인실">다인실</option>
+    </select>
+
+    <button>저장</button>
+
+  </form>
+</th:block>
+</html>

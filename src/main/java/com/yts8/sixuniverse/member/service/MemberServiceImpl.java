@@ -54,7 +54,7 @@ public class MemberServiceImpl implements MemberService {
   }
 
   @Override
-  public MemberDto findById(int memberId) {
+  public MemberDto findById(Long memberId) {
     return memberMapper.findById(memberId);
   }
 

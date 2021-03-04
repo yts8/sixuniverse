@@ -8,7 +8,7 @@ public interface MemberMapper {
 
   MemberDto findByEmail(String email);
 
-  MemberDto findById(int memberId);
+  MemberDto findById(Long memberId);
 
   void save(MemberDto memberDto);
 

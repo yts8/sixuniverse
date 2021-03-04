@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yts8.sixuniverse.room.repository.RoomMapper">
+
+  <select id="findById" resultType="RoomDto">
+    select *
+    from room
+    where room_id = #{roomId}
+  </select>
+
+  <insert id="save" parameterType="RoomDto" useGeneratedKeys="true" keyProperty="roomId">
+    insert into room (member_id, zipcode, address, sub_address)
+    values (#{memberId}, #{zipcode}, #{address}, #{subAddress})
+  </insert>
+
+  <update id="updateTypes" parameterType="RoomDto">
+    update room
+    set building_type=#{buildingType},
+        room_type=#{roomType}
+    where room_id = #{roomId}
+  </update>
+
+  <update id="updateBedrooms" parameterType="RoomDto">
+    update room
+    set max_people=#{maxPeople},
+        bedroom_count=#{bedroomCount},
+        bed_count=#{bedCount},
+        bath_count=#{bathCount}
+    where room_id = #{roomId}
+  </update>
+
+</mapper>
