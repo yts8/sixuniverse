@@ -14,7 +14,7 @@
       <div class="member-setting-index__profile-container">
         <span class="member-setting-index__profile-name" th:text="${session.member.getUsername()}"></span>
         <span th:text="${session.member.getEmail()}"></span>
-        <a href="#">프로필로 이동</a>
+        <a th:href="@{|/member/profile/${session.member.getMemberId()}|}">프로필로 이동</a>
       </div>
     </div>
     <div class="member-setting-index__content-container">
