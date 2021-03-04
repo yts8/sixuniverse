@@ -11,4 +11,10 @@ public interface RoomService {
   void updateTypes(RoomDto roomDto);
 
   void updateBedrooms(RoomDto roomDto);
+
+  void updateInfo(RoomDto roomDto);
+
+  void updateAvailabilitySettings(RoomDto roomDto);
+
+  void updatePrice(RoomDto roomDto);
 }
