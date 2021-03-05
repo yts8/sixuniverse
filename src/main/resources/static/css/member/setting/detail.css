@@ -18,6 +18,10 @@
   margin-bottom: 1rem;
 }
 
+.member-setting__title-container > .member-setting__title-list > a:hover {
+  text-decoration: underline;
+}
+
 .member-setting__title-container > .member-setting__title-list > .member-setting__title-list-icon {
   margin: 0 1rem;
 }
@@ -63,7 +67,7 @@
 }
 
 .member-setting__update-wrap > div > .member-setting__update-toggle-btn:hover {
-  border-bottom: 2px solid var(--host-color);
+  text-decoration: underline var(--host-color);
 }
 
 /* === Toggle === */
