@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/review/review-form.css}"/>
+</th:block>
+
+<th:block layout:fragment="content">
+  <div class="review-form__main">
+    <div class="review-form__score-all">
+      <div>
+        <div class="review-form__text-main">[]님의 숙소는 어땠나요?</div>
+        <div class="review-form__text-part">답변해주신 내용은 sixuniverse의 서비스를 개선하는 데 큰 도움이 됩니다.</div>
+      </div>
+      <div class="review-form__star-main">⭐⭐⭐⭐⭐</div>
+    </div>
+    <div class="review-form__score-part">
+      <div>
+        <div class="review-form__text-main">호스트 []님의 숙소를 평가해주세요.</div>
+        <div class="review-form__text-part">후기 여러 건을 총체적으로 취합한 정보가 sixuniverse에 전달됩니다.</div>
+      </div>
+      <div>
+        <div>
+          <div class="review-form__score-part-text">청결도</div>
+          <div class="review-form__star-part">⭐⭐⭐⭐⭐</div>
+        </div>
+        <div>
+          <div class="review-form__score-part-text">위치</div>
+          <div class="review-form__star-part">⭐⭐⭐⭐⭐</div>
+        </div>
+        <div>
+          <div class="review-form__score-part-text">서비스</div>
+          <div class="review-form__star-part">⭐⭐⭐⭐⭐</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-form__score-context">
+      <div>
+        <div class="review-form__text-main">후기 작성하기</div>
+        <div class="review-form__text-part">[]님의 숙소에 관해 다른 게스트가 참고할 점을 알려주세요.</div>
+      </div>
+      <div>
+        <input type="text">
+      </div>
+    </div>
+    <div class="review-form__move">
+      <div class="review-form__move-back">
+        <div class="review-form__back"> <</div>
+        <a href="#">
+          <div>뒤로</div>
+        </a>
+      </div>
+      <div>
+        <button class="review-form__ok">완료</button>
+      </div>
+    </div>
+  </div>
+</th:block>
+</html>

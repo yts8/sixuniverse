@@ -15,7 +15,7 @@ public class WishlistController {
 
   @GetMapping("/folder")
   public String folder() {
-    return "wishlist/wishlist-folder";
+    return "wishlist/folder";
   }
 
 }

@@ -1,0 +1,135 @@
+.reservation-review__main {
+  margin: 60px 250px;
+  display: flex;
+  flex-direction: column;
+}
+
+.reservation-review__score-all {
+  display: flex;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.reservation-review__star {
+  margin-right: 5px;
+}
+
+.reservation-review__score-sub {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.reservation-review__sub-box {
+  flex: 1;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0 10px;
+}
+
+.reservation-review__sub-box-left {
+
+  font-size: 16px;
+}
+
+.reservation-review__sub-box-right {
+
+  display: flex;
+}
+
+.reservation-review__sub-box-right-bar {
+  margin-right: 5px;
+}
+
+.reservation-review__sub-box-right-score {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.reservation-review__review {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 50px;
+  margin-bottom: 20px;
+}
+
+.reservation-review__review-guest {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 40%;
+  margin: 20px 10px;
+}
+
+.reservation-review__review-profile {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.reservation-review__review-profile-box {
+  width: 55px;
+  height: 55px;
+  border-radius: 70%;
+  overflow: hidden;
+  margin-right: 15px;
+}
+
+.reservation-review__review-profile-box-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.reservation-review__review-profile-text {
+  padding: 5px 0;
+}
+
+.reservation-review__review-profile-text-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #414141;
+}
+
+.reservation-review__review-profile-text-info {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #666666;
+}
+
+.reservation-review__review-text {
+  font-size: 16px;
+  margin-right: 50px;
+  line-height: normal;
+}
+
+.reservation-review__review-all button {
+  margin-left: 60px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  background-color: white;
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
+  border-radius: 10px;
+  width: 190px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.reservation-review__progressbar {
+  display: block;
+  width: 120px;
+  height: 4px;
+  background-color: #dddddd;
+  border-radius: 10px;
+  margin: 3px;
+}
+
+.reservation-review__gauge {
+  display: block;
+  width: 50%;
+  height: 4px;
+  background-color: black;
+  border-radius: 10px;
+}
