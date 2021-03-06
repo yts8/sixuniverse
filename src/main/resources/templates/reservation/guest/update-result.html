@@ -5,20 +5,20 @@
       layout:decorator="layout/default"
 >
 
-<div layout:fragment="css">
-  <link rel="stylesheet" th:href="@{/css/reservation/guest-reservation-update-result.css}">
-</div>
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/reservation/guest/update-result.css}">
+</th:block>
 
-<div layout:fragment="js">
-  <script type="text/javascript" defer th:src="@{/js/reservation/guest-reservation-update.js}"></script>
-</div>
+<th:block layout:fragment="js">
+  <script type="text/javascript" defer th:src="@{/js/reservation/guest/update.js}"></script>
+</th:block>
 
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
 </head>
 
-<div layout:fragment="content">
+<th:block layout:fragment="content">
 
   <div class="guest-reservation-update__box">
     <div class="guest-reservation-update__box2">
@@ -89,7 +89,7 @@
   </div>
 
 
-</div>
+</th:block>
 
 <body>
 

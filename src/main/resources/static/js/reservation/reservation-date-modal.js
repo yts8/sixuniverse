@@ -118,7 +118,8 @@
 
     $('.reservation__save-date').click(function () {
       $('.reservation__date').html($('#check-in').val() + ' ~ ' + $('#check-out').val());
-
+      $('.reservation__check-in').val($('#check-in').val() );
+      $('.reservation__check-out').val($('#check-out').val() );
       $('#date-modal').hide();
     });
 

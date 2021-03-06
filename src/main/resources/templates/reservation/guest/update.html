@@ -5,17 +5,16 @@
       layout:decorator="layout/default"
 >
 
-<div layout:fragment="css">
-  <link rel="stylesheet" th:href="@{/css/reservation/guest-reservation-update.css}">
-  <!--    <link rel="stylesheet" href="../../static/css/reservation/guest-reservation-simple-info.css">-->
-</div>
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/reservation/guest/update.css}">
+</th:block>
 
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
 </head>
 
-<div layout:fragment="content">
+<th:block layout:fragment="content">
 
   <div class="guest-reservation-update__box">
     <div class="guest-reservation-update__box2">
@@ -23,7 +22,7 @@
       <div class="guest-reservation-update__content">
         <div class="guest-reservation-update__title">무엇을 변경하고 싶으세요?</div>
 
-        <form th:action="@{./update}" method="post">
+        <form th:action="@{/reservation/guest/update}" method="post">
           <div class="guest-reservation-update__small-box">
             <div class="guest-reservation-update__sub-title">날짜</div>
             <div class="guest-reservation-update__reservation-date">
@@ -77,7 +76,7 @@
   </div>
 
 
-</div>
+</th:block>
 
 <body>
 

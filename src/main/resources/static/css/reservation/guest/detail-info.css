@@ -145,13 +145,19 @@ html, body {
 .guest-reservation-detail-info__room-img {
     width: 100%;
     height: 300px;
+    overflow: hidden;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
 }
 
 .guest-reservation-detail-info__room-img > img {
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    position: absolute;
     border-radius: 10px;
+    object-fit: cover;
 
 }
 

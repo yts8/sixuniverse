@@ -2,7 +2,7 @@
   $(document).ready(function () {
     $('.guest-reservation-cancel__next-btn').click(function () {
       $.ajax({
-        url: "./cancel/next",
+        url: "/reservation/guest/cancel/next",
         type: "GET",
         success: function(data){
           $('.guest-reservation-cancel__title').html('예약 취소 안내');

@@ -1,0 +1,112 @@
+.guest-reservation-complete__box {
+  display: flex;
+  width: 70%;
+  margin: 50px auto;
+}
+
+.guest-reservation-complete__box2 {
+  width: 100%;
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+
+.guest-reservation-complete__reservation-box {
+  width: 450px;
+  height: max-content;
+  border: 1px solid #c3c3c3;
+  border-radius: 10px;
+  padding: 20px;
+  margin-left: 100px;
+  margin-top: 30px;
+}
+
+.guest-reservation-complete__title {
+  margin: 30px 0 30px 0;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.guest-reservation-complete__content {
+  position: relative;
+}
+
+.guest-reservation-complete__info-box {
+  margin-top: 30px;
+  position: absolute;
+  bottom: 30px;
+}
+
+.guest-reservation-complete__sub-title {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.guest-reservation-complete__room-info {
+  width: 100%;
+  display: flex;
+  margin-top: 20px;
+}
+
+.guest-reservation-complete__sub-title2 {
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.guest-reservation-complete__info-content {
+  margin-right: 20px;
+}
+
+.guest-reservation-complete__info-content > div {
+  margin-top: 10px;
+}
+
+
+.guest-reservation-complete__room-info-img {
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.guest-reservation-complete__room-info-img > img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.guest-reservation-complete__room-name {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.guest-reservation-complete__reservation-content > div {
+  margin: 20px 0 20px 0;
+}
+
+.guest-reservation-complete__reservation-info > div {
+  margin-top: 10px;
+}
+
+.guest-reservation-complete__align {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #c3c3c3;
+}
+
+.guest-reservation-complete__align > div {
+  width: 100%;
+  padding: 20px 0 10px 0;
+}
+
+.guest-reservation-complete__align > div:nth-of-type(2) {
+  text-align: right;
+}

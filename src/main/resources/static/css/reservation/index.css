@@ -138,6 +138,12 @@
   display: flex;
 }
 
+.reservation__guest-number > input{
+  width: 20px;
+  text-align: center;
+  border: none;
+}
+
 .reservation__decrease, .reservation__increase {
   width: 30px;
   height: 30px;
@@ -397,8 +403,51 @@
   display: flex;
 }
 
+.reservation__room-img {
+  width: 120px;
+  height: 90px;
+  overflow: hidden;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
+.reservation__room-img > img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
 .reservation__room-info2 {
   margin-left: 10px;
+}
+
+.reservation__room-info2 >  div {
+  margin-top: 7px;
+}
+
+.reservation__room-info2 >  div:nth-of-type(1), .reservation__room-info2 >  div:nth-of-type(3) {
+  font-size: 11px;
+}
+
+.reservation__room-info2 >  div:nth-of-type(4) {
+  font-size: 13px;
+}
+
+.reservation__review-grade {
+  width: 100%;
+  display: flex;
+}
+
+.fa-star, .fa-medal {
+  color: #EB4C60;
+}
+
+.reservation__review-grade > div:nth-child(1) {
+  margin-right: 10px;
 }
 
 .reservation__table {

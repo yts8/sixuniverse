@@ -7,7 +7,7 @@
 
     $('.guest-reservation-update__next-btn').click(function () {
       $.ajax({
-        url: "./complete",
+        url: "/reservation/guest/update/complete",
         type: "GET",
         success: function(data){
           $('.guest-reservation-update__title').html('회원님이 요청하신 변경 내용');

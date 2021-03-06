@@ -1,5 +1,11 @@
 package com.yts8.sixuniverse.reservation.controller;
 
+import com.yts8.sixuniverse.member.dto.MemberDto;
+import com.yts8.sixuniverse.reservation.dto.ReservationDto;
+import com.yts8.sixuniverse.reservation.service.ReservationService;
+import com.yts8.sixuniverse.room.dto.RoomDto;
+import com.yts8.sixuniverse.room.service.RoomService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,20 +13,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/reservation")
 public class ReservationController {
 
-  @GetMapping("")
-  public String reservation() {
+  private final ReservationService reservationService;
+  private final RoomService roomService;
 
+  @GetMapping("")
+  public String reservation(HttpServletRequest request, Model model) {
+    Long roomId = Long.parseLong(request.getParameter("roomId"));
+
+    RoomDto roomDto = roomService.findById(roomId);
+
+    model.addAttribute("room", roomDto);
     return "reservation/index";
   }
 
-  @GetMapping("/guest-reservation-list")
+  @GetMapping("/guest/list")
   public String guestReservation(HttpServletRequest request, Model model) {
 
     String status = request.getParameter("status");
@@ -49,28 +64,28 @@ public class ReservationController {
       }
 
     model.addAttribute("testList", testList);
-    return "reservation/guest-reservation-list";
+    return "reservation/guest/list";
   }
 
-  @GetMapping("/guest-reservation-simple-info")
+  @GetMapping("/guest/simple-info")
   public String simple(HttpServletRequest request, Model model) {
 
     String status = request.getParameter("status");
 
     model.addAttribute("status", status);
 
-    return "reservation/guest-reservation-simple-info";
+    return "reservation/guest/simple-info";
   }
 
 
-  @GetMapping("/guest-reservation-detail-info")
+  @GetMapping("/guest/detail-info")
   public String detail(HttpServletRequest request, Model model) {
 
     String status = request.getParameter("status");
 
     model.addAttribute("status", status);
 
-    return "reservation/guest-reservation-detail-info";
+    return "reservation/guest/detail-info";
   }
 
   @GetMapping("/host-reservation-list")
@@ -79,37 +94,46 @@ public class ReservationController {
     return "reservation/host-reservation-list";
   }
 
-  @GetMapping("/update")
+  @GetMapping("/guest/update")
   public String guestReservationUpdate() {
 
-    return "reservation/guest-reservation-update";
+    return "reservation/guest/update";
   }
 
-  @PostMapping("/update")
+  @PostMapping("/guest/update")
   public String guestReservationUpdateResult() {
 
-    return "reservation/guest-reservation-update-result";
+    return "reservation/guest/update-result";
   }
 
 
-  @GetMapping("/complete")
+  @GetMapping("/guest/update/complete")
   public String guestReservationUpdateComplete() {
 
-    return "reservation/guest-reservation-update-result";
+    return "reservation/guest/update-result";
   }
 
-  @GetMapping("/cancel")
+  @GetMapping("/guest/cancel")
   public String guestReservationCancel() {
 
-    return "reservation/guest-reservation-cancel";
+    return "reservation/guest/cancel";
   }
 
-  @GetMapping("/cancel/next")
+  @GetMapping("/guest/cancel/next")
   public String guestReservationCancelNext() {
 
-    return "reservation/guest-reservation-cancel";
+    return "reservation/guest/cancel";
   }
 
+  @GetMapping("/pay/complete")
+  public String guestReservationPayComplete(HttpSession session, ReservationDto reservationDto) {
+    MemberDto memberDto = (MemberDto) session.getAttribute("member");
+    reservationDto.setMemberId(memberDto.getMemberId());
+    reservationDto.setStatus("upcoming");
 
+    reservationService.reservationInsert(reservationDto);
+
+    return "reservation/guest/complete";
+  }
 
 }

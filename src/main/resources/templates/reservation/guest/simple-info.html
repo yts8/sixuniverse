@@ -5,18 +5,15 @@
       layout:decorator="layout/default"
 >
 
-<div layout:fragment="css">
-  <link rel="stylesheet" th:href="@{/css/reservation/guest-reservation-simple-info.css}">
-<!--    <link rel="stylesheet" href="../../static/css/reservation/guest-reservation-simple-info.css">-->
-</div>
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/reservation/guest/simple-info.css}">
+</th:block>
 
-<div layout:fragment="js">
+<th:block layout:fragment="js">
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=34aa0f04a8c02352b695cb5574769930"></script>
-<!--  <script type="text/javascript" defer src="../../static/js/reservation/map.js"></script>-->
-    <script type="text/javascript" defer th:src="@{/js/reservation/map.js}"></script>
-    <script type="text/javascript" defer th:src="@{/js/reservation/guest-reservation-simple-info.js}"></script>
-
-</div>
+  <script type="text/javascript" defer th:src="@{/js/common/map.js}"></script>
+  <script type="text/javascript" defer th:src="@{/js/reservation/guest/simple-info.js}"></script>
+</th:block>
 
 <head>
   <meta charset="UTF-8">
@@ -24,12 +21,13 @@
 </head>
 
 <body>
-<div layout:fragment="content" class="guest-reservation-simple-info__box">
+<th:block layout:fragment="content" class="guest-reservation-simple-info__box">
 
   <div class="guest-reservation-simple-info__box">
 
     <div class="guest-reservation-simple-info__content">
-      <a href="./guest-reservation-list" class="guest-reservation-simple-info__back"><i class="fas fa-arrow-left"></i></a>
+      <a th:href="@{/reservation/guest/list}" class="guest-reservation-simple-info__back"><i
+          class="fas fa-arrow-left"></i></a>
       <div class="guest-reservation-simple-info__detail-room-box">
         <div class="guest-reservation-simple-info__detail-room">
           <div class="guest-reservation-simple-info__room-address">숙소주소</div>
@@ -39,7 +37,7 @@
         <div class="guest-reservation-simple-info__room-info-box">
           <div class="guest-reservation-simple-info__room-info-small-box">
             <div th:if="${status.equals('upcoming')}">
-             <div class="guest-reservation-simple-info__reservation-title">예정된 예약</div>
+              <div class="guest-reservation-simple-info__reservation-title">예정된 예약</div>
             </div>
             <div th:unless="${status.equals('upcoming')}">
               <div class="guest-reservation-simple-info__reservation-title">완료된 예약</div>
@@ -47,11 +45,13 @@
             <div class="guest-reservation-simple-info__room-info">
               <div class="guest-reservation-simple-info__detail-room-info">
                 <div class="guest-reservation-simple-info__room-info-align">
-                  <div>숙소사진</div>
+                  <div class="guest-reservation-simple-info__room-info-img">
+                    <img th:src="@{/images/reservation/sample.jpg}">
+                  </div>
                   <div class="guest-reservation-simple-info__room-info-margin">
-                    <div>예약날짜</div>
-                    <div>숙소제목</div>
-                    <div>숙소주소</div>
+                    <div class="guest-reservation-simple-info__reservation-date">예약날짜</div>
+                    <div class="guest-reservation-simple-info__room-name">숙소제목</div>
+                    <div class="guest-reservation-simple-info__room-info-address">숙소주소</div>
                   </div>
                 </div>
                 <div class="guest-reservation-simple-info__room-detail-info-view">세부사항보기</div>
@@ -61,7 +61,7 @@
                 <div class="guest-reservation-simple-info__msg">호스트에게 연락하기</div>
               </div>
               <div th:if="${status.equals('complete')}" class="guest-reservation-simple-info__title">
-              <div class="guest-reservation-simple-info__review">후기 작성</div>
+                <div class="guest-reservation-simple-info__review">후기 작성</div>
               </div>
             </div>
           </div>
@@ -71,11 +71,9 @@
       </div>
 
 
-
-
       <div class="guest-reservation-simple-info__map-box">
 
-      <div id="map">지도</div>
+        <div id="map">지도</div>
 
       </div>
 
@@ -84,9 +82,6 @@
   </div>
 
 
-
-
-
-</div>
+</th:block>
 </body>
 </html>
