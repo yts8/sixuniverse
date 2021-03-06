@@ -16,6 +16,9 @@
     <article class="login__wrap">
       <div class="login__box">
         <h1 class="login__title">Sixuniverse</h1>
+        <p class="login__error"
+           th:if="${loginError != null}"
+           th:text="${loginError}"></p>
         <form th:action="@{/login}" method="post" class="login__form">
 
           <div class="login__input-box">
@@ -52,7 +55,7 @@
         </div>
 
         <div class="login__social-container">
-          <a href="#" class="login__social-google">
+          <a th:href="@{/oauth2/authorization/google}" class="login__social-google">
             <i class="fab fa-google"></i>
             <span>Google</span>
           </a>

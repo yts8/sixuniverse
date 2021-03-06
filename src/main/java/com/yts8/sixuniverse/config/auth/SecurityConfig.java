@@ -9,6 +9,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
@@ -19,6 +22,7 @@ import org.springframework.security.web.savedrequest.SavedRequest;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   private final AuthenticationProvider authenticationProvider;
+  private final OAuth2UserService<OAuth2UserRequest, OAuth2User> oAuth2UserService;
 
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -55,6 +59,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
           RequestCache requestCache = new HttpSessionRequestCache();
           SavedRequest savedRequest = requestCache.getRequest(request, response);
           response.sendRedirect(savedRequest == null ? "/" : savedRequest.getRedirectUrl());
-        });
+        })
+        .and()
+        .oauth2Login()
+        .loginPage("/login")
+        .failureHandler((request, response, exception) -> {
+          exception.getMessage();
+          request.setAttribute("loginError", exception.getMessage());
+          request.getRequestDispatcher("/login").forward(request, response);
+
+        })
+        .userInfoEndpoint()
+        .userService(oAuth2UserService);
   }
 }
