@@ -67,7 +67,7 @@ body {
 a, button {
   all: unset;
   display: block;
-  color: black;
+  color: inherit;
   cursor: pointer;
   outline: none;
 }

@@ -1,5 +1,5 @@
 .g-review-by__main {
-  margin: 55px 320px;
+  margin: 35px 235px;
 }
 
 .g-review-by__main-top span {
@@ -8,77 +8,85 @@
 
 .g-review-by__title {
   color: #484848;
-  font-size: 42px;
+  font-size: 31px;
   font-weight: bold;
-  margin-top: 20px;
-  margin-bottom: 85px;
+  margin-top: 5px;
+  margin-bottom: 50px;
 }
 
 .g-review-by__tabs {
-  max-width: 1020px;
+  max-width: 765px;
   border-bottom: 1px solid #dce0e0;
-  width: 100%;
   word-spacing: -2px;
-  margin-bottom: 30px;
-  padding-bottom: 20px;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
 }
 
 .g-review-by__container {
-  max-width: 1020px;
+  max-width: 765px;
 }
 
 .g-review-by__panel {
   border: 1px solid #dce0e0;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 .g-review-by__panel-header {
   color: #484848;
-  font-size: 20px;
-  padding: 20px 25px;
+  font-size: 16px;
+  padding: 10px 20px;
   border-bottom: 1px solid #dce0e0;
   background-color: #edefed;
 }
 
 .g-review-by__panel-body {
-  font-size: 20px;
+  font-size: 14px;
   color: #484848;
-  padding: 25px;
-  line-height: 30px;
+  padding: 17px 20px;
+  line-height: 22px;
+}
+
+.g-review-by__panel-body-rate {
+  font-size: 16px;
+  word-spacing: -3px;
+  color: #484848;
+  padding: 17px 20px;
+  line-height: 22px;
 }
 
 .g-review-by__main-top a {
   text-decoration: none;
   color: #484848;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 14px;
 }
 
 .g-review-by__main-top a:hover {
   text-decoration: underline;
   color: #484848;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 14px;
 }
 
 .g-review-by__tabs a {
   display: inline-block;
   text-decoration: none;
-  color: #969696;
-  font-size: 19px;
-  margin-right: 20px;
+  color: #868686;
+  font-size: 14px;
+  margin-right: 15px;
+  cursor: pointer;
 }
 
 .g-review-by__tabs a:active {
   text-decoration: none;
   color: #484848;
-  font-size: 19px;
-  margin-right: 20px;
+  font-size: 14px;
+  margin-right: 15px;
 }
 
 .g-review-by__main-top nav {
   text-decoration: none;
-  color: #484848;
+  color: #707070;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 14px;
 }

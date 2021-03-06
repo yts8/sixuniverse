@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+<th:block layout:fragment="css">
+  <link rel="stylesheet" href="../../static/css/review/reservation-review.css"
+        th:href="@{/css/review/reservation-review.css}"/>
+</th:block>
+
+<th:block layout:fragment="content">
+  <div class="reservation-review__main">
+    <div class="reservation-review__score-all">
+      <div class="reservation-review__star">
+        <img th:src="@{/images/wishlist/star.JPG}"/>
+      </div>
+      <div>5.0점(후기 20개)</div>
+    </div>
+    <div class="reservation-review__score-sub">
+      <div class="reservation-review__sub-box">
+        <div class="reservation-review__sub-box-left">청결도</div>
+        <div class="reservation-review__sub-box-right">
+          <div class="reservation-review__sub-box-right-bar">
+            <span class="reservation-review__progressbar">
+              <span class="reservation-review__gauge"></span>
+            </span>
+          </div>
+          <div class="reservation-review__sub-box-right-score">4.4</div>
+        </div>
+      </div>
+      <div class="reservation-review__sub-box">
+        <div class="reservation-review__sub-box-left">위치</div>
+        <div class="reservation-review__sub-box-right">
+          <div class="reservation-review__sub-box-right-bar">
+            <span class="reservation-review__progressbar">
+              <span class="reservation-review__gauge"></span>
+            </span>
+          </div>
+          <div class="reservation-review__sub-box-right-score">4.7</div>
+        </div>
+      </div>
+      <div class="reservation-review__sub-box">
+        <div class="reservation-review__sub-box-left">서비스</div>
+        <div class="reservation-review__sub-box-right">
+          <div class="reservation-review__sub-box-right-bar">
+            <span class="reservation-review__progressbar">
+              <span class="reservation-review__gauge"></span>
+            </span>
+          </div>
+          <div class="reservation-review__sub-box-right-score">5.0</div>
+        </div>
+      </div>
+    </div>
+    <div class="reservation-review__review">
+      <div class="reservation-review__review-guest">
+        <div class="reservation-review__review-profile">
+          <div class="reservation-review__review-profile-box">
+            <img class="reservation-review__review-profile-box-img"
+                 th:src="@{/images/review/sky.jpeg}">
+          </div>
+          <div class="reservation-review__review-profile-text">
+            <div class="reservation-review__review-profile-text-name">어몽박</div>
+            <div class="reservation-review__review-profile-text-info">2021년 2월</div>
+          </div>
+        </div>
+        <div class="reservation-review__review-text">
+          편안 그 자체
+        </div>
+      </div>
+      <div class="reservation-review__review-guest">
+        <div class="reservation-review__review-profile">
+          <div class="reservation-review__review-profile-box">
+            <img class="reservation-review__review-profile-box-img"
+                 th:src="@{/images/review/sky.jpeg}">
+          </div>
+          <div class="reservation-review__review-profile-text">
+            <div class="reservation-review__review-profile-text-name">실버스타</div>
+            <div class="reservation-review__review-profile-text-info">2021년 2월</div>
+          </div>
+        </div>
+        <div class="reservation-review__review-text">
+          최고예요!
+        </div>
+      </div>
+      <div class="reservation-review__review-guest">
+        <div class="reservation-review__review-profile">
+          <div class="reservation-review__review-profile-box">
+            <img class="reservation-review__review-profile-box-img"
+                 th:src="@{/images/review/sky.jpeg}">
+          </div>
+          <div class="reservation-review__review-profile-text">
+            <div class="reservation-review__review-profile-text-name">솜솜맘</div>
+            <div class="reservation-review__review-profile-text-info">2021년 2월</div>
+          </div>
+        </div>
+        <div class="reservation-review__review-text">
+          좋습니다~
+        </div>
+      </div>
+      <div class="reservation-review__review-guest">
+        <div class="reservation-review__review-profile">
+          <div class="reservation-review__review-profile-box">
+            <img class="reservation-review__review-profile-box-img"
+                 th:src="@{/images/review/sky.jpeg}">
+          </div>
+          <div class="reservation-review__review-profile-text">
+            <div class="reservation-review__review-profile-text-name">어스린</div>
+            <div class="reservation-review__review-profile-text-info">2021년 2월</div>
+          </div>
+        </div>
+        <div class="reservation-review__review-text">
+          굿 굿 굿!
+        </div>
+      </div>
+    </div>
+    <div class="reservation-review__review-all">
+      <button>후기 20개 모두 보기</button>
+    </div>
+  </div>
+</th:block>
+
+</html>

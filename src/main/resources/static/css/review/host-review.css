@@ -1,0 +1,134 @@
+.host-review__main {
+  margin: 50px 125px;
+}
+
+.host-review__score-group {
+  display: table;
+  margin-bottom: 22px;
+}
+
+.host-review__score-group span {
+  border: 1px solid #EBEBEB;
+  display: inline-block;
+  white-space: nowrap;
+  padding: 9px 15px;
+  color: #414141;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.host-review__review {
+  display: flex;
+}
+
+.host-review__review-left {
+  flex: 1;
+}
+
+.host-review__review-panel {
+  width: 840px;
+  background: rgb(255, 255, 255);
+  border: 1px solid rgb(228, 228, 228);
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0 4px 4px 0;
+  padding: 15px;
+}
+
+.host-review__review-panel-guest {
+  display: flex;
+}
+
+.host-review__review-panel-guest-text {
+  flex: 10;
+  margin: 10px 0;
+}
+
+.host-review__review-panel-guest-text-name {
+  font-size: 17px;
+  color: #414141;
+}
+
+.host-review__review-panel-guest-text-info {
+  margin-top: 3px;
+  font-size: 14px;
+  color: #666666;
+}
+
+.host-review__review-panel-guest-img {
+  flex: 1;
+}
+
+.host-review__review-panel-guest-profile-box {
+  width: 65px;
+  height: 65px;
+  border-radius: 70%;
+  overflow: hidden;
+}
+
+.host-review__review-panel-guest-profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.host-review__review-panel-score-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: #414141;
+}
+
+.host-review__review-panel-score-content {
+  font-size: 14px;
+  color: #414141;
+  margin-top: 20px;
+}
+
+.host-review__review-panel-score-check {
+  font-size: 14px;
+  font-weight: bold;
+  color: #414141;
+  margin-top: 15px;
+  text-align: right;
+}
+
+.host-review__review-right {
+  flex: 1;
+  display: flex;
+  margin: 30px;
+}
+
+.host-review__review-right-left {
+  flex: 1;
+}
+
+.host-review__review-right-right {
+  flex: 1;
+}
+
+.host-review__review-right-left-body {
+  display: flex;
+}
+
+.host-review__review-right-num {
+  font-size: 40px;
+  font-weight: bold;
+  color: #414141;
+}
+
+.host-review__review-right-text {
+  margin-top: 5px;
+  font-size: 16px;
+  color: #414141;
+}
+
+.host-review__review-hr {
+  height: 1px;
+  background-color: #dbdbdb;
+  border: none;
+  margin: 15px 0;
+}
+
+.host-review__review-left a {
+  text-decoration: none;
+  color: black;
+}

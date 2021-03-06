@@ -1,5 +1,13 @@
 @charset "UTF-8";
 
+.login__error {
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--guest-color);
+}
+
 .login__container {
   min-height: 100%;
   background-color: #fafafa;

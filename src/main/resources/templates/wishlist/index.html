@@ -4,13 +4,179 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
 
-<th:block layout:fragment="css"></th:block>
-<th:block layout:fragment="js"></th:block>
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/wishlist/wishlist.css}"/>
+</th:block>
+
+<th:block layout:fragment="js">
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=36fefe3128b3662c80a1121ac778673e"></script>
+  <script type="text/javascript" defer th:src="@{/js/wishlist/wishlist.js}"></script>
+</th:block>
 
 <th:block layout:fragment="content">
-  <section>
-    <h2>레이아웃 샘플</h2>
-    <span>이곳에 작성하면됩니다.</span>
-  </section>
+  <div class="wishlist__main">
+    <div class="wishlist__main-left">
+      <div class="wishlist__main-left-top">
+        <a th:href="@{/wishlist/folder}">
+          <img th:src="@{/images/wishlist/back.JPG}"/>
+        </a>
+        <button class="wishlist__make-wishlist-folder">
+          <img th:src="@{/images/wishlist/makewishlist.JPG/}"/>
+        </button>
+        <div class="wishlist__modal">
+          <div class="wishlist__modal-content">
+            <div class="wishlist__update-title">
+              <button>x</button>
+              <div>수정</div>
+            </div>
+            <hr class="wishlist__hr">
+            <div>
+              <div>
+                <input type="text">
+              </div>
+              <div>최대 50자</div>
+              <button>목록 삭제하기</button>
+            </div>
+            <hr class="wishlist__hr">
+            <div>
+              <button>취소</button>
+              <button>저장</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wishlist__main-left-middle">
+        <div class="wishlist__location">부산</div>
+        <hr class="wishlist__hr">
+        <div class="wishlist__room-count">숙소 []개</div>
+        <hr class="wishlist__hr">
+      </div>
+
+      <div class="wishlist__container">
+
+           <!-- 여기서부터 반복 -->
+          <div class="wishlist__main-left-bottom">
+            <a href="#">
+              <div class="wishlist__room">
+                <div class="wishlist__room-left">
+                  <div class="wishlist__room-box">
+                    <img class="wishlist__room-img" th:src="@{/images/wishlist/room.jpg}"/>
+                  </div>
+                </div>
+                <div class="wishlist__room-right">
+                  <div class="wishlist__room-right-top">
+                    <div>
+                      <div class="wishlist__room-type">Jungan-dong, Jung-gu, Busan의 아파트 전체</div>
+                      <div class="wishlist__room-name">✨토리하우스✨ 넷플릭스,고층뷰,도시뷰,청결</div>
+                    </div>
+                    <button>
+                      <img th:src="@{/images/wishlist/heart.JPG}"/>
+                    </button>
+                  </div>
+                  <hr class="wishlist__room-hr">
+                  <div class="wishlist__room-right-middle">최대 인원 []명 . 침실 []개 . 침대 []개 . 욕실 []개</div>
+                  <div class="wishlist__room-right-bottom">
+                    <div class="wishlist__room-right-bottom-left">
+                      <div>
+                        <img th:src="@{/images/wishlist/star.JPG}"/>
+                      </div>
+                      <div class="wishlist__room-score">5.0</div>
+                      <div class="wishlist__room-review-count">(후기 []개)</div>
+                    </div>
+                    <div class="wishlist__room-right-bottom-right">
+                      <div class="wishlist__room-price">\50,000</div>
+                      <div class="wishlist__room-day">/1박</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr class="wishlist__hr">
+            </a>
+          </div>
+
+          <div class="wishlist__main-left-bottom">
+            <a href="#">
+              <div class="wishlist__room">
+                <div class="wishlist__room-left">
+                  <div class="wishlist__room-box">
+                    <img class="wishlist__room-img" th:src="@{/images/wishlist/room.jpg}"/>
+                  </div>
+                </div>
+                <div class="wishlist__room-right">
+                  <div class="wishlist__room-right-top">
+                    <div>
+                      <div class="wishlist__room-type">Jungan-dong, Jung-gu, Busan의 아파트 전체</div>
+                      <div class="wishlist__room-name">✨토리하우스✨ 넷플릭스,고층뷰,도시뷰,청결</div>
+                    </div>
+                    <button>
+                      <img th:src="@{/images/wishlist/heart.JPG}"/>
+                    </button>
+                  </div>
+                  <hr class="wishlist__room-hr">
+                  <div class="wishlist__room-right-middle">최대 인원 []명 . 침실 []개 . 침대 []개 . 욕실 []개</div>
+                  <div class="wishlist__room-right-bottom">
+                    <div class="wishlist__room-right-bottom-left">
+                      <div>
+                        <img th:src="@{/images/wishlist/star.JPG}"/>
+                      </div>
+                      <div class="wishlist__room-score">5.0</div>
+                      <div class="wishlist__room-review-count">(후기 []개)</div>
+                    </div>
+                    <div class="wishlist__room-right-bottom-right">
+                      <div class="wishlist__room-price">\50,000</div>
+                      <div class="wishlist__room-day">/1박</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr class="wishlist__hr">
+            </a>
+          </div>
+
+          <div class="wishlist__main-left-bottom">
+            <a href="#">
+              <div class="wishlist__room">
+                <div class="wishlist__room-left">
+                  <div class="wishlist__room-box">
+                    <img class="wishlist__room-img" th:src="@{/images/wishlist/room.jpg}"/>
+                  </div>
+                </div>
+                <div class="wishlist__room-right">
+                  <div class="wishlist__room-right-top">
+                    <div>
+                      <div class="wishlist__room-type">Jungan-dong, Jung-gu, Busan의 아파트 전체</div>
+                      <div class="wishlist__room-name">✨토리하우스✨ 넷플릭스,고층뷰,도시뷰,청결</div>
+                    </div>
+                    <button>
+                      <img th:src="@{/images/wishlist/heart.JPG}"/>
+                    </button>
+                  </div>
+                  <hr class="wishlist__room-hr">
+                  <div class="wishlist__room-right-middle">최대 인원 []명 . 침실 []개 . 침대 []개 . 욕실 []개</div>
+                  <div class="wishlist__room-right-bottom">
+                    <div class="wishlist__room-right-bottom-left">
+                      <div>
+                        <img th:src="@{/images/wishlist/star.JPG}"/>
+                      </div>
+                      <div class="wishlist__room-score">5.0</div>
+                      <div class="wishlist__room-review-count">(후기 []개)</div>
+                    </div>
+                    <div class="wishlist__room-right-bottom-right">
+                      <div class="wishlist__room-price">\50,000</div>
+                      <div class="wishlist__room-day">/1박</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr class="wishlist__hr">
+            </a>
+          </div>
+
+      </div>
+    </div>
+    <div class="wishlist__main-right">
+      <div id="map"></div>
+    </div>
+  </div>
 </th:block>
 </html>

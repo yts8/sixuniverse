@@ -20,6 +20,7 @@
      password,
      username,
      birthdate,
+     profile_img,
      mobile,
      social,
      role)
@@ -27,6 +28,7 @@
             #{password},
             #{username},
             #{birthdate},
+            #{profileImg},
             #{mobile},
             #{social},
             #{role})
