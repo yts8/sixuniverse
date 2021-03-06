@@ -5,56 +5,55 @@
       layout:decorator="layout/default">
 
 <th:block layout:fragment="css">
-  <link rel="stylesheet" th:href="@{/css/review/guest-review-by.css}" />
+  <link rel="stylesheet" th:href="@{/css/review/guest-review-by.css}"/>
 </th:block>
-<th:block layout:fragment="js"></th:block>
 
 <th:block layout:fragment="content">
-<div class="g-review-by__main">
-  <div>
-    <section>
-      <div class="g-review-by__main-top">
-        <nav>
+  <div class="g-review-by__main">
+    <div>
+      <section>
+        <div class="g-review-by__main-top">
+          <nav>
           <span>
             <a href="#">프로필</a>
           </span>
-          <span> > </span>
-          <span> 후기 </span>
-        </nav>
-        <div class="g-review-by__title">내가 작성한 후기</div>
+            <span> > </span>
+            <span> 후기 </span>
+          </nav>
+          <div class="g-review-by__title">내가 작성한 후기</div>
+        </div>
+      </section>
+    </div>
+    <div class="g-review-by__tabs">
+      <a th:href="@{/review/guest-about}">나에 대한 후기</a>
+      <a href="#">내가 작성한 후기</a>
+    </div>
+    <div class="g-review-by__container">
+      <div class="g-review-by__panel">
+        <div class="g-review-by__panel-header">
+          <div>작성해야 할 후기</div>
+        </div>
+        <div class="g-review-by__panel-body">
+          <div>현재 작성할 후기가 없습니다. 여행을 한 번 다녀올 때가 된 것 같네요!</div>
+        </div>
       </div>
-    </section>
-  </div>
-  <div class="g-review-by__tabs">
-    <a th:href="@{/review/about}">나에 대한 후기</a>
-    <a href="#">내가 작성한 후기</a>
-  </div>
-  <div class="g-review-by__container">
-    <div class="g-review-by__panel">
-      <div class="g-review-by__panel-header">
-        <p>작성해야 할 후기</p>
+      <div class="g-review-by__panel">
+        <div class="g-review-by__panel-header">
+          <div>내가 작성한 후기</div>
+        </div>
+        <div class="g-review-by__panel-body">
+          <div>아직 후기를 남기지 않으셨습니다.</div>
+        </div>
       </div>
-      <div class="g-review-by__panel-body">
-        <p>현재 작성할 후기가 없습니다. 여행을 한 번 다녀올 때가 된 것 같네요!</p>
+      <div class="g-review-by__panel">
+        <div class="g-review-by__panel-header">
+          <div>만료된 후기</div>
+        </div>
+        <div class="g-review-by__panel-body-rate">
+          <div>공개 후기를 작성할 수 있는 기한이 지났습니다. 에어비앤비와 공유하고 싶은 사항이 있으신가요? 언제든 비공개 후기를 보내주시면 검토하겠습니다.</div>
+        </div>
       </div>
     </div>
-    <div class="g-review-by__panel">
-      <div class="g-review-by__panel-header">
-        <p>내가 작성한 후기</p>
-      </div>
-      <div class="g-review-by__panel-body">
-        <p>아직 후기를 남기지 않으셨습니다.</p>
-      </div>
-    </div>
-    <div class="g-review-by__panel">
-      <div class="g-review-by__panel-header">
-        <p>만료된 후기</p>
-      </div>
-      <div class="g-review-by__panel-body">
-        <p>공개 후기를 작성할 수 있는 기한이 지났습니다. 에어비앤비와 공유하고 싶은 사항이 있으신가요? 언제든 비공개 후기를 보내주시면 검토하겠습니다.</p>
-      </div>
-    </div>
   </div>
-</div>
 </th:block>
 </html>

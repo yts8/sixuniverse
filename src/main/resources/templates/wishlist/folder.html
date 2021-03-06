@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/wishlist/wishlist-folder.css}"/>
+</th:block>
+
+<th:block layout:fragment="content">
+  <div class="wishlist-folder__main">
+    <div>
+      <div class="wishlist-folder__title">
+        <div>저장 목록</div>
+        <button type="button" class="wishlist-folder__make">목록 만들기</button>
+      </div>
+    </div>
+    <div class="wishlist-folder__room-all">
+      <!-- 여기서부터 반복 -->
+      <div class="wishlist-folder__list-box">
+        <a href="#">
+          <div class="wishlist-folder__room-top">
+            <div class="wishlist-folder__room-img-left">
+              <img class="wishlist-folder__room-img"
+                   th:src="@{/images/wishlist/room.jpg}">
+            </div>
+            <div class="wishlist-folder__room-img-right">
+              <div class="wishlist-folder__room-img-right-top">
+                <img class="wishlist-folder__room-img"
+                     th:src="@{/images/wishlist/room2.webp}">
+              </div>
+              <div class="wishlist-folder__room-img-right-bottom">
+                <img class="wishlist-folder__room-img"
+                     th:src="@{/images/wishlist/room3.webp}">
+              </div>
+            </div>
+          </div>
+          <div class="wishlist-folder__room-text">
+            <div class="wishlist-folder__location">부산</div>
+            <div class="wishlist-folder__room-count">숙소 []개</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="wishlist-folder__list-box">
+        <a href="#">
+          <div class="wishlist-folder__room-top">
+            <div class="wishlist-folder__room-img-left">
+              <img class="wishlist-folder__room-img"
+                   th:src="@{/images/wishlist/room.jpg}">
+            </div>
+            <div class="wishlist-folder__room-img-right">
+              <div class="wishlist-folder__room-img-right-top">
+                <img class="wishlist-folder__room-img"
+                     th:src="@{/images/wishlist/room2.webp}">
+              </div>
+              <div class="wishlist-folder__room-img-right-bottom">
+                <img class="wishlist-folder__room-img"
+                     th:src="@{/images/wishlist/room3.webp}">
+              </div>
+            </div>
+          </div>
+          <div class="wishlist-folder__room-text">
+            <div class="wishlist-folder__location">부산</div>
+            <div class="wishlist-folder__room-count">숙소 []개</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="wishlist-folder__list-box">
+        <a href="#">
+          <div class="wishlist-folder__room-top">
+            <div class="wishlist-folder__room-img-left">
+              <img class="wishlist-folder__room-img"
+                   th:src="@{/images/wishlist/room.jpg}">
+            </div>
+            <div class="wishlist-folder__room-img-right">
+              <div class="wishlist-folder__room-img-right-top">
+                <img class="wishlist-folder__room-img"
+                     th:src="@{/images/wishlist/room2.webp}">
+              </div>
+              <div class="wishlist-folder__room-img-right-bottom">
+                <img class="wishlist-folder__room-img"
+                     th:src="@{/images/wishlist/room3.webp}">
+              </div>
+            </div>
+          </div>
+          <div class="wishlist-folder__room-text">
+            <div class="wishlist-folder__location">부산</div>
+            <div class="wishlist-folder__room-count">숙소 []개</div>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</th:block>
+</html>

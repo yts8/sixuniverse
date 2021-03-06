@@ -1,5 +1,5 @@
 .g-review-about__main {
-  margin: 55px 320px;
+  margin: 35px 235px;
 }
 
 .g-review-about__main-top span {
@@ -8,22 +8,22 @@
 
 .g-review-about__title {
   color: #484848;
-  font-size: 42px;
+  font-size: 31px;
   font-weight: bold;
-  margin-top: 20px;
-  margin-bottom: 85px;
+  margin-top: 5px;
+  margin-bottom: 50px;
 }
 
 .g-review-about__tabs {
-  max-width: 1020px;
+  max-width: 765px;
   border-bottom: 1px solid #dce0e0;
   word-spacing: -2px;
-  margin-bottom: 30px;
-  padding-bottom: 20px;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
 }
 
 .g-review-about__container {
-  max-width: 1020px;
+  max-width: 765px;
 }
 
 .g-review-about__panel {
@@ -32,22 +32,22 @@
 
 .g-review-about__panel-header {
   color: #484848;
-  font-size: 20px;
-  padding: 20px 25px;
+  font-size: 16px;
+  padding: 10px 20px;
   border-bottom: 1px solid #dce0e0;
   background-color: #edefed;
 }
 
 .g-review-about__panel-body {
-  font-size: 20px;
+  font-size: 16px;
   color: #484848;
-  padding: 25px;
-  line-height: 30px;
+  padding: 17px 20px;
+  line-height: 27px;
 }
 
 .g-review-about__panel-body-container {
   display: flex;
-  padding-top: 30px;
+  padding-top: 25px;
 }
 
 .g-review-about__panel-body-left {
@@ -55,28 +55,34 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-right: 25px;
 }
 
 .g-review-about__panel-body-right {
-  flex: 2;
+  flex: 10;
+  display: flex;
+  flex-direction: column;
 }
 
 .g-review-about__panel-body-p-comment {
-  font-size: 18px;
+  flex: 1;
+  font-size: 14px;
 }
 
 .g-review-about__panel-body-p-date {
-  font-size: 18px;
+  flex: 1;
+  font-size: 14px;
   word-spacing: -3px;
-  font-weight: lighter;
-  color: #484848;
+  color: #707070;
+  margin-top: 30px;
 }
 
 .g-review-about__profile-box {
-  width: 90px;
-  height: 90px;
+  width: 65px;
+  height: 65px;
   border-radius: 70%;
   overflow: hidden;
+  margin-bottom: 5px;
 }
 
 .g-review-about__profile-img {
@@ -89,48 +95,51 @@
   text-decoration: none;
   color: #484848;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 14px;
 }
 
 .g-review-about__main-top a:hover {
   text-decoration: underline;
   color: #484848;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 14px;
 }
 
 .g-review-about__tabs a {
   display: inline-block;
   text-decoration: none;
-  color: #969696;
-  font-size: 19px;
-  margin-right: 20px;
+  color: #868686;
+  font-size: 14px;
+  margin-right: 15px;
+  cursor: pointer;
 }
 
 .g-review-about__tabs a:active {
   text-decoration: none;
   color: #484848;
-  font-size: 19px;
-  margin-right: 20px;
+  font-size: 14px;
+  margin-right: 15px;
 }
 
 .g-review-about__panel-body-left a {
   text-decoration: none;
+  text-align: center;
   font-weight: lighter;
+  line-height: 20px;
   color: #484848;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .g-review-about__main-top nav {
   text-decoration: none;
-  color: #484848;
+  color: #707070;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 14px;
 }
 
 .g-review-about__hr {
   height: 1px;
   background-color: #dbdbdb;
   border: none;
-  margin: 20px 0;
+  margin: 15px 0;
 }

@@ -8,14 +8,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/review")
 public class ReviewController {
 
-  @GetMapping("/about")
+  @GetMapping("/guest-about")
   public String about() {
     return "review/guest-review-about";
   }
 
-  @GetMapping("/by")
+  @GetMapping("/guest-by")
   public String by() {
     return "review/guest-review-by";
   }
+
+  @GetMapping("/host")
+  public String host() { return "review/host-review"; }
+
+  @GetMapping("/form")
+  public String reviewForm() {
+    return "review/review-form";
+  }
+
+  @GetMapping("/reservation")
+  public String reviewReservation() {
+    return "review/reservation-review";
+  }
+
 
 }
