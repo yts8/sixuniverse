@@ -3,6 +3,7 @@ package com.yts8.sixuniverse.member.service;
 import com.yts8.sixuniverse.member.dto.MemberDto;
 import com.yts8.sixuniverse.member.repository.MemberMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,9 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberServiceImpl implements MemberService {
 
   private final MemberMapper memberMapper;
+  private final PasswordEncoder passwordEncoder;
 
   @Override
   public void save(MemberDto memberDto) {
+    memberDto.setPassword(passwordEncoder.encode(memberDto.getPassword()));
     memberMapper.save(memberDto);
   }
 

@@ -19,30 +19,31 @@ public class MemberApiController {
 
   private final MemberService memberService;
   private final PasswordEncoder passwordEncoder;
+  private final HttpSession httpSession;
 
   @PostMapping("/update/username")
-  public void updateUsername(HttpSession httpSession, @RequestBody MemberDto memberDto) {
+  public void updateUsername(@RequestBody MemberDto memberDto) {
     MemberDto member = (MemberDto) httpSession.getAttribute("member");
     member.setUsername(memberDto.getUsername());
     memberService.updateUsername(member);
   }
 
   @PostMapping("/update/birthdate")
-  public void updateBirthdate(HttpSession httpSession, @RequestBody MemberDto memberDto) {
+  public void updateBirthdate(@RequestBody MemberDto memberDto) {
     MemberDto member = (MemberDto) httpSession.getAttribute("member");
     member.setBirthdate(memberDto.getBirthdate());
     memberService.updateBirthdate(member);
   }
 
   @PostMapping("/update/mobile")
-  public void updateMobile(HttpSession httpSession, @RequestBody MemberDto memberDto) {
+  public void updateMobile(@RequestBody MemberDto memberDto) {
     MemberDto member = (MemberDto) httpSession.getAttribute("member");
     member.setMobile(memberDto.getMobile());
     memberService.updateMobile(member);
   }
 
   @PostMapping("/update/address")
-  public void updateAddress(HttpSession httpSession, @RequestBody MemberDto memberDto) {
+  public void updateAddress(@RequestBody MemberDto memberDto) {
     MemberDto member = (MemberDto) httpSession.getAttribute("member");
     member.setZipcode(memberDto.getZipcode());
     member.setAddress(memberDto.getAddress());
@@ -51,16 +52,15 @@ public class MemberApiController {
   }
 
   @PostMapping("/update/bio")
-  public void updateBio(HttpSession httpSession, @RequestBody MemberDto memberDto) {
+  public void updateBio(@RequestBody MemberDto memberDto) {
     MemberDto member = (MemberDto) httpSession.getAttribute("member");
     member.setBio(memberDto.getBio());
     memberService.updateBio(member);
   }
 
   @PostMapping("/update/password")
-  public boolean updatePassword(HttpSession httpSession, @RequestBody MemberPasswordDto memberPasswordDto) {
+  public boolean updatePassword(@RequestBody MemberPasswordDto memberPasswordDto) {
     MemberDto member = (MemberDto) httpSession.getAttribute("member");
-    System.out.println("memberPasswordDto = " + memberPasswordDto);
     if (!passwordEncoder.matches(memberPasswordDto.getOldPassword(), member.getPassword())) {
       return false;
     }

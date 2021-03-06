@@ -4,7 +4,6 @@ import com.yts8.sixuniverse.member.dto.MemberDto;
 import com.yts8.sixuniverse.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginController {
 
   private final MemberService memberService;
-  private final PasswordEncoder passwordEncoder;
 
   @GetMapping("/login")
   public String login(Model model, Authentication authentication) {
@@ -51,9 +49,8 @@ public class LoginController {
 
   @PostMapping("/join")
   public String join(MemberDto memberDto) {
-    memberDto.setRole("GUEST");
+    memberDto.setRole("ROLE_GUEST");
     memberDto.setSocial("LOCAL");
-    memberDto.setPassword(passwordEncoder.encode(memberDto.getPassword()));
     memberService.save(memberDto);
     return "redirect:/login";
   }
