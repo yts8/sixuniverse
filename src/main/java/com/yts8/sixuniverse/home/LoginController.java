@@ -49,8 +49,8 @@ public class LoginController {
 
   @PostMapping("/join")
   public String join(MemberDto memberDto) {
-    memberDto.setRole("ROLE_GUEST");
-    memberDto.setSocial("LOCAL");
+    memberDto.setRole("HOST");
+    memberDto.setSocial("local");
     memberService.save(memberDto);
     return "redirect:/login";
   }

@@ -52,7 +52,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     httpSession.setAttribute("member", member);
 
     return new DefaultOAuth2User(
-        Collections.singleton(new SimpleGrantedAuthority(member.getRole())),
+        Collections.singleton(new SimpleGrantedAuthority("ROLE_" + member.getRole())),
         oAuth2User.getAttributes(),
         userRequest.getClientRegistration()
             .getProviderDetails()

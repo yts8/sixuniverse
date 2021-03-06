@@ -13,8 +13,8 @@ public class OAuthMember {
     authMember.setPassword(UUID.randomUUID().toString() + UUID.randomUUID().toString());
     authMember.setUsername((String) attributes.get("name"));
     authMember.setProfileImg((String) attributes.get("picture"));
-    authMember.setSocial(registrationId.toUpperCase());
-    authMember.setRole("ROLE_GUEST");
+    authMember.setSocial(registrationId);
+    authMember.setRole("HOST");
     return authMember;
   }
 
