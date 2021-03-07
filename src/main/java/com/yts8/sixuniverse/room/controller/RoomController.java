@@ -18,7 +18,6 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 @RequestMapping("/room")
 public class RoomController {
-
   private final RoomService roomService;
   private final RoomImageService roomImageService;
 
