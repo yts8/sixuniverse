@@ -9,6 +9,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 @RequestMapping("/host/room")
 public class RoomController {
-
   private final RoomService roomService;
 }

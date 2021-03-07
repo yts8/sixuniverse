@@ -4,15 +4,21 @@
 <mapper namespace="com.yts8.sixuniverse.chat.repository.ChatMapper">
 
   <!--채팅메세지 insert-->
-  <insert id="insertChat" parameterType="ChatDto" useGeneratedKeys="true" keyProperty="chatId">
-    insert into chat (member_id,join_num,content)
-    values(#{memberId},#{joinNum},#{content})
+  <insert id="addMessage" parameterType="ChatDto" useGeneratedKeys="true" keyProperty="chatId">
+    insert into chat (member_id, join_num, content)
+    values (#{memberId}, #{joinNum}, #{content})
   </insert>
-  
+
   <insert id="createChatroomJoin" parameterType="ChatroomJoinDto" useGeneratedKeys="true" keyProperty="joinNum">
-  insert into chatroom_join (member_id,name,chat_ref)
-  values(#{memberId},#{name},#{chatRef})
-</insert>
+    insert into chatroom_join (member_id, name, chat_ref)
+    values (#{memberId}, #{name}, #{chatRef})
+  </insert>
+
+  <!--채팅방목록 출력용 최근 항목만 받아오기(전체최근항목으로변경하기)-->
+  <select id="findMessage" resultType="chatDto">
+    select * from chat where member_id=#{memberId} order by create_date desc limit 1
+
+  </select>
 
 
-    </mapper>
+</mapper>

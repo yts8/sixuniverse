@@ -1,20 +1,34 @@
 package com.yts8.sixuniverse.chat.controller;
 
+import com.yts8.sixuniverse.chat.service.ChatService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/chat")
+@RequestMapping("")
 @RequiredArgsConstructor
 
 public class ChatController {
-/*  private final ChatService chatService;*/
 
-    @GetMapping("")
-    public String chat(){
-/*        *//*메세지 출력(타임리프테스트)*//*
+  private final ChatService chatService;
+
+/*  @GetMapping("")
+  public String chat(Model model, HttpSession httpSession) {
+
+    *//*memberId *//*
+    MemberDto member = (MemberDto) httpSession.getAttribute("member");
+    ChatDto chatDto =chatService.findMessage(member.getMemberId());
+
+    model.addAttribute("chatDto", chatDto);*/
+
+
+
+
+
+    /*        *//*메세지 출력(타임리프테스트)*//*
         ChatDto chat1 = new ChatDto(1,2,1,"타임리프내용",LocalDateTime.now());
         ChatDto chat2 = new ChatDto(2,3,2,"타임리프내용2",LocalDateTime.now());
 
@@ -33,32 +47,31 @@ public class ChatController {
 
         model.addAttribute("chatroomJoinDtoList",chatroomJoinDtoList);*/
 
-        return "chat/index";
-    }
+/*    return "chat/index";
+  }*/
+
+
 /*    @GetMapping("/test")
         public String chatTest(HttpServletRequest request, Model model){
-
         String test = request.getParameter("test");
-
         System.out.println(test);
-
         return "chat/index";
     }*/
 /*
 
   @PostMapping("/message")
   public String chat(ChatDto message){
-
     chatService.insertChat(message);
-
     return "chat/index";
   }
 */
 
-
-
-
-
+  @GetMapping("/chatTest")
+  public ModelAndView chat() {
+    ModelAndView mv = new ModelAndView();
+    mv.setViewName("chat/index");
+    return mv;
+  }
 
 
 }

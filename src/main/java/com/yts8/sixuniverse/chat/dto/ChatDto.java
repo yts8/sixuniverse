@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class ChatDto {
   private int chatId;
-  private int memberId;
+  private Long memberId;
   private int joinNum;
   private String content;
   private LocalDateTime createDate;
