@@ -13,6 +13,8 @@
   const newPasswordInputEl = document.querySelector("#new-password");
   const confirmPasswordInputEl = document.querySelector("#confirm-password");
 
+  // CSRF
+  const csrf = document.querySelector("#csrf").value;
 
   // Color
   const failBackgroundColor = "var(--fail-background-color)";
@@ -71,8 +73,6 @@
 
   // AJAX
   const sendAjax = async (id, data) => {
-
-    const csrf = document.querySelector("#csrf").value;
 
     return await fetch(`http://localhost:8080/api/member/update/${id}`, {
       method: "post",

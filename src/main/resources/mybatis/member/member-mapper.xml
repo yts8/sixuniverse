@@ -72,4 +72,10 @@
     where member_id = #{memberId}
   </update>
 
+  <update id="updateProfileImg" parameterType="MemberDto">
+    update member
+    set profile_img=#{profileImg}
+    where member_id = #{memberId}
+  </update>
+
 </mapper>
