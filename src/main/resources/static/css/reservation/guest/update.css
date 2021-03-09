@@ -1,85 +1,85 @@
 .guest-reservation-update__box {
-    display: flex;
-    width: 70%;
-    margin: 50px auto;
+  display: flex;
+  width: 70%;
+  margin: 50px auto;
 }
 
 .guest-reservation-update__box2 {
-    display: flex;
-    width: 100%;
-    margin: 0 auto;
-    justify-content: center;
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  justify-content: center;
 }
 
 .guest-reservation-update__title {
-    margin: 30px 0 30px 0;
-    font-size: 30px;
-    font-weight: bold;
+  margin: 30px 0 30px 0;
+  font-size: 30px;
+  font-weight: bold;
 }
 
 .guest-reservation-update__small-box {
-    margin: 40px 0 40px 0;
+  margin: 40px 0 40px 0;
 
 }
 
 .guest-reservation-update__sub-title {
-    font-weight: bold;
-    font-size: 16px;
+  font-weight: bold;
+  font-size: 16px;
 }
 
 .guest-reservation-update__reservation-date, .guest-reservation-update__guest {
-    display: flex;
-    margin-top: 20px;
-    padding: 20px;
-    border: 1px solid #c3c3c3;
+  display: flex;
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #c3c3c3;
 }
 
 .guest-reservation-update__reservation-date > .fa-arrow-right {
-    margin: 0 20px 0 20px;
+  margin: 0 20px 0 20px;
 }
 
 .guest-reservation-update__reservation-date > .guest-reservation-update__i-calendar {
-    margin-left: 80px;
+  margin-left: 80px;
 }
 
 
 .guest-reservation-update__guest > .fa-angle-down {
-    margin-left: 220px;
+  margin-left: 220px;
 }
 
 .guest-reservation-update__next-btn {
-    text-align: center;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #24292e;
-    color: white;
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #24292e;
+  color: white;
 }
 
 .guest-reservation-update__reservation-box {
-    width: 300px;
-    height: 90%;
-    border: 1px solid #c3c3c3;
-    padding: 20px;
-    margin-left: 100px;
-    margin-top: 30px;
+  width: 300px;
+  height: 90%;
+  border: 1px solid #c3c3c3;
+  padding: 20px;
+  margin-left: 100px;
+  margin-top: 30px;
 }
 
 .guest-reservation-update__room-info {
-    display: flex;
+  display: flex;
 }
 
 .guest-reservation-update__room-address {
-    font-weight: bold;
-    margin-right: 10px;
+  font-weight: bold;
+  margin-right: 10px;
 }
 
 .guest-reservation-update__info-align {
-    display: flex;
-    border-top: 1px solid #c3c3c3;
-    padding-top: 10px;
-    padding-bottom: 10px;
+  display: flex;
+  border-top: 1px solid #c3c3c3;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .guest-reservation-update__content {
-    margin-left: 10px;
+  margin-left: 10px;
 }

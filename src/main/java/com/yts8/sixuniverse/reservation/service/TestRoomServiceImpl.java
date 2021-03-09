@@ -13,12 +13,9 @@ import java.util.List;
 public class TestRoomServiceImpl implements TestRoomService {
 
   private final TestRoomMapper testRoomMapper;
-  private final SqlSession sqlSession;
-
-  private final static String namespace="com.yts8.sixuniverse.reservation.repository.TestRoomMapper";
 
   @Override
   public List<RoomDto> roomList() {
-    return sqlSession.selectList(namespace+".selectRoom");
+    return testRoomMapper.selectRoom();
   }
 }

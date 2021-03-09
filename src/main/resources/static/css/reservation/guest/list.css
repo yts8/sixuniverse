@@ -4,10 +4,10 @@
 }
 
 .guest-reservation__content {
-    max-width: 1600px;
-    padding-left: 80px;
-    padding-right: 80px;
-    margin: 0 auto;
+  max-width: 1600px;
+  padding-left: 80px;
+  padding-right: 80px;
+  margin: 0 auto;
 }
 
 .guest-reservation__title {
