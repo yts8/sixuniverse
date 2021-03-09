@@ -28,9 +28,8 @@
     <button class="guest-reservation__cancel">취소된 예약</button>
   </nav>
 
-    <div class="guest-reservation__room-info">
-      <form th:action="@{/reservation/guest/simple-info}" method="get" th:each="test : ${testList}">
-        <input type="hidden" name="status" th:value="${test}">
+    <div class="guest-reservation__room-info" >
+      <a th:href="@{|/reservation/guest/simple-info/${reservation.reservationId}|}" th:each="reservation, i : ${reservationList}" th:if="${reservationList} != null">
         <table class="guest-reservation__room-info-table">
           <tr><td>
             <div class="guest-reservation__room-img-box">
@@ -39,21 +38,24 @@
           </td></tr>
           <tr>
             <td class="guest-reservation__room-simple-info">
-              <div class="guest-reservation__reservation-date">예약날짜</div>
-              <div class="guest-reservation__room-simple-address">간단주소</div>
+              <div class="guest-reservation__reservation-date" th:text="${reservation.checkIn } + ' ~ ' + ${reservation.checkOut } ">예약날짜</div>
+              <div class="guest-reservation__room-simple-address" th:text="${roomList.get(i.index).address}">간단주소</div>
             </td>
           </tr>
           <tr><td class="guest-reservation__room-simple-info-room-name">
-            <div class="guest-reservation__room-name">숙소이름</div>
+            <div class="guest-reservation__room-name"  th:text="${roomList.get(i.index).title}">숙소이름</div>
             <i class="fas fa-angle-right"></i>
           </td></tr>
-          <tr><td th:text="${test}"></td></tr>
           <tr><td class="guest-reservation__detail">
             <input type="submit" value="더보기" class="guest-reservation__detail-btn">
           </td></tr>
         </table>
-      </form>
+      </a>
     </div>
+
+    <div class="guest-reservation__room-info" th:unless="${reservationList} != null"> 없슈ㅠ </div>
+
+
   </div>
 
 </div>

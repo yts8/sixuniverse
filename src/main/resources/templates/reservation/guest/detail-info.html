@@ -30,7 +30,7 @@
       <div class="guest-reservation-detail-info__detail-room-box">
         <div class="guest-reservation-detail-info__detail-room">
           <div class="guest-reservation-detail-info__detail-room-title">
-            <a href="./guest-reservation-simple-info?status=complete">
+            <a th:href="@{|/reservation/guest/simple-info/${reservation.reservationId}|}">
               <div class="guest-reservation-detail-info__close">
                 <i class="fas fa-times"></i>
               </div>
@@ -43,14 +43,14 @@
 
               <div class="guest-reservation-detail-info__detail-room-content">
                 <div class="guest-reservation-detail-info__detail-room-reservation-info">
-                  <div class="guest-reservation-detail-info__reservation-date">예약날짜</div>
-                  <div class="guest-reservation-detail-info__room-owner">호스트 님의 숙소</div>
+                  <div class="guest-reservation-detail-info__reservation-date" th:text="${reservation.checkIn} + ' ~ ' + ${reservation.checkOut}">예약날짜</div>
+                  <div class="guest-reservation-detail-info__room-owner"><span th:text="${member.getUsername()}"></span> 님의 숙소</div>
                 </div>
 
                 <div class="guest-reservation-detail-info__detail-room-info">
                   <div class="guest-reservation-detail-info__room-img"><img th:src="@{/images/reservation/sample.jpg}"></div>
                   <div class="guest-reservation-detail-info__info-align">
-                    <div class="guest-reservation-detail-info__room-name">숙소이름</div>
+                    <div class="guest-reservation-detail-info__room-name" th:text="${room.title}">숙소이름</div>
                     <div class="guest-reservation-detail-info__margin">
                       <i class="fas fa-comment-alt"></i><span>호스트에게 메시지 보내기</span><i class="fas fa-chevron-right"></i></div>
                     <div class="guest-reservation-detail-info__margin">
@@ -70,13 +70,13 @@
                   <div class="guest-reservation-detail-info__detail-room-date">
                     <div class="guest-reservation-detail-info__check-in-out guest-reservation-detail-info__Y-line">
                       <div class="guest-reservation-detail-info__check-title">체크인</div>
-                      <div class="guest-reservation-detail-info__check-reservation-date">예약날짜</div>
-                      <div class="guest-reservation-detail-info__check-time">체크인시간</div>
+                      <div class="guest-reservation-detail-info__check-reservation-date" th:text="${reservation.checkIn}">예약날짜</div>
+                      <div class="guest-reservation-detail-info__check-time" th:text="${room.checkInTime}">체크인시간</div>
                     </div>
                     <div class="guest-reservation-detail-info__check-in-out">
                       <div class="guest-reservation-detail-info__check-title">체크아웃</div>
-                      <div class="guest-reservation-detail-info__check-reservation-date">예약날짜</div>
-                      <div class="guest-reservation-detail-info__check-time">체크인시간</div>
+                      <div class="guest-reservation-detail-info__check-reservation-date" th:text="${reservation.checkOut}">예약날짜</div>
+                      <div class="guest-reservation-detail-info__check-time" th:text="${room.checkOutTime}">체크아웃시간</div>
                     </div>
                   </div>
 
@@ -84,8 +84,8 @@
                     <div class="guest-reservation-detail-info__sub-title1">간략정보</div>
                     <div class="guest-reservation-detail-info__basic-info">
                       <div class="guest-reservation-detail-info__basic-info-content">
-                        <div>호스트 : 이름 님</div>
-                        <div>게스트 : 몇 명</div>
+                        <div>호스트 : <span th:text="${member.username}"></span> 님</div>
+                        <div>게스트 : <span th:text="${reservation.adult} + ${reservation.kid} + ${reservation.infant}"></span> 명</div>
                         <div>금액</div>
                       </div>
                       <div class="guest-reservation-detail-info__basic-info-content">
@@ -100,23 +100,23 @@
                 <div class="guest-reservation-detail-info__reservation-detail-info">
                   <div class="guest-reservation-detail-info__guest-info">
                     <div class="guest-reservation-detail-info__sub-title2">게스트</div>
-                    <div>게스트 : 몇 명</div>
+                    <div>게스트 : <span th:text="${reservation.adult} + ${reservation.kid} + ${reservation.infant}"></span> 명</div>
                   </div>
                   <div class="guest-reservation-detail-info__reservation-detail-info-number">
                     <div class="guest-reservation-detail-info__sub-title2">예약번호</div>
-                    <div>111111</div>
+                    <div th:text="${reservation.reservationId}">111111</div>
                   </div>
                 </div>
 
                 <div class="guest-reservation-detail-info__room-address-info">
                   <div class="guest-reservation-detail-info__sub-title2">주소</div>
-                  <div>숙소 주소</div>
+                  <div th:text="${room.address} + ' ' + ${room.subAddress}">숙소 주소</div>
                 </div>
 
                 <div class="guest-reservation-detail-info__host-info">
                   <div class="guest-reservation-detail-info__host-info-content">
                     <div class="guest-reservation-detail-info__host-content">
-                      <div class="guest-reservation-detail-info__sub-title2">호스트 누구님</div>
+                      <div class="guest-reservation-detail-info__sub-title2">호스트 <span th:text="${member.username}"></span> </div>
                       <div class="guest-reservation-detail-info__host-profile">프로필 보기</div>
                     </div>
                     <div class="guest-reservation-detail-info__host-content">
