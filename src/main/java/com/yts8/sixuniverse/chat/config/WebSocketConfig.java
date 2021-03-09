@@ -8,15 +8,16 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
+
 @Configuration
 @EnableWebSocket
-public class WebSocketConfig implements WebSocketConfigurer{ // 구현체
+public class WebSocketConfig implements WebSocketConfigurer {
 
   @Autowired
   SocketHandler socketHandler;
 
   @Override
   public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-    registry.addHandler(socketHandler, "/chating/{roomNumber}");
+    registry.addHandler(socketHandler, "/chating/{chatroomId}");
   }
 }

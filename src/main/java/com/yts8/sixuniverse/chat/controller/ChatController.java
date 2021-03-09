@@ -1,77 +1,32 @@
 package com.yts8.sixuniverse.chat.controller;
 
-import com.yts8.sixuniverse.chat.service.ChatService;
+import com.yts8.sixuniverse.chat.dto.ChatDto;
+import com.yts8.sixuniverse.member.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Controller
 @RequestMapping("")
 @RequiredArgsConstructor
 
 public class ChatController {
+  @GetMapping("/chatTest/{chatroomId}")
+  public String chat(HttpSession httpSession, Model model, @PathVariable int chatroomId, ChatDto chatDto) {
 
-  private final ChatService chatService;
-
-/*  @GetMapping("")
-  public String chat(Model model, HttpSession httpSession) {
-
-    *//*memberId *//*
     MemberDto member = (MemberDto) httpSession.getAttribute("member");
-    ChatDto chatDto =chatService.findMessage(member.getMemberId());
-
-    model.addAttribute("chatDto", chatDto);*/
-
-
-
-
-
-    /*        *//*메세지 출력(타임리프테스트)*//*
-        ChatDto chat1 = new ChatDto(1,2,1,"타임리프내용",LocalDateTime.now());
-        ChatDto chat2 = new ChatDto(2,3,2,"타임리프내용2",LocalDateTime.now());
-
-
-        // 생성된 데이터를 List에 담는다.
-        List<ChatDto> chat = new ArrayList<>();
-        chat.add(chat1);
-        chat.add(chat2);
-        model.addAttribute("chatRoomList",chat);
-
-        List<ChatroomJoinDto> chatroomJoinDtoList = new ArrayList<>();
-       ChatroomJoinDto cRoom = new ChatroomJoinDto(1,2,"채팅방 이름(기본설정 상대방이름)-타임리프",1);
-       ChatroomJoinDto cRoom2 = new ChatroomJoinDto(2,3,"채팅방 이름(기본설정 상대방이름)-타임리프",2);
-       chatroomJoinDtoList.add(cRoom);
-       chatroomJoinDtoList.add(cRoom2);
-
-        model.addAttribute("chatroomJoinDtoList",chatroomJoinDtoList);*/
-
-/*    return "chat/index";
-  }*/
-
-
-/*    @GetMapping("/test")
-        public String chatTest(HttpServletRequest request, Model model){
-        String test = request.getParameter("test");
-        System.out.println(test);
-        return "chat/index";
-    }*/
-/*
-
-  @PostMapping("/message")
-  public String chat(ChatDto message){
-    chatService.insertChat(message);
+    String userName = member.getUsername();
+    String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("MM월 dd일 HH:MM"));
+    model.addAttribute("userName", userName);
+    model.addAttribute("chatroomId", chatroomId);
+    model.addAttribute("date",date);
     return "chat/index";
   }
-*/
-
-  @GetMapping("/chatTest")
-  public ModelAndView chat() {
-    ModelAndView mv = new ModelAndView();
-    mv.setViewName("chat/index");
-    return mv;
-  }
-
-
 }
