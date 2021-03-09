@@ -1,66 +1,62 @@
 .ui-datepicker-title {
-    background-color: white;
+  background-color: white;
 }
 
-.ui-state-default, .ui-widget-content .ui-state-default{
-    background-color: transparent !important;
-    border: none !important;
-    font-weight: bold !important;
-    text-align: center;
-    padding: 10px;
+.ui-state-default, .ui-widget-content .ui-state-default {
+  background-color: transparent !important;
+  border: none !important;
+  font-weight: bold !important;
+  text-align: center;
+  padding: 10px;
 }
 
 .ui-widget-header {
-    border: none !important;
-    background-color: transparent !important;
+  border: none !important;
+  background-color: transparent !important;
 }
 
 .ui-state-active, .ui-widget-content .ui-state-active,
-.ui-start, .ui-end{
-    /*background-color: black !important;*/
-    /*border-radius: 20px !important;*/
-    background-color: rgba(216,216,216,0.7);
-    border-radius: 20px;
+.ui-start, .ui-end {
+  background-color: rgba(216, 216, 216, 0.7) !important;
 }
 
 .ui-widget-content {
-    width: 100% !important;
-    border: none !important;
+  width: 100% !important;
+  border: none !important;
 }
 
 .ui-datepicker-multi .ui-datepicker-group {
-    border: none !important;
+  border: none !important;
 }
 
 .date-range-selected {
-    background-color: rgba(216,216,216,0.7);
-    border-radius: 20px;
+  background-color: rgba(216, 216, 216, 0.7);
 }
 
 
 .testblack {
-    background-color: black !important;
-    border-radius: 20px !important;
+  background-color: black !important;
+  border-radius: 20px !important;
 }
 
 .ui-datepicker-prev span.ui-icon,
 .ui-datepicker-next span.ui-icon {
-    background-image: url("../../images/reservation/right-arrow.png") !important;
-    background-size: contain !important;
-    background-position: center !important;
+  background-image: url("../../images/reservation/right-arrow.png") !important;
+  background-size: contain !important;
+  background-position: center !important;
 }
 
 .ui-datepicker-prev span.ui-icon {
-    transform: rotate(180deg) !important;
+  transform: rotate(180deg) !important;
 }
 
 .ui-datepicker-prev span.ui-icon:focus,
 .ui-datepicker-next span.ui-icon:focus {
-    outline: none !important;
+  outline: none !important;
 }
 
 .ui-state-hover {
-    background-color: #F6F6F6 !important;
-    border: none !important;
-    border-radius: 30px !important;
+  background-color: #F6F6F6 !important;
+  border: none !important;
+  border-radius: 30px !important;
 }

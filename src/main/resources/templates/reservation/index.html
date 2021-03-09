@@ -43,7 +43,9 @@
             <div class="reservation__small-box">
               <h4 class="reservation__sub-title2">날짜</h4>
               <div class="reservation__date">[2021.2.24-2021.2.25]</div>
-              <div>[<img th:src="@{/images/reservation/clock.png}" class="reservation__img"> 체크인: 오후2:00 이후]</div>
+              <div>[<img th:src="@{/images/reservation/clock.png}" class="reservation__img">
+                체크인: <span th:text="${room.getCheckInTime()}"></span> 이후]
+              </div>
             </div>
             <button id="update-date" class="reservation__update-btn">수정</button>
           </div>
@@ -69,8 +71,8 @@
 
 
               <div class="reservation__date-wrapper">
-                <div id="range-date" class="dates">
-                  <div></div>
+                <div  class="dates">
+                  <div id="range-date"></div>
                 </div>
               </div>
 
@@ -135,7 +137,8 @@
 
               </div>
 
-              <div>최대 <span th:text="${room.getMaxPeople()}" class="reservation__max-people"></span> 명. 유아는 숙박인원에 포함되지 않습니다.</div>
+              <div>최대 <span th:text="${room.getMaxPeople()}" class="reservation__max-people"></span> 명.
+                유아는 숙박인원에 포함되지 않습니다.</div>
 
               <div class="reservation__guest-update-btn">
           <span class="reservation__modal-cancel pop_bt">
@@ -254,8 +257,11 @@
               <img th:src="@{/images/reservation/sample.jpg}">
             </div>
             <div class="reservation__room-info2">
-              <div>주소</div>
-              <div>제목</div>
+              <div>
+                <span th:text="${room.getAddress()}"></span>
+                <span class="reservation__room-sub-address" th:text="${room.getSubAddress()}"></span>
+              </div>
+              <div th:text="${room.getTitle()}"></div>
               <div>침대 | 욕실</div>
               <div class="reservation__review-grade">
                 <div>
@@ -276,12 +282,12 @@
           <div class="reservation__price-info">
             <div class="reservation__table">
               <div class="reservation__price">1박당요금</div>
-              <span class="reservation__price2">￦40000</span>
+              <span class="reservation__price2" th:text="'￦ ' + ${room.price}"></span>
             </div>
 
             <div class="reservation__table">
-              <div class="reservation__price">수수료</div>
-              <span class="reservation__price2">￦1000</span>
+              <div class="reservation__price" >수수료</div>
+              <span class="reservation__price2" th:text="'￦ ' + ${room.price} * 0.1"></span>
             </div>
 
             <div class="reservation__table">
@@ -291,7 +297,7 @@
 
             <div class="reservation__table">
               <div class="reservation__total">총 합계</div>
-              <span class="reservation__total2">￦11000</span>
+              <span class="reservation__total2" th:text="'￦ ' + (${room.price} + ${room.price} * 0.1)"></span>
             </div>
 
 

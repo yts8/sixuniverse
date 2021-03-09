@@ -1,44 +1,44 @@
 .guest-reservation-cancel__box {
-    display: flex;
-    width: 70%;
-    margin: 50px auto;
+  display: flex;
+  width: 70%;
+  margin: 50px auto;
 }
 
 
 .guest-reservation-cancel__box2 {
-    width: 100%;
-    display: flex;
-    margin: 0 auto;
-    justify-content: center;
+  width: 100%;
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
 }
 
 .guest-reservation-cancel__content {
-    width: max-content;
+  width: max-content;
 
 }
 
 .guest-reservation-cancel__title {
-    margin: 30px 0 30px 0;
-    font-size: 30px;
-    font-weight: bold;
+  margin: 30px 0 30px 0;
+  font-size: 30px;
+  font-weight: bold;
 }
 
 .guest-reservation-cancel__small-box {
-    margin: 40px 0 40px 0;
+  margin: 40px 0 40px 0;
 
 }
 
 .guest-reservation-cancel__sub-title {
-    font-weight: bold;
-    font-size: 16px;
+  font-weight: bold;
+  font-size: 16px;
 }
 
 .guest-reservation-cancel__cancel-reason {
-    width: 100%;
-    height: 40px;
-    border-radius: 7px;
-    padding: 10px;
-    margin-top: 20px;
+  width: 100%;
+  height: 40px;
+  border-radius: 7px;
+  padding: 10px;
+  margin-top: 20px;
 }
 
 .guest-reservation-cancel__btn {
@@ -46,81 +46,81 @@
 }
 
 .guest-reservation-cancel__next-btn {
-    width: 40px;
-    height: 15px;
-    text-align: center;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #24292e;
-    color: white;
+  width: 40px;
+  height: 15px;
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #24292e;
+  color: white;
 }
 
 .guest-reservation-cancel__reservation-box {
-    width: 500px;
-    height: max-content;
-    border: 1px solid #c3c3c3;
-    padding: 20px;
-    margin-left: 100px;
-    margin-top: 30px;
+  width: 500px;
+  height: max-content;
+  border: 1px solid #c3c3c3;
+  padding: 20px;
+  margin-left: 100px;
+  margin-top: 30px;
 }
 
 .guest-reservation-cancel__room-info {
-    display: flex;
+  display: flex;
 
 }
 
 .guest-reservation-cancel__room-address {
-    font-weight: bold;
-    margin-right: 10px;
+  font-weight: bold;
+  margin-right: 10px;
 }
 
 .guest-reservation-cancel__info-align {
-    display: flex;
-    border-top: 1px solid #c3c3c3;
-    padding-top: 10px;
-    padding-bottom: 10px;
+  display: flex;
+  border-top: 1px solid #c3c3c3;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .guest-reservation-cancel__info-align2 {
-    display: flex;
+  display: flex;
 }
 
 .guest-reservation-cancel__content {
-    margin-left: 10px;
+  margin-left: 10px;
 
 }
 
 .guest-reservation-cancel__info-content {
-    width: 100%;
-    margin-left: 10px;
-    text-align: right;
+  width: 100%;
+  margin-left: 10px;
+  text-align: right;
 }
 
 .guest-reservation-cancel__info-content > span {
-    float: right;
+  float: right;
 
 }
 
 .guest-reservation-cancel__price-info {
-    border-top: 1px solid #c3c3c3;
+  border-top: 1px solid #c3c3c3;
 
 }
 
 .guest-reservation-cancel__price-info > div {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .guest-reservation-cancel__right {
-    margin-left: 20px;
+  margin-left: 20px;
 
 }
 
 .guest-reservation-cancel__price-title {
-    width: 100%;
- }
+  width: 100%;
+}
 
 .guest-reservation-cancel__total-refund {
-    width: 100%;
-    font-weight: bold;
+  width: 100%;
+  font-weight: bold;
 }
 
