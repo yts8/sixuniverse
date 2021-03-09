@@ -243,7 +243,7 @@
             <input type="hidden" name="adult" class="reservation__adult">
             <input type="hidden" name="kid" class="reservation__kid">
             <input type="hidden" name="infant" class="reservation__infant">
-            <input type="hidden" name="roomId" th:value="${room.getRoomId()}">
+            <input type="hidden" name="roomId" th:value="${room.roomId}">
             <button type="submit" class="reservation__btn">예약 및 결제하기</button>
           </form>
 
@@ -259,7 +259,7 @@
             <div class="reservation__room-info2">
               <div>
                 <span th:text="${room.getAddress()}"></span>
-                <span class="reservation__room-sub-address" th:text="${room.getSubAddress()}"></span>
+                <span class="reservation__room-sub-address" th:text="${room.subAddress}"></span>
               </div>
               <div th:text="${room.getTitle()}"></div>
               <div>침대 | 욕실</div>
@@ -287,7 +287,7 @@
 
             <div class="reservation__table">
               <div class="reservation__price" >수수료</div>
-              <span class="reservation__price2" th:text="'￦ ' + ${room.price} * 0.1"></span>
+              <span class="reservation__price2" th:text="'￦ ' + ${commission} "></span>
             </div>
 
             <div class="reservation__table">
@@ -297,7 +297,7 @@
 
             <div class="reservation__table">
               <div class="reservation__total">총 합계</div>
-              <span class="reservation__total2" th:text="'￦ ' + (${room.price} + ${room.price} * 0.1)"></span>
+              <span class="reservation__total2" th:text="'￦ ' + (${room.price} + ${commission})"></span>
             </div>
 
 

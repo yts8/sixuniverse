@@ -6,4 +6,17 @@
     insert into reservation
     values (null, #{roomId}, #{memberId}, #{status}, #{adult}, #{kid}, #{infant}, #{checkIn}, #{checkOut}, #{createDate}, #{cancelDate})
   </insert>
+
+  <select id="reservationList" resultType="ReservationDto">
+    select *
+    from reservation
+    where member_id = #{memberId} and status = #{status}
+  </select>
+
+  <select id="findById" resultType="ReservationDto">
+    select *
+    from reservation
+    where reservation_id = #{reservationId}
+  </select>
+
 </mapper>

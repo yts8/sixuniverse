@@ -1,9 +1,8 @@
 (() => {
   $(document).ready(function () {
 
-    var cur = -1, prv = -1;
+    let cur = -1, prv = -1;
     let cur2 = 0;
-
 
     $('#update-date').bind('click', function () {
       $('#date-modal').show();
@@ -22,9 +21,9 @@
 
       $(function () {
 
-        var minDate = new Date();
-        var d1, d2;
-        var disabledDays = ["2021-3-19", "2021-3-20", "2021-3-24", "2021-3-25", "2021-3-26"];
+        const minDate = new Date();
+        let d1, d2;
+        const disabledDays = ["2021-3-19", "2021-3-20", "2021-3-24", "2021-3-25", "2021-3-26"];
         let maxDate = null;
         let maxDate2 = 0;
 
@@ -41,7 +40,7 @@
 
           beforeShowDay: function disableAllTheseDays(date) {
 
-            var m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
+            const m = date.getMonth(), d = date.getDate(), y = date.getFullYear();
 
             for (i = 0; i < disabledDays.length; i++) {
               if ($.inArray(y + '-' + (m + 1) + '-' + d, disabledDays) != -1) {
@@ -102,16 +101,12 @@
 
         });
 
-
-
-
       });
-
 
     });
 
-    $('.reservation__delete-date').click(function () {
 
+    $('.reservation__delete-date').click(function () {
 
       $('#check-in').val('');
       $('#check-out').val('');
@@ -121,9 +116,6 @@
       $('.ui-datepicker td').removeClass('date-range-selected');
 
       cur = -1;
-
-
-
 
     });
 
