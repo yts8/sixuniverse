@@ -26,6 +26,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'

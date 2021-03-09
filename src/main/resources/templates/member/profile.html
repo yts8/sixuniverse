@@ -7,17 +7,22 @@
 <th:block layout:fragment="css">
   <link rel="stylesheet" th:href="@{/css/member/profile.css}"/>
 </th:block>
+<th:block layout:fragment="js">
+  <script defer th:src="@{/js/member/profile.js}"></script>
+</th:block>
+
 <th:block layout:fragment="content">
   <div class="member-profile__container">
     <section class="member-profile__side-container">
       <div class="member-profile__side-wrap">
         <div class="member-profile__img-wrap">
-          <img th:src="@{/images/member/test.jpg}" alt="프로필">
+          <img id="member-profile-img" th:src="${session.member.getProfileImg()}" alt="프로필">
           <div th:if="${memberDto.getMemberId().equals(session.member.getMemberId())}">
+            <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
             <label for="profile-img">
               사진 업데이트하기
             </label>
-            <input type="file" id="profile-img"/>
+            <input type="file" id="profile-img" accept="image/*"/>
           </div>
         </div>
         <div class="member-profile__auth-container">

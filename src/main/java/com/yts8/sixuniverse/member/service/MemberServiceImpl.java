@@ -52,6 +52,11 @@ public class MemberServiceImpl implements MemberService {
   }
 
   @Override
+  public void updateProfileImg(MemberDto memberDto) {
+    memberMapper.updateProfileImg(memberDto);
+  }
+
+  @Override
   public MemberDto findByEmail(String email) {
     return memberMapper.findByEmail(email);
   }

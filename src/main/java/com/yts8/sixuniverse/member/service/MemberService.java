@@ -21,4 +21,6 @@ public interface MemberService {
   void updateBio(MemberDto memberDto);
 
   void updatePassword(MemberDto memberDto);
+
+  void updateProfileImg(MemberDto memberDto);
 }

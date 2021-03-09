@@ -22,5 +22,7 @@ public interface MemberMapper {
 
   void updateBio(MemberDto memberDto);
 
-  void updatePassword(MemberDto member);
+  void updatePassword(MemberDto memberDto);
+
+  void updateProfileImg(MemberDto memberDto);
 }
