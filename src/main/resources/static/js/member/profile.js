@@ -1,7 +1,7 @@
 (() => {
 
   // Element
-  const profileImgEl = document.querySelector("#profile-img");
+  const updateProfileImgEl = document.querySelector("#update-profile-img");
   const memberProfileImgEl = document.querySelector("#member-profile-img");
 
   // CSRF
@@ -13,6 +13,8 @@
     const formData = new FormData();
     formData.append("profileImg", e.target.files[0]);
 
+
+    memberProfileImgEl.style.opacity = '0.5';
     const res = await fetch("http://localhost:8080/api/member/update/profile-img", {
       method: "post",
       headers: {
@@ -20,13 +22,14 @@
       },
       body: formData
     });
-    const fileUrl = await res.json()
-    memberProfileImgEl.setAttribute("src", fileUrl.profileImg);
+    const json = await res.json()
+    memberProfileImgEl.setAttribute("src", json.profileImg);
+    memberProfileImgEl.style.opacity = '1';
   }
 
   // Initialize
   const init = () => {
-    profileImgEl.addEventListener("change", handleProfileImgChange);
+    updateProfileImgEl.addEventListener("change", handleProfileImgChange);
   }
   init();
 

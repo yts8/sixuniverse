@@ -45,7 +45,7 @@
     let submitStatus = false;
 
     // Auth
-    let authStr;
+    let authCode;
 
     // Function
     const setSubmit = () => {
@@ -87,7 +87,7 @@
       joinAuthInputContainerEl.style.display = "none";
       joinAuthInputEl.value = "";
       joinAuthIconEl.style.color = disableColor;
-      authStr = null;
+      authCode = null;
       emailStatus = false;
       authStatus = false;
 
@@ -133,20 +133,21 @@
       setSubmit();
     }
 
-    const handleAuthBtnClick = () => {
+    const handleAuthBtnClick = async () => {
       if (emailStatus) {
         joinAuthBtnContainerEl.style.display = "none";
         joinAuthInputContainerEl.style.display = "flex"
 
-        // TODO: 이메일 보내고 인증 코드 받기
-        authStr = "1234";
+        const res = await fetch(`http://localhost:8080/api/login/email/${joinEmailInputEl.value}/auth-code`)
+        const json = await res.json();
+        authCode = json.authCode;
       }
       setSubmit();
     }
 
     const handleAuthInputKeyup = (e) => {
       const {value} = e.target;
-      if (value === authStr) {
+      if (value === authCode) {
         joinAuthIconEl.style.color = activeColor;
         setStatus(e.target, true);
       } else {

@@ -1,59 +1,51 @@
 package com.yts8.sixuniverse.aws;
 
-import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileOutputStream;
+import javax.annotation.PostConstruct;
 import java.io.IOException;
-import java.util.Optional;
 import java.util.UUID;
 
 @Component
-@RequiredArgsConstructor
 public class S3Uploader {
+  private AmazonS3 s3Client;
 
-  private final AmazonS3Client amazonS3Client;
+  @Value("${cloud.aws.credentials.accessKey}")
+  private String ACCESS_KEY;
+
+  @Value("${cloud.aws.credentials.secretKey}")
+  private String SECRET_KEY;
 
   @Value("${cloud.aws.s3.bucket}")
-  private String bucket;
+  private String BUCKET;
 
-  public String upload(MultipartFile multipartFile, String dirName) throws IOException {
-    File uploadFile = convert(multipartFile).orElseThrow(() -> new IllegalArgumentException("MultipartFile -> File로 전환이 실패했습니다."));
-    return upload(uploadFile, dirName);
+  @Value("${cloud.aws.region.static}")
+  private String REGION;
+
+  @PostConstruct
+  public void setS3Client() {
+    AWSCredentials credentials = new BasicAWSCredentials(this.ACCESS_KEY, this.SECRET_KEY);
+
+    s3Client = AmazonS3ClientBuilder.standard()
+        .withCredentials(new AWSStaticCredentialsProvider(credentials))
+        .withRegion(this.REGION)
+        .build();
   }
 
-  private String upload(File uploadFile, String dirName) {
-    String fileName = dirName + "/" + uploadFile.getName();
-    String uploadImageUrl = putS3(uploadFile, fileName);
-    removeNewFile(uploadFile);
-    return uploadImageUrl;
+  public String upload(MultipartFile file, String dirname) throws IOException {
+    String fileName = dirname + "/" + UUID.randomUUID().toString() + file.getOriginalFilename();
+
+    s3Client.putObject(new PutObjectRequest(this.BUCKET, fileName, file.getInputStream(), null)
+        .withCannedAcl(CannedAccessControlList.PublicRead));
+    return s3Client.getUrl(this.BUCKET, fileName).toString();
   }
-
-  private String putS3(File uploadFile, String fileName) {
-    amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, uploadFile).withCannedAcl(CannedAccessControlList.PublicRead));
-    return amazonS3Client.getUrl(bucket, fileName).toString();
-  }
-
-  private void removeNewFile(File targetFile) {
-    targetFile.delete();
-  }
-
-  private Optional<File> convert(MultipartFile file) throws IOException {
-    File convertFile = new File(UUID.randomUUID().toString() + file.getOriginalFilename());
-    if (convertFile.createNewFile()) {
-      try (FileOutputStream fos = new FileOutputStream(convertFile)) {
-        fos.write(file.getBytes());
-      }
-      return Optional.of(convertFile);
-    }
-    return Optional.empty();
-  }
-
-
 }
