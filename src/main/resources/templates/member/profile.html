@@ -19,10 +19,10 @@
           <img id="member-profile-img" th:src="${session.member.getProfileImg()}" alt="프로필">
           <div th:if="${memberDto.getMemberId().equals(session.member.getMemberId())}">
             <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
-            <label for="profile-img">
+            <label for="update-profile-img">
               사진 업데이트하기
             </label>
-            <input type="file" id="profile-img" accept="image/*"/>
+            <input type="file" id="update-profile-img" accept="image/*"/>
           </div>
         </div>
         <div class="member-profile__auth-container">

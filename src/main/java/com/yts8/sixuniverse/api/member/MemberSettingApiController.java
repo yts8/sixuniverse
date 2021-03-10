@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -75,7 +77,7 @@ public class MemberSettingApiController {
   }
 
   @PostMapping("/update/profile-img")
-  public MemberDto updateProfileImg(@RequestParam("profileImg") MultipartFile multipartFile, HttpServletRequest request) {
+  public Map<String, String> updateProfileImg(@RequestParam("profileImg") MultipartFile multipartFile, HttpServletRequest request) {
     String profileImg = null;
     try {
       profileImg = s3Uploader.upload(multipartFile, "member/profile");
@@ -86,6 +88,9 @@ public class MemberSettingApiController {
     member.setProfileImg(profileImg);
     memberService.updateProfileImg(member);
 
-    return member;
+    Map<String, String> map = new HashMap<>();
+    map.put("profileImg", profileImg);
+
+    return map;
   }
 }
