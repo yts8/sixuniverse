@@ -15,8 +15,7 @@
   background-color: transparent !important;
 }
 
-.ui-state-active, .ui-widget-content .ui-state-active,
-.ui-start, .ui-end {
+.ui-state-active, .ui-widget-content .ui-state-active {
   background-color: rgba(216, 216, 216, 0.7) !important;
 }
 

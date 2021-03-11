@@ -24,18 +24,18 @@
     setCollapsedState( );
 
     $('.guest-reservation__upcoming').on('click',function(){
-      location.href='/reservation/guest/list?status=upcoming';
+      location.href='/reservation/guest/list';
       $('.guest-reservation__upcoming').toggleClass("guest-reservation__active");
     });
 
     $('.guest-reservation__complete').on('click',function(){
-      location.href='/reservation/guest/list?status=complete';
+      location.href='/reservation/guest/list';
       $('.guest-reservation__complete').toggleClass("guest-reservation__active");
 
     });
 
     $('.guest-reservation__cancel').on('click',function(){
-      location.href='/reservation/guest/list?status=cancel';
+      location.href='/reservation/guest/list';
       $('.guest-reservation__cancel').toggleClass("guest-reservation__active");
 
     });

@@ -11,6 +11,7 @@
 
 <th:block layout:fragment="js">
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
   <script type="text/javascript" defer th:src="@{/js/reservation/reservation-modal.js}"></script>
@@ -51,6 +52,10 @@
           </div>
 
           <!-- 날짜 modal -->
+          <input type="hidden" name="reservationDateList" th:value="${reservationDateList}" class="reservation__reservation-date-list">
+          <input type="hidden" name="expriyDate" th:value="${room.expiryDate}" class="reservation__room-expiry-date">
+
+
           <div id="date-modal" class="reservation__modal">
             <div class="reservation__date-modal-content">
               <div class="reservation__modal-cancel"><i class="fas fa-times"></i></div>
@@ -237,9 +242,10 @@
 
           <div class="reservation__line"></div>
 
-          <form th:action="@{/reservation/pay/complete}" method="get">
+          <form th:action="@{/reservation/pay/complete}" method="post">
             <input type="hidden" name="checkIn" class="reservation__check-in">
             <input type="hidden" name="checkOut" class="reservation__check-out">
+            <input type="hidden" name="reservationDateArray" class="reservation__date">
             <input type="hidden" name="adult" class="reservation__adult">
             <input type="hidden" name="kid" class="reservation__kid">
             <input type="hidden" name="infant" class="reservation__infant">

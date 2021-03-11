@@ -23,13 +23,19 @@
   <div class="guest-reservation__content">
   <div class="guest-reservation__title">여행</div>
   <nav class="guest-reservation__nav">
-    <button class="guest-reservation__upcoming"><div>예정된 예약</div></button>
-    <button class="guest-reservation__complete">완료된 예약</button>
-    <button class="guest-reservation__cancel">취소된 예약</button>
+    <a th:href="@{|/reservation/guest/list/upcoming|}">
+      <button class="guest-reservation__upcoming"><div>예정된 예약</div></button>
+    </a>
+    <a th:href="@{|/reservation/guest/list/complete|}">
+      <button class="guest-reservation__complete">완료된 예약</button>
+    </a>
+    <a th:href="@{|/reservation/guest/list/cancel|}">
+      <button class="guest-reservation__cancel">취소된 예약</button>
+    </a>
   </nav>
 
     <div class="guest-reservation__room-info" >
-      <a th:href="@{|/reservation/guest/simple-info/${reservation.reservationId}|}" th:each="reservation, i : ${reservationList}" th:if="${reservationList} != null">
+      <a th:href="@{|/reservation/guest/simple-info/${reservation.reservationId}|}" th:each="reservation, i : ${reservationList}" th:if="${reservationList.size()} != 0">
         <table class="guest-reservation__room-info-table">
           <tr><td>
             <div class="guest-reservation__room-img-box">
@@ -53,7 +59,7 @@
       </a>
     </div>
 
-    <div class="guest-reservation__room-info" th:unless="${reservationList} != null"> 없슈ㅠ </div>
+    <div class="guest-reservation__room-info" th:unless="${reservationList.size()} != 0"> 없슈ㅠ </div>
 
 
   </div>
