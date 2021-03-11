@@ -1,4 +1,5 @@
-
+  //
+  var createDate= "${session.room.getCreateDate()}";
 
   document.addEventListener('DOMContentLoaded', function () {
   var calendarEl = document.getElementById('calendar');
@@ -58,38 +59,39 @@
 },
 
   events: [
+
+    {
+      title: 'event',
+      start:  'createDate',
+      selectable: true
+    },
 {
   title: 'event',
-  start: '2021-03-07',
-  // end: '2021-03-30',
-  selectable: false,
-},
-{
-  title: 'event',
-  start: '2021-03-08',
-  // end: '2021-03-30',
-  selectable: true,
-}, {
-  title: 'event',
-  start: '2021-03-09',
-  // end: '2021-03-30',
-  selectable: true,
-}, {
-  title: 'event',
-  start: '2021-03-10',
-  // end: '2021-03-30',
-  selectable: true,
-}, {
-  title: 'event',
-  start: '2021-03-11',
-  // end: '2021-03-30',
-  selectable: true,
-}, {
-  title: 'event',
-  start: '2021-03-17',
+  start: '2021-03-08 21:22:22',
   // end: '2021-03-30',
   selectable: true,
 },
+// {
+//   title: 'event',
+//   start: '2021-03-09',
+//   // end: '2021-03-30',
+//   selectable: true,
+// }, {
+//   title: 'event',
+//   start: '2021-03-10',
+//   // end: '2021-03-30',
+//   selectable: true,
+// }, {
+//   title: 'event',
+//   start: '2021-03-11',
+//   // end: '2021-03-30',
+//   selectable: true,
+// }, {
+//   title: 'event',
+//   start: '2021-03-17',
+//   // end: '2021-03-30',
+//   selectable: true,
+// },
   ]
 
 

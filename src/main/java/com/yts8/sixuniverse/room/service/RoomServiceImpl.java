@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -16,6 +18,16 @@ public class RoomServiceImpl implements RoomService {
   @Override
   public RoomDto findById(Long roomId) {
     return roomMapper.findById(roomId);
+  }
+
+  @Override
+  public Date findByCreateDate(Long roomId) {
+    return roomMapper.findByCreateDate(roomId);
+  }
+
+  @Override
+  public Long findByMemberId(Long memberId) {
+    return roomMapper.findByMemberId(memberId);
   }
 
   @Override

@@ -9,6 +9,18 @@
         where room_id = #{roomId}
     </select>
 
+    <select id="findByMemberId" resultType="java.lang.Long">
+        select member_id
+        from room
+        where member_id = #{memberId}
+    </select>
+
+    <select id="findByCreateDate" resultType="java.util.Date">
+        select create_date
+        from room
+        where member_id = #{memberId}
+    </select>
+
     <insert id="save" parameterType="RoomDto" useGeneratedKeys="true" keyProperty="roomId">
         insert into room (member_id, zipcode, address, sub_address)
         values (#{memberId}, #{zipcode}, #{address}, #{subAddress})

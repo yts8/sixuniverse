@@ -1,55 +1,54 @@
-body, html{
-    overflow: hidden;
-    height: 100%;
+body, html {
+  overflow: hidden;
+  height: 100%;
 }
 
 
 .container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .room__register-container {
-    height: 100%;
-    margin: 50px;
+  height: 100%;
+  margin: 50px;
 }
 
 
 .room__guide {
-    margin-bottom: 50px;
-    font-size: 30px;
+  margin-bottom: 50px;
+  font-size: 30px;
 }
-.room__guide-sub{
-    margin-top: 30px;
-    margin-bottom: 40px;
-    font-size: 20px;
+
+.room__guide-sub {
+  margin-top: 30px;
+  margin-bottom: 40px;
+  font-size: 20px;
 }
 
 .room__step {
-    color: #414141;
-    font-size: 20px;
-    margin-top: 20px;
+  color: #414141;
+  font-size: 20px;
+  margin-top: 20px;
 }
 
-.room__select{
-    width: 350px;
-    padding: 10px;
-    border-radius: 8px;
-    border:solid #888888 1px;
-    margin-bottom: 40px;
-    margin-top: 20px;
-    /*font-size: 30px;*/
+.room__select {
+  width: 350px;
+  padding: 10px;
+  border-radius: 8px;
+  border: solid #888888 1px;
+  margin-bottom: 40px;
+  margin-top: 20px;
+  /*font-size: 30px;*/
 }
-
-
 
 .room__register-btn {
-    padding: 15px 30px;
-    size: 17px;
-    color: white;
-    font-weight: bold;
-    background-color: #56a5ac;
-    border-radius: 8px;
-    border: none;
+  padding: 15px 30px;
+  size: 17px;
+  color: white;
+  font-weight: bold;
+  background-color: #56a5ac;
+  border-radius: 8px;
+  border: none;
 }
