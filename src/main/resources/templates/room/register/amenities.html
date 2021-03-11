@@ -3,68 +3,120 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
+<div layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/room/register/amenities.css}"/>
+</div>
+
 <th:block layout:fragment="content">
-  <h1>어떤 편의시설을 제공하나요?</h1>
-  <form th:action="@{/host/room/register/amenities}" method="post">
 
-    <input type="hidden" name="roomId" th:value="${roomId}"/>
+  <div class="container">
 
-    <div>
-      <label>
-        <span>필수 품목</span>
-        <span>수건, 침대 시트, 비누, 화장지, 배게</span>
-      </label>
-      <input type="checkbox" name="name" value="필수 품목"/>
+    <div class="room__register-container">
+
+      <div class="room__guide">어떤 편의시설을 제공하나요?</div>
+      <div class="room__guide-sub"></div>
+
+      <form th:action="@{/host/room/register/amenities}" method="post">
+        <input type="hidden" name="roomId" th:value="${roomId}"/>
+
+        <div class="room__amenities-container">
+
+          <div class="room__amenities-detail">
+            <label>
+              <input type="checkbox" name="name" id="label1" value="필수 품목"/>
+              <span>필수 품목</span>
+              <span>수건, 침대 시트, 비누, 화장지, 배게</span>
+            </label>
+          </div>
+
+          <div class="room__amenities-detail">
+            <label>
+            <input type="checkbox" id="label2" name="name" value="무선인터넷"/>
+            <span>무선인터넷</span>
+            </label>
+          </div>
+
+          <div class="room__amenities-detail">
+            <label>
+            <input type="checkbox" id="label3" name="name" value="TV"/>
+            <span>TV</span>
+            </label>
+          </div>
+
+          <div class="room__amenities-detail">
+            <label>
+            <input type="checkbox" id="label4" name="name" value="난방"/>
+            <span>난방</span>
+            </label>
+          </div>
+
+          <div class="room__amenities-detail">
+            <label>
+            <input type="checkbox" id="label5" name="name" value="에어컨"/>
+            <span>에어컨</span>
+            </label>
+          </div>
+
+          <div class="room__amenities-detail">
+            <label>
+            <input type="checkbox" id="label6" name="name" value="다리미"/>
+            <span>다리미</span>
+            </label>
+          </div>
+
+          <div class="room__amenities-detail">
+            <label>
+            <input type="checkbox"id="label7"  name="name" value="샴푸"/>
+            <span>샴푸</span>
+            </label>
+          </div>
+
+          <div class="room__amenities-detail">
+            <label>
+            <input type="checkbox" id="label8"name="name" value="헤어드라이어"/>
+            <span>헤어드라이어</span>
+            </label>
+          </div>
+
+          <div class="room__amenities-detail">
+            <label>
+            <input type="checkbox" id="label9"name="name" value="조식,커피,차"/>
+            <span>조식,커피,차</span>
+            </label>
+          </div>
+
+          <div class="room__amenities-detail">
+            <label>
+            <input type="checkbox" id="label10"name="name" value="업무 가능 공간/책상"/>
+            <span>업무 가능 공간/책상</span>
+            </label>
+          </div>
+
+          <div class="room__amenities-detail">
+            <label>
+            <input type="checkbox" id="label11"name="name" value="벽난로"/>
+            <span>벽난로</span>
+            </label>
+          </div>
+
+          <div class="room__amenities-detail">
+            <label>
+            <input type="checkbox"id="label12" name="name" value="옷장/서랍장"/>
+            <span>옷장/서랍장</span>
+            </label>
+          </div>
+
+          <div class="room__amenities-detail">
+            <label>
+            <input type="checkbox" id="label13"name="name" value="게스트 전용 출입문"/>
+            <span>게스트 전용 출입문</span>
+            </label>
+          </div>
+
+        </div>
+        <button type="submit" class="room__register-btn">계속</button>
+      </form>
     </div>
-    <div>
-      <label>무선인터넷</label>
-      <input type="checkbox" name="name" value="무선인터넷"/>
-    </div>
-    <div>
-      <label>TV</label>
-      <input type="checkbox" name="name" value="TV"/>
-    </div>
-    <div>
-      <label>난방</label>
-      <input type="checkbox" name="name" value="난방"/>
-    </div>
-    <div>
-      <label>에어컨</label>
-      <input type="checkbox" name="name" value="에어컨"/>
-    </div>
-    <div>
-      <label>다리미</label>
-      <input type="checkbox" name="name" value="다리미"/>
-    </div>
-    <div>
-      <label>샴푸</label>
-      <input type="checkbox" name="name" value="샴푸"/>
-    </div>
-    <div>
-      <label>헤어드라이어</label>
-      <input type="checkbox" name="name" value="헤어드라이어"/>
-    </div>
-    <div>
-      <label>조식,커피,차</label>
-      <input type="checkbox" name="name" value="조식,커피,차"/>
-    </div>
-    <div>
-      <label>업무 가능 공간/책상</label>
-      <input type="checkbox" name="name" value="업무 가능 공간/책상"/>
-    </div>
-    <div>
-      <label>벽난로</label>
-      <input type="checkbox" name="name" value="벽난로"/>
-    </div>
-    <div>
-      <label>옷장/서랍장</label>
-      <input type="checkbox" name="name" value="옷장/서랍장"/>
-    </div>
-    <div>
-      <label>게스트 전용 출입문</label>
-      <input type="checkbox" name="name" value="게스트 전용 출입문"/>
-    </div>
-    <button type="submit">등록</button>
-  </form>
+  </div>
 </th:block>
 </html>

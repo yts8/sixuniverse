@@ -1,0 +1,88 @@
+body, html {
+    overflow: hidden;
+    height: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.room__register-container {
+    height: 100%;
+    margin: 50px;
+}
+
+
+.room__guide {
+    font-weight: bold;
+    margin-top: 50px;
+    font-size: 25px;
+}
+
+.room__guide-sub {
+    margin-top: 10px;
+    font-size: 20px;
+    color: #787878;
+}
+
+
+.room__register-btn {
+    padding: 15px 30px;
+    size: 17px;
+    color: white;
+    font-weight: bold;
+    background-color: #56a5ac;
+    border-radius: 8px;
+    border: none;
+    margin-top: 40px;
+}
+
+/*뽀려온 모달*/
+
+.room__number-container {
+    /*margin-left: 40px;*/
+    /*display: table-cell;*/
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+}
+
+
+.room__number {
+    margin-left: 10px;
+    display: flex;
+}
+
+.room__number-detail{
+    width: 150px;
+}
+
+
+.room__number > input {
+    width: 20px;
+    text-align: center;
+    border: none;
+}
+
+.room__decrease, .room__increase {
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: 1px solid #398288;
+    border-radius: 30px;
+    margin: 0 5px 0 5px;
+    text-align: center;
+}
+.room__decrease{
+    margin-left: 40px;
+}
+
+.fa-minus, .fa-plus {
+    color: #398288;
+}
+
+.room__decrease:hover, .room__increase:hover {
+    border-color: #398288;
+}

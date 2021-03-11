@@ -5,7 +5,7 @@ package com.yts8.sixuniverse.performance.controller;
     import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/performance/*")
+@RequestMapping("/host/performance")
 public class PerformanceController {
 
   @GetMapping ("/income")
