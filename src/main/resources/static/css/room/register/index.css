@@ -1,0 +1,61 @@
+body, html {
+  overflow: hidden;
+  height: 100%;
+}
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.room__register-container {
+  height: 100%;
+  margin: 50px;
+}
+
+
+.room__guide {
+  margin-bottom: 20px;
+  font-size: 30px;
+}
+
+.room__step {
+  color: #414141;
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.room__postcode-btn {
+  padding: 15px 30px;
+  size: 17px;
+  font-weight: bold;
+  color: white;
+  background-color: #56a5ac;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: none;
+}
+
+.room__address {
+  /*size: 30px;*/
+  margin-bottom: 10px;
+  width: 350px;
+  height: 50px;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: solid #888888 1px;
+}
+
+
+.room__register-btn {
+  padding: 15px 30px;
+  size: 17px;
+  color: white;
+  font-weight: bold;
+  background-color: #56a5ac;
+  border-radius: 8px;
+  border: none;
+}

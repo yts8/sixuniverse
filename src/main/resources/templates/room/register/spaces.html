@@ -3,42 +3,70 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
+<div layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/room/register/amenities.css}"/>
+</div>
+
 <th:block layout:fragment="content">
-  <h1>게스트가 어떤 공간을 사용할 수 있나요?</h1>
-  <form th:action="@{/host/room/register/spaces}" method="post">
 
-    <input type="hidden" name="roomId" th:value="${roomId}"/>
+  <div class="container">
 
-    <div>
-      <label>세탁공간 - 건조기</label>
-      <input type="checkbox" name="name" value="건조기"/>
-    </div>
-    <div>
-      <label>세탁공간 - 세탁기</label>
-      <input type="checkbox" name="name" value="세탁기"/>
-    </div>
-    <div>
-      <label>자쿠지</label>
-      <input type="checkbox" name="name" value="자쿠지"/>
-    </div>
-    <div>
-      <label>주방</label>
-      <input type="checkbox" name="name" value="주방"/>
-    </div>
-    <div>
-      <label>수영장</label>
-      <input type="checkbox" name="name" value="수영장"/>
-    </div>
-    <div>
-      <label>주차</label>
-      <input type="checkbox" name="name" value="주차"/>
-    </div>
-    <div>
-      <label>헬스장</label>
-      <input type="checkbox" name="name" value="헬스장"/>
-    </div>
+    <div class="room__register-container">
 
-    <button type="submit">등록</button>
-  </form>
+      <div class="room__guide">게스트가 어떤 공간을 사용할 수 있나요?</div>
+
+      <form th:action="@{/host/room/register/spaces}" method="post">
+
+        <input type="hidden" name="roomId" th:value="${roomId}"/>
+
+        <div>
+          <label>
+            <input type="checkbox" name="name" value="건조기"/>
+            <span>세탁공간 - 건조기</span>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input type="checkbox" name="name" value="세탁기"/>
+            <span>세탁공간 - 세탁기</span>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input type="checkbox" name="name" value="자쿠지"/>
+            <span>자쿠지</span>
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" name="name" value="주방"/>
+            <span>주방</span>
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" name="name" value="수영장"/>
+            <span>수영장</span>
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" name="name" value="주차"/>
+            <span>주차</span>
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" name="name" value="헬스장"/>
+            <span>헬스장</span>
+          </label>
+        </div>
+
+        <button type="submit" class="room__register-btn">계속</button>
+      </form>
+    </div>
+  </div>
 </th:block>
 </html>

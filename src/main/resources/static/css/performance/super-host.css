@@ -2,138 +2,131 @@
 
 
 .performance__container{
-  margin: auto 0;
-  display: flex;
-  position:relative;
-  flex-direction: column;
+    margin: auto 0;
+    display: flex;
+    position:relative;
+    flex-direction: column;
 
-}
-.performance__main-menu-container{
-  margin: 20px;
-  display:flex;
-  font-size: 30px;
-  font-weight: bold;
-  flex-direction: row;
 }
 
 .performance__sub-menu-container{
-  margin-left: 50px;
-  margin-right: 50px;
-  margin-bottom: 10px;
-  display:flex;
-  flex-direction: row;
-  font-weight: bold;
-  border-bottom-color: #999999;
-  border-bottom: 1px solid;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 10px;
+    display:flex;
+    flex-direction: row;
+    font-weight: bold;
+    border-bottom-color: #999999;
+    border-bottom: 1px solid;
 }
 
 .performance__sub3{
 }
 
 .performance__sub1, .performance__sub2, .performance__sub3,.performance__sub4{
-  margin: 20px;
-  margin-right: 24px;
-  display: inline-block ;
+    margin: 20px;
+    margin-right: 24px;
+    display: inline-block ;
 }
 
 .performance__a{
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
 .performance__super-host-container{
-  display:flex;
-  flex-direction: column;
-  margin: 50px;
+    display:flex;
+    flex-direction: column;
+    margin: 50px;
 }
 
 .performance__super-main-container{
-  margin-bottom: 50px;
+    margin-bottom: 50px;
 }
 .performance__super-guide1{
-  color: #EB4C60;
-  font-size: 43px;
-  font-weight: bold;
-  margin-bottom: 10px;
+    color: #EB4C60;
+    font-size: 43px;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 .performance__super-guide2{
-  font-size: 25px;
-  line-height: 1.5;
+    font-size: 25px;
+    line-height: 1.5;
 }
 
 .performance__statistics-container{
-  background-color: rgb(247, 247, 247);
+    background-color: rgb(247, 247, 247);
 }
 
 .performance__super-subject{
-  margin:30px;
-  font-size: 20px;
-  font-weight: bold;
+    margin:30px;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .performance__super-date{
-  margin: 20px;
-  margin-right: 24px;
-  display:flex;
-  flex-direction: column;
+    margin: 20px;
+    margin-right: 24px;
+    display:flex;
+    flex-direction: column;
 }
 .performance__date{
-  /*color: rgb(34,34,34);*/
-  border-radius: 8px;
-  /*box-shadow: rgb(176, 176, 176) 0px 0px 0px 1px inset;*/
-  font-size: 20px ;
-  margin-bottom: 10px;
-  padding: 5px;
-  width: 200px;
+    /*color: rgb(34,34,34);*/
+    border-radius: 8px;
+    /*box-shadow: rgb(176, 176, 176) 0px 0px 0px 1px inset;*/
+    font-size: 20px ;
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 200px;
 }
 .performance__super-date-detail{
-  font-size: 15px;
+    font-size: 15px;
 }
 .performance__super-result-container{
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: row;
 }
 .performance__super-result1,.performance__super-result2,.performance__super-result3,.performance__super-result4{
-  background-color: white;
-  border: 1px solid rgb(235, 235, 235);
-  margin:20px;
-  width:100%;
-  height: 200px;
-  font-weight: bold;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-direction: column;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+    background-color: white;
+    border: 1px solid rgb(235, 235, 235);
+    margin:20px;
+    width:100%;
+    height: 200px;
+    font-weight: bold;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
 }
 .performance__result-sub1{
- font-size: 40px;
-  margin-bottom: 10px;
+    font-size: 40px;
+    margin-bottom: 10px;
 }
 .performance__result-sub2{
-  font-size: 20px;
-  margin-bottom: 10px;
+    font-size: 20px;
+    margin-bottom: 10px;
 
 }
 .performance__result-sub3{
-  font-size: 18px;
-  color: #bdbdbd;
+    font-size: 18px;
+    color: #bdbdbd;
 
 }
 .performance__result-sub4{
-  margin-top: 50px;
-  display: flex;
-  vertical-align: middle;
+    margin-top: 50px;
+    display: flex;
+    vertical-align: middle;
 
-  align-items: center;
-  /*   헉헉 이거당 */
+    align-items: center;
+    /*   헉헉 이거당 */
 }
 .performance__img{
-  width: 20px;
-  height: 20px;
+    width: 20px;
+    height: 20px;
 }

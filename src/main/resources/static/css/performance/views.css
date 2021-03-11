@@ -8,13 +8,6 @@
     flex-direction: column;
 
 }
-.performance__main-menu-container{
-    margin: 20px;
-    display:flex;
-    font-size: 30px;
-    font-weight: bold;
-    flex-direction: row;
-}
 
 .performance__sub-menu-container{
     margin-left: 50px;

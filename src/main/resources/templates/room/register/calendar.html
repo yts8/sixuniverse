@@ -3,17 +3,39 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
+<div layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/room/register/calendar.css}"/>
+  <link rel="stylesheet" th:href="@{/css/room/register/fullcalendar.css}"/>
+</div>
+<div layout:fragment="js">
+  <script type="text/javascript" defer th:src="@{/js/room/fullcalendar.js}"></script>
+  <script type="text/javascript" defer th:src="@{/js/room/calendar.js}"></script>
+</div>
 <th:block layout:fragment="content">
-  <h1>숙소의 예약정보를 정해주세요.</h1>
-  <form th:action="@{/host/room/register/calendar}" method="post">
-    <input type="hidden" name="roomId" th:value="${roomId}"/>
 
-    <div>예약 가능 여부 설정하기</div>
-    <div>간단한 방법으로 달력을 수정할 수 있어요. 예약을 차단하거나 차단 해제할 날짜를 선택하기만 하면 됩니다. 숙소를 등록한 후에도 언제든지 변경할 수 있습니다.</div>
+  <div class="container">
 
-    <div><h1>달력</h1></div>
+    <div class="room__register-container">
 
-    <button type="submit">등록</button>
-  </form>
+      <div class="room__guide">숙소의 예약정보를 정해주세요.</div>
+      <form th:action="@{/host/room/register/calendar}" method="post">
+        <input type="hidden" name="roomId" th:value="${roomId}"/>
+
+        <div class="room__guide">예약 가능 여부 설정하기</div>
+        <div class="room__guide-sub">간단한 방법으로 달력을 수정할 수 있어요. 예약을 차단하거나 차단 해제할 날짜를 선택하기만 하면 됩니다. 숙소를 등록한 후에도 언제든지 변경할 수
+          있습니다.
+        </div>
+
+        <div class="room__guide">달력</div>
+        <div class="room_calendar-container">
+          <div id='calendar'></div>
+        </div>
+
+      </form>
+      <div>
+        <button type="submit" class="room__register-btn">계속</button>
+      </div>
+    </div>
+  </div>
 </th:block>
 </html>

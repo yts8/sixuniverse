@@ -3,10 +3,16 @@ package com.yts8.sixuniverse.room.repository;
 import com.yts8.sixuniverse.room.dto.RoomDto;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Date;
+
 @Mapper
 public interface RoomMapper {
 
   RoomDto findById(Long roomId);
+
+  Long findByMemberId(Long memberId);
+
+  Date findByCreateDate(Long roomId);
 
   void save(RoomDto roomDto);
 

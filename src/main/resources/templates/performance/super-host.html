@@ -4,7 +4,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
 <div layout:fragment="css">
-  <link rel="stylesheet" th:href="@{/css/performance/super-host.css}" />
+  <link rel="stylesheet" th:href="@{/css/performance/super-host.css}"/>
 </div>
 <div layout:fragment="content">
   <section>
@@ -13,7 +13,6 @@
     <div class="performance__container">
 
       <div class="performance__menu-container">
-        <div class="performance__main-menu-container">실적</div>
         <div class="performance__sub-menu-container">
           <div class="performance__sub1"><a href="./income" class="performance__a">수입</a></div>
           <div class="performance__sub2"><a href="./views" class="performance__a">조회수</a></div>
@@ -27,19 +26,22 @@
         <div class="performance__super-main-container">
           <div class="performance__super-guide1">다음 평가에서 슈퍼호스트가 되어보세요!</div>
           <div class="performance__super-guide2">최고의 호스팅을 제공하는 호스트로서 인정받고 혜택을 누려보세요.<br>
-            매월 1일에 이루어지는 평가에서 좋은 성과를 달성하시기 바랍니다.</div>
+            매월 1일에 이루어지는 평가에서 좋은 성과를 달성하시기 바랍니다.
+          </div>
         </div>
 
         <div class="performance__statistics-container">
           <div class="performance__super-subject">슈퍼호스트 통계</div>
           <div class="performance__super-date">
-              <select class="performance__date">
-                <option value="">기간 선택</option>
-                <option value="2022년 3월">2022년 3월</option>
-                <option value="2022년 1월">2022년 2월</option>
-                <option value="2022년 1월">2022년 1월</option>
-              </select>
-            <div class="performance__super-date-detail">sixuniverse는 1개월마다 평가를 실시하여 호스트가 지난 한달 동안 슈퍼호스트 기준을 만족했는지 확인합니다. 조건을 충족하시면 슈퍼호스트가 됩니다.</div>
+            <select class="performance__date">
+              <option value="">기간 선택</option>
+              <option value="2022년 3월">2022년 3월</option>
+              <option value="2022년 1월">2022년 2월</option>
+              <option value="2022년 1월">2022년 1월</option>
+            </select>
+            <div class="performance__super-date-detail">sixuniverse는 1개월마다 평가를 실시하여 호스트가 지난 한달 동안 슈퍼호스트 기준을 만족했는지 확인합니다.
+              조건을 충족하시면 슈퍼호스트가 됩니다.
+            </div>
           </div>
 
           <div class="performance__super-result-container">
@@ -48,27 +50,39 @@
               <div class="performance__result-sub1">-★</div>
               <div class="performance__result-sub2">전체 평점</div>
               <div class="performance__result-sub3">기준 : 4.8점</div>
-              <div class="performance__result-sub4"><div><img th:src="@{/images/performance/not-check.png}" class="performance__img"></div><div>아쉽네요.</div></div>
+              <div class="performance__result-sub4">
+                <div><img th:src="@{/images/performance/not-check.png}" class="performance__img"></div>
+                <div>아쉽네요.</div>
+              </div>
             </div>
             <div class="performance__super-result2">
               <div class="performance__result-sub1">-%</div>
               <div class="performance__result-sub2">응답률</div>
               <div class="performance__result-sub3">기준 : 90 %</div>
-              <div class="performance__result-sub4"><div><img th:src="@{/images/performance/not-check.png}" class="performance__img"></div><div>아쉽네요.</div></div>
+              <div class="performance__result-sub4">
+                <div><img th:src="@{/images/performance/not-check.png}" class="performance__img"></div>
+                <div>아쉽네요.</div>
+              </div>
             </div>
             <div class="performance__super-result3">
               <div class="performance__result-sub1">-만원</div>
               <div class="performance__result-sub2">월 매출</div>
               <div class="performance__result-sub3">기준 : 190만 원</div>
-              <div class="performance__result-sub4"><div><img th:src="@{/images/performance/not-check.png}" class="performance__img"></div><div>아쉽네요.</div></div>
+              <div class="performance__result-sub4">
+                <div><img th:src="@{/images/performance/not-check.png}" class="performance__img"></div>
+                <div>아쉽네요.</div>
+              </div>
             </div>
             <div class="performance__super-result4">
               <div class="performance__result-sub1">0.0%</div>
               <div class="performance__result-sub2">예약 취소율</div>
               <div class="performance__result-sub3">기준 : 1.0% 미만</div>
-              <div class="performance__result-sub4"><div><img th:src="@{/images/performance/check.png}" class="performance__img"></div><div>대단해요!</div></div>
+              <div class="performance__result-sub4">
+                <div><img th:src="@{/images/performance/check.png}" class="performance__img"></div>
+                <div>대단해요!</div>
+              </div>
             </div>
-            </div>
+          </div>
         </div>
       </div>
     </div>
