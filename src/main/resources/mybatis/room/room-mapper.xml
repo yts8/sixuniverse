@@ -9,7 +9,6 @@
     where room_id = #{roomId}
   </select>
 
-<!--  나중에 보고 살리거나 삭제하기,, 갱신일기준 캘린더에 on 구현하면,,,,-->
   <select id="findByRenewDate" resultType="java.time.LocalDateTime">
     select renew_date
     from room

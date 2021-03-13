@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -208,16 +209,8 @@ public class RoomRegisterController {
     model.addAttribute("title", "달력 설정");
 
 //    갱신일로부터 +예약받을 예정일수 -> 캘린더에 on 상태로 만들기 위해 보내는 값
-//    LocalDateTime renewDate=roomService.findByRenewDate(roomId);
-//    List<String> RenewDateList = new ArrayList<>();
-//    for (int i=0; i<30; i++) {
-//      String strRenewDate=renewDate+"";
-//      strRenewDate.substring(0,10);
-//      RenewDateList.add(strRenewDate);
-//      renewDate.plusDays(1L);
-//    }
-//    model.addAttribute("renewDate",RenewDateList);
-
+    LocalDateTime renewDate=roomService.findByRenewDate(roomId);
+    model.addAttribute("renewDate", renewDate);
 
     return "room/register/calendar";
   }

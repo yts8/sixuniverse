@@ -21,18 +21,8 @@ public class RoomServiceImpl implements RoomService {
   }
 
   @Override
-  public LocalDateTime findByCreateDate(Long roomId) {
-    return roomMapper.findByCreateDate(roomId);
-  }
-
-  @Override
   public LocalDateTime findByRenewDate(Long roomId) {
     return roomMapper.findByRenewDate(roomId);
-  }
-
-  @Override
-  public Long findByMemberId(Long memberId) {
-    return roomMapper.findByMemberId(memberId);
   }
 
   @Override
