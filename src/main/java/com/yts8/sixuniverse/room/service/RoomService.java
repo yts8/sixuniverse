@@ -2,7 +2,7 @@ package com.yts8.sixuniverse.room.service;
 
 import com.yts8.sixuniverse.room.dto.RoomDto;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public interface RoomService {
 
@@ -10,7 +10,8 @@ public interface RoomService {
 
   Long findByMemberId(Long memberId);
 
-  Date findByCreateDate(Long roomId);
+  LocalDateTime findByCreateDate(Long roomId);
+  LocalDateTime findByRenewDate(Long roomId);
 
   void save(RoomDto roomDto);
 

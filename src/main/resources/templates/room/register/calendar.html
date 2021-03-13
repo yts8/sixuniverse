@@ -10,9 +10,10 @@
 <div layout:fragment="js">
   <script type="text/javascript" defer th:src="@{/js/room/fullcalendar.js}"></script>
   <script type="text/javascript" defer th:src="@{/js/room/calendar.js}"></script>
+
 </div>
 <th:block layout:fragment="content">
-
+<input type="hidden" th:value="${createDate}" th:id="createDate">
   <div class="container">
 
     <div class="room__register-container">
