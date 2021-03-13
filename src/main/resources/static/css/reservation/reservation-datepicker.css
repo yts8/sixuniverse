@@ -15,8 +15,7 @@
   background-color: transparent !important;
 }
 
-.ui-state-active, .ui-widget-content .ui-state-active,
-.ui-start, .ui-end {
+.ui-state-active, .ui-widget-content .ui-state-active {
   background-color: rgba(216, 216, 216, 0.7) !important;
 }
 
@@ -59,4 +58,100 @@
   background-color: #F6F6F6 !important;
   border: none !important;
   border-radius: 30px !important;
+}
+
+
+.reservation__modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.reservation__modal-content, .reservation__date-modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 20px;
+  max-width: 400px;
+}
+
+.reservation__date-modal-content {
+  max-width: 650px;
+  margin: 6% auto;
+}
+
+.reservation__modal-cancel {
+  width: max-content;
+  vertical-align: middle;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+
+.reservation__choose-date {
+  vertical-align: middle;
+  display: flex;
+  margin-bottom: 20px;
+  justify-content: space-between;
+}
+
+.reservation__ch-date {
+  display: flex;
+  justify-content: flex-end;
+
+}
+
+.reservation__date-done {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.reservation__delete-date {
+  font-weight: bold;
+  text-decoration: underline;
+  margin-right: 20px;
+}
+
+.reservation__save-date {
+  padding: 14px;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.reservation__ch-in-out-date {
+  height: max-content;
+  justify-content: flex-end;
+  border: 2px solid black;
+  border-radius: 10px;
+  margin-top: 15px;
+  padding: 13px;
+}
+
+.reservation__check-title {
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.reservation__date-value {
+  width: 120px;
+  margin-top: 8px;
+  border: none;
+  font-size: 14px;
+}
+
+.reservation__sub-title {
+  font-size: 23px;
+  font-weight: bold;
+  margin: 30px 0 40px 0;
 }

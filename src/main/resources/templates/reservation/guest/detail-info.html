@@ -10,7 +10,7 @@
 </th:block>
 
 <th:block layout:fragment="js">
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=34aa0f04a8c02352b695cb5574769930"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=34aa0f04a8c02352b695cb5574769930&libraries=services"></script>
   <script type="text/javascript" defer th:src="@{/js/common/map.js}"></script>
   <script type="text/javascript" defer th:src="@{/js/reservation/guest/simple-info.js}"></script>
 </th:block>
@@ -23,6 +23,7 @@
 <body>
 
 <th:block layout:fragment="content" class="guest-reservation-detail-info__box">
+  <input type="hidden" th:value="${room.address}" class="room-address-value">
 
   <div class="guest-reservation-detail-info__box">
 
@@ -55,12 +56,12 @@
                       <i class="fas fa-comment-alt"></i><span>호스트에게 메시지 보내기</span><i class="fas fa-chevron-right"></i></div>
                     <div class="guest-reservation-detail-info__margin">
                       <i class="fas fa-mobile-alt"></i><span>호스트에게 연락하기</span><i class="fas fa-chevron-right"></i></div>
-                    <a th:href="@{/reservation/guest/update}">
+                    <a th:if="${reservation.status.equals('upcoming')}" th:href="@{|/reservation/guest/update/${reservation.reservationId}|}">
                       <div class="guest-reservation-detail-info__margin">
                       <i class="fas fa-pen"></i><span>예약 변경</span> <i class="fas fa-chevron-right"></i></div>
                     </a>
 
-                    <a th:href="@{/reservation/guest/cancel}">
+                    <a th:if="${reservation.status.equals('upcoming')}" th:href="@{/reservation/guest/cancel}">
                       <div class="guest-reservation-detail-info__margin">
                         <i class="far fa-window-close"></i><span>예약 취소</span> <i class="fas fa-chevron-right"></i>
                       </div>

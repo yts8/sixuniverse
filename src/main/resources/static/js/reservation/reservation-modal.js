@@ -3,7 +3,6 @@
     let num = 0;
     let maxNum = parseInt($('.reservation__max-people').html());
 
-
     const pNum = function plusNum() {
       if (parseInt($('#adult-number').val()) + parseInt($('#kid-number').val()) < maxNum) {
         ++num;

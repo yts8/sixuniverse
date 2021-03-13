@@ -7,6 +7,16 @@
 
 <th:block layout:fragment="css">
   <link rel="stylesheet" th:href="@{/css/reservation/guest/update.css}">
+  <link rel="stylesheet" th:href="@{/css/reservation/reservation-datepicker.css}">
+</th:block>
+
+<th:block layout:fragment="js">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+  <script type="text/javascript" defer th:src="@{/js/reservation/reservation-modal.js}"></script>
+  <script type="text/javascript" defer th:src="@{/js/reservation/reservation-date-modal.js}"></script>
 </th:block>
 
 <head>
@@ -26,14 +36,15 @@
           <div class="guest-reservation-update__small-box">
             <div class="guest-reservation-update__sub-title">날짜</div>
             <div class="guest-reservation-update__reservation-date">
-              <div>체크인날짜</div>
+              <div class="reservation__check-in">체크인날짜</div>
               <i class="fas fa-arrow-right"></i>
-              <div>체크아웃날짜</div>
+              <div class="reservation__check-out">체크아웃날짜</div>
               <div class="guest-reservation-update__i-calendar">
-                <i class="far fa-calendar"></i>
+                <i class="far fa-calendar" id="update-date"></i>
               </div>
             </div>
           </div>
+
 
           <div class="guest-reservation-update__small-box">
             <div class="guest-reservation-update__sub-title">인원</div>
@@ -46,6 +57,49 @@
           <input type="submit" value="계속" class="guest-reservation-update__next-btn">
 
         </form>
+
+        <!-- 날짜 modal -->
+        <input type="hidden" name="reservationDateList" th:value="${reservationDateList}" class="reservation__reservation-date-list">
+        <input type="hidden" name="expriyDate" th:value="${room.expiryDate}" class="reservation__room-expiry-date">
+        <input type="hidden" name="reservationDateArray" class="reservation__date">
+
+        <div id="date-modal" class="reservation__modal">
+          <div class="reservation__date-modal-content">
+            <div class="reservation__modal-cancel"><i class="fas fa-times"></i></div>
+            <div class="reservation__choose-date">
+              <h2 class="reservation__sub-title">날짜 선택</h2>
+              <div class="reservation__ch-date">
+                <div class="reservation__ch-in-out-date">
+                  <div class="reservation__check-title">체크인</div>
+                  <input type="text" id="check-in" class="reservation__date-value" readonly>
+                </div>
+                <div class="reservation__ch-in-out-date">
+                  <div class="reservation__check-title">체크아웃</div>
+                  <input type="text" id="check-out" class="reservation__date-value" readonly>
+
+                </div>
+              </div>
+            </div>
+
+
+            <div class="reservation__date-wrapper">
+              <div  class="dates">
+                <div id="range-date"></div>
+              </div>
+            </div>
+
+            <div class="reservation__date-done">
+              <button class="reservation__delete-date">날짜지우기</button>
+              <button class="reservation__save-date">저장</button>
+            </div>
+
+
+          </div>
+        </div>
+
+
+
+
 
 
       </div>

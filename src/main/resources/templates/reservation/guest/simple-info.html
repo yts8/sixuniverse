@@ -10,7 +10,7 @@
 </th:block>
 
 <th:block layout:fragment="js">
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=34aa0f04a8c02352b695cb5574769930"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=34aa0f04a8c02352b695cb5574769930&libraries=services"></script>
   <script type="text/javascript" defer th:src="@{/js/common/map.js}"></script>
 </th:block>
 
@@ -21,7 +21,7 @@
 
 <body>
 <th:block layout:fragment="content" class="guest-reservation-simple-info__box">
-
+<input type="hidden" th:value="${room.address}" class="room-address-value">
   <div class="guest-reservation-simple-info__box">
 
     <div class="guest-reservation-simple-info__content">
