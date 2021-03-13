@@ -32,6 +32,4 @@
     from reservation_date where room_id = #{roomId} and reservation_id not in (#{reservationId})
   </select>
 
-
-
 </mapper>
