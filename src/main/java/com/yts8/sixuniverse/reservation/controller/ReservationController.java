@@ -22,6 +22,7 @@ import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -43,6 +44,8 @@ public class ReservationController {
     int commission = (int) (roomDto.getPrice() * 0.1);
 
     List<String> reservationDateList = reservationDateService.reservationDateList(roomId);
+
+    Collections.sort(reservationDateList);
 
     model.addAttribute("room", roomDto);
     model.addAttribute("commission", commission);
@@ -118,8 +121,10 @@ public class ReservationController {
     Long roomId = reservationDto.getRoomId();
     RoomDto roomDto = roomService.findById(roomId);
     List<String> reservationDateList = reservationDateService.reservationDateList(roomId);
+    Collections.sort(reservationDateList);
 
     model.addAttribute("room", roomDto);
+    model.addAttribute("reservation", reservationDto);
     model.addAttribute("reservationDateList", reservationDateList);
 
     return "reservation/guest/update";

@@ -32,6 +32,7 @@
   margin-top: 20px;
   padding: 20px;
   border: 1px solid #c3c3c3;
+  justify-content: space-between;
 }
 
 .guest-reservation-update__reservation-date > .fa-arrow-right {
@@ -39,12 +40,12 @@
 }
 
 .guest-reservation-update__reservation-date > .guest-reservation-update__i-calendar {
-  margin-left: 80px;
+  /*margin-left: 80px;*/
 }
 
 
-.guest-reservation-update__guest > .fa-angle-down {
-  margin-left: 220px;
+.guest-reservation-update__guest > .fa-user-friends {
+  /*margin-left: 80px;*/
 }
 
 .guest-reservation-update__next-btn {

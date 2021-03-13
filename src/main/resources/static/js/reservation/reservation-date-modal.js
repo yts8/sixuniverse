@@ -79,8 +79,6 @@
               $.each(disabledDays, function (index, item) {
                 maxDate = new Date(item);
 
-                console.log(maxDate);
-
                 maxDate2 = (new Date(maxDate.getFullYear(), maxDate.getMonth() + 1, maxDate.getDate())).getTime();
 
                 if (maxCur < maxDate2) {
@@ -142,7 +140,9 @@
 
         $('.reservation__date').html($('#check-in').val() + ' ~ ' + $('#check-out').val());
         $('.reservation__check-in').val($('#check-in').val());
+        $('.reservation__check-in').html($('#check-in').val());
         $('.reservation__check-out').val($('#check-out').val());
+        $('.reservation__check-out').html($('#check-out').val());
         $('.reservation__date').val(arrayDays);
 
         $('#date-modal').hide();

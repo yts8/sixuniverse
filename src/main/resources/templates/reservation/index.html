@@ -7,6 +7,7 @@
 <th:block layout:fragment="css">
   <link rel="stylesheet" th:href="@{/css/reservation/index.css}">
   <link rel="stylesheet" th:href="@{/css/reservation/reservation-datepicker.css}">
+  <link rel="stylesheet" th:href="@{/css/reservation/guest/update-guest.css}">
 </th:block>
 
 <th:block layout:fragment="js">
@@ -52,7 +53,8 @@
           </div>
 
           <!-- 날짜 modal -->
-          <input type="hidden" name="reservationDateList" th:value="${reservationDateList}" class="reservation__reservation-date-list">
+          <input type="hidden" name="reservationDateList" th:value="${reservationDateList}"
+                 class="reservation__reservation-date-list">
           <input type="hidden" name="expriyDate" th:value="${room.expiryDate}" class="reservation__room-expiry-date">
 
           <div id="date-modal" class="reservation__modal">
@@ -75,7 +77,7 @@
 
 
               <div class="reservation__date-wrapper">
-                <div  class="dates">
+                <div class="dates">
                   <div id="range-date"></div>
                 </div>
               </div>
@@ -142,7 +144,8 @@
               </div>
 
               <div>최대 <span th:text="${room.getMaxPeople()}" class="reservation__max-people"></span> 명.
-                유아는 숙박인원에 포함되지 않습니다.</div>
+                유아는 숙박인원에 포함되지 않습니다.
+              </div>
 
               <div class="reservation__guest-update-btn">
           <span class="reservation__modal-cancel pop_bt">
@@ -291,7 +294,7 @@
             </div>
 
             <div class="reservation__table">
-              <div class="reservation__price" >수수료</div>
+              <div class="reservation__price">수수료</div>
               <span class="reservation__price2" th:text="'￦ ' + ${commission} "></span>
             </div>
 

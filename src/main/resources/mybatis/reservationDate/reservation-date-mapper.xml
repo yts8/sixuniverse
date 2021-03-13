@@ -18,4 +18,10 @@
     from reservation_date where room_id = ${roomId} and reservation_date = #{reservationDate}
   </select>
 
+  <select id="findByReservation">
+
+  </select>
+
+
+
 </mapper>

@@ -7,6 +7,7 @@
 
 <th:block layout:fragment="css">
   <link rel="stylesheet" th:href="@{/css/reservation/guest/update.css}">
+  <link rel="stylesheet" th:href="@{/css/reservation/guest/update-guest.css}">
   <link rel="stylesheet" th:href="@{/css/reservation/reservation-datepicker.css}">
 </th:block>
 
@@ -36,9 +37,9 @@
           <div class="guest-reservation-update__small-box">
             <div class="guest-reservation-update__sub-title">날짜</div>
             <div class="guest-reservation-update__reservation-date">
-              <div class="reservation__check-in">체크인날짜</div>
+              <div class="reservation__check-in" th:text="${reservation.checkIn}">체크인날짜</div>
               <i class="fas fa-arrow-right"></i>
-              <div class="reservation__check-out">체크아웃날짜</div>
+              <div class="reservation__check-out" th:text="${reservation.checkOut}">체크아웃날짜</div>
               <div class="guest-reservation-update__i-calendar">
                 <i class="far fa-calendar" id="update-date"></i>
               </div>
@@ -48,11 +49,15 @@
 
           <div class="guest-reservation-update__small-box">
             <div class="guest-reservation-update__sub-title">인원</div>
-            <div class="guest-reservation-update__guest">
+            <div class="guest-reservation-update__guest" id="update-guest">
+              <div>성인 아동 유아</div>
               <div>게스트 몇 명</div>
-              <i class="fas fa-angle-down"></i>
+              <i class="fas fa-user-friends"></i></i>
             </div>
           </div>
+
+
+
 
           <input type="submit" value="계속" class="guest-reservation-update__next-btn">
 
@@ -96,6 +101,75 @@
 
           </div>
         </div>
+
+
+        <!-- 게스트 모달 -->
+        <div id="my-modal" class="reservation__modal">
+          <div class="reservation__modal-content">
+            <div class="reservation__modal-cancel"><i class="fas fa-times"></i></div>
+            <h2 class="reservation__sub-title">게스트</h2>
+            <div class="reservation__guest">
+        <span>
+         <div class="reservation__guest-title">성인</div>
+        </span>
+              <div class="reservation__number-right">
+                <div class="reservation__guest-number">
+                  <button class="reservation__decrease" id="adult-minus"><i class="fas fa-minus"></i></button>
+                  <input type="text" name="adult-number" value="1" id="adult-number" readonly>
+                  <button class="reservation__increase" id="adult-plus"><i class="fas fa-plus"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="reservation__guest">
+        <span>
+          <div>
+            <div class="reservation__guest-title">어린이</div>
+            <div class="reservation__guest-age">2~12세</div>
+          </div>
+        </span>
+              <div class="reservation__number-right">
+                <div class="reservation__guest-number">
+                  <button class="reservation__decrease" id="kid-minus"><i class="fas fa-minus"></i></button>
+                  <input type="text" name="kid-number" value="0" id="kid-number" readonly>
+                  <button class="reservation__increase" id="kid-plus"><i class="fas fa-plus"></i></button>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="reservation__guest">
+        <span>
+          <div>
+            <div class="reservation__guest-title">유아</div>
+            <div class="reservation__guest-age">2세 미만</div>
+          </div>
+        </span>
+              <div class="reservation__number-right">
+                <div class="reservation__guest-number">
+                  <button class="reservation__decrease" id="infant-minus"><i class="fas fa-minus"></i></button>
+                  <input type="text" name="infant-number" value="0" id="infant-number" readonly>
+                  <button class="reservation__increase" id="infant-plus"><i class="fas fa-plus"></i></button>
+                </div>
+              </div>
+
+            </div>
+
+            <div>최대 <span th:text="${room.getMaxPeople()}" class="reservation__max-people"></span> 명.
+              유아는 숙박인원에 포함되지 않습니다.
+            </div>
+
+            <div class="reservation__guest-update-btn">
+          <span class="reservation__modal-cancel pop_bt">
+            취소
+          </span>
+              <button class="reservation__guest-update">저장하기</button>
+            </div>
+          </div>
+
+        </div>
+
+
 
 
 
