@@ -1,6 +1,5 @@
 package com.yts8.sixuniverse.reservation.repository;
 
-import com.yts8.sixuniverse.reservation.dto.ReservationDateDto;
 import com.yts8.sixuniverse.reservation.dto.ReservationDto;
 import org.apache.ibatis.annotations.Mapper;
 

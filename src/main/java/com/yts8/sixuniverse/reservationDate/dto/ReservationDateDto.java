@@ -1,4 +1,4 @@
-package com.yts8.sixuniverse.reservation.dto;
+package com.yts8.sixuniverse.reservationDate.dto;
 
 import lombok.Data;
 

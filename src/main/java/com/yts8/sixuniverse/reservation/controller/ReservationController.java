@@ -2,10 +2,10 @@ package com.yts8.sixuniverse.reservation.controller;
 
 import com.yts8.sixuniverse.member.dto.MemberDto;
 import com.yts8.sixuniverse.member.service.MemberService;
-import com.yts8.sixuniverse.reservation.dto.ReservationDateDto;
 import com.yts8.sixuniverse.reservation.dto.ReservationDto;
-import com.yts8.sixuniverse.reservation.service.ReservationDateService;
 import com.yts8.sixuniverse.reservation.service.ReservationService;
+import com.yts8.sixuniverse.reservationDate.dto.ReservationDateDto;
+import com.yts8.sixuniverse.reservationDate.service.ReservationDateService;
 import com.yts8.sixuniverse.room.dto.RoomDto;
 import com.yts8.sixuniverse.room.service.RoomService;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -60,10 +62,6 @@ public class ReservationController {
     MemberDto memberDto = (MemberDto) session.getAttribute("member");
     Long memberId = memberDto.getMemberId();
 
-    if (status == null) {
-      status = "upcoming";
-    }
-
     List<ReservationDto> reservationList = reservationService.reservationList(memberId, status);
     List<RoomDto> roomList = new ArrayList<>();
 
@@ -74,8 +72,8 @@ public class ReservationController {
       roomList.add(roomDto);
     }
 
-    model.addAttribute("reservationList", reservationList);
     model.addAttribute("roomList", roomList);
+    model.addAttribute("reservationList", reservationList);
 
     return "reservation/guest/list";
   }
@@ -100,9 +98,9 @@ public class ReservationController {
     RoomDto roomDto = roomService.findById(reservationDto.getRoomId());
     MemberDto memberDto = memberService.findById(roomDto.getMemberId());
 
-    model.addAttribute("reservation", reservationDto);
     model.addAttribute("room", roomDto);
     model.addAttribute("member", memberDto);
+    model.addAttribute("reservation", reservationDto);
 
     return "reservation/guest/detail-info";
   }
@@ -113,8 +111,16 @@ public class ReservationController {
     return "reservation/host-reservation-list";
   }
 
-  @GetMapping("/guest/update")
-  public String guestReservationUpdate() {
+  @GetMapping("/guest/update/{reservationId}")
+  public String guestReservationUpdate(Model model, @PathVariable Long reservationId) {
+    ReservationDto reservationDto = reservationService.findById(reservationId);
+
+    Long roomId = reservationDto.getRoomId();
+    RoomDto roomDto = roomService.findById(roomId);
+    List<String> reservationDateList = reservationDateService.reservationDateList(roomId);
+
+    model.addAttribute("room", roomDto);
+    model.addAttribute("reservationDateList", reservationDateList);
 
     return "reservation/guest/update";
   }
@@ -145,34 +151,73 @@ public class ReservationController {
   }
 
   @PostMapping("/pay/complete")
-  public String guestReservationPayComplete(HttpSession session, ReservationDto reservationDto, ReservationDateDto reservationDateDto, HttpServletRequest request) {
+  public String guestReservationPayComplete(HttpSession session, ReservationDto reservationDto,
+                                            ReservationDateDto reservationDateDto, HttpServletRequest request,
+                                            HttpServletResponse response, Model model) {
+
     MemberDto memberDto = (MemberDto) session.getAttribute("member");
-    reservationDto.setMemberId(memberDto.getMemberId());
-    reservationDto.setStatus("upcoming");
-    
+    Long memberId = memberDto.getMemberId(); // 세션값 가져오기
+    Long roomId = reservationDto.getRoomId();
+    RoomDto roomDto = roomService.findById(roomId); // 호스트가 등록한 숙소인지 찾기 위해
+
     String reservationDateArr = request.getParameter("reservationDateArray");
     String[] reservationDateArray = reservationDateArr.split(",");
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-    reservationService.reservationInsert(reservationDto);
-
-    reservationDateDto.setReservationId(reservationDto.getReservationId());
-
     try {
 
-      for(int i = 0; i < reservationDateArray.length; i++) {
-        Date reservationDate = sdf.parse(reservationDateArray[i]);
+      if(memberId.equals(roomDto.getMemberId())) {
 
-        reservationDateDto.setReservationDate(reservationDate);
+          response.setContentType("text/html; charset=UTF-8");
+          PrintWriter out =response.getWriter();   // getWriter : try catch 문 필요
+          out.println("<script>");
+          out.println("alert('자신이 등록한 숙소는 예약할 수 없습니다.')");
+          out.println("history.back()");
+          out.println("</script>");
 
-        reservationDateService.reservationDateInsert(reservationDateDto);
+      } else {
+        Date reservationDateCheckIn = sdf.parse(reservationDateArray[0]); // parse : try catch 문 필요
+
+        // 이미 예약된 날짜인지 확인하기 위해 숙소아이디와 체크인 날짜로 찾아봄
+        ReservationDateDto reservationDateRoomId =  reservationDateService.findByReservationDate(roomId, reservationDateCheckIn);
+
+        if(reservationDateRoomId != null) {
+          // 예약 시 선택한 체크인 날짜가 이미 예약된 날짜라면
+          // 예약하지 못하게 막기
+          PrintWriter out =response.getWriter();   // getWriter : try catch 문 필요
+          out.println("<script>");
+          out.println("alert('이미 예약된 날짜입니다.')");
+          out.println("history.back()");
+          out.println("</script>");
+
+
+        } else {
+          reservationDto.setMemberId(memberId);
+          reservationDto.setStatus("upcoming");
+
+          reservationService.reservationInsert(reservationDto);
+
+          reservationDateDto.setReservationId(reservationDto.getReservationId());
+
+          for (int i = 0; i < reservationDateArray.length; i++) {
+            Date reservationDate = sdf.parse(reservationDateArray[i]); // parse : try catch 문 필요
+
+            reservationDateDto.setReservationDate(reservationDate);
+
+            reservationDateService.reservationDateInsert(reservationDateDto);
+          }
+        }
 
       }
-
-    } catch(Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
+
+    model.addAttribute("reservation", reservationDto);
+    model.addAttribute("room", roomDto);
+
+
 
     return "reservation/guest/complete";
   }

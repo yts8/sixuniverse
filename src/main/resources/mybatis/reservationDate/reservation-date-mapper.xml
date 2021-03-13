@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.yts8.sixuniverse.reservation.repository.ReservationDateMapper">
+<mapper namespace="com.yts8.sixuniverse.reservationDate.repository.ReservationDateMapper">
 
   <insert id="reservationDateInsert">
     insert into reservation_date
@@ -11,6 +11,11 @@
   <select id="reservationDateList" resultType="java.lang.String">
     select reservation_date
     from reservation_date where room_id = #{roomId}
+  </select>
+
+  <select id="findByReservationDate" resultType="ReservationDto">
+    select room_id, reservation_date
+    from reservation_date where room_id = ${roomId} and reservation_date = #{reservationDate}
   </select>
 
 </mapper>

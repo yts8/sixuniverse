@@ -32,6 +32,7 @@
         let disabledDayList = $('.reservation__reservation-date-list').val();
         const disabledDays = disabledDayList.substring(1,disabledDayList.length-1).split(", ");
 
+        console.log(disabledDays);
 
         $('#range-date').datepicker({
           numberOfMonths: [1, 2],
@@ -77,6 +78,8 @@
 
               $.each(disabledDays, function (index, item) {
                 maxDate = new Date(item);
+
+                console.log(maxDate);
 
                 maxDate2 = (new Date(maxDate.getFullYear(), maxDate.getMonth() + 1, maxDate.getDate())).getTime();
 
