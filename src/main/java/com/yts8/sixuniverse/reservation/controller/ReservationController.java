@@ -185,6 +185,7 @@ public class ReservationController {
     reservationDto1.setRoomId(roomId);
 
     List<LocalDate> reservationDateList = reservationDateService.reservationDateUpdateList(reservationDto1);
+
     Collections.sort(reservationDateList);
 
     model.addAttribute("room", roomDto);
