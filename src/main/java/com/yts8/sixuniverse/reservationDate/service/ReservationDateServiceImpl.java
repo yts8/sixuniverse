@@ -1,5 +1,6 @@
 package com.yts8.sixuniverse.reservationDate.service;
 
+import com.yts8.sixuniverse.reservation.dto.ReservationDto;
 import com.yts8.sixuniverse.reservationDate.dto.ReservationDateDto;
 import com.yts8.sixuniverse.reservationDate.repository.ReservationDateMapper;
 import lombok.RequiredArgsConstructor;
@@ -20,12 +21,17 @@ public class ReservationDateServiceImpl implements ReservationDateService {
   }
 
   @Override
-  public void reservationDateInsert(ReservationDateDto reservationDateDto) {
-    reservationDateMapper.reservationDateInsert(reservationDateDto);
+  public void reservationDateInsert(List<ReservationDateDto> reservationDateDtos) {
+    reservationDateMapper.reservationDateInsert(reservationDateDtos);
   }
 
   @Override
   public List<String> reservationDateList(Long roomId) {
     return reservationDateMapper.reservationDateList(roomId);
+  }
+
+  @Override
+  public List<String> reservationDateUpdateList(ReservationDto reservationDto) {
+    return reservationDateMapper.reservationDateUpdateList(reservationDto);
   }
 }

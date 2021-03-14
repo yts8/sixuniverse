@@ -10,6 +10,6 @@ public interface ReservationService {
 
   ReservationDto findById(Long reservationId);
 
-  List<ReservationDto> reservationList(Long memberId, String status);
+  List<ReservationDto> reservationList(ReservationDto reservationDto);
 
 }

@@ -3,9 +3,11 @@
 
 <mapper namespace="com.yts8.sixuniverse.reservationDate.repository.ReservationDateMapper">
 
-  <insert id="reservationDateInsert">
-    insert into reservation_date
-    values (null, #{reservationId}, #{roomId}, #{reservationDate})
+  <insert id="reservationDateInsert" parameterType="java.util.List">
+    insert into reservation_date (reservation_id, room_id, reservation_date) values
+    <foreach collection="list" item="reservationDateDto" separator=",">
+      (#{reservationDateDto.reservationId}, #{reservationDateDto.roomId}, #{reservationDateDto.reservationDate})
+    </foreach>
   </insert>
 
   <select id="reservationDateList" resultType="java.lang.String">
@@ -15,7 +17,14 @@
 
   <select id="findByReservationDate" resultType="ReservationDto">
     select room_id, reservation_date
-    from reservation_date where room_id = ${roomId} and reservation_date = #{reservationDate}
+    from reservation_date where room_id = #{roomId} and reservation_date = #{reservationDate}
   </select>
+
+  <select id="reservationDateUpdateList" resultType="java.lang.String">
+    select reservation_date
+    from reservation_date where room_id = #{roomId} and reservation_id not in (#{reservationId})
+  </select>
+
+
 
 </mapper>
