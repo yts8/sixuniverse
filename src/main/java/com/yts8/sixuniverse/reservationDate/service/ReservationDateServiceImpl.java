@@ -6,7 +6,7 @@ import com.yts8.sixuniverse.reservationDate.repository.ReservationDateMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -16,8 +16,8 @@ public class ReservationDateServiceImpl implements ReservationDateService {
   private final ReservationDateMapper reservationDateMapper;
 
   @Override
-  public ReservationDateDto findByReservationDate(Long roomId, Date reservationDate) {
-    return reservationDateMapper.findByReservationDate(roomId, reservationDate);
+  public ReservationDateDto findByReservationDate(ReservationDto reservationDto) {
+    return reservationDateMapper.findByReservationDate(reservationDto);
   }
 
   @Override
@@ -32,12 +32,12 @@ public class ReservationDateServiceImpl implements ReservationDateService {
 
 
   @Override
-  public List<String> reservationDateList(Long roomId) {
+  public List<LocalDate> reservationDateList(Long roomId) {
     return reservationDateMapper.reservationDateList(roomId);
   }
 
   @Override
-  public List<String> reservationDateUpdateList(ReservationDto reservationDto) {
+  public List<LocalDate> reservationDateUpdateList(ReservationDto reservationDto) {
     return reservationDateMapper.reservationDateUpdateList(reservationDto);
   }
 }
