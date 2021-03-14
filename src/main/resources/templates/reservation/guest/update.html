@@ -69,9 +69,6 @@
             <div class="guest-reservation-update__total-guest">게스트 <span class="reservation__total-guest" th:text="${reservation.adult} + ${reservation.kid} + ${reservation.infant}"></span> 명</div>
           </div>
 
-
-
-
           <input type="submit" value="계속" class="guest-reservation-update__next-btn">
         </form>
         <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
