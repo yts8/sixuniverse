@@ -129,6 +129,7 @@ public class ReservationController {
     reservationDto1.setRoomId(roomId);
 
     List<LocalDate> reservationDateList = reservationDateService.reservationDateUpdateList(reservationDto1);
+
     Collections.sort(reservationDateList);
 
     model.addAttribute("room", roomDto);
@@ -188,7 +189,6 @@ public class ReservationController {
       ReservationDto reservationDto1 = new ReservationDto();
       reservationDto1.setRoomId(roomId);
       reservationDto1.setCheckIn(reservationDateCheckIn);
-
       ReservationDateDto reservationDateRoomId = reservationDateService.findByReservationDate(reservationDto1);
 
       if (reservationDateRoomId != null) {
