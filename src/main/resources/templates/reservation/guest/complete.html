@@ -47,7 +47,7 @@
           <div class="guest-reservation-complete__reservation-info">
             <div class="guest-reservation-complete__room-name" th:text="${room.title}">숙소 제목</div>
             <div th:text="${reservation.checkIn} + ' ~ ' + ${reservation.checkOut}">예약날짜</div>
-            <div th:text="'게스트 : ' + "${reservation.adult} + ${reservation.kid} + ${reservation.infant}">인원</div>
+            <div th:text="'게스트 : ' + ${reservation.adult} + ${reservation.kid} + ${reservation.infant}">인원</div>
             <div th:text="${room.address} + ' ' + ${room.subAddress}">주소</div>
           </div>
           <div class="guest-reservation-complete__align">

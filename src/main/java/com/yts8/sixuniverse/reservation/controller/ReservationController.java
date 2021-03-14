@@ -65,7 +65,12 @@ public class ReservationController {
     MemberDto memberDto = (MemberDto) session.getAttribute("member");
     Long memberId = memberDto.getMemberId();
 
-    List<ReservationDto> reservationList = reservationService.reservationList(memberId, status);
+    ReservationDto reservationDto = new ReservationDto();
+    reservationDto.setMemberId(memberId);
+    reservationDto.setStatus(status);
+
+    List<ReservationDto> reservationList = reservationService.reservationList(reservationDto);
+
     List<RoomDto> roomList = new ArrayList<>();
 
     for (int i = 0; i < reservationList.size(); i++) {
@@ -120,7 +125,12 @@ public class ReservationController {
 
     Long roomId = reservationDto.getRoomId();
     RoomDto roomDto = roomService.findById(roomId);
-    List<String> reservationDateList = reservationDateService.reservationDateList(roomId);
+
+    ReservationDto reservationDto1 = new ReservationDto();
+    reservationDto1.setReservationId(reservationId);
+    reservationDto1.setRoomId(roomId);
+
+    List<String> reservationDateList = reservationDateService.reservationDateUpdateList(reservationDto1);
     Collections.sort(reservationDateList);
 
     model.addAttribute("room", roomDto);
@@ -157,7 +167,7 @@ public class ReservationController {
 
   @PostMapping("/pay/complete")
   public String guestReservationPayComplete(HttpSession session, ReservationDto reservationDto,
-                                            ReservationDateDto reservationDateDto, HttpServletRequest request,
+                                            HttpServletRequest request,
                                             HttpServletResponse response, Model model) {
 
     MemberDto memberDto = (MemberDto) session.getAttribute("member");
@@ -172,25 +182,25 @@ public class ReservationController {
 
     try {
 
-      if(memberId.equals(roomDto.getMemberId())) {
+      if (memberId.equals(roomDto.getMemberId())) {
 
-          response.setContentType("text/html; charset=UTF-8");
-          PrintWriter out =response.getWriter();   // getWriter : try catch 문 필요
-          out.println("<script>");
-          out.println("alert('자신이 등록한 숙소는 예약할 수 없습니다.')");
-          out.println("history.back()");
-          out.println("</script>");
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();   // getWriter : try catch 문 필요
+        out.println("<script>");
+        out.println("alert('자신이 등록한 숙소는 예약할 수 없습니다.')");
+        out.println("history.back()");
+        out.println("</script>");
 
       } else {
         Date reservationDateCheckIn = sdf.parse(reservationDateArray[0]); // parse : try catch 문 필요
 
         // 이미 예약된 날짜인지 확인하기 위해 숙소아이디와 체크인 날짜로 찾아봄
-        ReservationDateDto reservationDateRoomId =  reservationDateService.findByReservationDate(roomId, reservationDateCheckIn);
+        ReservationDateDto reservationDateRoomId = reservationDateService.findByReservationDate(roomId, reservationDateCheckIn);
 
-        if(reservationDateRoomId != null) {
+        if (reservationDateRoomId != null) {
           // 예약 시 선택한 체크인 날짜가 이미 예약된 날짜라면
           // 예약하지 못하게 막기
-          PrintWriter out =response.getWriter();   // getWriter : try catch 문 필요
+          PrintWriter out = response.getWriter();   // getWriter : try catch 문 필요
           out.println("<script>");
           out.println("alert('이미 예약된 날짜입니다.')");
           out.println("history.back()");
@@ -203,15 +213,18 @@ public class ReservationController {
 
           reservationService.reservationInsert(reservationDto);
 
-          reservationDateDto.setReservationId(reservationDto.getReservationId());
-
+          List<ReservationDateDto> reservationDateDtos = new ArrayList<>();
           for (int i = 0; i < reservationDateArray.length; i++) {
+            ReservationDateDto reservationDateDto = new ReservationDateDto();
+            reservationDateDto.setReservationId(reservationDto.getReservationId());
+            reservationDateDto.setRoomId(roomId);
             Date reservationDate = sdf.parse(reservationDateArray[i]); // parse : try catch 문 필요
 
             reservationDateDto.setReservationDate(reservationDate);
-
-            reservationDateService.reservationDateInsert(reservationDateDto);
+            reservationDateDtos.add(reservationDateDto);
           }
+
+          reservationDateService.reservationDateInsert(reservationDateDtos);
         }
 
       }
@@ -219,9 +232,8 @@ public class ReservationController {
       e.printStackTrace();
     }
 
-    model.addAttribute("reservation", reservationDto);
     model.addAttribute("room", roomDto);
-
+    model.addAttribute("reservation", reservationDto);
 
 
     return "reservation/guest/complete";

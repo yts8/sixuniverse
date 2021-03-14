@@ -36,16 +36,7 @@
 }
 
 .guest-reservation-update__reservation-date > .fa-arrow-right {
-  margin: 0 20px 0 20px;
-}
-
-.guest-reservation-update__reservation-date > .guest-reservation-update__i-calendar {
-  /*margin-left: 80px;*/
-}
-
-
-.guest-reservation-update__guest > .fa-user-friends {
-  /*margin-left: 80px;*/
+  /*margin: 0 20px 0 20px;*/
 }
 
 .guest-reservation-update__next-btn {
@@ -83,4 +74,9 @@
 
 .guest-reservation-update__content {
   margin-left: 10px;
+}
+
+.guest-reservation-update__total-guest {
+  margin-top: 10px;
+  color: #888888;
 }

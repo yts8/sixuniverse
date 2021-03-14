@@ -24,7 +24,7 @@ public class ReservationServiceImpl implements ReservationService {
   }
 
   @Override
-  public List<ReservationDto> reservationList(Long memberId, String status) {
-    return reservationMapper.reservationList(memberId, status);
+  public List<ReservationDto> reservationList(ReservationDto reservationDto) {
+    return reservationMapper.reservationList(reservationDto);
   }
 }
