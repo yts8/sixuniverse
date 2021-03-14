@@ -32,7 +32,6 @@ public class ReservationDateServiceImpl implements ReservationDateService {
 
   @Override
   public List<LocalDate> reservationDateList(Long roomId) {
-
     return reservationDateMapper.reservationDateList(roomId);
   }
 
