@@ -129,7 +129,6 @@ public class ReservationController {
     reservationDto1.setRoomId(roomId);
 
     List<LocalDate> reservationDateList = reservationDateService.reservationDateUpdateList(reservationDto1);
-
     Collections.sort(reservationDateList);
 
     model.addAttribute("room", roomDto);
@@ -199,7 +198,6 @@ public class ReservationController {
         out.println("alert('이미 예약된 날짜입니다.')");
         out.println("history.back()");
         out.println("</script>");
-
 
       } else {
         reservationDto.setMemberId(memberId);
