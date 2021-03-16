@@ -15,9 +15,12 @@
     $(".wishlist__make-wishlist-folder").click(function () {
       $(".wishlist__modal").fadeIn();
     });
-    $(".modal_content").click(function () {
+    $(".wishlist__update-title button").click(function () {
       $(".wishlist__modal").fadeOut();
     });
   });
+
+
+
 
 })();

@@ -8,14 +8,26 @@
   <link rel="stylesheet" th:href="@{/css/review/review-form.css}"/>
 </th:block>
 
+<th:block layout:fragment="js">
+  <script type="text/javascript" defer th:src="@{/js/review/review.js}"></script>
+</th:block>
+
 <th:block layout:fragment="content">
+  <form th:action="@{/review/complete}" method="post">
   <div class="review-form__main">
     <div class="review-form__score-all">
       <div>
         <div class="review-form__text-main">[]님의 숙소는 어땠나요?</div>
         <div class="review-form__text-part">답변해주신 내용은 sixuniverse의 서비스를 개선하는 데 큰 도움이 됩니다.</div>
       </div>
-      <div class="review-form__star-main">⭐⭐⭐⭐⭐</div>
+      <div class="review-form__star-main">
+        <span class="review-form__star-main-each" th:data-all="1"></span>
+        <span class="review-form__star-main-each" th:data-all="2"></span>
+        <span class="review-form__star-main-each" th:data-all="3"></span>
+        <span class="review-form__star-main-each" th:data-all="4"></span>
+        <span class="review-form__star-main-each" th:data-all="5"></span>
+        <input type="hidden" class="star-main-js" name="scoreAll">
+      </div>
     </div>
     <div class="review-form__score-part">
       <div>
@@ -25,15 +37,36 @@
       <div>
         <div>
           <div class="review-form__score-part-text">청결도</div>
-          <div class="review-form__star-part">⭐⭐⭐⭐⭐</div>
+          <div class="review-form__star-part-clean">
+            <span class="review-form__star-part-each" th:data-clean="1"></span>
+            <span class="review-form__star-part-each" th:data-clean="2"></span>
+            <span class="review-form__star-part-each" th:data-clean="3"></span>
+            <span class="review-form__star-part-each" th:data-clean="4"></span>
+            <span class="review-form__star-part-each" th:data-clean="5"></span>
+            <input type="hidden" class="star-clean-js" name="scoreClean">
+          </div>
         </div>
         <div>
           <div class="review-form__score-part-text">위치</div>
-          <div class="review-form__star-part">⭐⭐⭐⭐⭐</div>
+          <div class="review-form__star-part-location">
+            <span class="review-form__star-part-each" th:data-location="1"></span>
+            <span class="review-form__star-part-each" th:data-location="2"></span>
+            <span class="review-form__star-part-each" th:data-location="3"></span>
+            <span class="review-form__star-part-each" th:data-location="4"></span>
+            <span class="review-form__star-part-each" th:data-location="5"></span>
+            <input type="hidden" class="star-location-js" name="scoreLocation">
+          </div>
         </div>
         <div>
           <div class="review-form__score-part-text">서비스</div>
-          <div class="review-form__star-part">⭐⭐⭐⭐⭐</div>
+          <div class="review-form__star-part-service">
+            <span class="review-form__star-part-each" th:data-service="1"></span>
+            <span class="review-form__star-part-each" th:data-service="2"></span>
+            <span class="review-form__star-part-each" th:data-service="3"></span>
+            <span class="review-form__star-part-each" th:data-service="4"></span>
+            <span class="review-form__star-part-each" th:data-service="5"></span>
+            <input type="hidden" class="star-service-js" name="scoreService">
+          </div>
         </div>
       </div>
     </div>
@@ -43,7 +76,7 @@
         <div class="review-form__text-part">[]님의 숙소에 관해 다른 게스트가 참고할 점을 알려주세요.</div>
       </div>
       <div>
-        <input type="text">
+        <textarea class="review-form__textarea" name="reviewContent"></textarea>
       </div>
     </div>
     <div class="review-form__move">
@@ -54,9 +87,10 @@
         </a>
       </div>
       <div>
-        <button class="review-form__ok">완료</button>
+        <button type="submit" class="review-form__ok">완료</button>
       </div>
     </div>
   </div>
+  </form>
 </th:block>
 </html>

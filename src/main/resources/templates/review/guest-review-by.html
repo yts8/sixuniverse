@@ -8,6 +8,10 @@
   <link rel="stylesheet" th:href="@{/css/review/guest-review-by.css}"/>
 </th:block>
 
+<th:block layout:fragment="js">
+  <script type="text/javascript" defer th:src="@{/js/review/review.js}"></script>
+</th:block>
+
 <th:block layout:fragment="content">
   <div class="g-review-by__main">
     <div>
@@ -34,15 +38,103 @@
           <div>작성해야 할 후기</div>
         </div>
         <div class="g-review-by__panel-body">
+          <!--          <th:block th:if="${today} < ${reviewStart}">-->
           <div>현재 작성할 후기가 없습니다. 여행을 한 번 다녀올 때가 된 것 같네요!</div>
+          <!--          </th:block>-->
+          <!--          <th:block th:unless="${today} < ${reviewStart}">-->
+          <th:block th:each="reservationList : ${reservationList}">
+            <!-- 이거 좀 이상한데,,, 다시 생각해보기 -->
+            <th:block th:if="${reviewList} == null">
+              <div class="g-review-by__panel-body-review">
+                <div class="g-review-by__panel-review-profile">
+                  <div class="g-review-by__panel-review-profile-box">
+                    <img class="g-review-by__panel-review-profile-box-img"
+                         th:src="@{/images/review/sky.jpeg}">
+                  </div>
+                  <div class="g-review-by__panel-review-profile-text">
+                    <div class="g-review-by__panel-review-profile-text-name">[]님에 대한 후기를 남겨주세요.</div>
+                    <div class="g-review-by__a">
+                      <a th:href="@{|/review/form/${reservationList.reservationId}|}">
+                        <div>후기 작성하기</div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr class="g-review-by__hr">
+            </th:block>
+          </th:block>
+          <!--          </th:block>-->
         </div>
       </div>
       <div class="g-review-by__panel">
+
         <div class="g-review-by__panel-header">
           <div>내가 작성한 후기</div>
         </div>
+
         <div class="g-review-by__panel-body">
-          <div>아직 후기를 남기지 않으셨습니다.</div>
+
+          <th:block th:if="${reviewList} == null">
+            <div>아직 후기를 남기지 않으셨습니다.</div>
+          </th:block>
+
+          <th:block th:unless="${reviewList} == null">
+            <th:block th:each="review : ${reviewList}">
+              <div class="g-review-by__panel-body-review">
+                <div class="g-review-by__panel-review-profile">
+                  <div class="g-review-by__panel-review-profile-box">
+                    <img class="g-review-by__panel-review-profile-box-img"
+                         th:src="@{/images/review/sky.jpeg}">
+                  </div>
+                  <div class="g-review-by__panel-review-profile-text">
+                    <div class="g-review-by__panel-review-profile-text-name">[]님에 대한 후기</div>
+                    <div class="g-review-by__panel-review-text" th:text="${review.reviewContent}"></div>
+                    <div class="g-review-by__panel-review-day"
+                         th:text="${#temporals.format(review.reviewRegDate,'yyyy년 M월')}"></div>
+                  </div>
+                  <div class="g-review-by__a">
+                    <!--                    <th:block th:if="${today} <= ${reviewLimit}">-->
+                    <a th:href="@{|/review/updateForm/${review.reviewId}|}">
+                      <div>수정</div>
+                    </a>
+                    <div>
+                      <button class="g-review-by__modal-delete" th:data-id="${review.reviewId}">삭제</button>
+                    </div>
+                    <!--                    </th:block>-->
+                  </div>
+                </div>
+              </div>
+              <hr class="g-review-by__hr">
+            </th:block>
+          </th:block>
+
+          <!-- 모달창 -->
+          <form th:action="@{/review/guest-by/delete}" method="post">
+            <input type="hidden" id="review-id" name="reviewId">
+            <div class="g-review-by__modal">
+              <div class="g-review-by__modal-content">
+                <div class="g-review-by__delete-title">
+                  <button type="button">x</button>
+                </div>
+                <hr class="g-review-by__hr">
+                <div class="g-review-by__delete-text">정말로 삭제하시겠습니까?</div>
+                <hr class="g-review-by__hr">
+                <div class="g-review-by__move">
+                  <div class="g-review-by__move-back">
+                    <div class="g-review-by__back"> <</div>
+                    <a th:href="@{/review/guest-by}">
+                      <div>취소</div>
+                    </a>
+                  </div>
+                  <div>
+                    <button type="submit" class="g-review-by__ok">삭제</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+
         </div>
       </div>
       <div class="g-review-by__panel">

@@ -9,53 +9,58 @@
   <link rel="stylesheet" th:href="@{/css/review/host-review.css}"/>
 </th:block>
 
+<th:block layout:fragment="js">
+  <script type="text/javascript" defer th:src="@{/js/review/review.js}"></script>
+</th:block>
+
 <th:block layout:fragment="content">
   <div class="performance__container">
     <div class="menu-container">
       <div class="performance__sub-menu-container">
-        <div class="performance__sub1"><a href="./income" class="performance__a">수입</a></div>
-        <div class="performance__sub2"><a href="./views" class="performance__a">조회수</a></div>
-        <div class="performance__sub3"><a href="./super-host" class="performance__a">슈퍼호스트</a></div>
-        <div class="performance__sub4"><a th:href="@{/review/host-review}">후기관리</a></div>
+        <div class="performance__sub1"><a th:href="@{/performance/income}" class="performance__a">수입</a></div>
+        <div class="performance__sub2"><a th:href="@{/performance/views}" class="performance__a">조회수</a></div>
+        <div class="performance__sub3"><a th:href="@{/performance/super-host}" class="performance__a">슈퍼호스트</a></div>
+        <div class="performance__sub4"><a th:href="@{/review/host-review}" class="performance__a">후기관리</a></div>
       </div>
     </div>
   </div>
   <div class="host-review__main">
     <div>
       <div class="host-review__score-group">
-        <span>모두</span>
-        <span>5★</span>
-        <span>4★</span>
-        <span>3★</span>
-        <span>2★</span>
-        <span>1★</span>
+        <button>모두</button>
+        <button id="host-review__scoreFive">5★</button>
+        <button id="host-review__scoreFour">4★</button>
+        <button id="host-review__scoreThree">3★</button>
+        <button id="host-review__scoreTwo">2★</button>
+        <button id="host-review__scoreOne">1★</button>
       </div>
     </div>
     <div class="host-review__review">
       <div class="host-review__review-left">
-        <a th:href="@{/review/guest-about}">
-          <div class="host-review__review-panel">
-            <div class="host-review__review-panel-guest">
-              <div class="host-review__review-panel-guest-text">
-                <div class="host-review__review-panel-guest-text-name">Sung Eun</div>
-                <div class="host-review__review-panel-guest-text-info">2월 26일~2021년 2월 27일 . 방울 in the house</div>
-              </div>
-              <div class="host-review__review-panel-guest-img">
-                <div class="host-review__review-panel-guest-profile-box">
-                  <img class="host-review__review-panel-guest-profile-img"
-                       th:src="@{/images/review/sky.jpeg}">[사진]
-                </div>
+        <div class="host-review__review-panel">
+          <div class="host-review__review-panel-guest">
+            <div class="host-review__review-panel-guest-text">
+              <div class="host-review__review-panel-guest-text-name">Sung Eun</div>
+              <div class="host-review__review-panel-guest-text-info">2월 26일~2021년 2월 27일 . 방울 in the house</div>
+            </div>
+            <div class="host-review__review-panel-guest-img">
+              <div class="host-review__review-panel-guest-profile-box">
+                <img class="host-review__review-panel-guest-profile-img"
+                     th:src="@{/images/review/sky.jpeg}">[사진]
               </div>
             </div>
-            <hr class="host-review__review-hr">
-            <div>
-              <div class="host-review__review-panel-score-title">전체 평점 ⭐⭐⭐⭐⭐</div>
-              <div class="host-review__review-panel-score-content">🎀 방울맘 하우스 한번 들어가면 나올수 없어 🎀</div>
-              <div class="host-review__review-panel-score-check">답글 보기</div>
-            </div>
-            <hr class="host-review__review-hr">
           </div>
-        </a>
+          <hr class="host-review__review-hr">
+          <div>
+            <div class="host-review__review-panel-score-title">전체 평점 ⭐⭐⭐⭐⭐</div>
+            <div class="host-review__review-panel-score-content">🎀 방울맘 하우스 한번 들어가면 나올수 없어 🎀</div>
+            <a th:href="@{/review/guest-about}">
+              <div class="host-review__review-panel-score-check">답글 보기</div>
+            </a>
+          </div>
+          <hr class="host-review__review-hr">
+        </div>
+
       </div>
       <div class="host-review__review-right">
         <div class="host-review__review-right-left">
