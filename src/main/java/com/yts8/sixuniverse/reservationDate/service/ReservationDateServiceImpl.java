@@ -26,6 +26,12 @@ public class ReservationDateServiceImpl implements ReservationDateService {
   }
 
   @Override
+  public void hostReservationDateInsert(List<ReservationDateDto> reservationDateDto) {
+    reservationDateMapper.hostReservationDateInsert(reservationDateDto);
+  }
+
+
+  @Override
   public List<String> reservationDateList(Long roomId) {
     return reservationDateMapper.reservationDateList(roomId);
   }

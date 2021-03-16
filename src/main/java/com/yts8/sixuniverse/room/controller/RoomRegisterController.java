@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -219,15 +218,6 @@ public class RoomRegisterController {
 //    }
 //    model.addAttribute("renewDate",RenewDateList);
 
-    List<String> impossibleDayString=new ArrayList<>();
-    model.addAttribute("impossibleDayString",impossibleDayString);
-
-    List<Date> impossibleDay=new ArrayList<>();//db에 저장할 date타입 예약불가날짜 리스트
-
-    for(String day : impossibleDayString){
-      java.sql.Date day2 = java.sql.Date.valueOf(day);
-      impossibleDay.add(day2);
-    }
 
     return "room/register/calendar";
   }
