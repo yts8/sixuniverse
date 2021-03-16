@@ -33,7 +33,7 @@ public class RoomRegisterApiController {
     for(Date d:impossibleDay){
       ReservationDateDto reservationDateDto=new ReservationDateDto();
       reservationDateDto.setRoomId(roomId);
-      reservationDateDto.setReservationDate(d);
+//      reservationDateDto.setReservationDate(d);
       hostReservationDtos.add(reservationDateDto);
     }
 
