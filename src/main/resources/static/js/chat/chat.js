@@ -38,12 +38,13 @@
   init();
 
 })()*/
+
 (() => {
-  var ws;
+  let ws;
 
   function wsOpen() {
-
-    ws = new WebSocket("ws://" + location.host + "/chating/" + $("#chatroomId").val());
+     ws = new WebSocket("ws://" + location.host + "/chating/" + $("#chatroomId").val());
+    // ws = new WebSocket("ws://" + location.host + "/chating/" +$("#memberId").val());
     wsEvt();
   }
 
@@ -56,41 +57,48 @@
 
     ws.onmessage = function (data) {
       //메시지를 받으면 동작
-      var msg = data.data;
+      let msg = data.data;
       if (msg != null && msg.trim() != '') {
-        var d = JSON.parse(msg);
+        let d = JSON.parse(msg);
         if (d.memberId === $("#memberId").val()) {
-          /*여기 수정할 것*/
-          $(".chat__chatroom-content-js").append("<div class='chat__send-chat-container'><img class=\"chat__sender-img\" src=\"https://a0.muscache.com/defaults/user_pic-225x225.png?v=3\"> <div class='chat__send-chat-content'>" + "<span class='chat__sender'>" + d.userName +"</span>" + "<span class='chat__send-time'>" + d.date + "</span> <div class='chat__send-chat'>" + d.msg + "</div> </div> </div>");
+          $(".chatroom-content-js").append("<div class='chat__send-chat-container'><img class=\"chat__sender-img\" src=\"https://a0.muscache.com/defaults/user_pic-225x225.png?v=3\"> <div class='chat__send-chat-content'>" + "<span class='chat__sender'>" + d.userName +"</span>" + "<span class='chat__send-time'>" + d.date + "</span> <div class='chat__send-chat'>" + d.msg + "</div> </div> </div>");
         } else {
-          $(".chat__chatroom-content-js").append("<div class='chat__receive-chat-container'><div class='chat__receive-chat-content'><div><div class='chat__send-chat-content'><span class='chat__receive-time'> "+d.date+"</span><span class='chat__receiver\'> "+d.userName+"</span><div class='chat__receive-chat'>"+d.msg+"</div></div></div></div><img class=\"chat__sender-img\" src=\"https://a0.muscache.com/defaults/user_pic-225x225.png?v=3\"></div>")
+          $(".chatroom-content-js").append("<div class='chat__receive-chat-container'><div class='chat__receive-chat-content'><div><div class='chat__send-chat-content'><span class='chat__receive-time'> "+d.date+"</span><span class='chat__receiver\'> "+d.userName+"</span><div class='chat__receive-chat'>"+d.msg+"</div></div></div></div><img class=\"chat__sender-img\" src=\"https://a0.muscache.com/defaults/user_pic-225x225.png?v=3\"></div>")
         }
-      } else {
-        console.warn("unknown type!")
       }
     }
-    /* 버튼클릭 이벤트 추가할 것*/
+
+
+
+
+
     document.addEventListener("keypress", function (e) {
-      if (e.keyCode == 13) {
+      if (e.keyCode == 13) { //enter press
         send();
       }
     });
+
   }
 
 
   function send() {
-     $(".chat__form-chat-js").show();
-    var option = {
+    $(".form-chat-js").show();
+
+
+    let option = {
       memberId: $("#memberId").val(),
       userName: $("#userName").val(),
       chatroomId: $("#chatroomId").val(),
+     // reservationId:$('#reservationId').val(),
       date: $("#date").val(),
-      msg: $(".chat__message-js").val()
+      msg: $(".message-js").val()
     }
 
     ws.send(JSON.stringify(option))
-    $('.chat__message-js').val("");
+    $('.message-js').val("");
   }
+
+
 })()
 
 

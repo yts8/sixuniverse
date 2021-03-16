@@ -65,7 +65,8 @@
       </div>
 
       <input type="hidden" id="memberId" th:value="${session.member.getMemberId()}">
-      <input type="hidden" id="chatroomId" th:value="${chatroomId}"/>
+      <!--<input type="hidden" id="reservationId" th:value="${memberId}">-->
+     <input type="hidden" id="chatroomId" th:value="${chatroomId}"/>
       <input type="hidden" id="userName" th:value="${userName}"/>
       <input type="hidden" id="date" th:value="${date}"/>
 
@@ -73,8 +74,9 @@
 
 
 
+
       <!--채팅방 - 내용 출력 영역(스크롤적용부분)-->
-      <div class="chat__chatroom-content chat__chatroom-content-js">
+      <div class="chat__chatroom-content chatroom-content-js">
         <div class="chat__chat-content">
 
           <!--보내는 메세지 내용 영역-->
@@ -105,8 +107,8 @@
       </div>
 
       <!--채팅입력창-->
-      <div class="chat__form-chat chat__form-chat-js">
-        <input class="chat__message chat__message-js" th:name="content" placeholder="보내실 메시지를 입력하세요.">
+      <div class="chat__form-chat form-chat-js">
+        <input class="chat__message message-js" th:name="content" placeholder="보내실 메시지를 입력하세요.">
         <input type="image" onclick="send()" class="chat__send-img"
                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlIcdOy2ImPo3QJ38_FnB_IRKgVJq94Q35Ag&usqp=CAU"/>
       </div>

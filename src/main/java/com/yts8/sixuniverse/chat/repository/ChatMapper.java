@@ -8,12 +8,19 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ChatMapper {
   /*채팅메세지 저장*/
-  void addMessage(ChatDto chatDto);
-
+  void saveMessage(ChatDto chatDto);
   void createChatroomJoin(ChatroomJoinDto chatroomJoinDto);
 
-  /*(채팅방리스트용) 채팅정보 불러오기*/
-  ChatDto findMessage(Long memberId);
+
+
+
+
+  Long getHostChatRef(Long hostId);
+  Long getMyChatRef(Long memberId);
+
+
+
+
 
 
 }

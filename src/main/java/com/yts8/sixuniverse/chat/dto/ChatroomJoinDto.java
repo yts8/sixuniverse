@@ -10,10 +10,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ChatroomJoinDto {
-    private int joinNum;
+    private Long joinNum;
     private Long memberId;
     private String name;
-    private int chatRef;
+    private Long chatRef;
+
 
 
 }

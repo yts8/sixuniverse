@@ -4,9 +4,9 @@
 <mapper namespace="com.yts8.sixuniverse.chat.repository.ChatMapper">
 
   <!--채팅메세지 insert-->
-  <insert id="addMessage" parameterType="ChatDto" useGeneratedKeys="true" keyProperty="chatId">
-    insert into chat (member_id, join_num, content)
-    values (#{memberId}, #{joinNum}, #{content})
+  <insert id="saveMessage" parameterType="ChatDto" useGeneratedKeys="true" keyProperty="chatId">
+    insert into chat (member_id, content)
+    values (#{memberId}, #{content})
   </insert>
 
   <insert id="createChatroomJoin" parameterType="ChatroomJoinDto" useGeneratedKeys="true" keyProperty="joinNum">
@@ -19,6 +19,24 @@
     select * from chat where member_id=#{memberId} order by create_date desc limit 1
 
   </select>
+
+  <!--호스트ID -->
+  <select id="getHostChatRef" resultType="java.lang.Long">
+    select chat_ref from chatroom_join where member_id=#{hostId}
+  </select>
+
+  <select id="getMyChatRef" resultType="java.lang.Long">
+    select chat_ref from chatroom_join where member_id=#{memberId}
+  </select>
+
+  <insert id="createNewRoom" parameterType="ChatroomJoinDto" useGeneratedKeys="true" keyProperty="joinNum">
+    insert into chatroom_join (member_id, name, chat_ref)
+    values (#{memberId}, #{userName}, #{realChatRef})
+
+  </insert>
+
+
+
 
 
 </mapper>

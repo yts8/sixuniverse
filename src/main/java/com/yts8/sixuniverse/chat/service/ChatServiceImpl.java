@@ -19,12 +19,11 @@ public class ChatServiceImpl implements ChatService {
   }
 
   @Override
-  public void addMessage(ChatDto chatDto) {
-    chatMapper.addMessage(chatDto);
+  public void saveMessage(ChatDto chatDto) {
+    chatMapper.saveMessage(chatDto);
   }
 
-  @Override
-  public ChatDto findMessage(Long memberId) {return chatMapper.findMessage(memberId);}
+
 
 }
 

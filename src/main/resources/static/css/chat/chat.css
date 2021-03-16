@@ -273,7 +273,7 @@
 
 .chat__receive-chat-container{
     display: flex;
-    height: 80px;
+    /*height: 80px;*/
     margin: 10px;
 }
 /* 상대방 이미지*/
@@ -296,7 +296,7 @@
     font-size: 16px;
     line-height: 20px;
     font-weight: 800;
-    padding-right: 4px;
+    padding: 0 4px 0 5px;
     display: inline-block;
     height: 23px;
 
@@ -316,6 +316,7 @@
     width: 473px;
     text-align: right;
     line-height: normal;
+    padding-right: 5px;
 
 
 }
