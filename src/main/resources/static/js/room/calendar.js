@@ -3,6 +3,10 @@
 //   var renewDate= $('#renewDate').val();
 (() => {
   let impossibleDayString = [] //예약불가능날짜 담을 리스트
+  const today = $('#renew-date').val();
+  const yesterday = $('#yesterday').val();
+  const expiryDate = $('#expiry_date').val();
+  const expiryDay = $('#expiry_day').val();
 
   document.addEventListener('DOMContentLoaded', function () {
     const calendarEl = document.getElementById('calendar');
@@ -14,55 +18,87 @@
         right: "dayGridMonth",
         center: 'title',
       },
-      // initialDate: '2021-03-12', //숙소등록일 입력하기
+      initialDate: today,
       selectable: true,
-      // displayEventEnd: true,
-      // selectMirror: true,
       eventBackgroundColor: 'transparent',
       eventBorderColor: 'transparent',
-
-      dayMaxEvents: true, // allow "more" link when too many events
       locale: 'ko', //언어 한국어
+      events: [
+        {
+          id: 'past',
+          title: 'past',
+          start: '0000-00-00',
+          end: yesterday,
+          display: 'background',
+          color: '#787878',
+          selectable: false,
+          editable: false,
+        }, {
+          id: 'expiryDay',
+          title: 'expiryDay',
+          start: expiryDay,
+          end: '3000-11-11',
+          display: 'background',
+          color: '#787878',
+          selectable: false,
+          editable: false,
+        },
+        {
+          id: 'today',
+          title: 'today',
+          start: today,
+          end: today,
+          color: '#787878',
+        },
+        {
+          id: 'expiryDate',
+          title: '갱신일',
+          start: expiryDate,
+          end: expiryDate,
+          color: '#787878',
+        },
 
-      // select: function (arg) {
-//
-//   alert('해당 날짜에 예약이 불가능합니까?');
-//   calendar.addEvent({
-//   title: '예약불가날짜',
-//   start: arg.start,
-//   end: arg.end,
-//   allDay: arg.allDay
-// })
-//   // calendar.unselect()  //선택취소 메서드
-//
+      ],
 
-      // looks like multi-selection
+
+      //취소날짜 선택
       dateClick: function (dateClickInfo) {
+
+        // alert(info.event.title);
         const gray = "#787878";
         const clickDate = dateClickInfo.dateStr;  //클릭한 날짜 변수에 저장
 
-        if (dateClickInfo.dayEl.style.backgroundColor) {
-          dateClickInfo.dayEl.style.backgroundColor = "";
-          // alert('해당 날짜의 예약이 가능합니까?: ' + clickDate);
-          impossibleDayString = impossibleDayString.filter(day => day !== clickDate);
+        const event = calendar.getEventById('today') // an event object!
+        const today2 = event.start // a property (a Date object)- 참고
 
+        const event2 = calendar.getEventById('expiryDate') // an event object!
+        const expiry2 = event2.start // a property (a Date object)- 참고
+
+        if (dateClickInfo.date < today2 || dateClickInfo.date > expiry2) {
+          alert("비활성화된 기간입니다.")
         } else {
-          dateClickInfo.dayEl.style.backgroundColor = gray;
-          // alert('해당 날짜의 예약이 불가능합니까?: ' + clickDate);
-          impossibleDayString.push(clickDate);
-        }
-      },
 
+          if (dateClickInfo.dayEl.style.backgroundColor) {
+            dateClickInfo.dayEl.style.backgroundColor = "";
+            alert('해당 날짜의 예약이 가능합니까?: ' + clickDate);
+            impossibleDayString = impossibleDayString.filter(day => day !== clickDate);
+
+          } else {
+            dateClickInfo.dayEl.style.backgroundColor = gray;
+            alert('해당 날짜의 예약이 불가능합니까?: ' + clickDate);
+            impossibleDayString.push(clickDate);
+          }
+        }
+
+      },
 
 //   //캘린더에 아이콘만드는 코드
 //   eventContent: {
 //   html: `<div><img src="/images/room/ok.png" class="event-icon" /></div>`,
 // },
 
-      // events: []
 
     });
-
     calendar.render();
   });
 

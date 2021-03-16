@@ -5,6 +5,8 @@ import com.yts8.sixuniverse.reservationDate.service.ReservationDateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,8 +32,8 @@ public class RoomRegisterApiController {
     }
 
     List<ReservationDateDto> hostReservationDtos = new ArrayList<>();
-    for(Date d:impossibleDay){
-      ReservationDateDto reservationDateDto=new ReservationDateDto();
+    for (Date d : impossibleDay) {
+      ReservationDateDto reservationDateDto = new ReservationDateDto();
       reservationDateDto.setRoomId(roomId);
 //      reservationDateDto.setReservationDate(d);
       hostReservationDtos.add(reservationDateDto);
