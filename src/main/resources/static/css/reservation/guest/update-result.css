@@ -33,14 +33,7 @@
   margin-top: 20px;
   padding: 20px;
   border: 1px solid #c3c3c3;
-}
-
-.guest-reservation-update__reservation-date > .fa-arrow-right {
-  margin: 0 20px 0 20px;
-}
-
-.guest-reservation-update__reservation-date > .guest-reservation-update__i-calendar {
-  margin-left: 120px;
+  justify-content: space-between;
 }
 
 .guest-reservation-update__new-guest {

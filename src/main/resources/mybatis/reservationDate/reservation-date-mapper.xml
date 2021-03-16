@@ -17,21 +17,19 @@
     </foreach>
   </insert>
 
-  <select id="reservationDateList" resultType="java.lang.String">
+  <select id="reservationDateList" resultType="java.time.LocalDate">
     select reservation_date
     from reservation_date where room_id = #{roomId}
   </select>
 
   <select id="findByReservationDate" resultType="ReservationDto">
     select room_id, reservation_date
-    from reservation_date where room_id = #{roomId} and reservation_date = #{reservationDate}
+    from reservation_date where room_id = #{roomId} and reservation_date = #{checkIn}
   </select>
 
-  <select id="reservationDateUpdateList" resultType="java.lang.String">
+  <select id="reservationDateUpdateList" resultType="java.time.LocalDate">
     select reservation_date
     from reservation_date where room_id = #{roomId} and reservation_id not in (#{reservationId})
   </select>
-
-
 
 </mapper>

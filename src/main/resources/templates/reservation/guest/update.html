@@ -17,8 +17,7 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
   <script type="text/javascript" defer th:src="@{/js/reservation/reservation-modal.js}"></script>
-<!--  <script type="text/javascript" defer th:src="@{/js/reservation/reservation-date-modal.js}"></script>-->
-  <script type="text/javascript" defer th:src="@{/js/reservation/guest/update-date.js}"></script>
+  <script type="text/javascript" defer th:src="@{/js/reservation/reservation-date-modal.js}"></script>
 </th:block>
 
 <head>
@@ -34,12 +33,19 @@
       <div class="guest-reservation-update__content">
         <div class="guest-reservation-update__title">무엇을 변경하고 싶으세요?</div>
 
-        <form th:action="@{/reservation/guest/update}" method="post">
+        <form th:action="@{|/reservation/guest/update/${reservation.reservationId}|}" method="post">
+          <input type="hidden" name="checkIn" class="reservation__check-in" th:value="${reservation.checkIn}">
+          <input type="hidden" name="checkOut" class="reservation__check-out" th:value="${reservation.checkOut}">
+          <input type="hidden" name="adult" class="reservation__adult" th:value="${reservation.adult}">
+          <input type="hidden" name="kid" class="reservation__kid" th:value="${reservation.kid}">
+          <input type="hidden" name="infant" class="reservation__infant" th:value="${reservation.infant}">
+          <input type="hidden" name="reservationDateArray" class="reservation__date">
+
           <div class="guest-reservation-update__small-box">
             <div class="guest-reservation-update__sub-title">날짜</div>
             <div class="guest-reservation-update__reservation-date">
               <div class="reservation__check-in" th:text="${reservation.checkIn}">체크인날짜</div>
-              <i class="fas fa-arrow-right"></i>
+              <div> ~ </div>
               <div class="reservation__check-out" th:text="${reservation.checkOut}">체크아웃날짜</div>
               <div class="guest-reservation-update__i-calendar">
                 <i class="far fa-calendar" id="update-date"></i>
@@ -63,7 +69,6 @@
           </div>
 
           <input type="submit" value="계속" class="guest-reservation-update__next-btn">
-
         </form>
 
         <!-- 날짜 modal -->

@@ -5,15 +5,24 @@
         $('.guest-reservation__upcoming').addClass("guest-reservation__active");
         $('.guest-reservation__complete').removeClass("guest-reservation__active");
         $('.guest-reservation__cancel').removeClass("guest-reservation__active");
+        $('.guest-reservation__update').removeClass("guest-reservation__active");
       } else if (location.href.indexOf('complete') != -1) {
         $('.guest-reservation__complete').addClass("guest-reservation__active");
         $('.guest-reservation__upcoming').removeClass("guest-reservation__active");
         $('.guest-reservation__cancel').removeClass("guest-reservation__active");
+        $('.guest-reservation__update').removeClass("guest-reservation__active");
       } else if (location.href.indexOf('cancel') != -1){
         $('.guest-reservation__cancel').addClass("guest-reservation__active");
         $('.guest-reservation__upcoming').removeClass("guest-reservation__active");
         $('.guest-reservation__complete').removeClass("guest-reservation__active");
+        $('.guest-reservation__update').removeClass("guest-reservation__active");
+      } else if (location.href.indexOf('update') != -1) {
+        $('.guest-reservation__update').addClass("guest-reservation__active");
+        $('.guest-reservation__cancel').removeClass("guest-reservation__active");
+        $('.guest-reservation__upcoming').removeClass("guest-reservation__active");
+        $('.guest-reservation__complete').removeClass("guest-reservation__active");
       } else {
+        $('.guest-reservation__upcoming').removeClass("guest-reservation__active");
         $('.guest-reservation__cancel').removeClass("guest-reservation__active");
         $('.guest-reservation__upcoming').removeClass("guest-reservation__active");
         $('.guest-reservation__complete').removeClass("guest-reservation__active");
@@ -37,6 +46,12 @@
     $('.guest-reservation__cancel').on('click',function(){
       location.href='/reservation/guest/list';
       $('.guest-reservation__cancel').toggleClass("guest-reservation__active");
+
+    });
+
+    $('.guest-reservation__update').on('click',function(){
+      location.href='/reservation/guest/list';
+      $('.guest-reservation__update').toggleClass("guest-reservation__active");
 
     });
 

@@ -1,10 +1,10 @@
 package com.yts8.sixuniverse.reservation.dto;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-
 
 @Data
 public class ReservationDto {
@@ -15,8 +15,13 @@ public class ReservationDto {
   private int adult;
   private int kid;
   private int infant;
-  private Date checkIn;
-  private Date checkOut;
+
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  private LocalDate checkIn;
+
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
+  private LocalDate checkOut;
+
   private LocalDateTime createDate;
   private LocalDateTime cancelDate;
 }

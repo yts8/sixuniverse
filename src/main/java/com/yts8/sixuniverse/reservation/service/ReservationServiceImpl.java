@@ -5,6 +5,7 @@ import com.yts8.sixuniverse.reservation.repository.ReservationMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -26,5 +27,10 @@ public class ReservationServiceImpl implements ReservationService {
   @Override
   public List<ReservationDto> reservationList(ReservationDto reservationDto) {
     return reservationMapper.reservationList(reservationDto);
+  }
+
+  @Override
+  public void reservationCheckOut(LocalDate today) {
+    reservationMapper.reservationCheckOut(today);
   }
 }
