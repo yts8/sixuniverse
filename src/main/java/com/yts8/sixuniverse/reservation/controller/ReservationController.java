@@ -130,7 +130,6 @@ public class ReservationController {
     reservationDto1.setRoomId(roomId);
 
     List<LocalDate> reservationDateList = reservationDateService.reservationDateUpdateList(reservationDto1);
-
     Collections.sort(reservationDateList);
 
     model.addAttribute("room", roomDto);
@@ -192,7 +191,6 @@ public class ReservationController {
         reservationDto1.setCheckIn(reservationDateCheckIn);
 
         ReservationDateDto reservationDateRoomId = reservationDateService.findByReservationDate(reservationDto1);
-
 
         if (reservationDateRoomId != null) {
           // 예약 시 선택한 체크인 날짜가 이미 예약된 날짜라면
