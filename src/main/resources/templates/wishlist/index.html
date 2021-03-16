@@ -4,8 +4,13 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
 
+<head>
+  <meta charset="UTF-8">
+</head>
+
 <th:block layout:fragment="css">
-  <link rel="stylesheet" th:href="@{/css/wishlist/wishlist.css}"/>
+  <link rel="stylesheet" href="../../static/css/wishlist/wishlist.css"
+        th:href="@{/css/wishlist/wishlist.css}"/>
 </th:block>
 
 <th:block layout:fragment="js">
@@ -23,6 +28,8 @@
         <button class="wishlist__make-wishlist-folder">
           <img th:src="@{/images/wishlist/makewishlist.JPG/}"/>
         </button>
+
+        <!-- 모달창 -->
         <div class="wishlist__modal">
           <div class="wishlist__modal-content">
             <div class="wishlist__update-title">
@@ -32,23 +39,35 @@
             <hr class="wishlist__hr">
             <div>
               <div>
-                <input type="text">
+                <input type="text" class="wishlist__name">
               </div>
-              <div>최대 50자</div>
-              <button>목록 삭제하기</button>
+              <div class="wishlist__length">최대 50자</div>
+              <div class="wishlist__cancel">
+                <a href="#">
+                  <div>목록 삭제하기</div>
+                </a>
+              </div>
             </div>
             <hr class="wishlist__hr">
-            <div>
-              <button>취소</button>
-              <button>저장</button>
+            <div class="wishlist__move">
+              <div class="wishlist__move-back">
+                <div class="wishlist__back"> <</div>
+                <a href="#">
+                  <div>취소</div>
+                </a>
+              </div>
+              <div>
+                <button type="submit" class="wishlist__ok">완료</button>
+              </div>
             </div>
           </div>
         </div>
+
       </div>
       <div class="wishlist__main-left-middle">
         <div class="wishlist__location">부산</div>
         <hr class="wishlist__hr">
-        <div class="wishlist__room-count">숙소 []개</div>
+        <div class="wishlist__room-count">숙소 개</div>
         <hr class="wishlist__hr">
       </div>
 

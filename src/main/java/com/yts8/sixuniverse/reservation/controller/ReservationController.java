@@ -77,6 +77,7 @@ public class ReservationController {
       RoomDto roomDto = roomService.findById(reservation.getRoomId());
       roomList.add(roomDto);
     }
+    System.out.println("reservationList = " + reservationList);
 
     model.addAttribute("roomList", roomList);
     model.addAttribute("reservationList", reservationList);

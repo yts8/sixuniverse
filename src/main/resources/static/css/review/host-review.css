@@ -7,7 +7,7 @@
   margin-bottom: 22px;
 }
 
-.host-review__score-group span {
+.host-review__score-group button {
   border: 1px solid #EBEBEB;
   display: inline-block;
   white-space: nowrap;
@@ -129,6 +129,6 @@
 }
 
 .host-review__review-left a {
-  text-decoration: none;
+  text-decoration: underline;
   color: black;
 }

@@ -46,6 +46,152 @@
   line-height: 22px;
 }
 
+.g-review-by__panel-body-review {
+  display: flex;
+  flex-direction: column;
+}
+
+.g-review-by__panel-review-profile {
+  display: flex;
+}
+
+.g-review-by__panel-review-profile-box {
+  width: 50px;
+  height: 50px;
+  border-radius: 70%;
+  overflow: hidden;
+  margin-right: 15px;
+  margin-top: 10px;
+}
+
+.g-review-by__panel-review-profile-box-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.g-review-by__panel-review-profile-text {
+  flex: 1;
+}
+
+.g-review-by__panel-review-profile-text-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #414141;
+  margin-bottom: 10px;
+}
+
+.g-review-by__panel-review-text {
+  font-size: 14px;
+  margin-right: 50px;
+  line-height: normal;
+  margin-bottom: 10px;
+}
+
+.g-review-by__panel-review-day {
+  font-size: 14px;
+  color: #666666;
+}
+
+.g-review-by__a {
+  font-size: 14px;
+  font-weight: bold;
+  color: #414141;
+  text-decoration: underline;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 10px;
+}
+
+.g-review-by__a a {
+  margin: 0 10px;
+}
+
+.g-review-by__modal {
+  z-index: 99;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.03);
+  top: 0;
+  left: 0;
+  display: none;
+}
+
+.g-review-by__modal-content {
+  width: 300px;
+  height: 200px;
+  background: #fff;
+  border-radius: 15px;
+  position: relative;
+  top: 50%;
+  left: 55%;
+  margin-top: -100px;
+  margin-left: -200px;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 15px 0;
+  line-height: 23px;
+}
+
+.g-review-by__update-title {
+  display: flex;
+}
+
+.g-review-by__delete-title button {
+  width: 70px;
+  font-size: 25px;
+  margin-left: 5px;
+}
+
+.g-review-by__delete-text {
+  margin: 20px 0;
+}
+
+.g-review-by__move {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  padding: 0 20px;
+}
+
+.g-review-by__move-back {
+  align-items: center;
+  display: flex;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+  padding-bottom: 15px;
+}
+
+.g-review-by__back {
+  margin-right: 5px;
+}
+
+.g-review-by__move a {
+  color: black;
+}
+
+.g-review-by__move button {
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: black;
+  border-radius: 10px;
+  border-style: none;
+  width: 80px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.g-review-by__hr {
+  height: 1px;
+  background-color: #dbdbdb;
+  border: none;
+  margin: 15px 0;
+}
+
 .g-review-by__panel-body-rate {
   font-size: 16px;
   word-spacing: -3px;

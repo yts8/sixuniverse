@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yts8.sixuniverse.review.repository.ReviewMapper">
+
+  <insert id="insertReview">
+    insert into review
+    values (null, 1, 1,
+            #{scoreAll}, #{scoreClean}, #{scoreLocation}, #{scoreService},
+            #{reviewContent}, #{reviewRegDate}, #{replyContent}, #{replyRegDate})
+  </insert>
+
+  <select id="findById" resultType="ReviewDto">
+    select *
+    from review
+    where review_id = #{reviewId}
+  </select>
+
+  <select id="reviewList" resultType="ReviewDto">
+    select *
+    from review
+  </select>
+
+  <select id="getReview" resultType="ReviewDto">
+    select score_all,
+           score_clean,
+           score_location,
+           score_service,
+           review_content
+    from review
+    where review_id = #{reviewId}
+  </select>
+
+  <update id="updateReview" parameterType="ReviewDto">
+    update review
+    set score_all      = #{scoreAll},
+        score_clean    = #{scoreClean},
+        score_location = #{scoreLocation},
+        score_service  = #{scoreService},
+        review_content = #{reviewContent}
+    where review_id = #{reviewId}
+  </update>
+
+  <delete id="deleteReview" parameterType="ReviewDto">
+    delete from review
+    where review_id = #{reviewId}
+  </delete>
+
+</mapper>
