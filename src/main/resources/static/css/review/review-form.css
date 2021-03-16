@@ -27,8 +27,32 @@
   margin-bottom: 15px;
 }
 
-.review-form__star-main {
-  font-size: 30px;
+.review-form__star-main-each {
+  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+  background-size: auto 100%;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  text-indent: -9999px;
+  cursor: pointer;
+}
+
+.review-form__star-main-each.on {
+  background-position: 0 0;
+}
+
+.review-form__star-part-each {
+  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+  background-size: auto 100%;
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  text-indent: -9999px;
+  cursor: pointer;
+}
+
+.review-form__star-part-each.on {
+  background-position: 0 0;
 }
 
 .review-form__score-part-text {
@@ -42,6 +66,12 @@
   color: #414141;
   font-size: 25px;
   margin-bottom: 10px;
+}
+
+.review-form__textarea {
+  width: 700px;
+  height: 100px;
+  border-radius: 10px;
 }
 
 .review-form__move {

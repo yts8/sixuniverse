@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+<th:block layout:fragment="css">
+  <link rel="stylesheet" href="../../static/css/review/review-complete.css"
+        th:href="@{/css/review/review-complete.css}">
+</th:block>
+
+<th:block layout:fragment="content">
+  <div class="review-complete__thank">
+    <h2>후기를 남겨주셔서 감사합니다!</h2>
+  </div>
+  <a class="review-complete__back" th:href="@{/}">
+    <button>메인으로 돌아가기</button>
+  </a>
+</th:block>
+
+</html>
