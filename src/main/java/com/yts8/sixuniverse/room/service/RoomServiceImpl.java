@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -21,8 +21,13 @@ public class RoomServiceImpl implements RoomService {
   }
 
   @Override
-  public Date findByCreateDate(Long roomId) {
+  public LocalDateTime findByCreateDate(Long roomId) {
     return roomMapper.findByCreateDate(roomId);
+  }
+
+  @Override
+  public LocalDateTime findByRenewDate(Long roomId) {
+    return roomMapper.findByRenewDate(roomId);
   }
 
   @Override

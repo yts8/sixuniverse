@@ -12,6 +12,8 @@ public interface ReservationDateService {
 
   void reservationDateInsert(List<ReservationDateDto> reservationDateDtos);
 
+  void hostReservationDateInsert(List<ReservationDateDto> reservationDateDto);
+
   List<String> reservationDateList(Long roomId);
 
   List<String> reservationDateUpdateList(ReservationDto reservationDto);

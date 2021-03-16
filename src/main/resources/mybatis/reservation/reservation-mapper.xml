@@ -4,13 +4,15 @@
 <mapper namespace="com.yts8.sixuniverse.reservation.repository.ReservationMapper">
   <insert id="reservationInsert" parameterType="ReservationDateDto" useGeneratedKeys="true" keyProperty="reservationId" >
     insert into reservation
-    values (null, #{roomId}, #{memberId}, #{status}, #{adult}, #{kid}, #{infant}, #{checkIn}, #{checkOut}, #{createDate}, #{cancelDate})
+    values (null, #{roomId}, #{memberId}, #{status}, #{adult}, #{kid}, #{infant}, #{checkIn}, #{checkOut},
+            #{createDate}, #{cancelDate})
   </insert>
 
   <select id="reservationList" resultType="ReservationDto">
     select *
     from reservation
-    where member_id = #{memberId} and status = #{status}
+    where member_id = #{memberId}
+      and status = #{status}
   </select>
 
   <select id="findById" resultType="ReservationDto">

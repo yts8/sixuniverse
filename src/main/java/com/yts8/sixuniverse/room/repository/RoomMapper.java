@@ -3,7 +3,7 @@ package com.yts8.sixuniverse.room.repository;
 import com.yts8.sixuniverse.room.dto.RoomDto;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Mapper
 public interface RoomMapper {
@@ -12,7 +12,9 @@ public interface RoomMapper {
 
   Long findByMemberId(Long memberId);
 
-  Date findByCreateDate(Long roomId);
+  LocalDateTime findByCreateDate(Long roomId);
+
+  LocalDateTime findByRenewDate(Long roomId);
 
   void save(RoomDto roomDto);
 

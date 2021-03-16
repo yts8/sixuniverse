@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -207,6 +206,18 @@ public class RoomRegisterController {
   @GetMapping("/calendar/{roomId}")
   public String getCalendar(Model model, HttpSession httpSession, @PathVariable Long roomId) {
     model.addAttribute("title", "달력 설정");
+
+//    갱신일로부터 +예약받을 예정일수 -> 캘린더에 on 상태로 만들기 위해 보내는 값
+//    LocalDateTime renewDate=roomService.findByRenewDate(roomId);
+//    List<String> RenewDateList = new ArrayList<>();
+//    for (int i=0; i<30; i++) {
+//      String strRenewDate=renewDate+"";
+//      strRenewDate.substring(0,10);
+//      RenewDateList.add(strRenewDate);
+//      renewDate.plusDays(1L);
+//    }
+//    model.addAttribute("renewDate",RenewDateList);
+
 
     return "room/register/calendar";
   }
