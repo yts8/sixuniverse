@@ -30,7 +30,6 @@ public class ReservationDateServiceImpl implements ReservationDateService {
     reservationDateMapper.hostReservationDateInsert(reservationDateDto);
   }
 
-
   @Override
   public List<LocalDate> reservationDateList(Long roomId) {
     return reservationDateMapper.reservationDateList(roomId);

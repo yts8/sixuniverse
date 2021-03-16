@@ -22,7 +22,8 @@
   margin-top: 30px;
 }
 
-.guest-reservation__upcoming, .guest-reservation__complete, .guest-reservation__cancel {
+.guest-reservation__upcoming, .guest-reservation__complete,
+.guest-reservation__cancel, .guest-reservation__update {
   background-color: transparent;
   border: none;
   padding: 10px;
@@ -38,7 +39,7 @@
   cursor: pointer;
 }
 
-.guest-reservation__complete, .guest-reservation__cancel {
+.guest-reservation__complete, .guest-reservation__cancel, .guest-reservation__update {
   margin-left: 30px;
 }
 

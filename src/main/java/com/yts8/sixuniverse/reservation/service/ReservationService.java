@@ -2,6 +2,7 @@ package com.yts8.sixuniverse.reservation.service;
 
 import com.yts8.sixuniverse.reservation.dto.ReservationDto;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ReservationService {
@@ -11,5 +12,7 @@ public interface ReservationService {
   ReservationDto findById(Long reservationId);
 
   List<ReservationDto> reservationList(ReservationDto reservationDto);
+
+  void reservationCheckOut(LocalDate today);
 
 }

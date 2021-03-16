@@ -7,105 +7,128 @@
     let expiryDate = 0;
 
     $('#update-date').click(function () {
-      $('#date-modal').show();
 
-      $(function () {
+      $.ajax({
+        url: "/reservation/guest/update/ajax",
+        type: "GET",
+        data: {checkIn : $('.reservation__check-in').html()},
+        success: function (data) {
+          if(data) {
+            $('.guest-reservation-update__msg').html('예약 당일에는 날짜를 변경할 수 없습니다.');
+            $('.guest-reservation-update__reservation-date').css('box-shadow', '0 0 5px red');
+          } else {
+            $('#date-modal').show();
 
-        const minDate = new Date();
-        let d1, d2;
-        let maxDate = null;
-        let maxDate2 = 0;
-        expiryDate = $('.reservation__room-expiry-date').val();
+            $(function () {
 
-        let disabledDayList = $('.reservation__reservation-date-list').val();
-        const disabledDays = disabledDayList.substring(1,disabledDayList.length-1).split(", ");
+              const minDate = new Date();
+              let d1, d2;
+              let maxDate = null;
+              let maxDate2 = 0;
+              expiryDate = $('.reservation__room-expiry-date').val();
 
-        $('#range-date').datepicker({
-          numberOfMonths: [1, 2],
-          showMonthAfterYear: true,
-          dateFormat: 'yy-mm-dd',
-          yearSuffix: "년",
-          monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-          dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-          minDate: minDate,
-          maxDate: expiryDate == 0 ? null : "+" + expiryDate + "m", // 숙소 expiry_date 가져오기
+              let disabledDayList = $('.reservation__reservation-date-list').val();
+              const disabledDays = disabledDayList.substring(1,disabledDayList.length-1).split(", ");
 
-          beforeShowDay: function disableAllTheseDays(date) {
+              $('#range-date').datepicker({
+                numberOfMonths: [1, 2],
+                showMonthAfterYear: true,
+                dateFormat: 'yy-mm-dd',
+                yearSuffix: "년",
+                monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+                minDate: minDate,
+                maxDate: expiryDate == 0 ? null : "+" + expiryDate + "m", // 숙소 expiry_date 가져오기
 
-            const m = date.getMonth() < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
-            const d = date.getDate() < 10 ? "0" + date.getDate(): date.getDate(), y = date.getFullYear();
+                beforeShowDay: function disableAllTheseDays(date) {
 
-            for (i = 0; i < disabledDays.length; i++) {
-              if ($.inArray(y + '-' + m + '-' + d, disabledDays) != -1) {
-                return [false];
-              }
-            }
+                  const m = date.getMonth() < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                  const d = date.getDate() < 10 ? "0" + date.getDate(): date.getDate(), y = date.getFullYear();
 
-            return [true, ((date.getTime() >= Math.min(prv, cur2) && date.getTime() <= Math.max(prv, cur2)) ? 'date-range-selected' : '')];
-          },
+                  for (i = 0; i < disabledDays.length; i++) {
+                    if ($.inArray(y + '-' + m + '-' + d, disabledDays) != -1) {
+                      return [false];
+                    }
+                  }
 
-          onSelect: function (dateText, inst) {
+                  return [true, ((date.getTime() >= Math.min(prv, cur2) && date.getTime() <= Math.max(prv, cur2)) ? 'date-range-selected' : '')];
+                },
 
-            prv = cur;
-            cur = (new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay)).getTime();
-            cur2 = cur;
+                onSelect: function (dateText, inst) {
 
-            if (prv == -1 || prv == cur) {
+                  prv = cur;
+                  cur = (new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay)).getTime();
+                  cur2 = cur;
 
-              const minDate2 = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
+                  if (prv == -1 || prv == cur) {
 
-              $('#range-date').datepicker('option', 'minDate', minDate2);
+                    const minDate2 = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
 
-              prv = cur;
-              $('#check-in').val(dateText);
-              $('#check-out').val('');
+                    $('#range-date').datepicker('option', 'minDate', minDate2);
 
-              const maxCur = (new Date(inst.selectedYear, inst.selectedMonth + 1, inst.selectedDay)).getTime();
+                    prv = cur;
+                    $('#check-in').val(dateText);
+                    $('#check-out').val('');
 
-              $.each(disabledDays, function (index, item) {
-                maxDate = new Date(item);
+                    const maxCur = (new Date(inst.selectedYear, inst.selectedMonth + 1, inst.selectedDay)).getTime();
 
-                maxDate2 = (new Date(maxDate.getFullYear(), maxDate.getMonth() + 1, maxDate.getDate())).getTime();
+                    $.each(disabledDays, function (index, item) {
+                      maxDate = new Date(item);
 
-                if (maxCur < maxDate2) {
+                      maxDate2 = (new Date(maxDate.getFullYear(), maxDate.getMonth() + 1, maxDate.getDate())).getTime();
 
-                  $('#range-date').datepicker('option', 'maxDate', maxDate);
+                      if (maxCur < maxDate2) {
 
-                  return false;
-                }
+                        $('#range-date').datepicker('option', 'maxDate', maxDate);
+
+                        return false;
+                      }
+
+                    });
+
+                  } else {
+                    d1 = $.datepicker.formatDate('yy-mm-dd', new Date(Math.min(prv, cur)), {});
+                    d2 = $.datepicker.formatDate('yy-mm-dd', new Date(Math.max(prv, cur)), {});
+
+                    const minus = ((new Date(d2).getTime()) - (new Date(d1).getTime())) / 1000 / 60 / 60 / 24;
+
+                    for (let i = 0; i <= minus; i++) {
+                      const testD1 = new Date(d1);
+                      const testDate = new Date(testD1.setDate(testD1.getDate() + i));
+
+                      arrayDays[i] = moment(testDate).format('YYYY-MM-DD');
+                    }
+
+                    $('#check-in').val(d1);
+                    $('#check-out').val(d2);
+
+                    $('#range-date').datepicker('option', 'minDate', 0);
+                    $('#range-date').datepicker('option', 'maxDate', expiryDate == 0 ? null : "+" + expiryDate + "m"); // 개월제한 있을 때 개원제한으로 막기
+
+                    cur = -1;
+
+                  }
+
+                },
 
               });
 
-            } else {
-              d1 = $.datepicker.formatDate('yy-mm-dd', new Date(Math.min(prv, cur)), {});
-              d2 = $.datepicker.formatDate('yy-mm-dd', new Date(Math.max(prv, cur)), {});
+            });
 
-              const minus = ((new Date(d2).getTime()) - (new Date(d1).getTime())) / 1000 / 60 / 60 / 24;
 
-              for (let i = 0; i <= minus; i++) {
-                const testD1 = new Date(d1);
-                const testDate = new Date(testD1.setDate(testD1.getDate() + i));
 
-                arrayDays[i] = moment(testDate).format('YYYY-MM-DD');
-              }
 
-              $('#check-in').val(d1);
-              $('#check-out').val(d2);
+          }
+        }
 
-              $('#range-date').datepicker('option', 'minDate', 0);
-              $('#range-date').datepicker('option', 'maxDate', expiryDate == 0 ? null : "+" + expiryDate + "m"); // 개월제한 있을 때 개원제한으로 막기
+      })
 
-              cur = -1;
 
-            }
 
-          },
-
-        });
-
-      });
 
     });
+
+
 
     $('.reservation__delete-date').click(function () {
 
@@ -141,5 +164,7 @@
     });
 
   });
+
+
 
 })()

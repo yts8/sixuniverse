@@ -5,7 +5,6 @@ import com.yts8.sixuniverse.reservationDate.dto.ReservationDateDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Mapper
