@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -208,9 +209,19 @@ public class RoomRegisterController {
   public String getCalendar(Model model, HttpSession httpSession, @PathVariable Long roomId) {
     model.addAttribute("title", "달력 설정");
 
-//    갱신일로부터 +예약받을 예정일수 -> 캘린더에 on 상태로 만들기 위해 보내는 값
     LocalDateTime renewDate=roomService.findByRenewDate(roomId);
     model.addAttribute("renewDate", renewDate);
+
+    LocalDateTime yesterdayTime=renewDate.minusDays(1L);
+    String yesterday = yesterdayTime.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+    model.addAttribute("yesterday", yesterday);
+
+    int expiryDateNum=roomService.findByExpiryDate(roomId);
+    LocalDateTime expiryDate = renewDate.plusMonths(expiryDateNum);
+    model.addAttribute("expiryDate", expiryDate);
+
+    String expiryDay = expiryDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+    model.addAttribute("expiryDay", expiryDay);
 
     return "room/register/calendar";
   }

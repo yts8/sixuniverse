@@ -10,11 +10,8 @@ public interface RoomMapper {
 
   RoomDto findById(Long roomId);
 
-  Long findByMemberId(Long memberId);
-
-  LocalDateTime findByCreateDate(Long roomId);
-
   LocalDateTime findByRenewDate(Long roomId);
+  int findByExpiryDate(Long roomId);
 
   void save(RoomDto roomDto);
 

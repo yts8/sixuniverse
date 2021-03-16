@@ -26,6 +26,11 @@ public class RoomServiceImpl implements RoomService {
   }
 
   @Override
+  public int findByExpiryDate(Long roomId) {
+    return roomMapper.findByExpiryDate(roomId);
+  }
+
+  @Override
   public void save(RoomDto roomDto) {
     roomMapper.save(roomDto);
   }

@@ -15,6 +15,12 @@
     where room_id = #{roomId}
   </select>
 
+  <select id="findByExpiryDate" resultType="int">
+    select expiry_date
+    from room
+    where room_id = #{roomId}
+  </select>
+
   <insert id="save" parameterType="RoomDto" useGeneratedKeys="true" keyProperty="roomId">
     insert into room (member_id, zipcode, address, sub_address)
     values (#{memberId}, #{zipcode}, #{address}, #{subAddress})
