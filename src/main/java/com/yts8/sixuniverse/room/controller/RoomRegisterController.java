@@ -209,6 +209,7 @@ public class RoomRegisterController {
   public String getCalendar(Model model, HttpSession httpSession, @PathVariable Long roomId) {
     model.addAttribute("title", "달력 설정");
 
+    int expiryDateNum = roomService.findByExpiryDate(roomId);
     LocalDateTime renewDate = roomService.findByRenewDate(roomId);
     model.addAttribute("renewDate", renewDate);
 
@@ -216,7 +217,6 @@ public class RoomRegisterController {
     String yesterday = yesterdayTime.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
     model.addAttribute("yesterday", yesterday);
 
-    int expiryDateNum = roomService.findByExpiryDate(roomId);
     LocalDateTime expiryDate = renewDate.plusMonths(expiryDateNum);
     model.addAttribute("expiryDate", expiryDate);
 
