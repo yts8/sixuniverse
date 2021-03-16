@@ -32,8 +32,10 @@
         <div class="member-setting__update-wrap">
           <div class="member-setting__update-box">
             <div class="member-setting__update-title">비밀번호</div>
-            <div class="update-password-text-box-js"
-                 th:text="|최종 수정일: ${session.member.getUpdateDate()}|">
+            <div>
+              <span>최종 수정일 : </span>
+              <span class="update-password-text-box-js"
+                    th:text="${#temporals.format(session.member.getUpdateDate(), 'yyyy-MM-dd')}"></span>
             </div>
 
             <div class="member-setting__update-input-wrap
