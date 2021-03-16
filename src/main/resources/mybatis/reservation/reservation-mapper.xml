@@ -11,10 +11,8 @@
   <select id="reservationList" parameterType="ReservationDateDto" resultType="ReservationDto">
     select *
     from reservation
-    where member_id = #{memberId}
-      and status = #{status}
+    where member_id = #{memberId} and status = #{status}
     order by check_in desc
-
   </select>
 
   <select id="findById" parameterType="ReservationDateDto" resultType="ReservationDto">
