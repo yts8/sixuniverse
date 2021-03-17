@@ -8,5 +8,4 @@ public class RoomImageDto {
   private Long roomImgId;
   private Long roomId;
   private String roomImg;
-  private int imgOrder;
 }

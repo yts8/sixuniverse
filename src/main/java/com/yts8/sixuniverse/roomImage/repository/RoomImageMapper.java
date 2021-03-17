@@ -7,8 +7,8 @@ import java.util.List;
 
 @Mapper
 public interface RoomImageMapper {
-  void save(List<RoomImageDto> imageDto);
+  void save(RoomImageDto roomImageDto);
 
-  List<RoomImageDto> findByRoomId(RoomImageDto imageDto);
+  List<RoomImageDto> findByRoomId(Long roomId);
 
 }

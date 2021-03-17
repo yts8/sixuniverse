@@ -30,7 +30,11 @@ body, html {
 
 
 .room__register-btn {
-  padding: 15px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 92px;
+  height: 46px;
   size: 17px;
   color: white;
   font-weight: bold;
