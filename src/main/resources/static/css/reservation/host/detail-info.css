@@ -1,0 +1,179 @@
+.reservation__detail-container {
+    font-size: 14px;
+    line-height: 1.43;
+    color: #484848;
+    background-color: #fff;
+    box-sizing: border-box;
+    padding-left: 80px;
+    padding-right: 80px;
+    width: 800px;
+    margin: 0 auto;
+}
+
+.reservation__detail-subject {
+    padding-bottom: 24px;
+    margin-top: 64px;
+    display: flex;
+    width: 800px;
+}
+
+.reservation__detail-h1 {
+    font-size: 32px;
+    line-height: 1.125em;
+    color: #484848;
+    font-weight: bold;
+}
+
+.reservation__detail-profile {
+    border-top-color: rgb(235, 235, 235);
+    border-top-width: 1px;
+    border-top-style: solid;
+    padding-top: 52px;
+    padding-bottom: 16px;
+    display: block;
+    width: 704px;
+    border-bottom-color: rgb(235, 235, 235);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+}
+
+.reservation__detail-status {
+    color: rgb(118, 118, 118);
+    font-size: 12px;
+    line-height: 1.33em;
+}
+
+.reservation__detail-profile-con {
+    display: table-cell;
+    width: 100%;
+    vertical-align: top;
+    float: left;
+}
+
+.reservation__detail-profile-name {
+    margin-bottom: 4px;
+    font-size: 24px;
+    line-height: 1.25em;
+    font-weight: bold;
+    color: #484848;
+}
+
+.reservation__detail-profile-info, .reservation__detail-profile-room {
+    font-size: 16px;
+    line-height: 1.375;
+    color: #484848;
+}
+
+.reservation__detail-profile-sub {
+    display: flex;
+}
+
+.reservation__detail-profile-img {
+    height: 64px;
+    width: 64px;
+}
+
+.reservation__detail-profile-img-con-photo {
+    margin: 16px;
+    background-color: #D8D8D8;
+    border-radius: 50%;
+    border-width: 2px;
+    border-color: #ffffff;
+}
+
+.reservation__detail-review {
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.reservation__detail-review-con {
+    background: #ffffff;
+    border: 1px solid #e4e4e4;
+    border-radius: 4px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, .05);
+    width: 704px;
+    height: 145px;
+    padding: 16px;
+}
+
+.reservation__detail-score, .reservation__detail-star-score-shape, .reservation__detail-link-btn {
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+.reservation__detail-join {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.reservation__detail-review-score {
+    display: flex;
+}
+
+.reservation__detail-all-score {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.reservation__detail-star-score {
+    color: var(--host-color);
+    font-size: 16px;
+    margin-left: 8px;
+    font-weight: bold;
+}
+
+.reservation__detail-content {
+    margin-top: 16px;
+    font-size: 16px;
+}
+
+.reservation__detail-info {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-size: 16px;
+    line-height: 1.375em;
+}
+
+.reservation__detail-see-profile-link {
+    color: var(--host-color);
+    font-size: 16px;
+}
+
+.reservation__detail-see-profile {
+    padding-bottom: 24px;
+    padding-top: 12px;
+    border-bottom-color: rgb(235, 235, 235);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    width: 704px;
+}
+
+.reservation__detail-link-btn {
+    color: var(--host-color);
+}
+
+.reservation__detail-contact {
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+
+.reservation__detail-message {
+    display: flex;
+    justify-content: center;
+}
+
+.reservation__detail-message-btn {
+    width: 348px;
+    padding: 6px 15px 6px 15px;
+    border-color: var(--host-color);
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    color: var(--host-color);
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: bold;
+    text-align: center;
+}
+
+

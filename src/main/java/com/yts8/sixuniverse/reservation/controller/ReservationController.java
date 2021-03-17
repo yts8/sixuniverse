@@ -164,10 +164,10 @@ public class ReservationController {
     return "reservation/guest/detail-info";
   }
 
-  @GetMapping("/host-reservation-list")
+  @GetMapping("/host/list")
   public String reservationHost() {
 
-    return "reservation/host-reservation-list";
+    return "reservation/host/list";
   }
 
   @GetMapping("/guest/update/{reservationId}")
@@ -233,7 +233,6 @@ public class ReservationController {
 
     String reservationDateArr = request.getParameter("reservationDateArray");
     String[] reservationDateArray = null;
-
     if (reservationDateArr.substring(1).equals("[")) {
       reservationDateArray = reservationDateArr.substring(1, reservationDateArr.length() - 1).split(", ");
     } else {
@@ -262,15 +261,13 @@ public class ReservationController {
         reservationService.reservationInsert(reservationDto);
 
         List<ReservationDateDto> reservationDateDtos = new ArrayList<>();
+        
         for (String reservationDay : reservationDateArray) {
           ReservationDateDto reservationDateDto = new ReservationDateDto();
           reservationDateDto.setReservationId(reservationDto.getReservationId());
           reservationDateDto.setRoomId(roomId);
 
-          System.out.println(reservationDay);
-
           LocalDate reservationDate = LocalDate.parse(reservationDay.substring(1,11)); // parse : try catch 문 필요
-
           reservationDateDto.setReservationDate(reservationDate);
           reservationDateDtos.add(reservationDateDto);
         }
@@ -288,4 +285,11 @@ public class ReservationController {
     return "reservation/guest/complete";
   }
 
+  @GetMapping("/host/detail-info")
+  public String reservationHostDetail() {
+
+    return "reservation/host/detail-info";
+  }
+
 }
+
