@@ -38,4 +38,43 @@
 }
 
 /* === File === */
+.room__images-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 1rem;
+  grid-auto-rows: 15rem;
+}
 
+.room__images-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.room__images-wrap > input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.room__images-wrap > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  background-size: cover;
+  background-position: center;
+}
+
+.room__images-wrap > span {
+  color: #787878;
+  font-size: 2rem;
+}

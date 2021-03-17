@@ -8,6 +8,8 @@ public interface RoomImageService {
 
   void save(RoomImageDto roomImageDto);
 
+  void updateImage(RoomImageDto roomImageDto);
+
   List<RoomImageDto> findByRoomId(Long roomId);
 
 }

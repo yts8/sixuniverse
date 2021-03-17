@@ -21,6 +21,11 @@ public class roomImageServiceImpl implements RoomImageService {
   }
 
   @Override
+  public void updateImage(RoomImageDto roomImageDto) {
+    roomImageMapper.updateImage(roomImageDto);
+  }
+
+  @Override
   public List<RoomImageDto> findByRoomId(Long roomId) {
     return roomImageMapper.findByRoomId(roomId);
   }

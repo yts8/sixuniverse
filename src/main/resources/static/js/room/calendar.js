@@ -110,7 +110,7 @@
     for (const day of impossibleDayString) {
       formData.append("impossibleDayString", day);
     }
-    await fetch("http://localhost:8080/api/room/register/calendar", {
+    await fetch("http://localhost:8080/api/host/room/register/calendar", {
       method: "post",
       headers: {
         "X-CSRF-TOKEN": csrf
