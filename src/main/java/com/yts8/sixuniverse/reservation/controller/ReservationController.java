@@ -155,12 +155,6 @@ public class ReservationController {
   }
 
 
-  @GetMapping("/guest/update/complete")
-  public String guestReservationUpdateComplete() {
-
-    return "reservation/guest/update-result";
-  }
-
   @GetMapping("/guest/cancel")
   public String guestReservationCancel() {
 
@@ -187,18 +181,6 @@ public class ReservationController {
     String[] reservationDateArray = reservationDateArr.split(",");
 
     try {
-
-      if (memberId.equals(roomDto.getMemberId())) {
-
-        response.setContentType("text/html; charset=UTF-8");
-        PrintWriter out = response.getWriter();   // getWriter : try catch 문 필요
-        out.println("<script>");
-        out.println("alert('자신이 등록한 숙소는 예약할 수 없습니다.')");
-        out.println("history.back()");
-        out.println("</script>");
-
-      } else {
-
         LocalDate reservationDateCheckIn = LocalDate.parse(reservationDateArray[0]); // parse : try catch 문 필요
 
         // 이미 예약된 날짜인지 확인하기 위해 숙소아이디와 체크인 날짜로 찾아봄
@@ -239,7 +221,6 @@ public class ReservationController {
           reservationDateService.reservationDateInsert(reservationDateDtos);
         }
 
-      }
     } catch (Exception e) {
       e.printStackTrace();
     }

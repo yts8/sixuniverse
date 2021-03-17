@@ -27,4 +27,10 @@
     where check_out <![CDATA[ < ]]> #{today}
   </update>
 
+  <update id="guestReservationUpdateRequest">
+    update reservation
+    set status = 'update'
+    where reservation_id = #{reservationId}
+  </update>
+
 </mapper>

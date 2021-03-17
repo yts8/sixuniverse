@@ -9,7 +9,7 @@
     $('#update-date').click(function () {
 
       $.ajax({
-        url: "/reservation/guest/update/ajax",
+        url: "/api/reservation/guest/update/ajax",
         type: "GET",
         data: {checkIn : $('.reservation__check-in').html()},
         success: function (data) {

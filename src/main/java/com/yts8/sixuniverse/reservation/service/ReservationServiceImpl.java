@@ -33,4 +33,9 @@ public class ReservationServiceImpl implements ReservationService {
   public void reservationCheckOut(LocalDate today) {
     reservationMapper.reservationCheckOut(today);
   }
+
+  @Override
+  public void guestReservationUpdateRequest(Long reservationId) {
+    reservationMapper.guestReservationUpdateRequest(reservationId);
+  }
 }
