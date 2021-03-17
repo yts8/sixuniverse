@@ -5,6 +5,8 @@ import com.yts8.sixuniverse.chat.dto.ChatDto;
 import com.yts8.sixuniverse.chat.dto.ChatroomJoinDto;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface ChatMapper {
   /*채팅메세지 저장*/
@@ -13,14 +15,12 @@ public interface ChatMapper {
 
 
 
+  Long getChatRef(Long myMemberId, Long hostId);
+  Long createNewChatRef();
 
+  void testCreateNewRoom(ChatroomJoinDto chatroomJoinDto);
 
-  Long getHostChatRef(Long hostId);
-  Long getMyChatRef(Long memberId);
+  List getHostChatRef(Long hostId);
 
-
-
-
-
-
+  List getMyChatRef(Long myMemberId);
 }

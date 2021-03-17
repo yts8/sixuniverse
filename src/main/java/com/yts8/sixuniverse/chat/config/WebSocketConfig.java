@@ -19,7 +19,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
 
   @Override
   public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-   registry.addHandler(socketHandler, "/chating/{chatroomId}");
- //  registry.addHandler(socketHandler, "/chating/{memberId}");
+  // registry.addHandler(socketHandler, "/chating/{chatroomId}");
+   registry.addHandler(socketHandler, "/chating/Test/{chatRef}");
   }
 }

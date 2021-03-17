@@ -14,7 +14,4 @@ public class ChatroomJoinDto {
     private Long memberId;
     private String name;
     private Long chatRef;
-
-
-
 }

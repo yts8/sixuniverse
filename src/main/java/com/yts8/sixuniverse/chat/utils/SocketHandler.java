@@ -16,8 +16,6 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
 @Component
@@ -28,8 +26,7 @@ public class SocketHandler extends TextWebSocketHandler {
   HashMap<String, WebSocketSession> sessionMap = new HashMap<>(); //웹소켓 세션을 담아둘 맵
   private final ChatService chatService;
   private final ChatroomJoinService chatroomJoinService;
-  private final HttpSession httpSession;
-  private final HttpServletRequest request;
+
 
 
 
@@ -64,9 +61,10 @@ public class SocketHandler extends TextWebSocketHandler {
 
     String content = jboj.get("msg").toString();
     Long memberId = Long.parseLong(jboj.get("memberId").toString());
-  //  Long joinNum = Long.parseLong(jboj.get("memberId").toString());
-    String userName = jboj.get("userName").toString();
-    Long realChatRef = Long.parseLong(jboj.get("realChatRef").toString());
+    // Long joinNum = Long.parseLong(jboj.get("memberId").toString());
+    Long joinNum = Long.parseLong(jboj.get("joinNum").toString());
+    // String name = jboj.get("name").toString();
+    //  Long chatRef = Long.parseLong(jboj.get("chatRef").toString());
 
 
     /* 저장공간 생성 */
@@ -75,15 +73,16 @@ public class SocketHandler extends TextWebSocketHandler {
 
     chatDto.setContent(content);
     chatDto.setMemberId(memberId);
-    // chatDto.setJoinNum(joinNum);
-
+    chatDto.setJoinNum(joinNum);
+    System.out.println("핸들러 : " + chatroomJoinDto.getJoinNum());
+/*
     chatroomJoinDto.setName(userName);
     chatroomJoinDto.setMemberId(memberId);
-    chatroomJoinDto.setChatRef(realChatRef);
+    chatroomJoinDto.setChatRef(chatRef);
 
 
 
-    chatroomJoinService.creatNewRoom(chatroomJoinDto);
+    chatroomJoinService.creatNewRoom(chatroomJoinDto);*/
     chatService.saveMessage(chatDto);
 
     }

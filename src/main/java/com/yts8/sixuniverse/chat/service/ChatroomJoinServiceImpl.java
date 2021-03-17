@@ -6,6 +6,8 @@ import com.yts8.sixuniverse.chat.repository.ChatMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ChatroomJoinServiceImpl implements ChatroomJoinService {
@@ -14,22 +16,34 @@ public class ChatroomJoinServiceImpl implements ChatroomJoinService {
 
 
   @Override
-  public Long getHostChatRef(Long hostId) {
-    return chatMapper.getHostChatRef(hostId);
-  }
-
-  @Override
-  public Long getMyChatRef(Long memberId) {
-    return chatMapper.getMyChatRef(memberId);
-  }
-
-  @Override
   public void creatNewRoom(ChatroomJoinDto chatroomJoinDto) { }
 
 
-  // 존재하는 방이 있는지 체크한다. -> 존재한다면 해당 방 번호를 return 한다.
+  /* 공통된 chatRef 있는지 확인 */
+  @Override
+  public Long getChatRef(Long myMemberId, Long hostId) {
+    return chatMapper.getChatRef(myMemberId,hostId);
+  }
 
+  /*(없으면) 기존의 chat_ref의 최댓값에서 +1해서 리턴*/
+  @Override
+  public Long createNewChatRef() {
+    return chatMapper.createNewChatRef();
+  }
 
+  /* ChatController에서 채팅방 먼저 생성 */
+  @Override
+  public void testCreateNewRoom(ChatroomJoinDto chatroomJoinDto) {
+    chatMapper.testCreateNewRoom(chatroomJoinDto);
+  }
 
-    // member1과 member2의 id를 전달해서 일치하는 chatRef를 찾는다.
+  @Override
+  public List getHostChatRef(Long hostId) {
+    return chatMapper.getHostChatRef(hostId);
+  }
+  @Override
+  public List getMyChatRef(Long myMemberId) {
+    return chatMapper.getMyChatRef(myMemberId);
+  }
+
 }
