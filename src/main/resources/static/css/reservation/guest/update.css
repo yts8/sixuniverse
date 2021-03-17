@@ -35,6 +35,12 @@
   justify-content: space-between;
 }
 
+.guest-reservation-update__msg {
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
 .guest-reservation-update__next-btn {
   text-align: center;
   padding: 20px;

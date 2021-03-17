@@ -33,6 +33,7 @@
       <div class="guest-reservation-update__content">
         <div class="guest-reservation-update__title">무엇을 변경하고 싶으세요?</div>
 
+
         <form th:action="@{|/reservation/guest/update/${reservation.reservationId}|}" method="post">
           <input type="hidden" name="checkIn" class="reservation__check-in" th:value="${reservation.checkIn}">
           <input type="hidden" name="checkOut" class="reservation__check-out" th:value="${reservation.checkOut}">
@@ -70,6 +71,8 @@
 
           <input type="submit" value="계속" class="guest-reservation-update__next-btn">
         </form>
+        <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
+
 
         <!-- 날짜 modal -->
         <input type="hidden" name="reservationDateList" th:value="${reservationDateList}" class="reservation__reservation-date-list">

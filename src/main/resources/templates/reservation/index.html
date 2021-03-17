@@ -15,12 +15,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+  <script type="text/javascript" defer th:src="@{/js/reservation/index.js}"></script>
   <script type="text/javascript" defer th:src="@{/js/reservation/reservation-modal.js}"></script>
   <script type="text/javascript" defer th:src="@{/js/reservation/reservation-date-modal.js}"></script>
 </th:block>
 
 <head>
-  <meta charset="UTF-8">
+<!--  <meta charset="UTF-8">-->
   <title>예약하기</title>
 </head>
 
@@ -46,7 +47,7 @@
               <h4 class="reservation__sub-title2">날짜</h4>
               <div class="reservation__date">[2021.2.24-2021.2.25]</div>
               <div>[<img th:src="@{/images/reservation/clock.png}" class="reservation__img">
-                체크인: <span th:text="${room.getCheckInTime()}"></span> 이후]
+                체크인: <span th:text="${room.getCheckInTime()}"></span> 시 이후]
               </div>
             </div>
             <button id="update-date" class="reservation__update-btn">수정</button>
@@ -244,16 +245,18 @@
 
           <div class="reservation__line"></div>
 
-          <form th:action="@{/reservation/pay/complete}" method="post">
+          <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
+
+          <form th:action="@{/reservation/pay/complete}" method="post" id="reservation-fr">
             <input type="hidden" name="checkIn" class="reservation__check-in">
             <input type="hidden" name="checkOut" class="reservation__check-out">
             <input type="hidden" name="reservationDateArray" class="reservation__date">
             <input type="hidden" name="adult" class="reservation__adult">
             <input type="hidden" name="kid" class="reservation__kid">
             <input type="hidden" name="infant" class="reservation__infant">
-            <input type="hidden" name="roomId" th:value="${room.roomId}">
-            <button type="submit" class="reservation__btn">예약 및 결제하기</button>
+            <input type="hidden" name="roomId" class="reservation__room-id" th:value="${room.roomId}">
           </form>
+          <button class="reservation__btn">예약 및 결제하기</button>
 
 
         </div>

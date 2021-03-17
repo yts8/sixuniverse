@@ -11,10 +11,8 @@
   <select id="reservationList" parameterType="ReservationDateDto" resultType="ReservationDto">
     select *
     from reservation
-    where member_id = #{memberId}
-      and status = #{status}
+    where member_id = #{memberId} and status = #{status}
     order by check_in desc
-
   </select>
 
   <select id="findById" parameterType="ReservationDateDto" resultType="ReservationDto">
@@ -27,6 +25,12 @@
     update reservation
     set status = 'complete'
     where check_out <![CDATA[ < ]]> #{today}
+  </update>
+
+  <update id="guestReservationUpdateRequest">
+    update reservation
+    set status = 'update'
+    where reservation_id = #{reservationId}
   </update>
 
 </mapper>

@@ -15,4 +15,6 @@ public interface ReservationMapper {
   ReservationDto findById(Long reservationId);
 
   void reservationCheckOut(LocalDate today);
+
+  void guestReservationUpdateRequest(Long reservationId);
 }

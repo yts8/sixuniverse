@@ -6,14 +6,25 @@
     let arrayDays = [];
     let expiryDate = 0;
 
+    const header = "X-CSRF-TOKEN";
+    const csrf = document.querySelector("#csrf").value;
+
+    const data = $('.reservation__check-in').val()=='' ? '1999-09-09': $('.reservation__check-in').val();
+    const json = JSON.stringify(data);
+
+
     $('#update-date').click(function () {
 
       $.ajax({
-        url: "/reservation/guest/update/ajax",
-        type: "GET",
-        data: {checkIn : $('.reservation__check-in').html()},
-        success: function (data) {
-          if(data) {
+        url: "/api/reservation/guest/update/today",
+        data: json,
+        type: 'post',
+        contentType:'application/json; charset=utf-8',
+        beforeSend: function(xhr){
+          xhr.setRequestHeader(header, csrf);
+        },
+        success: function (result) {
+          if(result) {
             $('.guest-reservation-update__msg').html('예약 당일에는 날짜를 변경할 수 없습니다.');
             $('.guest-reservation-update__reservation-date').css('box-shadow', '0 0 5px red');
           } else {
