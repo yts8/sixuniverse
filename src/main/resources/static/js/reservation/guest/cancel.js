@@ -1,15 +1,13 @@
 (() => {
   $(document).ready(function () {
-    $('.guest-reservation-cancel__next-btn').click(function () {
-      $.ajax({
-        url: "/api/reservation/guest/cancel/next",
-        type: "GET",
-        success: function(data){
-          $('.guest-reservation-cancel__title').html('예약 취소 안내');
-          $('.guest-reservation-cancel__small-box').hide();
-        }
 
-      });
+    $('.guest-reservation-cancel__next-btn').click(function () {
+
+      if($('select[name=reason]').val() == null) {
+        alert('선택해주세요');
+        return;
+      }
+
     });
 
   });

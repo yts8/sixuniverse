@@ -20,23 +20,21 @@ public class ReservationApiController {
   private final ReservationService reservationService;
   private final RoomService roomService;
 
-  @GetMapping("/guest/update/ajax")
-  public boolean updateDate(HttpServletRequest request) {
+  @PostMapping("/guest/update/today")
+  public @ResponseBody boolean updateDate(@RequestBody LocalDate checkIn) {
     boolean result = false;
 
-    String checkIn = request.getParameter("checkIn");
-    String today = LocalDate.now() + "";
+    LocalDate today = LocalDate.now();
 
     if (checkIn.equals(today)) {
       result = true;
     }
-
     return result;
   }
 
 
-  @GetMapping("/guest/update/complete")
-  public void guestReservationUpdateComplete(ReservationDto reservationDto) {
+  @PostMapping("/guest/update/complete")
+  public @ResponseBody void guestReservationUpdateComplete(@RequestBody ReservationDto reservationDto) {
     reservationService.guestReservationUpdateRequest(reservationDto.getReservationId());
   }
 

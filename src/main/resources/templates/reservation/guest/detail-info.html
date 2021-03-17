@@ -61,7 +61,7 @@
                       <i class="fas fa-pen"></i><span>예약 변경</span> <i class="fas fa-chevron-right"></i></div>
                     </a>
 
-                    <a th:if="${reservation.status.equals('upcoming')}" th:href="@{/reservation/guest/cancel}">
+                    <a th:if="${reservation.status.equals('upcoming')}" th:href="@{|/reservation/guest/cancel/reason/${reservation.reservationId}|}">
                       <div class="guest-reservation-detail-info__margin">
                         <i class="far fa-window-close"></i><span>예약 취소</span> <i class="fas fa-chevron-right"></i>
                       </div>

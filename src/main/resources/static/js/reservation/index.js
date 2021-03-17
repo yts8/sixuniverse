@@ -16,8 +16,8 @@
       beforeSend: function(xhr){
         xhr.setRequestHeader(header, csrf);
       },
-      success: function (data) {
-        if (data) {
+      success: function (result) {
+        if (result) {
           alert("자신이 등록한 숙소는 예약하실 수 없습니다.");
           history.back();
         } else {

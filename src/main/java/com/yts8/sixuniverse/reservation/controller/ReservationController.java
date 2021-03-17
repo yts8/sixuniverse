@@ -155,16 +155,18 @@ public class ReservationController {
   }
 
 
-  @GetMapping("/guest/cancel")
-  public String guestReservationCancel() {
+  @GetMapping("/guest/cancel/reason/{reservationId}")
+  public String guestReservationCancel(Model model, @PathVariable Long reservationId) {
+
+    model.addAttribute("reservationId", reservationId);
 
     return "reservation/guest/cancel";
   }
 
-  @GetMapping("/guest/cancel/next")
-  public String guestReservationCancelNext() {
+  @PostMapping("/guest/cancel/confirm/{reservationId}")
+  public String guestReservationCancelConfirm(@PathVariable Long reservationId) {
 
-    return "reservation/guest/cancel";
+    return "reservation/guest/cancel-confirm";
   }
 
   @PostMapping("/pay/complete")
