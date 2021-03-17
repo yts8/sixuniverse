@@ -4,9 +4,12 @@
 (() => {
   let impossibleDayString = [] //예약불가능날짜 담을 리스트
   const today = $('#renew-date').val();
+<<<<<<< HEAD
   const yesterday = $('#yesterday').val();
   const expiryDate = $('#expiry_date').val();
   const expiryDay = $('#expiry_day').val();
+=======
+>>>>>>> 65e7e41 (calendar update)
 
   document.addEventListener('DOMContentLoaded', function () {
     const calendarEl = document.getElementById('calendar');
@@ -20,8 +23,18 @@
       },
       initialDate: today,
       selectable: true,
+<<<<<<< HEAD
       eventBackgroundColor: 'transparent',
       eventBorderColor: 'transparent',
+=======
+
+      // displayEventEnd: true, //?
+
+      eventBackgroundColor: 'transparent',
+      eventBorderColor: 'transparent',
+
+      // dayMaxEvents: true, // allow "more" link when too many events
+>>>>>>> 65e7e41 (calendar update)
       locale: 'ko', //언어 한국어
       events: [
         {
@@ -60,7 +73,34 @@
 
       ],
 
+<<<<<<< HEAD
 
+=======
+      events: [
+        {
+          id: 'past',
+          title: 'past',
+          start: '0000-00-00',
+          end: '2021-03-14',
+          display: 'background',
+          color: '#787878',
+          selectable: false,
+          editable: false,
+
+        },
+        {
+          id: 'today',
+          title: 'today',
+          start: today,
+          end: today,
+          color: '#787878',
+
+        },
+
+      ],
+
+
+>>>>>>> 65e7e41 (calendar update)
       //취소날짜 선택
       dateClick: function (dateClickInfo) {
 
@@ -70,23 +110,40 @@
 
         const event = calendar.getEventById('today') // an event object!
         const today2 = event.start // a property (a Date object)- 참고
+<<<<<<< HEAD
 
         const event2 = calendar.getEventById('expiryDate') // an event object!
         const expiry2 = event2.start // a property (a Date object)- 참고
 
         if (dateClickInfo.date < today2 || dateClickInfo.date > expiry2) {
+=======
+
+        // const future= 수정일+설정한 기간
+        // if(dateClickInfo.date < today && dateClickInfo.date>future){
+        if (dateClickInfo.date < today2) {
+>>>>>>> 65e7e41 (calendar update)
           alert("비활성화된 기간입니다.")
         } else {
 
           if (dateClickInfo.dayEl.style.backgroundColor) {
             dateClickInfo.dayEl.style.backgroundColor = "";
+<<<<<<< HEAD
             alert('해당 날짜의 예약이 가능합니까?: ' + clickDate);
+=======
+            // alert('해당 날짜의 예약이 가능합니까?: ' + clickDate);
+>>>>>>> 65e7e41 (calendar update)
             impossibleDayString = impossibleDayString.filter(day => day !== clickDate);
 
           } else {
             dateClickInfo.dayEl.style.backgroundColor = gray;
+<<<<<<< HEAD
             alert('해당 날짜의 예약이 불가능합니까?: ' + clickDate);
             impossibleDayString.push(clickDate);
+=======
+            // alert('해당 날짜의 예약이 불가능합니까?: ' + clickDate);
+            impossibleDayString.push(clickDate);
+            // console.log(dateClickInfo.dateStr)
+>>>>>>> 65e7e41 (calendar update)
           }
         }
 
