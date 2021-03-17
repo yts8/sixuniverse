@@ -1,8 +1,3 @@
-body, html {
-  /*overflow: hidden;*/
-  height: 140%;
-}
-
 .room__container {
   display: flex;
   flex-direction: column;
@@ -13,9 +8,8 @@ body, html {
   display: flex;
   flex-direction: column;
   height: 100%;
-  margin: 50px;
+  padding: 50px;
 }
-
 
 .room__guide {
   font-weight: bold;

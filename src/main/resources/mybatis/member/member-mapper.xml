@@ -68,7 +68,8 @@
 
   <update id="updatePassword" parameterType="MemberDto">
     update member
-    set password=#{password}
+    set password=#{password},
+        update_date=#{updateDate}
     where member_id = #{memberId}
   </update>
 

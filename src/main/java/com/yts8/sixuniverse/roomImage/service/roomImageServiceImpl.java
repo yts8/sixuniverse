@@ -16,13 +16,13 @@ public class roomImageServiceImpl implements RoomImageService {
   private final RoomImageMapper roomImageMapper;
 
   @Override
-  public void save(List<RoomImageDto> imageDto) {
-    roomImageMapper.save(imageDto);
+  public void save(RoomImageDto roomImageDto) {
+    roomImageMapper.save(roomImageDto);
   }
 
   @Override
-  public List<RoomImageDto> findByRoomId(RoomImageDto roomImageDto) {
-    return roomImageMapper.findByRoomId(roomImageDto);
+  public List<RoomImageDto> findByRoomId(Long roomId) {
+    return roomImageMapper.findByRoomId(roomId);
   }
 
 }

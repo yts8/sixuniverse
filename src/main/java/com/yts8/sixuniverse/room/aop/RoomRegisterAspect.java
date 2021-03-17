@@ -17,22 +17,17 @@ import javax.servlet.http.HttpSession;
 public class RoomRegisterAspect {
 
   private final RoomService roomService;
+  private final HttpSession httpSession;
 
   @Around("execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.get*(..)) && " +
-      "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.getAddress(..)) &&" +
-      "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.getAmenities(..)) &&" +
-      "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.getSafety(..)) &&" +
-      "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.getSpaces(..)) &&" +
-      "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.getImages(..))")
+      "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.getAddress(..))")
   public Object getCheckUser(ProceedingJoinPoint joinPoint) throws Throwable {
 
-    Object[] methodArgs = joinPoint.getArgs();
-    HttpSession httpSession = (HttpSession) methodArgs[1];
+    Long roomId = (Long) joinPoint.getArgs()[1];
 
-    Long roomId = (Long) methodArgs[2];
     MemberDto member = (MemberDto) httpSession.getAttribute("member");
-
     RoomDto roomDto = roomService.findById(roomId);
+
     if (roomDto == null || !roomDto.getMemberId().equals(member.getMemberId())) {
       return "redirect:/";
     }
@@ -41,24 +36,19 @@ public class RoomRegisterAspect {
   }
 
   @Around("execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.post*(..)) && " +
-      "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.postAddress(..)) &&" +
-      "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.postAmenities(..)) &&" +
-      "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.postSafety(..)) &&" +
-      "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.postSpaces(..)) &&" +
-      "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.postImages(..))")
+      "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.postAddress(..))")
   public Object postCheckUser(ProceedingJoinPoint joinPoint) throws Throwable {
 
-    HttpSession httpSession = (HttpSession) joinPoint.getArgs()[0];
-    RoomDto room = (RoomDto) joinPoint.getArgs()[1];
+    RoomDto room = (RoomDto) joinPoint.getArgs()[0];
 
     MemberDto member = (MemberDto) httpSession.getAttribute("member");
     RoomDto roomDto = roomService.findById(room.getRoomId());
+
     if (roomDto == null || !roomDto.getMemberId().equals(member.getMemberId())) {
       return "redirect:/";
     }
 
     return joinPoint.proceed();
   }
-
 
 }

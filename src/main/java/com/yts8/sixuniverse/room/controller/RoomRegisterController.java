@@ -5,7 +5,6 @@ import com.yts8.sixuniverse.room.dto.RoomDto;
 import com.yts8.sixuniverse.room.service.RoomService;
 import com.yts8.sixuniverse.roomFacility.dto.RoomFacilityDto;
 import com.yts8.sixuniverse.roomFacility.service.RoomFacilityService;
-import com.yts8.sixuniverse.roomImage.dto.RoomImageDto;
 import com.yts8.sixuniverse.roomImage.service.RoomImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -43,37 +42,37 @@ public class RoomRegisterController {
   }
 
   @GetMapping("/types/{roomId}")
-  public String getTypes(Model model, HttpSession httpSession, @PathVariable Long roomId) {
+  public String getTypes(Model model, @PathVariable Long roomId) {
     model.addAttribute("title", "유형 선택");
     model.addAttribute("roomDto", roomService.findById(roomId));
 
     return "room/register/types";
   }
 
-  @PostMapping("/types")
-  public String postTypes(HttpSession httpSession, RoomDto roomDto) {
+  @PostMapping("/types/update")
+  public String postTypes(RoomDto roomDto) {
     roomService.updateTypes(roomDto);
 
     return "redirect:/host/room/register/bedrooms/" + roomDto.getRoomId();
   }
 
   @GetMapping("/bedrooms/{roomId}")
-  public String getBedrooms(Model model, HttpSession httpSession, @PathVariable Long roomId) {
+  public String getBedrooms(Model model, @PathVariable Long roomId) {
     model.addAttribute("title", "유형 선택");
     model.addAttribute("roomDto", roomService.findById(roomId));
 
     return "room/register/bedrooms";
   }
 
-  @PostMapping("/bedrooms")
-  public String postBedRooms(HttpSession httpSession, RoomDto roomDto) {
+  @PostMapping("/bedrooms/update")
+  public String postBedRooms(RoomDto roomDto) {
     roomService.updateBedrooms(roomDto);
 
     return "redirect:/host/room/register/amenities/" + roomDto.getRoomId();
   }
 
   @GetMapping("/amenities/{roomId}")
-  public String getAmenities(Model model, HttpSession httpSession, @PathVariable Long roomId) {
+  public String getAmenities(Model model, @PathVariable Long roomId) {
     RoomFacilityDto facilityDto = new RoomFacilityDto();
     facilityDto.setRoomId(roomId);
     facilityDto.setCategoryName("amenities");
@@ -85,13 +84,13 @@ public class RoomRegisterController {
   }
 
   @PostMapping("/amenities")
-  public String postAmenities(HttpSession httpSession, RoomDto roomDto, @RequestParam List<String> name) {
+  public String postAmenities(RoomDto roomDto, @RequestParam(value = "name") List<String> names) {
 
     List<RoomFacilityDto> facilityDtos = new ArrayList<>();
-    for (String n : name) {
+    for (String name : names) {
       RoomFacilityDto facilityDto = new RoomFacilityDto();
       facilityDto.setRoomId(roomDto.getRoomId());
-      facilityDto.setName(n);
+      facilityDto.setName(name);
       facilityDto.setCategoryName("amenities");
       facilityDtos.add(facilityDto);
     }
@@ -101,7 +100,7 @@ public class RoomRegisterController {
   }
 
   @GetMapping("/safety/{roomId}")
-  public String getSafety(Model model, HttpSession httpSession, @PathVariable Long roomId) {
+  public String getSafety(Model model, @PathVariable Long roomId) {
     RoomFacilityDto facilityDto = new RoomFacilityDto();
     facilityDto.setRoomId(roomId);
     facilityDto.setCategoryName("safety");
@@ -113,13 +112,13 @@ public class RoomRegisterController {
   }
 
   @PostMapping("/safety")
-  public String postSafety(HttpSession httpSession, RoomDto roomDto, @RequestParam List<String> name) {
+  public String postSafety(RoomDto roomDto, @RequestParam(value = "name") List<String> names) {
 
     List<RoomFacilityDto> facilityDtos = new ArrayList<>();
-    for (String n : name) {
+    for (String name : names) {
       RoomFacilityDto facilityDto = new RoomFacilityDto();
       facilityDto.setRoomId(roomDto.getRoomId());
-      facilityDto.setName(n);
+      facilityDto.setName(name);
       facilityDto.setCategoryName("safety");
       facilityDtos.add(facilityDto);
     }
@@ -129,7 +128,7 @@ public class RoomRegisterController {
   }
 
   @GetMapping("/spaces/{roomId}")
-  public String getSpaces(Model model, HttpSession httpSession, @PathVariable Long roomId) {
+  public String getSpacesFacility(Model model, @PathVariable Long roomId) {
     RoomFacilityDto facilityDto = new RoomFacilityDto();
     facilityDto.setRoomId(roomId);
     facilityDto.setCategoryName("spaces");
@@ -141,13 +140,13 @@ public class RoomRegisterController {
   }
 
   @PostMapping("/spaces")
-  public String postSpaces(HttpSession httpSession, RoomDto roomDto, @RequestParam List<String> name) {
+  public String postSpacesFacility(RoomDto roomDto, @RequestParam(value = "name") List<String> names) {
 
     List<RoomFacilityDto> facilityDtos = new ArrayList<>();
-    for (String n : name) {
+    for (String name : names) {
       RoomFacilityDto facilityDto = new RoomFacilityDto();
       facilityDto.setRoomId(roomDto.getRoomId());
-      facilityDto.setName(n);
+      facilityDto.setName(name);
       facilityDto.setCategoryName("spaces");
       facilityDtos.add(facilityDto);
     }
@@ -157,66 +156,56 @@ public class RoomRegisterController {
   }
 
   @GetMapping("/images/{roomId}")
-  public String getImages(Model model, HttpSession httpSession, @PathVariable Long roomId) {
-    RoomImageDto ImageDto = new RoomImageDto();
-    ImageDto.setRoomId(roomId);
+  public String getImages(Model model, @PathVariable Long roomId) {
 
     model.addAttribute("title", "숙소 이미지 등록");
-//    model.addAttribute("images", roomImageService.findByRoomId(ImageDto));
+    model.addAttribute("images", roomImageService.findByRoomId(roomId));
 
     return "room/register/images";
   }
 
-  @PostMapping("/images")
-  public String postImages(HttpSession httpSession, RoomDto roomDto) {
-    List<RoomImageDto> roomImageDtos = new ArrayList<>();
-
-
-    return "redirect:/host/room/register/info/" + roomDto.getRoomId();
-  }
-
   @GetMapping("/info/{roomId}")
-  public String getInfo(Model model, HttpSession httpSession, @PathVariable Long roomId) {
+  public String getInfo(Model model, @PathVariable Long roomId) {
     model.addAttribute("title", "제목과 내용 설정");
     model.addAttribute("roomDto", roomService.findById(roomId));
 
     return "room/register/info";
   }
 
-  @PostMapping("/info")
-  public String postInfo(HttpSession httpSession, RoomDto roomDto) {
+  @PostMapping("/info/update")
+  public String postInfo(RoomDto roomDto) {
     roomService.updateInfo(roomDto);
 
     return "redirect:/host/room/register/availability-settings/" + roomDto.getRoomId();
   }
 
   @GetMapping("/availability-settings/{roomId}")
-  public String getAvailabilitySettings(Model model, HttpSession httpSession, @PathVariable Long roomId) {
+  public String getAvailabilitySettings(Model model, @PathVariable Long roomId) {
     model.addAttribute("title", "숙소 예약 정보 설정");
     model.addAttribute("roomDto", roomService.findById(roomId));
 
     return "room/register/availability-setting";
   }
 
-  @PostMapping("/availability-settings")
-  public String postAvailabilitySettings(HttpSession httpSession, RoomDto roomDto) {
+  @PostMapping("/availability-settings/update")
+  public String postAvailabilitySettings(RoomDto roomDto) {
     roomService.updateAvailabilitySettings(roomDto);
 
     return "redirect:/host/room/register/calendar/" + roomDto.getRoomId();
   }
 
   @GetMapping("/calendar/{roomId}")
-  public String getCalendar(Model model, HttpSession httpSession, @PathVariable Long roomId) {
+  public String getCalendar(Model model, @PathVariable Long roomId) {
     model.addAttribute("title", "달력 설정");
 
-    LocalDateTime renewDate=roomService.findByRenewDate(roomId);
+    LocalDateTime renewDate = roomService.findByRenewDate(roomId);
     model.addAttribute("renewDate", renewDate);
 
-    LocalDateTime yesterdayTime=renewDate.minusDays(1L);
+    LocalDateTime yesterdayTime = renewDate.minusDays(1L);
     String yesterday = yesterdayTime.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
     model.addAttribute("yesterday", yesterday);
 
-    int expiryDateNum=roomService.findByExpiryDate(roomId);
+    int expiryDateNum = roomService.findByExpiryDate(roomId);
     LocalDateTime expiryDate = renewDate.plusMonths(expiryDateNum);
     model.addAttribute("expiryDate", expiryDate);
 
@@ -226,22 +215,16 @@ public class RoomRegisterController {
     return "room/register/calendar";
   }
 
-  @PostMapping("/calendar")
-  public String postCalendar(HttpSession httpSession, RoomDto roomDto) {
-
-    return "redirect:/host/room/register/price/" + roomDto.getRoomId();
-  }
-
   @GetMapping("/price/{roomId}")
-  public String getPrice(Model model, HttpSession httpSession, @PathVariable Long roomId) {
+  public String getPrice(Model model, @PathVariable Long roomId) {
     model.addAttribute("title", "가격 설정");
     model.addAttribute("roomDto", roomService.findById(roomId));
 
     return "room/register/price";
   }
 
-  @PostMapping("/price")
-  public String postPrice(HttpSession httpSession, RoomDto roomDto) {
+  @PostMapping("/price/update")
+  public String postPrice(RoomDto roomDto) {
     roomService.updatePrice(roomDto);
     return "redirect:/";
   }

@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,16 +65,17 @@ public class MemberSettingApiController {
   }
 
   @PostMapping("/update/password")
-  public boolean updatePassword(@RequestBody MemberPasswordDto memberPasswordDto) {
+  public MemberDto updatePassword(@RequestBody MemberPasswordDto memberPasswordDto) {
     MemberDto member = (MemberDto) httpSession.getAttribute("member");
     if (!passwordEncoder.matches(memberPasswordDto.getOldPassword(), member.getPassword())) {
-      return false;
+      return null;
     }
     String encodeNewPassword = passwordEncoder.encode(memberPasswordDto.getNewPassword());
     member.setPassword(encodeNewPassword);
+    member.setUpdateDate(LocalDateTime.now());
     memberService.updatePassword(member);
 
-    return true;
+    return member;
   }
 
   @PostMapping("/update/profile-img")

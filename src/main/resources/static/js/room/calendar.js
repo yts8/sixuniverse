@@ -80,12 +80,10 @@
 
           if (dateClickInfo.dayEl.style.backgroundColor) {
             dateClickInfo.dayEl.style.backgroundColor = "";
-            alert('해당 날짜의 예약이 가능합니까?: ' + clickDate);
             impossibleDayString = impossibleDayString.filter(day => day !== clickDate);
 
           } else {
             dateClickInfo.dayEl.style.backgroundColor = gray;
-            alert('해당 날짜의 예약이 불가능합니까?: ' + clickDate);
             impossibleDayString.push(clickDate);
           }
         }
@@ -102,23 +100,23 @@
     calendar.render();
   });
 
-  document.querySelector(".room-register-btn-js")
-    .addEventListener("click", async () => {
+  const submitBtnEl = document.querySelector(".room-register-btn-js");
+  submitBtnEl.addEventListener("click", async () => {
+    const csrf = document.querySelector("#csrf").value;
 
-      const csrf = document.querySelector("#csrf").value;
-
-      const formData = new FormData();
-      const roomIdEl = document.querySelector("#room-id");
-      formData.append("roomId", roomIdEl.value);
-      for (const day of impossibleDayString) {
-        formData.append("impossibleDayString", day);
-      }
-      await fetch("http://localhost:8080/api/room/register/calendar", {
-        method: "post",
-        headers: {
-          "X-CSRF-TOKEN": csrf
-        },
-        body: formData
-      })
+    const formData = new FormData();
+    const roomIdEl = document.querySelector("#room-id");
+    formData.append("roomId", roomIdEl.value);
+    for (const day of impossibleDayString) {
+      formData.append("impossibleDayString", day);
+    }
+    await fetch("http://localhost:8080/api/room/register/calendar", {
+      method: "post",
+      headers: {
+        "X-CSRF-TOKEN": csrf
+      },
+      body: formData
     })
+    location.href = `../price/${roomIdEl.value}`;
+  })
 })();

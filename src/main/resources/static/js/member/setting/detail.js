@@ -5,6 +5,7 @@
   const updateBtnEls = document.querySelectorAll(".update-btn-js");
   const updateAddressBtnEl = document.querySelector(".update-address-btn-js");
   const updatePasswordBtnEl = document.querySelector(".update-password-btn-js");
+  const updatePasswordTextBoxEl = document.querySelector(".update-password-text-box-js");
 
   const usernameInputEl = document.querySelector("#username");
   const birthdateInputEl = document.querySelector("#birthdate");
@@ -169,12 +170,15 @@
       "newPassword": newPasswordInputEl.value
     }
     const res = await sendAjax(id, data)
-    const isUpdate = await res.json();
-
-    if (!isUpdate) {
-      alert("비밀번호 변경 실패");
+    try {
+      const member = await res.json();
+      console.log(member);
+      updatePasswordTextBoxEl.innerHTML = member.updateDate.split("T")[0];
+    } catch (e) {
+      alert("기존 비밀번호가 다릅니다.");
       return;
     }
+
 
     oldPasswordInputEl.value = "";
     newPasswordInputEl.value = "";
