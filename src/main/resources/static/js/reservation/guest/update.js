@@ -8,7 +8,6 @@
     const kid = parseInt($('#kid').html());
     const infant = parseInt($('#infant').html());
 
-
     const header = "X-CSRF-TOKEN";
     const csrf = document.querySelector("#csrf").value;
 
@@ -18,8 +17,6 @@
       adult:adult, kid:kid, infant:infant
     };
     const json = JSON.stringify(data);
-
-
 
     $('.guest-reservation-update__next-btn').click(function () {
       $.ajax({
