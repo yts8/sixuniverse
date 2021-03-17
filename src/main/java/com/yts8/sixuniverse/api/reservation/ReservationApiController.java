@@ -33,6 +33,7 @@ public class ReservationApiController {
     if (checkIn.equals(today)) {
       result = true;
     }
+
     return result;
   }
 
