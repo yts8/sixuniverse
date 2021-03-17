@@ -27,8 +27,6 @@ public class RoomRegisterApiController {
     for (String day : impossibleDayString) {
       LocalDate day2 = LocalDate.parse(day);
 
-//      LocalDateTime day2=LocalDateTime.parse(day, DateTimeFormat.forPattern("ddMMyyyy"));
-
       impossibleDay.add(day2);
     }
 
