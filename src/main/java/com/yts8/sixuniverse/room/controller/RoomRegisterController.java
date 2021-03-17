@@ -49,7 +49,7 @@ public class RoomRegisterController {
     return "room/register/types";
   }
 
-  @PostMapping("/types")
+  @PostMapping("/types/update")
   public String postTypes(RoomDto roomDto) {
     roomService.updateTypes(roomDto);
 
@@ -64,7 +64,7 @@ public class RoomRegisterController {
     return "room/register/bedrooms";
   }
 
-  @PostMapping("/bedrooms")
+  @PostMapping("/bedrooms/update")
   public String postBedRooms(RoomDto roomDto) {
     roomService.updateBedrooms(roomDto);
 
@@ -172,7 +172,7 @@ public class RoomRegisterController {
     return "room/register/info";
   }
 
-  @PostMapping("/info")
+  @PostMapping("/info/update")
   public String postInfo(RoomDto roomDto) {
     roomService.updateInfo(roomDto);
 
@@ -187,7 +187,7 @@ public class RoomRegisterController {
     return "room/register/availability-setting";
   }
 
-  @PostMapping("/availability-settings")
+  @PostMapping("/availability-settings/update")
   public String postAvailabilitySettings(RoomDto roomDto) {
     roomService.updateAvailabilitySettings(roomDto);
 
@@ -215,12 +215,6 @@ public class RoomRegisterController {
     return "room/register/calendar";
   }
 
-  @PostMapping("/calendar")
-  public String postCalendar(RoomDto roomDto) {
-
-    return "redirect:/host/room/register/price/" + roomDto.getRoomId();
-  }
-
   @GetMapping("/price/{roomId}")
   public String getPrice(Model model, @PathVariable Long roomId) {
     model.addAttribute("title", "가격 설정");
@@ -229,7 +223,7 @@ public class RoomRegisterController {
     return "room/register/price";
   }
 
-  @PostMapping("/price")
+  @PostMapping("/price/update")
   public String postPrice(RoomDto roomDto) {
     roomService.updatePrice(roomDto);
     return "redirect:/";

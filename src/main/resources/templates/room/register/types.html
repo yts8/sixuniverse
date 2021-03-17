@@ -15,7 +15,7 @@
 
       <div class="room__guide">숙소의 유형을 선택해주세요</div>
 
-      <form th:action="@{/host/room/register/types}" method="post">
+      <form th:action="@{/host/room/register/types/update}" method="post">
 
         <input type="hidden" name="roomId" th:value="${roomDto.roomId}"/>
 
