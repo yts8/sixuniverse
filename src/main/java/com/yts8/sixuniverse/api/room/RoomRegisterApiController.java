@@ -1,23 +1,36 @@
 package com.yts8.sixuniverse.api.room;
 
+import com.yts8.sixuniverse.aws.S3Uploader;
+import com.yts8.sixuniverse.member.dto.MemberDto;
 import com.yts8.sixuniverse.reservationDate.dto.ReservationDateDto;
 import com.yts8.sixuniverse.reservationDate.service.ReservationDateService;
+import com.yts8.sixuniverse.room.dto.RoomDto;
+import com.yts8.sixuniverse.room.service.RoomService;
+import com.yts8.sixuniverse.roomImage.dto.RoomImageDto;
+import com.yts8.sixuniverse.roomImage.service.RoomImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/room/register")
+@RequestMapping("/api/host/room/register")
 public class RoomRegisterApiController {
 
+  private final RoomImageService roomImageService;
+  private final RoomService roomService;
   private final ReservationDateService reservationDateService;
+  private final S3Uploader s3Uploader;
+  private final HttpSession httpSession;
 
   @PostMapping("/calendar")
   public void postCalendar(@RequestParam List<String> impossibleDayString, @RequestParam Long roomId) {
@@ -42,5 +55,53 @@ public class RoomRegisterApiController {
     reservationDateService.hostReservationDateInsert(hostReservationDtos);
 
 
+  }
+
+  @PostMapping("/images")
+  public RoomImageDto postImages(@RequestParam("roomImg") MultipartFile multipartFile, Long roomId) {
+
+    RoomDto roomDto = roomService.findById(roomId);
+    MemberDto member = (MemberDto) httpSession.getAttribute("member");
+
+    if (!roomDto.getRoomId().equals(member.getMemberId())) {
+      return null;
+    }
+
+    String roomImg = null;
+    try {
+      roomImg = s3Uploader.upload(multipartFile, "room/images");
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    RoomImageDto roomImageDto = new RoomImageDto();
+    roomImageDto.setRoomId(roomId);
+    roomImageDto.setRoomImg(roomImg);
+    roomImageService.save(roomImageDto);
+
+    return roomImageDto;
+  }
+
+  @PostMapping("/images/update")
+  public RoomImageDto updateImages(@RequestParam("roomImg") MultipartFile multipartFile, Long roomImgId, Long roomId) {
+    RoomDto roomDto = roomService.findById(roomId);
+    MemberDto member = (MemberDto) httpSession.getAttribute("member");
+
+    if (!roomDto.getRoomId().equals(member.getMemberId())) {
+      return null;
+    }
+
+    String roomImg = null;
+    try {
+      roomImg = s3Uploader.upload(multipartFile, "room/images");
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    RoomImageDto roomImageDto = new RoomImageDto();
+    roomImageDto.setRoomImgId(roomImgId);
+    roomImageDto.setRoomId(roomId);
+    roomImageDto.setRoomImg(roomImg);
+    roomImageService.updateImage(roomImageDto);
+
+    return roomImageDto;
   }
 }

@@ -9,6 +9,8 @@ import java.util.List;
 public interface RoomImageMapper {
   void save(RoomImageDto roomImageDto);
 
+  void updateImage(RoomImageDto roomImageDto);
+
   List<RoomImageDto> findByRoomId(Long roomId);
 
 }

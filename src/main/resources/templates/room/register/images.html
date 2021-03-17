@@ -3,9 +3,14 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
-<div layout:fragment="css">
+<th:block layout:fragment="css">
   <link rel="stylesheet" th:href="@{/css/room/register/images.css}"/>
-</div>
+</th:block>
+
+<th:block layout:fragment="js">
+  <script defer th:src="@{/js/room/images.js}"></script>
+</th:block>
+
 <th:block layout:fragment="content">
 
   <div class="room__container">
@@ -18,6 +23,26 @@
         언제든 사진을 추가하거나 수정하실 수 있습니다.
       </div>
 
+      <div class="room__images-container room-images-container-js">
+        <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
+        <input type="hidden" id="room-id" th:value="${roomId}"/>
+
+        <label th:each="roomImage : ${roomImages}" class="room__images-wrap room-image-label-js">
+          <input type="file" th:data-room-img-id="${roomImage.roomImgId}"/>
+          <img th:src="${roomImage.roomImg}"/>
+          <span>
+            <i class="fas fa-plus"></i>
+          </span>
+        </label>
+
+        <label class="room__images-wrap room-image-label-js">
+          <input type="file"/>
+          <img/>
+          <span>
+            <i class="fas fa-plus"></i>
+          </span>
+        </label>
+      </div>
       <a th:href="@{|/host/room/register/info/${roomId}|}" class="room__register-btn">계속</a>
     </div>
   </div>

@@ -3,15 +3,23 @@
 
 <mapper namespace="com.yts8.sixuniverse.roomImage.repository.RoomImageMapper">
 
-  <insert id="save" parameterType="RoomImageDto">
+  <insert id="save" parameterType="RoomImageDto" useGeneratedKeys="true" keyProperty="roomImgId">
     insert into room_img (room_id, room_img)
-    values (#{roomImageDto.roomId}, #{roomImageDto.roomImg})
+    values (#{roomId}, #{roomImg})
   </insert>
+
+  <update id="updateImage" parameterType="RoomImageDto">
+    update room_img
+    set room_img=#{roomImg}
+    where room_img_id = #{roomImgId}
+      and room_id = #{roomId}
+  </update>
 
   <select id="findByRoomId" resultType="RoomImageDto">
     select *
     from room_img
     where room_id = #{roomId}
+    order by room_img_id desc
   </select>
 
 </mapper>

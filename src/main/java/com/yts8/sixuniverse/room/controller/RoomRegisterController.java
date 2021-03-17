@@ -159,7 +159,7 @@ public class RoomRegisterController {
   public String getImages(Model model, @PathVariable Long roomId) {
 
     model.addAttribute("title", "숙소 이미지 등록");
-    model.addAttribute("images", roomImageService.findByRoomId(roomId));
+    model.addAttribute("roomImages", roomImageService.findByRoomId(roomId));
 
     return "room/register/images";
   }

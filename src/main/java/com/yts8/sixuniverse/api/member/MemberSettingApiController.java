@@ -9,7 +9,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -24,7 +23,6 @@ public class MemberSettingApiController {
   private final MemberService memberService;
   private final PasswordEncoder passwordEncoder;
   private final HttpSession httpSession;
-
   private final S3Uploader s3Uploader;
 
   @PostMapping("/update/username")
@@ -79,7 +77,7 @@ public class MemberSettingApiController {
   }
 
   @PostMapping("/update/profile-img")
-  public Map<String, String> updateProfileImg(@RequestParam("profileImg") MultipartFile multipartFile, HttpServletRequest request) {
+  public Map<String, String> updateProfileImg(@RequestParam("profileImg") MultipartFile multipartFile) {
     String profileImg = null;
     try {
       profileImg = s3Uploader.upload(multipartFile, "member/profile");
