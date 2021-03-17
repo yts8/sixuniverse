@@ -35,7 +35,7 @@
           editable: false,
         }, {
           id: 'expiryDay',
-          title: 'expiryDay',
+          title: 'expiryDayAfter',
           start: expiryDay,
           end: '3000-11-11',
           display: 'background',

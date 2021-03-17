@@ -9,6 +9,7 @@ public interface RoomService {
   RoomDto findById(Long roomId);
 
   LocalDateTime findByRenewDate(Long roomId);
+
   int findByExpiryDate(Long roomId);
 
   void save(RoomDto roomDto);
