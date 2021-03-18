@@ -8,11 +8,17 @@
     <foreach collection="list" item="roomFacilityDto" separator=",">
       (#{roomFacilityDto.roomId}, #{roomFacilityDto.name}, #{roomFacilityDto.categoryName})
     </foreach>
-
   </insert>
 
-  <select id="findByRoomIdAndCategoryName" parameterType="RoomFacilityDto" resultType="RoomFacilityDto">
-    select *
+  <delete id="removeByRoomIdAndCategoryName">
+    delete
+    from room_facility
+    where room_id = #{roomId}
+      and category_name = #{categoryName}
+  </delete>
+
+  <select id="findByRoomIdAndCategoryName" parameterType="RoomFacilityDto" resultType="string">
+    select name
     from room_facility
     where room_id = #{roomId}
       and category_name = #{categoryName}

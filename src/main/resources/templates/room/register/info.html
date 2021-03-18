@@ -20,13 +20,22 @@
         <div class="room__guide">숙소의 제목을 만드세요</div>
         <div class="room__guide-sub">숙소의 특징과 장점을 강조하는 제목으로 게스트의 관심을 끌어보세요.</div>
         <div>
-          <input type="text" name="title" class="room__subject">
+
+          <input type="text"
+                 name="title"
+                 class="room__subject"
+                 th:value="${roomDto.getTitle()}">
+
         </div>
 
         <div class="room__guide">게스트에게 숙소에 대해 설명해주세요.</div>
         <div class="room__guide-sub">숙소의 장점, 특별한 편의시설(예: 빠른 와이파이 또는 주차 시설)과 주변 지역의 매력을 소개해주세요.</div>
 
-        <textarea name="content" cols="50" rows="10" class="room__introduce"></textarea>
+        <textarea name="content"
+                  cols="50"
+                  rows="10"
+                  class="room__introduce"
+                  th:text="${roomDto.getContent()}"></textarea>
 
         <button type="submit" class="room__register-btn">계속</button>
       </form>

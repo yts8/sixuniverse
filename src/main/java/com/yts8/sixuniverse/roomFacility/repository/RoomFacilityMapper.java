@@ -9,5 +9,7 @@ import java.util.List;
 public interface RoomFacilityMapper {
   void save(List<RoomFacilityDto> facilityDtos);
 
-  List<RoomFacilityDto> findByRoomIdAndCategoryName(RoomFacilityDto roomFacilityDto);
+  List<String> findByRoomIdAndCategoryName(RoomFacilityDto roomFacilityDto);
+
+  void removeByRoomIdAndCategoryName(RoomFacilityDto roomFacilityDto);
 }

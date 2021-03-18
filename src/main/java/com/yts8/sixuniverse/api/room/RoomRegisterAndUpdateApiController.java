@@ -24,7 +24,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/host/room/register")
-public class RoomRegisterApiController {
+public class RoomRegisterAndUpdateApiController {
 
   private final RoomImageService roomImageService;
   private final RoomService roomService;
@@ -33,28 +33,28 @@ public class RoomRegisterApiController {
   private final HttpSession httpSession;
 
   @PostMapping("/calendar")
-  public void postCalendar(@RequestParam List<String> impossibleDayString, @RequestParam Long roomId) {
+  public void postCalendar(@RequestParam List<String> impossibleDayString, Long roomId) {
 
-    List<LocalDate> impossibleDay = new ArrayList<>();//db에 저장할 date타입 예약불가날짜 리스트
+    RoomDto roomDto = roomService.findById(roomId);
+    MemberDto member = (MemberDto) httpSession.getAttribute("member");
 
-    for (String day : impossibleDayString) {
-      LocalDate day2 = LocalDate.parse(day);
+    if (roomDto.getMemberId().equals(member.getMemberId())) {
+      List<LocalDate> impossibleDay = new ArrayList<>();//db에 저장할 date타입 예약불가날짜 리스트
 
-      impossibleDay.add(day2);
+      for (String day : impossibleDayString) {
+        LocalDate day2 = LocalDate.parse(day);
+        impossibleDay.add(day2);
+      }
+
+      List<ReservationDateDto> hostReservationDtos = new ArrayList<>();
+      for (LocalDate d : impossibleDay) {
+        ReservationDateDto reservationDateDto = new ReservationDateDto();
+        reservationDateDto.setRoomId(roomId);
+        reservationDateDto.setReservationDate(d);
+        hostReservationDtos.add(reservationDateDto);
+      }
+      reservationDateService.hostReservationDateInsert(hostReservationDtos);
     }
-
-    List<ReservationDateDto> hostReservationDtos = new ArrayList<>();
-    for (LocalDate d : impossibleDay) {
-      ReservationDateDto reservationDateDto = new ReservationDateDto();
-      reservationDateDto.setRoomId(roomId);
-      reservationDateDto.setReservationDate(d);
-      hostReservationDtos.add(reservationDateDto);
-    }
-
-
-    reservationDateService.hostReservationDateInsert(hostReservationDtos);
-
-
   }
 
   @PostMapping("/images")

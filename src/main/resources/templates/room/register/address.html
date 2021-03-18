@@ -23,12 +23,31 @@
       <div class="room__guide">숙소의 위치를 알려주세요.</div>
 
       <div class="room__post-container">
-        <form th:action="@{/host/room/register/address}" method="post">
-          <button type="button" class="postcode-search-btn room__postcode-btn">우편번호 검색</button>
-          <input type="text" id="zipcode" name="zipcode" class="room__address" placeholder="우편번호(필수사항)" readonly/>
-          <input type="text" id="address" name="address" class="room__address" placeholder="주소(필수사항)" readonly/><br>
+        <form th:action="@{${url}}" method="post">
+          <input th:if="${isUpdate}" type="hidden" name="roomId" th:value="${roomId}"/>
 
-          <input type="text" id="sub-address" name="subAddress" class="room__address" placeholder="상세주소(선택사항)"/>
+          <button type="button" class="postcode-search-btn room__postcode-btn">우편번호 검색</button>
+          <input type="text"
+                 id="zipcode"
+                 name="zipcode"
+                 class="room__address"
+                 th:value="${roomDto.getZipcode()}"
+                 placeholder="우편번호(필수사항)" readonly/>
+
+          <input type="text"
+                 id="address"
+                 name="address"
+                 class="room__address"
+                 th:value="${roomDto.getAddress()}"
+                 placeholder="주소(필수사항)" readonly/><br>
+
+          <input type="text"
+                 id="sub-address"
+                 name="subAddress"
+                 class="room__address"
+                 th:value="${roomDto.getSubAddress()}"
+                 placeholder="상세주소(선택사항)"/>
+
           <button type="submit" class="room__register-btn">계속</button>
         </form>
       </div>

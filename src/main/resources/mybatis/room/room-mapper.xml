@@ -26,6 +26,14 @@
     values (#{memberId}, #{zipcode}, #{address}, #{subAddress})
   </insert>
 
+  <update id="updateAddress" parameterType="RoomDto">
+    update room
+    set zipcode=#{zipcode},
+        address=#{address},
+        sub_address=#{subAddress}
+    where room_id = #{roomId}
+  </update>
+
   <update id="updateTypes" parameterType="RoomDto">
     update room
     set building_type=#{buildingType},
