@@ -16,4 +16,8 @@ public interface ReservationService {
   void reservationCheckOut(LocalDate today);
 
   void guestReservationUpdateRequest(Long reservationId);
+
+  void guestReservationUpdateInsert(ReservationDto reservationDto);
+
+  void guestReservationCancel(ReservationDto reservationDto);
 }

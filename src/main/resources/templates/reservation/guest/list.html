@@ -37,7 +37,8 @@
     </a>
   </nav>
 
-    <div class="guest-reservation__room-info" >
+
+    <div class="guest-reservation__room-info">
       <a th:href="@{|/reservation/guest/simple-info/${reservation.reservationId}|}" th:each="reservation, i : ${reservationList}" th:if="${reservationList.size()} != 0">
         <table class="guest-reservation__room-info-table">
           <tr><td>
@@ -60,7 +61,15 @@
           </td></tr>
         </table>
       </a>
+
     </div>
+
+
+
+    <div>
+
+    </div>
+
 
     <div class="guest-reservation__room-info" th:unless="${reservationList.size()} != 0"> 없슈ㅠ </div>
 

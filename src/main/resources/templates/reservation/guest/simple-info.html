@@ -35,11 +35,16 @@
 
         <div class="guest-reservation-simple-info__room-info-box">
           <div class="guest-reservation-simple-info__room-info-small-box">
-            <div th:if="${reservation.status.equals('upcoming')}">
-              <div class="guest-reservation-simple-info__reservation-title">예정된 예약</div>
-            </div>
-            <div th:unless="${reservation.status.equals('upcoming')}">
-              <div class="guest-reservation-simple-info__reservation-title">완료된 예약</div>
+            <div th:switch="${reservation.status}">
+              <div th:case="'upcoming'">
+                <div class="guest-reservation-simple-info__reservation-title">예정된 예약</div>
+              </div>
+              <div th:case="'complete'">
+                <div class="guest-reservation-simple-info__reservation-title">완료된 예약</div>
+              </div>
+              <div th:case="'update'">
+                <div class="guest-reservation-simple-info__reservation-title">변경을 요청한 예약</div>
+              </div>
             </div>
             <div class="guest-reservation-simple-info__room-info">
               <a th:href="@{|/reservation/guest/detail-info/${reservation.reservationId}|}">
