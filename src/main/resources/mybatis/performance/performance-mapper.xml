@@ -3,5 +3,12 @@
 
 <mapper namespace="com.yts8.sixuniverse.performance.repository.PerformanceMapper">
 
+  <select id="findByReviewScore" resultType="double">
+    select (avg(score_clean) + avg(score_location) + avg(score_service)) / 3
+    from review
+           join room on review.room_id = room.room_id
+           join member on room.member_id = member.member_id
+    where member.member_id = #{memberId}
+  </select>
 
 </mapper>
