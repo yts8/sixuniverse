@@ -24,9 +24,9 @@
   // Regex
   const rgxs = {
     username: /.+/,
-    birthdate: /\d{8}/i,
-    mobile: /(01[01])\d{8}/i,
-    zipcode: /\d{5}/,
+    birthdate: /^\d{8}$/i,
+    mobile: /^(01[01])\d{8}$/i,
+    zipcode: /^\d{5}$/,
     bio: /.+/,
     password: /^.*(?=^.{8,20}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/
   }

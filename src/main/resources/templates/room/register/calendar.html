@@ -3,15 +3,14 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
-<div layout:fragment="css">
+<th:block layout:fragment="css">
   <link rel="stylesheet" th:href="@{/css/room/register/calendar.css}"/>
   <link rel="stylesheet" th:href="@{/css/room/register/fullcalendar.css}"/>
-</div>
-<div layout:fragment="js">
+</th:block>
+<th:block layout:fragment="js">
   <script type="text/javascript" defer th:src="@{/js/room/fullcalendar.js}"></script>
   <script type="text/javascript" defer th:src="@{/js/room/calendar.js}"></script>
-
-</div>
+</th:block>
 <th:block layout:fragment="content">
   <div class="room__container">
 

@@ -3,9 +3,14 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
-<div layout:fragment="css">
+<th:block layout:fragment="css">
   <link rel="stylesheet" th:href="@{/css/room/register/availability-setting.css}"/>
-</div>
+</th:block>
+
+<th:block layout:fragment="js">
+  <script defer th:src="@{/js/room/availability-settings.js}"></script>
+</th:block>
+
 <th:block layout:fragment="content">
 
   <div class="room__container">
@@ -27,6 +32,7 @@
         <div class="room__guide-sub">숙박 기간이 짧으면 예약을 더 많이 받을 수 있지만, 새로운 게스트를 맞이하기 위한 호스팅 준비도 더 자주 해야 합니다.</div>
 
         <input type="number"
+               id="max-date-number"
                name="maxDateNumber"
                th:value="${roomDto.getMaxDateNumber()}"
                placeholder="박 (최대)">
@@ -46,7 +52,7 @@
                   th:text="|${time}시|"></option>
         </select>
 
-        <button type="submit" class="room__register-btn">계속</button>
+        <button type="submit" id="submit" class="room__register-btn">계속</button>
       </form>
     </div>
   </div>

@@ -3,9 +3,14 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
-<div layout:fragment="css">
+<th:block layout:fragment="css">
   <link rel="stylesheet" th:href="@{/css/room/register/amenities.css}"/>
-</div>
+</th:block>
+
+<th:block layout:fragment="js">
+  <script defer th:src="@{/js/room/facility.js}"></script>
+</th:block>
+
 <th:block layout:fragment="content">
 
   <div class="room__container">
@@ -76,7 +81,7 @@
           </label>
         </div>
 
-        <button type="submit" class="room__register-btn">계속</button>
+        <button type="submit" id="submit" class="room__register-btn">계속</button>
       </form>
     </div>
   </div>

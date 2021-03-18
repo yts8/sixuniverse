@@ -3,9 +3,9 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
-<div layout:fragment="css">
+<th:block layout:fragment="css">
   <link rel="stylesheet" th:href="@{/css/room/register/info.css}"/>
-</div>
+</th:block>
 <th:block layout:fragment="content">
 
   <div class="room__container">
@@ -24,7 +24,8 @@
           <input type="text"
                  name="title"
                  class="room__subject"
-                 th:value="${roomDto.getTitle()}">
+                 th:value="${roomDto.getTitle()}"
+                 required>
 
         </div>
 
@@ -35,7 +36,8 @@
                   cols="50"
                   rows="10"
                   class="room__introduce"
-                  th:text="${roomDto.getContent()}"></textarea>
+                  th:text="${roomDto.getContent()}"
+                  required></textarea>
 
         <button type="submit" class="room__register-btn">계속</button>
       </form>

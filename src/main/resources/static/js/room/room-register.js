@@ -3,61 +3,61 @@
     let num = 0;
 
 
-      $('#people-plus').bind('click', function () {
-        num = parseInt($('#maxPeople').val());
-          ++num;
-        $('#maxPeople').val(num);
-      });
+    $('#people-plus').bind('click', function () {
+      num = parseInt($('#max-people').val());
+      ++num;
+      $('#max-people').val(num);
+    });
 
     $('#people-minus').bind('click', function () {
-      num = parseInt($('#maxPeople').val());
+      num = parseInt($('#max-people').val());
       if (num > 0) {
         --num;
       }
-      $('#maxPeople').val(num);
+      $('#max-people').val(num);
     });
 
 
     $('#bath-plus').bind('click', function () {
-      num = parseInt($('#bathCount').val());
+      num = parseInt($('#bath-count').val());
       ++num;
-      $('#bathCount').val(num);
+      $('#bath-count').val(num);
     });
 
     $('#bath-minus').bind('click', function () {
-      num = parseInt($('#bathCount').val());
+      num = parseInt($('#bath-count').val());
       if (num > 0) {
         --num;
       }
-      $('#bathCount').val(num);
+      $('#bath-count').val(num);
     });
 
     $('#bedRoom-plus').bind('click', function () {
-      num = parseInt($('#bedRoomCount').val());
+      num = parseInt($('#bedroom-count').val());
       ++num;
-      $('#bedRoomCount').val(num);
+      $('#bedroom-count').val(num);
     });
 
     $('#bedRoom-minus').bind('click', function () {
-      num = parseInt($('#bedRoomCount').val());
+      num = parseInt($('#bedroom-count').val());
       if (num > 0) {
         --num;
       }
-      $('#bedRoomCount').val(num);
+      $('#bedroom-count').val(num);
     });
 
     $('#bed-plus').bind('click', function () {
-      num = parseInt($('#bedCount').val());
+      num = parseInt($('#bed-count').val());
       ++num;
-      $('#bedCount').val(num);
+      $('#bed-count').val(num);
     });
 
     $('#bed-minus').bind('click', function () {
-      num = parseInt($('#bedCount').val());
+      num = parseInt($('#bed-count').val());
       if (num > 0) {
         --num;
       }
-      $('#bedCount').val(num);
+      $('#bed-count').val(num);
     });
 
 

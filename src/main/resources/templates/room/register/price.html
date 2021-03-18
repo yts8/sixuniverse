@@ -3,9 +3,14 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
-<div layout:fragment="css">
+<th:block layout:fragment="css">
   <link rel="stylesheet" th:href="@{/css/room/register/price.css}"/>
-</div>
+</th:block>
+
+<th:block layout:fragment="js">
+  <script defer th:src="@{/js/room/price.js}"></script>
+</th:block>
+
 <th:block layout:fragment="content">
 
   <div class="room__container">
@@ -19,9 +24,9 @@
         <div class="room__guide">기본 요금</div>
         <div class="room__guide-sub">이 요금이 기본 요금이 됩니다.</div>
 
-        <input type="text" name="price" th:value="${roomDto.getPrice()}">
+        <input type="text" id="price" name="price" th:value="${roomDto.getPrice()}">
 
-        <button type="submit" class="room__register-btn">계속</button>
+        <button type="submit" id="submit" class="room__register-btn">계속</button>
       </form>
     </div>
   </div>

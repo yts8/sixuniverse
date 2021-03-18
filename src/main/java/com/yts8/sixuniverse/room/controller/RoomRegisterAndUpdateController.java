@@ -148,7 +148,7 @@ public class RoomRegisterAndUpdateController {
   }
 
   @GetMapping("/spaces/{roomId}")
-  public String getSpacesFacility(Model model, @PathVariable Long roomId) {
+  public String getSpaces(Model model, @PathVariable Long roomId) {
     RoomFacilityDto facilityDto = new RoomFacilityDto();
     facilityDto.setRoomId(roomId);
     facilityDto.setCategoryName("spaces");
@@ -160,7 +160,7 @@ public class RoomRegisterAndUpdateController {
   }
 
   @PostMapping("/spaces")
-  public String postSpacesFacility(RoomDto roomDto, @RequestParam(value = "name") List<String> names) {
+  public String postSpaces(RoomDto roomDto, @RequestParam(value = "name") List<String> names) {
 
     List<RoomFacilityDto> facilityDtos = new ArrayList<>();
     for (String name : names) {
