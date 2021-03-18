@@ -17,11 +17,12 @@ public class RoomFacilityServiceImpl implements RoomFacilityService {
 
   @Override
   public void save(List<RoomFacilityDto> facilityDtos) {
+    facilityMapper.removeByRoomIdAndCategoryName(facilityDtos.get(0));
     facilityMapper.save(facilityDtos);
   }
 
   @Override
-  public List<RoomFacilityDto> findByRoomIdAndCategoryName(RoomFacilityDto roomFacilityDto) {
+  public List<String> findByRoomIdAndCategoryName(RoomFacilityDto roomFacilityDto) {
     return facilityMapper.findByRoomIdAndCategoryName(roomFacilityDto);
   }
 }

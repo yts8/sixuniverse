@@ -35,6 +35,10 @@ public class RoomServiceImpl implements RoomService {
     roomMapper.save(roomDto);
   }
 
+  public void updateAddress(RoomDto roomDto) {
+    roomMapper.updateAddress(roomDto);
+  }
+
   @Override
   public void updateTypes(RoomDto roomDto) {
     roomMapper.updateTypes(roomDto);

@@ -14,13 +14,13 @@ import javax.servlet.http.HttpSession;
 @Aspect
 @Component
 @RequiredArgsConstructor
-public class RoomRegisterAspect {
+public class RoomRegisterAndUpdateAspect {
 
   private final RoomService roomService;
   private final HttpSession httpSession;
 
-  @Around("execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.get*(..)) && " +
-      "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.getAddress(..))")
+  @Around("execution(* com.yts8.sixuniverse.room.controller.RoomRegisterAndUpdateController.get*(..)) && " +
+      "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterAndUpdateController.getAddressRegister(..))")
   public Object getCheckUser(ProceedingJoinPoint joinPoint) throws Throwable {
 
     Long roomId = (Long) joinPoint.getArgs()[1];
@@ -35,8 +35,8 @@ public class RoomRegisterAspect {
     return joinPoint.proceed();
   }
 
-  @Around("execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.post*(..)) && " +
-      "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterController.postAddress(..))")
+  @Around("execution(* com.yts8.sixuniverse.room.controller.RoomRegisterAndUpdateController.post*(..)) && " +
+      "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterAndUpdateController.postAddress(..))")
   public Object postCheckUser(ProceedingJoinPoint joinPoint) throws Throwable {
 
     RoomDto room = (RoomDto) joinPoint.getArgs()[0];

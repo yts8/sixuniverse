@@ -21,45 +21,80 @@
 
         <div>
           <label>
-            <input type="checkbox" name="name" value="건조기"/>
+
+            <input type="checkbox"
+                   name="name"
+                   value="건조기"
+                   th:checked='${#lists.contains(spaces, "건조기")}'/>
+
             <span>세탁공간 - 건조기</span>
           </label>
         </div>
 
         <div>
           <label>
-            <input type="checkbox" name="name" value="세탁기"/>
+
+            <input type="checkbox"
+                   name="name"
+                   value="세탁기"
+                   th:checked='${#lists.contains(spaces, "세탁기")}'>
+
             <span>세탁공간 - 세탁기</span>
           </label>
         </div>
 
         <div>
           <label>
-            <input type="checkbox" name="name" value="자쿠지"/>
+
+            <input type="checkbox"
+                   name="name"
+                   value="자쿠지"
+                   th:checked='${#lists.contains(spaces, "자쿠지")}'/>
+
             <span>자쿠지</span>
           </label>
         </div>
         <div>
           <label>
-            <input type="checkbox" name="name" value="주방"/>
+
+            <input type="checkbox"
+                   name="name"
+                   value="주방"
+                   th:checked='${#lists.contains(spaces, "주방")}'>
+
             <span>주방</span>
           </label>
         </div>
         <div>
           <label>
-            <input type="checkbox" name="name" value="수영장"/>
+
+            <input type="checkbox"
+                   name="name"
+                   value="수영장"
+                   th:checked='${#lists.contains(spaces, "수영장")}'/>
+
             <span>수영장</span>
           </label>
         </div>
         <div>
           <label>
-            <input type="checkbox" name="name" value="주차"/>
+
+            <input type="checkbox"
+                   name="name"
+                   value="주차"
+                   th:checked='${#lists.contains(spaces, "주차")}'>
+
             <span>주차</span>
           </label>
         </div>
         <div>
           <label>
-            <input type="checkbox" name="name" value="헬스장"/>
+
+            <input type="checkbox"
+                   name="name"
+                   value="헬스장"
+                   th:checked='${#lists.contains(spaces, "헬스장")}'/>
+
             <span>헬스장</span>
           </label>
         </div>

@@ -20,16 +20,20 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/host/room/register")
-public class RoomRegisterController {
+public class RoomRegisterAndUpdateController {
 
   private final RoomService roomService;
   private final RoomFacilityService roomFacilityService;
   private final RoomImageService roomImageService;
 
   @GetMapping("")
-  public String getAddress(Model model) {
-    model.addAttribute("title", "숙소등록");
-    return "room/register/index";
+  public String getAddressRegister(Model model) {
+    model.addAttribute("title", "숙소 등록");
+    model.addAttribute("isUpdate", false);
+    model.addAttribute("url", "/host/room/register/address");
+    model.addAttribute("roomDto", new RoomDto());
+
+    return "room/register/address";
   }
 
   @PostMapping("/address")
@@ -37,6 +41,22 @@ public class RoomRegisterController {
     MemberDto member = (MemberDto) httpSession.getAttribute("member");
     roomDto.setMemberId(member.getMemberId());
     roomService.save(roomDto);
+
+    return "redirect:/host/room/register/types/" + roomDto.getRoomId();
+  }
+
+  @GetMapping("/address/{roomId}")
+  public String getAddress(Model model, @PathVariable Long roomId) {
+    model.addAttribute("title", "주소 수정");
+    model.addAttribute("isUpdate", true);
+    model.addAttribute("url", "/host/room/register/address/update");
+    model.addAttribute("roomDto", roomService.findById(roomId));
+    return "room/register/address";
+  }
+
+  @PostMapping("/address/update")
+  public String postAddressUpdate(RoomDto roomDto) {
+    roomService.updateAddress(roomDto);
 
     return "redirect:/host/room/register/types/" + roomDto.getRoomId();
   }

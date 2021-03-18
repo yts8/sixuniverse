@@ -23,7 +23,12 @@
 
           <div class="room__amenities-detail">
             <label>
-              <input type="checkbox" name="name" id="label1" value="필수 품목"/>
+
+              <input type="checkbox"
+                     name="name"
+                     value="필수 품목"
+                     th:checked='${#lists.contains(amenities, "필수 품목")}'/>
+
               <span>필수 품목</span>
               <span>수건, 침대 시트, 비누, 화장지, 배게</span>
             </label>
@@ -31,85 +36,143 @@
 
           <div class="room__amenities-detail">
             <label>
-            <input type="checkbox" id="label2" name="name" value="무선인터넷"/>
-            <span>무선인터넷</span>
+
+              <input type="checkbox"
+                     name="name"
+                     value="무선인터넷"
+                     th:checked='${#lists.contains(amenities, "무선인터넷")}'/>
+
+              <span>무선인터넷</span>
             </label>
           </div>
 
           <div class="room__amenities-detail">
             <label>
-            <input type="checkbox" id="label3" name="name" value="TV"/>
-            <span>TV</span>
+
+              <input type="checkbox"
+                     name="name"
+                     value="TV"
+                     th:checked='${#lists.contains(amenities, "TV")}'/>
+
+              <span>TV</span>
             </label>
           </div>
 
           <div class="room__amenities-detail">
             <label>
-            <input type="checkbox" id="label4" name="name" value="난방"/>
-            <span>난방</span>
+
+              <input type="checkbox"
+                     name="name"
+                     value="난방"
+                     th:checked='${#lists.contains(amenities, "난방")}'/>
+
+              <span>난방</span>
             </label>
           </div>
 
           <div class="room__amenities-detail">
             <label>
-            <input type="checkbox" id="label5" name="name" value="에어컨"/>
-            <span>에어컨</span>
+
+              <input type="checkbox"
+                     name="name"
+                     value="에어컨"
+                     th:checked='${#lists.contains(amenities, "에어컨")}'/>
+
+              <span>에어컨</span>
             </label>
           </div>
 
           <div class="room__amenities-detail">
             <label>
-            <input type="checkbox" id="label6" name="name" value="다리미"/>
-            <span>다리미</span>
+              <input type="checkbox"
+                     name="name"
+                     value="다리미"
+                     th:checked='${#lists.contains(amenities, "다리미")}'/>
+              <span>다리미</span>
             </label>
           </div>
 
           <div class="room__amenities-detail">
             <label>
-            <input type="checkbox"id="label7"  name="name" value="샴푸"/>
-            <span>샴푸</span>
+
+              <input type="checkbox"
+                     name="name"
+                     value="샴푸"
+                     th:checked='${#lists.contains(amenities, "샴푸")}'/>
+
+              <span>샴푸</span>
             </label>
           </div>
 
           <div class="room__amenities-detail">
             <label>
-            <input type="checkbox" id="label8"name="name" value="헤어드라이어"/>
-            <span>헤어드라이어</span>
+
+              <input type="checkbox"
+                     name="name"
+                     value="헤어드라이어"
+                     th:checked='${#lists.contains(amenities, "헤어드라이어")}'/>
+
+              <span>헤어드라이어</span>
             </label>
           </div>
 
           <div class="room__amenities-detail">
             <label>
-            <input type="checkbox" id="label9"name="name" value="조식,커피,차"/>
-            <span>조식,커피,차</span>
+
+              <input type="checkbox"
+                     name="name"
+                     value="조식, 커피, 차"
+                     th:checked='${#lists.contains(amenities, "조식, 커피, 차")}'/>
+
+              <span>조식, 커피, 차</span>
             </label>
           </div>
 
           <div class="room__amenities-detail">
             <label>
-            <input type="checkbox" id="label10"name="name" value="업무 가능 공간/책상"/>
-            <span>업무 가능 공간/책상</span>
+
+              <input type="checkbox"
+                     name="name"
+                     value="업무 가능 공간/책상"
+                     th:checked='${#lists.contains(amenities, "업무 가능 공간/책상")}'/>
+
+              <span>업무 가능 공간/책상</span>
             </label>
           </div>
 
           <div class="room__amenities-detail">
             <label>
-            <input type="checkbox" id="label11"name="name" value="벽난로"/>
-            <span>벽난로</span>
+
+              <input type="checkbox"
+                     name="name"
+                     value="벽난로"
+                     th:checked='${#lists.contains(amenities, "벽난로")}'/>
+
+              <span>벽난로</span>
             </label>
           </div>
 
           <div class="room__amenities-detail">
             <label>
-            <input type="checkbox"id="label12" name="name" value="옷장/서랍장"/>
-            <span>옷장/서랍장</span>
+
+              <input type="checkbox"
+                     name="name"
+                     value="옷장/서랍장"
+                     th:checked='${#lists.contains(amenities, "옷장/서랍장")}'/>
+
+              <span>옷장/서랍장</span>
             </label>
           </div>
 
           <div class="room__amenities-detail">
             <label>
-            <input type="checkbox" id="label13"name="name" value="게스트 전용 출입문"/>
-            <span>게스트 전용 출입문</span>
+
+              <input type="checkbox"
+                     name="name"
+                     value="게스트 전용 출입문"
+                     th:checked='${#lists.contains(amenities, "게스트 전용 출입문")}'/>
+
+              <span>게스트 전용 출입문</span>
             </label>
           </div>
 

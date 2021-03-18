@@ -14,6 +14,8 @@ public interface RoomService {
 
   void save(RoomDto roomDto);
 
+  void updateAddress(RoomDto roomDto);
+
   void updateTypes(RoomDto roomDto);
 
   void updateBedrooms(RoomDto roomDto);

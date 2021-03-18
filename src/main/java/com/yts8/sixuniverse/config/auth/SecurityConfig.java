@@ -66,7 +66,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .failureHandler((request, response, exception) -> {
           request.setAttribute("loginError", exception.getMessage());
           request.getRequestDispatcher("/login").forward(request, response);
-
         })
         .userInfoEndpoint()
         .userService(oAuth2UserService);
