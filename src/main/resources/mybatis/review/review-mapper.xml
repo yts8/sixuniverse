@@ -3,12 +3,13 @@
 
 <mapper namespace="com.yts8.sixuniverse.review.repository.ReviewMapper">
 
-  <insert id="insertReview">
+  <insert id="insertReview" parameterType="ReviewDto" useGeneratedKeys="true" keyProperty="reviewId">
     insert into review
-    values (null, 1, 1,
-            #{scoreAll}, #{scoreClean}, #{scoreLocation}, #{scoreService},
+    values (null, #{roomId}, #{reservationId},
+            #{scoreClean}, #{scoreLocation}, #{scoreService},
             #{reviewContent}, #{reviewRegDate}, #{replyContent}, #{replyRegDate})
   </insert>
+
 
   <select id="findById" resultType="ReviewDto">
     select *
@@ -22,8 +23,7 @@
   </select>
 
   <select id="getReview" resultType="ReviewDto">
-    select score_all,
-           score_clean,
+    select score_clean,
            score_location,
            score_service,
            review_content
@@ -33,8 +33,7 @@
 
   <update id="updateReview" parameterType="ReviewDto">
     update review
-    set score_all      = #{scoreAll},
-        score_clean    = #{scoreClean},
+    set score_clean    = #{scoreClean},
         score_location = #{scoreLocation},
         score_service  = #{scoreService},
         review_content = #{reviewContent}
@@ -42,7 +41,8 @@
   </update>
 
   <delete id="deleteReview" parameterType="ReviewDto">
-    delete from review
+    delete
+    from review
     where review_id = #{reviewId}
   </delete>
 

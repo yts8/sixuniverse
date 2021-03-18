@@ -13,23 +13,9 @@
 </th:block>
 
 <th:block layout:fragment="content">
-  <form th:action="@{/review/updateForm}" method="post">
+  <form th:action="@{/review/update-form}" method="post">
     <input type="hidden" name="reviewId" th:value="${reviewId}">
     <div class="review-form__main">
-      <div class="review-form__score-all">
-        <div>
-          <div class="review-form__text-main">[]님의 숙소는 어땠나요?</div>
-          <div class="review-form__text-part">답변해주신 내용은 sixuniverse의 서비스를 개선하는 데 큰 도움이 됩니다.</div>
-        </div>
-        <div class="review-form__star-main">
-          <span class="review-form__star-main-each" th:data-all="1"></span>
-          <span class="review-form__star-main-each" th:data-all="2"></span>
-          <span class="review-form__star-main-each" th:data-all="3"></span>
-          <span class="review-form__star-main-each" th:data-all="4"></span>
-          <span class="review-form__star-main-each" th:data-all="5"></span>
-          <input type="hidden" class="star-main-js" name="scoreAll">
-        </div>
-      </div>
       <div class="review-form__score-part">
         <div>
           <div class="review-form__text-main">호스트 []님의 숙소를 평가해주세요.</div>
