@@ -22,19 +22,9 @@
   });
 
   // 전체, 청결도, 위치, 서비스 별점
-  const starScoreAllEl = document.querySelector(".star-main-js");
   const starScoreCleanEl = document.querySelector(".star-clean-js");
   const starScoreLocationEl = document.querySelector(".star-location-js");
   const starScoreServiceEl = document.querySelector(".star-service-js");
-
-  $('.review-form__star-main span').click(function () {
-    const starScoreAll = $(this).data('all');
-    starScoreAllEl.value = starScoreAll;
-
-    $(this).parent().children('span').removeClass('on');
-    $(this).addClass('on').prevAll('span').addClass('on');
-    return false;
-  });
 
   $('.review-form__star-part-clean span').click(function () {
     const starScoreClean = $(this).data('clean');

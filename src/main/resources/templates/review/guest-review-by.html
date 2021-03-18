@@ -44,7 +44,7 @@
           <!--          <th:block th:unless="${today} < ${reviewStart}">-->
           <th:block th:each="reservationList : ${reservationList}">
             <!-- 이거 좀 이상한데,,, 다시 생각해보기 -->
-            <th:block th:if="${reviewList} == null">
+<!--            <th:block th:if="${reviewList} == null">-->
               <div class="g-review-by__panel-body-review">
                 <div class="g-review-by__panel-review-profile">
                   <div class="g-review-by__panel-review-profile-box">
@@ -62,7 +62,7 @@
                 </div>
               </div>
               <hr class="g-review-by__hr">
-            </th:block>
+<!--            </th:block>-->
           </th:block>
           <!--          </th:block>-->
         </div>
@@ -95,7 +95,7 @@
                   </div>
                   <div class="g-review-by__a">
                     <!--                    <th:block th:if="${today} <= ${reviewLimit}">-->
-                    <a th:href="@{|/review/updateForm/${review.reviewId}|}">
+                    <a th:href="@{|/review/update-form/${review.reviewId}|}">
                       <div>수정</div>
                     </a>
                     <div>
