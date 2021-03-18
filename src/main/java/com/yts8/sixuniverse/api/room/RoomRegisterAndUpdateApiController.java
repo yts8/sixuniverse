@@ -58,9 +58,9 @@ public class RoomRegisterAndUpdateApiController {
   }
 
   @PostMapping("/images")
-  public RoomImageDto postImages(@RequestParam("roomImg") MultipartFile multipartFile, Long roomId) {
+  public RoomImageDto postImages(RoomDto room, @RequestParam("roomImg") MultipartFile multipartFile) {
 
-    RoomDto roomDto = roomService.findById(roomId);
+    RoomDto roomDto = roomService.findById(room.getRoomId());
     MemberDto member = (MemberDto) httpSession.getAttribute("member");
 
     if (!roomDto.getMemberId().equals(member.getMemberId())) {
@@ -74,7 +74,7 @@ public class RoomRegisterAndUpdateApiController {
       e.printStackTrace();
     }
     RoomImageDto roomImageDto = new RoomImageDto();
-    roomImageDto.setRoomId(roomId);
+    roomImageDto.setRoomId(roomDto.getRoomId());
     roomImageDto.setRoomImg(roomImg);
     roomImageService.save(roomImageDto);
 

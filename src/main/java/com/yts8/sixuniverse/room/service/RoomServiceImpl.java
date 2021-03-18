@@ -63,4 +63,8 @@ public class RoomServiceImpl implements RoomService {
   public void updatePrice(RoomDto roomDto) {
     roomMapper.updatePrice(roomDto);
   }
+
+  public void updateStatus(RoomDto roomDto) {
+    roomMapper.updateStatus(roomDto);
+  }
 }

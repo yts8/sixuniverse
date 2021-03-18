@@ -27,4 +27,6 @@ public interface RoomMapper {
   void updateAvailabilitySettings(RoomDto roomDto);
 
   void updatePrice(RoomDto roomDto);
+
+  void updateStatus(RoomDto roomDto);
 }

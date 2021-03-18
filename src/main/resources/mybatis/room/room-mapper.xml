@@ -72,4 +72,10 @@
     where room_id = #{roomId}
   </update>
 
+  <update id="updateStatus" parameterType="RoomDto">
+    update room
+    set status=#{status}
+    where room_id = #{roomId}
+  </update>
+
 </mapper>

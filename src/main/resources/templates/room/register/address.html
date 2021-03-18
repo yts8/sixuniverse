@@ -3,12 +3,13 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
-<div layout:fragment="css">
+<th:block layout:fragment="css">
   <link rel="stylesheet" th:href="@{/css/room/register/index.css}"/>
-</div>
+</th:block>
 <th:block layout:fragment="js">
   <script defer src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script defer th:src="@{/js/common/daum-postcode.js}"></script>
+  <script defer th:src="@{/js/room/address.js}"></script>
 </th:block>
 <th:block layout:fragment="content">
 
@@ -48,7 +49,7 @@
                  th:value="${roomDto.getSubAddress()}"
                  placeholder="상세주소(선택사항)"/>
 
-          <button type="submit" class="room__register-btn">계속</button>
+          <button type="submit" id="submit" class="room__register-btn">계속</button>
         </form>
       </div>
 
