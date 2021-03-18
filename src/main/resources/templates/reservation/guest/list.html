@@ -19,64 +19,84 @@
 </head>
 <body>
 <th:block layout:fragment="content">
-<div class="guest-reservation__box">
-  <div class="guest-reservation__content">
-  <div class="guest-reservation__title">여행</div>
-  <nav class="guest-reservation__nav">
-    <a th:href="@{|/reservation/guest/list/upcoming|}">
-      <button class="guest-reservation__upcoming"><div>예정된 예약</div></button>
-    </a>
-    <a th:href="@{|/reservation/guest/list/complete|}">
-      <button class="guest-reservation__complete">완료된 예약</button>
-    </a>
-    <a th:href="@{|/reservation/guest/list/cancel|}">
-      <button class="guest-reservation__cancel">취소된 예약</button>
-    </a>
-    <a th:href="@{|/reservation/guest/list/update|}">
-      <button class="guest-reservation__update">변경 예약</button>
-    </a>
-  </nav>
+  <div class="guest-reservation__box">
+    <div class="guest-reservation__content">
+      <div class="guest-reservation__title">여행</div>
+      <nav class="guest-reservation__nav">
+        <a th:href="@{|/reservation/guest/list/upcoming|}">
+          <button class="guest-reservation__upcoming">
+            <div>예정된 예약</div>
+          </button>
+        </a>
+        <a th:href="@{|/reservation/guest/list/complete|}">
+          <button class="guest-reservation__complete">완료된 예약</button>
+        </a>
+        <a th:href="@{|/reservation/guest/list/cancel|}">
+          <button class="guest-reservation__cancel">취소된 예약</button>
+        </a>
+        <a th:href="@{|/reservation/guest/list/update|}">
+          <button class="guest-reservation__update">변경 예약</button>
+        </a>
+      </nav>
+
+      <!--    <div class="guest-reservation__room-info">-->
+      <!--      <a th:href="@{|/reservation/guest/simple-info/${reservation.reservationId}|}" th:each="reservation, i : ${reservationList}" th:if="${reservationList.size()} != 0">-->
+      <!--        <table class="guest-reservation__room-info-table">-->
+      <!--          <tr><td>-->
+      <!--            <div class="guest-reservation__room-img-box">-->
+      <!--              <img th:src="@{/images/reservation/sample.jpg}" class="guest-reservation__room-img">-->
+      <!--            </div>-->
+      <!--          </td></tr>-->
+      <!--          <tr>-->
+      <!--            <td class="guest-reservation__room-simple-info">-->
+      <!--              <div class="guest-reservation__reservation-date" th:text="${reservation.checkIn } + ' ~ ' + ${reservation.checkOut } ">예약날짜</div>-->
+      <!--              <div class="guest-reservation__room-simple-address" th:text="${roomList.get(i.index).address}">간단주소</div>-->
+      <!--            </td>-->
+      <!--          </tr>-->
+      <!--          <tr><td class="guest-reservation__room-simple-info-room-name">-->
+      <!--            <div class="guest-reservation__room-name"  th:text="${roomList.get(i.index).title}">숙소이름</div>-->
+      <!--            <i class="fas fa-angle-right"></i>-->
+      <!--          </td></tr>-->
+      <!--          <tr><td class="guest-reservation__detail">-->
+      <!--            <input type="submit" value="더보기" class="guest-reservation__detail-btn">-->
+      <!--          </td></tr>-->
+      <!--        </table>-->
+      <!--      </a>-->
+      <!--    </div>-->
+
+      <div class="guest-reservation__cancel-update-box">
+        <a th:href="@{|/reservation/guest/simple-info/${reservation.reservationId}|}"
+           th:each="reservation, i : ${reservationList}" th:if="${reservationList.size()} != 0">
+          <table>
+            <tr>
+              <td rowspan="2">
+                <div>
+                  <img th:src="@{/images/reservation/sample.jpg}">
+                </div>
+              </td>
+              <td>
+                <div th:text="${roomList.get(i.index).title}">숙소이름</div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div th:text="${roomList.get(i.index).address}">간단주소</div>
+                <div th:text="${reservation.checkIn } + ' ~ ' + ${reservation.checkOut } ">
+                  예약날짜
+                </div>
+              </td>
+            </tr>
+          </table>
+        </a>
+      </div>
 
 
-    <div class="guest-reservation__room-info">
-      <a th:href="@{|/reservation/guest/simple-info/${reservation.reservationId}|}" th:each="reservation, i : ${reservationList}" th:if="${reservationList.size()} != 0">
-        <table class="guest-reservation__room-info-table">
-          <tr><td>
-            <div class="guest-reservation__room-img-box">
-              <img th:src="@{/images/reservation/sample.jpg}" class="guest-reservation__room-img">
-            </div>
-          </td></tr>
-          <tr>
-            <td class="guest-reservation__room-simple-info">
-              <div class="guest-reservation__reservation-date" th:text="${reservation.checkIn } + ' ~ ' + ${reservation.checkOut } ">예약날짜</div>
-              <div class="guest-reservation__room-simple-address" th:text="${roomList.get(i.index).address}">간단주소</div>
-            </td>
-          </tr>
-          <tr><td class="guest-reservation__room-simple-info-room-name">
-            <div class="guest-reservation__room-name"  th:text="${roomList.get(i.index).title}">숙소이름</div>
-            <i class="fas fa-angle-right"></i>
-          </td></tr>
-          <tr><td class="guest-reservation__detail">
-            <input type="submit" value="더보기" class="guest-reservation__detail-btn">
-          </td></tr>
-        </table>
-      </a>
+      <div class="guest-reservation__room-info" th:unless="${reservationList.size()} != 0"> 없슈ㅠ</div>
+
 
     </div>
-
-
-
-    <div>
-
-    </div>
-
-
-    <div class="guest-reservation__room-info" th:unless="${reservationList.size()} != 0"> 없슈ㅠ </div>
-
 
   </div>
-
-</div>
 
 </th:block>
 </body>

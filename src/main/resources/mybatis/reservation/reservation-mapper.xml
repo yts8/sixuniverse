@@ -11,7 +11,9 @@
   <select id="reservationList" parameterType="ReservationDateDto" resultType="ReservationDto">
     select *
     from reservation
-    where member_id = #{memberId} and status = #{status} and update_target is null
+    where member_id = #{memberId}
+      and status = #{status}
+      and update_target is null
     order by check_in
   </select>
 
@@ -40,7 +42,8 @@
 
   <update id="guestReservationCancel">
     update reservation
-    set cancel_date = #{cancelDate}, status = #{status}
+    set cancel_date = #{cancelDate},
+        status      = #{status}
     where reservation_id = #{reservationId}
   </update>
 
