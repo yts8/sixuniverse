@@ -18,18 +18,6 @@
     };
     const json = JSON.stringify(data);
 
-    const header = "X-CSRF-TOKEN";
-    const csrf = document.querySelector("#csrf").value;
-
-    const data = {
-      reservationId:$('#reservation-id').val(), checkIn:$('#check-in').html(),
-      checkOut:$('#check-out').html(),
-      adult:adult, kid:kid, infant:infant
-    };
-    const json = JSON.stringify(data);
-
-
-
     $('.guest-reservation-update__next-btn').click(function () {
       $.ajax({
         url: "/api/reservation/guest/update/complete",
