@@ -33,12 +33,13 @@
         <div class="performance__statistics-container">
           <div class="performance__super-subject">슈퍼호스트 통계</div>
           <div class="performance__super-date">
-            <select class="performance__date">
-              <option value="">기간 선택</option>
-              <option value="2022년 3월">2022년 3월</option>
-              <option value="2022년 1월">2022년 2월</option>
-              <option value="2022년 1월">2022년 1월</option>
-            </select>
+            <!--            시간 -->
+            <!--            <select class="performance__date">-->
+            <!--              <option value="">기간 선택</option>-->
+            <!--              <option value="2022년 3월">2022년 3월</option>-->
+            <!--              <option value="2022년 1월">2022년 2월</option>-->
+            <!--              <option value="2022년 1월">2022년 1월</option>-->
+            <!--            </select>-->
             <div class="performance__super-date-detail">sixuniverse는 1개월마다 평가를 실시하여 호스트가 지난 한달 동안 슈퍼호스트 기준을 만족했는지 확인합니다.
               조건을 충족하시면 슈퍼호스트가 됩니다.
             </div>
@@ -47,12 +48,14 @@
           <div class="performance__super-result-container">
 
             <div class="performance__super-result1">
-              <div class="performance__result-sub1">-★</div>
+              <div class="performance__result-sub1"><span th:text="${reviewScore}"></span>★</div>
               <div class="performance__result-sub2">전체 평점</div>
-              <div class="performance__result-sub3">기준 : 4.8점</div>
+              <div class="performance__result-sub3">기준 :4.8점</div>
               <div class="performance__result-sub4">
-                <div><img th:src="@{/images/performance/not-check.png}" class="performance__img"></div>
-                <div>아쉽네요.</div>
+                <span th:if="${reviewScore} >= '4.8'"> <div><img th:src="@{/images/performance/check.png}"
+                                                                 class="performance__img">대단해요!</div></span>
+                <span th:unless="${reviewScore} >= '4.8'"><div><img th:src="@{/images/performance/not-check.png}"
+                                                                    class="performance__img">아쉽네요</div></span>
               </div>
             </div>
             <div class="performance__super-result2">
@@ -60,8 +63,10 @@
               <div class="performance__result-sub2">응답률</div>
               <div class="performance__result-sub3">기준 : 90 %</div>
               <div class="performance__result-sub4">
-                <div><img th:src="@{/images/performance/not-check.png}" class="performance__img"></div>
-                <div>아쉽네요.</div>
+                <span th:if="${reviewScore} >= '4.8'"> <div><img th:src="@{/images/performance/check.png}"
+                                                                 class="performance__img">대단해요!</div></span>
+                <span th:unless="${reviewScore} >= '4.8'"><div><img th:src="@{/images/performance/not-check.png}"
+                                                                    class="performance__img">아쉽네요</div></span>
               </div>
             </div>
             <div class="performance__super-result3">
@@ -69,8 +74,10 @@
               <div class="performance__result-sub2">월 매출</div>
               <div class="performance__result-sub3">기준 : 190만 원</div>
               <div class="performance__result-sub4">
-                <div><img th:src="@{/images/performance/not-check.png}" class="performance__img"></div>
-                <div>아쉽네요.</div>
+                <span th:if="${reviewScore} >= '4.8'"> <div><img th:src="@{/images/performance/check.png}"
+                                                                 class="performance__img">대단해요!</div></span>
+                <span th:unless="${reviewScore} >= '4.8'"><div><img th:src="@{/images/performance/not-check.png}"
+                                                                    class="performance__img">아쉽네요</div></span>
               </div>
             </div>
             <div class="performance__super-result4">
@@ -78,8 +85,10 @@
               <div class="performance__result-sub2">예약 취소율</div>
               <div class="performance__result-sub3">기준 : 1.0% 미만</div>
               <div class="performance__result-sub4">
-                <div><img th:src="@{/images/performance/check.png}" class="performance__img"></div>
-                <div>대단해요!</div>
+                <span th:if="${reviewScore} >= '4.8'"> <div><img th:src="@{/images/performance/check.png}"
+                                                                 class="performance__img">대단해요!</div></span>
+                <span th:unless="${reviewScore} >= '4.8'"><div><img th:src="@{/images/performance/not-check.png}"
+                                                                    class="performance__img">아쉽네요</div></span>
               </div>
             </div>
           </div>
