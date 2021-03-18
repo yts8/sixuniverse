@@ -17,4 +17,6 @@ public interface ReservationMapper {
   void reservationCheckOut(LocalDate today);
 
   void guestReservationUpdateRequest(Long reservationId);
+
+  void guestReservationUpdateInsert(ReservationDto reservationDto);
 }

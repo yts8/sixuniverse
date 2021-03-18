@@ -11,8 +11,8 @@
   <select id="reservationList" parameterType="ReservationDateDto" resultType="ReservationDto">
     select *
     from reservation
-    where member_id = #{memberId} and status = #{status}
-    order by check_in desc
+    where member_id = #{memberId} and status = #{status} and update_target is null
+    order by check_in
   </select>
 
   <select id="findById" parameterType="ReservationDateDto" resultType="ReservationDto">
@@ -32,5 +32,10 @@
     set status = 'update'
     where reservation_id = #{reservationId}
   </update>
+
+  <insert id="guestReservationUpdateInsert">
+    insert into reservation (room_id, member_id, status, adult, kid, infant, check_in, check_out, update_target)
+    values (#{roomId}, #{memberId}, #{status}, #{adult}, #{kid}, #{infant}, #{checkIn}, #{checkOut}, #{reservationId})
+  </insert>
 
 </mapper>

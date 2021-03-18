@@ -10,7 +10,6 @@
 </th:block>
 
 <th:block layout:fragment="js">
-  <script type="text/javascript" defer th:src="@{/js/reservation/guest/cancel.js}"></script>
 </th:block>
 
 
@@ -69,8 +68,10 @@
 
         </div>
 
+        <input type="hidden" class="guest-reservation-cancel__reservation-id" th:value="${reservationId}">
         <div class="guest-reservation-cancel__btn">
-          <button class="guest-reservation-cancel__next-btn">계속</button>
+          <button class="guest-reservation-cancel__back-btn">뒤로</button>
+          <button class="guest-reservation-cancel__next-btn">취소</button>
         </div>
 
 

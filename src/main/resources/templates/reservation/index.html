@@ -235,15 +235,14 @@
 
           <div class="reservation__line"></div>
 
-          <div class="reservation__wait-info">
-            <img th:src="@{/images/reservation/calendar.png}" class="reservation__img2">
-            <div class="reservation__wait-content">
-              <div class="reservation__wait">호스트가 24시간 이내 예약 요청을 수락하기 전까지는 예약이 아직 확정된 것이 아닙니다.</div>
-              <div>예약 확정 전까지는 요금이 청구되지 않습니다.</div>
-            </div>
-          </div>
+<!--          <div class="reservation__wait-info">-->
+<!--            <img th:src="@{/images/reservation/calendar.png}" class="reservation__img2">-->
+<!--            <div class="reservation__wait-content">-->
+<!--              <div class="reservation__wait">호스트가 24시간 이내 예약 요청을 수락하기 전까지는 예약이 아직 확정된 것이 아닙니다.</div>-->
+<!--              <div>예약 확정 전까지는 요금이 청구되지 않습니다.</div>-->
+<!--            </div>-->
+<!--          </div>-->
 
-          <div class="reservation__line"></div>
 
           <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
 

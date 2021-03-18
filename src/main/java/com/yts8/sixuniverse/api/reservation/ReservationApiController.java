@@ -1,5 +1,6 @@
 package com.yts8.sixuniverse.api.reservation;
 
+import com.amazonaws.services.ec2.model.ResetSnapshotAttributeRequest;
 import com.yts8.sixuniverse.member.dto.MemberDto;
 import com.yts8.sixuniverse.reservation.dto.ReservationDto;
 import com.yts8.sixuniverse.reservation.service.ReservationService;
@@ -35,7 +36,16 @@ public class ReservationApiController {
 
   @PostMapping("/guest/update/complete")
   public @ResponseBody void guestReservationUpdateComplete(@RequestBody ReservationDto reservationDto) {
-    reservationService.guestReservationUpdateRequest(reservationDto.getReservationId());
+    Long reservationId = reservationDto.getReservationId();
+    reservationService.guestReservationUpdateRequest(reservationId);
+
+    ReservationDto originalReservationDto = reservationService.findById(reservationId);
+    reservationDto.setRoomId(originalReservationDto.getRoomId());
+    reservationDto.setStatus("update");
+    reservationDto.setMemberId(originalReservationDto.getMemberId());
+
+    reservationService.guestReservationUpdateInsert(reservationDto);
+
   }
 
   @PostMapping("/room/member/check")
