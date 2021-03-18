@@ -19,4 +19,6 @@ public interface ReservationDateMapper {
   List<LocalDate> reservationDateList(Long roomId);
 
   List<LocalDate> reservationDateUpdateList(ReservationDto reservationDto);
+
+  void guestReservationDateDelete(Long reservationId);
 }

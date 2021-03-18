@@ -19,4 +19,6 @@ public interface ReservationMapper {
   void guestReservationUpdateRequest(Long reservationId);
 
   void guestReservationUpdateInsert(ReservationDto reservationDto);
+
+  void guestReservationCancel(ReservationDto reservationDto);
 }

@@ -18,4 +18,6 @@ public interface ReservationDateService {
 
   List<LocalDate> reservationDateUpdateList(ReservationDto reservationDto);
 
+  void guestReservationDateDelete(Long reservationId);
+
 }

@@ -10,6 +10,7 @@
 </th:block>
 
 <th:block layout:fragment="js">
+  <script type="text/javascript" defer th:src="@{/js/reservation/guest/cancel-confirm.js}"></script>
 </th:block>
 
 
@@ -20,6 +21,8 @@
 <body>
 
 <th:block layout:fragment="content">
+  <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
+
   <div class="guest-reservation-cancel__box">
     <div class="guest-reservation-cancel__box2">
       <div class="guest-reservation-cancel__content">

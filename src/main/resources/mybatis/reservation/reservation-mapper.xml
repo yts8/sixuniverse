@@ -38,4 +38,10 @@
     values (#{roomId}, #{memberId}, #{status}, #{adult}, #{kid}, #{infant}, #{checkIn}, #{checkOut}, #{reservationId})
   </insert>
 
+  <update id="guestReservationCancel">
+    update reservation
+    set cancel_date = #{cancelDate}, status = #{status}
+    where reservation_id = #{reservationId}
+  </update>
+
 </mapper>

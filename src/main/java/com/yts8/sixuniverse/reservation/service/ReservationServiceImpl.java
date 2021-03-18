@@ -43,4 +43,9 @@ public class ReservationServiceImpl implements ReservationService {
   public void guestReservationUpdateInsert(ReservationDto reservationDto) {
     reservationMapper.guestReservationUpdateInsert(reservationDto);
   }
+
+  @Override
+  public void guestReservationCancel(ReservationDto reservationDto) {
+    reservationMapper.guestReservationCancel(reservationDto);
+  }
 }

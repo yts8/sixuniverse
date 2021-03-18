@@ -32,4 +32,9 @@
     from reservation_date where room_id = #{roomId} and reservation_id not in (#{reservationId})
   </select>
 
+  <delete id="guestReservationDateDelete">
+    delete from reservation_date
+    where reservation_id = #{reservationId}
+  </delete>
+
 </mapper>
