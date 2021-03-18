@@ -19,7 +19,7 @@
     select *
     from room_img
     where room_id = #{roomId}
-    order by room_img_id desc
+    order by room_img_id asc
   </select>
 
 </mapper>

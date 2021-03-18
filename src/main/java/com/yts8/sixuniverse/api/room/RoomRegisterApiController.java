@@ -63,7 +63,7 @@ public class RoomRegisterApiController {
     RoomDto roomDto = roomService.findById(roomId);
     MemberDto member = (MemberDto) httpSession.getAttribute("member");
 
-    if (!roomDto.getRoomId().equals(member.getMemberId())) {
+    if (!roomDto.getMemberId().equals(member.getMemberId())) {
       return null;
     }
 
@@ -86,7 +86,7 @@ public class RoomRegisterApiController {
     RoomDto roomDto = roomService.findById(roomId);
     MemberDto member = (MemberDto) httpSession.getAttribute("member");
 
-    if (!roomDto.getRoomId().equals(member.getMemberId())) {
+    if (!roomDto.getMemberId().equals(member.getMemberId())) {
       return null;
     }
 
