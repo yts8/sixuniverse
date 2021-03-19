@@ -1,11 +1,55 @@
 @charset "UTF-8";
+
+/* 세부 채팅창전체 영역*/
+.chat__chatroom {
+    width: 550px;
+}
+
+/* 채팅룸 헤더*/
+.chat__chatroom-header{
+    height: 72px;
+}
+/* 채팅방 이름 영역*/
+.chat__chatroom-wrap{
+    width: 509px;
+    height: 72px;
+    padding: 0px 20px 0px 24px;
+    display: flex;
+    flex-direction: row;
+    align-items:center ;
+    position: relative;
+    border-bottom: 1px solid rgb(235,235,235);
+}
+
+/*채팅방 이름*/
+ .chat__chatroom-name{
+        height: 20px;
+     width: 490px;
+     display: inline;
+
+ }
+/* 채팅방이름 설정 로고*/
+ .chat__chatroom-name-setting{
+     width: 20px;
+     height: 20px;
+     float:right;
+ }
+
+
+.chat__form-chat{
+    width: 500px;
+    height: 40px;
+    border-style: solid;
+    margin: 20px 10px 10px 20px;
+    padding: 5px;
+    border-radius: 20px;
+    display:flex;
+
+}
+
+
 /* 전체 영역 나누기*/
 
-/* 헤더자리*/
-#chat__header{
-    background-color: brown;
-    height: 80px;
-}
 /* 채팅페이지 전체영역(헤더하단)*/
 .chat__chat-frame{
     top:80px !important;
@@ -93,9 +137,9 @@
 
 /* 채팅방 리스트 회원이름 */
 .chat__member-name{
-    width: 280px;
+    width: 290px;
     height: 20px;
-    margin-bottom: 15px;
+    padding-bottom: 5px;
     font-size: 1.0em;
 }
 /* 채팅방 리스트채팅 내용*/
@@ -137,10 +181,9 @@
 }
 /* 채팅방 이름 */
 .chat__chatroom-name{
-/*    height: 20px;
+    height: 20px;
     width: 490px;
-    display: inline;*/
-
+    display: inline;
 }
 /* 채팅방이름 설정 로고*/
 .chat__chatroom-name-setting{
@@ -187,7 +230,7 @@
     margin: 10px;
 
 }
-/* 회원 이미지*/
+/* 보내는사람 이미지*/
 .chat__sender-img{
     width: 45px;
     height: 45px;
@@ -196,7 +239,7 @@
     padding-right: 4px;
 }
 
-/* 메세지 내용 영역(사진 제외 - 수신/발신 공통)*/
+/* 보내는 메세지 내용 영역(사진 제외)*/
 
 .chat__send-chat-content{
     width: 473px;
@@ -226,9 +269,63 @@
     line-height: normal;
 }
 
+/* 받은 메세지 */
+
+.chat__receive-chat-container{
+    display: flex;
+    /*height: 80px;*/
+    margin: 10px;
+}
+/* 상대방 이미지*/
+.chat__receiver-img{
+    width: 45px;
+    height: 45px;
+    position: static;
+    border-radius: 50%;
+    padding-right: 4px;
+}
+/* 받은 메세지 내용 영역(사진 제외)*/
+.chat__receive-chat-content{
+    width: 473px;
+    height: 23px;
+    text-align: right;
+
+}
+/* 보내는 사람 이름*/
+.chat__receiver{
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 800;
+    padding: 0 4px 0 5px;
+    display: inline-block;
+    height: 23px;
+
+}
+/* 보낸 시간(시간만 출력)*/
+.chat__receive-time{
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 400;
+    display: inline-block;
+    height: 23px;
+
+}
+/* 보내는 메세지 내용*/
+.chat__receive-chat{
+    height: 25px;
+    width: 473px;
+    text-align: right;
+    line-height: normal;
+    padding-right: 5px;
+
+
+}
+
+
+
 
 /* 채팅 입력창 전체 영역*/
-.chat__form-chat{
+.chat__input-chat{
     width: 500px;
     height: 40px;
     border-style: solid;
@@ -249,6 +346,7 @@
     width: 40px;
     height: 40px;
 }
+
 
 
 

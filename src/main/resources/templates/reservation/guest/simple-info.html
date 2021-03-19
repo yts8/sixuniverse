@@ -21,7 +21,7 @@
 
 <body>
 <th:block layout:fragment="content" class="guest-reservation-simple-info__box">
-<input type="hidden" th:value="${room.address}" class="room-address-value">
+  <input type="hidden" th:value="${room.address}" class="room-address-value">
   <div class="guest-reservation-simple-info__box">
 
     <div class="guest-reservation-simple-info__content">
@@ -66,6 +66,7 @@
               <div class="guest-reservation-simple-info__title">
                 <div class="guest-reservation-simple-info__msg">호스트에게 연락하기</div>
               </div>
+
               <div th:if="${reservation.status.equals('complete')}" class="guest-reservation-simple-info__title">
                 <a th:href="@{|/review/form/${reservation.reservationId}|}">
                   <div class="guest-reservation-simple-info__review">후기 작성</div>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yts8.sixuniverse.chat.repository.ChatMapper">
+
+  <!--채팅메세지 insert-->
+  <insert id="saveMessage" parameterType="ChatDto" useGeneratedKeys="true" keyProperty="chatId">
+    insert into chat (member_id, content,join_num)
+    values (#{memberId}, #{content},#{joinNum})
+  </insert>
+
+
+
+  <!--채팅방목록 출력용 최근 항목만 받아오기(전체최근항목으로변경하기)-->
+  <select id="findMessage" resultType="chatDto">
+    select *
+    from chat
+    where member_id = #{memberId}
+    order by create_date desc
+    limit 1
+  </select>
+
+  <!-- 생성한 채팅방번호 각 memberId에 저장하기 -->
+  <insert id="testCreateNewRoom" parameterType="ChatroomJoinDto" useGeneratedKeys="true" keyProperty="joinNum">
+    insert into chatroom_join (member_id, name, chat_ref)
+    values (#{memberId}, #{name}, #{chatRef})
+  </insert>
+
+
+
+  <!--새로운 채팅방 생성하기 -->
+  <select id="createNewChatRef" resultType="java.lang.Long">
+    SELECT ifnull(MAX(chat_ref),0) + 1
+    FROM chatroom_join;
+  </select>
+
+
+  <!-- 공통된 chatRef count -->
+  <select id="chatRefCount" resultType="java.lang.Long">
+    Select count(g.chat_ref) from chatroom_join g join chatroom_join h on g.chat_ref=h.chat_ref where g.member_id= #{myMemberId} and h.member_id= #{hostId};
+  </select>
+
+  <!-- 공통된 chatRef 값 받아오기-->
+  <select id="getChatRefTest" resultType="java.lang.Long">
+    Select g.chat_ref
+    from chatroom_join g
+        join chatroom_join h
+        on g.chat_ref=h.chat_ref
+    where g.member_id= #{myMemberId}
+      and h.member_id= #{hostId};
+  </select>
+
+
+  <select id="findByChatRef" resultType="java.lang.Long">
+    select join_num from chatroom_join
+    where chat_ref=#{chatRef}
+    limit 1;
+  </select>
+
+  <select id="findMemberIdByChatRef" resultType="java.lang.Long">
+    select member_id from chatroom_join
+    where chat_ref=#{chatRef}
+    limit 1;
+  </select>
+
+
+
+
+
+</mapper>
