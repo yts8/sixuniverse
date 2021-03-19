@@ -58,7 +58,7 @@ public class ReservationController {
   }
 
   @GetMapping("/guest/list/{status}")
-  public String guestReservation(HttpServletRequest request, HttpSession session, Model model, @PathVariable String status) {
+  public String guestReservation(HttpSession session, Model model, @PathVariable String status) {
     MemberDto memberDto = (MemberDto) session.getAttribute("member");
     Long memberId = memberDto.getMemberId();
 
@@ -77,6 +77,7 @@ public class ReservationController {
       roomList.add(roomDto);
     }
 
+    model.addAttribute("status", status);
     model.addAttribute("roomList", roomList);
     model.addAttribute("reservationList", reservationList);
 

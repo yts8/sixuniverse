@@ -21,7 +21,7 @@
 </th:block>
 
 <head>
-<!--  <meta charset="UTF-8">-->
+  <!--  <meta charset="UTF-8">-->
   <title>예약하기</title>
 </head>
 
@@ -98,9 +98,9 @@
               <div class="reservation__modal-cancel"><i class="fas fa-times"></i></div>
               <h2 class="reservation__sub-title">게스트</h2>
               <div class="reservation__guest">
-        <span>
-         <div class="reservation__guest-title">성인</div>
-        </span>
+                <span>
+                 <div class="reservation__guest-title">성인</div>
+                </span>
                 <div class="reservation__number-right">
                   <div class="reservation__guest-number">
                     <button class="reservation__decrease" id="adult-minus"><i class="fas fa-minus"></i></button>
@@ -111,12 +111,12 @@
               </div>
 
               <div class="reservation__guest">
-        <span>
-          <div>
-            <div class="reservation__guest-title">어린이</div>
-            <div class="reservation__guest-age">2~12세</div>
-          </div>
-        </span>
+                <span>
+                  <div>
+                    <div class="reservation__guest-title">어린이</div>
+                    <div class="reservation__guest-age">2~12세</div>
+                  </div>
+                </span>
                 <div class="reservation__number-right">
                   <div class="reservation__guest-number">
                     <button class="reservation__decrease" id="kid-minus"><i class="fas fa-minus"></i></button>
@@ -128,12 +128,12 @@
               </div>
 
               <div class="reservation__guest">
-        <span>
-          <div>
-            <div class="reservation__guest-title">유아</div>
-            <div class="reservation__guest-age">2세 미만</div>
-          </div>
-        </span>
+                <span>
+                  <div>
+                    <div class="reservation__guest-title">유아</div>
+                    <div class="reservation__guest-age">2세 미만</div>
+                  </div>
+                </span>
                 <div class="reservation__number-right">
                   <div class="reservation__guest-number">
                     <button class="reservation__decrease" id="infant-minus"><i class="fas fa-minus"></i></button>
@@ -149,9 +149,9 @@
               </div>
 
               <div class="reservation__guest-update-btn">
-          <span class="reservation__modal-cancel pop_bt">
-            취소
-          </span>
+                <span class="reservation__modal-cancel pop_bt">
+                  취소
+                </span>
                 <button class="reservation__guest-update">저장하기</button>
               </div>
             </div>
@@ -235,13 +235,13 @@
 
           <div class="reservation__line"></div>
 
-<!--          <div class="reservation__wait-info">-->
-<!--            <img th:src="@{/images/reservation/calendar.png}" class="reservation__img2">-->
-<!--            <div class="reservation__wait-content">-->
-<!--              <div class="reservation__wait">호스트가 24시간 이내 예약 요청을 수락하기 전까지는 예약이 아직 확정된 것이 아닙니다.</div>-->
-<!--              <div>예약 확정 전까지는 요금이 청구되지 않습니다.</div>-->
-<!--            </div>-->
-<!--          </div>-->
+          <!--          <div class="reservation__wait-info">-->
+          <!--            <img th:src="@{/images/reservation/calendar.png}" class="reservation__img2">-->
+          <!--            <div class="reservation__wait-content">-->
+          <!--              <div class="reservation__wait">호스트가 24시간 이내 예약 요청을 수락하기 전까지는 예약이 아직 확정된 것이 아닙니다.</div>-->
+          <!--              <div>예약 확정 전까지는 요금이 청구되지 않습니다.</div>-->
+          <!--            </div>-->
+          <!--          </div>-->
 
 
           <input type="hidden" id="csrf" th:value="${_csrf.token}"/>

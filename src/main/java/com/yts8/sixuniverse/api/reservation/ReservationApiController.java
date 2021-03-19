@@ -8,6 +8,7 @@ import com.yts8.sixuniverse.reservationDate.service.ReservationDateService;
 import com.yts8.sixuniverse.room.dto.RoomDto;
 import com.yts8.sixuniverse.room.service.RoomService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,7 +62,7 @@ public class ReservationApiController {
     MemberDto memberDto = (MemberDto) session.getAttribute("member");
     Long sessionMemberId = memberDto.getMemberId();
 
-    if(sessionMemberId==roomMemberId) {
+    if(sessionMemberId.equals(roomMemberId)) {
       result = true;
     }
 
@@ -78,6 +79,19 @@ public class ReservationApiController {
     reservationService.guestReservationCancel(reservationDto);
     reservationDateService.guestReservationDateDelete(reservationId);
   }
+
+  @GetMapping("/update/info{reservationId}")
+  public ReservationDto listUpdateInfo(@PathVariable Long reservationId) {
+
+    return reservationService.findByUpdateTarget(reservationId);
+  }
+
+  @GetMapping("/cancel/info/{reservationId}")
+  public ReservationDto listCancelInfo(@PathVariable Long reservationId) {
+
+    return reservationService.findById(reservationId);
+  }
+
 
 
 }

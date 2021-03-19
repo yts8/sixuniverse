@@ -20,4 +20,6 @@ public interface ReservationService {
   void guestReservationUpdateInsert(ReservationDto reservationDto);
 
   void guestReservationCancel(ReservationDto reservationDto);
+
+  ReservationDto findByUpdateTarget(Long reservationId);
 }

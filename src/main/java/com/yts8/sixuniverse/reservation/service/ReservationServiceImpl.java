@@ -48,4 +48,9 @@ public class ReservationServiceImpl implements ReservationService {
   public void guestReservationCancel(ReservationDto reservationDto) {
     reservationMapper.guestReservationCancel(reservationDto);
   }
+
+  @Override
+  public ReservationDto findByUpdateTarget(Long reservationId) {
+    return reservationMapper.findByUpdateTarget(reservationId);
+  }
 }

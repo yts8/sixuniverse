@@ -47,4 +47,10 @@
     where reservation_id = #{reservationId}
   </update>
 
+  <select id="findByUpdateTarget" resultType="ReservationDto">
+    select *
+    from reservation
+    where update_target = #{reservationId}
+  </select>
+
 </mapper>
