@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default" xmlns="http://www.w3.org/1999/html">
+<div layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/room/detail.css}"/>
+</div>
+<th:block layout:fragment="content">
+  <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
+  <input type="hidden" id="room-id" th:value="${roomId}"/>
+
+  <div class="room__detail-container">
+    <div class="room__detail-first-container">
+      <div class="room__detail-subject"><span th:text="${room.title}"></span></div>
+      <div class="room__detail-address"><span th:text="${room.address}"></span></div><!--주소 클릭하면 지도로 바로 검색 링크걸기-->
+      <div class="room__detail-photo-container">
+        <div class="room__detail-photo-big-container"><img th:src="${roomImages.get(0).getRoomImg()}"/></div>
+        <div class="room__detail-photo-small-container">
+          <label th:each="index : ${#numbers.sequence(1, 4)}" class="room__images-wrap room-image-label-js">
+            <img th:src="${roomImages.get(index).getRoomImg()}"/>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="room__detail-second-container">
+      <div class="room__detail-second-left-container">
+
+        <div class="room__detail-summery-container">
+          <div class="room__detail-summery-subject">
+            <!--            호스트네임 가져오기-->
+            보영님이 호스팅하는
+            <span th:text="${room.buildingType}"></span>
+            <span th:text="${room.roomType}"></span></div>
+          <div class="room__detail-summery-sub">
+            최대 인원 <span th:text="${room.maxPeople}"></span>명 ·
+            <!--            if문돌려서 값 1 이상일때만 보이게 하기-->
+            침실 <span th:text="${room.bedroomCount}"></span> ·
+            침대 <span th:text="${room.bedCount}"></span>개 ·
+            욕실 <span th:text="${room.bathCount}"></span>개
+          </div>
+        </div>
+
+        <div class="room__detail-rule-container">
+          <div class="room__detail-rule-subject">집 전체</div>
+          <div class="room__detail-rule-sub">공동주택 전체를 단독으로 사용하시게 됩니다.</div>
+          <div class="room__detail-rule-subject">체크인 24시간 전까지 수수료 없이 예약 취소 가능</div>
+          <div class="room__detail-rule-sub">그 이후로는 체크인 전에 취소하면 첫 1박 요금과 서비스 수수료를 제외한 전액이 환불됩니다.</div>
+          <div class="room__detail-rule-subject">숙소 이용규칙</div>
+          <div class="room__detail-rule-sub">반려동물 동반이나 흡연이 금지되는 숙소입니다.</div>
+        </div>
+
+        <div class="room__detail-introduce-container">
+          <span th:text="${room.content}"></span>
+        </div>
+
+        <div class="room__detail-amenities-container">
+          <div class="room__detail-amenities-subject">편의시설</div>
+          <div class="room__detail-amenities-item-container">
+            <!--            있는것만 가져오기-->
+            <div class="room__detail-amenities-item">주방</div>
+            <div class="room__detail-amenities-item">주방</div>
+            <div class="room__detail-amenities-item">주방</div>
+            <div class="room__detail-amenities-item">주방</div>
+            <div class="room__detail-amenities-item">주방</div>
+            <div class="room__detail-amenities-item">주방</div>
+          </div>
+        </div>
+
+        <div class="room__detail-calendar-container">캘린더 자리</div>
+      </div>
+      <div class="room__detail-second-right-container">오른쪽 예약상자</div>
+    </div>
+
+    <div class="room__detail-third-container">
+      <!--      후기 넣는 자리-->
+
+    </div>
+
+    <div class="room__detail-fourth-container">
+      <!--      지도 넣는 자리-->
+    </div>
+
+    <div class="room__detail-fifth-container">
+      <!--      호스트 프로필 넣는 자리-->
+    </div>
+
+  </div>
+
+
+  </div>
+
+  </div>
+</th:block>
+</html>
