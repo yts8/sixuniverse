@@ -30,6 +30,7 @@ dependencies {
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+    implementation 'com.google.code.gson:gson'
     implementation 'com.mashape.unirest:unirest-java:1.4.9'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'

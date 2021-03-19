@@ -14,5 +14,8 @@ public interface ChatService {
 
 
 
+  Long findByChatRef(Long chatRef);
 
+
+  Long findMemberIdByChatRef(Long chatRef);
 }

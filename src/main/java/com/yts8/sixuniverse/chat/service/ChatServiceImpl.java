@@ -19,6 +19,17 @@ public class ChatServiceImpl implements ChatService {
   }
 
   @Override
+  public Long findByChatRef(Long chatRef) {
+    return chatMapper.findByChatRef(chatRef);
+  }
+
+  @Override
+  public Long findMemberIdByChatRef(Long chatRef) {
+    return chatMapper.findMemberIdByChatRef(chatRef);
+  }
+
+
+  @Override
   public void saveMessage(ChatDto chatDto) {
     chatMapper.saveMessage(chatDto);
   }

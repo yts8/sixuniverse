@@ -9,10 +9,7 @@
     values (#{memberId}, #{content},#{joinNum})
   </insert>
 
-  <insert id="createChatroomJoin" parameterType="ChatroomJoinDto" useGeneratedKeys="true" keyProperty="joinNum">
-    insert into chatroom_join (member_id, name, chat_ref)
-    values (#{memberId}, #{name}, #{chatRef})
-  </insert>
+
 
   <!--채팅방목록 출력용 최근 항목만 받아오기(전체최근항목으로변경하기)-->
   <select id="findMessage" resultType="chatDto">
@@ -21,30 +18,9 @@
     where member_id = #{memberId}
     order by create_date desc
     limit 1
-
   </select>
 
-
-  <insert id="createNewRoom" parameterType="ChatroomJoinDto" useGeneratedKeys="true" keyProperty="joinNum">
-    insert into chatroom_join (member_id, name, chat_ref)
-    values (#{memberId}, #{userName}, #{realChatRef})
-  </insert>
-
-  <!--Long getChatRef(Long myMemberId, Long hostId);-->
-  <select id="getChatRef" resultType="java.lang.Long">
-    SELECT chat_ref
-    FROM chatroom_join
-    WHERE member_id NOT IN (#{hostId}, #{myMemberId})
-    GROUP BY chat_ref;
-  </select>
-
-  <!--Long createNewChatRef();-->
-  <select id="createNewChatRef" resultType="java.lang.Long">
-    SELECT MAX(chat_ref) + 1
-    FROM chatroom_join;
-  </select>
-
-
+  <!-- 생성한 채팅방번호 각 memberId에 저장하기 -->
   <insert id="testCreateNewRoom" parameterType="ChatroomJoinDto" useGeneratedKeys="true" keyProperty="joinNum">
     insert into chatroom_join (member_id, name, chat_ref)
     values (#{memberId}, #{name}, #{chatRef})
@@ -52,20 +28,43 @@
 
 
 
-
-
-
-  <!--호스트ID -->
-  <select id="getHostChatRef" resultType="java.lang.Long">
-    select chat_ref
-    from chatroom_join
-    where member_id = #{hostId}
+  <!--새로운 채팅방 생성하기 -->
+  <select id="createNewChatRef" resultType="java.lang.Long">
+    SELECT ifnull(MAX(chat_ref),0) + 1
+    FROM chatroom_join;
   </select>
 
-  <select id="getMyChatRef" resultType="java.lang.Long">
-    select chat_ref
-    from chatroom_join
-    where member_id = #{myMemberId}
+
+  <!-- 공통된 chatRef count -->
+  <select id="chatRefCount" resultType="java.lang.Long">
+    Select count(g.chat_ref) from chatroom_join g join chatroom_join h on g.chat_ref=h.chat_ref where g.member_id= #{myMemberId} and h.member_id= #{hostId};
   </select>
+
+  <!-- 공통된 chatRef 값 받아오기-->
+  <select id="getChatRefTest" resultType="java.lang.Long">
+    Select g.chat_ref
+    from chatroom_join g
+        join chatroom_join h
+        on g.chat_ref=h.chat_ref
+    where g.member_id= #{myMemberId}
+      and h.member_id= #{hostId};
+  </select>
+
+
+  <select id="findByChatRef" resultType="java.lang.Long">
+    select join_num from chatroom_join
+    where chat_ref=#{chatRef}
+    limit 1;
+  </select>
+
+  <select id="findMemberIdByChatRef" resultType="java.lang.Long">
+    select member_id from chatroom_join
+    where chat_ref=#{chatRef}
+    limit 1;
+  </select>
+
+
+
+
 
 </mapper>

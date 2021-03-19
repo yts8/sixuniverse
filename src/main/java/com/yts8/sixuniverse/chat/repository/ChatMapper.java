@@ -23,4 +23,18 @@ public interface ChatMapper {
   List getHostChatRef(Long hostId);
 
   List getMyChatRef(Long myMemberId);
+
+
+
+
+
+  Long getRealChatRef(Long myMemberId, Long hostId);
+  Long getRealRealChatRef(Long myMemberId, Long hostId);
+
+  Long chatRefCount(Long myMemberId,Long hostId);
+  Long getChatRefTest(Long myMemberId, Long hostId);
+
+  Long findByChatRef(Long chatRef);
+
+  Long findMemberIdByChatRef(Long chatRef);
 }
