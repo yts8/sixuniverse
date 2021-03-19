@@ -38,7 +38,6 @@ public class ReservationController {
   @GetMapping("")
   public String reservation(HttpServletRequest request, Model model) {
     Long roomId = Long.parseLong(request.getParameter("roomId"));
-
     RoomDto roomDto = roomService.findById(roomId);
     int commission = (int) (roomDto.getPrice() * 0.1);
 
@@ -183,45 +182,45 @@ public class ReservationController {
     String[] reservationDateArray = reservationDateArr.split(",");
 
     try {
-        LocalDate reservationDateCheckIn = LocalDate.parse(reservationDateArray[0]); // parse : try catch 문 필요
+      LocalDate reservationDateCheckIn = LocalDate.parse(reservationDateArray[0]); // parse : try catch 문 필요
 
-        // 이미 예약된 날짜인지 확인하기 위해 숙소아이디와 체크인 날짜로 찾아봄
-        ReservationDto reservationDto1 = new ReservationDto();
-        reservationDto1.setRoomId(roomId);
-        reservationDto1.setCheckIn(reservationDateCheckIn);
+      // 이미 예약된 날짜인지 확인하기 위해 숙소아이디와 체크인 날짜로 찾아봄
+      ReservationDto reservationDto1 = new ReservationDto();
+      reservationDto1.setRoomId(roomId);
+      reservationDto1.setCheckIn(reservationDateCheckIn);
 
-        ReservationDateDto reservationDateRoomId = reservationDateService.findByReservationDate(reservationDto1);
+      ReservationDateDto reservationDateRoomId = reservationDateService.findByReservationDate(reservationDto1);
 
-        if (reservationDateRoomId != null) {
-          // 예약 시 선택한 체크인 날짜가 이미 예약된 날짜라면
-          // 예약하지 못하게 막기
-          PrintWriter out = response.getWriter();   // getWriter : try catch 문 필요
-          out.println("<script>");
-          out.println("alert('이미 예약된 날짜입니다.')");
-          out.println("history.back()");
-          out.println("</script>");
+      if (reservationDateRoomId != null) {
+        // 예약 시 선택한 체크인 날짜가 이미 예약된 날짜라면
+        // 예약하지 못하게 막기
+        PrintWriter out = response.getWriter();   // getWriter : try catch 문 필요
+        out.println("<script>");
+        out.println("alert('이미 예약된 날짜입니다.')");
+        out.println("history.back()");
+        out.println("</script>");
 
 
-        } else {
-          reservationDto.setMemberId(memberId);
-          reservationDto.setStatus("upcoming");
+      } else {
+        reservationDto.setMemberId(memberId);
+        reservationDto.setStatus("upcoming");
 
-          reservationService.reservationInsert(reservationDto);
+        reservationService.reservationInsert(reservationDto);
 
-          List<ReservationDateDto> reservationDateDtos = new ArrayList<>();
-          for (int i = 0; i < reservationDateArray.length; i++) {
-            ReservationDateDto reservationDateDto = new ReservationDateDto();
-            reservationDateDto.setReservationId(reservationDto.getReservationId());
-            reservationDateDto.setRoomId(roomId);
+        List<ReservationDateDto> reservationDateDtos = new ArrayList<>();
+        for (int i = 0; i < reservationDateArray.length; i++) {
+          ReservationDateDto reservationDateDto = new ReservationDateDto();
+          reservationDateDto.setReservationId(reservationDto.getReservationId());
+          reservationDateDto.setRoomId(roomId);
 
-            LocalDate reservationDate = LocalDate.parse(reservationDateArray[i]); // parse : try catch 문 필요
+          LocalDate reservationDate = LocalDate.parse(reservationDateArray[i]); // parse : try catch 문 필요
 
-            reservationDateDto.setReservationDate(reservationDate);
-            reservationDateDtos.add(reservationDateDto);
-          }
-
-          reservationDateService.reservationDateInsert(reservationDateDtos);
+          reservationDateDto.setReservationDate(reservationDate);
+          reservationDateDtos.add(reservationDateDto);
         }
+
+        reservationDateService.reservationDateInsert(reservationDateDtos);
+      }
 
     } catch (Exception e) {
       e.printStackTrace();
