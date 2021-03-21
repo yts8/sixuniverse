@@ -5,13 +5,15 @@
   <insert id="reservationInsert" parameterType="ReservationDateDto" useGeneratedKeys="true" keyProperty="reservationId">
     insert into reservation
     values (null, #{roomId}, #{memberId}, #{status}, #{adult}, #{kid}, #{infant}, #{checkIn}, #{checkOut},
-            #{createDate}, #{cancelDate})
+            #{createDate}, #{cancelDate}, #{updateTarget})
   </insert>
 
   <select id="reservationList" parameterType="ReservationDateDto" resultType="ReservationDto">
     select *
     from reservation
-    where member_id = #{memberId} and status = #{status} and update_target is null
+    where member_id = #{memberId}
+      and status = #{status}
+      and update_target is null
     order by check_in
   </select>
 
@@ -40,8 +42,15 @@
 
   <update id="guestReservationCancel">
     update reservation
-    set cancel_date = #{cancelDate}, status = #{status}
+    set cancel_date = #{cancelDate},
+        status      = #{status}
     where reservation_id = #{reservationId}
   </update>
+
+  <select id="findByUpdateTarget" resultType="ReservationDto">
+    select *
+    from reservation
+    where update_target = #{reservationId}
+  </select>
 
 </mapper>

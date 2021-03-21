@@ -24,4 +24,5 @@ public class ReservationDto {
 
   private LocalDateTime createDate;
   private LocalDateTime cancelDate;
+  private Long updateTarget;
 }

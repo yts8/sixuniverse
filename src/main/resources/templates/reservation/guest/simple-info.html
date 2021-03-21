@@ -10,7 +10,8 @@
 </th:block>
 
 <th:block layout:fragment="js">
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=34aa0f04a8c02352b695cb5574769930&libraries=services"></script>
+  <script type="text/javascript"
+          src="//dapi.kakao.com/v2/maps/sdk.js?appkey=34aa0f04a8c02352b695cb5574769930&libraries=services"></script>
   <script type="text/javascript" defer th:src="@{/js/common/map.js}"></script>
 </th:block>
 
@@ -29,7 +30,9 @@
           class="fas fa-arrow-left"></i></a>
       <div class="guest-reservation-simple-info__detail-room-box">
         <div class="guest-reservation-simple-info__detail-room">
-          <div class="guest-reservation-simple-info__room-address" th:text="${room.address} + ' ' + ${room.subAddress}">숙소주소</div>
+          <div class="guest-reservation-simple-info__room-address" th:text="${room.address} + ' ' + ${room.subAddress}">
+            숙소주소
+          </div>
           <div th:text="${reservation.checkIn} + ' ~ ' + ${reservation.checkOut}">예약날짜</div>
         </div>
 
@@ -51,22 +54,26 @@
                 <div class="guest-reservation-simple-info__detail-room-info">
                   <div class="guest-reservation-simple-info__room-info-align">
                     <div class="guest-reservation-simple-info__room-info-img">
-                      <img th:src="@{/images/reservation/sample.jpg}">
+                      <img th:src="${roomImageDtoList.get(0).roomImg}">
                     </div>
                     <div class="guest-reservation-simple-info__room-info-margin">
-                      <div class="guest-reservation-simple-info__reservation-date" th:text="${reservation.checkIn} + ' ~ ' + ${reservation.checkOut}">예약날짜</div>
+                      <div class="guest-reservation-simple-info__reservation-date"
+                           th:text="${reservation.checkIn} + ' ~ ' + ${reservation.checkOut}">예약날짜
+                      </div>
                       <div class="guest-reservation-simple-info__room-name" th:text="${room.title}">숙소제목</div>
-                      <div class="guest-reservation-simple-info__room-info-address" th:text="${room.address} + ' ' + ${room.subAddress}">숙소주소</div>
+                      <div class="guest-reservation-simple-info__room-info-address"
+                           th:text="${room.address} + ' ' + ${room.subAddress}">숙소주소
+                      </div>
                     </div>
                   </div>
                   <div class="guest-reservation-simple-info__room-detail-info-view">세부사항보기</div>
                 </div>
               </a>
-
-              <div class="guest-reservation-simple-info__title">
-                <div class="guest-reservation-simple-info__msg">호스트에게 연락하기</div>
-              </div>
-
+              <a th:href="@{|/chat/${hostId}}">
+                <div class="guest-reservation-simple-info__title">
+                  <div class="guest-reservation-simple-info__msg">호스트에게 연락하기</div>
+                </div>
+              </a>
               <div th:if="${reservation.status.equals('complete')}" class="guest-reservation-simple-info__title">
                 <a th:href="@{|/review/form/${reservation.reservationId}|}">
                   <div class="guest-reservation-simple-info__review">후기 작성</div>

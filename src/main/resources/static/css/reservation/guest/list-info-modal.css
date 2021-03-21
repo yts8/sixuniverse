@@ -1,0 +1,135 @@
+.guest-reservation__modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+.guest-reservation__modal-content {
+  background-color: #fefefe;
+  margin: 3% auto;
+  border: 1px solid #888;
+  border-radius: 20px;
+  max-width: 600px;
+}
+
+.reservation__modal-cancel {
+  width: max-content;
+  vertical-align: middle;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.guest-reservation__detail-info {
+  display: flex;
+  line-height: 50px;
+  border-bottom: 1px solid #c3c3c3;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background-color: white;
+  position: relative;
+}
+
+.guest-reservation__modal-cancel > .fa-times {
+  width: 30px;
+  margin: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  background-color: white;
+  font-size: 20px;
+  vertical-align: middle;
+  box-shadow: 0 0 10px #c3c3c3;
+  border-radius: 35px;
+  padding: 5px;
+}
+
+.guest-reservation__modal-title {
+  width: 100%;
+  text-align: center;
+  line-height: 50px;
+}
+
+.guest-reservation__modal-title > .fas fa-times {
+  float: left;
+  vertical-align: middle;
+}
+
+.guest-reservation__title-content {
+  text-align: center;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.guest-reservation__modal-detail-content {
+  height: 600px;
+  overflow-y: scroll;
+  padding: 20px;
+}
+
+.guest-reservation__reservation-status {
+  color: #888888;
+  border-bottom: 1px solid #bdbdbd;
+}
+
+.guest-reservation__reservation-status > div {
+  margin-top: 8px;
+}
+
+.guest-reservation__reservation-status-title {
+  color: #24292e;
+  font-weight: bold;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.guest-reservation__modal-room-img {
+  width: 80%;
+  height: 200px;
+  margin: 30px auto;
+  overflow: hidden;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
+.guest-reservation__modal-room-img > img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 10px;
+  object-fit: cover;
+
+}
+
+.guest-reservation__modal-room-info {
+  height: max-content;
+  padding-bottom: 20px;
+  margin-top: 20px;
+  border-bottom: 1px solid #bdbdbd;
+}
+
+.guest-reservation__modal-room-info > div {
+  margin-bottom: 10px;
+}
+
+.guest-reservation__modal-subtitle {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+.reservation__sub-title {
+  font-size: 23px;
+  font-weight: bold;
+  margin: 30px 0 40px 0;
+}

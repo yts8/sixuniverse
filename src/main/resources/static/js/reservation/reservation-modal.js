@@ -94,6 +94,8 @@
 
       $('.reservation__total-guest').html( totalGuest );
 
+      $('.room__detail-guest-info').show();
+      $('.room__detail-guest-select-info').hide();
 
       $('#my-modal').hide();
 

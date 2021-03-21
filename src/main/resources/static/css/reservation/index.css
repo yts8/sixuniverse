@@ -39,12 +39,10 @@
 }
 
 .fa-chevron-left {
-  /*float: inherit;*/
   margin: 0 auto;
 }
 
 .reservation__back:hover {
-
   background-color: #c3c3c3;
 }
 
@@ -55,7 +53,6 @@
   width: 100%;
   height: 100%;
   text-align: center;
-  vertical-align: middle;
 }
 
 .reservation__sub-title {
@@ -136,12 +133,10 @@
   border: none;
   border-bottom: 1px solid #c3c3c3;
   margin-left: 15px;
-
 }
 
 .reservation__re-info {
   width: 50%;
-
 }
 
 .reservation__box2 {
@@ -272,7 +267,7 @@
   margin-left: 10px;
 }
 
-.reservation__room-info2 >  div {
+.reservation__room-info2 > div {
   margin-top: 7px;
 }
 
@@ -280,11 +275,11 @@
   margin-left: 5px;
 }
 
-.reservation__room-info2 >  div:nth-of-type(1), .reservation__room-info2 >  div:nth-of-type(3) {
+.reservation__room-info2 > div:nth-of-type(1), .reservation__room-info2 > div:nth-of-type(3) {
   font-size: 11px;
 }
 
-.reservation__room-info2 >  div:nth-of-type(4) {
+.reservation__room-info2 > div:nth-of-type(4) {
   font-size: 13px;
 }
 

@@ -12,10 +12,8 @@
 <body>
 <th:block layout:fragment="content">
 
-  <form th:action="@{/reservation}" method="get" th:each="room : ${roomList}">
+  <form th:action="@{|/room/detail/${room.roomId}|}" method="get" th:each="room : ${roomList}">
     <div  style="border: 1px solid #c3c3c3">
-
-    <input type="hidden" name="roomId" th:value="${room.getRoomId()}">
 
       <div th:text="${room.getTitle()}"></div>
 
