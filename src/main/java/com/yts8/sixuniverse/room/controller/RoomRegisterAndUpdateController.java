@@ -33,7 +33,7 @@ public class RoomRegisterAndUpdateController {
     model.addAttribute("url", "/host/room/register/address");
     model.addAttribute("roomDto", new RoomDto());
 
-    return "room/register/address";
+    return "room/host/register/address";
   }
 
   @PostMapping("/address")
@@ -51,7 +51,7 @@ public class RoomRegisterAndUpdateController {
     model.addAttribute("isUpdate", true);
     model.addAttribute("url", "/host/room/register/address/update");
     model.addAttribute("roomDto", roomService.findById(roomId));
-    return "room/register/address";
+    return "room/host/register/address";
   }
 
   @PostMapping("/address/update")
@@ -66,7 +66,7 @@ public class RoomRegisterAndUpdateController {
     model.addAttribute("title", "유형 선택");
     model.addAttribute("roomDto", roomService.findById(roomId));
 
-    return "room/register/types";
+    return "room/host/register/types";
   }
 
   @PostMapping("/types/update")
@@ -81,7 +81,7 @@ public class RoomRegisterAndUpdateController {
     model.addAttribute("title", "유형 선택");
     model.addAttribute("roomDto", roomService.findById(roomId));
 
-    return "room/register/bedrooms";
+    return "room/host/register/bedrooms";
   }
 
   @PostMapping("/bedrooms/update")
@@ -100,7 +100,7 @@ public class RoomRegisterAndUpdateController {
     model.addAttribute("title", "편의 시설");
     model.addAttribute("amenities", roomFacilityService.findByRoomIdAndCategoryName(facilityDto));
 
-    return "room/register/amenities";
+    return "room/host/register/amenities";
   }
 
   @PostMapping("/amenities")
@@ -128,7 +128,7 @@ public class RoomRegisterAndUpdateController {
     model.addAttribute("title", "안전 시설");
     model.addAttribute("safety", roomFacilityService.findByRoomIdAndCategoryName(facilityDto));
 
-    return "room/register/safety";
+    return "room/host/register/safety";
   }
 
   @PostMapping("/safety")
@@ -156,7 +156,7 @@ public class RoomRegisterAndUpdateController {
     model.addAttribute("title", "게스트 사용 시설");
     model.addAttribute("spaces", roomFacilityService.findByRoomIdAndCategoryName(facilityDto));
 
-    return "room/register/spaces";
+    return "room/host/register/spaces";
   }
 
   @PostMapping("/spaces")
@@ -181,7 +181,7 @@ public class RoomRegisterAndUpdateController {
     model.addAttribute("title", "숙소 이미지 등록");
     model.addAttribute("roomImages", roomImageService.findByRoomId(roomId));
 
-    return "room/register/images";
+    return "room/host/register/images";
   }
 
   @GetMapping("/info/{roomId}")
@@ -189,7 +189,7 @@ public class RoomRegisterAndUpdateController {
     model.addAttribute("title", "제목과 내용 설정");
     model.addAttribute("roomDto", roomService.findById(roomId));
 
-    return "room/register/info";
+    return "room/host/register/info";
   }
 
   @PostMapping("/info/update")
@@ -204,7 +204,7 @@ public class RoomRegisterAndUpdateController {
     model.addAttribute("title", "숙소 예약 정보 설정");
     model.addAttribute("roomDto", roomService.findById(roomId));
 
-    return "room/register/availability-setting";
+    return "room/host/register/availability-setting";
   }
 
   @PostMapping("/availability-settings/update")
@@ -232,7 +232,7 @@ public class RoomRegisterAndUpdateController {
     String expiryDay = expiryDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
     model.addAttribute("expiryDay", expiryDay);
 
-    return "room/register/calendar";
+    return "room/host/register/calendar";
   }
 
   @GetMapping("/price/{roomId}")
@@ -240,7 +240,7 @@ public class RoomRegisterAndUpdateController {
     model.addAttribute("title", "가격 설정");
     model.addAttribute("roomDto", roomService.findById(roomId));
 
-    return "room/register/price";
+    return "room/host/register/price";
   }
 
   @PostMapping("/price/update")
