@@ -22,65 +22,51 @@
 
         <input type="hidden" name="roomId" th:value="${roomId}"/>
 
-        <div>
-          <label>
+        <div class="room__check-container">
 
-            <input type="checkbox"
+          <div class="room__check-detail">
+            <input type="checkbox" id="ch1"
                    name="name"
                    value="화재 감지기"
                    th:checked='${#lists.contains(safety, "화재 감지기")}'/>
-
-            <span>화재 감지기</span>
-            <span>잘 작동하는 화재 감지기를 모든 방에 구비해 놓아야 하는지 현지 법규를 확인해보세요.</span>
-          </label>
-        </div>
-        <div>
-          <label>
-
-            <input type="checkbox"
+            <label for="ch1">화재 감지기</label>
+          </div>
+          <div class="room__check-detail">
+            <input type="checkbox" id="ch2"
                    name="name"
                    value="일산화탄소 감지기"
-                   th:checked='${#lists.contains(safety, "일산화탄소 감지기")}'>
+                   th:checked='${#lists.contains(safety, "일산화탄소 감지기")}'/>
+            <label for="ch2">일산화탄소 감지기</label><br>
+            <span class="room__check-info">일산화탄소 감지기 구비 요건에 대해 현지 법규를 확인해보세요. 지역에 따라, 정상적으로 작동하는 일산화탄소 감지기를 모든 방에 설치해야 할 수 있습니다.</span>
+          </div>
 
-            <span>일산화탄소 감지기</span>
-            <span>일산화탄소 감지기 구비 요건에 대해 현지 법규를 확인해보세요. 지역에 따라, 정상적으로 작동하는 일산화탄소 감지기를 모든 방에 설치해야 할 수 있습니다.</span>
-          </label>
-        </div>
-        <div>
-          <label>
 
-            <input type="checkbox"
+          <div class="room__check-detail">
+            <input type="checkbox" id="ch3"
                    name="name"
                    value="구급상자"
                    th:checked='${#lists.contains(safety, "구급상자")}'/>
-
-            <span>구급상자</span>
-          </label>
-        </div>
-        <div>
-          <label>
-
-            <input type="checkbox"
+            <label for="ch3">구급상자</label>
+          </div>
+          <div class="room__check-detail">
+            <input type="checkbox" id="ch4"
                    name="name"
                    value="소화기"
-                   th:checked='${#lists.contains(safety, "소화기")}'>
+                   th:checked='${#lists.contains(safety, "소화기")}'/>
+            <label for="ch4">소화기</label>
+          </div>
 
-            <span>소화기</span>
-          </label>
-        </div>
-        <div>
-          <label>
 
-            <input type="checkbox"
+          <div class="room__check-detail">
+            <input type="checkbox" id="ch5"
                    name="name"
                    value="침실문 잠금장치"
                    th:checked='${#lists.contains(safety, "침실문 잠금장치")}'/>
+            <label for="ch5">침실문 잠금장치</label>
+            <span class="room__check-info">안전과 사생활 보호를 위해 방문을 잠글 수 있음</span>
+          </div>
 
-            <span>침실문 잠금장치</span>
-            <span>안전과 사생활 보호를 위해 방문을 잠글 수 있음</span>
-          </label>
         </div>
-
         <button type="submit" id="submit" class="room__register-btn">계속</button>
       </form>
     </div>
