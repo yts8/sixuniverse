@@ -2,6 +2,7 @@ package com.yts8.sixuniverse.api.reservation;
 
 import com.amazonaws.services.ec2.model.ResetSnapshotAttributeRequest;
 import com.yts8.sixuniverse.member.dto.MemberDto;
+import com.yts8.sixuniverse.payment.dto.PaymentDto;
 import com.yts8.sixuniverse.payment.repository.PaymentMapper;
 import com.yts8.sixuniverse.payment.service.PaymentService;
 import com.yts8.sixuniverse.reservation.dto.ReservationDto;
@@ -97,7 +98,6 @@ public class ReservationApiController {
     return totalPrice;
 
   }
-
 
 
 }

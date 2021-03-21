@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class PaymentDto {
-  private Long paymentId;
+  private String paymentId;
   private Long reservationId;
   private Long memberCouponId;
   private int price;
