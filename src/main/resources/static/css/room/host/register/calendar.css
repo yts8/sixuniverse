@@ -24,6 +24,26 @@
   color: #787878;
 }
 
+.room__subject {
+  width: 500px;
+  height: 40px;
+  padding: 5px;
+}
+
+.room__introduce {
+  width: 500px;
+  height: 200px;
+  padding: 5px;
+}
+
+.room__price {
+  width: 300px;
+  height: 100%;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px;
+}
+
 .room__register-btn {
   padding: 15px 30px;
   size: 17px;
