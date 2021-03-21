@@ -1,8 +1,10 @@
 package com.yts8.sixuniverse.reservation.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yts8.sixuniverse.member.dto.MemberDto;
 import com.yts8.sixuniverse.member.service.MemberService;
 import com.yts8.sixuniverse.payment.dto.PaymentDto;
+import com.yts8.sixuniverse.payment.service.PaymentService;
 import com.yts8.sixuniverse.reservation.dto.ReservationDto;
 import com.yts8.sixuniverse.reservation.service.ReservationService;
 import com.yts8.sixuniverse.reservationDate.dto.ReservationDateDto;
@@ -19,12 +21,14 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.DataInput;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -35,6 +39,7 @@ public class ReservationController {
   private final MemberService memberService;
   private final ReservationDateService reservationDateService;
   private final RoomImageService roomImageService;
+  private final PaymentService paymentService;
 
   @PostMapping("/{roomId}")
   public String reservation(HttpSession session, Model model,
@@ -219,12 +224,12 @@ public class ReservationController {
     return "reservation/guest/cancel-confirm";
   }
 
-  @PostMapping("/pay/complete")
+  @PostMapping(value = "/pay/complete", produces = "application/json; charset=utf-8")
   public String guestReservationPayComplete(HttpSession session, ReservationDto reservationDto,
                                             HttpServletRequest request,
-//                                            @RequestBody PaymentDto paymentDto,
+                                            @RequestParam String paymentData,
                                             HttpServletResponse response, Model model) {
-//    System.out.println(paymentDto);
+
 
     MemberDto memberDto = (MemberDto) session.getAttribute("member");
     Long memberId = memberDto.getMemberId(); // 세션값 가져오기
@@ -267,12 +272,29 @@ public class ReservationController {
           reservationDateDto.setReservationId(reservationDto.getReservationId());
           reservationDateDto.setRoomId(roomId);
 
-          LocalDate reservationDate = LocalDate.parse(reservationDay.substring(1,11)); // parse : try catch 문 필요
+          LocalDate reservationDate = LocalDate.parse(reservationDay.substring(1, 11)); // parse : try catch 문 필요
           reservationDateDto.setReservationDate(reservationDate);
           reservationDateDtos.add(reservationDateDto);
         }
 
         reservationDateService.reservationDateInsert(reservationDateDtos);
+
+        // 결제 테스트
+        ObjectMapper mapper = new ObjectMapper();
+
+        Map<String, Object> map = null;
+
+        map = mapper.readValue(paymentData, Map.class);
+
+        PaymentDto paymentDto = new PaymentDto();
+        paymentDto.setPaymentId((String) map.get("imp_uid"));
+        paymentDto.setReservationId(reservationDto.getReservationId());
+        paymentDto.setPrice((int) map.get("paid_amount"));
+        paymentDto.setCommission((int) map.get("commission"));
+        paymentDto.setPaymentMethod((String) map.get("pay_method"));
+
+        paymentService.paymentInsert(paymentDto);
+
       }
 
     } catch (Exception e) {
