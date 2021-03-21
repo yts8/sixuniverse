@@ -55,7 +55,6 @@ public class ReservationApiController {
   @GetMapping("/cancel/info/{reservationId}")
   public ReservationRoomPaymentDto listCancelInfo(@PathVariable Long reservationId) {
 
-    System.out.println(reservationService.findByCancelReservationId(reservationId));
     return reservationService.findByCancelReservationId(reservationId);
   }
 
