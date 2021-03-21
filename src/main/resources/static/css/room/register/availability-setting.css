@@ -1,46 +1,140 @@
 .room__container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .room__register-container {
-  height: 100%;
-  padding: 50px;
+    height: 100%;
+    padding: 50px;
 }
 
 .room__guide {
-  font-weight: bold;
-  margin-top: 50px;
-  font-size: 25px;
-  margin-bottom: 10px;
+    font-weight: bold;
+    margin-top: 50px;
+    font-size: 25px;
+    margin-bottom: 10px;
 }
 
 .room__guide-sub {
-  margin-bottom: 10px;
-  font-size: 17px;
-  color: #787878;
+    margin-bottom: 10px;
+    font-size: 17px;
+    color: #787878;
 }
 
 .room__subject {
-  width: 500px;
-  height: 40px;
-  padding: 5px;
+    width: 500px;
+    height: 40px;
+    padding: 5px;
 }
 
 .room__introduce {
-  width: 500px;
-  height: 200px;
-  padding: 5px;
+    width: 500px;
+    height: 200px;
+    padding: 5px;
 }
 
+
+.room_setting-radio {
+    display: flex;
+    cursor: pointer;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0.375em;
+}
+
+/*라디오버튼*/
+.room__setting-radio-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.room_setting-radio input[type="radio"] {
+    display: none;
+}
+
+.room_setting-radio input[type="radio"] + span {
+    display: inline-block;
+    background: none;
+    border: 1px solid #dfdfdf;
+    padding: 0px 10px;
+    text-align: center;
+    height: 35px;
+    line-height: 33px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.room_setting-radio input[type="radio"]:checked + span {
+    border: 1px solid #23a3a7;
+    background: #23a3a7;
+    color: #fff;
+}
+
+/*숙박 기간 조절*/
+
+.room__number-container {
+    /*margin-left: 40px;*/
+    /*display: table-cell;*/
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+}
+.room__number {
+    margin-left: 10px;
+    display: flex;
+}
+
+.room__number-detail {
+    width: 150px;
+}
+.room__number > input {
+    width: 20px;
+    text-align: center;
+    border: none;
+}
+.room__decrease, .room__increase {
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: 1px solid #398288;
+    border-radius: 30px;
+    margin: 0 5px 0 5px;
+    text-align: center;
+}
+.fa-minus, .fa-plus {
+    color: #398288;
+}
+.room__decrease:hover, .room__increase:hover {
+    border-color: #398288;
+}
+
+/* 체크인 셀렉터*/
+select {
+    width: 200px;
+    padding: .8em .5em;
+    font-family: inherit;
+    background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 1px solid #999;
+    border-radius: 0px;
+}
+select::-ms-expand {
+    display: none;
+}
+
+
+/*버튼*/
 .room__register-btn {
-  padding: 15px 30px;
-  size: 17px;
-  color: white;
-  font-weight: bold;
-  background-color: #56a5ac;
-  border-radius: 8px;
-  border: none;
-  margin-top: 40px;
+    padding: 15px 30px;
+    size: 17px;
+    color: white;
+    font-weight: bold;
+    background-color: #56a5ac;
+    border-radius: 8px;
+    border: none;
+    margin-top: 40px;
 }
