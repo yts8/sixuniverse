@@ -9,6 +9,12 @@
     where room_id = #{roomId}
   </select>
 
+  <select id="findByMemberId" resultType="RoomDto">
+    select *
+    from room
+    where member_id = #{memberId}
+  </select>
+
   <select id="findByRenewDate" resultType="java.time.LocalDateTime">
     select renew_date
     from room
