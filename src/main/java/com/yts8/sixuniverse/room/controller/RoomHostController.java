@@ -18,7 +18,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/host/room")
-public class RoomHostListController {
+public class RoomHostController {
 
   private final RoomService roomService;
   private final RoomImageService roomImageService;
@@ -38,5 +38,4 @@ public class RoomHostListController {
     model.addAttribute("title", "숙소 목록");
     return "room/host/list";
   }
-
 }

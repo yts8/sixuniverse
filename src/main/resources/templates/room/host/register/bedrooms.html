@@ -4,14 +4,14 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
 <th:block layout:fragment="css">
-  <link rel="stylesheet" th:href="@{/css/room/register/bedrooms.css}"/>
+  <link rel="stylesheet" th:href="@{/css/room/host/register/bedrooms.css}"/>
 </th:block>
 
 <th:block layout:fragment="js">
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <script type="text/javascript" defer th:src="@{/js/room/room-register.js}"></script>
-  <script defer th:src="@{/js/room/bedrooms.js}"></script>
+  <script defer th:src="@{/js/room/host/register/room-register.js}"></script>
+  <script defer th:src="@{/js/room/host/register/bedrooms.js}"></script>
 </th:block>
 
 <th:block layout:fragment="content">

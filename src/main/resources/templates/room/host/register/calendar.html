@@ -4,12 +4,12 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
 <th:block layout:fragment="css">
-  <link rel="stylesheet" th:href="@{/css/room/register/calendar.css}"/>
-  <link rel="stylesheet" th:href="@{/css/room/register/fullcalendar.css}"/>
+  <link rel="stylesheet" th:href="@{/css/room/host/register/calendar.css}"/>
+  <link rel="stylesheet" th:href="@{/css/room/host/register/fullcalendar.css}"/>
 </th:block>
 <th:block layout:fragment="js">
-  <script type="text/javascript" defer th:src="@{/js/room/fullcalendar.js}"></script>
-  <script type="text/javascript" defer th:src="@{/js/room/calendar.js}"></script>
+  <script defer th:src="@{/js/room/host/register/fullcalendar.js}"></script>
+  <script defer th:src="@{/js/room/host/register/calendar.js}"></script>
 </th:block>
 <th:block layout:fragment="content">
   <div class="room__container">

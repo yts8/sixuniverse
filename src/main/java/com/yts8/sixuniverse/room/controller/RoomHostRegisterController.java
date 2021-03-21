@@ -20,7 +20,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/host/room/register")
-public class RoomRegisterAndUpdateController {
+public class RoomHostRegisterController {
 
   private final RoomService roomService;
   private final RoomFacilityService roomFacilityService;
