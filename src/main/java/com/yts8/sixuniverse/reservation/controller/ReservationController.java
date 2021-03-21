@@ -13,10 +13,7 @@ import com.yts8.sixuniverse.roomImage.service.RoomImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -222,9 +219,15 @@ public class ReservationController {
   }
 
   @PostMapping("/pay/complete")
+  @ResponseBody
   public String guestReservationPayComplete(HttpSession session, ReservationDto reservationDto,
-                                            HttpServletRequest request,
+                                            HttpServletRequest request, @RequestBody String json,
                                             HttpServletResponse response, Model model) {
+    System.out.println(request.getParameter("imp_uid"));
+    System.out.println(request.getParameter("paid_amount"));
+    System.out.println(request.getParameter("pay_method"));
+    System.out.println(json);
+
 
     MemberDto memberDto = (MemberDto) session.getAttribute("member");
     Long memberId = memberDto.getMemberId(); // 세션값 가져오기

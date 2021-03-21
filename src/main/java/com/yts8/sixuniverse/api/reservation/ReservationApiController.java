@@ -2,6 +2,8 @@ package com.yts8.sixuniverse.api.reservation;
 
 import com.amazonaws.services.ec2.model.ResetSnapshotAttributeRequest;
 import com.yts8.sixuniverse.member.dto.MemberDto;
+import com.yts8.sixuniverse.payment.repository.PaymentMapper;
+import com.yts8.sixuniverse.payment.service.PaymentService;
 import com.yts8.sixuniverse.reservation.dto.ReservationDto;
 import com.yts8.sixuniverse.reservation.service.ReservationService;
 import com.yts8.sixuniverse.reservationDate.service.ReservationDateService;
@@ -27,9 +29,11 @@ public class ReservationApiController {
   private final RoomService roomService;
   private final ReservationService reservationService;
   private final ReservationDateService reservationDateService;
+  private final PaymentService paymentService;
 
   @PostMapping("/guest/update/today")
-  public @ResponseBody boolean updateDate(@RequestBody LocalDate checkIn) {
+  public @ResponseBody
+  boolean updateDate(@RequestBody LocalDate checkIn) {
     boolean result = false;
 
     LocalDate today = LocalDate.now();
