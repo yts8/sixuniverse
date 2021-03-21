@@ -32,27 +32,27 @@
       //         pay_method: rsp.pay_method
       //       })
 
-            // 이 부분만 주석 처리 후 다른 주석 해제하면 결제 가능
-            // -------------------------------------------------------------
-            const randomNum = Math.floor(Math.random() * 10001);
+      // 이 부분만 주석 처리 후 다른 주석 해제하면 결제 가능
+      // -------------------------------------------------------------
+      const randomNum = Math.floor(Math.random() * 10001);
 
-            const data = JSON.stringify({
-              imp_uid: 'imp_' + randomNum,
-              paid_amount: price + commission,  // 게스트 최종결제금액
-              commission: commission,   // 수수료
-              pay_method: 'card'
-            })
-            // -------------------------------------------------------------
+      const data = JSON.stringify({
+        imp_uid: 'imp_' + randomNum,
+        paid_amount: price + commission,  // 게스트 최종결제금액
+        commission: commission,   // 수수료
+        pay_method: 'card'
+      })
+      // -------------------------------------------------------------
 
-            $('.reservation__payment').val(data);
-            $('#reservation-fr').submit();
+      $('.reservation__payment').val(data);
+      $('#reservation-fr').submit();
 
 
-  //         } else {
-  //           alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
-  //         }
-  //       });
-  //     }
+      //         } else {
+      //           alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
+      //         }
+      //       });
+      //     }
 
     });
 
