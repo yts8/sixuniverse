@@ -2,6 +2,7 @@ package com.yts8.sixuniverse.reservation.controller;
 
 import com.yts8.sixuniverse.member.dto.MemberDto;
 import com.yts8.sixuniverse.member.service.MemberService;
+import com.yts8.sixuniverse.payment.dto.PaymentDto;
 import com.yts8.sixuniverse.reservation.dto.ReservationDto;
 import com.yts8.sixuniverse.reservation.service.ReservationService;
 import com.yts8.sixuniverse.reservationDate.dto.ReservationDateDto;
@@ -13,10 +14,7 @@ import com.yts8.sixuniverse.roomImage.service.RoomImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -164,10 +162,10 @@ public class ReservationController {
     return "reservation/guest/detail-info";
   }
 
-  @GetMapping("/host-reservation-list")
+  @GetMapping("/host/list")
   public String reservationHost() {
 
-    return "reservation/host-reservation-list";
+    return "reservation/host/list";
   }
 
   @GetMapping("/guest/update/{reservationId}")
@@ -222,70 +220,76 @@ public class ReservationController {
   }
 
   @PostMapping("/pay/complete")
+  @ResponseBody
   public String guestReservationPayComplete(HttpSession session, ReservationDto reservationDto,
-                                            HttpServletRequest request,
+                                            HttpServletRequest request, @RequestBody PaymentDto paymentDto,
                                             HttpServletResponse response, Model model) {
+    System.out.println(paymentDto);
 
-    MemberDto memberDto = (MemberDto) session.getAttribute("member");
-    Long memberId = memberDto.getMemberId(); // 세션값 가져오기
-    Long roomId = reservationDto.getRoomId();
-    RoomDto roomDto = roomService.findById(roomId); // 호스트가 등록한 숙소인지 찾기 위해
-
-    String reservationDateArr = request.getParameter("reservationDateArray");
-    String[] reservationDateArray = null;
-
-    if (reservationDateArr.substring(1).equals("[")) {
-      reservationDateArray = reservationDateArr.substring(1, reservationDateArr.length() - 1).split(", ");
-    } else {
-      reservationDateArray = reservationDateArr.split(",");
-    }
-
-
-    try {
-      LocalDate reservationDateCheckIn = LocalDate.parse(reservationDateArray[0].substring(1)); // parse : try catch 문 필요
-
-      // 이미 예약된 날짜인지 확인하기 위해 숙소아이디와 체크인 날짜로 찾아봄
-      ReservationDto reservationDto1 = new ReservationDto();
-      reservationDto1.setRoomId(roomId);
-      reservationDto1.setCheckIn(reservationDateCheckIn);
-      ReservationDateDto reservationDateRoomId = reservationDateService.findByReservationDate(reservationDto1);
-
-      if (reservationDateRoomId != null) {
-        // 예약 시 선택한 체크인 날짜가 이미 예약된 날짜라면
-        // 예약하지 못하게 막기
-        return "redirect:/";
-
-      } else {
-        reservationDto.setMemberId(memberId);
-        reservationDto.setStatus("upcoming");
-
-        reservationService.reservationInsert(reservationDto);
-
-        List<ReservationDateDto> reservationDateDtos = new ArrayList<>();
-        for (String reservationDay : reservationDateArray) {
-          ReservationDateDto reservationDateDto = new ReservationDateDto();
-          reservationDateDto.setReservationId(reservationDto.getReservationId());
-          reservationDateDto.setRoomId(roomId);
-
-          System.out.println(reservationDay);
-
-          LocalDate reservationDate = LocalDate.parse(reservationDay.substring(1,11)); // parse : try catch 문 필요
-
-          reservationDateDto.setReservationDate(reservationDate);
-          reservationDateDtos.add(reservationDateDto);
-        }
-
-        reservationDateService.reservationDateInsert(reservationDateDtos);
-      }
-
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-
-    model.addAttribute("room", roomDto);
-    model.addAttribute("reservation", reservationDto);
+//    MemberDto memberDto = (MemberDto) session.getAttribute("member");
+//    Long memberId = memberDto.getMemberId(); // 세션값 가져오기
+//    Long roomId = reservationDto.getRoomId();
+//    RoomDto roomDto = roomService.findById(roomId); // 호스트가 등록한 숙소인지 찾기 위해
+//
+//    String reservationDateArr = request.getParameter("reservationDateArray");
+//    String[] reservationDateArray = null;
+//    if (reservationDateArr.substring(1).equals("[")) {
+//      reservationDateArray = reservationDateArr.substring(1, reservationDateArr.length() - 1).split(", ");
+//    } else {
+//      reservationDateArray = reservationDateArr.split(",");
+//    }
+//
+//
+//    try {
+//      LocalDate reservationDateCheckIn = LocalDate.parse(reservationDateArray[0].substring(1)); // parse : try catch 문 필요
+//
+//      // 이미 예약된 날짜인지 확인하기 위해 숙소아이디와 체크인 날짜로 찾아봄
+//      ReservationDto reservationDto1 = new ReservationDto();
+//      reservationDto1.setRoomId(roomId);
+//      reservationDto1.setCheckIn(reservationDateCheckIn);
+//      ReservationDateDto reservationDateRoomId = reservationDateService.findByReservationDate(reservationDto1);
+//
+//      if (reservationDateRoomId != null) {
+//        // 예약 시 선택한 체크인 날짜가 이미 예약된 날짜라면
+//        // 예약하지 못하게 막기
+//        return "redirect:/";
+//
+//      } else {
+//        reservationDto.setMemberId(memberId);
+//        reservationDto.setStatus("upcoming");
+//
+//        reservationService.reservationInsert(reservationDto);
+//
+//        List<ReservationDateDto> reservationDateDtos = new ArrayList<>();
+//
+//        for (String reservationDay : reservationDateArray) {
+//          ReservationDateDto reservationDateDto = new ReservationDateDto();
+//          reservationDateDto.setReservationId(reservationDto.getReservationId());
+//          reservationDateDto.setRoomId(roomId);
+//
+//          LocalDate reservationDate = LocalDate.parse(reservationDay.substring(1,11)); // parse : try catch 문 필요
+//          reservationDateDto.setReservationDate(reservationDate);
+//          reservationDateDtos.add(reservationDateDto);
+//        }
+//
+//        reservationDateService.reservationDateInsert(reservationDateDtos);
+//      }
+//
+//    } catch (Exception e) {
+//      e.printStackTrace();
+//    }
+//
+//    model.addAttribute("room", roomDto);
+//    model.addAttribute("reservation", reservationDto);
 
     return "reservation/guest/complete";
   }
 
+  @GetMapping("/host/detail-info")
+  public String reservationHostDetail() {
+
+    return "reservation/host/detail-info";
+  }
+
 }
+

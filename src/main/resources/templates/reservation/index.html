@@ -14,6 +14,7 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
   <script type="text/javascript" defer th:src="@{/js/reservation/index.js}"></script>
   <script type="text/javascript" defer th:src="@{/js/reservation/reservation-modal.js}"></script>
@@ -254,6 +255,7 @@
             <input type="hidden" name="kid" class="reservation__kid" th:value="${beforeReservation.kid}">
             <input type="hidden" name="infant" class="reservation__infant" th:value="${beforeReservation.infant}">
             <input type="hidden" name="roomId" id="room-id" class="reservation__room-id" th:value="${room.roomId}">
+            <input type="hidden" name="PaymentDto" class="reservation__payment">
           </form>
           <button class="reservation__btn">예약 및 결제하기</button>
 
@@ -271,7 +273,7 @@
                 <span th:text="${room.getAddress()}"></span>
                 <span class="reservation__room-sub-address" th:text="${room.subAddress}"></span>
               </div>
-              <div th:text="${room.getTitle()}"></div>
+              <div th:text="${room.getTitle()}" id="roomName"></div>
               <div>침대 | 욕실</div>
               <div class="reservation__review-grade">
                 <div>
