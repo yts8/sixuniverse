@@ -5,7 +5,6 @@
   $(document).ready(function () {
 
     $('.reservation__btn').click(function () {
-
       const data = {
         // imp_uid: rsp.imp_uid,
         // paid_amount: rsp.paid_amount,
