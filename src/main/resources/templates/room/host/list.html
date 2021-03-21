@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default" xmlns="http://www.w3.org/1999/html">
+
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/room/list.css}"/>
+</th:block>
+
+<th:block layout:fragment="content">
+  <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
+
+  <div class="host-room-list__container">
+    <div th:text="|숙소 ${roomDtos.size()}개|" class="host-room-list__title"></div>
+
+    <table class="host-room-list__table-container">
+      <thead>
+      <tr class="host-room-list__table-title">
+        <th>
+          <div>삭제</div>
+        </th>
+        <th>
+          <div>숙소</div>
+        </th>
+        <th>
+          <div>필요한 조치</div>
+        </th>
+        <th>
+          <div>중지</div>
+        </th>
+        <th>
+          <div>최대 숙박 인원</div>
+        </th>
+        <th>
+          <div>침실</div>
+        </th>
+        <th>
+          <div>침대</div>
+        </th>
+        <th>
+          <div>욕실</div>
+        </th>
+        <th>
+          <div>위치</div>
+        </th>
+        <th>
+          <div>최종 수정일</div>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="index : ${#numbers.sequence(0, roomDtos.size() - 1)}" class="host-room-list__table-content">
+        <td>
+          <div>
+            <button class="host-room-list__btn room-delete-btn-js"
+                    th:data-id="${roomDtos.get(index).getRoomId()}">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </td>
+        <td>
+          <div class="host-room-list__room-title-wrap">
+
+            <a th:if='${#strings.equals(roomDtos.get(index).getStatus(), "register")}'
+               th:href="@{|/room/detail/${roomDtos.get(index).getRoomId()}|}"
+               class="host-room-list__room-title-box">
+              <img th:if="${roomImageDtos.get(index) != null}"
+                   th:src="${roomImageDtos.get(index).getRoomImg()}"
+                   alt="방 타이틀 이미지">
+              <div class="host-room-list__room-title" th:text="${roomDtos.get(index).getTitle()}"></div>
+            </a>
+
+            <div th:unless='${#strings.equals(roomDtos.get(index).getStatus(), "register")}'
+                 th:href="@{|/room/detail/${roomDtos.get(index).getRoomId()}|}"
+                 class="host-room-list__room-title-box">
+              <img th:if="${roomImageDtos.get(index) != null}"
+                   th:src="${roomImageDtos.get(index).getRoomImg()}"
+                   alt="방 타이틀 이미지">
+              <div class="host-room-list__room-title" th:text="${roomDtos.get(index).getTitle()}"></div>
+            </div>
+
+          </div>
+        </td>
+        <td>
+          <div>
+
+            <a th:if='${#strings.equals(roomDtos.get(index).getStatus(), "register")}'
+               th:href="@{|/host/room/register/address/${roomDtos.get(index).getRoomId()}|}"
+               class="host-room-list__btn">
+              수정하기
+            </a>
+
+            <a th:if='${#strings.equals(roomDtos.get(index).getStatus(), "not register")}'
+               th:href="@{|/host/room/register/address/${roomDtos.get(index).getRoomId()}|}"
+               class="host-room-list__btn">
+              등록 완료하기
+            </a>
+
+            <button th:if='${#strings.equals(roomDtos.get(index).getStatus(), "stop")}'
+                    th:data-id="${roomDtos.get(index).getRoomId()}"
+                    class="host-room-list__btn">
+              중지 해제
+            </button>
+
+            <button th:if='${#strings.equals(roomDtos.get(index).getStatus(), "renew")}'
+                    th:data-id="${roomDtos.get(index).getRoomId()}"
+                    class="host-room-list__btn">
+              재 등록
+            </button>
+          </div>
+        </td>
+        <td>
+          <div>
+            <button th:if='${#strings.equals(roomDtos.get(index).getStatus(), "register")}'
+                    th:data-id="${roomDtos.get(index).getRoomId()}"
+                    class="host-room-list__btn">운영 중지
+            </button>
+          </div>
+        </td>
+        <td>
+          <div th:text="${roomDtos.get(index).getMaxPeople()}"></div>
+        </td>
+        <td>
+          <div th:text="${roomDtos.get(index).getBedroomCount()}"></div>
+        </td>
+        <td>
+          <div th:text="${roomDtos.get(index).getBedCount()}"></div>
+        </td>
+        <td>
+          <div th:text="${roomDtos.get(index).getBathCount()}"></div>
+        </td>
+        <td>
+          <div>
+            <div>
+              <div class="host-room-list__address" th:text="${roomDtos.get(index).getAddress()}"></div>
+              <div th:text="${roomDtos.get(index).getSubAddress()}"></div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div th:text="${#temporals.format(roomDtos.get(index).getRenewDate(), 'yyyy년 MM월 dd일')}"></div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</th:block>
+</html>

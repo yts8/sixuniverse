@@ -30,4 +30,9 @@ public class roomImageServiceImpl implements RoomImageService {
     return roomImageMapper.findByRoomId(roomId);
   }
 
+  @Override
+  public RoomImageDto findOneByRoomId(Long roomId) {
+    return roomImageMapper.findOneByRoomId(roomId);
+  }
+
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +19,11 @@ public class RoomServiceImpl implements RoomService {
   @Override
   public RoomDto findById(Long roomId) {
     return roomMapper.findById(roomId);
+  }
+
+  @Override
+  public List<RoomDto> findByMemberId(Long memberId) {
+    return roomMapper.findByMemberId(memberId);
   }
 
   @Override
