@@ -5,7 +5,7 @@
   <insert id="reservationInsert" parameterType="ReservationDateDto" useGeneratedKeys="true" keyProperty="reservationId">
     insert into reservation
     values (null, #{roomId}, #{memberId}, #{status}, #{adult}, #{kid}, #{infant}, #{checkIn}, #{checkOut},
-            #{createDate}, #{cancelDate})
+            #{createDate}, #{cancelDate}, #{updateTarget})
   </insert>
 
   <select id="reservationList" parameterType="ReservationDateDto" resultType="ReservationDto">

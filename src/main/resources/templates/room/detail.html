@@ -3,9 +3,20 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default" xmlns="http://www.w3.org/1999/html">
-<div layout:fragment="css">
+<th:block layout:fragment="css">
   <link rel="stylesheet" th:href="@{/css/room/detail.css}"/>
-</div>
+  <link rel="stylesheet" th:href="@{/css/reservation/detail-modal.css}">
+</th:block>
+<th:block layout:fragment="js">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+  <script type="text/javascript" defer th:src="@{/js/reservation/reservation-date-modal.js}"></script>
+  <script type="text/javascript" defer th:src="@{/js/reservation/reservation-modal.js}"></script>
+  <script type="text/javascript" defer th:src="@{/js/reservation/reservation-check.js}"></script>
+</th:block>
+
 <th:block layout:fragment="content">
   <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
   <input type="hidden" id="room-id" th:value="${roomId}"/>
@@ -69,26 +80,182 @@
 
         <div class="room__detail-calendar-container">캘린더 자리</div>
       </div>
-      <div class="room__detail-second-right-container">오른쪽 예약상자</div>
+
+
+      <div class="room__detail-second-right-container">
+        <div class="room__detail-rule-subject">요금을 확인하려면 날짜를 입력하세요</div>
+
+        <div class="room__detail-reservation-info">
+          <div class="room__detail-check-in-out" id="update-date">
+            <div>
+              <div class="room__detail-date-title">체크인</div>
+              <div class="reservation__check-in">날짜 추가</div>
+            </div>
+            <div>
+              <div class="room__detail-date-title">체크아웃</div>
+              <div class="reservation__check-out">날짜 추가</div>
+            </div>
+          </div>
+
+          <div class="room__detail-guest-box">
+            <div class="room__detail-guest-select" id="update-guest">
+              <div class="room__detail-date-title">인원</div>
+              <div class="room__detail-guest-info">
+                성인 : <span class="reservation__guest-adult">1</span> 명 아동 : <span class="reservation__guest-kid">0</span>
+                명 유아 : <span class="reservation__guest-infant">0</span> 명
+                <div>총 인원 : <span class="reservation__total-guest">1</span> 명</div>
+              </div>
+            </div>
+
+            <!-- 게스트 모달 -->
+            <div id="my-modal" class="reservation__modal">
+              <div class="reservation__modal-content">
+                <div class="reservation__modal-cancel"><i class="fas fa-times"></i></div>
+                <h2 class="reservation__sub-title">게스트</h2>
+                <div class="reservation__guest">
+                <span>
+                 <div class="reservation__guest-title">성인</div>
+                </span>
+                  <div class="reservation__number-right">
+                    <div class="reservation__guest-number">
+                      <button class="reservation__decrease" id="adult-minus"><i class="fas fa-minus"></i></button>
+                      <input type="text" name="adult-number" value="1" id="adult-number" readonly>
+                      <button class="reservation__increase" id="adult-plus"><i class="fas fa-plus"></i></button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="reservation__guest">
+                <span>
+                  <div>
+                    <div class="reservation__guest-title">어린이</div>
+                    <div class="reservation__guest-age">2~12세</div>
+                  </div>
+                </span>
+                  <div class="reservation__number-right">
+                    <div class="reservation__guest-number">
+                      <button class="reservation__decrease" id="kid-minus"><i class="fas fa-minus"></i></button>
+                      <input type="text" name="kid-number" value="0" id="kid-number" readonly>
+                      <button class="reservation__increase" id="kid-plus"><i class="fas fa-plus"></i></button>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="reservation__guest">
+                <span>
+                  <div>
+                    <div class="reservation__guest-title">유아</div>
+                    <div class="reservation__guest-age">2세 미만</div>
+                  </div>
+                </span>
+                  <div class="reservation__number-right">
+                    <div class="reservation__guest-number">
+                      <button class="reservation__decrease" id="infant-minus"><i class="fas fa-minus"></i></button>
+                      <input type="text" name="infant-number" value="0" id="infant-number" readonly>
+                      <button class="reservation__increase" id="infant-plus"><i class="fas fa-plus"></i></button>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div>최대 <span th:text="${room.maxPeople}" class="reservation__max-people"></span> 명.
+                  유아는 숙박인원에 포함되지 않습니다.
+                </div>
+
+                <div class="reservation__guest-update-btn">
+                <span class="reservation__modal-cancel pop_bt">
+                  취소
+                </span>
+                  <button class="reservation__guest-update">저장하기</button>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+        <button class="room__detail-reservation-check-btn" id="before-btn">예약 가능 여부 보기</button>
+        <form th:action="@{|/reservation/${roomId}|}" method="post">
+          <input type="hidden" name="checkIn">
+          <input type="hidden" name="checkOut">
+          <input type="hidden" name="adult" th:value="1">
+          <input type="hidden" name="kid" th:value="0">
+          <input type="hidden" name="infant" th:value="0">
+          <input type="hidden" name="totalPrice">
+          <input type="hidden" name="commission">
+          <button type="submit" class="room__detail-reservation-check-btn" id="reservation-btn">예약 하기</button>
+        </form>
+
+        <div class="room__detail-price-info-box">
+          <div class="room__detail-price-info">
+            <div th:text="|1박당 요금 : ${room.price} |"></div>
+            <div class="room__detail-total-price">총 요금</div>
+          </div>
+          <div class="room__detail-price-info">
+            <div>수수료 10%</div>
+            <div class="room__detail-price-commission">얼마</div>
+          </div>
+        </div>
+
+
+        <!-- 날짜 modal -->
+        <input type="hidden" name="reservationDateList" th:value="${reservationDateList}"
+               class="reservation__reservation-date-list">
+        <input type="hidden" name="expriyDate" th:value="${room.expiryDate}" class="reservation__room-expiry-date">
+        <div id="date-modal" class="reservation__modal">
+          <div class="reservation__date-modal-content">
+            <div class="reservation__modal-cancel"><i class="fas fa-times"></i></div>
+            <div class="reservation__choose-date">
+              <h2 class="reservation__sub-title">날짜 선택</h2>
+              <div class="reservation__ch-date">
+                <div class="reservation__ch-in-out-date">
+                  <div class="reservation__check-title">체크인</div>
+                  <input type="text" id="check-in" class="reservation__date-value" readonly>
+                </div>
+                <div class="reservation__ch-in-out-date">
+                  <div class="reservation__check-title">체크아웃</div>
+                  <input type="text" id="check-out" class="reservation__date-value" readonly>
+                </div>
+              </div>
+            </div>
+
+            <div class="reservation__date-wrapper">
+              <div class="dates">
+                <div id="range-date"></div>
+              </div>
+
+              <div class="reservation__date-done">
+                <button class="reservation__delete-date">날짜지우기</button>
+                <button class="reservation__save-date">저장</button>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="room__detail-third-container">
+          <!--      후기 넣는 자리-->
+
+        </div>
+
+        <div class="room__detail-fourth-container">
+          <!--      지도 넣는 자리-->
+        </div>
+
+        <div class="room__detail-fifth-container">
+          <!--      호스트 프로필 넣는 자리-->
+        </div>
+
+      </div>
+
+
     </div>
-
-    <div class="room__detail-third-container">
-      <!--      후기 넣는 자리-->
-
-    </div>
-
-    <div class="room__detail-fourth-container">
-      <!--      지도 넣는 자리-->
-    </div>
-
-    <div class="room__detail-fifth-container">
-      <!--      호스트 프로필 넣는 자리-->
-    </div>
-
-  </div>
-
-
-  </div>
 
   </div>
 </th:block>

@@ -49,7 +49,7 @@
                 </div>
 
                 <div class="guest-reservation-detail-info__detail-room-info">
-                  <div class="guest-reservation-detail-info__room-img"><img th:src="@{/images/reservation/sample.jpg}"></div>
+                  <div class="guest-reservation-detail-info__room-img"><img th:src="${roomImageDtoList.get(0).roomImg}"></div>
                   <div class="guest-reservation-detail-info__info-align">
                     <div class="guest-reservation-detail-info__room-name" th:text="${room.title}">숙소이름</div>
                     <div class="guest-reservation-detail-info__margin">

@@ -1,144 +1,225 @@
 .room__detail-container {
-    display: flex;
-    flex-direction: column;
-    margin-left: 7rem;
-    margin-right: 7rem;
-    margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  margin-left: 7rem;
+  margin-right: 7rem;
+  margin-top: 3rem;
 }
 
 .room__detail-first-container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .room__detail-subject {
-    font-size: 2.2rem;
-    font-weight: bold;
+  font-size: 2.2rem;
+  font-weight: bold;
 }
 
 .room__detail-address {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
-    text-decoration: underline;
-    color: #787878;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  text-decoration: underline;
+  color: #787878;
 }
 
 .room__detail-photo-container {
-    display: flex;
-    flex-direction: row;
-    height: 30rem;
+  display: flex;
+  flex-direction: row;
+  height: 30rem;
 }
 
 .room__detail-photo-big-container {
-    /*display: inline-block;*/
-    overflow: hidden;
-    width: 50%;
-    position: center;
-    /*height: 30rem;*/
+  /*display: inline-block;*/
+  overflow: hidden;
+  width: 50%;
+  position: center;
+  /*height: 30rem;*/
 }
 
 img {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
 }
 
 .room__detail-photo-small-container {
-    background-size: cover;
-    position: center;
-    width: 50%;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 15rem;
-    overflow: hidden;
+  background-size: cover;
+  position: center;
+  width: 50%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 15rem;
+  overflow: hidden;
 }
 
 
 .room__detail-second-container {
-    margin-top: 5rem;
-    display: flex;
+  margin-top: 5rem;
+  display: flex;
 }
 
 .room__detail-second-left-container {
-    width: 50%;
+  width: 50%;
 }
 
 .room__detail-summery-subject {
-    font-size: 2rem;
-    font-weight: bold;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .room__detail-summery-sub {
-    font-size: 1.2rem;
-    margin-top: 0.5rem;
-    font-weight: normal;
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+  font-weight: normal;
 }
 
 .room__detail-rule-container {
-    margin-top: 2.5rem;
-    padding-top: 2.5rem;
-    padding-bottom: 2.5rem;
-    border-top: 1px solid #D5D5D5;
+  margin-top: 2.5rem;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-top: 1px solid #D5D5D5;
 
 }
 
 .room__detail-rule-subject {
-    font-size: 1.5rem;
-    font-weight: bold;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .room__detail-rule-sub {
-    font-size: 1.2rem;
-    margin-top: 0.5rem;
-    margin-bottom: 1.5rem;
-    font-weight: normal;
-    color: #787878;
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: normal;
+  color: #787878;
 }
 
 .room__detail-introduce-container {
 
-    padding-top: 2.5rem;
-    padding-bottom: 2.5rem;
-    border-top: 1px solid #D5D5D5;
-    font-size: 1.2rem;
-    line-height: 1.3;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-top: 1px solid #D5D5D5;
+  font-size: 1.2rem;
+  line-height: 1.3;
 }
 
 .room__detail-amenities-container {
-    margin-top: 2.5rem;
-    padding-top: 2.5rem;
-    padding-bottom: 2.5rem;
-    border-top: 1px solid #D5D5D5;
+  margin-top: 2.5rem;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-top: 1px solid #D5D5D5;
 }
 
 .room__detail-amenities-subject {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
 .room__detail-amenities-item {
-    font-size: 1.8rem;
+  font-size: 1.8rem;
 }
 
 .room__detail-calendar-container {
-    margin-top: 2.5rem;
-    padding-top: 2.5rem;
-    padding-bottom: 2.5rem;
-    border-top: 1px solid #D5D5D5;
+  margin-top: 2.5rem;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-top: 1px solid #D5D5D5;
 }
 
+
+/* 예약 상자 */
 
 .room__detail-second-right-container {
-    box-sizing: border-box;
-    width: 40%;
-    height: max-content;
-    border: 1px solid #D5D5D5;
-    margin-left: 70px;
-    padding: 30px;
-    border-radius: 15px;
-    /*top: 10rem;*/
-    position: sticky;
+  box-sizing: border-box;
+  width: 30%;
+  height: max-content;
+  box-shadow: 0 0 10px #c3c3c3;
+  margin-left: 150px;
+  padding: 30px;
+  border-radius: 15px;
+  top: 8rem;
+  position: sticky;
+}
+
+.room__detail-reservation-info {
+  border: 1px solid #c3c3c3;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+
+.room__detail-check-in-out {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+
+.room__detail-check-in-out > div {
+  width: 100%;
+  padding: 15px;
+}
+
+.room__detail-check-in-out > div > div {
+  margin-bottom: 8px;
+}
+
+.room__detail-check-in-out > div:nth-child(1) {
+  border-right: 1px solid #c3c3c3;
+}
+
+.room__detail-guest-box {
+  position: relative;
+}
+
+.room__detail-guest-select {
+  border-top: 1px solid #c3c3c3;
+  padding: 15px;
+}
+
+.room__detail-guest-select > div {
+  margin-bottom: 10px;
+}
+
+.room__detail-date-title {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.room__detail-guest-info > div {
+  margin-bottom: 10px;
+}
+
+.room__detail-reservation-check-btn {
+  width: 88%;
+  margin: 20px auto;
+  text-align: center;
+  background-color: black;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+#reservation-btn {
+  display: none;
+}
+
+.room__detail-price-info-box {
+  display: none;
+  margin-top: 20px;
+}
+
+.room__detail-price-info-box > div {
+  margin-bottom: 10px;
+}
+
+.room__detail-price-info {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 
+/* 예약 상자 끝 */
