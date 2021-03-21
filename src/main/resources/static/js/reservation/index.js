@@ -5,17 +5,17 @@
   $(document).ready(function () {
 
     $('.reservation__btn').click(function () {
-      const data = {
-        // imp_uid: rsp.imp_uid,
-        // paid_amount: rsp.paid_amount,
-        // pay_method: rsp.pay_method,
-        // name: rsp.name
-        paymentId: 11111111,
-        price: 40000,
-        paymentMethod: 'card'
-      }
+      // const data = {
+      //   // imp_uid: rsp.imp_uid,
+      //   // paid_amount: rsp.paid_amount,
+      //   // pay_method: rsp.pay_method,
+      //   // name: rsp.name
+      //   paymentId: 11111111,
+      //   price: 40000,
+      //   paymentMethod: 'card'
+      // }
 
-      $('.reservation__payment').val(data);
+      // $('.reservation__payment').val(data);
 
       $('#reservation-fr').submit();
 
