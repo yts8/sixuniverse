@@ -19,7 +19,7 @@ import java.util.List;
 @Aspect
 @Component
 @RequiredArgsConstructor
-public class RoomRegisterAndUpdateAspect {
+public class RoomHostRegisterAspect {
 
   private final RoomService roomService;
   private final RoomImageService roomImageService;
@@ -27,8 +27,9 @@ public class RoomRegisterAndUpdateAspect {
 
   private final HttpSession httpSession;
 
-  @Around("execution(* com.yts8.sixuniverse.room.controller.RoomRegisterAndUpdateController.get*(..)) && " +
-      "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterAndUpdateController.getAddressRegister(..))")
+  @Around("" +
+      "execution(* com.yts8.sixuniverse.room.controller.RoomHostRegisterController.get*(..)) && " +
+      "!execution(* com.yts8.sixuniverse.room.controller.RoomHostRegisterController.getAddressRegister(..))")
   public Object getCheckUser(ProceedingJoinPoint joinPoint) throws Throwable {
 
     Long roomId = (Long) joinPoint.getArgs()[1];
@@ -43,9 +44,11 @@ public class RoomRegisterAndUpdateAspect {
     return joinPoint.proceed();
   }
 
-  @Around("(execution(* com.yts8.sixuniverse.room.controller.RoomRegisterAndUpdateController.post*(..)) ||" +
-      "execution(* com.yts8.sixuniverse.api.room.RoomRegisterAndUpdateApiController.postImages(..))) &&" +
-      "!execution(* com.yts8.sixuniverse.room.controller.RoomRegisterAndUpdateController.postAddress(..))")
+  @Around("(" +
+      "execution(* com.yts8.sixuniverse.room.controller.RoomHostRegisterController.post*(..)) ||" +
+      "execution(* com.yts8.sixuniverse.api.room.RoomHostRegisterApiController.postImages(..))" +
+      ") &&" +
+      "!execution(* com.yts8.sixuniverse.room.controller.RoomHostRegisterController.postAddress(..))")
   public Object postCheckUser(ProceedingJoinPoint joinPoint) throws Throwable {
 
     RoomDto room = (RoomDto) joinPoint.getArgs()[0];

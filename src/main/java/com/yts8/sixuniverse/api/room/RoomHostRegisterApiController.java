@@ -24,7 +24,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/host/room/register")
-public class RoomRegisterAndUpdateApiController {
+public class RoomHostRegisterApiController {
 
   private final RoomImageService roomImageService;
   private final RoomService roomService;
