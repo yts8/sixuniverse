@@ -4,7 +4,26 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
 
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/home/index.css}"/>
+</th:block>
+
 <div layout:fragment="content">
-  <h1>여기가 홈</h1>
+  <section>
+
+    <div class="home__container">
+
+      <div class="home__image-container">
+        <img th:src="@{/images/home/main.jpg}" class="home__image">
+      </div>
+
+      <div class="home__text-container">
+        <div><span class="home__text">호스트분들이 있기에 가능합니다.</span></div>
+      </div>
+
+
+    </div>
+  </section>
 </div>
+
 </html>
