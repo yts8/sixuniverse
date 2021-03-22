@@ -5,19 +5,17 @@
 
   <!--채팅메세지 insert-->
   <insert id="saveMessage" parameterType="ChatDto" useGeneratedKeys="true" keyProperty="chatId">
-    insert into chat (member_id, content,join_num)
-    values (#{memberId}, #{content},#{joinNum})
+    insert into chat (member_id, content, join_num)
+    values (#{memberId}, #{content}, #{joinNum})
   </insert>
 
 
-
   <!--채팅방목록 출력용 최근 항목만 받아오기(전체최근항목으로변경하기)-->
-  <select id="findMessage" resultType="chatDto">
+  <select id="gggg" resultType="chatDto">
     select *
     from chat
     where member_id = #{memberId}
-    order by create_date desc
-    limit 1
+    order by create_date desc limit 1
   </select>
 
   <!-- 생성한 채팅방번호 각 memberId에 저장하기 -->
@@ -27,44 +25,93 @@
   </insert>
 
 
-
   <!--새로운 채팅방 생성하기 -->
   <select id="createNewChatRef" resultType="java.lang.Long">
-    SELECT ifnull(MAX(chat_ref),0) + 1
+    SELECT ifnull(MAX(chat_ref), 0) + 1
     FROM chatroom_join;
   </select>
 
 
   <!-- 공통된 chatRef count -->
-  <select id="chatRefCount" resultType="java.lang.Long">
-    Select count(g.chat_ref) from chatroom_join g join chatroom_join h on g.chat_ref=h.chat_ref where g.member_id= #{myMemberId} and h.member_id= #{hostId};
+  <select id="chatRefCount" parameterType="MemberIdDto" resultType="java.lang.Long">
+    Select count(g.chat_ref)
+    from chatroom_join g
+           join chatroom_join h on g.chat_ref = h.chat_ref
+    where g.member_id = #{myMemberId}
+      and h.member_id = #{hostId};
   </select>
 
   <!-- 공통된 chatRef 값 받아오기-->
-  <select id="getChatRefTest" resultType="java.lang.Long">
+  <select id="getChatRefTest" parameterType="MemberIdDto" resultType="java.lang.Long">
     Select g.chat_ref
     from chatroom_join g
-        join chatroom_join h
-        on g.chat_ref=h.chat_ref
-    where g.member_id= #{myMemberId}
-      and h.member_id= #{hostId};
+           join chatroom_join h
+                on g.chat_ref = h.chat_ref
+    where g.member_id = #{myMemberId}
+      and h.member_id = #{hostId};
   </select>
 
 
+  <!-- join_num 값 받아오기-->
   <select id="findByChatRef" resultType="java.lang.Long">
-    select join_num from chatroom_join
-    where chat_ref=#{chatRef}
-    limit 1;
+    select join_num
+    from chatroom_join
+    where chat_ref = #{chatRef} limit 1;
   </select>
 
   <select id="findMemberIdByChatRef" resultType="java.lang.Long">
-    select member_id from chatroom_join
-    where chat_ref=#{chatRef}
-    limit 1;
+    select member_id
+    from chatroom_join
+    where chat_ref = #{chatRef} limit 1;
   </select>
 
 
+  <!-- 채팅 출력용 -->
+  <select id="findMessageByMemberId" parameterType="ChatDto" resultType="ChatDto">
+    select *
+    from chat
+    where member_id = #{memberId}
+  </select>
+  <!-- 채팅 출력용 -->
+  <select id="findUserNameByChatRef" parameterType="ChatroomJoinDto" resultType="ChatroomJoinDto">
+    select name
+    from chatroom_join
+    where chat_ref = #{chatRef}
+  </select>
 
+  <!-- 채팅방 번호로 메세지 찾기 -->
+  <select id="findMessageByChatRef" parameterType="java.lang.Long" resultType="ChatDto">
+    select c.member_id, c.content, c.create_date
+    from chat c
+           join chatroom_join r
+                on c.member_id = r.member_id
+    where r.chat_ref = #{chatRef}
+    order by create_date asc
+  </select>
+
+  <!-- 카운트 -->
+  <select id="findMessages" parameterType="java.lang.Long" resultType="java.lang.Long">
+    select count(*)
+    from chat c
+           join chatroom_join r
+                on c.member_id = r.member_id
+    where chat_ref = #{chatRef}
+  </select>
+
+
+  <!-- 채팅 리스트 출력 용 (마지막 채팅 하나만 가져오기)-->
+  <select id="getLastChat" parameterType="java.lang.Long" resultType="MessageDto">
+    select m.profile_img,
+           m.username,
+           m.member_id,
+           c.content,
+           c.create_date
+    from chat c
+           join member m on m.member_id = c.member_id
+           join chatroom_join r on r.member_id = c.member_id
+    where r.member_id = #{myMemberId}
+    order by c.create_date desc limit 1;
+  </select>
 
 
 </mapper>

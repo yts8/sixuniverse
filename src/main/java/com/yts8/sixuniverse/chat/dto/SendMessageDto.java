@@ -6,7 +6,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class SendrMessageDto {
+public class SendMessageDto {
   private String msg;
   private Long memberId;
   private String profileImg;

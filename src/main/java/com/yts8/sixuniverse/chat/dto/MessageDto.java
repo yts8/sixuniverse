@@ -5,12 +5,11 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-
 @Data
-public class ChatDto {
-  private Long chatId;
+public class MessageDto {
+  private String profileImg;
+  private String username;
   private Long memberId;
-  private Long joinNum;
   private String content;
   private LocalDateTime createDate;
 }
