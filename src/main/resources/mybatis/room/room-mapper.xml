@@ -84,6 +84,23 @@
     where room_id = #{roomId}
   </update>
 
+  <update id="updateRenew" parameterType="RoomDto">
+    update room
+    set status='register',
+        renew_date=#{renewDate}
+    where room_id = #{roomId}
+  </update>
+
+  <update id="updateExpiry">
+    update room
+    set status='register'
+    <![CDATA[
+    where status = 'register'
+      and expiry_date <> 0
+      and date_add(renew_date, INTERVAL expiry_date MONTH) < #{renewDate}
+    ]]>
+  </update>
+
   <delete id="remove">
     delete
     from room
