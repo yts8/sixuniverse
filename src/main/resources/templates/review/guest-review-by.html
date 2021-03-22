@@ -38,31 +38,27 @@
           <div>작성해야 할 후기</div>
         </div>
         <div class="g-review-by__panel-body">
-          <!--          <th:block th:if="${today} < ${reviewStart}">-->
           <div>현재 작성할 후기가 없습니다. 여행을 한 번 다녀올 때가 된 것 같네요!</div>
-          <!--          </th:block>-->
-          <!--          <th:block th:unless="${today} < ${reviewStart}">-->
-          <th:block th:each="reservationList : ${reservationList}">
-            <!-- 이거 좀 이상한데,,, 다시 생각해보기 -->
-<!--            <th:block th:if="${reviewList} == null">-->
-              <div class="g-review-by__panel-body-review">
-                <div class="g-review-by__panel-review-profile">
-                  <div class="g-review-by__panel-review-profile-box">
-                    <img class="g-review-by__panel-review-profile-box-img"
-                         th:src="@{/images/review/sky.jpeg}">
-                  </div>
-                  <div class="g-review-by__panel-review-profile-text">
-                    <div class="g-review-by__panel-review-profile-text-name">[]님에 대한 후기를 남겨주세요.</div>
-                    <div class="g-review-by__a">
-                      <a th:href="@{|/review/form/${reservationList.reservationId}|}">
-                        <div>후기 작성하기</div>
-                      </a>
-                    </div>
+          <th:block th:each="reviewBefore : ${reviewBeforeList}">
+            <!--            <th:block th:if="${reviewBefore.getStatus() == 'complete' && reviewBefore.getCancelDate() == null}">-->
+            <div class="g-review-by__panel-body-review">
+              <div class="g-review-by__panel-review-profile">
+                <div class="g-review-by__panel-review-profile-box">
+                  <img class="g-review-by__panel-review-profile-box-img"
+                       th:src="${reviewBefore.getHostProfileImg()}">
+                </div>
+                <div class="g-review-by__panel-review-profile-text">
+                      <span class="g-review-by__panel-review-profile-text-name"
+                            th:text="${reviewBefore.getHostName()}"></span>님에 대한 후기를 남겨주세요.
+                  <div class="g-review-by__a">
+                    <a th:href="@{|/review/form/${reviewBefore.getReservationId()}|}">
+                      <div>후기 작성하기</div>
+                    </a>
                   </div>
                 </div>
               </div>
-              <hr class="g-review-by__hr">
-<!--            </th:block>-->
+            </div>
+            <hr class="g-review-by__hr">
           </th:block>
           <!--          </th:block>-->
         </div>
@@ -75,33 +71,34 @@
 
         <div class="g-review-by__panel-body">
 
-          <th:block th:if="${reviewList} == null">
+          <th:block th:if="${reviewGuestList.isEmpty() == true}">
             <div>아직 후기를 남기지 않으셨습니다.</div>
           </th:block>
 
-          <th:block th:unless="${reviewList} == null">
-            <th:block th:each="review : ${reviewList}">
+          <th:block th:unless="${reviewGuestList.isEmpty() == true}">
+            <th:block th:each="review : ${reviewGuestList}">
               <div class="g-review-by__panel-body-review">
                 <div class="g-review-by__panel-review-profile">
                   <div class="g-review-by__panel-review-profile-box">
                     <img class="g-review-by__panel-review-profile-box-img"
-                         th:src="@{/images/review/sky.jpeg}">
+                         th:src="${review.getHostProfileImg()}">
                   </div>
                   <div class="g-review-by__panel-review-profile-text">
-                    <div class="g-review-by__panel-review-profile-text-name">[]님에 대한 후기</div>
-                    <div class="g-review-by__panel-review-text" th:text="${review.reviewContent}"></div>
+                    <span class="g-review-by__panel-review-profile-text-name" th:text="${review.getHostName()}"></span>에
+                    대한 후기
+                    <div class="g-review-by__panel-review-text" th:text="${review.getReviewContent()}"></div>
                     <div class="g-review-by__panel-review-day"
-                         th:text="${#temporals.format(review.reviewRegDate,'yyyy년 M월')}"></div>
+                         th:text="${#temporals.format(review.getReviewRegDate(),'yyyy년 M월')}"></div>
                   </div>
                   <div class="g-review-by__a">
-                    <!--                    <th:block th:if="${today} <= ${reviewLimit}">-->
-                    <a th:href="@{|/review/update-form/${review.reviewId}|}">
-                      <div>수정</div>
-                    </a>
-                    <div>
-                      <button class="g-review-by__modal-delete" th:data-id="${review.reviewId}">삭제</button>
-                    </div>
-                    <!--                    </th:block>-->
+                    <th:block th:if="${today} < ${review.getReviewRegDate().plusDays(3)}">
+                      <div>
+                        <a class="g-review-by__a-update" th:href="@{|/review/update-form/${review.reviewId}|}">수정</a>
+                      </div>
+                      <div>
+                        <button class="g-review-by__modal-delete" th:data-id="${review.reviewId}">삭제</button>
+                      </div>
+                    </th:block>
                   </div>
                 </div>
               </div>
@@ -143,7 +140,29 @@
         </div>
         <div class="g-review-by__panel-body-rate">
           <div>공개 후기를 작성할 수 있는 기한이 지났습니다. 에어비앤비와 공유하고 싶은 사항이 있으신가요? 언제든 비공개 후기를 보내주시면 검토하겠습니다.</div>
+          <th:block th:each="reviewAfter : ${reviewAfterList}">
+            <div class="g-review-by__panel-body-review">
+              <div class="g-review-by__panel-review-profile">
+                <div class="g-review-by__panel-review-profile-box">
+                  <img class="g-review-by__panel-review-profile-box-img"
+                       th:src="${reviewAfter.getHostProfileImg()}">
+                </div>
+                <div class="g-review-by__panel-review-profile-text">
+                  <span class="g-review-by__panel-review-profile-text-name"
+                        th:text="${reviewAfter.getHostName()}"></span>에 대한 후기 작성
+                  기한이 만료되었습니다.
+                  <div class="g-review-by__a">
+                    <a th:href="@{|/reservation/guest/detail-info/${reviewAfter.getReservationId()}|}">
+                      <div>여행 일정표 보기</div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr class="g-review-by__hr">
+          </th:block>
         </div>
+
       </div>
     </div>
   </div>

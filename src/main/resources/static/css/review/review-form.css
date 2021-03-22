@@ -78,6 +78,11 @@
   color: black;
 }
 
+.review-form__move a:hover {
+  color: black;
+  text-decoration: underline;
+}
+
 .review-form__move button {
   text-align: center;
   margin-right: 350px;
@@ -85,6 +90,20 @@
   font-weight: bold;
   color: white;
   background-color: #dbdbdb;
+  border-radius: 10px;
+  border-style: none;
+  width: 80px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.review-form__move button:hover {
+  text-align: center;
+  margin-right: 350px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: #000000;
   border-radius: 10px;
   border-style: none;
   width: 80px;
