@@ -11,4 +11,79 @@
     where member.member_id = #{memberId}
   </select>
 
+  <select id="findByRoomCount" resultType="int">
+    select count(room_id)
+    from room
+    where member_id = #{memberId}
+  </select>
+
+  <select id="findByCancelCount" resultType="double">
+    select count(cancel_date) / count(reservation_id)
+    from reservation
+    where member_id = #{memberId}
+  </select>
+
+  <select id="findByReservationCount" resultType="int">
+    select count(reservation_id)
+    from reservation
+    where member_id = #{memberId}
+  </select>
+
+  <select id="findByMonthlyIncome" resultType="int">
+    select SUM(price - commission)
+    from payment
+           join reservation on reservation.reservation_id = payment.reservation_id
+    where member_id = #{memberId}
+      and (reservation.status = 'complete')
+      and payment.cancel_date is null
+      and ((payment.create_date - now()) <![CDATA[ < ]]> 31);
+  </select>
+
+  <!--수익있는지 확인 (0이면 수익 0)-->
+  <select id="findByMonthlyIncomeCount" resultType="int">
+    select count(price)
+    from payment
+           join reservation on reservation.reservation_id = payment.reservation_id
+    where member_id = #{memberId}
+      and (reservation.status = 'complete')
+      and payment.cancel_date is null
+      and (payment.create_date - now())  <![CDATA[ < ]]> 31;
+
+  </select>
+
+  <!--  now자리에 기준년도 1/1 넣어주면됨-->
+  <select id="findByYearlyIncome" resultType="int">
+    select SUM(price - commission)
+    from payment
+           join reservation on reservation.reservation_id = payment.reservation_id
+    where member_id = #{memberId}
+      and (reservation.status = 'complete')
+      and payment.cancel_date is null
+      <![CDATA[
+      and (now() < payment.create_date < now() + interval 1 year)
+        ]]>;
+  </select>
+
+  <select id="findByYearlyIncomeCount" resultType="int">
+    select count(price)
+    from payment
+           join reservation on reservation.reservation_id = payment.reservation_id
+    where member_id = #{memberId}
+      and (reservation.status = 'complete')
+      and payment.cancel_date is null
+      <![CDATA[
+      and (now() < payment.create_date < now() + interval 1 year)
+        ]]>;
+  </select>
+
+  <select id="findByReservationMonthlyCount" resultType="int">
+    select count(reservation_id)
+    from reservation
+    where member_id = #{memberId}
+ <![CDATA[
+      and (now() < create_date < now() + interval 30 day)
+        ]]>;
+  </select>
+
+
 </mapper>

@@ -26,13 +26,14 @@
 
         <select class="performance__income-date-select">
           <option value="">기간 선택</option>
-          <option value="2022년 3월">2022년 3월</option>
-          <option value="2022년 1월">2022년 2월</option>
-          <option value="2022년 1월">2022년 1월</option>
+          <option value="2021년">2021년</option>
+          <!--          여유있으면 셀렉터로 연도 선택해서 값 가져오기 구현-->
+          <option value="2021년">2020년</option>
+          <option value="2021년">2019년</option>
         </select>
 
-        <div class="performance__expected-income-year">1,832,780 원</div>
-        <div class="performance__expected-income-year-detail">2021 수입</div><!-- 여유있으면 지급예정/지급완료로 나누기 -->
+        <div class="performance__expected-income-year"><span th:text="${yearlyIncome}"></span>원</div>
+        <div class="performance__expected-income-year-detail">2021 총 수입</div><!-- 여유있으면 지급예정/지급완료로 나누기 -->
 
         <div class="performance__chart-container">
           <div style="width:800px">
