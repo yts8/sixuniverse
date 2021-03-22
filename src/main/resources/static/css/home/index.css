@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+.home__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #ffffff;
+    width: 100%;
+    margin-bottom: 100px;
+}
+
+.home__image-container {
+    display: flex;
+    justify-content: center;
+    margin: 30px 100px 30px 100px;
+}
+
+.home__image {
+    width: 1200px;
+    height: 500px;
+}
+
+.home__text-container {
+    color: #000000;
+    font-weight: bold;
+    font-size: 30px;
+    justify-content: center;
+    display: flex;
+    margin-bottom: 100px;
+}
+
+

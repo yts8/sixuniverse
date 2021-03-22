@@ -14,14 +14,49 @@
 <th:block th:fragment="header">
   <div class="header__hide"></div>
   <header class="header__container">
-    <ul>
-      <li sec:authorize="isAnonymous">
-        <a th:href="@{/login}">로그인</a>
-      </li>
-      <li sec:authorize="isAuthenticated">
-        <a th:href="@{/logout}">로그아웃</a>
-      </li>
-    </ul>
+
+    <div class="header__menu-container">
+
+      <div class="header__logo-container">
+        <span>SIXUNIVERS</span>
+      </div>
+
+      <div class="header__search-container">
+        <div class="header__finder">
+          <div class="header__finder__outer">
+            <div class="header__finder__inner">
+              <div class="header__finder__icon" ref="icon"></div>
+              <input class="header__finder__input" type="text" name="q" placeholder="검색 시작하기"/>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="header__member-container">
+        호스트 되기
+        <!--        <ul>-->
+        <!--          <li sec:authorize="isAnonymous">  // 만들어오기,,,,,,,,,-->
+        <!--            <a th:href="@{/login}">호스트 되기</a>-->
+        <!--          </li>-->
+        <!--          <li sec:authorize="isAuthenticated">-->
+        <!--            <a th:href="@{/logout}">게스트 되기</a>-->
+        <!--          </li>-->
+        <!--        </ul>-->
+      </div>
+
+
+      <div class="header__login-container">
+        <ul>
+          <li sec:authorize="isAnonymous">
+            <a th:href="@{/login}">로그인</a>
+          </li>
+          <li sec:authorize="isAuthenticated">
+            <a th:href="@{/logout}">로그아웃</a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
   </header>
 </th:block>
 
