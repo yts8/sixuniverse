@@ -53,6 +53,10 @@
   grid-auto-rows: minmax(30px, auto);
 }
 
+.guest-reservation__nothing {
+  width: 1200px;
+}
+
 .guest-reservation__room-info-table {
   width: 100%;
   min-height: 300px;

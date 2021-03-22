@@ -1,11 +1,8 @@
 package com.yts8.sixuniverse.api.reservation;
 
-import com.amazonaws.services.ec2.model.ResetSnapshotAttributeRequest;
-import com.yts8.sixuniverse.member.dto.MemberDto;
-import com.yts8.sixuniverse.payment.dto.PaymentDto;
-import com.yts8.sixuniverse.payment.repository.PaymentMapper;
 import com.yts8.sixuniverse.payment.service.PaymentService;
 import com.yts8.sixuniverse.reservation.dto.ReservationDto;
+import com.yts8.sixuniverse.reservation.dto.ReservationRoomDto;
 import com.yts8.sixuniverse.reservation.service.ReservationService;
 import com.yts8.sixuniverse.reservationDate.service.ReservationDateService;
 import com.yts8.sixuniverse.room.dto.RoomDto;
@@ -14,12 +11,10 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
-import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -70,16 +65,16 @@ public class ReservationApiController {
     reservationDateService.guestReservationDateDelete(reservationId);
   }
 
-  @GetMapping("/update/info{reservationId}")
-  public ReservationDto listUpdateInfo(@PathVariable Long reservationId) {
+  @GetMapping("/update/info/{reservationId}")
+  public List<ReservationRoomDto> listUpdateInfo(@PathVariable Long reservationId) {
 
-    return reservationService.findByUpdateTarget(reservationId);
+    return reservationService.findByUpdateReservationId(reservationId);
   }
 
   @GetMapping("/cancel/info/{reservationId}")
-  public ReservationDto listCancelInfo(@PathVariable Long reservationId) {
+  public ReservationRoomDto listCancelInfo(@PathVariable Long reservationId) {
 
-    return reservationService.findById(reservationId);
+    return reservationService.findByCancelReservationId(reservationId);
   }
 
   @PostMapping("/before")
