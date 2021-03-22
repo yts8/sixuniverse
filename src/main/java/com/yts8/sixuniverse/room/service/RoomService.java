@@ -31,6 +31,10 @@ public interface RoomService {
 
   void updateStatus(RoomDto roomDto);
 
+  void updateRenew(RoomDto roomDto);
+
+  void updateExpiry(LocalDateTime renewDate);
+
   void remove(Long roomId);
 
 }

@@ -79,6 +79,16 @@ public class RoomServiceImpl implements RoomService {
   }
 
   @Override
+  public void updateRenew(RoomDto roomDto) {
+    roomMapper.updateRenew(roomDto);
+  }
+
+  @Override
+  public void updateExpiry(LocalDateTime renewDate) {
+    roomMapper.updateExpiry(renewDate);
+  }
+
+  @Override
   public void remove(Long roomId) {
     roomMapper.remove(roomId);
     roomFacilityService.removeByRoomId(roomId);

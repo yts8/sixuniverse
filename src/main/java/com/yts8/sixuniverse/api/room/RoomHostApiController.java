@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/host/room")
@@ -24,7 +26,28 @@ public class RoomHostApiController {
       roomDto.setStatus("remove");
       roomService.updateStatus(roomDto);
     }
+  }
 
-    // TODO: 유효성 검사 및 운영 중지 복구.. 리업뎃
+  @PostMapping("{roomId}/update/stop")
+  public void postRoomUpdateStop(@PathVariable Long roomId) {
+    RoomDto roomDto = roomService.findById(roomId);
+    if (roomDto.getStatus().equals("register")) {
+      roomDto.setStatus("stop");
+      roomService.updateStatus(roomDto);
+    }
+  }
+
+  @PostMapping("{roomId}/update/clear")
+  public void postRoomUpdateClear(@PathVariable Long roomId) {
+    RoomDto roomDto = roomService.findById(roomId);
+    roomDto.setStatus("register");
+    roomService.updateStatus(roomDto);
+  }
+
+  @PostMapping("{roomId}/update/renew")
+  public void postRoomUpdateRenew(@PathVariable Long roomId) {
+    RoomDto roomDto = roomService.findById(roomId);
+    roomDto.setRenewDate(LocalDateTime.now());
+    roomService.updateRenew(roomDto);
   }
 }

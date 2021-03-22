@@ -104,26 +104,29 @@
               </a>
 
               <button th:if='${#strings.equals(roomDtos.get(index).getStatus(), "stop")}'
-                      th:data-id="${roomDtos.get(index).getRoomId()}"
-                      class="host-room-list__btn">
+                      class="host-room-list__btn room-clear-btn-js"
+                      th:data-id="${roomDtos.get(index).getRoomId()}">
                 중지 해제
               </button>
 
-              <button th:if='${#strings.equals(roomDtos.get(index).getStatus(), "renew")}'
-                      th:data-id="${roomDtos.get(index).getRoomId()}"
-                      class="host-room-list__btn">
+              <button th:if='${#strings.equals(roomDtos.get(index).getStatus(), "expiry")}'
+                      class="host-room-list__btn room-renew-btn-js"
+                      th:data-id="${roomDtos.get(index).getRoomId()}">
                 재 등록
               </button>
+
               <span th:if='${#strings.equals(roomDtos.get(index).getStatus(), "remove")}'>
-              삭제 됨
-            </span>
+                삭제 됨
+              </span>
+
             </div>
           </td>
           <td>
             <div>
               <button th:if='${#strings.equals(roomDtos.get(index).getStatus(), "register")}'
-                      th:data-id="${roomDtos.get(index).getRoomId()}"
-                      class="host-room-list__btn">운영 중지
+                      class="host-room-list__btn room-stop-btn-js"
+                      th:data-id="${roomDtos.get(index).getRoomId()}">
+                운영 중지
               </button>
             </div>
           </td>

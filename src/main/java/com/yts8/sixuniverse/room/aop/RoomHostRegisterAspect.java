@@ -1,6 +1,6 @@
 package com.yts8.sixuniverse.room.aop;
 
-import com.yts8.sixuniverse.api.room.RoomHostApiController;
+import com.yts8.sixuniverse.api.room.RoomHostRegisterApiController;
 import com.yts8.sixuniverse.member.dto.MemberDto;
 import com.yts8.sixuniverse.room.dto.RoomDto;
 import com.yts8.sixuniverse.room.service.RoomService;
@@ -52,13 +52,12 @@ public class RoomHostRegisterAspect {
   public Object postUserCheck(ProceedingJoinPoint joinPoint) throws Throwable {
 
     RoomDto room = (RoomDto) joinPoint.getArgs()[0];
-    System.out.println(joinPoint.getTarget());
 
     MemberDto member = (MemberDto) httpSession.getAttribute("member");
     RoomDto roomDto = roomService.findById(room.getRoomId());
 
     if (roomDto == null || !roomDto.getMemberId().equals(member.getMemberId())) {
-      if (joinPoint.getTarget() instanceof RoomHostApiController) {
+      if (joinPoint.getTarget() instanceof RoomHostRegisterApiController) {
         return null;
       }
       return "redirect:/";
