@@ -29,4 +29,10 @@
     order by room_img_id limit 1
   </select>
 
+  <delete id="removeByRoomId">
+    delete
+    from room_img
+    where room_id = #{roomId}
+  </delete>
+
 </mapper>

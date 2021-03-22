@@ -15,4 +15,6 @@ public interface RoomImageMapper {
 
   RoomImageDto findOneByRoomId(Long roomId);
 
+  void removeByRoomId(Long roomId);
+
 }

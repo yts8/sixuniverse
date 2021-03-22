@@ -8,6 +8,10 @@
   <link rel="stylesheet" th:href="@{/css/room/host/list.css}"/>
 </th:block>
 
+<th:block layout:fragment="js">
+  <script defer th:src="@{/js/room/host/list.js}"></script>
+</th:block>
+
 <th:block layout:fragment="content">
   <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
 
@@ -54,7 +58,8 @@
         <tr th:each="index : ${#numbers.sequence(0, roomDtos.size() - 1)}" class="host-room-list__table-content">
           <td>
             <div>
-              <button class="host-room-list__btn room-delete-btn-js"
+              <button th:unless='${#strings.equals(roomDtos.get(index).getStatus(), "remove")}'
+                      class="host-room-list__btn room-delete-btn-js"
                       th:data-id="${roomDtos.get(index).getRoomId()}">
                 <i class="fas fa-times"></i>
               </button>

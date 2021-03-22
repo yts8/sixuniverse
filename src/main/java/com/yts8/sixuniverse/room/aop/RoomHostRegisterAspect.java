@@ -1,5 +1,6 @@
 package com.yts8.sixuniverse.room.aop;
 
+import com.yts8.sixuniverse.api.room.RoomHostApiController;
 import com.yts8.sixuniverse.member.dto.MemberDto;
 import com.yts8.sixuniverse.room.dto.RoomDto;
 import com.yts8.sixuniverse.room.service.RoomService;
@@ -24,13 +25,12 @@ public class RoomHostRegisterAspect {
   private final RoomService roomService;
   private final RoomImageService roomImageService;
   private final RoomFacilityService roomFacilityService;
-
   private final HttpSession httpSession;
 
   @Around("" +
       "execution(* com.yts8.sixuniverse.room.controller.RoomHostRegisterController.get*(..)) && " +
       "!execution(* com.yts8.sixuniverse.room.controller.RoomHostRegisterController.getAddressRegister(..))")
-  public Object getCheckUser(ProceedingJoinPoint joinPoint) throws Throwable {
+  public Object getUserCheck(ProceedingJoinPoint joinPoint) throws Throwable {
 
     Long roomId = (Long) joinPoint.getArgs()[1];
 
@@ -46,17 +46,21 @@ public class RoomHostRegisterAspect {
 
   @Around("(" +
       "execution(* com.yts8.sixuniverse.room.controller.RoomHostRegisterController.post*(..)) ||" +
-      "execution(* com.yts8.sixuniverse.api.room.RoomHostRegisterApiController.postImages(..))" +
+      "execution(* com.yts8.sixuniverse.api.room.RoomHostRegisterApiController.post*(..))" +
       ") &&" +
       "!execution(* com.yts8.sixuniverse.room.controller.RoomHostRegisterController.postAddress(..))")
-  public Object postCheckUser(ProceedingJoinPoint joinPoint) throws Throwable {
+  public Object postUserCheck(ProceedingJoinPoint joinPoint) throws Throwable {
 
     RoomDto room = (RoomDto) joinPoint.getArgs()[0];
+    System.out.println(joinPoint.getTarget());
 
     MemberDto member = (MemberDto) httpSession.getAttribute("member");
     RoomDto roomDto = roomService.findById(room.getRoomId());
 
     if (roomDto == null || !roomDto.getMemberId().equals(member.getMemberId())) {
+      if (joinPoint.getTarget() instanceof RoomHostApiController) {
+        return null;
+      }
       return "redirect:/";
     }
 

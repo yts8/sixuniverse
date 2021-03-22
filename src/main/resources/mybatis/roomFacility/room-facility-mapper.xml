@@ -24,4 +24,10 @@
       and category_name = #{categoryName}
   </select>
 
+  <delete id="removeByRoomId">
+    delete
+    from room_facility
+    where room_id = #{roomId}
+  </delete>
+
 </mapper>

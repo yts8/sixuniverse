@@ -30,4 +30,7 @@ public interface RoomService {
   void updatePrice(RoomDto roomDto);
 
   void updateStatus(RoomDto roomDto);
+
+  void remove(Long roomId);
+
 }

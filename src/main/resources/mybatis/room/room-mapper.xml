@@ -84,4 +84,10 @@
     where room_id = #{roomId}
   </update>
 
+  <delete id="remove">
+    delete
+    from room
+    where room_id = #{roomId}
+  </delete>
+
 </mapper>

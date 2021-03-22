@@ -39,17 +39,21 @@
       e.target.dataset.roomImgId = json.roomImgId;
 
       if (!roomImgId) {
-        const nextLabelEl = document.createElement("label");
-        nextLabelEl.classList.add("room__images-wrap");
-        nextLabelEl.classList.add("room-image-label-js");
-        nextLabelEl.innerHTML = '<input type="file"/>' +
-          '                   <img/>' +
-          '                   <span>' +
-          '                     <i class="fas fa-plus"></i>' +
-          '                   </span>';
-        roomImagesContainerEl.append(nextLabelEl);
-        const fileInputEl = nextLabelEl.querySelector('input[type="file"]')
-        fileInputEl.addEventListener("change", (e) => handleFileChange(e, nextLabelEl));
+        if (json.roomImg != null) {
+          const nextLabelEl = document.createElement("label");
+          nextLabelEl.classList.add("room__images-wrap");
+          nextLabelEl.classList.add("room-image-label-js");
+          nextLabelEl.innerHTML = '<input type="file"/>' +
+            '                   <img/>' +
+            '                   <span>' +
+            '                     <i class="fas fa-plus"></i>' +
+            '                   </span>';
+          roomImagesContainerEl.append(nextLabelEl);
+          const fileInputEl = nextLabelEl.querySelector('input[type="file"]')
+          fileInputEl.addEventListener("change", (e) => handleFileChange(e, nextLabelEl));
+        } else {
+          alert("잘못된 요청입니다.")
+        }
       }
     } catch (error) {
       alert("잘못된 요청입니다.");

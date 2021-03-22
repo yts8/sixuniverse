@@ -32,4 +32,6 @@ public interface RoomMapper {
   void updatePrice(RoomDto roomDto);
 
   void updateStatus(RoomDto roomDto);
+
+  void remove(Long roomId);
 }
