@@ -74,19 +74,26 @@
             </tr>
           </table>
         </a>
+
       </div>
+
+      <div class="guest-reservation__room-info" th:unless="${reservationList.size()} != 0">
+        <img th:src="@{/images/reservation/nothing.png}" class="guest-reservation__nothing">
+      </div>
+
 
       <!-- 취소 / 변경 예약 정보 -->
       <div class="guest-reservation__cancel-update-box"
            th:unless="${status.equals('upcoming') || status.equals('complete')}">
-        <div th:each="reservation, i : ${reservationList}" th:if="${reservationList.size()} != 0" class="guest-reservation__cancel-update">
+        <div th:each="reservation, i : ${reservationList}" th:if="${reservationList.size()} != 0"
+             class="guest-reservation__cancel-update">
           <input type="hidden" class="guest-reservation__id" th:value="${reservation.reservationId}">
           <table class="guest-reservation__cancel-update-table">
             <input type="hidden" class="guest-reservation__status" th:value="${status}">
             <tr>
               <td rowspan="2">
                 <div>
-                  <img th:src="@{/images/reservation/sample.jpg}">
+                  <img th:src="${roomImageList.get(i.index).get(0).roomImg}">
                 </div>
               </td>
               <td>
@@ -121,10 +128,11 @@
 
           <div class="guest-reservation__modal-detail-content">
             <div class="guest-reservation__reservation-status">
-              <div>주소</div>
-              <div>예약날짜</div>
+              <div class="guest-reservation__modal-address">주소</div>
+              <div class="guest-reservation__modal-date">예약날짜</div>
               <div th:if="${status.equals('cancel')}" class="guest-reservation__reservation-status-title">예약 취소 완료</div>
-              <div th:unless="${status.equals('cancel')}" class="guest-reservation__reservation-status-title">변경 요청 예약</div>
+              <div th:unless="${status.equals('cancel')}" class="guest-reservation__reservation-status-title">변경 요청 예약
+              </div>
             </div>
 
             <div>
@@ -132,11 +140,11 @@
                 <img th:src="@{/images/reservation/sample.jpg}">
               </div>
               <div class="guest-reservation__modal-room-info">
-                <div class="guest-reservation__modal-subtitle">숙소 이름</div>
+                <div class="guest-reservation__modal-subtitle" id="room-name">숙소 이름</div>
               </div>
               <div class="guest-reservation__modal-room-info">
                 <div>간략 정보</div>
-                <div>호스트 : 누구 님</div>
+                <div>호스트 : <span class="guest-reservation__modal-host-name"></span> 님</div>
                 <div>게스트 : <span class="guest-reservation__modal-guest"></span> 명</div>
               </div>
 
@@ -145,9 +153,37 @@
                 <div>환불 금액</div>
               </div>
 
+              <div th:unless="${status.equals('cancel')}" class="guest-reservation__modal-room-info">
+                <div class="guest-reservation__modal-subtitle">변경 정보</div>
+                <div class="guest-reservation__modal-before-after">
+                  <div class="guest-reservation__modal-before-after-content">
+                    <div class="guest-reservation__modal-subject">변경 전</div>
+                    <div class="guest-reservation__modal-before-check-in-out"></div>
+                    <div class="guest-reservation__modal-before-guest">
+                      <div>성인 : <span class="guest-reservation__modal-before-adult"></span> 명</div>
+                      <div>아동 : <span class="guest-reservation__modal-before-kid"></span> 명</div>
+                      <div>유아 : <span class="guest-reservation__modal-before-infant"></span> 명</div>
+                      <div>총 인원 : <span class="guest-reservation__modal-before-total"></span></div>
+                    </div>
+                  </div>
+
+                  <div class="guest-reservation__modal-before-after-content">
+                    <div class="guest-reservation__modal-subject">변경 후</div>
+                    <div class="guest-reservation__modal-after-check-in-out"></div>
+                    <div class="guest-reservation__modal-after-guest">
+                      <div>성인 : <span class="guest-reservation__modal-after-adult"></span> 명</div>
+                      <div>아동 : <span class="guest-reservation__modal-after-kid"></span> 명</div>
+                      <div>유아 : <span class="guest-reservation__modal-after-infant"></span> 명</div>
+                      <div>총 인원 : <span class="guest-reservation__modal-after-total"></span></div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
               <div class="guest-reservation__modal-room-info">
                 <div class="guest-reservation__modal-subtitle">결제 세부 정보</div>
-                <div>총 비용</div>
+                <div class="guest-reservation__modal-price">총 비용</div>
               </div>
 
               <div class="guest-reservation__modal-room-info">
@@ -155,21 +191,15 @@
               </div>
 
 
-
-
             </div>
 
           </div>
-
 
 
         </div>
       </div>
 
     </div>
-
-
-    <div class="guest-reservation__room-info" th:unless="${reservationList.size()} != 0"> 없슈ㅠ</div>
 
 
   </div>

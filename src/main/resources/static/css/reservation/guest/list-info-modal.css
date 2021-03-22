@@ -133,3 +133,27 @@
   font-weight: bold;
   margin: 30px 0 40px 0;
 }
+
+.guest-reservation__modal-subject {
+  font-size: 17px;
+  font-weight: bold;
+  color: #888888;
+}
+
+.guest-reservation__modal-before-after {
+  display: flex;
+  justify-content: space-between;
+}
+
+.guest-reservation__modal-before-after > div {
+  width: 100%;
+  padding: 10px;
+}
+
+.guest-reservation__modal-before-after > div:nth-of-type(1) {
+  border-right: 1px solid #c3c3c3;
+}
+
+.guest-reservation__modal-before-after-content div {
+  margin-bottom: 10px;
+}

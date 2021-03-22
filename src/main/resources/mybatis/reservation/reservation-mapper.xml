@@ -47,10 +47,46 @@
     where reservation_id = #{reservationId}
   </update>
 
-  <select id="findByUpdateTarget" resultType="ReservationDto">
-    select *
+  <select id="findByUpdateReservationId" resultType="ReservationRoomDto">
+    select reservation.reservation_id,
+           reservation.room_id,
+           reservation.status,
+           adult,
+           kid,
+           infant,
+           check_in,
+           check_out,
+           room.address,
+           room.sub_address,
+           title,
+           m.username,
+           p.price
     from reservation
-    where update_target = #{reservationId}
+           join room on reservation.room_id = room.room_id
+           join member m on room.member_id = m.member_id
+           left outer join payment p on reservation.reservation_id = p.reservation_id
+    where reservation.update_target = #{reservationId} or reservation.reservation_id = #{reservationId};
+  </select>
+
+  <select id="findByCancelReservationId" resultType="ReservationRoomDto">
+    select reservation.reservation_id,
+           reservation.room_id,
+           reservation.status,
+           adult,
+           kid,
+           infant,
+           check_in,
+           check_out,
+           room.address,
+           room.sub_address,
+           title,
+           m.username,
+           p.price
+    from reservation
+           join room on reservation.room_id = room.room_id
+           join member m on room.member_id = m.member_id
+           join payment p on reservation.reservation_id = p.reservation_id
+    where reservation.reservation_id = #{reservationId}
   </select>
 
 </mapper>

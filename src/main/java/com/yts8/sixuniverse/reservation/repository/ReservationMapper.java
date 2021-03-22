@@ -1,6 +1,7 @@
 package com.yts8.sixuniverse.reservation.repository;
 
 import com.yts8.sixuniverse.reservation.dto.ReservationDto;
+import com.yts8.sixuniverse.reservation.dto.ReservationRoomDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.time.LocalDate;
@@ -22,5 +23,7 @@ public interface ReservationMapper {
 
   void guestReservationCancel(ReservationDto reservationDto);
 
-  ReservationDto findByUpdateTarget(Long reservationId);
+  List<ReservationRoomDto> findByUpdateReservationId(Long reservationId);
+
+  ReservationRoomDto findByCancelReservationId(Long reservationId);
 }
