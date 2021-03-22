@@ -33,14 +33,7 @@
         <div class="performance__statistics-container">
           <div class="performance__super-subject">슈퍼호스트 통계</div>
           <div class="performance__super-date">
-            <!--            시간 -->
-            <!--            <select class="performance__date">-->
-            <!--              <option value="">기간 선택</option>-->
-            <!--              <option value="2022년 3월">2022년 3월</option>-->
-            <!--              <option value="2022년 1월">2022년 2월</option>-->
-            <!--              <option value="2022년 1월">2022년 1월</option>-->
-            <!--            </select>-->
-            <div class="performance__super-date-detail">sixuniverse는 1개월마다 평가를 실시하여 호스트가 지난 한달 동안 슈퍼호스트 기준을 만족했는지 확인합니다.
+            <div class="performance__super-date-detail">SIXUNIVERSE는 호스트가 지난 한달 동안 누적된 데이터를 바탕으로 슈퍼호스트 기준을 만족했는지 확인합니다.
               조건을 충족하시면 슈퍼호스트가 됩니다.
             </div>
           </div>
@@ -59,35 +52,35 @@
               </div>
             </div>
             <div class="performance__super-result2">
-              <div class="performance__result-sub1">-%</div>
-              <div class="performance__result-sub2">응답률</div>
-              <div class="performance__result-sub3">기준 : 90 %</div>
+              <div class="performance__result-sub1"><span th:text="${roomCount}"></span>개</div>
+              <div class="performance__result-sub2">운영중인 숙소</div>
+              <div class="performance__result-sub3">기준 : 3개</div>
               <div class="performance__result-sub4">
-                <span th:if="${reviewScore} >= '4.8'"> <div><img th:src="@{/images/performance/check.png}"
+                <span th:if="${roomCount} >= '3'"> <div><img th:src="@{/images/performance/check.png}"
                                                                  class="performance__img">대단해요!</div></span>
-                <span th:unless="${reviewScore} >= '4.8'"><div><img th:src="@{/images/performance/not-check.png}"
+                <span th:unless="${roomCount} >= '3'"><div><img th:src="@{/images/performance/not-check.png}"
                                                                     class="performance__img">아쉽네요</div></span>
               </div>
             </div>
             <div class="performance__super-result3">
-              <div class="performance__result-sub1">-만원</div>
+              <div class="performance__result-sub1"><span th:text="${monthlyIncome}"></span>만원</div>
               <div class="performance__result-sub2">월 매출</div>
               <div class="performance__result-sub3">기준 : 190만 원</div>
               <div class="performance__result-sub4">
-                <span th:if="${reviewScore} >= '4.8'"> <div><img th:src="@{/images/performance/check.png}"
+                <span th:if="${monthlyIncome} >= '1900000'"> <div><img th:src="@{/images/performance/check.png}"
                                                                  class="performance__img">대단해요!</div></span>
-                <span th:unless="${reviewScore} >= '4.8'"><div><img th:src="@{/images/performance/not-check.png}"
+                <span th:unless="${monthlyIncome} >= '1900000'"><div><img th:src="@{/images/performance/not-check.png}"
                                                                     class="performance__img">아쉽네요</div></span>
               </div>
             </div>
             <div class="performance__super-result4">
-              <div class="performance__result-sub1">0.0%</div>
+              <div class="performance__result-sub1"><span th:text="${cancelRatio}"></span>%</div>
               <div class="performance__result-sub2">예약 취소율</div>
               <div class="performance__result-sub3">기준 : 1.0% 미만</div>
               <div class="performance__result-sub4">
-                <span th:if="${reviewScore} >= '4.8'"> <div><img th:src="@{/images/performance/check.png}"
+                <span th:if="${cancelRatio} < '1.0'"> <div><img th:src="@{/images/performance/check.png}"
                                                                  class="performance__img">대단해요!</div></span>
-                <span th:unless="${reviewScore} >= '4.8'"><div><img th:src="@{/images/performance/not-check.png}"
+                <span th:unless="${cancelRatio} < '1.0'"><div><img th:src="@{/images/performance/not-check.png}"
                                                                     class="performance__img">아쉽네요</div></span>
               </div>
             </div>

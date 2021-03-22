@@ -12,4 +12,6 @@ public interface RoomFacilityMapper {
   List<String> findByRoomIdAndCategoryName(RoomFacilityDto roomFacilityDto);
 
   void removeByRoomIdAndCategoryName(RoomFacilityDto roomFacilityDto);
+
+  void removeByRoomId(Long roomId);
 }

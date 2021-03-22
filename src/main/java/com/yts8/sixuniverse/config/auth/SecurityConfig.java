@@ -44,6 +44,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/login/**",
             "/api/login/**",
             "/join",
+            "/api/reservation/before",
+            "/api/reservation/guest/update/today",
             "/member/setting/password/reset",
             "/room/detail/**").permitAll()
         .antMatchers("/member/**", "/api/member/**").hasAnyRole("GUEST", "HOST", "ADMIN")

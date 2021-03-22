@@ -5,13 +5,15 @@
   <insert id="reservationInsert" parameterType="ReservationDateDto" useGeneratedKeys="true" keyProperty="reservationId">
     insert into reservation
     values (null, #{roomId}, #{memberId}, #{status}, #{adult}, #{kid}, #{infant}, #{checkIn}, #{checkOut},
-            #{createDate}, #{cancelDate})
+            #{createDate}, #{cancelDate}, #{updateTarget})
   </insert>
 
   <select id="reservationList" parameterType="ReservationDateDto" resultType="ReservationDto">
     select *
     from reservation
-    where member_id = #{memberId} and status = #{status} and update_target is null
+    where member_id = #{memberId}
+      and status = #{status}
+      and update_target is null
     order by check_in
   </select>
 
@@ -40,8 +42,51 @@
 
   <update id="guestReservationCancel">
     update reservation
-    set cancel_date = #{cancelDate}, status = #{status}
+    set cancel_date = #{cancelDate},
+        status      = #{status}
     where reservation_id = #{reservationId}
   </update>
+
+  <select id="findByUpdateReservationId" resultType="ReservationRoomDto">
+    select reservation.reservation_id,
+           reservation.room_id,
+           reservation.status,
+           adult,
+           kid,
+           infant,
+           check_in,
+           check_out,
+           room.address,
+           room.sub_address,
+           title,
+           m.username,
+           p.price
+    from reservation
+           join room on reservation.room_id = room.room_id
+           join member m on room.member_id = m.member_id
+           left outer join payment p on reservation.reservation_id = p.reservation_id
+    where reservation.update_target = #{reservationId} or reservation.reservation_id = #{reservationId};
+  </select>
+
+  <select id="findByCancelReservationId" resultType="ReservationRoomDto">
+    select reservation.reservation_id,
+           reservation.room_id,
+           reservation.status,
+           adult,
+           kid,
+           infant,
+           check_in,
+           check_out,
+           room.address,
+           room.sub_address,
+           title,
+           m.username,
+           p.price
+    from reservation
+           join room on reservation.room_id = room.room_id
+           join member m on room.member_id = m.member_id
+           join payment p on reservation.reservation_id = p.reservation_id
+    where reservation.reservation_id = #{reservationId}
+  </select>
 
 </mapper>

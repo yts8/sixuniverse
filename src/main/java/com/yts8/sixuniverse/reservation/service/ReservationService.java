@@ -1,6 +1,7 @@
 package com.yts8.sixuniverse.reservation.service;
 
 import com.yts8.sixuniverse.reservation.dto.ReservationDto;
+import com.yts8.sixuniverse.reservation.dto.ReservationRoomDto;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,4 +21,8 @@ public interface ReservationService {
   void guestReservationUpdateInsert(ReservationDto reservationDto);
 
   void guestReservationCancel(ReservationDto reservationDto);
+
+  List<ReservationRoomDto> findByUpdateReservationId(Long reservationId);
+
+  ReservationRoomDto findByCancelReservationId(Long reservationId);
 }

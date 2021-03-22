@@ -11,7 +11,7 @@
   <!-- Common CSS -->
   <link rel="stylesheet" th:href="@{/css/reset.css}"/>
   <link rel="stylesheet" th:href="@{/css/variables.css}"/>
-  <th:block th:replace="partials/header :: headerCss"/>
+  <th:block th:replace="partials/guest-header :: guestHeaderCss"/>
   <th:block th:replace="partials/footer :: footerCss"/>
   <th:block layout:fragment="css"/>
 
@@ -24,7 +24,7 @@
 </head>
 <body>
 <!-- Header -->
-<th:block th:replace="partials/header :: header"/>
+<th:block th:replace="partials/guest-header :: guestHeader"/>
 
 <!-- 각 페이지가 구현 해야할 부분 -->
 <th:block layout:fragment="content"/>

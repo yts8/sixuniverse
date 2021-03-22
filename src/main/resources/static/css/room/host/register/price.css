@@ -1,0 +1,55 @@
+.room__container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.room__register-container {
+    height: 100%;
+    padding: 50px;
+}
+
+.room__guide {
+    font-weight: bold;
+    margin-top: 50px;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.room__guide-sub {
+    margin-bottom: 10px;
+    font-size: 17px;
+    color: #787878;
+}
+
+.room__subject {
+    width: 500px;
+    height: 40px;
+    padding: 5px;
+}
+
+.room__introduce {
+    width: 500px;
+    height: 200px;
+    padding: 5px;
+}
+
+.room__price {
+    width: 300px;
+    height: 100%;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+
+.room__register-btn {
+    padding: 15px 30px;
+    size: 17px;
+    color: white;
+    font-weight: bold;
+    background-color: #56a5ac;
+    border-radius: 8px;
+    border: none;
+    margin-top: 40px;
+}

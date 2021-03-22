@@ -13,4 +13,8 @@ public interface RoomImageMapper {
 
   List<RoomImageDto> findByRoomId(Long roomId);
 
+  RoomImageDto findOneByRoomId(Long roomId);
+
+  void removeByRoomId(Long roomId);
+
 }

@@ -1,5 +1,6 @@
 package com.yts8.sixuniverse.reservation.dto;
 
+import com.yts8.sixuniverse.payment.dto.PaymentDto;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -24,4 +25,5 @@ public class ReservationDto {
 
   private LocalDateTime createDate;
   private LocalDateTime cancelDate;
+  private Long updateTarget;
 }

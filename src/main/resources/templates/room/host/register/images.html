@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/room/host/register/images.css}"/>
+</th:block>
+
+<th:block layout:fragment="js">
+  <script defer th:src="@{/js/room/host/register/images.js}"></script>
+</th:block>
+
+<th:block layout:fragment="content">
+
+  <div class="room__container">
+    <div class="room__register-container">
+
+      <div class="room__guide">멋진 사진으로 숙소가 돋보이게 해주세요.</div>
+      <div class="room__guide-sub">
+        휴대전화나 카메라를 사용하여 사진을 찍으세요.
+        숙소를 등록하려면 5장 이상의 사진을 업로드하세요.
+        언제든 사진을 추가하거나 수정하실 수 있습니다.
+      </div>
+
+      <div class="room__images-container room-images-container-js">
+        <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
+        <input type="hidden" id="room-id" th:value="${roomId}"/>
+
+        <label th:each="roomImage : ${roomImages}" class="room__images-wrap room-image-label-js">
+          <input type="file" th:data-room-img-id="${roomImage.roomImgId}"/>
+          <img th:src="${roomImage.roomImg}"/>
+          <span>
+            <i class="fas fa-plus"></i>
+          </span>
+        </label>
+
+        <label class="room__images-wrap room-image-label-js">
+          <input type="file"/>
+          <img/>
+          <span>
+            <i class="fas fa-plus"></i>
+          </span>
+        </label>
+      </div>
+      <a th:href="@{|/host/room/register/info/${roomId}|}" class="room__register-btn">계속</a>
+    </div>
+  </div>
+</th:block>
+</html>

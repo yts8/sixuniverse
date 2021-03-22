@@ -120,7 +120,7 @@
 
                   }
 
-                },
+                }
 
               });
 
@@ -128,17 +128,15 @@
 
 
 
-
           }
+        },
+        error: function () {
+          console.log('ajax 실패');
         }
 
       })
 
-
-
-
     });
-
 
 
     $('.reservation__delete-date').click(function () {
@@ -158,6 +156,33 @@
     $('.reservation__save-date').click(function () {
       if ($('#check-in').val() != '' && $('#check-out').val() != '') {
 
+        const header = "X-CSRF-TOKEN";
+        const csrf = document.querySelector("#csrf").value;
+
+        const data = {
+          checkIn: $('#check-in').val(),
+          checkOut: $('#check-out').val(),
+          roomId: $('#room-id').val()
+        };
+        const json = JSON.stringify(data);
+
+        console.log(data);
+
+        $.ajax({
+          url: "/api/reservation/before",
+          data: json,
+          type: 'post',
+          contentType: 'application/json; charset=utf-8',
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, csrf);
+          },
+          success: function (result) {
+              $('#total-price').html(result);
+              $('#commission').html(result * 0.1);
+              $('.reservation__total2').html(result + (result * 0.1));
+          }
+        });
+
         $('.reservation__date').html($('#check-in').val() + ' ~ ' + $('#check-out').val());
         $('.reservation__check-in').val($('#check-in').val());
         $('.reservation__check-in').html($('#check-in').val());
@@ -166,6 +191,8 @@
         $('.reservation__date').val(arrayDays);
 
         $('#date-modal').hide();
+
+
       }
     });
 

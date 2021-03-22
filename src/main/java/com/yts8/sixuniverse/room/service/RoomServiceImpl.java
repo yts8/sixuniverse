@@ -2,11 +2,14 @@ package com.yts8.sixuniverse.room.service;
 
 import com.yts8.sixuniverse.room.dto.RoomDto;
 import com.yts8.sixuniverse.room.repository.RoomMapper;
+import com.yts8.sixuniverse.roomFacility.service.RoomFacilityService;
+import com.yts8.sixuniverse.roomImage.service.RoomImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -14,10 +17,17 @@ import java.time.LocalDateTime;
 public class RoomServiceImpl implements RoomService {
 
   private final RoomMapper roomMapper;
+  private final RoomFacilityService roomFacilityService;
+  private final RoomImageService roomImageService;
 
   @Override
   public RoomDto findById(Long roomId) {
     return roomMapper.findById(roomId);
+  }
+
+  @Override
+  public List<RoomDto> findByMemberId(Long memberId) {
+    return roomMapper.findByMemberId(memberId);
   }
 
   @Override
@@ -66,5 +76,22 @@ public class RoomServiceImpl implements RoomService {
 
   public void updateStatus(RoomDto roomDto) {
     roomMapper.updateStatus(roomDto);
+  }
+
+  @Override
+  public void updateRenew(RoomDto roomDto) {
+    roomMapper.updateRenew(roomDto);
+  }
+
+  @Override
+  public void updateExpiry(LocalDateTime renewDate) {
+    roomMapper.updateExpiry(renewDate);
+  }
+
+  @Override
+  public void remove(Long roomId) {
+    roomMapper.remove(roomId);
+    roomFacilityService.removeByRoomId(roomId);
+    roomImageService.removeByRoomId(roomId);
   }
 }

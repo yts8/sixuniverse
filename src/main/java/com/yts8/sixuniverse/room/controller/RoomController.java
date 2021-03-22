@@ -1,6 +1,7 @@
 package com.yts8.sixuniverse.room.controller;
 
 import com.yts8.sixuniverse.member.dto.MemberDto;
+import com.yts8.sixuniverse.reservationDate.service.ReservationDateService;
 import com.yts8.sixuniverse.room.dto.RoomDto;
 import com.yts8.sixuniverse.room.service.RoomService;
 import com.yts8.sixuniverse.roomImage.service.RoomImageService;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -20,6 +24,7 @@ import javax.servlet.http.HttpSession;
 public class RoomController {
   private final RoomService roomService;
   private final RoomImageService roomImageService;
+  private final ReservationDateService reservationDateService;
 
   @GetMapping("/detail/{roomId}")
   public String detail(HttpSession session, HttpServletRequest request, Model model, @PathVariable Long roomId) {
@@ -28,6 +33,10 @@ public class RoomController {
     MemberDto member = (MemberDto) session.getAttribute("member");
     RoomDto roomDto = roomService.findById(roomId);
     model.addAttribute("room", roomDto);
+
+    List<LocalDate> reservationDateList = reservationDateService.reservationDateList(roomId);
+    Collections.sort(reservationDateList);
+    model.addAttribute("reservationDateList", reservationDateList);
 
 //    model.addAttribute("hostId", getHostId());
 

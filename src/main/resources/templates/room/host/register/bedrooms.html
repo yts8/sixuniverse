@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/room/host/register/bedrooms.css}"/>
+</th:block>
+
+<th:block layout:fragment="js">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script defer th:src="@{/js/room/host/register/room-register.js}"></script>
+  <script defer th:src="@{/js/room/host/register/bedrooms.js}"></script>
+</th:block>
+
+<th:block layout:fragment="content">
+
+  <div class="room__container">
+
+    <div class="room__register-container">
+
+      <form th:action="@{/host/room/register/bedrooms/update}" method="post">
+        <input type="hidden" name="roomId" th:value="${roomDto.getRoomId()}"/>
+
+        <div class="room__guide">얼마나 많은 인원이 숙박할 수 있나요?</div>
+        <div class="room__guide-sub">모든 게스트가 편안하게 숙박할 수 있도록 침대가 충분히 구비되어 있는지 확인하세요.</div>
+
+        <div class="room__number-container">
+          <div class="room__number-detail">최대 숙박인원</div>
+          <div class="room__number">
+            <button type="button" class="room__decrease" id="people-minus"><i class="fas fa-minus"></i></button>
+            <input type="text" name="maxPeople" th:value="${roomDto.getMaxPeople()}" id="max-people" readonly>
+            <button type="button" class="room__increase" id="people-plus"><i class="fas fa-plus"></i></button>
+          </div>
+        </div>
+
+        <div class="room__number-container">
+          <div class="room__number-detail">침실</div>
+          <div class="room__number">
+            <button type="button" class="room__decrease" id="bedRoom-minus"><i class="fas fa-minus"></i></button>
+            <input type="text" name="bedroomCount" th:value="${roomDto.getBedroomCount()}" id="bedroom-count" readonly>
+            <button type="button" class="room__increase" id="bedRoom-plus"><i class="fas fa-plus"></i></button>
+          </div>
+        </div>
+
+        <div class="room__number-container">
+          <div class="room__number-detail">침대</div>
+          <div class="room__number">
+            <button type="button" class="room__decrease" id="bed-minus"><i class="fas fa-minus"></i></button>
+            <input type="text" name="bedCount" th:value="${roomDto.getBedCount()}" id="bed-count" readonly>
+            <button type="button" class="room__increase" id="bed-plus"><i class="fas fa-plus"></i></button>
+          </div>
+        </div>
+
+        <div class="room__number-container">
+          <div class="room__number-detail">욕실</div>
+          <div class="room__number">
+            <button type="button" class="room__decrease" id="bath-minus"><i class="fas fa-minus"></i></button>
+            <input type="text" name="bathCount" th:value="${roomDto.getBathCount()}" id="bath-count" readonly>
+            <button type="button" class="room__increase" id="bath-plus"><i class="fas fa-plus"></i></button>
+          </div>
+        </div>
+
+        <button type="submit" id="submit" class="room__register-btn">계속</button>
+      </form>
+    </div>
+  </div>
+</th:block>
+</html>

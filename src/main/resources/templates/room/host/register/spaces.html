@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/room/host/register/amenities.css}"/>
+</th:block>
+
+<th:block layout:fragment="js">
+  <script defer th:src="@{/js/room/host/register/facility.js}"></script>
+</th:block>
+
+<th:block layout:fragment="content">
+
+  <div class="room__container">
+
+    <div class="room__register-container">
+
+      <div class="room__guide">게스트가 어떤 공간을 사용할 수 있나요?</div>
+
+      <form th:action="@{/host/room/register/spaces}" method="post">
+
+        <input type="hidden" name="roomId" th:value="${roomId}"/>
+
+        <div class="room__check-container">
+
+          <div class="room__check-detail">
+            <input type="checkbox" id="ch1"
+                   name="name"
+                   value="건조기"
+                   th:checked='${#lists.contains(spaces, "건조기")}'/>
+            <label for="ch1">세탁공간 - 건조기</label>
+          </div>
+
+          <div class="room__check-detail">
+            <input type="checkbox" id="ch2"
+                   name="name"
+                   value="세탁기"
+                   th:checked='${#lists.contains(spaces, "세탁기")}'/>
+            <label for="ch2">세탁공간 - 세탁기</label>
+          </div>
+
+
+          <div class="room__check-detail">
+            <input type="checkbox" id="ch3"
+                   name="name"
+                   value="자쿠지"
+                   th:checked='${#lists.contains(spaces, "자쿠지")}'/>
+            <label for="ch3">자쿠지</label>
+          </div>
+
+          <div class="room__check-detail">
+            <input type="checkbox" id="ch4"
+                   name="name"
+                   value="주방"
+                   th:checked='${#lists.contains(spaces, "주방")}'/>
+            <label for="ch4">주방</label>
+          </div>
+
+          <div class="room__check-detail">
+            <input type="checkbox" id="ch5"
+                   name="name"
+                   value="수영장"
+                   th:checked='${#lists.contains(spaces, "수영장")}'/>
+            <label for="ch5">수영장</label>
+          </div>
+
+          <div class="room__check-detail">
+            <input type="checkbox" id="ch6"
+                   name="name"
+                   value="주차"
+                   th:checked='${#lists.contains(spaces, "주차")}'/>
+            <label for="ch6">주차</label>
+          </div>
+
+          <div class="room__check-detail">
+            <input type="checkbox" id="ch7"
+                   name="name"
+                   value="헬스장"
+                   th:checked='${#lists.contains(spaces, "헬스장")}'/>
+            <label for="ch7">헬스장</label>
+          </div>
+        </div>
+        <button type="submit" id="submit" class="room__register-btn">계속</button>
+      </form>
+    </div>
+  </div>
+</th:block>
+</html>

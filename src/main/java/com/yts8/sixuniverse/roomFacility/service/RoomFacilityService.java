@@ -8,4 +8,7 @@ public interface RoomFacilityService {
   void save(List<RoomFacilityDto> facilityDtos);
 
   List<String> findByRoomIdAndCategoryName(RoomFacilityDto roomFacilityDto);
+
+  void removeByRoomId(Long roomId);
+
 }

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/room/host/register/types.css}"/>
+</th:block>
+<th:block layout:fragment="content">
+
+
+  <div class="room__container">
+
+    <div class="room__register-container">
+
+      <div class="room__guide">숙소의 유형을 선택해주세요</div>
+
+      <form th:action="@{/host/room/register/types/update}" method="post">
+
+        <input type="hidden" name="roomId" th:value="${roomDto.roomId}"/>
+
+        <label for="building-type" class="room__guide-sub">숙소의 건물유형을 선택해주세요</label><br>
+        <select id="building-type" name="buildingType" class="room__select">
+          <option value="아파트" th:selected='${#strings.equals(roomDto.getBuildingType(), "아파트")}'>아파트</option>
+          <option value="주택" th:selected='${#strings.equals(roomDto.getBuildingType(), "주택")}'>주택</option>
+          <option value="별채" th:selected='${#strings.equals(roomDto.getBuildingType(), "별채")}'>별채</option>
+          <option value="독특한 장소" th:selected='${#strings.equals(roomDto.getBuildingType(), "독특한 장소")}'>독특한 장소</option>
+          <option value="부티크호텔" th:selected='${#strings.equals(roomDto.getBuildingType(), "부티크호텔")}'>부티크호텔</option>
+        </select><br>
+
+        <label for="room-type" class="room__guide-sub">게스트가 이용할 숙소유형을 선택해주세요</label><br>
+        <select id="room-type" name="roomType" class="room__select" th:value="${roomDto.getRoomType()}">
+          <option value="집 전체" th:selected='${#strings.equals(roomDto.getRoomType(), "집 전체")}'>집 전체</option>
+          <option value="개인실" th:selected='${#strings.equals(roomDto.getRoomType(), "개인실")}'>개인실</option>
+          <option value="다인실" th:selected='${#strings.equals(roomDto.getRoomType(), "다인실")}'>다인실</option>
+        </select>
+
+        <button class="room__register-btn">계속</button>
+
+      </form>
+    </div>
+  </div>
+  </div>
+</th:block>
+</html>

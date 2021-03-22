@@ -25,4 +25,10 @@ public class RoomFacilityServiceImpl implements RoomFacilityService {
   public List<String> findByRoomIdAndCategoryName(RoomFacilityDto roomFacilityDto) {
     return facilityMapper.findByRoomIdAndCategoryName(roomFacilityDto);
   }
+
+  @Override
+  public void removeByRoomId(Long roomId) {
+    facilityMapper.removeByRoomId(roomId);
+  }
+
 }

@@ -14,6 +14,7 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
   <script type="text/javascript" defer th:src="@{/js/reservation/index.js}"></script>
   <script type="text/javascript" defer th:src="@{/js/reservation/reservation-modal.js}"></script>
@@ -21,7 +22,7 @@
 </th:block>
 
 <head>
-<!--  <meta charset="UTF-8">-->
+  <!--  <meta charset="UTF-8">-->
   <title>예약하기</title>
 </head>
 
@@ -45,7 +46,7 @@
           <div class="reservation__box2">
             <div class="reservation__small-box">
               <h4 class="reservation__sub-title2">날짜</h4>
-              <div class="reservation__date">[2021.2.24-2021.2.25]</div>
+              <div class="reservation__date" th:text="${beforeReservation.checkIn + ' ~ ' + beforeReservation.checkOut}">예약날짜</div>
               <div>[<img th:src="@{/images/reservation/clock.png}" class="reservation__img">
                 체크인: <span th:text="${room.getCheckInTime()}"></span> 시 이후]
               </div>
@@ -98,29 +99,29 @@
               <div class="reservation__modal-cancel"><i class="fas fa-times"></i></div>
               <h2 class="reservation__sub-title">게스트</h2>
               <div class="reservation__guest">
-        <span>
-         <div class="reservation__guest-title">성인</div>
-        </span>
+                <span>
+                 <div class="reservation__guest-title">성인</div>
+                </span>
                 <div class="reservation__number-right">
                   <div class="reservation__guest-number">
                     <button class="reservation__decrease" id="adult-minus"><i class="fas fa-minus"></i></button>
-                    <input type="text" name="adult-number" value="1" id="adult-number" readonly>
+                    <input type="text" name="adult-number" th:value="${beforeReservation.adult}" id="adult-number" readonly>
                     <button class="reservation__increase" id="adult-plus"><i class="fas fa-plus"></i></button>
                   </div>
                 </div>
               </div>
 
               <div class="reservation__guest">
-        <span>
-          <div>
-            <div class="reservation__guest-title">어린이</div>
-            <div class="reservation__guest-age">2~12세</div>
-          </div>
-        </span>
+                <span>
+                  <div>
+                    <div class="reservation__guest-title">어린이</div>
+                    <div class="reservation__guest-age">2~12세</div>
+                  </div>
+                </span>
                 <div class="reservation__number-right">
                   <div class="reservation__guest-number">
                     <button class="reservation__decrease" id="kid-minus"><i class="fas fa-minus"></i></button>
-                    <input type="text" name="kid-number" value="0" id="kid-number" readonly>
+                    <input type="text" name="kid-number" th:value="${beforeReservation.kid}" id="kid-number" readonly>
                     <button class="reservation__increase" id="kid-plus"><i class="fas fa-plus"></i></button>
                   </div>
                 </div>
@@ -128,16 +129,16 @@
               </div>
 
               <div class="reservation__guest">
-        <span>
-          <div>
-            <div class="reservation__guest-title">유아</div>
-            <div class="reservation__guest-age">2세 미만</div>
-          </div>
-        </span>
+                <span>
+                  <div>
+                    <div class="reservation__guest-title">유아</div>
+                    <div class="reservation__guest-age">2세 미만</div>
+                  </div>
+                </span>
                 <div class="reservation__number-right">
                   <div class="reservation__guest-number">
                     <button class="reservation__decrease" id="infant-minus"><i class="fas fa-minus"></i></button>
-                    <input type="text" name="infant-number" value="0" id="infant-number" readonly>
+                    <input type="text" name="infant-number" th:value="${beforeReservation.infant}" id="infant-number" readonly>
                     <button class="reservation__increase" id="infant-plus"><i class="fas fa-plus"></i></button>
                   </div>
                 </div>
@@ -149,9 +150,9 @@
               </div>
 
               <div class="reservation__guest-update-btn">
-          <span class="reservation__modal-cancel pop_bt">
-            취소
-          </span>
+                <span class="reservation__modal-cancel pop_bt">
+                  취소
+                </span>
                 <button class="reservation__guest-update">저장하기</button>
               </div>
             </div>
@@ -163,11 +164,11 @@
             <div class="reservation__small-box">
               <h4 class="reservation__sub-title2">게스트</h4>
               <div>
-                <span>성인 : <span class="reservation__guest-adult"></span> 명</span>
-                <span>아동 : <span class="reservation__guest-kid"></span> 명</span>
-                <span>유아 : <span class="reservation__guest-infant"></span> 명</span>
+                <span>성인 : <span class="reservation__guest-adult" th:text="${beforeReservation.adult}"></span> 명</span>
+                <span>아동 : <span class="reservation__guest-kid" th:text="${beforeReservation.kid}"></span> 명</span>
+                <span>유아 : <span class="reservation__guest-infant" th:text="${beforeReservation.infant}"></span> 명</span>
               </div>
-              <div>총 인원 : <span class="reservation__total-guest"></span> 명</div>
+              <div>총 인원 : <span class="reservation__total-guest" th:text="${beforeReservation.adult + beforeReservation.kid + beforeReservation.infant}"></span> 명</div>
             </div>
             <button id="update-guest" class="reservation__update-btn">수정</button>
           </div>
@@ -235,25 +236,26 @@
 
           <div class="reservation__line"></div>
 
-<!--          <div class="reservation__wait-info">-->
-<!--            <img th:src="@{/images/reservation/calendar.png}" class="reservation__img2">-->
-<!--            <div class="reservation__wait-content">-->
-<!--              <div class="reservation__wait">호스트가 24시간 이내 예약 요청을 수락하기 전까지는 예약이 아직 확정된 것이 아닙니다.</div>-->
-<!--              <div>예약 확정 전까지는 요금이 청구되지 않습니다.</div>-->
-<!--            </div>-->
-<!--          </div>-->
+          <!--          <div class="reservation__wait-info">-->
+          <!--            <img th:src="@{/images/reservation/calendar.png}" class="reservation__img2">-->
+          <!--            <div class="reservation__wait-content">-->
+          <!--              <div class="reservation__wait">호스트가 24시간 이내 예약 요청을 수락하기 전까지는 예약이 아직 확정된 것이 아닙니다.</div>-->
+          <!--              <div>예약 확정 전까지는 요금이 청구되지 않습니다.</div>-->
+          <!--            </div>-->
+          <!--          </div>-->
 
 
           <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
 
           <form th:action="@{/reservation/pay/complete}" method="post" id="reservation-fr">
-            <input type="hidden" name="checkIn" class="reservation__check-in">
-            <input type="hidden" name="checkOut" class="reservation__check-out">
-            <input type="hidden" name="reservationDateArray" class="reservation__date">
-            <input type="hidden" name="adult" class="reservation__adult">
-            <input type="hidden" name="kid" class="reservation__kid">
-            <input type="hidden" name="infant" class="reservation__infant">
-            <input type="hidden" name="roomId" class="reservation__room-id" th:value="${room.roomId}">
+            <input type="hidden" name="checkIn" class="reservation__check-in" th:value="${beforeReservation.checkIn}">
+            <input type="hidden" name="checkOut" class="reservation__check-out" th:value="${beforeReservation.checkOut}">
+            <input type="hidden" name="reservationDateArray" class="reservation__date" th:value="${reservationDateArray}">
+            <input type="hidden" name="adult" class="reservation__adult" th:value="${beforeReservation.adult}">
+            <input type="hidden" name="kid" class="reservation__kid" th:value="${beforeReservation.kid}">
+            <input type="hidden" name="infant" class="reservation__infant" th:value="${beforeReservation.infant}">
+            <input type="hidden" name="roomId" id="room-id" class="reservation__room-id" th:value="${room.roomId}">
+            <input type="hidden" name="paymentData" class="reservation__payment">
           </form>
           <button class="reservation__btn">예약 및 결제하기</button>
 
@@ -264,14 +266,14 @@
         <div class="reservation__room-box">
           <div class="reservation__room-info">
             <div class="reservation__room-img">
-              <img th:src="@{/images/reservation/sample.jpg}">
+              <img th:src="${roomImages.get(0).roomImg}">
             </div>
             <div class="reservation__room-info2">
               <div>
                 <span th:text="${room.getAddress()}"></span>
                 <span class="reservation__room-sub-address" th:text="${room.subAddress}"></span>
               </div>
-              <div th:text="${room.getTitle()}"></div>
+              <div th:text="${room.getTitle()}" id="roomName"></div>
               <div>침대 | 욕실</div>
               <div class="reservation__review-grade">
                 <div>
@@ -291,13 +293,13 @@
 
           <div class="reservation__price-info">
             <div class="reservation__table">
-              <div class="reservation__price">1박당요금</div>
-              <span class="reservation__price2" th:text="'￦ ' + ${room.price}"></span>
+              <div class="reservation__price" th:text="| 1박 요금 : ${room.price}|"></div>
+              <span class="reservation__price2" id="total-price" th:text="${totalPrice}"></span>
             </div>
 
             <div class="reservation__table">
               <div class="reservation__price">수수료</div>
-              <span class="reservation__price2" th:text="'￦ ' + ${commission} "></span>
+              <span class="reservation__price2" id="commission" th:text="'￦ ' + ${commission} "></span>
             </div>
 
             <div class="reservation__table">
@@ -307,7 +309,7 @@
 
             <div class="reservation__table">
               <div class="reservation__total">총 합계</div>
-              <span class="reservation__total2" th:text="'￦ ' + (${room.price} + ${commission})"></span>
+              <span class="reservation__total2" th:text="${totalPrice + commission}"></span>
             </div>
 
 

@@ -9,6 +9,12 @@
     where room_id = #{roomId}
   </select>
 
+  <select id="findByMemberId" resultType="RoomDto">
+    select *
+    from room
+    where member_id = #{memberId}
+  </select>
+
   <select id="findByRenewDate" resultType="java.time.LocalDateTime">
     select renew_date
     from room
@@ -77,5 +83,28 @@
     set status=#{status}
     where room_id = #{roomId}
   </update>
+
+  <update id="updateRenew" parameterType="RoomDto">
+    update room
+    set status='register',
+        renew_date=#{renewDate}
+    where room_id = #{roomId}
+  </update>
+
+  <update id="updateExpiry">
+    update room
+    set status='register'
+    <![CDATA[
+    where status = 'register'
+      and expiry_date <> 0
+      and date_add(renew_date, INTERVAL expiry_date MONTH) < #{renewDate}
+    ]]>
+  </update>
+
+  <delete id="remove">
+    delete
+    from room
+    where room_id = #{roomId}
+  </delete>
 
 </mapper>

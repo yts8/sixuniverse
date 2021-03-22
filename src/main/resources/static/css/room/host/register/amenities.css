@@ -1,0 +1,111 @@
+.room__container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.room__register-container {
+    height: 100%;
+    padding: 50px;
+}
+
+.room__guide {
+    font-weight: bold;
+    margin-top: 50px;
+    font-size: 25px;
+}
+
+.room__guide-sub {
+    margin-top: 10px;
+    font-size: 20px;
+    color: #787878;
+}
+
+.room__check-container {
+    margin-top: 30px;
+    /*font-size: 20px;*/
+}
+
+.room__check-info{
+    margin-top : 2px;
+    margin-bottom : 10px;
+    margin-left: 27px;
+    color: #787878;
+}
+
+
+.room__register-btn {
+    padding: 15px 30px;
+    size: 17px;
+    color: white;
+    font-weight: bold;
+    background-color: #56a5ac;
+    border-radius: 8px;
+    border: none;
+    margin-top: 40px;
+}
+
+
+/*체크박스*/
+.room__check-detail {
+    margin-bottom: 1rem;
+}
+
+.room__check-detail input[type="checkbox"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0
+}
+
+
+.room__check-detail input[type="checkbox"] + label {
+
+    display: inline-block;
+    position: relative;
+    cusor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+.room__check-detail input[type="checkbox"] + label:before {
+
+    content: ' ';
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    margin: -2px 8px 0 0;
+    text-align: center;
+    vertical-align: middle;
+    background: #fafafa;
+    border: 1px solid #cacece;
+    border-radius: 3px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+
+}
+
+
+.room__check-detail input[type="checkbox"] + label:active:before,
+.room__check-detail input[type="checkbox"]:checked + label:active:before {
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+
+}
+
+
+.room__check-detail input[type="checkbox"]:checked + label:before {
+    content: '\2713';
+    color: #314ca2;
+    text-shadow: 1px 1px white;
+    background: #f1f4ff;
+    border-color: #adb8c0;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+
+}

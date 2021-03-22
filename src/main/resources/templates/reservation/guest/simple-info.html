@@ -54,7 +54,7 @@
                 <div class="guest-reservation-simple-info__detail-room-info">
                   <div class="guest-reservation-simple-info__room-info-align">
                     <div class="guest-reservation-simple-info__room-info-img">
-                      <img th:src="@{/images/reservation/sample.jpg}">
+                      <img th:src="${roomImageDtoList.get(0).roomImg}">
                     </div>
                     <div class="guest-reservation-simple-info__room-info-margin">
                       <div class="guest-reservation-simple-info__reservation-date"
@@ -69,11 +69,11 @@
                   <div class="guest-reservation-simple-info__room-detail-info-view">세부사항보기</div>
                 </div>
               </a>
-
-              <div class="guest-reservation-simple-info__title">
-                <div class="guest-reservation-simple-info__msg">호스트에게 연락하기</div>
-              </div>
-
+              <a th:href="@{|/chat/${hostId}}">
+                <div class="guest-reservation-simple-info__title">
+                  <div class="guest-reservation-simple-info__msg">호스트에게 연락하기</div>
+                </div>
+              </a>
               <div th:if="${reservation.status.equals('complete')}" class="guest-reservation-simple-info__title">
                 <a th:href="@{|/review/form/${reservation.reservationId}|}">
                   <div class="guest-reservation-simple-info__review">후기 작성</div>

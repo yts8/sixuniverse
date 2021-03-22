@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yts8.sixuniverse.payment.repository.PaymentMapper">
+  <insert id="paymentInsert">
+    insert into payment (payment_id, reservation_id, price, commission, mileage, discount, member_coupon_id, payment_method)
+    values (#{paymentId}, #{reservationId}, #{price}, #{commission}, #{mileage}, #{discount}, #{memberCouponId}, #{paymentMethod})
+  </insert>
+
+</mapper>
