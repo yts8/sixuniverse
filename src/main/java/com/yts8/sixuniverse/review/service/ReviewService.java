@@ -1,6 +1,8 @@
 package com.yts8.sixuniverse.review.service;
 
 import com.yts8.sixuniverse.review.dto.ReviewDto;
+import com.yts8.sixuniverse.review.dto.ReviewGuestDto;
+import com.yts8.sixuniverse.review.dto.ReviewHostDto;
 
 import java.util.List;
 
@@ -10,12 +12,28 @@ public interface ReviewService {
 
   ReviewDto findById(Long reviewId);
 
-  List<ReviewDto> reviewList();
+  List<ReviewGuestDto> reviewBefore(Long memberId);
+
+  List<ReviewGuestDto> reviewAfter(Long memberId);
+
+  List<ReviewGuestDto> reviewGuestList(Long memberId);
+
+  List<ReviewHostDto> reviewHostList(Long memberId);
+
+  List<ReviewHostDto> reviewReservationList(Long memberId);
 
   ReviewDto getReview(Long reviewId);
 
   void updateReview(ReviewDto reviewDto);
 
   void deleteReview(ReviewDto reviewDto);
+
+  int reviewCount(Long memberId);
+
+  double reviewScoreClean(Long memberId);
+
+  double reviewScoreLocation(Long memberId);
+
+  double reviewScoreService(Long memberId);
 
 }

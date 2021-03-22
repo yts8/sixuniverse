@@ -97,14 +97,19 @@
   font-size: 14px;
   font-weight: bold;
   color: #414141;
-  text-decoration: underline;
   display: flex;
   justify-content: flex-end;
   margin-right: 10px;
 }
 
-.g-review-by__a a {
-  margin: 0 10px;
+.g-review-by__a-update, .g-review-by__modal-delete {
+  margin: 0 5px;
+  text-decoration: underline;
+}
+
+.g-review-by__a-update:hover, .g-review-by__modal-delete:hover {
+  color: red;
+  text-decoration: none;
 }
 
 .g-review-by__modal {
@@ -223,10 +228,11 @@
   cursor: pointer;
 }
 
-.g-review-by__tabs a:active {
+.g-review-by__tabs a:hover, a:visited {
   text-decoration: none;
   color: #484848;
   font-size: 14px;
+  font-weight: bold;
   margin-right: 15px;
 }
 

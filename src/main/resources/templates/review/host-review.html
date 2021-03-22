@@ -7,6 +7,8 @@
 <th:block layout:fragment="css">
   <link rel="stylesheet" th:href="@{/css/performance/views.css}"/>
   <link rel="stylesheet" th:href="@{/css/review/host-review.css}"/>
+  <link rel="stylesheet" th:href="@{/css/review/review-form.css}"/>
+
 </th:block>
 
 <th:block layout:fragment="js">
@@ -38,40 +40,53 @@
     <div class="host-review__review">
       <div class="host-review__review-left">
         <div class="host-review__review-panel">
-          <div class="host-review__review-panel-guest">
-            <div class="host-review__review-panel-guest-text">
-              <div class="host-review__review-panel-guest-text-name">Sung Eun</div>
-              <div class="host-review__review-panel-guest-text-info">2월 26일~2021년 2월 27일 . 방울 in the house</div>
-            </div>
-            <div class="host-review__review-panel-guest-img">
-              <div class="host-review__review-panel-guest-profile-box">
-                <img class="host-review__review-panel-guest-profile-img"
-                     th:src="@{/images/review/sky.jpeg}">[사진]
+          <th:block th:each="review : ${reviewHostList}">
+            <div class="host-review__review-panel-guest">
+              <div class="host-review__review-panel-guest-text">
+                <div class="host-review__review-panel-guest-text-name" th:text="${review.getGuestName()}"></div>
+                <span class="host-review__review-panel-guest-text-info"
+                      th:text="${#temporals.format(review.getCheckIn(),'M월 dd일')}"></span> ~
+                <span class="host-review__review-panel-guest-text-info"
+                      th:text="${#temporals.format(review.getCheckOut(),'yyyy년 M월 dd일 ')}"></span> .
+                <span class="host-review__review-panel-guest-text-info" th:text="${review.getTitle()}"></span>
+              </div>
+              <div class="host-review__review-panel-guest-img">
+                <div class="host-review__review-panel-guest-profile-box">
+                  <img class="host-review__review-panel-guest-profile-img"
+                       th:src="${review.getGuestProfileImg()}">
+                </div>
               </div>
             </div>
-          </div>
-          <hr class="host-review__review-hr">
-          <div>
-            <div class="host-review__review-panel-score-title">전체 평점 ⭐⭐⭐⭐⭐</div>
-            <div class="host-review__review-panel-score-content">🎀 방울맘 하우스 한번 들어가면 나올수 없어 🎀</div>
-            <a th:href="@{/review/guest-about}">
-              <div class="host-review__review-panel-score-check">답글 보기</div>
-            </a>
-          </div>
-          <hr class="host-review__review-hr">
+            <div>
+              <span class="host-review__review-panel-score-title">전체 평점</span>
+              <th:block th:switch="${review.getScore()}">
+                <span th:case="1">⭐</span>
+                <span th:case="2">⭐⭐</span>
+                <span th:case="3">⭐⭐⭐</span>
+                <span th:case="4">⭐⭐⭐⭐</span>
+                <span th:case="5">⭐⭐⭐⭐⭐</span>
+              </th:block>
+              <div class="host-review__review-panel-score-content" th:text="${review.getReviewContent()}">
+              </div>
+              <a th:href="@{/review/guest-about}">
+                <div class="host-review__review-panel-score-check">답글 쓰기</div>
+              </a>
+            </div>
+            <hr class="host-review__review-hr">
+          </th:block>
         </div>
 
       </div>
       <div class="host-review__review-right">
         <div class="host-review__review-right-left">
           <div class="host-review__review-right-left-body">
-            <div class="host-review__review-right-num">5</div>
+            <div class="host-review__review-right-num" th:text="${reviewScore}"></div>
             <div>⭐</div>
           </div>
           <div class="host-review__review-right-text">전체 평점</div>
         </div>
         <div class="host-review__review-right-right">
-          <div class="host-review__review-right-num">1</div>
+          <div class="host-review__review-right-num" th:text="${reviewCount}"></div>
           <div class="host-review__review-right-text">총 후기 수</div>
         </div>
       </div>

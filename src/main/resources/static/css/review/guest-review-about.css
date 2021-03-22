@@ -114,10 +114,11 @@
   cursor: pointer;
 }
 
-.g-review-about__tabs a:active {
+.g-review-about__tabs a:hover, a:visited {
   text-decoration: none;
   color: #484848;
   font-size: 14px;
+  font-weight: bold;
   margin-right: 15px;
 }
 
