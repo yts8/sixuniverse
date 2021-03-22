@@ -40,14 +40,18 @@ public class RoomHostApiController {
   @PostMapping("{roomId}/update/clear")
   public void postRoomUpdateClear(@PathVariable Long roomId) {
     RoomDto roomDto = roomService.findById(roomId);
-    roomDto.setStatus("register");
-    roomService.updateStatus(roomDto);
+    if (roomDto.getStatus().equals("stop")) {
+      roomDto.setStatus("register");
+      roomService.updateStatus(roomDto);
+    }
   }
 
   @PostMapping("{roomId}/update/renew")
   public void postRoomUpdateRenew(@PathVariable Long roomId) {
     RoomDto roomDto = roomService.findById(roomId);
-    roomDto.setRenewDate(LocalDateTime.now());
-    roomService.updateRenew(roomDto);
+    if (roomDto.getStatus().equals("expiry")) {
+      roomDto.setRenewDate(LocalDateTime.now());
+      roomService.updateRenew(roomDto);
+    }
   }
 }
