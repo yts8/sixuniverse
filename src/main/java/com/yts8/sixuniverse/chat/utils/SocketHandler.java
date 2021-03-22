@@ -4,7 +4,7 @@ package com.yts8.sixuniverse.chat.utils;
 import com.google.gson.Gson;
 import com.yts8.sixuniverse.chat.dto.ChatDto;
 import com.yts8.sixuniverse.chat.dto.ReceiveMessageDto;
-import com.yts8.sixuniverse.chat.dto.SendrMessageDto;
+import com.yts8.sixuniverse.chat.dto.SendMessageDto;
 import com.yts8.sixuniverse.chat.service.ChatService;
 import com.yts8.sixuniverse.member.dto.MemberDto;
 import com.yts8.sixuniverse.member.service.MemberService;
@@ -56,12 +56,12 @@ public class SocketHandler extends TextWebSocketHandler {
     chatService.saveMessage(chatDto); // DB
 
 
-    SendrMessageDto sendrMessageDto = gson.fromJson(msg, SendrMessageDto.class);
+    SendMessageDto sendMessageDto = gson.fromJson(msg, SendMessageDto.class);
 
     MemberDto member = memberService.findById(memberId);
-    sendrMessageDto.setMemberId(member.getMemberId());
-    sendrMessageDto.setUsername(member.getUsername());
-    sendrMessageDto.setProfileImg(member.getProfileImg());
+    sendMessageDto.setMemberId(member.getMemberId());
+    sendMessageDto.setUsername(member.getUsername());
+    sendMessageDto.setProfileImg(member.getProfileImg());
 
 
 
@@ -81,7 +81,7 @@ public class SocketHandler extends TextWebSocketHandler {
     for (String key : sessionMap.keySet()) {
       WebSocketSession wss = sessionMap.get(key);
       try {
-        wss.sendMessage(new TextMessage(gson.toJson(sendrMessageDto))); // JSON 문자열로 만든다.
+        wss.sendMessage(new TextMessage(gson.toJson(sendMessageDto))); // JSON 문자열로 만든다.
 
 
       } catch (Exception e) {

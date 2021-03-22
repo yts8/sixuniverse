@@ -28,21 +28,18 @@
         <!--채팅리스트 스크롤 적용 영역-->
         <div class="chat__chatroom-list-scroll">
           <div class="chat__chatroom-list-frame">
-            <div class="chat__chatroom-list-content">
+            <div th:each="last, i : ${lastChat}" th:if="${lastChat.size()} != 0" class="chat__chatroom-list-content">
               <a href="#"></a>
               <div class="chat__member-img-frame">
                 <div>
-                  <img class="chat__member-img" src="https://a0.muscache.com/defaults/user_pic-225x225.png?v=3">
+                  <img th:text="${last.profileImg}" class="chat__member-img"
+                       src="https://a0.muscache.com/defaults/user_pic-225x225.png?v=3">
                 </div>
               </div>
               <div class="chat__member-info-frame">
-                <div th:text="${hostId}" class="chat__member-name"> </div>
-                <div class="chat__message-content">
-                  메시지 내용
-                </div>
-                <div class="chat__message-date">
-                  시간
-                </div>
+                <div th:text="${last.username}" class="chat__member-name"></div>
+                <div th:text="${last.content}" class="chat__message-content"></div>
+                <div th:text="${last.createDate}" class="chat__message-date"></div>
               </div>
             </div>
           </div>
@@ -63,42 +60,40 @@
       </div>
 
       <input type="hidden" id="memberId" th:value="${session.member.getMemberId()}">
-      <!--<input type="hidden" id="reservationId" th:value="${memberId}">-->
       <input type="hidden" id="chatRef" th:value="${chatRef}"/>
       <input type="hidden" id="name" th:value="${session.member.getUsername()}"/>
       <input type="hidden" id="hostId" th:value="${hostId}"/>
 
 
-
-
-
-
       <!--채팅방 - 내용 출력 영역(스크롤적용부분)-->
+
       <div class="chat__chatroom-content chatroom-content-js">
-        <div class="chat__chat-content">
+        <div th:each="chat, i : ${chatDto}" th:if="${chatDto.size()} != 0" class="chat__chat-content">
 
           <!--보내는 메세지 내용 영역-->
-          <div>
+          <div th:if="${chat.memberId}==${session.member.getMemberId()}">
+            <img class="chat__sender-img" src="https://a0.muscache.com/defaults/user_pic-225x225.png?v=3">
             <div class="chat__send-chat-content">
-              <span class="chat__sender"></span>
-              <span class="chat__send-time"></span>
-              <div class="chat__send-chat"></div>
+              <span th:text="${session.member.getUsername()}" class="chat__sender"></span>
+              <span th:text="${chat.createDate}" class="chat__send-time"></span>
+              <div th:text="${chat.content}" class="chat__send-chat"></div>
+              </img>
             </div>
           </div>
           <!--보낸 메세지 영역 끝-->
-
           <!--받은 메세지 영역-->
-          <div class="chat__receive-chat-container">
+          <div th:if="${chat.memberId}!=${session.member.getMemberId()}" class="chat__receive-chat-container">
             <div class="chat__receive-chat-content">
               <div>
                 <div class="chat__send-chat-content">
-                  <span class="chat__receive-time"></span>
+                  <span th:text="${chat.createDate}" class="chat__receive-time"></span>
                   <span class="chat__receiver"></span>
-                  <div class="chat__receive-chat"></div>
+                  <img class="chat__receiver-img" src="https://a0.muscache.com/defaults/user_pic-225x225.png?v=3">
+                  <div th:text="${chat.content}" class="chat__receive-chat"></div>
                 </div>
               </div>
-              </div>
             </div>
+          </div>
           <!--받은 메세지 끝-->
 
         </div>

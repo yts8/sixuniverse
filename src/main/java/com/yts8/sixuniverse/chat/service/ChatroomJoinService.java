@@ -2,6 +2,9 @@ package com.yts8.sixuniverse.chat.service;
 
 
 import com.yts8.sixuniverse.chat.dto.ChatroomJoinDto;
+import com.yts8.sixuniverse.chat.dto.MemberIdDto;
+
+import java.util.List;
 
 public interface ChatroomJoinService {
 
@@ -14,8 +17,10 @@ public interface ChatroomJoinService {
 
 
   // 공통된 chatRef count
-  Long chatRefCount(Long myMemberId, Long hostId);
+  Long chatRefCount(MemberIdDto memberIdDto);
 
   // 공통된 chatRef 값 받아오기
-  Long getChatRefTest(Long myMemberId, Long hostId);
+  Long getChatRefTest(MemberIdDto memberIdDto);
+
+  List<ChatroomJoinDto> findUserNameByChatRef(Long chatRef);
 }
