@@ -35,4 +35,9 @@ public class roomImageServiceImpl implements RoomImageService {
     return roomImageMapper.findOneByRoomId(roomId);
   }
 
+  @Override
+  public void removeByRoomId(Long roomId) {
+    roomImageMapper.removeByRoomId(roomId);
+  }
+
 }

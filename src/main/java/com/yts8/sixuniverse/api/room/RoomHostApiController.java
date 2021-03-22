@@ -1,5 +1,6 @@
 package com.yts8.sixuniverse.api.room;
 
+import com.yts8.sixuniverse.room.dto.RoomDto;
 import com.yts8.sixuniverse.room.service.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,14 @@ public class RoomHostApiController {
 
   @PostMapping("{roomId}/delete")
   public void postRoomDelete(@PathVariable Long roomId) {
-    System.out.println(roomId);
+    RoomDto roomDto = roomService.findById(roomId);
+    if (roomDto.getStatus().equals("not register")) {
+      roomService.remove(roomId);
+    } else {
+      roomDto.setStatus("remove");
+      roomService.updateStatus(roomDto);
+    }
+
+    // TODO: 유효성 검사 및 운영 중지 복구.. 리업뎃
   }
 }

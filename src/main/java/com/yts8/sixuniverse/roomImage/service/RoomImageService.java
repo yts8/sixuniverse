@@ -14,4 +14,6 @@ public interface RoomImageService {
 
   RoomImageDto findOneByRoomId(Long roomId);
 
+  void removeByRoomId(Long roomId);
+
 }
