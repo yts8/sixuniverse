@@ -11,20 +11,44 @@
   <!-- Common CSS -->
   <link rel="stylesheet" th:href="@{/css/reset.css}"/>
   <link rel="stylesheet" th:href="@{/css/variables.css}"/>
-  <th:block th:replace="partials/guest-header :: guestHeaderCss"/>
+
+  <!--  Guest Header-->
+  <th:block th:unless='${#httpServletRequest.getServletPath().startsWith("/host")}'>
+    <th:block th:replace="partials/guest-header :: guestHeaderCss"/>
+  </th:block>
+
+  <!--  Host Header-->
+  <th:block th:if='${#httpServletRequest.getServletPath().startsWith("/host")}'>
+    <th:block th:replace="partials/host-header :: hostHeaderCss"/>
+  </th:block>
+
   <th:block th:replace="partials/footer :: footerCss"/>
   <th:block layout:fragment="css"/>
 
   <!-- Common JS -->
   <script src="https://kit.fontawesome.com/72ec3ada60.js" crossorigin="anonymous"></script>
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+  <!--  Host Header-->
+  <th:block th:if='${#httpServletRequest.getServletPath().startsWith("/host")}'>
+    <th:block th:replace="partials/host-header :: hostHeaderJs"/>
+  </th:block>
+
   <th:block layout:fragment="js"/>
 
   <title th:text="${title} + ' | Sixunsiverse'"></title>
 </head>
 <body>
-<!-- Header -->
-<th:block th:replace="partials/guest-header :: guestHeader"/>
+
+<!--Guest Header-->
+<th:block th:unless='${#httpServletRequest.getServletPath().startsWith("/host")}'>
+  <th:block th:replace="partials/guest-header :: guestHeader"/>
+</th:block>
+
+<!--Host Header-->
+<th:block th:if='${#httpServletRequest.getServletPath().startsWith("/host")}'>
+  <th:block th:replace="partials/host-header :: hostHeader"/>
+</th:block>
 
 <!-- 각 페이지가 구현 해야할 부분 -->
 <th:block layout:fragment="content"/>
