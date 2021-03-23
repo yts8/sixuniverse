@@ -1,4 +1,4 @@
-package com.yts8.sixuniverse.config.auth;
+package com.yts8.sixuniverse.config.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -51,8 +51,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/member/**", "/api/member/**").hasAnyRole("GUEST", "HOST", "ADMIN")
         .antMatchers("/host/**", "/api/host/**").hasAnyRole("HOST", "ADMIN")
         .antMatchers("/admin/**").hasRole("ADMIN")
-        .anyRequest().authenticated()
-        .and()
+        .anyRequest().authenticated();
+
+    http
         .formLogin()
         .usernameParameter("email")
         .passwordParameter("password")
@@ -71,5 +72,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         })
         .userInfoEndpoint()
         .userService(oAuth2UserService);
+
+    http
+        .sessionManagement()
+        .maximumSessions(1)
+        .maxSessionsPreventsLogin(true);
   }
 }
