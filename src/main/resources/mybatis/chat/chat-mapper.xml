@@ -81,11 +81,13 @@
 
   <!-- 채팅방 번호로 메세지 찾기 -->
   <select id="findMessageByChatRef" parameterType="java.lang.Long" resultType="ChatDto">
-    select c.member_id, c.content, c.create_date
+    select c.member_id, c.content, c.create_date, r.chat_ref
     from chat c
            join chatroom_join r
-                on c.member_id = r.member_id
-    where r.chat_ref = #{chatRef}
+                on c.join_num = r.join_num
+    where c.join_num in (select distinct g.join_num
+                         from chatroom_join h
+                                join chatroom_join g on g.chat_ref = #{chatRef})
     order by create_date asc
   </select>
 
@@ -94,23 +96,30 @@
     select count(*)
     from chat c
            join chatroom_join r
-                on c.member_id = r.member_id
-    where chat_ref = #{chatRef}
+                on c.join_num = r.join_num
+    where c.join_num in (select distinct g.join_num
+                         from chatroom_join h
+                                join chatroom_join g on g.chat_ref = #{chatRef})
+    order by create_date asc
   </select>
 
 
-  <!-- 채팅 리스트 출력 용 (마지막 채팅 하나만 가져오기)-->
+  <!-- 채팅방 리스트 출력 용-->
   <select id="getLastChat" parameterType="java.lang.Long" resultType="MessageDto">
-    select m.profile_img,
-           m.username,
-           m.member_id,
+    select m.username,
+           m.profile_img,
+           cj.chat_ref,
            c.content,
            c.create_date
-    from chat c
-           join member m on m.member_id = c.member_id
-           join chatroom_join r on r.member_id = c.member_id
-    where r.member_id = #{myMemberId}
-    order by c.create_date desc limit 1;
+    from chatroom_join cj
+           join chat c on cj.join_num = c.join_num
+           join member m on m.member_id = cj.member_id
+    where c.chat_id in (select max(cc.chat_id)
+                        from chat cc
+                               join chatroom_join ccj on ccj.join_num = cc.join_num
+                        where ccj.chat_ref in (select chat_ref from chatroom_join where member_id = #{myMemberId})
+                        group by cc.join_num)
+    order by c.create_date desc
   </select>
 
 

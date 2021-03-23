@@ -1,31 +1,31 @@
-/*(() => { */// IIFE
+(() => {
 
-/* const csrf = document.querySelector("#csrf");
-  await fetch(`http://localhost:8080/api/member/update/${id}`, {
-     method: "post",
-     headers: {
-       "Content-Type": "application/json",
-       "X-CSRF-TOKEN": csrf
-     },
-     body: JSON.stringify({
-       name: "이름"
-     })
-   })*/
+  /* const csrf = document.querySelector("#csrf");
+    await fetch(`http://localhost:8080/api/member/update/${id}`, {
+       method: "post",
+       headers: {
+         "Content-Type": "application/json",
+         "X-CSRF-TOKEN": csrf
+       },
+       body: JSON.stringify({
+         name: "이름"
+       })
+     })*/
 // Element
-/*  const chatRoomEls = document.querySelectorAll(".chat-chatroom-list-frame-js");
+  const chatRoomEls = document.querySelectorAll(".chatroom-list-frame-js");
 
   // Handler
   const handleChatRoomClick = async (e) => {
     const chatRoomEl = e.currentTarget;
-    const roomId = chatRoomEl.dataset.roomId;
+    const myMemberId = chatRoomEl.dataset.myMemberId;
 
-    const res = await fetch(`http://localhost:8080/api/chat/chatroom/${roomId}`, {
+    const res = await fetch(`http://localhost:8080/api/chat/${myMemberId}`, {
       method: "GET",
     })
-    const chats = await res.json();
+    const chatDto = await res.json();
 
-    for (let chat of chats) {
-      console.log(chat.chatId)
+    for (let chat of chatDto) {
+      console.log(chat.chatRef)
     }
 
   }
@@ -37,9 +37,7 @@
   }
   init();
 
-})()*/
 
-(() => {
   let ws;
 
   function wsOpen() {

@@ -77,6 +77,9 @@ public class ChatController {
       List<ChatDto> chatDto = chatService.findMessageByChatRef(chatRef);
       List<MessageDto> lastChatDto = chatService.getLastChat(myMemberId);
       model.addAttribute("chatDto", chatDto);
+      model.addAttribute("lastChat",lastChatDto);
+      System.out.println(lastChatDto);
+      System.out.println(chatDto);
     }
 
     model.addAttribute("hostId", hostId);

@@ -1,53 +1,32 @@
 package com.yts8.sixuniverse.api.chat;
 
+import com.yts8.sixuniverse.chat.dto.ChatDto;
+import com.yts8.sixuniverse.chat.dto.ChatroomJoinDto;
+import com.yts8.sixuniverse.chat.dto.MessageDto;
 import com.yts8.sixuniverse.chat.service.ChatService;
+import com.yts8.sixuniverse.member.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("")
+@RequestMapping("/api/chat")
 public class ChatApiController {
   private final ChatService chatService;
 
-  /* 연습용 */
-/*
-  @GetMapping("/chatTest/{roomId}")
-  public Long Test(HttpSession httpSession, @PathVariable Long roomId){
+  /* 조지 테스트 */
+  @PostMapping("/{myMemberId}")
+  public List<MessageDto> getChatroom(@PathVariable Long myMemberId) {
+    List<MessageDto> chatDto = chatService.getLastChat(myMemberId);
 
+
+    return chatDto;
 
   }
-*/
-
-
-
-
-
-
-
-
 }
 
-
-
-/* 조지 테스트
-  @GetMapping("/chatroom/{chatId}")
-  public List<ChatDto> getChatroom(@PathVariable int chatId) {*/
-   /* List<ChatDto> chatDtos = new ArrayList<>();
-
-    ChatDto chatDto1 = new ChatDto();
-    ChatDto chatDto2 = new ChatDto();
-    chatDto1.setChatId(1);
-    chatDto1.setContent("dto1");
-    chatDto2.setChatId(2);
-    chatDto2.setContent("dto2");
-
-    chatDtos.add(chatDto1);
-    chatDtos.add(chatDto2);*/
-
-/*  return chatDtos;*/
-/*
-  }
-}
-*/
