@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class MessageDto {
   private String profileImg;
   private String username;
-  private Long memberId;
-  private String content;
   private LocalDateTime createDate;
+  private Long chatRef;
+  private String content;
 }

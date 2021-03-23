@@ -27,8 +27,9 @@
         </div>
         <!--채팅리스트 스크롤 적용 영역-->
         <div class="chat__chatroom-list-scroll">
-          <div class="chat__chatroom-list-frame">
-            <div th:each="last, i : ${lastChat}" th:if="${lastChat.size()} != 0" class="chat__chatroom-list-content">
+          <div th:each="last, i : ${lastChat}" th:if="${lastChat.size()} != 0"
+               class="chat__chatroom-list-frame chatroom-list-frame-js">
+            <div class="chat__chatroom-list-content">
               <a href="#"></a>
               <div class="chat__member-img-frame">
                 <div>
