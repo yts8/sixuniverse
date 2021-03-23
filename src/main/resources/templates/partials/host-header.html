@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link th:fragment="hostHeaderCss" rel="stylesheet" th:href="@{/css/partials/host-header.css}">
+  <script th:fragment="hostHeaderJs" defer th:src="@{/js/partials/host-header.js}"></script>
+  <title>header</title>
+</head>
+<body>
+<th:block th:fragment="hostHeader">
+  <div class="host-header__hide"></div>
+  <header class="host-header__container">
+    <div class="host-header__wrap">
+      <div class="host-header__logo-box"></div>
+      <ul class="host-header__menu">
+        <li>
+          <a th:href="@{/host}">홈</a>
+        </li>
+        <li>
+          <a href="#">메시지</a>
+        </li>
+        <li>
+          <a href="#">예약</a>
+        </li>
+        <li>
+          <a th:href="@{/host/room/list}">숙소</a>
+        </li>
+        <li>
+          <a href="#">실적</a>
+        </li>
+      </ul>
+    </div>
+    <div class="host-header__wrap">
+      <a th:href="@{/host/room/register}" class="host-header__room-register">숙소 등록하기</a>
+      <div class="host-header__profile-menu-box">
+        <button class="host-header__profile-menu-btn header-profile-menu-btn-js">
+          <i class="fas fa-bars"></i>
+          <img th:src="${session.member.getProfileImg()}" alt="프로필"/>
+        </button>
+        <ul class="host-header__profile-menu header__profile-menu-hide header-profile-menu-js">
+          <li>
+            <a th:href="@{|/member/profile/${session.member.getMemberId()}|}">프로필</a>
+          </li>
+          <li>
+            <a th:href="@{/member/setting}">계정관리</a>
+          </li>
+          <li>
+            <a th:href="@{/logout}">로그아웃</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>
+</th:block>
+
+</body>
+</html>

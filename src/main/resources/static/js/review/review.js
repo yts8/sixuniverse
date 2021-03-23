@@ -53,4 +53,13 @@
     return false;
   });
 
+  // 프로그레스바 게이지
+  $(document).ready(function () {
+    $('.reservation-review__gauge').each(function () {
+      var $this = $(this);
+      var per = $this.attr('per');
+      $this.css('width', per + "%");
+    });
+  });
+
 })();

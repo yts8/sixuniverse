@@ -102,6 +102,7 @@ html, body, .reservation-review__modal-content {
 .reservation-review__review-text {
   font-size: 16px;
   margin-right: 50px;
+  margin-bottom: 15px;
   line-height: normal;
 }
 
@@ -128,7 +129,7 @@ html, body, .reservation-review__modal-content {
   background: rgba(0, 0, 0, 0.5);
   top: 0;
   left: 0;
-  display: block;
+  display: none;
 }
 
 .reservation-review__modal-content {
@@ -145,6 +146,7 @@ html, body, .reservation-review__modal-content {
   box-sizing: border-box;
   padding: 15px 0;
   line-height: 23px;
+  overflow-y: hidden;
 }
 
 .reservation-review__update-title button {
@@ -163,10 +165,11 @@ html, body, .reservation-review__modal-content {
 }
 
 .reservation-review__modal-main-right {
+  height: 500px;
   flex: 2;
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .reservation-review__score-all-modal {
@@ -235,8 +238,14 @@ html, body, .reservation-review__modal-content {
 
 .reservation-review__gauge {
   display: block;
-  width: 50%;
   height: 4px;
   background-color: black;
   border-radius: 10px;
+}
+
+.reservation-review__review-hr {
+  height: 1px;
+  background-color: #dbdbdb;
+  border: none;
+  margin: 15px 0;
 }

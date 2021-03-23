@@ -13,6 +13,7 @@
     select *
     from room
     where member_id = #{memberId}
+    order by renew_date desc
   </select>
 
   <select id="findByRenewDate" resultType="java.time.LocalDateTime">

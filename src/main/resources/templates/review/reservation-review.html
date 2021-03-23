@@ -23,7 +23,12 @@
       <div class="reservation-review__star">
         <img th:src="@{/images/wishlist/star.JPG}"/>
       </div>
-      <div>5.0점(후기 20개)</div>
+      <div>
+        <span th:text="${reviewScore}"></span>
+        <span>점(후기 </span>
+        <span th:text="${reviewCount}"></span>
+        <span>개)</span>
+      </div>
     </div>
     <div class="reservation-review__score-sub">
       <div class="reservation-review__sub-box">
@@ -31,10 +36,10 @@
         <div class="reservation-review__sub-box-right">
           <div class="reservation-review__sub-box-right-bar">
             <span class="reservation-review__progressbar">
-              <span class="reservation-review__gauge"></span>
+              <span class="reservation-review__gauge" th:per="${reviewScoreClean}*100/5.0"></span>
             </span>
           </div>
-          <div class="reservation-review__sub-box-right-score">4.4</div>
+          <div class="reservation-review__sub-box-right-score" th:text="${reviewScoreClean}"></div>
         </div>
       </div>
       <div class="reservation-review__sub-box">
@@ -42,10 +47,10 @@
         <div class="reservation-review__sub-box-right">
           <div class="reservation-review__sub-box-right-bar">
             <span class="reservation-review__progressbar">
-              <span class="reservation-review__gauge"></span>
+              <span class="reservation-review__gauge" th:per="${reviewScoreLocation}*100/5.0"></span>
             </span>
           </div>
-          <div class="reservation-review__sub-box-right-score">4.7</div>
+          <div class="reservation-review__sub-box-right-score" th:text="${reviewScoreLocation}"></div>
         </div>
       </div>
       <div class="reservation-review__sub-box">
@@ -53,77 +58,37 @@
         <div class="reservation-review__sub-box-right">
           <div class="reservation-review__sub-box-right-bar">
             <span class="reservation-review__progressbar">
-              <span class="reservation-review__gauge"></span>
+              <span class="reservation-review__gauge" th:per="${reviewScoreService}*100/5.0"></span>
             </span>
           </div>
-          <div class="reservation-review__sub-box-right-score">5.0</div>
+          <div class="reservation-review__sub-box-right-score" th:text="${reviewScoreService}"></div>
         </div>
       </div>
     </div>
     <div class="reservation-review__review">
-      <div class="reservation-review__review-guest">
-        <div class="reservation-review__review-profile">
-          <div class="reservation-review__review-profile-box">
-            <img class="reservation-review__review-profile-box-img"
-                 th:src="@{/images/review/sky.jpeg}">
+      <th:block th:each="review : ${reviewReservationList}">
+        <div class="reservation-review__review-guest">
+          <div class="reservation-review__review-profile">
+            <div class="reservation-review__review-profile-box">
+              <img class="reservation-review__review-profile-box-img"
+                   th:src="${review.getGuestProfileImg()}">
+            </div>
+            <div class="reservation-review__review-profile-text">
+              <div class="reservation-review__review-profile-text-name" th:text="${review.getGuestName()}"></div>
+              <div class="reservation-review__review-profile-text-info"
+                   th:text="${#temporals.format(review.getReviewRegDate(),'yyyy년 M월')}"></div>
+            </div>
           </div>
-          <div class="reservation-review__review-profile-text">
-            <div class="reservation-review__review-profile-text-name">어몽박</div>
-            <div class="reservation-review__review-profile-text-info">2021년 2월</div>
-          </div>
+          <div class="reservation-review__review-text" th:text="${review.getReviewContent()}"></div>
         </div>
-        <div class="reservation-review__review-text">
-          편안 그 자체
-        </div>
-      </div>
-      <div class="reservation-review__review-guest">
-        <div class="reservation-review__review-profile">
-          <div class="reservation-review__review-profile-box">
-            <img class="reservation-review__review-profile-box-img"
-                 th:src="@{/images/review/sky.jpeg}">
-          </div>
-          <div class="reservation-review__review-profile-text">
-            <div class="reservation-review__review-profile-text-name">실버스타</div>
-            <div class="reservation-review__review-profile-text-info">2021년 2월</div>
-          </div>
-        </div>
-        <div class="reservation-review__review-text">
-          최고예요!
-        </div>
-      </div>
-      <div class="reservation-review__review-guest">
-        <div class="reservation-review__review-profile">
-          <div class="reservation-review__review-profile-box">
-            <img class="reservation-review__review-profile-box-img"
-                 th:src="@{/images/review/sky.jpeg}">
-          </div>
-          <div class="reservation-review__review-profile-text">
-            <div class="reservation-review__review-profile-text-name">솜솜맘</div>
-            <div class="reservation-review__review-profile-text-info">2021년 2월</div>
-          </div>
-        </div>
-        <div class="reservation-review__review-text">
-          좋습니다~
-        </div>
-      </div>
-      <div class="reservation-review__review-guest">
-        <div class="reservation-review__review-profile">
-          <div class="reservation-review__review-profile-box">
-            <img class="reservation-review__review-profile-box-img"
-                 th:src="@{/images/review/sky.jpeg}">
-          </div>
-          <div class="reservation-review__review-profile-text">
-            <div class="reservation-review__review-profile-text-name">어스린</div>
-            <div class="reservation-review__review-profile-text-info">2021년 2월</div>
-          </div>
-        </div>
-        <div class="reservation-review__review-text">
-          굿 굿 굿!
-        </div>
-      </div>
+      </th:block>
     </div>
     <div class="reservation-review__review-all">
-      <button>후기 20개 모두 보기</button>
+      <button>
+        <span>후기 </span>
+        <span th:text="${reviewCount}"></span>
+        <span>개 모두 보기</span>
+      </button>
     </div>
 
     <!-- 모달창 -->
@@ -138,7 +103,12 @@
               <div class="reservation-review__star">
                 <img th:src="@{/images/wishlist/star.JPG}"/>
               </div>
-              <div>5.0점(후기 20개)</div>
+              <div>
+                <span th:text="${reviewScore}"></span>
+                <span>점(후기 </span>
+                <span th:text="${reviewCount}"></span>
+                <span>개)</span>
+              </div>
             </div>
             <div class="reservation-review__score-sub-modal">
               <div class="reservation-review__sub-box-modal">
@@ -146,10 +116,10 @@
                 <div class="reservation-review__sub-box-right-modal">
                   <div class="reservation-review__sub-box-right-bar-modal">
                     <span class="reservation-review__progressbar">
-                      <span class="reservation-review__gauge"></span>
+                      <span class="reservation-review__gauge" th:per="${reviewScoreClean}*100/5.0"></span>
                     </span>
                   </div>
-                  <div class="reservation-review__sub-box-right-score-modal">4.4</div>
+                  <div class="reservation-review__sub-box-right-score-modal" th:text="${reviewScoreClean}"></div>
                 </div>
               </div>
               <div class="reservation-review__sub-box-modal">
@@ -157,10 +127,10 @@
                 <div class="reservation-review__sub-box-right-modal">
                   <div class="reservation-review__sub-box-right-bar-modal">
                     <span class="reservation-review__progressbar">
-                      <span class="reservation-review__gauge"></span>
+                      <span class="reservation-review__gauge" th:per="${reviewScoreLocation}*100/5.0"></span>
                     </span>
                   </div>
-                  <div class="reservation-review__sub-box-right-score-modal">4.7</div>
+                  <div class="reservation-review__sub-box-right-score-modal" th:text="${reviewScoreLocation}"></div>
                 </div>
               </div>
               <div class="reservation-review__sub-box-modal">
@@ -168,85 +138,39 @@
                 <div class="reservation-review__sub-box-right-modal">
                   <div class="reservation-review__sub-box-right-bar-modal">
                     <span class="reservation-review__progressbar">
-                      <span class="reservation-review__gauge"></span>
+                      <span class="reservation-review__gauge" th:per="${reviewScoreService}*100/5.0"></span>
                     </span>
                   </div>
-                  <div class="reservation-review__sub-box-right-score-modal">5.0</div>
+                  <div class="reservation-review__sub-box-right-score-modal" th:text="${reviewScoreService}"></div>
                 </div>
               </div>
             </div>
           </div>
           <div class="reservation-review__modal-main-right">
             <div class="reservation-review__review-modal">
-              <th:block th:each="num : ${#numbers.sequence(1,2)}">
-                <div class="reservation-review__review-guest-modal">
+              <div class="reservation-review__review-guest-modal">
+                <th:block th:each="review : ${reviewHostList}">
                   <div class="reservation-review__review-profile">
                     <div class="reservation-review__review-profile-box">
                       <img class="reservation-review__review-profile-box-img"
-                           th:src="@{/images/review/sky.jpeg}">
+                           th:src="${review.getGuestProfileImg()}">
                     </div>
                     <div class="reservation-review__review-profile-text">
-                      <div class="reservation-review__review-profile-text-name">어몽박</div>
-                      <div class="reservation-review__review-profile-text-info">2021년 2월</div>
+                      <div class="reservation-review__review-profile-text-name"
+                           th:text="${review.getGuestName()}"></div>
+                      <div class="reservation-review__review-profile-text-info"
+                           th:text="${#temporals.format(review.getReviewRegDate(),'yyyy년 M월')}"></div>
                     </div>
                   </div>
-                  <div class="reservation-review__review-text">
-                    편안 그 자체
-                  </div>
-                </div>
-                <div class="reservation-review__review-guest-modal">
-                  <div class="reservation-review__review-profile">
-                    <div class="reservation-review__review-profile-box">
-                      <img class="reservation-review__review-profile-box-img"
-                           th:src="@{/images/review/sky.jpeg}">
-                    </div>
-                    <div class="reservation-review__review-profile-text">
-                      <div class="reservation-review__review-profile-text-name">실버스타</div>
-                      <div class="reservation-review__review-profile-text-info">2021년 2월</div>
-                    </div>
-                  </div>
-                  <div class="reservation-review__review-text">
-                    최고예요!
-                  </div>
-                </div>
-                <div class="reservation-review__review-guest-modal">
-                  <div class="reservation-review__review-profile">
-                    <div class="reservation-review__review-profile-box">
-                      <img class="reservation-review__review-profile-box-img"
-                           th:src="@{/images/review/sky.jpeg}">
-                    </div>
-                    <div class="reservation-review__review-profile-text">
-                      <div class="reservation-review__review-profile-text-name">솜솜맘</div>
-                      <div class="reservation-review__review-profile-text-info">2021년 2월</div>
-                    </div>
-                  </div>
-                  <div class="reservation-review__review-text">
-                    좋습니다~
-                  </div>
-                </div>
-                <div class="reservation-review__review-guest-modal">
-                  <div class="reservation-review__review-profile">
-                    <div class="reservation-review__review-profile-box">
-                      <img class="reservation-review__review-profile-box-img"
-                           th:src="@{/images/review/sky.jpeg}">
-                    </div>
-                    <div class="reservation-review__review-profile-text">
-                      <div class="reservation-review__review-profile-text-name">어스린</div>
-                      <div class="reservation-review__review-profile-text-info">2021년 2월</div>
-                    </div>
-                  </div>
-                  <div class="reservation-review__review-text">
-                    굿 굿 굿!
-                  </div>
-                </div>
-              </th:block>
+                  <div class="reservation-review__review-text" th:text="${review.getReviewContent()}"></div>
+                  <hr class="reservation-review__review-hr">
+                </th:block>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-
   </div>
 </th:block>
 

@@ -1,6 +1,11 @@
+body {
+  overflow-y: hidden;
+}
+
 .host-room-list__container {
   padding: 2rem;
   font-size: 0.9rem;
+  line-height: 1.2;
 }
 
 .host-room-list__title {
@@ -12,6 +17,12 @@
 
 .host-room-list__table-container {
   width: 100%;
+}
+
+.host-room-list__table-container > tbody {
+  display: block;
+  max-height: 30rem;
+  overflow-y: scroll;
 }
 
 .host-room-list__table-container > thead > .host-room-list__table-title,
