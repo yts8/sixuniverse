@@ -1,6 +1,6 @@
-package com.yts8.sixuniverse.config.auth.service;
+package com.yts8.sixuniverse.config.security.service;
 
-import com.yts8.sixuniverse.config.auth.dto.OAuthMember;
+import com.yts8.sixuniverse.config.security.dto.OAuthMember;
 import com.yts8.sixuniverse.member.dto.MemberDto;
 import com.yts8.sixuniverse.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
