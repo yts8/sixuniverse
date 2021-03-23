@@ -83,7 +83,7 @@
 
 
       <div class="room__detail-second-right-container">
-        <div class="room__detail-rule-subject">요금을 확인하려면 날짜를 입력하세요</div>
+        <div class="room__detail-rule-subject" id="reservation-box-subject">요금을 확인하려면 날짜를 입력하세요</div>
 
         <div class="room__detail-reservation-info">
           <div class="room__detail-check-in-out" id="update-date">
@@ -192,7 +192,10 @@
 
         <div class="room__detail-price-info-box">
           <div class="room__detail-price-info">
-            <div th:text="|1박당 요금 : ${room.price} |"></div>
+            <div>
+              <span th:text="|${room.price} x |"></span>
+              <span class="room__detail-days"></span>
+            </div>
             <div class="room__detail-total-price">총 요금</div>
           </div>
           <div class="room__detail-price-info">

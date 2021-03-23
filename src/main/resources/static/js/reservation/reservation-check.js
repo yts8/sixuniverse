@@ -2,6 +2,11 @@
   $(document).ready(function () {
 
     $('.reservation__save-date').click(function () {
+      const checkIn = new Date($('.reservation__check-in').html());
+      const checkOut = new Date($('.reservation__check-out').html());
+
+      const days = (checkOut.getTime() - checkIn.getTime()) / 1000 / 60 / 60 / 24;
+
       const header = "X-CSRF-TOKEN";
       const csrf = document.querySelector("#csrf").value;
 
@@ -22,9 +27,11 @@
         },
         success: function (result) {
           console.log(result);
+          $('#reservation-box-subject').html(result + '/' + days + '박')
           $('#before-btn').hide();
           $('#reservation-btn').show();
           $('.room__detail-price-info-box').show();
+          $('.room__detail-days').html(days + '박');
           $('.room__detail-total-price').html(result);
           $('.room__detail-price-commission').html(result * 0.1);
 
