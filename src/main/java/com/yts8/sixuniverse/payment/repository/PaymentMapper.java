@@ -7,4 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 public interface PaymentMapper {
   void paymentInsert(PaymentDto paymentDto);
 
+  PaymentDto findByReservationId(Long reservationId);
+
+  void paymentCancel(PaymentDto paymentDto);
+
 }

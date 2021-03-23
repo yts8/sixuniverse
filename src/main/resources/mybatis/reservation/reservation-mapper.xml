@@ -27,6 +27,7 @@
     update reservation
     set status = 'complete'
     where check_out <![CDATA[ < ]]> #{today}
+      and status = 'upcoming'
   </update>
 
   <update id="guestReservationUpdateRequest">
@@ -47,7 +48,7 @@
     where reservation_id = #{reservationId}
   </update>
 
-  <select id="findByUpdateReservationId" resultType="ReservationRoomDto">
+  <select id="findByUpdateReservationId" resultType="ReservationRoomPaymentDto">
     select reservation.reservation_id,
            reservation.room_id,
            reservation.status,
@@ -65,10 +66,11 @@
            join room on reservation.room_id = room.room_id
            join member m on room.member_id = m.member_id
            left outer join payment p on reservation.reservation_id = p.reservation_id
-    where reservation.update_target = #{reservationId} or reservation.reservation_id = #{reservationId};
+    where reservation.update_target = #{reservationId}
+       or reservation.reservation_id = #{reservationId};
   </select>
 
-  <select id="findByCancelReservationId" resultType="ReservationRoomDto">
+  <select id="findByCancelReservationId" resultType="ReservationRoomPaymentDto">
     select reservation.reservation_id,
            reservation.room_id,
            reservation.status,
@@ -81,7 +83,9 @@
            room.sub_address,
            title,
            m.username,
-           p.price
+           p.payment_id,
+           p.price,
+           p.commission
     from reservation
            join room on reservation.room_id = room.room_id
            join member m on room.member_id = m.member_id

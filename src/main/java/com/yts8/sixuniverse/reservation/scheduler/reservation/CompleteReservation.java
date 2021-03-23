@@ -1,4 +1,4 @@
-package com.yts8.sixuniverse.scheduler.reservation;
+package com.yts8.sixuniverse.reservation.scheduler.reservation;
 
 import com.yts8.sixuniverse.reservation.service.ReservationService;
 import lombok.RequiredArgsConstructor;

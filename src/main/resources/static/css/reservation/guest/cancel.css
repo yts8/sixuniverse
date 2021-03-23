@@ -74,7 +74,7 @@
 }
 
 .guest-reservation-cancel__next-btn {
-  width: 40px;
+  width: 70px;
   height: 15px;
   text-align: center;
   padding: 20px;
@@ -94,7 +94,7 @@
 
 .guest-reservation-cancel__room-info {
   display: flex;
-
+  margin-bottom: 10px;
 }
 
 .guest-reservation-cancel__room-address {

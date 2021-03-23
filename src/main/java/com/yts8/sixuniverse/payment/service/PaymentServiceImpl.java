@@ -15,4 +15,14 @@ public class PaymentServiceImpl implements PaymentService {
   public void paymentInsert(PaymentDto paymentDto) {
     paymentMapper.paymentInsert(paymentDto);
   }
+
+  @Override
+  public PaymentDto findByReservationId(Long reservationId) {
+    return paymentMapper.findByReservationId(reservationId);
+  }
+
+  @Override
+  public void paymentCancel(PaymentDto paymentDto) {
+    paymentMapper.paymentCancel(paymentDto);
+  }
 }

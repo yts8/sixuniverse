@@ -6,7 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 
 @Data
-public class ReservationRoomDto {
+public class ReservationRoomPaymentDto {
   private Long reservationId;
   private Long roomId;
   private String status;
@@ -24,5 +24,7 @@ public class ReservationRoomDto {
   private String subAddress;
   private String title;
   private String username;
+  private String paymentId;
   private int price;
+  private int commission;
 }

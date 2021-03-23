@@ -7,4 +7,16 @@
     values (#{paymentId}, #{reservationId}, #{price}, #{commission}, #{mileage}, #{discount}, #{memberCouponId}, #{paymentMethod})
   </insert>
 
+  <select id="findByReservationId" resultType="PaymentDto">
+    select payment_id, price, commission, payment_method
+    from payment
+    where reservation_id = #{reservationId}
+  </select>
+
+  <update id="paymentCancel">
+    update payment
+    set cancel_date = #{cancelDate}
+    where payment_id = #{paymentId}
+  </update>
+
 </mapper>
