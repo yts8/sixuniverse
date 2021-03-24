@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -75,18 +74,34 @@ public class ChatController {
 
     if (chatMessages != 0) {
       List<ChatDto> chatDto = chatService.findMessageByChatRef(chatRef);
-      List<MessageDto> lastChatDto = chatService.getLastChat(myMemberId);
-      model.addAttribute("chatDto", chatDto);
-      model.addAttribute("lastChat",lastChatDto);
-      System.out.println(lastChatDto);
-      System.out.println(chatDto);
-    }
 
+      ChatListDto chatListDto = new ChatListDto();
+      chatListDto.setChatRef(chatRef);
+      chatListDto.setMyMemberId(myMemberId);
+
+      hostId = chatService.findHostId(chatListDto);
+      String hostName = chatService.findUsernameById(hostId);
+
+      List<MessageDto> lastChatDto = chatService.getLastChat(myMemberId);
+
+      Long countReply = chatService.countReplyOfHost(hostId);
+      System.out.println("호스트 메세지가 있는 채팅방 갯수 : " + countReply);
+      Long countHostRoom = chatService.countHostRoom(hostId);
+      System.out.println("호스트가 속한 채팅방의 갯수 : " + countHostRoom);
+
+      double reply = ((double) countReply / countHostRoom) * 100;
+
+      model.addAttribute("reply", reply);
+      model.addAttribute("hostId", hostId);
+      model.addAttribute("hostName", hostName);
+      model.addAttribute("chatDto", chatDto);
+      model.addAttribute("lastChat", lastChatDto);
+    }
     model.addAttribute("hostId", hostId);
     model.addAttribute("chatRef", chatRef);
 
     return "chat/index";
-
   }
+
 
 }

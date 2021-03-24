@@ -1,10 +1,7 @@
 package com.yts8.sixuniverse.chat.service;
 
 
-import com.yts8.sixuniverse.chat.dto.ChatDto;
-import com.yts8.sixuniverse.chat.dto.ChatroomJoinDto;
-import com.yts8.sixuniverse.chat.dto.MemberIdDto;
-import com.yts8.sixuniverse.chat.dto.MessageDto;
+import com.yts8.sixuniverse.chat.dto.*;
 import com.yts8.sixuniverse.chat.repository.ChatMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -33,10 +30,29 @@ public class ChatServiceImpl implements ChatService {
   }
 
   @Override
-  public List<MessageDto> getLastChat(Long myMemberId) {return chatMapper.getLastChat(myMemberId);}
+  public List<MessageDto> getLastChat(Long myMemberId) {
+    return chatMapper.getLastChat(myMemberId);
+  }
 
   @Override
-  public Long countLastChat(Long chatRef) {return chatMapper.countLastChat(chatRef);}
+  public Long findHostId(ChatListDto chatListDto) {
+    return chatMapper.findHostId(chatListDto);
+  }
+
+  @Override
+  public String findUsernameById(Long hostId) {
+    return chatMapper.findUsernameById(hostId);
+  }
+
+  @Override
+  public Long countReplyOfHost(Long hostId) {
+    return chatMapper.countReplyOfHost(hostId);
+  }
+
+  @Override
+  public Long countHostRoom(Long hostId) {
+    return chatMapper.countHostRoom(hostId);
+  }
 
   @Override
   public void saveMessage(ChatDto chatDto) {
