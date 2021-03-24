@@ -38,6 +38,12 @@
         <div class="performance__chart-container">
           <div style="width:800px">
             <canvas id="myChart"></canvas>
+
+            <th:block th:each="monthlyIncome: ${incomeList}">
+              <input type="hidden" class="monthly-income-js" th:value="${monthlyIncome}"/>
+            </th:block>
+
+
           </div>
         </div>
 

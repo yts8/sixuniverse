@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -61,6 +63,12 @@ public class PerformanceServiceImpl implements PerformanceService {
   public int findByYearlyIncomeCount(Long memberId) {
 
     return performanceMapper.findByYearlyIncomeCount(memberId);
+  }
+
+  @Override
+  public int monthlyIncomeList(Long memberId, int interval) {
+
+    return performanceMapper.monthlyIncomeList(memberId, interval);
   }
 
 
