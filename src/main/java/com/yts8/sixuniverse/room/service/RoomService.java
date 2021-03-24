@@ -37,4 +37,6 @@ public interface RoomService {
 
   void remove(Long roomId);
 
+  void updateReadCount(Long roomId);
+
 }

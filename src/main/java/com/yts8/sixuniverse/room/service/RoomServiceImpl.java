@@ -94,4 +94,9 @@ public class RoomServiceImpl implements RoomService {
     roomFacilityService.removeByRoomId(roomId);
     roomImageService.removeByRoomId(roomId);
   }
+
+  @Override
+  public void updateReadCount(Long roomId) {
+    roomMapper.updateReadCount(roomId);
+  }
 }
