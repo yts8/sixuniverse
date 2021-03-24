@@ -15,7 +15,7 @@
     <section class="member-profile__side-container">
       <div class="member-profile__side-wrap">
         <div class="member-profile__img-wrap">
-          <img id="member-profile-img" th:src="${session.member.getProfileImg()}" alt="프로필">
+          <img id="member-profile-img" th:src="${memberDto.getProfileImg()}" alt="프로필">
           <div th:if="${memberDto.getMemberId().equals(session.member.getMemberId())}">
             <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
             <label for="update-profile-img">
@@ -43,7 +43,7 @@
     <div class="member-profile__info-container">
       <div class="member-profile__info-wrap">
         <h1 class="member-profile__info-title"
-            th:text="${session.member.getUsername()}">
+            th:text="${memberDto.getUsername()}">
           안녕하세요. 저는 사람입니다.
         </h1>
         <span class="member-profile__info-create-date"
