@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yts8.sixuniverse.roomHits.repository.RoomHitsMapper">
+
+  <insert id="save" parameterType="RoomHitsDto">
+    insert into room_hits (room_id, read_date)
+    values (#{roomId}, #{readDate})
+  </insert>
+
+  <select id="findByRoomIdAndReadDate" parameterType="RoomHitsDto" resultType="RoomHitsDto">
+    select *
+    from room_hits
+    where room_id = #{roomId}
+      and read_date = #{readDate}
+  </select>
+
+  <update id="updateHits">
+    update room_hits
+    set hits=hits + 1
+    where room_hits_id = #{roomHitsId}
+  </update>
+
+</mapper>
