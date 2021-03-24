@@ -122,5 +122,38 @@
     order by c.create_date desc
   </select>
 
+  <select id="findHostId" parameterType="ChatListDto" resultType="java.lang.Long">
+    select distinct g.member_id
+    from chatroom_join g
+           join chatroom_join h
+                on g.chat_ref = g.chat_ref
+    where g.chat_ref = #{chatRef}
+      and g.member_id not in (#{myMemberId})
+  </select>
+
+  <select id="findUsernameById" parameterType="java.lang.Long" resultType="java.lang.String">
+    select username
+    from member
+    where member_id = #{hostId}
+  </select>
+
+  <!--호스트의 메세지가 있는 채팅방갯수-->
+  <select id="countReplyOfHost" parameterType="java.lang.Long" resultType="java.lang.Long">
+    select count(chat_ref)
+    from (
+           select distinct r.chat_ref
+           from chatroom_join r
+                  join chat c
+                       on c.join_num = r.join_num
+           where (r.chat_ref in
+                  (select distinct chat_ref from chatroom_join where member_id = #{hostId}))
+             and c.member_id = #{hostId}) a
+  </select>
+  <!--호스트가 속한 채팅방의 갯수-->
+  <select id="countHostRoom" parameterType="java.lang.Long" resultType="java.lang.Long">
+    select distinct count(chat_ref)
+    from chatroom_join
+    where member_id = #{hostId};
+  </select>
 
 </mapper>
