@@ -2,7 +2,8 @@
 
 /* 세부 채팅창전체 영역*/
 .chat__chatroom {
-    width: 550px;
+    /*width: 550px;*/
+    width: 800px;
 }
 
 /* 채팅룸 헤더*/
@@ -12,7 +13,8 @@
 
 /* 채팅방 이름 영역*/
 .chat__chatroom-wrap {
-    width: 509px;
+    /* width: 509px;*/
+    width: 800px;
     height: 72px;
     padding: 0px 20px 0px 24px;
     display: flex;
@@ -40,10 +42,12 @@
 
 .chat__form-chat {
     width: 500px;
+
     height: 40px;
     border-style: solid;
     margin: 20px 10px 10px 20px;
-    padding: 5px;
+    margin: 20px;
+    padding: 5px 5px 5px 60px;
     border-radius: 20px;
     display: flex;
 
@@ -68,7 +72,8 @@
 /* 세부 채팅창전체 영역*/
 .chat__chatroom {
     /*         display: flex;*/
-    width: 550px;
+    /* width: 550px;*/
+    width: 770px;
     /*        flex-direction: row;
             align-items: center;*/
 
@@ -183,7 +188,8 @@
 
 /* 채팅방 헤더(채팅방이름)영역*/
 .chat__chatroom-wrap {
-    width: 509px;
+    /* width: 509px;*/
+    width: 765px;
     height: 72px;
     padding: 0px 20px 0px 24px;
     display: flex;
@@ -253,7 +259,7 @@
     height: 45px;
     position: static;
     border-radius: 50%;
-    padding-right: 4px;
+   /* padding-right: 4px;*/
 }
 
 /* 보내는 메세지 내용 영역(사진 제외)*/
@@ -261,7 +267,7 @@
 .chat__send-chat-content {
     width: 473px;
     height: 23px;
-    display: contents;
+    /* display: contents;*/
 }
 
 /* 보내는 사람 이름*/
@@ -293,9 +299,15 @@
 /* 받은 메세지 */
 
 .chat__receive-chat-container {
-    display: flex;
+
+    /*float: right;*/ /*여기 추가*/
     /*height: 80px;
     margin: 10px;*/
+    display: flex;
+    float: right;
+    height: 80px;
+    /*margin: 10px;*/
+    margin: 10px 55px 10px 10px;
 }
 
 /* 상대방 이미지*/
@@ -312,7 +324,7 @@
     width: 473px;
     height: 23px;
     text-align: right;
-    display: contents; /* 여기 추가 */
+    display: inline-flex;
 
 }
 

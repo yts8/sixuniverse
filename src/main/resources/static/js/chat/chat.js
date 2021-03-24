@@ -1,43 +1,4 @@
 (() => {
-
-  /* const csrf = document.querySelector("#csrf");
-    await fetch(`http://localhost:8080/api/member/update/${id}`, {
-       method: "post",
-       headers: {
-         "Content-Type": "application/json",
-         "X-CSRF-TOKEN": csrf
-       },
-       body: JSON.stringify({
-         name: "이름"
-       })
-     })*/
-// Element
-  const chatRoomEls = document.querySelectorAll(".chatroom-list-frame-js");
-
-  // Handler
-  const handleChatRoomClick = async (e) => {
-    const chatRoomEl = e.currentTarget;
-    const myMemberId = chatRoomEl.dataset.myMemberId;
-
-    const res = await fetch(`http://localhost:8080/api/chat/${myMemberId}`, {
-      method: "GET",
-    })
-    const chatDto = await res.json();
-
-    for (let chat of chatDto) {
-      console.log(chat.chatRef)
-    }
-
-  }
-
-  const init = () => {
-    chatRoomEls.forEach(chatRoomEl => {
-      chatRoomEl.addEventListener("click", handleChatRoomClick)
-    })
-  }
-  init();
-
-
   let ws;
 
   function wsOpen() {
@@ -68,7 +29,7 @@
           if (d.memberId === parseInt($("#memberId").val())) {
             $(".chatroom-content-js").append("<div class='chat__send-chat-container'><img class=\"chat__sender-img\" src=\"https://a0.muscache.com/defaults/user_pic-225x225.png?v=3\"> <div class='chat__send-chat-content'>" + "<span class='chat__sender'>" + d.username + "</span>" + "<span class='chat__send-time'>" + d.date + "</span> <div class='chat__send-chat'>" + d.msg + "</div> </div> </div>");
           } else {
-            $(".chatroom-content-js").append("<div class='chat__receive-chat-container'><div class='chat__receive-chat-content'><div><div class='chat__send-chat-content'><span class='chat__receive-time'> " + d.date + "</span><span class='chat__receiver\'> " + d.username + "</span><div class='chat__receive-chat'>" + d.msg + "</div></div></div></div><img class=\"chat__sender-img\" src=\"https://a0.muscache.com/defaults/user_pic-225x225.png?v=3\"></div>")
+            $(".chatroom-content-js").append("<div class='chat__receive-chat-container'><div class='chat__receive-chat-content'><div class='chat__receive-chat-content'><div><span class='chat__receive-time'> " + d.date + "</span><span class='chat__receiver\'> " + d.username + "</span><div class='chat__receive-chat'>" + d.msg + "</div></div></div></div><img class=\"chat__sender-img\" src=\"https://a0.muscache.com/defaults/user_pic-225x225.png?v=3\"></div>")
           }
         }
       }
@@ -83,7 +44,6 @@
 
   }
 
-
   function send() {
     $(".form-chat-js").show();
 
@@ -97,6 +57,8 @@
     ws.send(JSON.stringify(option))
     $('.message-js').val("");
   }
+
+
 
 
 })()
