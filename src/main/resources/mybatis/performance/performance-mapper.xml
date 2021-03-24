@@ -85,5 +85,16 @@
         ]]>;
   </select>
 
+  <!--  findByMonthlyIncome이랑 합칠지 생각해보기-->
+  <select id="monthlyIncomeList" resultType="int">
+    SELECT ifnull(sum(price-commission),0) income
+    FROM payment
+           join reservation on reservation.reservation_id = payment.reservation_id
+    where member_id = #{memberId}
+      and  <![CDATA[ (now() - interval (#{interval}+1) month) < payment.create_date < (now() + interval -#{interval} month)
+      and (reservation.status = 'complete')
+      and payment.cancel_date is null]]>;;
+  </select>
+
 
 </mapper>

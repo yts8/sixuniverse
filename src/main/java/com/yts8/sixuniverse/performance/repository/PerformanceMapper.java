@@ -2,6 +2,8 @@ package com.yts8.sixuniverse.performance.repository;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface PerformanceMapper {
 
@@ -22,5 +24,7 @@ public interface PerformanceMapper {
   int findByYearlyIncome(Long memberId);
 
   int findByYearlyIncomeCount(Long memberId);
+
+  int monthlyIncomeList(Long memberId, int interval);
 
 }
