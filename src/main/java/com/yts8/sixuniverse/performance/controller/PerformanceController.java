@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -25,7 +27,7 @@ public class PerformanceController {
 
     //연 매출
     int yearlyIncomeCount = performanceService.findByYearlyIncomeCount(member.getMemberId());
-    System.out.println("yearlyIncomeCount = " + yearlyIncomeCount);
+//    System.out.println("yearlyIncomeCount = " + yearlyIncomeCount);
     if (yearlyIncomeCount != 0) {
       int yearlyIncome = performanceService.findByYearlyIncome(member.getMemberId());
       NumberFormat formatter = NumberFormat.getNumberInstance();
@@ -33,6 +35,14 @@ public class PerformanceController {
     } else {
       model.addAttribute("yearlyIncome", 0);
     }
+
+    //월별 매출 -> 차트
+    ArrayList<Integer> incomeList = new ArrayList<Integer>();
+    for (int interval = 0; interval < 12; interval++) {
+      int i = performanceService.monthlyIncomeList(member.getMemberId(), interval);
+      incomeList.add(i);
+    }
+    model.addAttribute("incomeList", incomeList);
     return "performance/income";
   }
 

@@ -26,7 +26,7 @@
       <div class="guest-reservation-cancel__content">
         <div class="guest-reservation-cancel__title">취소하려는 이유가 무엇인가요?</div>
 
-        <form th:action="@{|/reservation/guest/cancel/confirm/${reservationId}|}" method="post">
+        <form th:action="@{|/reservation/guest/cancel/confirm/${reservationRPDto.reservationId}|}" method="post">
         <div class="guest-reservation-cancel__small-box">
           <div class="guest-reservation-cancel__sub-title">이유를 선택하세요</div>
 
@@ -53,32 +53,33 @@
 
       <div class="guest-reservation-cancel__reservation-box">
         <div class="guest-reservation-cancel__room-info">
-          <div class="guest-reservation-cancel__room-address">숙소주소</div>
+          <div class="guest-reservation-cancel__room-address" th:text="${reservationRPDto.address + reservationRPDto.subAddress}">숙소주소</div>
           <div>숙소사진</div>
         </div>
         <div class="guest-reservation-cancel__info-align">
           <i class="fas fa-user-friends"></i>
           <div class="guest-reservation-cancel__content">
-            <span>인원 몇 명</span>
+            <span th:text="|성인 : ${reservationRPDto.adult} 명, 아동 : ${reservationRPDto.kid} 명, 유아 : ${reservationRPDto.infant}|">인원 몇 명</span>
+            <div th:text="|총 인원 : ${reservationRPDto.adult + reservationRPDto.kid + reservationRPDto.infant}|"></div>
           </div>
         </div>
         <div class="guest-reservation-cancel__info-align">
           <i class="far fa-calendar-alt"></i>
           <div class="guest-reservation-cancel__content">
-            <span>예약날짜</span>
+            <span th:text="|${reservationRPDto.checkIn} ~ ${reservationRPDto.checkOut}|">예약날짜</span>
           </div>
         </div>
         <div class="guest-reservation-cancel__price-info">
           <div class="guest-reservation-cancel__info-align2">
-            <span class="guest-reservation-cancel__price-title">변경 전 총 예약금</span>
+            <span class="guest-reservation-cancel__price-title">결제한 금액</span>
             <div class="guest-reservation-cancel__info-content">
-              <span>￦ 111111</span>
+              <span th:text="${reservationRPDto.price}">￦ 111111</span>
             </div>
           </div>
           <div class="guest-reservation-cancel__info-align">
-            <span class="guest-reservation-cancel__total-refund">총 환불금액</span>
+            <span class="guest-reservation-cancel__total-refund">총 환불금액 (수수료 제외)</span>
             <div class="guest-reservation-cancel__info-content">
-              <span>￦ 111111</span>
+              <span th:text="${reservationRPDto.price - reservationRPDto.commission}">￦ 111111</span>
             </div>
           </div>
         </div>

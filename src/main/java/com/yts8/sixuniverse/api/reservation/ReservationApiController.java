@@ -1,8 +1,12 @@
 package com.yts8.sixuniverse.api.reservation;
 
+import com.siot.IamportRestClient.exception.IamportResponseException;
+import com.siot.IamportRestClient.request.CancelData;
+import com.yts8.sixuniverse.payment.dto.PaymentDto;
 import com.yts8.sixuniverse.payment.service.PaymentService;
 import com.yts8.sixuniverse.reservation.dto.ReservationDto;
-import com.yts8.sixuniverse.reservation.dto.ReservationRoomDto;
+import com.yts8.sixuniverse.reservation.dto.ReservationRoomPaymentDto;
+import com.yts8.sixuniverse.reservation.service.IamportClient;
 import com.yts8.sixuniverse.reservation.service.ReservationService;
 import com.yts8.sixuniverse.reservationDate.service.ReservationDateService;
 import com.yts8.sixuniverse.room.dto.RoomDto;
@@ -11,10 +15,12 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,22 +32,8 @@ public class ReservationApiController {
   private final ReservationDateService reservationDateService;
   private final PaymentService paymentService;
 
-  @PostMapping("/guest/update/today")
-  public @ResponseBody
-  boolean updateDate(@RequestBody LocalDate checkIn) {
-    boolean result = false;
-
-    LocalDate today = LocalDate.now();
-
-    if (checkIn.equals(today)) {
-      result = true;
-    }
-    return result;
-  }
-
-
   @PostMapping("/guest/update/complete")
-  public @ResponseBody void guestReservationUpdateComplete(@RequestBody ReservationDto reservationDto) {
+  public void guestReservationUpdateComplete(@RequestBody ReservationDto reservationDto) {
     Long reservationId = reservationDto.getReservationId();
     reservationService.guestReservationUpdateRequest(reservationId);
 
@@ -54,31 +46,21 @@ public class ReservationApiController {
 
   }
 
-  @PostMapping("/guest/cancel")
-  public @ResponseBody void cancel(@RequestBody Long reservationId) {
-    ReservationDto reservationDto = new ReservationDto();
-    reservationDto.setReservationId(reservationId);
-    reservationDto.setStatus("cancel");
-    reservationDto.setCancelDate(LocalDateTime.now());
-
-    reservationService.guestReservationCancel(reservationDto);
-    reservationDateService.guestReservationDateDelete(reservationId);
-  }
-
   @GetMapping("/update/info/{reservationId}")
-  public List<ReservationRoomDto> listUpdateInfo(@PathVariable Long reservationId) {
+  public List<ReservationRoomPaymentDto> listUpdateInfo(@PathVariable Long reservationId) {
 
     return reservationService.findByUpdateReservationId(reservationId);
   }
 
   @GetMapping("/cancel/info/{reservationId}")
-  public ReservationRoomDto listCancelInfo(@PathVariable Long reservationId) {
+  public ReservationRoomPaymentDto listCancelInfo(@PathVariable Long reservationId) {
 
+    System.out.println(reservationService.findByCancelReservationId(reservationId));
     return reservationService.findByCancelReservationId(reservationId);
   }
 
   @PostMapping("/before")
-  public @ResponseBody int reservationCheck(@RequestBody ReservationDto reservationDto) {
+  public int reservationCheck(@RequestBody ReservationDto reservationDto) {
     LocalDate checkIn = reservationDto.getCheckIn();
     LocalDate checkOut = reservationDto.getCheckOut();
 
@@ -93,6 +75,34 @@ public class ReservationApiController {
 
   }
 
+  @PostMapping("/guest/pay/cancel")
+  public void reservationPayCancel(@RequestBody Map<String, String> json) throws IOException, IamportResponseException {
+    String apiKey = "2408991764225801"; // 아임포트 키
+    String apiSecret = "smb4OZF2sLSpFZ9nomAWdF6PDjwwhd8JzjOojtqMejbUikhHHSDVxKKa3hGluP549TttmUfBdqvvLNct";
+    IamportClient iamportClient = new IamportClient(apiKey, apiSecret);
+
+    CancelData cancelData = new CancelData(json.get("imp_uid"), true);
+    iamportClient.cancelPaymentByImpUid(cancelData);
+  }
+
+
+  @PostMapping("/guest/cancel")
+  public void cancel(@RequestBody Map<String, String> json) {
+    Long reservationId = Long.parseLong(json.get("reservationId"));
+
+    ReservationDto reservationDto = new ReservationDto();
+    reservationDto.setReservationId(reservationId);
+    reservationDto.setStatus("cancel");
+    reservationDto.setCancelDate(LocalDateTime.now());
+
+    reservationService.guestReservationCancel(reservationDto);
+    reservationDateService.guestReservationDateDelete(reservationId);
+
+    PaymentDto paymentDto = new PaymentDto();
+    paymentDto.setPaymentId(json.get("paymentId"));
+    paymentDto.setCancelDate(LocalDateTime.now());
+    paymentService.paymentCancel(paymentDto);
+  }
 
 }
 

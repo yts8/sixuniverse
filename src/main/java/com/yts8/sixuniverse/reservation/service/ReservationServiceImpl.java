@@ -1,7 +1,7 @@
 package com.yts8.sixuniverse.reservation.service;
 
 import com.yts8.sixuniverse.reservation.dto.ReservationDto;
-import com.yts8.sixuniverse.reservation.dto.ReservationRoomDto;
+import com.yts8.sixuniverse.reservation.dto.ReservationRoomPaymentDto;
 import com.yts8.sixuniverse.reservation.repository.ReservationMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -51,12 +51,12 @@ public class ReservationServiceImpl implements ReservationService {
   }
 
   @Override
-  public List<ReservationRoomDto> findByUpdateReservationId(Long reservationId) {
+  public List<ReservationRoomPaymentDto> findByUpdateReservationId(Long reservationId) {
     return reservationMapper.findByUpdateReservationId(reservationId);
   }
 
   @Override
-  public ReservationRoomDto findByCancelReservationId(Long reservationId) {
+  public ReservationRoomPaymentDto findByCancelReservationId(Long reservationId) {
     return reservationMapper.findByCancelReservationId(reservationId);
   }
 

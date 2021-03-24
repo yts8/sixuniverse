@@ -1,4 +1,4 @@
-package com.yts8.sixuniverse.config.auth.dto;
+package com.yts8.sixuniverse.config.security.dto;
 
 import com.yts8.sixuniverse.member.dto.MemberDto;
 

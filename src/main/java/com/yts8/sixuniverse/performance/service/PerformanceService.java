@@ -1,5 +1,7 @@
 package com.yts8.sixuniverse.performance.service;
 
+import java.util.List;
+
 public interface PerformanceService {
 
   double findByReviewScore(Long memberId);
@@ -19,4 +21,6 @@ public interface PerformanceService {
   int findByYearlyIncome(Long memberId);
 
   int findByYearlyIncomeCount(Long memberId);
+
+  int monthlyIncomeList(Long memberId, int interval);
 }

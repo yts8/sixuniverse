@@ -1,6 +1,6 @@
-package com.yts8.sixuniverse.config.auth.provider;
+package com.yts8.sixuniverse.config.security.provider;
 
-import com.yts8.sixuniverse.config.auth.service.MemberContext;
+import com.yts8.sixuniverse.config.security.service.MemberContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;

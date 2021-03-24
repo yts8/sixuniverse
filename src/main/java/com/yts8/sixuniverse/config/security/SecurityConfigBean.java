@@ -1,4 +1,4 @@
-package com.yts8.sixuniverse.config.auth;
+package com.yts8.sixuniverse.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

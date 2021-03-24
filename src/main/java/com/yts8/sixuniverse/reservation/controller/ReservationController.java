@@ -6,6 +6,7 @@ import com.yts8.sixuniverse.member.service.MemberService;
 import com.yts8.sixuniverse.payment.dto.PaymentDto;
 import com.yts8.sixuniverse.payment.service.PaymentService;
 import com.yts8.sixuniverse.reservation.dto.ReservationDto;
+import com.yts8.sixuniverse.reservation.dto.ReservationRoomPaymentDto;
 import com.yts8.sixuniverse.reservation.service.ReservationService;
 import com.yts8.sixuniverse.reservationDate.dto.ReservationDateDto;
 import com.yts8.sixuniverse.reservationDate.service.ReservationDateService;
@@ -21,8 +22,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.DataInput;
-import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -212,14 +211,18 @@ public class ReservationController {
 
   @GetMapping("/guest/cancel/reason/{reservationId}")
   public String guestReservationCancel(Model model, @PathVariable Long reservationId) {
+    ReservationRoomPaymentDto reservationRoomPaymentDto = reservationService.findByCancelReservationId(reservationId);
 
-    model.addAttribute("reservationId", reservationId);
+    model.addAttribute("reservationRPDto", reservationRoomPaymentDto);
 
     return "reservation/guest/cancel";
   }
 
   @PostMapping("/guest/cancel/confirm/{reservationId}")
-  public String guestReservationCancelConfirm(@PathVariable Long reservationId) {
+  public String guestReservationCancelConfirm(Model model, @PathVariable Long reservationId) {
+    ReservationRoomPaymentDto reservationRoomPaymentDto = reservationService.findByCancelReservationId(reservationId);
+
+    model.addAttribute("reservationRPDto", reservationRoomPaymentDto);
 
     return "reservation/guest/cancel-confirm";
   }

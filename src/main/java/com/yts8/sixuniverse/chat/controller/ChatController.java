@@ -85,11 +85,11 @@ public class ChatController {
       List<MessageDto> lastChatDto = chatService.getLastChat(myMemberId);
 
       Long countReply = chatService.countReplyOfHost(hostId);
-      System.out.println("호스트 메세지가 있는 채팅방 갯수 : " +countReply);
+      System.out.println("호스트 메세지가 있는 채팅방 갯수 : " + countReply);
       Long countHostRoom = chatService.countHostRoom(hostId);
       System.out.println("호스트가 속한 채팅방의 갯수 : " + countHostRoom);
 
-      double reply = ((double)countReply / countHostRoom)*100 ;
+      double reply = ((double) countReply / countHostRoom) * 100;
 
       model.addAttribute("reply", reply);
       model.addAttribute("hostId", hostId);
