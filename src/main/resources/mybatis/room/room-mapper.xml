@@ -108,10 +108,4 @@
     where room_id = #{roomId}
   </delete>
 
-  <update id="updateReadCount">
-    update room
-    set read_count = read_count + 1
-    where room_id = #{roomdId}
-  </update>
-
 </mapper>

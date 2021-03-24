@@ -38,6 +38,4 @@ public interface RoomMapper {
   void updateExpiry(LocalDateTime renewDate);
 
   void remove(Long roomId);
-
-  void updateReadCount(Long roomId);
 }
