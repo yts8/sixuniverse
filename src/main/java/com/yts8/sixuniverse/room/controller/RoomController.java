@@ -30,6 +30,8 @@ public class RoomController {
   public String detail(HttpSession session, HttpServletRequest request, Model model, @PathVariable Long roomId) {
     model.addAttribute("title", "숙소 상세 정보");
 
+    roomService.updateReadCount(roomId);
+
     MemberDto member = (MemberDto) session.getAttribute("member");
     RoomDto roomDto = roomService.findById(roomId);
     model.addAttribute("room", roomDto);

@@ -64,8 +64,6 @@
 }
 
 .guest-reservation-cancel__back-btn {
-  width: 38px;
-  height: 13px;
   text-align: center;
   margin-right: 10px;
   padding: 20px;
@@ -74,8 +72,6 @@
 }
 
 .guest-reservation-cancel__next-btn {
-  width: 70px;
-  height: 15px;
   text-align: center;
   padding: 20px;
   border-radius: 10px;
