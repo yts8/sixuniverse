@@ -121,6 +121,11 @@
   margin-bottom: 10px;
 }
 
+.header__people {
+  display: flex;
+  justify-content: space-between;
+}
+
 .header__guest-title {
   display: table-cell;
   font-weight: bold;
@@ -132,8 +137,8 @@
 
 .header__number-right {
   margin-left: 40px;
-  display: table-cell;
-  float: right;
+  /*display: table-cell;*/
+  /*float: right;*/
 }
 
 .header__guest-number {

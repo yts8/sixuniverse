@@ -58,11 +58,6 @@ public class ReservationServiceImpl implements ReservationService {
   }
 
   @Override
-  public ReservationDto findByUpdateTarget(Long reservationId) {
-    return reservationMapper.findByUpdateTarget(reservationId);
-  }
-
-  @Override
   public ReviewDto findByRoomIdAndMemberId(ReservationDto reservationDto) {
     return reservationMapper.findByRoomIdAndMemberId(reservationDto);
   }
@@ -75,6 +70,16 @@ public class ReservationServiceImpl implements ReservationService {
   @Override
   public ReservationRoomPaymentDto findByCancelReservationId(Long reservationId) {
     return reservationMapper.findByCancelReservationId(reservationId);
+  }
+
+  @Override
+  public void hostUpdate(ReservationDto reservationDto) {
+    reservationMapper.hostUpdate(reservationDto);
+  }
+
+  @Override
+  public void hostUpdateNo(Long reservationId) {
+    reservationMapper.hostUpdateNo(reservationId);
   }
 
 

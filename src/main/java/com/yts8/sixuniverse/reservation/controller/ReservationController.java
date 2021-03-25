@@ -7,6 +7,7 @@ import com.yts8.sixuniverse.payment.dto.PaymentDto;
 import com.yts8.sixuniverse.payment.service.PaymentService;
 import com.yts8.sixuniverse.reservation.dto.ReservationDto;
 import com.yts8.sixuniverse.reservation.dto.HostReservationDto;
+import com.yts8.sixuniverse.reservation.dto.ReservationRoomPaymentDto;
 import com.yts8.sixuniverse.reservation.service.ReservationService;
 import com.yts8.sixuniverse.reservationDate.dto.ReservationDateDto;
 import com.yts8.sixuniverse.reservationDate.service.ReservationDateService;
@@ -22,7 +23,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.Period;
@@ -124,10 +124,13 @@ public class ReservationController {
       roomImageList.add(roomImageDto);
     }
 
+    List<ReservationRoomPaymentDto> reservationRPDto = reservationService.findByUpdateReservationId(reservationDto.getReservationId());
+
     model.addAttribute("status", status);
     model.addAttribute("roomList", roomList);
     model.addAttribute("roomImageList", roomImageList);
     model.addAttribute("reservationList", reservationList);
+    model.addAttribute("reservationRPDto", reservationRPDto);
 
     return "reservation/guest/list";
   }
@@ -209,14 +212,18 @@ public class ReservationController {
 
   @GetMapping("/guest/cancel/reason/{reservationId}")
   public String guestReservationCancel(Model model, @PathVariable Long reservationId) {
+    ReservationRoomPaymentDto reservationRoomPaymentDto = reservationService.findByCancelReservationId(reservationId);
 
-    model.addAttribute("reservationId", reservationId);
+    model.addAttribute("reservationRPDto", reservationRoomPaymentDto);
 
     return "reservation/guest/cancel";
   }
 
   @PostMapping("/guest/cancel/confirm/{reservationId}")
-  public String guestReservationCancelConfirm(@PathVariable Long reservationId) {
+  public String guestReservationCancelConfirm(Model model, @PathVariable Long reservationId) {
+    ReservationRoomPaymentDto reservationRoomPaymentDto = reservationService.findByCancelReservationId(reservationId);
+
+    model.addAttribute("reservationRPDto", reservationRoomPaymentDto);
 
     return "reservation/guest/cancel-confirm";
   }

@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -101,6 +102,19 @@ public class ReservationApiController {
     paymentDto.setPaymentId(json.get("paymentId"));
     paymentDto.setCancelDate(LocalDateTime.now());
     paymentService.paymentCancel(paymentDto);
+  }
+
+  @PostMapping("/host/update/update-ok")
+  public String updateOk(@RequestBody ReservationDto reservationDto) {
+    reservationService.hostUpdate(reservationDto);
+    return "ok";
+  }
+
+  @PostMapping("/host/update/update-no")
+  public String updateNo(@RequestBody ReservationDto reservationDto) {
+    reservationService.hostUpdate(reservationDto);
+    reservationService.hostUpdateNo(reservationDto.getReservationId());
+    return "no";
   }
 
 }
