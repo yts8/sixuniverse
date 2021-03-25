@@ -1,8 +1,9 @@
 package com.yts8.sixuniverse.reservation.service;
 
 import com.yts8.sixuniverse.reservation.dto.ReservationDto;
-import com.yts8.sixuniverse.reservation.dto.ReservationRoomPaymentDto;
+import com.yts8.sixuniverse.reservation.dto.HostReservationDto;
 import com.yts8.sixuniverse.reservation.repository.ReservationMapper;
+import com.yts8.sixuniverse.review.dto.ReviewDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,11 @@ public class ReservationServiceImpl implements ReservationService {
   }
 
   @Override
+  public List<HostReservationDto> hostReservationList(ReservationDto reservationDto) {
+    return reservationMapper.hostReservationList(reservationDto);
+  }
+
+  @Override
   public void reservationCheckOut(LocalDate today) {
     reservationMapper.reservationCheckOut(today);
   }
@@ -51,13 +57,14 @@ public class ReservationServiceImpl implements ReservationService {
   }
 
   @Override
-  public List<ReservationRoomPaymentDto> findByUpdateReservationId(Long reservationId) {
-    return reservationMapper.findByUpdateReservationId(reservationId);
+  public ReservationDto findByUpdateTarget(Long reservationId) {
+    return reservationMapper.findByUpdateTarget(reservationId);
   }
 
   @Override
-  public ReservationRoomPaymentDto findByCancelReservationId(Long reservationId) {
-    return reservationMapper.findByCancelReservationId(reservationId);
+  public ReviewDto findByRoomIdAndMemberId(ReservationDto reservationDto) {
+    return reservationMapper.findByRoomIdAndMemberId(reservationDto);
   }
+
 
 }

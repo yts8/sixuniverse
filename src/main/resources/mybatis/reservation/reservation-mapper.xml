@@ -17,6 +17,37 @@
     order by check_in
   </select>
 
+  <select id="hostReservationList" parameterType="ReservationDto" resultType="HostReservationDto">
+    select r.status,
+    room.room_id,
+    room.title,
+    room.price,
+    r.reservation_id,
+    r.member_id,
+    r.check_in,
+    r.check_out,
+    r.create_date,
+    r.adult,
+    r.kid,
+    r.infant
+    from room
+    join reservation r on room.room_id = r.room_id
+    join payment p on r.reservation_id = p.reservation_id
+    where room.member_id = #{memberId}
+    <if test='!status.equals("all")'>
+      and r.status = #{status};
+    </if>
+  </select>
+
+  <select id="findByRoomIdAndMemberId" parameterType="ReservationDto" resultType="ReservationDto">
+    select review.reply_content, review.reply_reg_date
+    from review
+           join reservation r on r.reservation_id = review.reservation_id
+           join payment p on p.reservation_id = r.reservation_id
+    where r.room_id = #{roomId}
+      and member_id = #{memberId};
+  </select>
+
   <select id="findById" parameterType="ReservationDateDto" resultType="ReservationDto">
     select *
     from reservation
@@ -92,5 +123,6 @@
            join payment p on reservation.reservation_id = p.reservation_id
     where reservation.reservation_id = #{reservationId}
   </select>
+
 
 </mapper>

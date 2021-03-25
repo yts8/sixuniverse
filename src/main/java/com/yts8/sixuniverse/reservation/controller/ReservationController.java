@@ -6,10 +6,12 @@ import com.yts8.sixuniverse.member.service.MemberService;
 import com.yts8.sixuniverse.payment.dto.PaymentDto;
 import com.yts8.sixuniverse.payment.service.PaymentService;
 import com.yts8.sixuniverse.reservation.dto.ReservationDto;
-import com.yts8.sixuniverse.reservation.dto.ReservationRoomPaymentDto;
+import com.yts8.sixuniverse.reservation.dto.HostReservationDto;
 import com.yts8.sixuniverse.reservation.service.ReservationService;
 import com.yts8.sixuniverse.reservationDate.dto.ReservationDateDto;
 import com.yts8.sixuniverse.reservationDate.service.ReservationDateService;
+import com.yts8.sixuniverse.review.dto.ReviewDto;
+import com.yts8.sixuniverse.review.service.ReviewService;
 import com.yts8.sixuniverse.room.dto.RoomDto;
 import com.yts8.sixuniverse.room.service.RoomService;
 import com.yts8.sixuniverse.roomImage.dto.RoomImageDto;
@@ -39,6 +41,7 @@ public class ReservationController {
   private final ReservationDateService reservationDateService;
   private final RoomImageService roomImageService;
   private final PaymentService paymentService;
+  private final ReviewService reviewService;
 
   @PostMapping("/{roomId}")
   public String reservation(HttpSession session, Model model,
@@ -166,11 +169,6 @@ public class ReservationController {
     return "reservation/guest/detail-info";
   }
 
-  @GetMapping("/host/list")
-  public String reservationHost() {
-
-    return "reservation/host/list";
-  }
 
   @GetMapping("/guest/update/{reservationId}")
   public String guestReservationUpdate(Model model, @PathVariable Long reservationId) {
@@ -211,18 +209,14 @@ public class ReservationController {
 
   @GetMapping("/guest/cancel/reason/{reservationId}")
   public String guestReservationCancel(Model model, @PathVariable Long reservationId) {
-    ReservationRoomPaymentDto reservationRoomPaymentDto = reservationService.findByCancelReservationId(reservationId);
 
-    model.addAttribute("reservationRPDto", reservationRoomPaymentDto);
+    model.addAttribute("reservationId", reservationId);
 
     return "reservation/guest/cancel";
   }
 
   @PostMapping("/guest/cancel/confirm/{reservationId}")
-  public String guestReservationCancelConfirm(Model model, @PathVariable Long reservationId) {
-    ReservationRoomPaymentDto reservationRoomPaymentDto = reservationService.findByCancelReservationId(reservationId);
-
-    model.addAttribute("reservationRPDto", reservationRoomPaymentDto);
+  public String guestReservationCancelConfirm(@PathVariable Long reservationId) {
 
     return "reservation/guest/cancel-confirm";
   }
@@ -310,8 +304,60 @@ public class ReservationController {
     return "reservation/guest/complete";
   }
 
-  @GetMapping("/host/detail-info")
-  public String reservationHostDetail() {
+  @GetMapping("/host/list")
+  public String hostReservation() {
+
+    return "redirect:/reservation/host/list/upcoming";
+  }
+
+  @GetMapping("/host/list/{status}")
+  public String hostReservation(HttpSession session, Model model, @PathVariable String status) {
+    MemberDto memberDto = (MemberDto) session.getAttribute("member");
+    Long memberId = memberDto.getMemberId();
+
+
+    ReservationDto reservationDto = new ReservationDto();
+    reservationDto.setMemberId(memberId);
+    reservationDto.setStatus(status);
+
+
+    List<HostReservationDto> hostReservationList = reservationService.hostReservationList(reservationDto);
+
+    List<RoomDto> roomList = new ArrayList<>();
+
+    List<Integer> dateSub = new ArrayList<>();
+
+    for (HostReservationDto reservation : hostReservationList) {
+      Long roomId = reservation.getRoomId();
+
+      RoomDto roomDto = roomService.findById(roomId);
+      roomList.add(roomDto);
+
+      dateSub.add(reservation.getCheckOut().compareTo(reservation.getCheckIn()));
+
+    }
+
+    model.addAttribute("status", status);
+    model.addAttribute("roomList", roomList);
+    model.addAttribute("hostReservationList", hostReservationList);
+    model.addAttribute("dateSub", dateSub);
+
+    return "reservation/host/list";
+  }
+
+  @GetMapping("/host/detail-info/{reservationId}")
+  public String hostDetail(HttpServletRequest request, Model model, @PathVariable Long reservationId) {
+
+    ReservationDto reservationDto = reservationService.findById(reservationId);
+
+    RoomDto roomDto = roomService.findById(reservationDto.getRoomId());
+    MemberDto memberDto = memberService.findById(reservationDto.getMemberId());
+    ReviewDto reviewDto = reservationService.findByRoomIdAndMemberId(reservationDto);
+
+    model.addAttribute("room", roomDto);
+    model.addAttribute("member", memberDto);
+    model.addAttribute("reservation", reservationDto);
+    model.addAttribute("review", reviewDto);
 
     return "reservation/host/detail-info";
   }
