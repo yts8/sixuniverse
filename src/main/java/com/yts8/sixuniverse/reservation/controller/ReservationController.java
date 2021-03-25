@@ -5,13 +5,13 @@ import com.yts8.sixuniverse.member.dto.MemberDto;
 import com.yts8.sixuniverse.member.service.MemberService;
 import com.yts8.sixuniverse.payment.dto.PaymentDto;
 import com.yts8.sixuniverse.payment.service.PaymentService;
+import com.yts8.sixuniverse.reservation.dto.HostDetailInfoDto;
 import com.yts8.sixuniverse.reservation.dto.ReservationDto;
 import com.yts8.sixuniverse.reservation.dto.HostReservationDto;
 import com.yts8.sixuniverse.reservation.dto.ReservationRoomPaymentDto;
 import com.yts8.sixuniverse.reservation.service.ReservationService;
 import com.yts8.sixuniverse.reservationDate.dto.ReservationDateDto;
 import com.yts8.sixuniverse.reservationDate.service.ReservationDateService;
-import com.yts8.sixuniverse.review.dto.ReviewDto;
 import com.yts8.sixuniverse.review.service.ReviewService;
 import com.yts8.sixuniverse.room.dto.RoomDto;
 import com.yts8.sixuniverse.room.service.RoomService;
@@ -327,52 +327,28 @@ public class ReservationController {
   @GetMapping("/host/list/{status}")
   public String hostReservation(HttpSession session, Model model, @PathVariable String status) {
     MemberDto memberDto = (MemberDto) session.getAttribute("member");
-    Long memberId = memberDto.getMemberId();
-
 
     ReservationDto reservationDto = new ReservationDto();
-    reservationDto.setMemberId(memberId);
+    reservationDto.setMemberId(memberDto.getMemberId());
     reservationDto.setStatus(status);
-
-
     List<HostReservationDto> hostReservationList = reservationService.hostReservationList(reservationDto);
 
-    List<RoomDto> roomList = new ArrayList<>();
 
-    List<Integer> dateSub = new ArrayList<>();
-
-    for (HostReservationDto reservation : hostReservationList) {
-      Long roomId = reservation.getRoomId();
-
-      RoomDto roomDto = roomService.findById(roomId);
-      roomList.add(roomDto);
-
-      dateSub.add(reservation.getCheckOut().compareTo(reservation.getCheckIn()));
-
-    }
-
+    model.addAttribute("title", "예약정보");
     model.addAttribute("status", status);
-    model.addAttribute("roomList", roomList);
     model.addAttribute("hostReservationList", hostReservationList);
-    model.addAttribute("dateSub", dateSub);
 
     return "reservation/host/list";
   }
 
   @GetMapping("/host/detail-info/{reservationId}")
-  public String hostDetail(HttpServletRequest request, Model model, @PathVariable Long reservationId) {
-
-    ReservationDto reservationDto = reservationService.findById(reservationId);
-
-    RoomDto roomDto = roomService.findById(reservationDto.getRoomId());
-    MemberDto memberDto = memberService.findById(reservationDto.getMemberId());
-    ReviewDto reviewDto = reservationService.findByRoomIdAndMemberId(reservationDto);
-
-    model.addAttribute("room", roomDto);
-    model.addAttribute("member", memberDto);
-    model.addAttribute("reservation", reservationDto);
-    model.addAttribute("review", reviewDto);
-
+  public String hostDetail(Model model, HttpSession session, @PathVariable Long reservationId) {
+    MemberDto member = (MemberDto) session.getAttribute("member");
+    HostDetailInfoDto hostDetailInfoDto = reservationService.HostDetailInfo(reservationId);
+    if (!member.getMemberId().equals(hostDetailInfoDto.getHostMemberId())) {
+      return "redirect:/";
+    }
+    model.addAttribute("hostDetailInfoDto", hostDetailInfoDto);
     return "reservation/host/detail-info";
   }
 

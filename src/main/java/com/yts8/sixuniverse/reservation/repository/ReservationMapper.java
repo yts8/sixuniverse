@@ -1,5 +1,6 @@
 package com.yts8.sixuniverse.reservation.repository;
 
+import com.yts8.sixuniverse.reservation.dto.HostDetailInfoDto;
 import com.yts8.sixuniverse.reservation.dto.ReservationDto;
 import com.yts8.sixuniverse.reservation.dto.HostReservationDto;
 import com.yts8.sixuniverse.reservation.dto.ReservationRoomPaymentDto;
@@ -27,8 +28,6 @@ public interface ReservationMapper {
 
   void guestReservationCancel(ReservationDto reservationDto);
 
-  ReviewDto findByRoomIdAndMemberId(ReservationDto reservationDto);
-
   List<ReservationRoomPaymentDto> findByUpdateReservationId(Long reservationId);
 
   ReservationRoomPaymentDto findByCancelReservationId(Long reservationId);
@@ -37,4 +36,5 @@ public interface ReservationMapper {
 
   void hostUpdateNo(Long reservationId);
 
+  HostDetailInfoDto HostDetailInfo(Long reservationId);
 }

@@ -21,7 +21,6 @@
     select r.status,
     room.room_id,
     room.title,
-    room.price,
     r.reservation_id,
     r.member_id,
     r.check_in,
@@ -29,23 +28,53 @@
     r.create_date,
     r.adult,
     r.kid,
-    r.infant
+    r.infant,
+    p.commission,
+    p.price,
+    m.member_id,
+    m.username
     from room
     join reservation r on room.room_id = r.room_id
     join payment p on r.reservation_id = p.reservation_id
+    join member m on m.member_id = r.member_id
     where room.member_id = #{memberId}
     <if test='!status.equals("all")'>
       and r.status = #{status};
     </if>
   </select>
 
-  <select id="findByRoomIdAndMemberId" parameterType="ReservationDto" resultType="ReservationDto">
-    select review.reply_content, review.reply_reg_date
-    from review
-           join reservation r on r.reservation_id = review.reservation_id
-           join payment p on p.reservation_id = r.reservation_id
-    where r.room_id = #{roomId}
-      and member_id = #{memberId};
+  <select id="HostDetailInfo" resultType="HostDetailInfoDto">
+    select gm.member_id                                                              as guest_member_id,
+           gm.username,
+           gm.profile_img,
+           r.status,
+           (r.check_out - r.check_in)                                                as date_sub,
+           room.price,
+           room.title,
+           ((review.score_service + review.score_clean + review.score_location) / 3) as score_all,
+           review.review_content,
+           gm.address,
+           gm.host_grade,
+           gm.mobile,
+           hm.member_id                                                              as host_member_id,
+           r.adult,
+           r.kid,
+           r.infant,
+           r.check_in,
+           r.check_out,
+           r.create_date,
+           r.member_id,
+           r.reservation_id,
+           p.commission,
+           p.mileage,
+           p.price                                                                   as total_price
+    from reservation r
+           join member gm on gm.member_id = r.member_id
+           left join review on r.reservation_id = review.reservation_id
+           join room on r.room_id = room.room_id
+           join member hm on room.member_id = hm.member_id
+           join payment p on r.reservation_id = p.reservation_id
+    where r.reservation_id = #{reservationId}
   </select>
 
   <select id="findById" parameterType="ReservationDateDto" resultType="ReservationDto">
@@ -104,16 +133,13 @@
            room.sub_address,
            title,
            m.username,
-           p.price,
-           room_img.room_img
+           p.price
     from reservation
            join room on reservation.room_id = room.room_id
-           join room_img on room.room_id = room_img.room_id
            join member m on room.member_id = m.member_id
            left outer join payment p on reservation.reservation_id = p.reservation_id
     where reservation.update_target = #{reservationId}
-       or reservation.reservation_id = #{reservationId}
-      and room_img_id = (select min(room_img_id) from room_img where room_img.room_id = room.room_id);
+       or reservation.reservation_id = #{reservationId};
   </select>
 
   <select id="findByCancelReservationId" resultType="ReservationRoomPaymentDto">
@@ -131,15 +157,12 @@
            m.username,
            p.payment_id,
            p.price,
-           p.commission,
-           room_img.room_img
+           p.commission
     from reservation
            join room on reservation.room_id = room.room_id
-           join room_img on room.room_id = room_img.room_id
            join member m on room.member_id = m.member_id
            join payment p on reservation.reservation_id = p.reservation_id
     where reservation.reservation_id = #{reservationId}
-      and room_img_id = (select min(room_img_id) from room_img where room_img.room_id = room.room_id);
   </select>
 
 

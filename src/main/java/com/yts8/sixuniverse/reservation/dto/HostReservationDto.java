@@ -8,15 +8,17 @@ import java.time.LocalDateTime;
 
 @Data
 public class HostReservationDto {
+  private String status;
+  private Long roomId;
   private String title;
   private int price;
   private Long reservationId;
-  private Long roomId;
   private Long memberId;
-  private String status;
   private int adult;
   private int kid;
   private int infant;
+  private int commission;
+  private String username;
 
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate checkIn;
