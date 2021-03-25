@@ -8,10 +8,10 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link th:fragment="guestHeaderCss" rel="stylesheet" th:href="@{/css/partials/guest-header.css}">
-  <link th:fragment="guestHeaderDateModalCss" rel="stylesheet" th:href="@{/css/reservation/date-modal.css}">
+  <link th:fragment="guestHeaderDateModalCss" rel="stylesheet" th:href="@{/css/partials/date-modal.css}">
 
-  <script th:fragment="guestHeaderDateModalJs" defer th:src="@{/js/reservation/date-modal.js}"></script>
-  <script th:fragment="guestHeaderGuestModalJs" defer th:src="@{/js/reservation/header-guest.js}"></script>
+  <script th:fragment="guestHeaderDateModalJs" defer th:src="@{/js/partials/guest-header-search-date.js}"></script>
+  <script th:fragment="guestHeaderGuestModalJs" defer th:src="@{/js/partials/guest-header-search.js}"></script>
   <title>header</title>
 </head>
 <body>
@@ -36,71 +36,82 @@
         </div>
       </div>
 
+
       <div class="header__search-expand-container">
-        <div class="header__search-keyword-box">
+        <form action="#" method="get">
+          <input type="hidden" name="checkIn" id="search-check-in">
+          <input type="hidden" name="checkOut" id="search-check-out">
+          <input type="hidden" name="totalGuest" id="total-guest">
 
-          <div>
-            <div class="header__search-outer">
-              <div class="header__search-inner">
-                <div>
-                  <div class="header__search-content">
-                    <div>위치</div>
-                    <div>어디로 여행가나요?</div>
+
+          <div class="header__search-expand-content">
+            <div class="header__search-keyword-box">
+
+              <div>
+                <div class="header__search-outer">
+                  <div class="header__search-inner">
+                    <div>
+                      <div class="header__search-content">
+                        <div>위치</div>
+                        <div>
+                          <input type="text" name="location" placeholder="어디로 여행가세요?" class="header__search-input">
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
 
-          <div class="header__search-select-date">
-            <div class="header__search-outer">
-              <div class="header__search-inner">
-                <div>
-                  <div class="header__search-content">
-                    <div>체크인</div>
-                    <div id="header-check-in">날짜추가</div>
+              <div class="header__search-select-date">
+                <div class="header__search-outer">
+                  <div class="header__search-inner">
+                    <div>
+                      <div class="header__search-content">
+                        <div>체크인</div>
+                        <div id="header-check-in">날짜추가</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
 
-          <div class="header__search-select-date">
-            <div class="header__search-outer">
-              <div class="header__search-inner">
-                <div>
-                  <div class="header__search-content">
-                    <div>체크아웃</div>
-                    <div id="header-check-out">날짜추가</div>
+              <div class="header__search-select-date">
+                <div class="header__search-outer">
+                  <div class="header__search-inner">
+                    <div>
+                      <div class="header__search-content">
+                        <div>체크아웃</div>
+                        <div id="header-check-out">날짜추가</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
 
-          <!-- 게스트 모달 -->
-          <div class="header__search-select-guest" id="header-update-guest">
-            <div class="header__search-outer">
-              <div class="header__search-inner">
-                <div>
-                  <div class="header__search-content">
-                    <div>인원</div>
-                    <div id="header-total-guest">게스트추가</div>
+              <div class="header__search-select-guest" id="header-update-guest">
+                <div class="header__search-outer">
+                  <div class="header__search-inner">
+                    <div>
+                      <div class="header__search-content">
+                        <div>인원</div>
+                        <div id="header-total-guest" class="header__search-guest-number">게스트추가</div>
+                      </div>
+                    </div>
+
+                    <div class="header__search-icon">
+                      <button type="submit"><i class="fas fa-search"></i></button>
+                    </div>
                   </div>
                 </div>
-
-                <div class="header__search-icon">
-                  <i class="fas fa-search"></i>
-                </div>
               </div>
+
+
             </div>
+
+
           </div>
-
-
-
-        </div>
+        </form>
       </div>
-
 
       <!-- 날짜 모달 -->
       <div id="header-date-modal" class="header__modal">

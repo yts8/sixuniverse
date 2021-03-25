@@ -28,14 +28,6 @@
             dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
             minDate: minDate,
             beforeShowDay: function disableAllTheseDays(date) {
-              // const m = date.getMonth() < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
-              // const d = date.getDate() < 10 ? "0" + date.getDate() : date.getDate(), y = date.getFullYear();
-              //
-              // for (i = 0; i < disabledDays.length; i++) {
-              //   if ($.inArray(y + '-' + m + '-' + d, disabledDays) != -1) {
-              //     return [false];
-              //   }
-              // }
               return [true, ((date.getTime() >= Math.min(prv, cur2) && date.getTime() <= Math.max(prv, cur2)) ? 'date-range-selected' : '')];
             },
             onSelect: function (dateText, inst) {
@@ -68,7 +60,9 @@
                 }
 
                 $('#header-check-in').html(d1);
+                $('#search-check-in').val(d1);
                 $('#header-check-out').html(d2);
+                $('#search-check-out').val(d2);
 
                 $('#header-range-date').datepicker('option', 'minDate', 0);
 

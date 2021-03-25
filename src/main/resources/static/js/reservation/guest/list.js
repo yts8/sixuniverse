@@ -75,8 +75,7 @@
           if (result.length > 1) {
             let before = result[0];
             let after = result[1];
-            console.log(result);
-
+            $('.guest-reservation__modal-room-image').attr('src', before.roomImg);
             $('.guest-reservation__modal-guest').html(before.adult + before.kid + before.infant);
             $('.guest-reservation__modal-address').html(before.address);
             $('.guest-reservation__modal-date').html(before.checkIn + ' ~ ' + before.checkOut);
@@ -96,7 +95,7 @@
             $('.guest-reservation__modal-before-check-in-out').html(before.checkIn + ' ~ ' + before.checkOut);
             $('.guest-reservation__modal-after-check-in-out').html(after.checkIn + ' ~ ' + after.checkOut);
           } else {
-            console.log(result)
+            $('.guest-reservation__modal-room-image').attr('src', result.roomImg);
             $('.guest-reservation__modal-guest').html(result.adult + result.kid + result.infant);
             $('.guest-reservation__modal-address').html(result.address);
             $('.guest-reservation__modal-date').html(result.checkIn + ' ~ ' + result.checkOut);

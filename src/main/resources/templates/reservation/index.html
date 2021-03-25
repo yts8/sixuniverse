@@ -6,14 +6,12 @@
 
 <th:block layout:fragment="css">
   <link rel="stylesheet" th:href="@{/css/reservation/index.css}">
+<!--  <link rel="stylesheet" th:href="@{/css/reservation/ui-datepicker.css}">-->
   <link rel="stylesheet" th:href="@{/css/reservation/reservation-datepicker.css}">
   <link rel="stylesheet" th:href="@{/css/reservation/guest/update-guest.css}">
 </th:block>
 
 <th:block layout:fragment="js">
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
   <script type="text/javascript" defer th:src="@{/js/reservation/index.js}"></script>
