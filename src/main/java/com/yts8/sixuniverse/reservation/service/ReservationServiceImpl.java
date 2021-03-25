@@ -2,6 +2,7 @@ package com.yts8.sixuniverse.reservation.service;
 
 import com.yts8.sixuniverse.reservation.dto.ReservationDto;
 import com.yts8.sixuniverse.reservation.dto.HostReservationDto;
+import com.yts8.sixuniverse.reservation.dto.ReservationRoomPaymentDto;
 import com.yts8.sixuniverse.reservation.repository.ReservationMapper;
 import com.yts8.sixuniverse.review.dto.ReviewDto;
 import lombok.RequiredArgsConstructor;
@@ -64,6 +65,16 @@ public class ReservationServiceImpl implements ReservationService {
   @Override
   public ReviewDto findByRoomIdAndMemberId(ReservationDto reservationDto) {
     return reservationMapper.findByRoomIdAndMemberId(reservationDto);
+  }
+
+  @Override
+  public List<ReservationRoomPaymentDto> findByUpdateReservationId(Long reservationId) {
+    return reservationMapper.findByUpdateReservationId(reservationId);
+  }
+
+  @Override
+  public ReservationRoomPaymentDto findByCancelReservationId(Long reservationId) {
+    return reservationMapper.findByCancelReservationId(reservationId);
   }
 
 
