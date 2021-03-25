@@ -225,25 +225,28 @@ public class ReservationController {
   public String guestReservationPayComplete(HttpSession session, ReservationDto reservationDto,
                                             HttpServletRequest request,
                                             @RequestParam String paymentData,
-                                            HttpServletResponse response, Model model) {
+                                            Model model) {
 
 
     MemberDto memberDto = (MemberDto) session.getAttribute("member");
     Long memberId = memberDto.getMemberId(); // 세션값 가져오기
     Long roomId = reservationDto.getRoomId();
     RoomDto roomDto = roomService.findById(roomId); // 호스트가 등록한 숙소인지 찾기 위해
+    List<RoomImageDto> roomImageDto = roomImageService.findByRoomId(roomId);
 
     String reservationDateArr = request.getParameter("reservationDateArray");
+
     String[] reservationDateArray = null;
-    if (reservationDateArr.substring(1).equals("[")) {
+    if (reservationDateArr.charAt(0) == '[') {
       reservationDateArray = reservationDateArr.substring(1, reservationDateArr.length() - 1).split(", ");
     } else {
       reservationDateArray = reservationDateArr.split(",");
     }
 
+    PaymentDto afterPaymentDto = null;
 
     try {
-      LocalDate reservationDateCheckIn = LocalDate.parse(reservationDateArray[0].substring(1)); // parse : try catch 문 필요
+      LocalDate reservationDateCheckIn = LocalDate.parse(reservationDateArray[0]); // parse : try catch 문 필요
 
       // 이미 예약된 날짜인지 확인하기 위해 숙소아이디와 체크인 날짜로 찾아봄
       ReservationDto reservationDto1 = new ReservationDto();
@@ -269,7 +272,7 @@ public class ReservationController {
           reservationDateDto.setReservationId(reservationDto.getReservationId());
           reservationDateDto.setRoomId(roomId);
 
-          LocalDate reservationDate = LocalDate.parse(reservationDay.substring(1, 11)); // parse : try catch 문 필요
+          LocalDate reservationDate = LocalDate.parse(reservationDay); // parse : try catch 문 필요
           reservationDateDto.setReservationDate(reservationDate);
           reservationDateDtos.add(reservationDateDto);
         }
@@ -292,6 +295,8 @@ public class ReservationController {
 
         paymentService.paymentInsert(paymentDto);
 
+        afterPaymentDto = paymentService.findByReservationId(reservationDto.getReservationId());
+
       }
 
     } catch (Exception e) {
@@ -300,6 +305,8 @@ public class ReservationController {
 
     model.addAttribute("room", roomDto);
     model.addAttribute("reservation", reservationDto);
+    model.addAttribute("payment", afterPaymentDto);
+    model.addAttribute("roomImages", roomImageDto);
 
     return "reservation/guest/complete";
   }

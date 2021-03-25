@@ -92,13 +92,16 @@
            room.sub_address,
            title,
            m.username,
-           p.price
+           p.price,
+           room_img.room_img
     from reservation
            join room on reservation.room_id = room.room_id
+           join room_img on room.room_id = room_img.room_id
            join member m on room.member_id = m.member_id
            left outer join payment p on reservation.reservation_id = p.reservation_id
     where reservation.update_target = #{reservationId}
-       or reservation.reservation_id = #{reservationId};
+       or reservation.reservation_id = #{reservationId}
+      and room_img_id = (select min(room_img_id) from room_img where room_img.room_id = room.room_id);
   </select>
 
   <select id="findByCancelReservationId" resultType="ReservationRoomPaymentDto">
@@ -116,12 +119,15 @@
            m.username,
            p.payment_id,
            p.price,
-           p.commission
+           p.commission,
+           room_img.room_img
     from reservation
            join room on reservation.room_id = room.room_id
+           join room_img on room.room_id = room_img.room_id
            join member m on room.member_id = m.member_id
            join payment p on reservation.reservation_id = p.reservation_id
     where reservation.reservation_id = #{reservationId}
+      and room_img_id = (select min(room_img_id) from room_img where room_img.room_id = room.room_id);
   </select>
 
 
