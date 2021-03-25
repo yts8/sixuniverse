@@ -1,6 +1,7 @@
 package com.yts8.sixuniverse.room.service;
 
 import com.yts8.sixuniverse.room.dto.RoomDto;
+import com.yts8.sixuniverse.room.dto.RoomInfoDto;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,6 +15,8 @@ public interface RoomService {
   LocalDateTime findByRenewDate(Long roomId);
 
   int findByExpiryDate(Long roomId);
+
+  List<RoomInfoDto> roomInfoFindByMemberId(Long memberId);
 
   void save(RoomDto roomDto);
 

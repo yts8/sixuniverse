@@ -1,8 +1,7 @@
 package com.yts8.sixuniverse.performance.repository;
 
 import org.apache.ibatis.annotations.Mapper;
-
-import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface PerformanceMapper {
@@ -17,7 +16,7 @@ public interface PerformanceMapper {
 
   int findByHits(Long memberId);
 
-  int findByHitsList(Long memberId, int interval);
+  int findByHitsList(@Param("memberId") Long memberId, @Param("interval") int interval);
 
   String findBySuperHostIs(Long memberId);
 
@@ -35,6 +34,6 @@ public interface PerformanceMapper {
 
   int findByYearlyIncomeCount(Long memberId);
 
-  int monthlyIncomeList(Long memberId, int interval);
+  int monthlyIncomeList(@Param("memberId") Long memberId, @Param("interval") int interval);
 
 }

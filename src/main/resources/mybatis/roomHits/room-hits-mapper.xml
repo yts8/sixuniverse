@@ -15,7 +15,7 @@
       and read_date = #{readDate}
   </select>
 
-  <update id="updateHits">
+  <update id="addHits">
     update room_hits
     set hits=hits + 1
     where room_hits_id = #{roomHitsId}

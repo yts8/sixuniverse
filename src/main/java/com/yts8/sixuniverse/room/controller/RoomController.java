@@ -49,7 +49,7 @@ public class RoomController {
       if (findRoomHitsDto == null) {
         roomHitsService.save(roomHitsDto);
       } else {
-        roomHitsService.updateHits(findRoomHitsDto.getRoomHitsId());
+        roomHitsService.addHits(findRoomHitsDto.getRoomHitsId());
       }
     }
 

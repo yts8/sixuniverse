@@ -8,6 +8,6 @@ public interface RoomHitsService {
 
   RoomHitsDto findByRoomIdAndReadDate(RoomHitsDto roomHitsDto);
 
-  void updateHits(Long roomHitsId);
+  void addHits(Long roomHitsId);
 
 }

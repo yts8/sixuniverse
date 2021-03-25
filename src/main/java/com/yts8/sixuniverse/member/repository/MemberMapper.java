@@ -25,4 +25,6 @@ public interface MemberMapper {
   void updatePassword(MemberDto memberDto);
 
   void updateProfileImg(MemberDto memberDto);
+
+  void updateHostGradeAndRole(MemberDto memberDto);
 }

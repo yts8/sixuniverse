@@ -46,7 +46,7 @@
       and read_date <![CDATA[ >= ]]> now() - interval 30 day;
   </select>
 
-  <select id="findByHitsList" resultType="int">
+  <select id="findByHitsList" parameterType="map" resultType="int">
     select ifnull(sum(hits), 0)
     from room_hits
            join room on room.room_id = room_hits.room_id
@@ -100,17 +100,17 @@
   </select>
 
   <!--  findByMonthlyIncome이랑 합칠지 생각해보기-->
-  <select id="monthlyIncomeList" resultType="int">
+  <select id="monthlyIncomeList" parameterType="map" resultType="int">
     SELECT ifnull(sum(payment.price - payment.commission), 0)
     FROM payment
            join reservation on reservation.reservation_id = payment.reservation_id
            join room on reservation.room_id = room.room_id
     where room.member_id = #{memberId}
      <![CDATA[
-      and last_day(now() - interval 1 year) + interval (12 - month (now())) month + interval ${interval} month
-        < payment.create_date
+      and last_day(now() - interval 1 year) + interval (12 - month(now())) month + interval #{interval} month
+      < payment.create_date
       and payment.create_date <=
-      last_day(now() - interval 1 year) + interval (12 - month (now())) month + interval (1 + ${interval}) month
+          last_day(now() - interval 1 year) + interval (12 - month(now())) month + interval (1 + #{interval}) month
       and (reservation.status = 'complete')
       and payment.cancel_date is null]]>;
   </select>

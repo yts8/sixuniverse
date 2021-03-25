@@ -12,7 +12,7 @@
 
 <th:block layout:fragment="content">
   <div class="member-profile__container">
-    <section class="member-profile__side-container">
+    <aside class="member-profile__side-container">
       <div class="member-profile__side-wrap">
         <div class="member-profile__img-wrap">
           <img id="member-profile-img" th:src="${memberDto.getProfileImg()}" alt="프로필">
@@ -39,18 +39,59 @@
           <span>이메일</span>
         </div>
       </div>
-    </section>
+    </aside>
     <div class="member-profile__info-container">
       <div class="member-profile__info-wrap">
         <h1 class="member-profile__info-title"
-            th:text="${memberDto.getUsername()}">
+            th:text="'안녕하세요. ' + ${memberDto.getUsername()} + '입니다.'">
           안녕하세요. 저는 사람입니다.
         </h1>
         <span class="member-profile__info-create-date"
-              th:text="${memberDto.getCreateDate()}">
+              th:text="|회원 가입: ${#temporals.format(memberDto.getCreateDate(), 'yyyy년 MM월 dd일')}|">
           회원 가입: 2021년
         </span>
+        <a th:if="${memberDto.getMemberId().equals(session.member.getMemberId())}"
+           th:href="@{/member/setting}"
+           class="member-profile__profile-setting">
+          프로필 수정하기
+        </a>
       </div>
+
+      <section class="room-info__container">
+        <h2 th:text="${memberDto.getUsername()} + '님의 숙소'"></h2>
+        <div class="room-info__wrap">
+          <div th:each="roomInfoDto : ${roomInfoDtos}" class="room-info__item-box">
+
+            <a th:href="@{|/room/detail/${roomInfoDto.getRoomId()}|}">
+              <img th:src="${roomInfoDto.getRoomImg()}" alt="숙소 대표 사진"/>
+            </a>
+
+            <div class="room-info__box review-score__container">
+              <div class="review-score__star-icon">
+                <i class="fas fa-star"></i>
+              </div>
+              <div th:text="${#numbers.formatDecimal(roomInfoDto.getReviewScore(), 1, 1, 'COMMA')}">5.0</div>
+              <div th:text="'(' + ${roomInfoDto.getReviewCount()} + ')'">(1)</div>
+            </div>
+
+            <div class="room-info__box">
+              <div th:text="${roomInfoDto.getBuildingType()}">집 전체</div>
+              <div>·</div>
+              <div th:text="${roomInfoDto.getRoomType()}">House</div>
+            </div>
+
+            <div th:text="${roomInfoDto.getTitle()}">제목</div>
+
+            <div class="room-info__box">
+              <div th:text="${#numbers.formatInteger(roomInfoDto.getPrice(), 3, 'COMMA')}">10000</div>
+              <div>/</div>
+              <div>1박</div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
 
       <!-- === 어몽박에게 맡긴닷.. === -->
       <div>
