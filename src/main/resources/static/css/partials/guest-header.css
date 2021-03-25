@@ -142,7 +142,7 @@
 /* 검색 확장 */
 .header__search-expand-container {
   display: none;
-  flex: 4;
+  flex: 5;
 }
 .header__search-expand-content {
   height: 4.5rem;
@@ -169,7 +169,7 @@
   border: none;
 }
 
-.header__search-outer {
+.header__search-box {
   width: 100%;
   height: 100%;
   border-radius: 40px;
@@ -177,7 +177,7 @@
   align-items: center;
 }
 
-.header__search-outer:hover {
+.header__search-box:hover {
   background-color: #d9d9d9;
 }
 

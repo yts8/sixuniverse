@@ -9,12 +9,14 @@
   <th:block layout:fragment="css">
     <link rel="stylesheet" th:href="@{/css/reservation/host/list.css}"/>
   </th:block>
-  <th:block layout:fragment="js">
-    <script type="text/javascript" defer th:src="@{/js/reservation/host/list.js}"></script>
-  </th:block>
 </head>
+<th:block layout:fragment="js">
+  <script type="text/javascript" defer th:src="@{/js/reservation/host/list.js}"></script>
+  <script type="text/javascript" defer th:src="@{/js/reservation/host/update.js}"></script>
+</th:block>
 
 <th:block layout:fragment="content">
+  <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
   <div>
     <div class="reservation__list-container">
       <section>
@@ -94,6 +96,7 @@
             <tbody th:unless="${hostReservationList.isEmpty()}"
                    class="reservation__list-tbody">
             <tr th:each="hostReservation, i : ${hostReservationList}">
+              <input type="hidden" th:value="${hostReservation.reservationId}" id="reservation-id">
               <td class="reservation__request">
                 <div class="reservation__request-sub">
                   <span th:if='${#strings.equals(hostReservation.status, "upcoming")}' th:text="'예정'"

@@ -72,6 +72,18 @@
     values (#{roomId}, #{memberId}, #{status}, #{adult}, #{kid}, #{infant}, #{checkIn}, #{checkOut}, #{reservationId})
   </insert>
 
+  <update id="hostUpdate">
+    update reservation
+    set status = #{status}
+    where update_target = #{reservationId}
+  </update>
+
+  <update id="hostUpdateNo">
+    update reservation
+    set status = 'upcoming'
+    where reservation_id = #{reservationId}
+  </update>
+
   <update id="guestReservationCancel">
     update reservation
     set cancel_date = #{cancelDate},

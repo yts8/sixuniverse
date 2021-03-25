@@ -26,11 +26,14 @@ public interface ReservationService {
 
   void guestReservationCancel(ReservationDto reservationDto);
 
-  ReservationDto findByUpdateTarget(Long reservationId);
-
   ReviewDto findByRoomIdAndMemberId(ReservationDto reservationDto);
 
   List<ReservationRoomPaymentDto> findByUpdateReservationId(Long reservationId);
 
   ReservationRoomPaymentDto findByCancelReservationId(Long reservationId);
+
+  void hostUpdate(ReservationDto reservationDto);
+
+  void hostUpdateNo(Long reservationId);
+
 }

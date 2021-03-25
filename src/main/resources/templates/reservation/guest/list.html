@@ -99,6 +99,16 @@
               <td>
                 <div th:text="${roomList.get(i.index).title}">숙소이름</div>
               </td>
+
+              <td rowspan="2" th:if="${status.equals('update')}" class="guest-reservation__update-status-box">
+                <div class="guest-reservation__update-status">요청 중</div>
+              </td>
+              <td rowspan="2" th:if="${reservationRPDto.get(1).status.equals('update-ok')}" class="guest-reservation__update-status-box">
+                <div class="guest-reservation__update-status">추가결제 및 부분환불</div>
+              </td>
+              <td rowspan="2" th:if="${reservationRPDto.get(1).status.equals('update-no')}" class="guest-reservation__update-status-box">
+                <div class="guest-reservation__update-status">요청 거절됨</div>
+              </td>
             </tr>
             <tr>
               <td>
@@ -107,6 +117,7 @@
                   예약날짜
                 </div>
               </td>
+
             </tr>
           </table>
         </div>
