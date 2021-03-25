@@ -7,9 +7,17 @@ import java.util.List;
 @Mapper
 public interface PerformanceMapper {
 
+  void updateSuperHost(Long memberId);
+
   double findByReviewScore(Long memberId);
 
   int findByRoomCount(Long memberId);
+
+  int findByHits(Long memberId);
+
+  int findByHitsList(Long memberId, int interval);
+
+  String findBySuperHostIs(Long memberId);
 
   double findByCancelCount(Long memberId);
 
