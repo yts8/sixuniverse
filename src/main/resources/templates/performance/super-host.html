@@ -24,7 +24,9 @@
       <div class="performance__super-host-container">
 
         <div class="performance__super-main-container">
-          <div class="performance__super-guide1">다음 평가에서 슈퍼호스트가 되어보세요!</div>
+          <div class="performance__super-guide1">
+            <span th:if="${isSuperHost}==0">다음 평가에서 슈퍼호스트가 되어보세요!</span>
+            <span th:unless="${isSuperHost}==0">슈퍼호스트님 반갑습니다!</span></div>
           <div class="performance__super-guide2">최고의 호스팅을 제공하는 호스트로서 인정받고 혜택을 누려보세요.<br>
             매월 1일에 이루어지는 평가에서 좋은 성과를 달성하시기 바랍니다.
           </div>
@@ -57,9 +59,9 @@
               <div class="performance__result-sub3">기준 : 3개</div>
               <div class="performance__result-sub4">
                 <span th:if="${roomCount} >= '3'"> <div><img th:src="@{/images/performance/check.png}"
-                                                                 class="performance__img">대단해요!</div></span>
+                                                             class="performance__img">대단해요!</div></span>
                 <span th:unless="${roomCount} >= '3'"><div><img th:src="@{/images/performance/not-check.png}"
-                                                                    class="performance__img">아쉽네요</div></span>
+                                                                class="performance__img">아쉽네요</div></span>
               </div>
             </div>
             <div class="performance__super-result3">
@@ -68,9 +70,9 @@
               <div class="performance__result-sub3">기준 : 190만 원</div>
               <div class="performance__result-sub4">
                 <span th:if="${monthlyIncome} >= '1900000'"> <div><img th:src="@{/images/performance/check.png}"
-                                                                 class="performance__img">대단해요!</div></span>
+                                                                       class="performance__img">대단해요!</div></span>
                 <span th:unless="${monthlyIncome} >= '1900000'"><div><img th:src="@{/images/performance/not-check.png}"
-                                                                    class="performance__img">아쉽네요</div></span>
+                                                                          class="performance__img">아쉽네요</div></span>
               </div>
             </div>
             <div class="performance__super-result4">
@@ -79,9 +81,9 @@
               <div class="performance__result-sub3">기준 : 1.0% 미만</div>
               <div class="performance__result-sub4">
                 <span th:if="${cancelRatio} < '1.0'"> <div><img th:src="@{/images/performance/check.png}"
-                                                                 class="performance__img">대단해요!</div></span>
+                                                                class="performance__img">대단해요!</div></span>
                 <span th:unless="${cancelRatio} < '1.0'"><div><img th:src="@{/images/performance/not-check.png}"
-                                                                    class="performance__img">아쉽네요</div></span>
+                                                                   class="performance__img">아쉽네요</div></span>
               </div>
             </div>
           </div>

@@ -16,13 +16,34 @@ public class PerformanceServiceImpl implements PerformanceService {
   private final PerformanceMapper performanceMapper;
 
   @Override
+  public void updateSuperHost(Long memberId) {
+    performanceMapper.updateSuperHost(memberId);
+  }
+
+  @Override
   public double findByReviewScore(Long memberId) {
     return performanceMapper.findByReviewScore(memberId);
   }
 
   @Override
   public int findByRoomCount(Long memberId) {
+
     return performanceMapper.findByRoomCount(memberId);
+  }
+
+  @Override
+  public int findByHits(Long memberId) {
+    return performanceMapper.findByHits(memberId);
+  }
+
+  @Override
+  public int findByHitsList(Long memberId, int interval) {
+    return performanceMapper.findByHitsList(memberId, interval);
+  }
+
+  @Override
+  public String findBySuperHostIs(Long memberId) {
+    return performanceMapper.findBySuperHostIs(memberId);
   }
 
   @Override

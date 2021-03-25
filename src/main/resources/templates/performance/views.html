@@ -30,7 +30,7 @@
 
         <div class="performance__views-detail-container">
           <div class="performance__views-datail">
-            <div class="performance__views-datail-big">534</div>
+            <div class="performance__views-datail-big"><span th:text="${readCount}"></span></div>
             <div class="performance__views-datail-small">지난 30일간 조회수</div>
           </div>
           <div class="performance__views-datail">
@@ -38,7 +38,7 @@
             <div class="performance__views-datail-small">지난 30일간 받은 새 예약</div>
           </div>
           <div class="performance__views-datail">
-            <div class="performance__views-datail-big">5.7%</div>
+            <div class="performance__views-datail-big"><span th:text="${reservationRatio}"></span>%</div>
             <div class="performance__views-datail-small">예약률</div>
           </div>
         </div>
@@ -46,6 +46,9 @@
         <div class="performance__views-chart-container">
           <div style="width:800px">
             <canvas id="viewsChart"></canvas>
+            <th:block th:each="hits: ${hitsList}">
+              <input type="hidden" class="weekly-hits-js" th:value="${hits}"/>
+            </th:block>
           </div>
         </div>
       </div>
