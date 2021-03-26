@@ -42,11 +42,9 @@
 
 .chat__form-chat {
     width: 500px;
-
     height: 40px;
     border-style: solid;
     margin: 20px 10px 10px 20px;
-    margin: 20px;
     padding: 5px 5px 5px 60px;
     border-radius: 20px;
     display: flex;

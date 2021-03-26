@@ -43,13 +43,13 @@ public class ChatController {
       /* 채팅방 생성 */
       /* 게스트 채팅방 번호*/
       ChatroomJoinDto chatroomJoinDto = new ChatroomJoinDto();
-      chatroomJoinDto.setName("호스트이름");
+      chatroomJoinDto.setName(chatService.findUsernameById(hostId));
       chatroomJoinDto.setMemberId(member.getMemberId());
       chatroomJoinDto.setChatRef(chatRef);
 
       /* 호스트 채팅방 번호*/
       ChatroomJoinDto chatroomJoinDto2 = new ChatroomJoinDto();
-      chatroomJoinDto2.setName("게스트이름");
+      chatroomJoinDto2.setName(member.getUsername());
       chatroomJoinDto2.setMemberId(hostId);
       chatroomJoinDto2.setChatRef(chatRef);
 
@@ -59,8 +59,6 @@ public class ChatController {
     } else if (chatRef != 0) {
       chatRef = chatroomJoinService.getChatRefTest(memberIdDto);
     }
-
-
     model.addAttribute("hostId", hostId);
     return "redirect:/chat/host/{hostId}/chatroom/" + chatRef;
   }
@@ -72,6 +70,10 @@ public class ChatController {
     Long myMemberId = member.getMemberId();
     Long chatMessages = chatService.findMessages(chatRef);
 
+    /* 채팅방 이름 출력 */
+
+    String hostName = chatService.findUsernameById(hostId);
+
     if (chatMessages != 0) {
       List<ChatDto> chatDto = chatService.findMessageByChatRef(chatRef);
 
@@ -80,18 +82,33 @@ public class ChatController {
       chatListDto.setMyMemberId(myMemberId);
 
       hostId = chatService.findHostId(chatListDto);
-      String hostName = chatService.findUsernameById(hostId);
+      System.out.println("호스트 아이디 : " + hostId);
+
 
       List<MessageDto> lastChatDto = chatService.getLastChat(myMemberId);
 
-      Long countReply = chatService.countReplyOfHost(hostId);
-      System.out.println("호스트 메세지가 있는 채팅방 갯수 : " + countReply);
-      Long countHostRoom = chatService.countHostRoom(hostId);
-      System.out.println("호스트가 속한 채팅방의 갯수 : " + countHostRoom);
 
-      double reply = ((double) countReply / countHostRoom) * 100;
+      Long countReply = 0L;
+      Long countHostRoom = 0L;
+      /* 만약 호스트의 메세지 기록이 없을 때*/
+      if (countReply == null && countHostRoom == null) {
+        countReply = 0L;
+        System.out.println("여기여기" + countReply);
+        countHostRoom = 0L;
+        System.out.println("여기여기" + countReply);
 
-      model.addAttribute("reply", reply);
+      } else {
+        countReply = chatService.countReplyOfHost(hostId);
+        System.out.println("호스트 메세지가 있는 채팅방 갯수 : " + countReply);
+        countHostRoom = chatService.countHostRoom(hostId);
+        System.out.println("호스트가 속한 채팅방의 갯수 : " + countHostRoom);
+        double reply = ((double) countReply / countHostRoom) * 100;
+        model.addAttribute("reply", reply);
+      }
+
+
+      System.out.println("호스트 메세지가 있는 채팅방 갯수 ---- " + countReply);
+      System.out.println("호스트가 속한 채팅방의 갯수 ------ " + countHostRoom);
       model.addAttribute("hostId", hostId);
       model.addAttribute("hostName", hostName);
       model.addAttribute("chatDto", chatDto);
@@ -99,6 +116,7 @@ public class ChatController {
     }
     model.addAttribute("hostId", hostId);
     model.addAttribute("chatRef", chatRef);
+    model.addAttribute("hostName", hostName);
 
     return "chat/index";
   }

@@ -27,9 +27,9 @@
         console.log(d);
         if (d.chatRef === parseInt($("#chatRef").val())) {
           if (d.memberId === parseInt($("#memberId").val())) {
-            $(".chatroom-content-js").append("<div class='chat__send-chat-container'><img class=\"chat__sender-img\" src=\"https://a0.muscache.com/defaults/user_pic-225x225.png?v=3\"> <div class='chat__send-chat-content'>" + "<span class='chat__sender'>" + d.username + "</span>" + "<span class='chat__send-time'>" + d.date + "</span> <div class='chat__send-chat'>" + d.msg + "</div> </div> </div>");
+            $(".chatroom-content-js").append("<div class='chat__send-chat-container'><img class=\"chat__sender-img\" src='"+d.profile+"'/> <div class='chat__send-chat-content'>" + "<span class='chat__sender'>" + d.username + "</span>" + "<span class='chat__send-time'>" + d.date + "</span> <div class='chat__send-chat'>" + d.msg + "</div> </div> </div>");
           } else {
-            $(".chatroom-content-js").append("<div class='chat__receive-chat-container'><div class='chat__receive-chat-content'><div class='chat__receive-chat-content'><div><span class='chat__receive-time'> " + d.date + "</span><span class='chat__receiver\'> " + d.username + "</span><div class='chat__receive-chat'>" + d.msg + "</div></div></div></div><img class=\"chat__sender-img\" src=\"https://a0.muscache.com/defaults/user_pic-225x225.png?v=3\"></div>")
+            $(".chatroom-content-js").append('<div><div class="chat__receive-chat-container"><div class="chat__receive-chat-content"><div><span class="chat__receive-time">' + d.date + '</span><span  class="chat__receiver">' + d.username + '</span><div  class="chat__receive-chat">' + d.msg + '</div></div><img class="chat__receiver-img" src="https://a0.muscache.com/defaults/user_pic-225x225.png?v=3"></div></div></div></div>')
           }
         }
       }
@@ -51,7 +51,8 @@
     let option = {
       memberId: $("#memberId").val(),
       chatRef: $('#chatRef').val(),
-      msg: $(".message-js").val()
+      msg: $(".message-js").val(),
+      profile: $("#profile").val()
     }
 
     ws.send(JSON.stringify(option))
