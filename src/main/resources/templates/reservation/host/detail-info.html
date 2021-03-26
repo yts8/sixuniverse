@@ -11,22 +11,37 @@
 </th:block>
 
 <th:block layout:fragment="content">
-  <div class="reservation__detail-container">
+  <div th:if="${hostDetailInfoDto != null}" class="reservation__detail-container">
     <div class="reservation__detail-subject">
       <h1 class="reservation__detail-h1">예약 세부정보</h1>
     </div>
     <div class="reservation__detail-profile">
       <section>
-        <div class="reservation__detail-status">완료</div>
+        <div th:if='${#strings.equals(hostDetailInfoDto.status, "upcoming")}' th:text="'예정'"
+             class="reservation__detail-status">완료
+        </div>
+        <div th:if='${#strings.equals(hostDetailInfoDto.status, "complete")}' th:text="'완료'"
+             class="reservation__detail-status">완료
+        </div>
+        <div th:if='${#strings.equals(hostDetailInfoDto.status, "cancel")}' th:text="'취소'"
+             class="reservation__detail-status">완료
+        </div>
+        <div th:if='${#strings.equals(hostDetailInfoDto.status, "update")}' th:text="'변경'"
+             class="reservation__detail-status">완료
+        </div>
         <div class="reservation__detail-profile-sub">
           <div class="reservation__detail-profile-con">
-            <div class="reservation__detail-profile-name">Sung Eun Park</div>
-            <div class="reservation__detail-profile-info">게스트 1명 · 1박 · ₩11,640</div>
-            <div class="reservation__detail-profile-room">방울 in the house</div>
+            <div th:text="${hostDetailInfoDto.username}" class="reservation__detail-profile-name">Sung Eun Park</div>
+            <div
+                th:text="'게스트 ' + ${hostDetailInfoDto.adult + hostDetailInfoDto.kid + hostDetailInfoDto.infant} + '명 · ' + ${hostDetailInfoDto.dateSub} + '박 · ₩' + ${hostDetailInfoDto.totalPrice - hostDetailInfoDto.commission}"
+                class="reservation__detail-profile-info">게스트 1명 · 1박 · ₩11,640
+            </div>
+            <div th:text="${hostDetailInfoDto.title}" class="reservation__detail-profile-room">방울 in the house</div>
           </div>
           <div class="reservation__detail-profile-img">
-            <a href="#" target="_blank" class="reservation__detail-profile-img-con">
-              <img class="reservation__detail-profile-img-photo">프로필 이미지
+            <a th:href="@{|/member/profile/${hostDetailInfoDto.guestMemberId}|}" target="_blank"
+               class="reservation__detail-profile-img-con">
+              <img th:src="${hostDetailInfoDto.profileImg}" class="reservation__detail-profile-img-photo">
             </a>
           </div>
         </div>
@@ -34,33 +49,37 @@
     </div>
     <div class="reservation__detail-review">
       <div class="reservation__detail-review-con">
-          <div class="reservation__detail-review-score">
-            <span class="reservation__detail-all-score">전체 평점</span>
-            <div class="reservation__detail-star-score">
-              <span class="reservation__detail-star-score-shape">★★★★★</span>
-           </div>
+        <div class="reservation__detail-review-score">
+          <span class="reservation__detail-all-score">전체 평점</span>
+          <div class="reservation__detail-star-score">
+            <span th:text="${hostDetailInfoDto.scoreAll}" class="reservation__detail-star-score-shape">★★★★★</span>
           </div>
-        <div class="reservation__detail-content">방울맘 하우스,, 쾌적하고,,, 아늑,,, 호호^^</div>
+        </div>
+        <div th:text="${hostDetailInfoDto.reviewContent}" class="reservation__detail-content">방울맘 하우스,, 쾌적하고,,, 아늑,,,
+          호호^^
+        </div>
       </div>
     </div>
     <div class="reservation__detail-info">
       <div class="reservation__detail-score-review">
         <div class="reservation_-detail-score-icon"></div>
         <div class="reservation_-detail-score-link">
-          <button type="button" class="reservation__detail-link-btn">평점 4.5점 · 후기 3개</button>
+          <!--          <button type="button" class="reservation__detail-link-btn">평점 4.5점 · 후기 3개</button>-->
         </div>
       </div>
       <div class="reservation__detail-join">
         <div class="reservation__detail-residence-icon"></div>
-        <div class="reservation__detail-residence-con">거주지: 서울, 한국</div>
+        <div th:text="${hostDetailInfoDto.address}" class="reservation__detail-residence-con">거주지: 서울, 한국</div>
       </div>
-      <div>
+      <div th:if="${#strings.equals(hostDetailInfoDto.hostGrade, 'HOST')}">
         <div class="reservation__detail-judge-host-icon"></div>
         <div class="reservation__detail-judge-host-con">호스트이기도 해요</div>
       </div>
     </div>
     <div class="reservation__detail-see-profile">
-      <a href="#" target="_blank" class="reservation__detail-see-profile-link">프로필 보기</a>
+      <a th:href="@{|/member/profile/${hostDetailInfoDto.guestMemberId}|}" target="_blank"
+         class="reservation__detail-see-profile-link">프로필
+        보기</a>
     </div>
     <div class="reservation__detail-contact">
       <div class="reservation__detail-contact-btn">
@@ -68,52 +87,72 @@
           <button type="button" class="reservation__detail-message-btn">메시지 보내기</button>
         </div>
       </div>
-      <div class="reservation__detail-mobile">전화번호: +82 10-9606-2908</div>
+      <div class="reservation__detail-mobile">
+        <span th:text="${hostDetailInfoDto.mobile}" class="reservation__detail-mobile-num">전화번호: +82 10-9606-2908</span>
+      </div>
     </div>
     <div class="reservation__detail-guest">
       <div class="reservation__detail-guest-sub">게스트</div>
-      <div class="reservation__detail-guest-info">성인 1명</div>
+      <div
+          th:text="'성인' + ${hostDetailInfoDto.adult} + '명, 아동' + ${hostDetailInfoDto.kid} + '명, 유아' + ${hostDetailInfoDto.infant} + '명'"
+          class="reservation__detail-guest-info">성인 1명
+      </div>
     </div>
     <div class="reservation__detail-check-in">
       <div class="reservation__detail-check-in-sub">체크인</div>
-      <div class="reservation__detail-check-in-info">2021년 2월 26일 (금)</div>
+      <div th:text="${hostDetailInfoDto.checkIn}" class="reservation__detail-check-in-info">2021년 2월 26일 (금)</div>
     </div>
     <div class="reservation__detail-check-out">
       <div class="reservation__detail-check-out-sub">체크아웃</div>
-      <div class="reservation__detail-check-out-info">2021년 2월 27일 (토)</div>
+      <div th:text="${hostDetailInfoDto.checkOut}" class="reservation__detail-check-out-info">2021년 2월 27일 (토)</div>
     </div>
     <div class="reservation__detail-reserve-date">
       <div class="reservation__detail-reserve-date-sub">예약일</div>
-      <div class="reservation__detail-reserve-date-info">2021년 2월 26일 (금)</div>
+      <div th:text="${hostDetailInfoDto.createDate}" class="reservation__detail-reserve-date-info">2021년 2월 26일 (금)
+      </div>
     </div>
     <div class="reservation__detail-reserve-num">
       <div class="reservation__detail-reserve-num-sub">예약번호</div>
-      <div class="reservation__detail-reserve-num-info">HMY9T5SDRD</div>
+      <div th:text="${hostDetailInfoDto.reservationId}" class="reservation__detail-reserve-num-info">HMY9T5SDRD</div>
     </div>
-    <div class="reservation__detail-guest-price">게스트가 결제한 금액</div>
-    <div class="reservation_-detail-guest-price-info">
-      <div class="reservation_-detail-guest-price-amount">₩12,000 x 1박</div>
-      <div class="reservation_-detail-guest-price-plus">₩12,000</div>
+    <div class="reservation__detail-guest-price-box">
+      <div class="reservation__detail-guest-price">게스트가 결제한 금액</div>
+      <div class="reservation__detail-guest-price-info">
+        <div th:text="${hostDetailInfoDto.price} + ' x ' +  ${hostDetailInfoDto.dateSub} + '박'"
+             class="reservation_-detail-guest-price-amount">₩12,000
+          x 1박
+        </div>
+        <div class="reservation_-detail-guest-price-plus">₩12,000</div>
+      </div>
+      <div class="reservation_-detail-guest-commission">
+        <div class="reservation_-detail-guest-commission-sub">게스트 서비스 수수료</div>
+        <div th:text="${hostDetailInfoDto.commission}" class="reservation_-detail-guest-commission-amount">
+          ₩1,694
+        </div>
+      </div>
     </div>
-    <div class="reservation_-detail-guest-commission">
-      <div class="reservation_-detail-guest-commission-sub">게스트 서비스 수수료</div>
-      <div class="reservation_-detail-guest-commission-amount">₩1,694</div>
-    </div>
-    <div class="reservation_-detail-guest-final-price">
+    <div class="reservation__detail-guest-final-price">
       <div class="reservation_-detail-guest-final-price-sub">게스트가 결제한 총 금액(KRW)</div>
-      <div class="reservation_-detail-guest-final-price-amount">₩13,863</div>
+      <div th:text="${hostDetailInfoDto.totalPrice + hostDetailInfoDto.commission + hostDetailInfoDto.mileage}"
+           class="reservation_-detail-guest-final-price-amount">₩13,863
+      </div>
     </div>
-    <div class="reservation__detail-host-price">호스트 수령 대금</div>
-    <div class="reservation__detail-one-day">
-      <div class="reservation__detail-one-day-price">1박 숙박료</div>
-      <div class="reservation__detail-one-day-amount">₩15,000</div>
+    <div class="reservation__detail-host-price-box">
+      <div class="reservation__detail-host-price">호스트 수령 대금</div>
+      <div class="reservation__detail-one-day">
+        <div class="reservation__detail-one-day-price">1박 숙박료</div>
+        <div th:text="${hostDetailInfoDto.price}" class="reservation__detail-one-day-amount">₩15,000
+        </div>
+      </div>
     </div>
     <div class="reservation__detail-host-final-price">
       <div class="reservation__detail-host-final-price-info">호스트가 수령할 총 금액(KRW)</div>
-      <div class="reservation__detail-host-final-price-amount">₩11,640</div>
+      <div th:text="${hostDetailInfoDto.totalPrice - hostDetailInfoDto.commission}"
+           class="reservation__detail-host-final-price-amount">₩11,640
+      </div>
     </div>
-    <div>
-      <a href="#">예약 변경하기</a>
+    <div class="reservation__detail-change-box">
+      <a href="#" class="reservation__detail-change-link">예약 취소하기</a>
     </div>
   </div>
 </th:block>

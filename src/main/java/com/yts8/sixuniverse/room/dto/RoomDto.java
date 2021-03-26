@@ -25,7 +25,6 @@ public class RoomDto {
   private String checkInTime;
   private String checkOutTime;
   private int expiryDate;
-  private int readCount;
   private String status;
   private LocalDateTime createDate;
   private LocalDateTime renewDate;

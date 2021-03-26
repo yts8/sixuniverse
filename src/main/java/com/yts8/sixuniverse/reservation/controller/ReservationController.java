@@ -5,11 +5,14 @@ import com.yts8.sixuniverse.member.dto.MemberDto;
 import com.yts8.sixuniverse.member.service.MemberService;
 import com.yts8.sixuniverse.payment.dto.PaymentDto;
 import com.yts8.sixuniverse.payment.service.PaymentService;
+import com.yts8.sixuniverse.reservation.dto.HostDetailInfoDto;
 import com.yts8.sixuniverse.reservation.dto.ReservationDto;
+import com.yts8.sixuniverse.reservation.dto.HostReservationDto;
 import com.yts8.sixuniverse.reservation.dto.ReservationRoomPaymentDto;
 import com.yts8.sixuniverse.reservation.service.ReservationService;
 import com.yts8.sixuniverse.reservationDate.dto.ReservationDateDto;
 import com.yts8.sixuniverse.reservationDate.service.ReservationDateService;
+import com.yts8.sixuniverse.review.service.ReviewService;
 import com.yts8.sixuniverse.room.dto.RoomDto;
 import com.yts8.sixuniverse.room.service.RoomService;
 import com.yts8.sixuniverse.roomImage.dto.RoomImageDto;
@@ -20,7 +23,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.Period;
@@ -39,6 +41,7 @@ public class ReservationController {
   private final ReservationDateService reservationDateService;
   private final RoomImageService roomImageService;
   private final PaymentService paymentService;
+  private final ReviewService reviewService;
 
   @PostMapping("/{roomId}")
   public String reservation(HttpSession session, Model model,
@@ -121,10 +124,13 @@ public class ReservationController {
       roomImageList.add(roomImageDto);
     }
 
+    List<ReservationRoomPaymentDto> reservationRPDto = reservationService.findByUpdateReservationId(reservationDto.getReservationId());
+
     model.addAttribute("status", status);
     model.addAttribute("roomList", roomList);
     model.addAttribute("roomImageList", roomImageList);
     model.addAttribute("reservationList", reservationList);
+    model.addAttribute("reservationRPDto", reservationRPDto);
 
     return "reservation/guest/list";
   }
@@ -166,11 +172,6 @@ public class ReservationController {
     return "reservation/guest/detail-info";
   }
 
-  @GetMapping("/host/list")
-  public String reservationHost() {
-
-    return "reservation/host/list";
-  }
 
   @GetMapping("/guest/update/{reservationId}")
   public String guestReservationUpdate(Model model, @PathVariable Long reservationId) {
@@ -231,25 +232,28 @@ public class ReservationController {
   public String guestReservationPayComplete(HttpSession session, ReservationDto reservationDto,
                                             HttpServletRequest request,
                                             @RequestParam String paymentData,
-                                            HttpServletResponse response, Model model) {
+                                            Model model) {
 
 
     MemberDto memberDto = (MemberDto) session.getAttribute("member");
     Long memberId = memberDto.getMemberId(); // 세션값 가져오기
     Long roomId = reservationDto.getRoomId();
     RoomDto roomDto = roomService.findById(roomId); // 호스트가 등록한 숙소인지 찾기 위해
+    List<RoomImageDto> roomImageDto = roomImageService.findByRoomId(roomId);
 
     String reservationDateArr = request.getParameter("reservationDateArray");
+
     String[] reservationDateArray = null;
-    if (reservationDateArr.substring(1).equals("[")) {
+    if (reservationDateArr.charAt(0) == '[') {
       reservationDateArray = reservationDateArr.substring(1, reservationDateArr.length() - 1).split(", ");
     } else {
       reservationDateArray = reservationDateArr.split(",");
     }
 
+    PaymentDto afterPaymentDto = null;
 
     try {
-      LocalDate reservationDateCheckIn = LocalDate.parse(reservationDateArray[0].substring(1)); // parse : try catch 문 필요
+      LocalDate reservationDateCheckIn = LocalDate.parse(reservationDateArray[0]); // parse : try catch 문 필요
 
       // 이미 예약된 날짜인지 확인하기 위해 숙소아이디와 체크인 날짜로 찾아봄
       ReservationDto reservationDto1 = new ReservationDto();
@@ -275,7 +279,7 @@ public class ReservationController {
           reservationDateDto.setReservationId(reservationDto.getReservationId());
           reservationDateDto.setRoomId(roomId);
 
-          LocalDate reservationDate = LocalDate.parse(reservationDay.substring(1, 11)); // parse : try catch 문 필요
+          LocalDate reservationDate = LocalDate.parse(reservationDay); // parse : try catch 문 필요
           reservationDateDto.setReservationDate(reservationDate);
           reservationDateDtos.add(reservationDateDto);
         }
@@ -298,6 +302,8 @@ public class ReservationController {
 
         paymentService.paymentInsert(paymentDto);
 
+        afterPaymentDto = paymentService.findByReservationId(reservationDto.getReservationId());
+
       }
 
     } catch (Exception e) {
@@ -306,15 +312,44 @@ public class ReservationController {
 
     model.addAttribute("room", roomDto);
     model.addAttribute("reservation", reservationDto);
+    model.addAttribute("payment", afterPaymentDto);
+    model.addAttribute("roomImages", roomImageDto);
 
     return "reservation/guest/complete";
   }
 
-  @GetMapping("/host/detail-info")
-  public String reservationHostDetail() {
+  @GetMapping("/host/list")
+  public String hostReservation() {
 
+    return "redirect:/reservation/host/list/upcoming";
+  }
+
+  @GetMapping("/host/list/{status}")
+  public String hostReservation(HttpSession session, Model model, @PathVariable String status) {
+    MemberDto memberDto = (MemberDto) session.getAttribute("member");
+
+    ReservationDto reservationDto = new ReservationDto();
+    reservationDto.setMemberId(memberDto.getMemberId());
+    reservationDto.setStatus(status);
+    List<HostReservationDto> hostReservationList = reservationService.hostReservationList(reservationDto);
+
+
+    model.addAttribute("title", "예약정보");
+    model.addAttribute("status", status);
+    model.addAttribute("hostReservationList", hostReservationList);
+
+    return "reservation/host/list";
+  }
+
+  @GetMapping("/host/detail-info/{reservationId}")
+  public String hostDetail(Model model, HttpSession session, @PathVariable Long reservationId) {
+    MemberDto member = (MemberDto) session.getAttribute("member");
+    HostDetailInfoDto hostDetailInfoDto = reservationService.HostDetailInfo(reservationId);
+    if (!member.getMemberId().equals(hostDetailInfoDto.getHostMemberId())) {
+      return "redirect:/";
+    }
+    model.addAttribute("hostDetailInfoDto", hostDetailInfoDto);
     return "reservation/host/detail-info";
   }
 
 }
-

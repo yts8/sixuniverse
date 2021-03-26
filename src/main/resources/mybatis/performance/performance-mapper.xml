@@ -3,6 +3,12 @@
 
 <mapper namespace="com.yts8.sixuniverse.performance.repository.PerformanceMapper">
 
+  <update id="updateSuperHost">
+    update member
+    set host_grade ='SUPER-HOST'
+    where member_id = #{memberId}
+  </update>
+
   <select id="findByReviewScore" resultType="double">
     select (avg(score_clean) + avg(score_location) + avg(score_service)) / 3
     from review
@@ -24,9 +30,28 @@
   </select>
 
   <select id="findByReservationCount" resultType="int">
-    select count(reservation_id)
-    from reservation
-    where member_id = #{memberId}
+    select count(reservation_date_id)
+    from reservation_date
+           join reservation on reservation.room_id = reservation_date.room_id
+           join room on reservation.member_id = room.member_id
+    where room.member_id = #{memberId}
+      and room.create_date  <![CDATA[ >= ]]> now() - interval 30 day;
+  </select>
+
+  <select id="findByHits" resultType="int">
+    select ifnull(sum(hits), 0)
+    from room_hits
+           join room on room.room_id = room_hits.room_id
+    where room.member_id = #{memberId}
+      and read_date <![CDATA[ >= ]]> now() - interval 30 day;
+  </select>
+
+  <select id="findByHitsList" resultType="int">
+    select ifnull(sum(hits), 0)
+    from room_hits
+           join room on room.room_id = room_hits.room_id
+    where read_date = current_date - interval #{interval} day
+      and room.member_id = #{memberId};
   </select>
 
   <select id="findByMonthlyIncome" resultType="int">
@@ -87,13 +112,19 @@
 
   <!--  findByMonthlyIncome이랑 합칠지 생각해보기-->
   <select id="monthlyIncomeList" resultType="int">
-    SELECT ifnull(sum(price-commission),0) income
+    SELECT ifnull(sum(price - commission), 0) income
     FROM payment
            join reservation on reservation.reservation_id = payment.reservation_id
     where member_id = #{memberId}
       and  <![CDATA[ (now() - interval (#{interval}+1) month) < payment.create_date < (now() + interval -#{interval} month)
       and (reservation.status = 'complete')
-      and payment.cancel_date is null]]>;;
+      and payment.cancel_date is null]]>;
+  </select>
+
+  <select id="findBySuperHostIs" resultType="String">
+    SELECT host_grade
+    FROM member
+    where member_id = #{memberId};
   </select>
 
 

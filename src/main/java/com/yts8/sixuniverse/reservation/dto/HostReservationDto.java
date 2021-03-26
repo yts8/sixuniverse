@@ -4,15 +4,21 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
-public class ReservationRoomPaymentDto {
-  private Long reservationId;
-  private Long roomId;
+public class HostReservationDto {
   private String status;
+  private Long roomId;
+  private String title;
+  private int price;
+  private Long reservationId;
+  private Long memberId;
   private int adult;
   private int kid;
   private int infant;
+  private int commission;
+  private String username;
 
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate checkIn;
@@ -20,12 +26,6 @@ public class ReservationRoomPaymentDto {
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate checkOut;
 
-  private String address;
-  private String subAddress;
-  private String title;
-  private String roomImg;
-  private String username;
-  private String paymentId;
-  private int price;
-  private int commission;
+  @DateTimeFormat(pattern = "yyyy-MM-dd a hh:mm")
+  private LocalDateTime createDate;
 }

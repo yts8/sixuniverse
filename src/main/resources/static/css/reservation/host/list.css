@@ -1,117 +1,131 @@
 .reservation__list-container {
-    font-size: 14px;
-    line-height: 1.43;
-    color: #484848;
-    background-color: #ffffff;
-    margin: 0 auto;
-    padding-right: 24px;
-    padding-left: 24px;
+  font-size: 14px;
+  line-height: 1.43;
+  color: #484848;
+  background-color: #ffffff;
+  margin: 0 auto;
+  padding-right: 24px;
+  padding-left: 24px;
 }
 
 .reservation__list-subject {
-    font-size: 32px;
-    font-weight: bold;
-    line-height: 1.125em;
-    color: #484848;
-    margin-top: 62px;
-    padding-top: 6px;
-    padding-bottom: 6px;
+  font-size: 32px;
+  font-weight: bold;
+  line-height: 1.125em;
+  color: #484848;
+  margin-top: 62px;
+  padding-top: 6px;
+  padding-bottom: 6px;
 }
 
 .reservation__menu-list {
-    margin-top: 32px;
-    box-sizing: border-box;
-    border-bottom: 1px solid #ebebeb;
-    position: relative;
-    vertical-align: middle;
-    min-width: 100%;
-    display: flex;
+  margin-top: 32px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #ebebeb;
+  position: relative;
+  vertical-align: middle;
+  min-width: 100%;
+  display: flex;
 }
 
-.reservation__plan-sub {
-    font-size: 16px;
-    line-height: 22px;
-    color: var(--host-color);
-    border-bottom-color: var(--host-color);
-    border-bottom-width: 2px;
-    margin-right: 32px;
-    padding: 24px 0 12px 0;
-    text-align: center;
-    font-weight: bold;
-}
-
-.reservation__finish-sub, .reservation__cancel-sub, .reservation__all-sub {
-    font-size: 16px;
-    line-height: 22px;
-    letter-spacing: normal;
-    color: #484848;
-    background-color: transparent;
-    border-bottom-color: transparent;
-    border-bottom-width: 2px;
-    margin-right: 32px;
-    padding: 24px 0 12px 0;
-    font-weight: bold;
+.reservation__complete-sub, .reservation__cancel-sub, .reservation__update-sub, .reservation__all-sub, .reservation__upcoming-sub {
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: normal;
+  color: #484848;
+  background-color: transparent;
+  border-bottom-color: transparent;
+  border-bottom-width: 2px;
+  padding: 24px 0 12px 0;
+  font-weight: bold;
 }
 
 .reservation__list-thead > tr > th {
-    border-bottom: 1px solid #ebebeb;
-    padding: 1rem 5.5rem 1rem 0;
-    font-weight: bold;
+  border-bottom: 1px solid #ebebeb;
+  padding: 1rem 5.5rem 1rem 0;
+  font-weight: bold;
 }
 
 .reservation__list-table {
-    margin-top: 48px;
-    margin-bottom: 150px;
-    text-align: left;
-    min-width: 100%;
-    box-sizing: border-box;
+  margin-top: 48px;
+  margin-bottom: 150px;
+  text-align: left;
+  min-width: 100%;
+  box-sizing: border-box;
 }
 
 .reservation__list-tbody > tr > td {
-    border-bottom: 1px solid #ebebeb;
-    padding: 1rem 5.5rem 1rem 0;
-    vertical-align: middle;
+  border-bottom: 1px solid #ebebeb;
+  padding: 1rem 5.5rem 1rem 0;
+  vertical-align: middle;
 }
 
 .reservation__detail-char {
-    color: var(--host-color);
-    border: 1px solid var(--host-color);
-    border-radius: 5px;
-    padding: 0.7em 1.2em 0.7em 1.2em;
-    font-weight: bold;
-    margin-left: 2em;
-    margin-right: 0;
-}
-
-.reservation__check-in-btn:hover {
-    background-color: #F2F2F2;
-    width: 5em;
-    height: 2em;
-}
-
-.reservation__check-out-btn:hover {
-    background-color: #F2F2F2;
-    width: 5em;
-    height: 2em;
+  color: var(--host-color);
+  border: 1px solid var(--host-color);
+  border-radius: 5px;
+  padding: 0.7em 1.2em 0.7em 1.2em;
+  font-weight: bold;
+  margin-left: 2em;
+  margin-right: 0;
 }
 
 .reservation__detail-con {
-    float: right;
-    margin-right: 0;
+  float: right;
+  margin-right: 0;
 }
 
 .reservation__request-char {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .reservation__guest-name-link {
-    color: var(--host-color);
+  color: var(--host-color);
 }
 
 .reservation__guest-name-link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .reservation__guest-con-num {
-    font-size: 14px;
+  font-size: 14px;
+}
+
+.host-reservation__underline {
+  border-bottom: 2px solid var(--host-color);
+  font-weight: bold;
+  cursor: pointer;
+
+}
+
+.host-reservation__underline > a > button {
+  color: var(--host-color);
+  font-weight: bold;
+
+}
+
+.reservation__status {
+  margin-right: 32px;
+}
+
+.reservation__host-btn-box, .reservation__host-update {
+  display: flex;
+}
+
+.reservation__host-update-ok {
+  background-color: var(--host-color);
+  color: white;
+  border: 1px solid var(--host-color);
+  border-radius: 5px;
+  padding: 0.7em 1.2em 0.7em 1.2em;
+  font-weight: bold;
+}
+
+.reservation__host-update-no {
+  background-color: var(--host-color);
+  color: white;
+  border: 1px solid var(--host-color);
+  border-radius: 5px;
+  padding: 0.7em 1.2em 0.7em 1.2em;
+  font-weight: bold;
 }

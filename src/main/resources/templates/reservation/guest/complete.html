@@ -25,7 +25,7 @@
           <div class="guest-reservation-complete__room-info">
             <div class="guest-reservation-complete__info-content">
               <div class="guest-reservation-complete__sub-title2">숙소 이용 규칙</div>
-              <div><i class="far fa-clock"></i> 체크인 시간 <span>오후 3:00 이후</span></div>
+              <div><i class="far fa-clock"></i> 체크인 시간 <span th:text="${room.checkInTime}"></span>시 이후</div>
               <div><i class="fas fa-check"></i> 규칙List</div>
             </div>
             <div class="guest-reservation-complete__info-content">
@@ -41,7 +41,7 @@
 
       <div class="guest-reservation-complete__reservation-box">
         <div class="guest-reservation-complete__room-info-img">
-          <img th:src="@{/images/reservation/sample.jpg}">
+          <img th:src="${roomImages.get(0).roomImg}">
         </div>
         <div class="guest-reservation-complete__reservation-content">
           <div class="guest-reservation-complete__reservation-info">
@@ -52,7 +52,7 @@
           </div>
           <div class="guest-reservation-complete__align">
             <div>총 합계</div>
-            <div>￦ 10000</div>
+            <div th:text="${payment.price}">￦ 10000</div>
           </div>
           <div class="guest-reservation-complete__align">
             <div>예약 코드</div>

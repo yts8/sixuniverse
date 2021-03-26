@@ -137,6 +137,7 @@
 .reservation__detail-see-profile-link {
     color: var(--host-color);
     font-size: 16px;
+    text-decoration: underline;
 }
 
 .reservation__detail-see-profile {
@@ -154,12 +155,14 @@
 
 .reservation__detail-contact {
     padding-top: 24px;
-    padding-bottom: 24px;
 }
 
-.reservation__detail-message {
-    display: flex;
-    justify-content: center;
+.reservation__detail-contact-btn {
+    margin-left: 150px;
+}
+
+.reservation__detail-mobile-num {
+    margin-left: 265px;
 }
 
 .reservation__detail-message-btn {
@@ -176,4 +179,92 @@
     text-align: center;
 }
 
+.reservation__detail-mobile {
+    padding-top: 12px;
+    border-bottom-color: rgb(235, 235, 235);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    width: 704px;
+    padding-bottom: 24px;
+}
+
+.reservation__detail-guest, .reservation__detail-check-in, .reservation__detail-check-out, .reservation__detail-reserve-date, .reservation__detail-reserve-num {
+    border-bottom-color: rgb(235, 235, 235);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    font-size: 16px;
+    line-height: 1.375em;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    width: 704px;
+}
+
+.reservation__detail-guest-final-price, .reservation__detail-host-final-price, .reservation__detail-change-box {
+    border-bottom-color: rgb(235, 235, 235);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+
+.reservation__detail-guest-price, .reservation__detail-host-price, .reservation__detail-guest-price {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.reservation__detail-one-day, .reservation__detail-host-final-price {
+    font-size: 16px;
+    line-height: 1.375em;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    width: 704px;
+}
+
+.reservation_-detail-guest-price-info {
+    font-size: 16px;
+    line-height: 1.375em;
+    padding-top: 24px;
+    padding-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    width: 704px;
+}
+
+.reservation__detail-host-price-box {
+    border-bottom-color: rgb(235, 235, 235);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    width: 704px;
+    padding-top: 24px;
+}
+
+.reservation_-detail-guest-commission {
+    border-bottom-color: rgb(235, 235, 235);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    width: 704px;
+}
+
+.reservation_-detail-guest-commission, .reservation__detail-guest-final-price {
+    font-size: 16px;
+    line-height: 1.375em;
+    padding-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    width: 704px;
+}
+
+.reservation__detail-change-link {
+    font-size: 16px;
+    color: var(--host-color);
+    font-weight: bold;
+}
+
+.reservation__detail-guest-price {
+    padding-top: 24px;
+}
 

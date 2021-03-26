@@ -17,6 +17,66 @@
     order by check_in
   </select>
 
+  <select id="hostReservationList" parameterType="ReservationDto" resultType="HostReservationDto">
+    select r.status,
+    room.room_id,
+    room.title,
+    r.reservation_id,
+    r.member_id,
+    r.check_in,
+    r.check_out,
+    r.create_date,
+    r.adult,
+    r.kid,
+    r.infant,
+    p.commission,
+    p.price,
+    m.member_id,
+    m.username
+    from room
+    join reservation r on room.room_id = r.room_id
+    join payment p on r.reservation_id = p.reservation_id
+    join member m on m.member_id = r.member_id
+    where room.member_id = #{memberId}
+    <if test='!status.equals("all")'>
+      and r.status = #{status};
+    </if>
+  </select>
+
+  <select id="HostDetailInfo" resultType="HostDetailInfoDto">
+    select gm.member_id                                                              as guest_member_id,
+           gm.username,
+           gm.profile_img,
+           r.status,
+           (r.check_out - r.check_in)                                                as date_sub,
+           room.price,
+           room.title,
+           ((review.score_service + review.score_clean + review.score_location) / 3) as score_all,
+           review.review_content,
+           gm.address,
+           gm.host_grade,
+           gm.mobile,
+           hm.member_id                                                              as host_member_id,
+           r.adult,
+           r.kid,
+           r.infant,
+           r.check_in,
+           r.check_out,
+           r.create_date,
+           r.member_id,
+           r.reservation_id,
+           p.commission,
+           p.mileage,
+           p.price                                                                   as total_price
+    from reservation r
+           join member gm on gm.member_id = r.member_id
+           left join review on r.reservation_id = review.reservation_id
+           join room on r.room_id = room.room_id
+           join member hm on room.member_id = hm.member_id
+           join payment p on r.reservation_id = p.reservation_id
+    where r.reservation_id = #{reservationId}
+  </select>
+
   <select id="findById" parameterType="ReservationDateDto" resultType="ReservationDto">
     select *
     from reservation
@@ -40,6 +100,18 @@
     insert into reservation (room_id, member_id, status, adult, kid, infant, check_in, check_out, update_target)
     values (#{roomId}, #{memberId}, #{status}, #{adult}, #{kid}, #{infant}, #{checkIn}, #{checkOut}, #{reservationId})
   </insert>
+
+  <update id="hostUpdate">
+    update reservation
+    set status = #{status}
+    where update_target = #{reservationId}
+  </update>
+
+  <update id="hostUpdateNo">
+    update reservation
+    set status = 'upcoming'
+    where reservation_id = #{reservationId}
+  </update>
 
   <update id="guestReservationCancel">
     update reservation
@@ -92,5 +164,6 @@
            join payment p on reservation.reservation_id = p.reservation_id
     where reservation.reservation_id = #{reservationId}
   </select>
+
 
 </mapper>

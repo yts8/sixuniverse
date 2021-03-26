@@ -75,8 +75,7 @@
           if (result.length > 1) {
             let before = result[0];
             let after = result[1];
-            console.log(result);
-
+            $('.guest-reservation__modal-room-image').attr('src', before.roomImg);
             $('.guest-reservation__modal-guest').html(before.adult + before.kid + before.infant);
             $('.guest-reservation__modal-address').html(before.address);
             $('.guest-reservation__modal-date').html(before.checkIn + ' ~ ' + before.checkOut);
@@ -91,12 +90,17 @@
             $('.guest-reservation__modal-after-kid').html(after.kid);
             $('.guest-reservation__modal-after-infant').html(after.infant);
             $('.guest-reservation__modal-after-total').html(after.adult + after.kid + after.infant);
+            // if(after.status==='update-ok') {
+            //   $('.guest-reservation__update-status-box').append('<div class="guest-reservation__update-status">추가 결제 및 부분 환불</div>')
+            // } else {
+            //   $('.guest-reservation__update-status').html('요청 거절됨');
+            // }
 
             $('.guest-reservation__modal-host-name').html(before.username);
             $('.guest-reservation__modal-before-check-in-out').html(before.checkIn + ' ~ ' + before.checkOut);
             $('.guest-reservation__modal-after-check-in-out').html(after.checkIn + ' ~ ' + after.checkOut);
           } else {
-            console.log(result)
+            $('.guest-reservation__modal-room-image').attr('src', result.roomImg);
             $('.guest-reservation__modal-guest').html(result.adult + result.kid + result.infant);
             $('.guest-reservation__modal-address').html(result.address);
             $('.guest-reservation__modal-date').html(result.checkIn + ' ~ ' + result.checkOut);
