@@ -26,15 +26,10 @@ public class PerformanceController {
     MemberDto member = (MemberDto) session.getAttribute("member");
 
     //연 매출
-    int yearlyIncomeCount = performanceService.findByYearlyIncomeCount(member.getMemberId());
-//    System.out.println("yearlyIncomeCount = " + yearlyIncomeCount);
-    if (yearlyIncomeCount != 0) {
-      int yearlyIncome = performanceService.findByYearlyIncome(member.getMemberId());
-      NumberFormat formatter = NumberFormat.getNumberInstance();
-      model.addAttribute("yearlyIncome", formatter.format(yearlyIncome));
-    } else {
-      model.addAttribute("yearlyIncome", 0);
-    }
+    int yearlyIncome = performanceService.findByYearlyIncome(member.getMemberId());
+    NumberFormat formatter = NumberFormat.getNumberInstance();
+    model.addAttribute("yearlyIncome", formatter.format(yearlyIncome));
+
 
     //월별 매출 -> 차트
     ArrayList<Integer> incomeList = new ArrayList<Integer>();
@@ -82,17 +77,13 @@ public class PerformanceController {
     }
 
     //매출액
-    int monthlyIncomeCount = performanceService.findByMonthlyIncomeCount(member.getMemberId());
-    if (monthlyIncomeCount != 0) {
-      int monthlyIncome = performanceService.findByMonthlyIncome(member.getMemberId());
-      model.addAttribute("monthlyIncome", monthlyIncome);
-      if (monthlyIncome >= 1900000) {
-        condition++;
-      }
-    } else {
-      model.addAttribute("monthlyIncome", 0);
+    int monthlyIncome = performanceService.findByMonthlyIncome(member.getMemberId());
+    NumberFormat formatter2 = NumberFormat.getNumberInstance();
+    model.addAttribute("monthlyIncome", formatter2.format(monthlyIncome));
+    if (monthlyIncome >= 1900000) {
+      condition++;
     }
-
+    
     //슈퍼호스트
     if (condition == 4) {
       performanceService.updateSuperHost(member.getMemberId());
