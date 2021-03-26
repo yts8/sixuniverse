@@ -139,7 +139,7 @@
   </select>
 
   <select id="reviewScoreClean" resultType="double">
-    select avg(score_clean) as score_clean
+    select ifnull(avg(score_clean), 0) as score_clean
     from review
            join room on review.room_id = room.room_id
            join member on room.member_id = member.member_id
@@ -147,7 +147,7 @@
   </select>
 
   <select id="reviewScoreLocation" resultType="double">
-    select avg(score_location) as score_location
+    select ifnull(avg(score_location), 0) as score_location
     from review
            join room on review.room_id = room.room_id
            join member on room.member_id = member.member_id
@@ -155,7 +155,7 @@
   </select>
 
   <select id="reviewScoreService" resultType="double">
-    select avg(score_service) as score_service
+    select ifnull(avg(score_service), 0) as score_service
     from review
            join room on review.room_id = room.room_id
            join member on room.member_id = member.member_id
