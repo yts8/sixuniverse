@@ -62,3 +62,8 @@
 .reservation__decrease:hover, .reservation__increase:hover {
     border-color: #888888;
 }
+
+.reservation__guest-box {
+    display: flex;
+    justify-content: space-between;
+}

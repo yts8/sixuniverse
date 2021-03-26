@@ -11,6 +11,8 @@
 
 <th:block layout:fragment="js">
   <script type="text/javascript" defer th:src="@{/js/reservation/guest/list.js}"></script>
+  <script type="text/javascript" defer th:src="@{/js/reservation/guest/again-payment.js}"></script>
+  <script type="text/javascript" defer th:src="@{/js/reservation/guest/partial-refund.js}"></script>
 </th:block>
 
 
@@ -20,6 +22,8 @@
 </head>
 <body>
 <th:block layout:fragment="content">
+  <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
+
   <div class="guest-reservation__box">
     <div class="guest-reservation__content">
       <div class="guest-reservation__title">여행</div>
@@ -97,17 +101,13 @@
                 </div>
               </td>
               <td>
-                <div th:text="${roomList.get(i.index).title}">숙소이름</div>
+                <div th:text="${roomList.get(i.index).title}" class="guest-reservation__room-title">숙소이름</div>
               </td>
-
-              <td rowspan="2" th:if="${status.equals('update')}" class="guest-reservation__update-status-box">
-                <div class="guest-reservation__update-status">요청 중</div>
-              </td>
-              <td rowspan="2" th:if="${reservationRPDto.get(1).status.equals('update-ok')}" class="guest-reservation__update-status-box">
-                <div class="guest-reservation__update-status">추가결제 및 부분환불</div>
-              </td>
-              <td rowspan="2" th:if="${reservationRPDto.get(1).status.equals('update-no')}" class="guest-reservation__update-status-box">
-                <div class="guest-reservation__update-status">요청 거절됨</div>
+              <td rowspan="2" class="guest-reservation__update-status-box" th:each="update : ${updateList}"
+                  th:if="${update.updateTarget==reservation.reservationId}" th:switch="${update.status}">
+                <div class="guest-reservation__update-status" th:case="update">요청 중</div>
+                <div class="guest-reservation__update-status" th:case="update-ok">요청 수락됨</div>
+                <div class="guest-reservation__update-status" th:case="update-no">요청 거절됨</div>
               </td>
             </tr>
             <tr>
@@ -117,13 +117,13 @@
                   예약날짜
                 </div>
               </td>
-
             </tr>
           </table>
         </div>
       </div>
 
       <!-- 취소 변경 예약 정보 모달 -->
+      <input type="hidden" class="guest-reservation__cancel-update-id">
       <div id="cancel-update-modal" class="guest-reservation__modal">
         <div class="guest-reservation__modal-content">
           <div class="guest-reservation__detail-info">
@@ -195,6 +195,7 @@
               <div class="guest-reservation__modal-room-info">
                 <div class="guest-reservation__modal-subtitle">결제 세부 정보</div>
                 <div class="guest-reservation__modal-price">총 비용</div>
+                <input type="hidden" class="guest-reservation__again-payment-id">
               </div>
 
               <div class="guest-reservation__modal-room-info">

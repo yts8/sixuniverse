@@ -124,13 +124,13 @@ public class ReservationController {
       roomImageList.add(roomImageDto);
     }
 
-    List<ReservationRoomPaymentDto> reservationRPDto = reservationService.findByUpdateReservationId(reservationDto.getReservationId());
+    List<ReservationDto> updateList = reservationService.updateList();
 
     model.addAttribute("status", status);
     model.addAttribute("roomList", roomList);
     model.addAttribute("roomImageList", roomImageList);
     model.addAttribute("reservationList", reservationList);
-    model.addAttribute("reservationRPDto", reservationRPDto);
+    model.addAttribute("updateList", updateList);
 
     return "reservation/guest/list";
   }
@@ -318,6 +318,13 @@ public class ReservationController {
     return "reservation/guest/complete";
   }
 
+  @GetMapping("/pay/partial/refund/{data}")
+  public String payPartialRefund(@PathVariable Map<String, String> data) {
+    System.out.println(data);
+
+    return "redirect:/reservation/guest/list";
+  }
+
   @GetMapping("/host/list")
   public String hostReservation() {
 
@@ -327,10 +334,12 @@ public class ReservationController {
   @GetMapping("/host/list/{status}")
   public String hostReservation(HttpSession session, Model model, @PathVariable String status) {
     MemberDto memberDto = (MemberDto) session.getAttribute("member");
+    Long memberId = memberDto.getMemberId();
 
     ReservationDto reservationDto = new ReservationDto();
     reservationDto.setMemberId(memberDto.getMemberId());
     reservationDto.setStatus(status);
+
     List<HostReservationDto> hostReservationList = reservationService.hostReservationList(reservationDto);
 
 
