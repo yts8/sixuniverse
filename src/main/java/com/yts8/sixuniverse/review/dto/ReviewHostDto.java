@@ -11,7 +11,10 @@ public class ReviewHostDto {
   private LocalDate checkIn;
   private LocalDate checkOut;
   private String title;
-  private LocalDate reviewRegDate;
+  private Long reviewId;
   private String reviewContent;
+  private LocalDate reviewRegDate;
+  private String replyContent;
+  private LocalDate replyRegDate;
   private int score;
 }

@@ -61,6 +61,16 @@ public class ReviewServiceImpl implements ReviewService {
   }
 
   @Override
+  public void updateReply(ReviewDto reviewDto) {
+    reviewMapper.updateReply(reviewDto);
+  }
+
+  @Override
+  public void deleteReply(ReviewDto reviewDto) {
+    reviewMapper.deleteReply(reviewDto);
+  }
+
+  @Override
   public int reviewCount(Long memberId) { return reviewMapper.reviewCount(memberId); }
 
   @Override

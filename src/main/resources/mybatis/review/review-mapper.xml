@@ -74,8 +74,11 @@
            reservation.check_in                               as check_in,
            reservation.check_out                              as check_out,
            room.title                                         as title,
-           review.review_reg_date                             as review_reg_date,
+           review.review_id                                   as review_id,
            review.review_content                              as review_content,
+           review.review_reg_date                             as review_reg_date,
+           review.reply_content                               as reply_content,
+           review.reply_reg_date                              as reply_reg_date,
            (score_clean + score_location + score_service) / 3 as score
     from review
            join room on review.room_id = room.room_id
@@ -85,24 +88,52 @@
     order by review_id desc
   </select>
 
-  <select id="reviewReservationList" resultType="ReviewHostDto">
+  <select id="reviewHostStarList" resultType="ReviewHostDto">
     select member.username                                    as guestName,
            member.profile_img                                 as guestProfileImg,
+           reservation.check_in                               as check_in,
+           reservation.check_out                              as check_out,
+           room.title                                         as title,
+           review.review_id                                   as review_id,
+           review.review_content                              as review_content,
            review.review_reg_date                             as review_reg_date,
-           review.review_content                              as review_content
+           review.reply_content                               as reply_content,
+           review.reply_reg_date                              as reply_reg_date,
+           (score_clean + score_location + score_service) / 3 as score
     from review
            join room on review.room_id = room.room_id
            join reservation on review.reservation_id = reservation.reservation_id
            join member on member.member_id = reservation.member_id
     where room.member_id = #{memberId}
-    order by review_id desc limit 6
+      and #{score} <![CDATA[ <= ]]> (score_clean + score_location + score_service) / 3 <![CDATA[ < ]]> #{score+1}
+    order by review_id desc
+  </select>
+
+  <select id="reviewReservationList" resultType="ReviewHostDto">
+    select member.username        as guestName,
+           member.profile_img     as guestProfileImg,
+           review.review_reg_date as review_reg_date,
+           review.review_content  as review_content
+    from review
+           join room on review.room_id = room.room_id
+           join reservation on review.reservation_id = reservation.reservation_id
+           join member on member.member_id = reservation.member_id
+    where room.member_id = #{memberId}
+    order by review_id desc
+    limit 6
   </select>
 
   <select id="getReview" resultType="ReviewDto">
-    select score_clean,
+    select review_id,
+           room_id,
+           reservation_id,
+           score_clean,
            score_location,
            score_service,
-           review_content
+           review_content,
+           review_reg_date,
+           reply_content,
+           reply_reg_date
     from review
     where review_id = #{reviewId}
   </select>
@@ -148,10 +179,24 @@
     where review_id = #{reviewId}
   </update>
 
+  <update id="updateReply" parameterType="ReviewDto">
+    update review
+    set reply_content  = #{replyContent},
+        reply_reg_date = now()
+    where review_id = #{reviewId}
+  </update>
+
   <delete id="deleteReview" parameterType="ReviewDto">
     delete
     from review
     where review_id = #{reviewId}
   </delete>
+
+  <update id="deleteReply" parameterType="ReviewDto">
+    update review
+    set reply_content  = null,
+        reply_reg_date = null
+    where review_id = #{reviewId}
+  </update>
 
 </mapper>

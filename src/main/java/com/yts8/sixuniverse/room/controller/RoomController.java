@@ -1,7 +1,10 @@
 package com.yts8.sixuniverse.room.controller;
 
 import com.yts8.sixuniverse.member.dto.MemberDto;
+import com.yts8.sixuniverse.performance.service.PerformanceService;
 import com.yts8.sixuniverse.reservationDate.service.ReservationDateService;
+import com.yts8.sixuniverse.review.dto.ReviewHostDto;
+import com.yts8.sixuniverse.review.service.ReviewService;
 import com.yts8.sixuniverse.room.dto.RoomDto;
 import com.yts8.sixuniverse.room.service.RoomService;
 import com.yts8.sixuniverse.roomFacility.dto.RoomFacilityDto;
@@ -17,6 +20,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
@@ -30,6 +35,8 @@ public class RoomController {
   private final RoomHitsService roomHitsService;
   private final ReservationDateService reservationDateService;
   private final RoomFacilityService roomFacilityService;
+  private final ReviewService reviewService;
+  private final PerformanceService performanceService;
 
   @GetMapping("/detail/{roomId}")
   public String detail(Model model, HttpSession httpSession, @PathVariable Long roomId) {
@@ -71,9 +78,29 @@ public class RoomController {
 //      System.out.println("a2 = " + a2);
 //    }
 
+    List<ReviewHostDto> reviewHostList = reviewService.reviewHostList(roomDto.getMemberId());
+    model.addAttribute("reviewHostList", reviewHostList);
+
+    List<ReviewHostDto> reviewReservationList = reviewService.reviewReservationList(roomDto.getMemberId());
+    model.addAttribute("reviewReservationList", reviewReservationList);
+
+    NumberFormat formatter = new DecimalFormat("0.#");
+    double reviewScore = performanceService.findByReviewScore(roomDto.getMemberId());
+    model.addAttribute("reviewScore", formatter.format(reviewScore));
+
+    double reviewScoreClean = reviewService.reviewScoreClean(roomDto.getMemberId());
+    model.addAttribute("reviewScoreClean", formatter.format(reviewScoreClean));
+
+    double reviewScoreLocation = reviewService.reviewScoreLocation(roomDto.getMemberId());
+    model.addAttribute("reviewScoreLocation", formatter.format(reviewScoreLocation));
+
+    double reviewScoreService = reviewService.reviewScoreService(roomDto.getMemberId());
+    model.addAttribute("reviewScoreService", formatter.format(reviewScoreService));
+
+    int reviewCount = reviewService.reviewCount(roomDto.getMemberId());
+    model.addAttribute("reviewCount", reviewCount);
 
     return "room/detail";
   }
-
 
 }

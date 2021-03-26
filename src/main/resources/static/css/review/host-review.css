@@ -44,8 +44,10 @@
 }
 
 .host-review__review-panel-guest-text-name {
+  font-weight: bold;
   font-size: 17px;
   color: #414141;
+  margin-bottom: 5px;
 }
 
 .host-review__review-panel-guest-text-info {
@@ -83,12 +85,117 @@
   margin-top: 20px;
 }
 
-.host-review__review-panel-score-check {
+.host-review__reply {
+  display: flex;
+  flex-direction: column;
+}
+
+.host-review__reply-write {
+  margin: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.host-review__reply-write button {
+  text-decoration: underline;
   font-size: 14px;
   font-weight: bold;
   color: #414141;
-  margin-top: 15px;
-  text-align: right;
+}
+
+.host-review__reply-form {
+  display: none;
+  margin: 10px;
+}
+
+.host-review__box {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.host-review__input_area {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.host-review__reply-btn {
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: #dbdbdb;
+  border-radius: 10px;
+  border-style: none;
+  width: 65px;
+  height: 45px;
+  cursor: pointer;
+  margin: 5px 15px;
+}
+
+.host-review__reply-btn:hover {
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: #000000;
+  border-radius: 10px;
+  border-style: none;
+  width: 65px;
+  height: 45px;
+  cursor: pointer;
+  margin: 5px 15px;
+}
+
+#host-review__reply-update, #host-review__reply-delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: #dbdbdb;
+  border-radius: 10px;
+  width: 65px;
+  height: 45px;
+  cursor: pointer;
+}
+
+#host-review__reply-update:hover, #host-review__reply-delete:hover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #000000;
+  border-radius: 10px;
+  width: 65px;
+  height: 45px;
+  cursor: pointer;
+}
+
+.host-review__reply-textarea {
+  width: 650px;
+  height: 100px;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.host-review__reply-textarea-complete {
+  width: 650px;
+  height: 100px;
+  border-radius: 10px;
+  border-color: #eeeeee;
+  background-color: #eeeeee;
+  padding: 15px;
+  font-size: 14px;
+}
+
+#host-review__reply-update-form {
+  display: none;
 }
 
 .host-review__review-right {
@@ -126,9 +233,4 @@
   background-color: #dbdbdb;
   border: none;
   margin: 15px 0;
-}
-
-.host-review__review-left a {
-  text-decoration: underline;
-  color: black;
 }

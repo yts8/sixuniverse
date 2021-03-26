@@ -28,6 +28,10 @@ public interface ReviewService {
 
   void deleteReview(ReviewDto reviewDto);
 
+  void updateReply(ReviewDto reviewDto);
+
+  void deleteReply(ReviewDto reviewDto);
+
   int reviewCount(Long memberId);
 
   double reviewScoreClean(Long memberId);
