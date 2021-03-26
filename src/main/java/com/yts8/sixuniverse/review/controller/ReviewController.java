@@ -87,10 +87,11 @@ public class ReviewController {
     List<ReviewHostDto> reviewHostList = reviewService.reviewHostList(memberId);
     model.addAttribute("reviewHostList", reviewHostList);
 
-    RoomDto roomDto = roomService.findById(member.getMemberId());
-    ReviewDto reviewDto = reviewService.findById(roomDto.getRoomId());
-    ReviewDto getReview = reviewService.getReview(reviewDto.getReviewId());
-    model.addAttribute("getReview", getReview);
+//    List<RoomDto> roomDtoList = roomService.findByMemberId(memberId);
+//    ReviewDto reviewDto = reviewService.findById(roomDto.getRoomId());
+//    System.out.println("reviewDto = " + reviewDto);
+//    ReviewDto getReview = reviewService.getReview(reviewDto.getReviewId());
+//    model.addAttribute("getReview", getReview);
 
     NumberFormat formatter = new DecimalFormat("0.#");
     double reviewScore = performanceService.findByReviewScore(member.getMemberId());

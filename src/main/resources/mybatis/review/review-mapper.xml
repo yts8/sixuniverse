@@ -17,8 +17,8 @@
   </select>
 
   <select id="reviewBefore" resultType="ReviewGuestDto">
-    select member.username            as hostName,
-           member.profile_img         as hostProfileImg,
+    select member.username            as host_name,
+           member.profile_img         as host_profile_img,
            reservation.reservation_id as reservation_id
     from reservation
            left join review on reservation.reservation_id = review.reservation_id
@@ -33,8 +33,8 @@
   </select>
 
   <select id="reviewAfter" resultType="ReviewGuestDto">
-    select member.username            as hostName,
-           member.profile_img         as hostProfileImg,
+    select member.username            as host_name,
+           member.profile_img         as host_profile_img,
            reservation.reservation_id as reservation_id
     from reservation
            left join review on reservation.reservation_id = review.reservation_id
@@ -48,8 +48,8 @@
   </select>
 
   <select id="reviewGuestList" resultType="ReviewGuestDto">
-    select member.username            as hostName,
-           member.profile_img         as hostProfileImg,
+    select member.username            as host_name,
+           member.profile_img         as host_profile_img,
            review.review_id           as review_id,
            review.review_content      as review_content,
            review.review_reg_date     as review_reg_date,
@@ -69,8 +69,8 @@
   </select>
 
   <select id="reviewHostList" resultType="ReviewHostDto">
-    select member.username                                    as guestName,
-           member.profile_img                                 as guestProfileImg,
+    select member.username                                    as guest_name,
+           member.profile_img                                 as guest_profile_img,
            reservation.check_in                               as check_in,
            reservation.check_out                              as check_out,
            room.title                                         as title,
@@ -89,8 +89,8 @@
   </select>
 
   <select id="reviewHostStarList" resultType="ReviewHostDto">
-    select member.username                                    as guestName,
-           member.profile_img                                 as guestProfileImg,
+    select member.username                                    as guest_name,
+           member.profile_img                                 as guest_profile_img,
            reservation.check_in                               as check_in,
            reservation.check_out                              as check_out,
            room.title                                         as title,
@@ -110,8 +110,8 @@
   </select>
 
   <select id="reviewReservationList" resultType="ReviewHostDto">
-    select member.username        as guestName,
-           member.profile_img     as guestProfileImg,
+    select member.username        as guest_name,
+           member.profile_img     as guest_profile_img,
            review.review_reg_date as review_reg_date,
            review.review_content  as review_content
     from review
