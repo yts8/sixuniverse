@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -269,6 +270,7 @@ public class ReservationController {
       } else {
         reservationDto.setMemberId(memberId);
         reservationDto.setStatus("upcoming");
+        reservationDto.setCreateDate(LocalDateTime.now());
 
         reservationService.reservationInsert(reservationDto);
 
