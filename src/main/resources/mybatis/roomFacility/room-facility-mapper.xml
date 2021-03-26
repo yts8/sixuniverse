@@ -17,6 +17,12 @@
       and category_name = #{categoryName}
   </delete>
 
+  <select id="selectRoomFacility" parameterType="RoomFacilityDto" resultType="string">
+    select name
+    from room_facility
+    where room_id = #{roomId};
+  </select>
+
   <select id="findByRoomIdAndCategoryName" parameterType="RoomFacilityDto" resultType="string">
     select name
     from room_facility

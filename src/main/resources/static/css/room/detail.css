@@ -114,11 +114,14 @@ img {
 }
 
 .room__detail-amenities-subject {
-  font-size: 2rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1.8rem;
 }
 
 .room__detail-amenities-item {
-  font-size: 1.8rem;
+  margin-bottom: 1.3rem;
+  font-size: 1.3rem;
 }
 
 .room__detail-calendar-container {

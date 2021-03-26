@@ -60,18 +60,17 @@
 
         <div class="room__detail-introduce-container">
           <span th:text="${room.content}"></span>
+
+          <div><br>호스트한테 연락하기</div><!--          채팅연결 할거면 여기로!!!!-->
         </div>
 
         <div class="room__detail-amenities-container">
           <div class="room__detail-amenities-subject">편의시설</div>
           <div class="room__detail-amenities-item-container">
-            <!--            있는것만 가져오기-->
-            <div class="room__detail-amenities-item">주방</div>
-            <div class="room__detail-amenities-item">주방</div>
-            <div class="room__detail-amenities-item">주방</div>
-            <div class="room__detail-amenities-item">주방</div>
-            <div class="room__detail-amenities-item">주방</div>
-            <div class="room__detail-amenities-item">주방</div>
+            <th:block th:each="facility: ${roomFacilityList}">
+              <div class="room__detail-amenities-item" th:text="${facility}"></div>
+
+            </th:block>
           </div>
         </div>
 
@@ -98,7 +97,8 @@
             <div class="room__detail-guest-select" id="update-guest">
               <div class="room__detail-date-title">인원</div>
               <div class="room__detail-guest-info">
-                성인 : <span class="reservation__guest-adult">1</span> 명 아동 : <span class="reservation__guest-kid">0</span>
+                성인 : <span class="reservation__guest-adult">1</span> 명 아동 : <span
+                  class="reservation__guest-kid">0</span>
                 명 유아 : <span class="reservation__guest-infant">0</span> 명
                 <div>총 인원 : <span class="reservation__total-guest">1</span> 명</div>
               </div>

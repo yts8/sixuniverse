@@ -21,6 +21,10 @@ public class PerformanceServiceImpl implements PerformanceService {
   }
 
   @Override
+  public void updateSuperHostScheduler() {
+  }
+
+  @Override
   public double findByReviewScore(Long memberId) {
     return performanceMapper.findByReviewScore(memberId);
   }

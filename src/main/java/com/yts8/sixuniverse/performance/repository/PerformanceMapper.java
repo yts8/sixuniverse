@@ -9,6 +9,8 @@ public interface PerformanceMapper {
 
   void updateSuperHost(Long memberId);
 
+  void updateSuperHostScheduler();
+
   double findByReviewScore(Long memberId);
 
   int findByRoomCount(Long memberId);

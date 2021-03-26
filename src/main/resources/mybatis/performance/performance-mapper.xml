@@ -10,7 +10,7 @@
   </update>
 
   <select id="findByReviewScore" resultType="double">
-    select (avg(score_clean) + avg(score_location) + avg(score_service)) / 3
+    select ifnull((avg(score_clean) + avg(score_location) + avg(score_service)) / 3, 0)
     from review
            join room on review.room_id = room.room_id
            join member on room.member_id = member.member_id
@@ -126,6 +126,26 @@
     FROM member
     where member_id = #{memberId};
   </select>
+
+
+  <update id="updateSuperHostScheduler" parameterType="String">
+    update member
+    set host_grade='SUPERHOST'
+    where member_id in (select m.member_id
+                        from member m
+                               join room on m.member_id = room.member_id
+                               join reservation r on room.room_id = r.room_id
+                               join review r2 on r.reservation_id = r2.reservation_id
+                               join payment p on r.reservation_id = p.reservation_id
+                        where r.status = 'complete'
+                          and p.cancel_date is null
+                          and (now() - p.create_date) <![CDATA[ < ]]> 31
+                        group by m.member_id
+                        having ((avg(r2.score_service) + avg(r2.score_clean) +
+                                 avg(r2.score_location)) / 3) > 4.8
+                           and (count(r.cancel_date) / count(r.reservation_id)) <![CDATA[ < ]]> 0.01
+                           and count(room.room_Id) >= 3)
+  </update>
 
 
 </mapper>
