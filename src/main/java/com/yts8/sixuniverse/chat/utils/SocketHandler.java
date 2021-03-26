@@ -19,6 +19,7 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 @Component
@@ -62,6 +63,9 @@ public class SocketHandler extends TextWebSocketHandler {
     sendMessageDto.setMemberId(member.getMemberId());
     sendMessageDto.setUsername(member.getUsername());
     sendMessageDto.setProfileImg(member.getProfileImg());
+    sendMessageDto.setDate(LocalDateTime.now());
+
+
 
 
 

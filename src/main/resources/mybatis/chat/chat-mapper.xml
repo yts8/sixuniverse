@@ -114,7 +114,7 @@
            c.create_date
     from chatroom_join cj
            join chat c on cj.join_num = c.join_num
-           join member m on m.member_id = cj.member_id
+           join member m on m.member_id = c.member_id
     where c.chat_id in (select max(cc.chat_id)
                         from chat cc
                                join chatroom_join ccj on ccj.join_num = cc.join_num
@@ -155,6 +155,14 @@
     select distinct count(chat_ref)
     from chatroom_join
     where member_id = #{hostId};
+  </select>
+
+  <!-- 내가 속한 채팅방에서 내가 아닌 상대방이름-->
+  <select id="findOtherName" parameterType="ChatListDto" resultType="java.lang.String">
+  select username from member where member_id = (select distinct r.member_id
+  from chatroom_join r join chatroom_join g
+  on r.chat_ref = g.chat_ref
+  where r.chat_ref = #{chatRef} and r.member_id not in (#{myMemberId}));
   </select>
 
 </mapper>

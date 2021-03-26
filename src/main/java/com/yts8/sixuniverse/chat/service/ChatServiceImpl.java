@@ -55,6 +55,11 @@ public class ChatServiceImpl implements ChatService {
   }
 
   @Override
+  public String findOtherName(ChatListDto chatListDto) {
+    return chatMapper.findOtherName(chatListDto);
+  }
+
+  @Override
   public void saveMessage(ChatDto chatDto) {
     chatMapper.saveMessage(chatDto);
   }

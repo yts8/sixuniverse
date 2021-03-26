@@ -41,4 +41,6 @@ public interface ChatMapper {
   Long countReplyOfHost(Long hostId);
 
   Long countHostRoom(Long hostId);
+
+  String findOtherName(ChatListDto chatListDto);
 }
