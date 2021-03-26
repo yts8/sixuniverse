@@ -83,4 +83,31 @@ public class ReservationServiceImpl implements ReservationService {
   public HostDetailInfoDto HostDetailInfo(Long reservationId) {
     return reservationMapper.HostDetailInfo(reservationId);
   }
+
+  @Override
+  public ReviewDto findByRoomIdAndMemberId(ReservationDto reservationDto) {
+    return reservationMapper.findByRoomIdAndMemberId(reservationDto);
+  }
+
+  @Override
+  public List<ReservationDto> updateList() {
+    return reservationMapper.updateList();
+  }
+
+  @Override
+  public ReservationDto findByUpdateTarget(Long reservationId) {
+    return reservationMapper.findByUpdateTarget(reservationId);
+  }
+
+  @Override
+  public void guestReservationUpdate(ReservationDto reservationDto) {
+    reservationMapper.guestReservationUpdate(reservationDto);
+  }
+
+  @Override
+  public void reservationDelete(Long reservationId) {
+    reservationMapper.reservationDelete(reservationId);
+  }
+
+
 }

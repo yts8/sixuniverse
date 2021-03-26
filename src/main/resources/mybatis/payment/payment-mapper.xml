@@ -19,4 +19,10 @@
     where payment_id = #{paymentId}
   </update>
 
+  <update id="paymentUpdate">
+    update payment
+    set price = #{price}, commission = #{commission}
+    where payment_id = #{paymentId}
+  </update>
+
 </mapper>

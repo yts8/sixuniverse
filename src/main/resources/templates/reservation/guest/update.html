@@ -18,6 +18,7 @@
 
   <script type="text/javascript" defer th:src="@{/js/reservation/reservation-modal.js}"></script>
   <script type="text/javascript" defer th:src="@{/js/reservation/reservation-date-modal.js}"></script>
+  <script type="text/javascript" defer th:src="@{/js/reservation/guest/before-update.js}"></script>
 </th:block>
 
 <head>
@@ -34,7 +35,8 @@
         <div class="guest-reservation-update__title">무엇을 변경하고 싶으세요?</div>
 
 
-        <form th:action="@{|/reservation/guest/update/${reservation.reservationId}|}" method="post">
+        <form th:action="@{|/reservation/guest/update/${reservation.reservationId}|}" method="post"
+              class="guest-reservation-update__fr">
           <input type="hidden" name="checkIn" class="reservation__check-in" th:value="${reservation.checkIn}">
           <input type="hidden" name="checkOut" class="reservation__check-out" th:value="${reservation.checkOut}">
           <input type="hidden" name="adult" class="reservation__adult" th:value="${reservation.adult}">
@@ -46,7 +48,7 @@
             <div class="guest-reservation-update__sub-title">날짜</div>
             <div class="guest-reservation-update__reservation-date">
               <div class="reservation__check-in" id="update-check-in" th:text="${reservation.checkIn}">체크인날짜</div>
-              <div> ~ </div>
+              <div> ~</div>
               <div class="reservation__check-out" th:text="${reservation.checkOut}">체크아웃날짜</div>
               <div class="guest-reservation-update__i-calendar">
                 <i class="far fa-calendar" id="update-date"></i>
@@ -66,16 +68,20 @@
               </div>
               <i class="fas fa-user-friends"></i></i>
             </div>
-            <div class="guest-reservation-update__total-guest">게스트 <span class="reservation__total-guest" th:text="${reservation.adult} + ${reservation.kid} + ${reservation.infant}"></span> 명</div>
+            <div class="guest-reservation-update__total-guest">게스트 <span class="reservation__total-guest"
+                                                                         th:text="${reservation.adult} + ${reservation.kid} + ${reservation.infant}"></span>
+              명
+            </div>
           </div>
 
-          <input type="submit" value="계속" class="guest-reservation-update__next-btn">
+          <input type="button" value="계속" class="guest-reservation-update__next-btn">
         </form>
         <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
-
+        <input type="hidden" id="reservationId" th:value="${reservation.reservationId}">
 
         <!-- 날짜 modal -->
-        <input type="hidden" name="reservationDateList" th:value="${reservationDateList}" class="reservation__reservation-date-list">
+        <input type="hidden" name="reservationDateList" th:value="${reservationDateList}"
+               class="reservation__reservation-date-list">
         <input type="hidden" name="expriyDate" th:value="${room.expiryDate}" class="reservation__room-expiry-date">
         <input type="hidden" name="reservationDateArray" class="reservation__date">
 
@@ -99,7 +105,7 @@
 
 
             <div class="reservation__date-wrapper">
-              <div  class="dates">
+              <div class="dates">
                 <div id="range-date"></div>
               </div>
             </div>
@@ -120,47 +126,52 @@
             <div class="reservation__modal-cancel"><i class="fas fa-times"></i></div>
             <h2 class="reservation__sub-title">게스트</h2>
             <div class="reservation__guest">
-        <span>
-         <div class="reservation__guest-title">성인</div>
-        </span>
-              <div class="reservation__number-right">
-                <div class="reservation__guest-number">
-                  <button class="reservation__decrease" id="adult-minus"><i class="fas fa-minus"></i></button>
-                  <input type="text" name="adult-number" value="1" id="adult-number" readonly>
-                  <button class="reservation__increase" id="adult-plus"><i class="fas fa-plus"></i></button>
-                </div>
-              </div>
-            </div>
+              <div class="reservation__guest-box">
+                <div class="reservation__guest-title">성인</div>
 
-            <div class="reservation__guest">
-        <span>
-          <div>
-            <div class="reservation__guest-title">어린이</div>
-            <div class="reservation__guest-age">2~12세</div>
-          </div>
-        </span>
-              <div class="reservation__number-right">
-                <div class="reservation__guest-number">
-                  <button class="reservation__decrease" id="kid-minus"><i class="fas fa-minus"></i></button>
-                  <input type="text" name="kid-number" value="0" id="kid-number" readonly>
-                  <button class="reservation__increase" id="kid-plus"><i class="fas fa-plus"></i></button>
+                <div class="reservation__number-right">
+                  <div class="reservation__guest-number">
+                    <button class="reservation__decrease" id="adult-minus"><i class="fas fa-minus"></i></button>
+                    <input type="text" name="adult-number" th:value="${reservation.adult}" id="adult-number" readonly>
+                    <button class="reservation__increase" id="adult-plus"><i class="fas fa-plus"></i></button>
+                  </div>
                 </div>
               </div>
 
             </div>
 
             <div class="reservation__guest">
-        <span>
-          <div>
-            <div class="reservation__guest-title">유아</div>
-            <div class="reservation__guest-age">2세 미만</div>
-          </div>
-        </span>
-              <div class="reservation__number-right">
-                <div class="reservation__guest-number">
-                  <button class="reservation__decrease" id="infant-minus"><i class="fas fa-minus"></i></button>
-                  <input type="text" name="infant-number" value="0" id="infant-number" readonly>
-                  <button class="reservation__increase" id="infant-plus"><i class="fas fa-plus"></i></button>
+              <div class="reservation__guest-box">
+                <div>
+                  <div class="reservation__guest-title">어린이</div>
+                  <div class="reservation__guest-age">2~12세</div>
+                </div>
+
+                <div class="reservation__number-right">
+                  <div class="reservation__guest-number">
+                    <button class="reservation__decrease" id="kid-minus"><i class="fas fa-minus"></i></button>
+                    <input type="text" name="kid-number" th:value="${reservation.kid}" id="kid-number" readonly>
+                    <button class="reservation__increase" id="kid-plus"><i class="fas fa-plus"></i></button>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+
+            <div class="reservation__guest">
+              <div class="reservation__guest-box">
+                <div>
+                  <div class="reservation__guest-title">유아</div>
+                  <div class="reservation__guest-age">2세 미만</div>
+                </div>
+
+                <div class="reservation__number-right">
+                  <div class="reservation__guest-number">
+                    <button class="reservation__decrease" id="infant-minus"><i class="fas fa-minus"></i></button>
+                    <input type="text" name="infant-number" th:value="${reservation.infant}" id="infant-number" readonly>
+                    <button class="reservation__increase" id="infant-plus"><i class="fas fa-plus"></i></button>
+                  </div>
                 </div>
               </div>
 
@@ -179,12 +190,6 @@
           </div>
 
         </div>
-
-
-
-
-
-
 
 
       </div>

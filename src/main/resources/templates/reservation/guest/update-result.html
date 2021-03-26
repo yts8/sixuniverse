@@ -42,8 +42,8 @@
         <div class="guest-reservation-update__small-box">
           <div class="guest-reservation-update__sub-title">신규 게스트</div>
           <div class="guest-reservation-update__new-guest">
-            <div>성인: <span id="adult" th:text="${updateReservationDto.adult}"></span> 명 유아 : <span id="infant" th:text="${updateReservationDto.kid}"></span> 명
-              아동 : <span id="kid" th:text="${updateReservationDto.infant}"></span> 명</div>
+            <div>성인: <span id="adult" th:text="${updateReservationDto.adult}"></span> 명 유아 : <span id="infant" th:text="${updateReservationDto.infant}"></span> 명
+              아동 : <span id="kid" th:text="${updateReservationDto.kid}"></span> 명</div>
             <div>총 인원 수 : <span th:text="${updateReservationDto.adult + updateReservationDto.kid + updateReservationDto.infant}"></span> 명</div>
 
             <div>변경 전 성인: <span th:text="${reservation.adult}"></span> 명 유아 : <span th:text="${reservation.kid}"></span> 명

@@ -176,6 +176,7 @@
 }
 
 .guest-reservation__update-status-box {
+  width: 300px;
   vertical-align: middle;
 }
 
@@ -190,4 +191,17 @@
   border-radius: 5px;
   padding: 20px;
   vertical-align: middle;
+}
+
+.guest-reservation__room-title {
+  font-weight: bold;
+}
+
+.guest-reservation__again-payment, .guest-reservation__partial-refund {
+  color: white;
+  background-color: #EB4C60;
+  padding: 15px;
+  margin-top: 20px;
+  font-weight: bold;
+  border-radius: 10px;
 }
