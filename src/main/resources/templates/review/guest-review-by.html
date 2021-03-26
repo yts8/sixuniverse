@@ -28,10 +28,12 @@
         </div>
       </section>
     </div>
+
     <div class="g-review-by__tabs">
       <a th:href="@{/review/guest-about}">나에 대한 후기</a>
       <a href="#">내가 작성한 후기</a>
     </div>
+
     <div class="g-review-by__container">
       <div class="g-review-by__panel">
         <div class="g-review-by__panel-header">
@@ -40,7 +42,6 @@
         <div class="g-review-by__panel-body">
           <div>현재 작성할 후기가 없습니다. 여행을 한 번 다녀올 때가 된 것 같네요!</div>
           <th:block th:each="reviewBefore : ${reviewBeforeList}">
-            <!--            <th:block th:if="${reviewBefore.getStatus() == 'complete' && reviewBefore.getCancelDate() == null}">-->
             <div class="g-review-by__panel-body-review">
               <div class="g-review-by__panel-review-profile">
                 <div class="g-review-by__panel-review-profile-box">
@@ -60,21 +61,17 @@
             </div>
             <hr class="g-review-by__hr">
           </th:block>
-          <!--          </th:block>-->
         </div>
       </div>
-      <div class="g-review-by__panel">
 
+      <div class="g-review-by__panel">
         <div class="g-review-by__panel-header">
           <div>내가 작성한 후기</div>
         </div>
-
         <div class="g-review-by__panel-body">
-
           <th:block th:if="${reviewGuestList.isEmpty() == true}">
             <div>아직 후기를 남기지 않으셨습니다.</div>
           </th:block>
-
           <th:block th:unless="${reviewGuestList.isEmpty() == true}">
             <th:block th:each="review : ${reviewGuestList}">
               <div class="g-review-by__panel-body-review">
@@ -108,7 +105,7 @@
 
           <!-- 모달창 -->
           <form th:action="@{/review/guest-by/delete}" method="post">
-            <input type="hidden" id="review-id" name="reviewId">
+            <input type="hidden" class="review-id" name="reviewId">
             <div class="g-review-by__modal">
               <div class="g-review-by__modal-content">
                 <div class="g-review-by__delete-title">

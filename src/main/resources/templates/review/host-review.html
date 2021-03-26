@@ -8,7 +8,7 @@
   <link rel="stylesheet" th:href="@{/css/performance/views.css}"/>
   <link rel="stylesheet" th:href="@{/css/review/host-review.css}"/>
   <link rel="stylesheet" th:href="@{/css/review/review-form.css}"/>
-
+  <link rel="stylesheet" th:href="@{/css/review/guest-review-by.css}"/>
 </th:block>
 
 <th:block layout:fragment="js">
@@ -19,9 +19,10 @@
   <div class="performance__container">
     <div class="menu-container">
       <div class="performance__sub-menu-container">
-        <div class="performance__sub1"><a th:href="@{/performance/income}" class="performance__a">수입</a></div>
-        <div class="performance__sub2"><a th:href="@{/performance/views}" class="performance__a">조회수</a></div>
-        <div class="performance__sub3"><a th:href="@{/performance/super-host}" class="performance__a">슈퍼호스트</a></div>
+        <div class="performance__sub1"><a th:href="@{/host/performance/income}" class="performance__a">수입</a></div>
+        <div class="performance__sub2"><a th:href="@{/host/performance/views}" class="performance__a">조회수</a></div>
+        <div class="performance__sub3"><a th:href="@{/host/performance/super-host}" class="performance__a">슈퍼호스트</a>
+        </div>
         <div class="performance__sub4"><a th:href="@{/review/host-review}" class="performance__a">후기관리</a></div>
       </div>
     </div>
@@ -66,17 +67,105 @@
                 <span th:case="4">⭐⭐⭐⭐</span>
                 <span th:case="5">⭐⭐⭐⭐⭐</span>
               </th:block>
-              <div class="host-review__review-panel-score-content" th:text="${review.getReviewContent()}">
+              <div class="host-review__review-panel-score-content" th:text="${review.getReviewContent()}"></div>
+              <div class="host-review__reply">
+
+                <th:block th:if="${review.getReplyContent()} == null">
+                  <div class="host-review__reply-write">
+                    <button class="on-reply" th:data-id="${review.getReviewId()}">답글 쓰기</button>
+                  </div>
+                  <section th:class="'host-review__reply-form reply-form-js' + ${review.getReviewId()}">
+                    <form th:action="@{/review/host-review/update}" method="post">
+                      <input type="hidden" name="reviewId" th:value="${review.getReviewId()}">
+                      <input type="hidden" name="roomId" th:value="${getReview.getRoomId()}">
+                      <input type="hidden" name="reservationId" th:value="${getReview.getReservationId()}">
+                      <input type="hidden" name="reviewContent" th:value="${getReview.getReviewContent()}">
+                      <div class="host-review__box">
+                        <div class="host-review__input_area">
+                          <button type="submit" class="host-review__reply-btn">완료</button>
+                        </div>
+                        <div class="host-review__input_area">
+                          <textarea name="replyContent" class="host-review__reply-textarea"></textarea>
+                        </div>
+                      </div>
+                    </form>
+                  </section>
+                </th:block>
+
+                <th:block th:unless="${review.getReplyContent()} == null">
+                  <div class="host-review__reply-write">
+                    <button class="on-reply" th:data-id="'' + ${review.getReviewId()}">답글 보기</button>
+                  </div>
+                  <section th:class="'host-review__reply-form reply-form-js' + ${review.getReviewId()}">
+                    <div class="host-review__box">
+                      <th:block th:if="${today} < ${review.getReplyRegDate().plusDays(3)}">
+                        <div class="host-review__input_area">
+                          <button id="host-review__reply-update"
+                                  class="review-update-form-btn-js" th:data-id="${review.getReviewId()}">수정
+                          </button>
+                        </div>
+                        <div class="host-review__input_area">
+                          <button id="host-review__reply-delete"
+                                  class="g-review-by__modal-delete"
+                                  th:data-id="${review.reviewId}">삭제
+                          </button>
+                        </div>
+                      </th:block>
+                      <div th:class="'host-review__input_area reply-content-js' + ${review.getReviewId()}">
+                        <div class="host-review__reply-textarea-complete" th:text="${review.getReplyContent()}"></div>
+                      </div>
+                    </div>
+                  </section>
+                  <form th:action="@{/review/host-review/update}" method="post"
+                        th:class="'reply-update-form-js' + ${review.getReviewId()}"
+                        id="host-review__reply-update-form">
+                    <input type="hidden" name="reviewId" th:value="${review.getReviewId()}">
+                    <input type="hidden" name="roomId" th:value="${getReview.getRoomId()}">
+                    <input type="hidden" name="reservationId" th:value="${getReview.getReservationId()}">
+                    <input type="hidden" name="reviewContent" th:value="${getReview.getReviewContent()}">
+                    <div class="host-review__box">
+                      <div class="host-review__input_area">
+                        <button type="submit" class="host-review__reply-btn">완료</button>
+                      </div>
+                      <div class="host-review__input_area">
+                        <textarea name="replyContent" class="host-review__reply-textarea"></textarea>
+                      </div>
+                    </div>
+                  </form>
+                </th:block>
               </div>
-              <a th:href="@{/review/guest-about}">
-                <div class="host-review__review-panel-score-check">답글 쓰기</div>
-              </a>
             </div>
             <hr class="host-review__review-hr">
           </th:block>
         </div>
-
       </div>
+
+      <!-- 모달창 -->
+      <form th:action="@{/review/host-review/delete}" method="post">
+        <input type="hidden" class="review-id" name="reviewId">
+        <div class="g-review-by__modal">
+          <div class="g-review-by__modal-content">
+            <div class="g-review-by__delete-title">
+              <button type="button">x</button>
+            </div>
+            <hr class="g-review-by__hr">
+            <div class="g-review-by__delete-text">정말로 삭제하시겠습니까?</div>
+            <hr class="g-review-by__hr">
+            <div class="g-review-by__move">
+              <div class="g-review-by__move-back">
+                <div class="g-review-by__back"> <</div>
+                <a th:href="@{/review/host-review}">
+                  <div>취소</div>
+                </a>
+              </div>
+              <div>
+                <button type="submit" class="g-review-by__ok">삭제</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
       <div class="host-review__review-right">
         <div class="host-review__review-right-left">
           <div class="host-review__review-right-left-body">

@@ -23,6 +23,7 @@ import javax.servlet.http.HttpSession;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 @Controller
@@ -37,13 +38,21 @@ public class ReviewController {
   private final PerformanceService performanceService;
 
   @GetMapping("/guest-about")
-  public String about() {
+  public String about(HttpSession session, Model model) {
+    model.addAttribute("title", "후기");
+
+    MemberDto member = (MemberDto) session.getAttribute("member");
+    Long memberId = member.getMemberId();
+
+    List<ReviewHostDto> reviewHostList = reviewService.reviewHostList(memberId);
+    model.addAttribute("reviewHostList", reviewHostList);
 
     return "review/guest-review-about";
   }
 
   @GetMapping("/guest-by")
   public String by(HttpSession session, Model model) {
+    model.addAttribute("title", "후기");
 
     MemberDto member = (MemberDto) session.getAttribute("member");
 
@@ -59,11 +68,18 @@ public class ReviewController {
     LocalDate today = LocalDate.now();
     model.addAttribute("today", today);
 
+//    if (reviewDto != null) {
+//      return "redirect:/review/guest-by";
+//    } else {
+//      return "review/review-form";
+//    }
+
     return "review/guest-review-by";
   }
 
-  @GetMapping("/host")
+  @GetMapping("/host-review")
   public String host(HttpSession session, Model model) {
+    model.addAttribute("title", "후기");
 
     MemberDto member = (MemberDto) session.getAttribute("member");
     Long memberId = member.getMemberId();
@@ -71,54 +87,65 @@ public class ReviewController {
     List<ReviewHostDto> reviewHostList = reviewService.reviewHostList(memberId);
     model.addAttribute("reviewHostList", reviewHostList);
 
+    RoomDto roomDto = roomService.findById(member.getMemberId());
+    ReviewDto reviewDto = reviewService.findById(roomDto.getRoomId());
+    ReviewDto getReview = reviewService.getReview(reviewDto.getReviewId());
+    model.addAttribute("getReview", getReview);
+
     NumberFormat formatter = new DecimalFormat("0.#");
     double reviewScore = performanceService.findByReviewScore(member.getMemberId());
-    model.addAttribute("reviewScore",  formatter.format(reviewScore));
+    model.addAttribute("reviewScore", formatter.format(reviewScore));
 
     int reviewCount = reviewService.reviewCount(member.getMemberId());
     model.addAttribute("reviewCount", reviewCount);
 
+    LocalDate today = LocalDate.now();
+    model.addAttribute("today", today);
+
     return "review/host-review";
   }
 
-  @GetMapping("/reservation/{roomId}")
-  public String reviewReservation(@PathVariable Long roomId, Model model) {
+  @PostMapping("/host-review/update")
+  public String hostUpdate(ReviewDto reviewDto) {
 
-    RoomDto roomDto = roomService.findById(roomId);
+    ReviewDto review = reviewService.getReview(reviewDto.getReviewId());
 
-    List<ReviewHostDto> reviewHostList = reviewService.reviewHostList(roomDto.getMemberId());
-    model.addAttribute("reviewHostList", reviewHostList);
+    LocalDate today = LocalDate.now();
+    LocalDate reviewRegDate = review.getReviewRegDate();
+    LocalDate reviewLimit = reviewRegDate.plusDays(2);
+    Period period = Period.between(today, reviewLimit);
 
-    List<ReviewHostDto> reviewReservationList = reviewService.reviewReservationList(roomDto.getMemberId());
-    model.addAttribute("reviewReservationList", reviewReservationList);
+    if (period.getDays() < 0 || period.getDays() > 2) {
+      return "redirect:/review/host-review";
+    } else {
+      reviewService.updateReply(reviewDto);
+      return "redirect:/review/host-review";
+    }
 
-    NumberFormat formatter = new DecimalFormat("0.#");
-    double reviewScore = performanceService.findByReviewScore(roomDto.getMemberId());
-    model.addAttribute("reviewScore",  formatter.format(reviewScore));
+  }
 
-    double reviewScoreClean = reviewService.reviewScoreClean(roomDto.getMemberId());
-    model.addAttribute("reviewScoreClean",  formatter.format(reviewScoreClean));
+  @PostMapping("/host-review/delete")
+  public String hostDelete(ReviewDto reviewDto) {
 
-    double reviewScoreLocation = reviewService.reviewScoreLocation(roomDto.getMemberId());
-    model.addAttribute("reviewScoreLocation",  formatter.format(reviewScoreLocation));
+    ReviewDto review = reviewService.getReview(reviewDto.getReviewId());
 
-    double reviewScoreService = reviewService.reviewScoreService(roomDto.getMemberId());
-    model.addAttribute("reviewScoreService",  formatter.format(reviewScoreService));
+    LocalDate today = LocalDate.now();
+    LocalDate reviewRegDate = review.getReviewRegDate();
+    LocalDate reviewLimit = reviewRegDate.plusDays(2);
+    Period period = Period.between(today, reviewLimit);
 
-    int reviewCount = reviewService.reviewCount(roomDto.getMemberId());
-    model.addAttribute("reviewCount", reviewCount);
+    if (period.getDays() < 0 || period.getDays() > 2) {
+      return "redirect:/review/host-review";
+    } else {
+      reviewService.deleteReply(reviewDto);
+      return "redirect:/review/host-review";
+    }
 
-    return "review/reservation-review";
   }
 
   @GetMapping("/form/{reservationId}")
   public String reviewForm(@PathVariable Long reservationId, Model model) {
-
-//    reservationId -> review 테이블 찾아 있어? 그럼 redirect:/ 없으면 써.
-//    ReviewDto reviewDto = reviewService.findById(reservationId);
-//    if (reviewDto != null) {
-//      return "redirect:/review/guest-by";
-//    }
+    model.addAttribute("title", "후기 작성");
 
     ReservationDto reservationDto = reservationService.findById(reservationId);
 
@@ -135,6 +162,7 @@ public class ReviewController {
 
   @GetMapping("/update-form/{reviewId}")
   public String reviewUpdateForm(Model model, @PathVariable Long reviewId) {
+    model.addAttribute("title", "후기 수정");
 
     ReviewDto reviewDto = reviewService.findById(reviewId);
 
@@ -149,6 +177,15 @@ public class ReviewController {
     ReviewDto getReview = reviewService.getReview(reviewId);
     model.addAttribute("getReview", getReview);
 
+    LocalDate today = LocalDate.now();
+    LocalDate reviewRegDate = reviewDto.getReviewRegDate();
+    LocalDate reviewLimit = reviewRegDate.plusDays(2);
+    Period period = Period.between(today, reviewLimit);
+
+    if (period.getDays() < 0 || period.getDays() > 2) {
+      return "redirect:/review/guest-by";
+    }
+
     return "review/review-update-form";
   }
 
@@ -161,9 +198,21 @@ public class ReviewController {
 
   @PostMapping("/guest-by/delete")
   public String reviewDelete(ReviewDto reviewDto) {
-    reviewService.deleteReview(reviewDto);
 
-    return "redirect:/review/guest-by";
+    ReviewDto review = reviewService.getReview(reviewDto.getReviewId());
+
+    LocalDate today = LocalDate.now();
+    LocalDate reviewRegDate = review.getReviewRegDate();
+    LocalDate reviewLimit = reviewRegDate.plusDays(2);
+    Period period = Period.between(today, reviewLimit);
+
+    if (period.getDays() < 0 || period.getDays() > 2) {
+      return "redirect:/review/guest-by";
+    } else {
+      reviewService.deleteReview(reviewDto);
+      return "redirect:/review/guest-by";
+    }
+
   }
 
   @PostMapping("/complete")

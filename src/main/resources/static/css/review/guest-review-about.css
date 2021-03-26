@@ -47,7 +47,7 @@
 
 .g-review-about__panel-body-container {
   display: flex;
-  padding-top: 25px;
+  padding: 15px 0;
 }
 
 .g-review-about__panel-body-left {
@@ -125,10 +125,10 @@
 .g-review-about__panel-body-left a {
   text-decoration: none;
   text-align: center;
-  font-weight: lighter;
   line-height: 20px;
   color: #484848;
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .g-review-about__main-top nav {
@@ -142,5 +142,5 @@
   height: 1px;
   background-color: #dbdbdb;
   border: none;
-  margin: 15px 0;
+  margin: 5px 0;
 }
