@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -71,55 +72,47 @@ public class ChatController {
     Long chatMessages = chatService.findMessages(chatRef);
 
     /* 채팅방 이름 출력 */
+    ChatListDto chatListDto = new ChatListDto();
+    chatListDto.setChatRef(chatRef);
+    chatListDto.setMyMemberId(myMemberId);
+
+    String otherName = chatService.findOtherName(chatListDto);
 
     String hostName = chatService.findUsernameById(hostId);
+
 
     if (chatMessages != 0) {
       List<ChatDto> chatDto = chatService.findMessageByChatRef(chatRef);
 
-      ChatListDto chatListDto = new ChatListDto();
-      chatListDto.setChatRef(chatRef);
-      chatListDto.setMyMemberId(myMemberId);
-
       hostId = chatService.findHostId(chatListDto);
-      System.out.println("호스트 아이디 : " + hostId);
-
 
       List<MessageDto> lastChatDto = chatService.getLastChat(myMemberId);
-
 
       Long countReply = 0L;
       Long countHostRoom = 0L;
       /* 만약 호스트의 메세지 기록이 없을 때*/
       if (countReply == null && countHostRoom == null) {
         countReply = 0L;
-        System.out.println("여기여기" + countReply);
         countHostRoom = 0L;
-        System.out.println("여기여기" + countReply);
-
       } else {
         countReply = chatService.countReplyOfHost(hostId);
-        System.out.println("호스트 메세지가 있는 채팅방 갯수 : " + countReply);
         countHostRoom = chatService.countHostRoom(hostId);
-        System.out.println("호스트가 속한 채팅방의 갯수 : " + countHostRoom);
         double reply = ((double) countReply / countHostRoom) * 100;
         model.addAttribute("reply", reply);
       }
 
-
-      System.out.println("호스트 메세지가 있는 채팅방 갯수 ---- " + countReply);
-      System.out.println("호스트가 속한 채팅방의 갯수 ------ " + countHostRoom);
       model.addAttribute("hostId", hostId);
       model.addAttribute("hostName", hostName);
       model.addAttribute("chatDto", chatDto);
       model.addAttribute("lastChat", lastChatDto);
+      model.addAttribute("otherName", otherName);
     }
     model.addAttribute("hostId", hostId);
     model.addAttribute("chatRef", chatRef);
+    model.addAttribute("otherName", otherName);
     model.addAttribute("hostName", hostName);
+
 
     return "chat/index";
   }
-
-
 }

@@ -56,6 +56,7 @@
     <input type="hidden" id="profile" th:value="${session.member.getProfileImg()}"/>
 
 
+
     <!--채팅방영역-->
     <section class="chat__chatroom">
       <div class="chat__chatroom-header">
@@ -80,14 +81,14 @@
 
             <img class="chat__sender-img" th:src="${session.member.getProfileImg()}">
             <a th:href="@{|/member/profile/${session.member.getMemberId()}|}">
-            <div class="chat__send-chat-content send-chat-content-js">
-              <div>
-                <span th:text="${session.member.getUsername()}" class="chat__sender"></span>
-                <span th:text="${#temporals.format(chat.createDate, 'yyyy-MM-dd hh:mm')}"
-                      class="chat__send-time"></span></div>
-              <div th:text="${chat.content}" class="chat__send-chat"></div>
-              </img>
-            </div>
+              <div class="chat__send-chat-content send-chat-content-js">
+                <div>
+                  <span th:text="${session.member.getUsername()}" class="chat__sender"></span>
+                  <span th:text="${#temporals.format(chat.createDate, 'yyyy-MM-dd hh:mm')}"
+                       class="chat__send-time"></span></div>
+                <div th:text="${chat.content}" class="chat__send-chat"></div>
+                </img>
+              </div>
             </a>
           </div>
 
@@ -100,7 +101,7 @@
                 <div>
                   <span th:text="${#temporals.format(chat.createDate, 'yyyy-MM-dd hh:mm')}"
                         class="chat__receive-time"></span>
-                  <span th:text="${hostName}" class="chat__receiver"></span>
+                  <span th:text="${otherName}" class="chat__receiver"></span>
                   <div th:text="${chat.content}" class="chat__receive-chat"></div>
                 </div>
                 <img class="chat__receiver-img" src="https://a0.muscache.com/defaults/user_pic-225x225.png?v=3">

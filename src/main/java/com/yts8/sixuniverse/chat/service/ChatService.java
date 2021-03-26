@@ -28,4 +28,6 @@ public interface ChatService {
   Long countReplyOfHost(Long hostId);
 
   Long countHostRoom(Long hostId);
+
+  String findOtherName(ChatListDto chatListDto);
 }
