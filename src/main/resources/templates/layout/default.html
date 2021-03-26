@@ -15,8 +15,6 @@
   <!--  Guest Header-->
   <th:block th:unless='${#httpServletRequest.getServletPath().startsWith("/host")}'>
     <th:block th:replace="partials/guest-header :: guestHeaderCss"/>
-  </th:block>
-  <th:block th:unless='${#httpServletRequest.getServletPath().startsWith("/host")}'>
     <th:block th:replace="partials/guest-header :: guestHeaderDateModalCss"/>
   </th:block>
 
@@ -36,15 +34,11 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
   <!--  Host Header-->
-  <th:block th:if='${#httpServletRequest.getServletPath().startsWith("/host")}'>
-    <th:block th:replace="partials/host-header :: hostHeaderJs"/>
-  </th:block>
+  <th:block th:replace="partials/host-header :: hostHeaderJs"/>
 
   <!--  Guest Header-->
   <th:block th:unless='${#httpServletRequest.getServletPath().startsWith("/host")}'>
     <th:block th:replace="partials/guest-header :: guestHeaderDateModalJs"/>
-  </th:block>
-  <th:block th:unless='${#httpServletRequest.getServletPath().startsWith("/host")}'>
     <th:block th:replace="partials/guest-header :: guestHeaderGuestModalJs"/>
   </th:block>
 

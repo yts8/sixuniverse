@@ -10,6 +10,7 @@
   <link th:fragment="guestHeaderCss" rel="stylesheet" th:href="@{/css/partials/guest-header.css}">
   <link th:fragment="guestHeaderDateModalCss" rel="stylesheet" th:href="@{/css/partials/date-modal.css}">
 
+  <script th:fragment="hostHeaderJs" defer th:src="@{/js/partials/host-header.js}"></script>
   <script th:fragment="guestHeaderDateModalJs" defer th:src="@{/js/partials/guest-header-search-date.js}"></script>
   <script th:fragment="guestHeaderGuestModalJs" defer th:src="@{/js/partials/guest-header-search.js}"></script>
   <title>header</title>
@@ -23,15 +24,12 @@
         <span>SIXUNIVERSE</span>
       </div>
       <div class="header__search-container">
-        <div class="header__finder">
-          <div class="header__finder__outer">
-            <div class="header__finder__inner">
-              <div class="header__finder__icon" ref="icon"></div>
-              <input class="header__finder__input" type="text" name="q" placeholder="검색 시작하기"/>
-            </div>
-          </div>
-        </div>
+        <button class="header__finder">
+          <div class="header__finder-text">검색 시작하기</div>
+          <div class="header__finder-icon" ref="icon"></div>
+        </button>
       </div>
+
       <div class="header__search-expand-container">
         <form action="#" method="get">
           <input type="hidden" name="checkIn" id="search-check-in">
@@ -145,26 +143,40 @@
         </div>
       </div>
       <div class="header__member-container">
-        호스트 되기
-        <!--        <ul>-->
-        <!--          <li sec:authorize="isAnonymous">  // 만들어오기,,,,,,,,,-->
-        <!--            <a th:href="@{/login}">호스트 되기</a>-->
-        <!--          </li>-->
-        <!--          <li sec:authorize="isAuthenticated">-->
-        <!--            <a th:href="@{/logout}">게스트 되기</a>-->
-        <!--          </li>-->
-        <!--        </ul>-->
+        <a th:href="@{/host/room/register}">호스트 되기</a>
       </div>
+
       <div class="header__login-container">
-        <ul>
-          <li sec:authorize="isAnonymous">
-            <a th:href="@{/login}">로그인</a>
-          </li>
-          <li sec:authorize="isAuthenticated">
-            <a th:href="@{/logout}">로그아웃</a>
-          </li>
-        </ul>
+
+        <div class="host-header__profile-menu-box">
+
+          <button class="host-header__profile-menu-btn header-profile-menu-btn-js">
+            <i class="fas fa-bars"></i>
+            <img sec:authorize="isAnonymous" th:src="@{/images/partials/logoutPic.png}">
+            <img sec:authorize="isAuthenticated" th:src="${session.member.getProfileImg()}" alt="프로필"/>
+          </button>
+
+          <ul class="host-header__profile-menu header__profile-menu-hide header-profile-menu-js">
+            <li sec:authorize="isAnonymous">
+              <a th:href="@{/login}">로그인</a>
+            </li>
+            <li sec:authorize="isAnonymous">
+              <a th:href="@{/join}">회원가입</a>
+            </li>
+            <li sec:authorize="isAuthenticated">
+              <a th:href="@{|/member/profile/${session.member.getMemberId()}|}">프로필</a>
+            </li>
+            <li sec:authorize="isAuthenticated">
+              <a th:href="@{/member/setting}">계정관리</a>
+            </li>
+            <li sec:authorize="isAuthenticated">
+              <a th:href="@{/logout}">로그아웃</a>
+            </li>
+          </ul>
+        </div>
       </div>
+
+
     </div>
   </header>
 </th:block>
