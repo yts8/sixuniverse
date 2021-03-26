@@ -5,7 +5,7 @@
     let cur2 = 0;
     let arrayDays = [];
 
-    $('.header__finder__inner').click(function () {
+    $('.header__finder').click(function () {
       $('.header__search-expand-container').show()
       $('.header__search-container').hide()
     })
