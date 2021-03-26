@@ -79,4 +79,11 @@
     where member_id = #{memberId}
   </update>
 
+  <update id="updateHostGradeAndRole" parameterType="MemberDto">
+    update member
+    set host_grade=#{hostGrade},
+        role=#{role}
+    where member_id = #{memberId}
+  </update>
+
 </mapper>

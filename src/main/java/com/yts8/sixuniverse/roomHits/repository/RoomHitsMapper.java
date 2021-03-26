@@ -10,6 +10,6 @@ public interface RoomHitsMapper {
 
   RoomHitsDto findByRoomIdAndReadDate(RoomHitsDto roomHitsDto);
 
-  void updateHits(Long roomHitsId);
+  void addHits(Long roomHitsId);
 
 }

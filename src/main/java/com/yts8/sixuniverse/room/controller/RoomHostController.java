@@ -1,6 +1,7 @@
 package com.yts8.sixuniverse.room.controller;
 
 import com.yts8.sixuniverse.member.dto.MemberDto;
+import com.yts8.sixuniverse.member.service.MemberService;
 import com.yts8.sixuniverse.room.dto.RoomDto;
 import com.yts8.sixuniverse.room.service.RoomService;
 import com.yts8.sixuniverse.roomImage.dto.RoomImageDto;
@@ -22,11 +23,19 @@ public class RoomHostController {
 
   private final RoomService roomService;
   private final RoomImageService roomImageService;
+  private final MemberService memberService;
   private final HttpSession httpSession;
 
   @GetMapping("/list")
   public String getList(Model model) {
+
     MemberDto member = (MemberDto) httpSession.getAttribute("member");
+
+    if (!member.getRole().equals("HOST")) {
+      member.setRole("HOST");
+      member.setHostGrade("HOST");
+      memberService.updateHostGradeAndRole(member);
+    }
 
     List<RoomDto> roomDtos = roomService.findByMemberId(member.getMemberId());
     List<RoomImageDto> roomImageDtos = new ArrayList<>();

@@ -92,3 +92,56 @@
   font-size: 0.7rem;
   color: #787878;
 }
+
+.member-profile__profile-setting {
+  font-weight: 900;
+  font-size: 0.9rem;
+  text-decoration-line: underline;
+  margin-top: 2rem;
+}
+
+.room-info__container > h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.room-info__wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.room-info__item-box {
+  width: 40%;
+  margin: 2rem 2rem 2rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.room-info__item-box > div:not(:last-of-type) {
+  margin-bottom: 0.5rem;
+}
+
+.room-info__item-box > a > img {
+  width: 100%;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+}
+
+.room-info__box {
+  display: flex;
+
+}
+
+.review-score__container {
+  font-size: 0.9rem;
+  color: #787878;
+}
+
+.review-score__container > .review-score__star-icon {
+  color: var(--guest-color);
+}
+
+.room-info__box > div:not(:last-of-type) {
+  margin-right: 0.5rem;
+}

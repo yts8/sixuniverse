@@ -1,6 +1,7 @@
 package com.yts8.sixuniverse.room.service;
 
 import com.yts8.sixuniverse.room.dto.RoomDto;
+import com.yts8.sixuniverse.room.dto.RoomInfoDto;
 import com.yts8.sixuniverse.room.repository.RoomMapper;
 import com.yts8.sixuniverse.roomFacility.service.RoomFacilityService;
 import com.yts8.sixuniverse.roomImage.service.RoomImageService;
@@ -38,6 +39,11 @@ public class RoomServiceImpl implements RoomService {
   @Override
   public int findByExpiryDate(Long roomId) {
     return roomMapper.findByExpiryDate(roomId);
+  }
+
+  @Override
+  public List<RoomInfoDto> roomInfoFindByMemberId(Long memberId) {
+    return roomMapper.roomInfoFindByMemberId(memberId);
   }
 
   @Override

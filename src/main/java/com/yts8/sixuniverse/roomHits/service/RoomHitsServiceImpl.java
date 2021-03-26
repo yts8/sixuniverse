@@ -25,7 +25,7 @@ public class RoomHitsServiceImpl implements RoomHitsService {
   }
 
   @Override
-  public void updateHits(Long roomHitsId) {
-    roomHitsMapper.updateHits(roomHitsId);
+  public void addHits(Long roomHitsId) {
+    roomHitsMapper.addHits(roomHitsId);
   }
 }
