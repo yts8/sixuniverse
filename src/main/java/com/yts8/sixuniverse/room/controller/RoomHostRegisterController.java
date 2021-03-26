@@ -221,10 +221,6 @@ public class RoomHostRegisterController {
     LocalDateTime renewDate = roomService.findByRenewDate(roomId);
     model.addAttribute("renewDate", renewDate);
 
-    LocalDateTime yesterdayTime = renewDate.minusDays(1L);
-    String yesterday = yesterdayTime.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-    model.addAttribute("yesterday", yesterday);
-
     int expiryDateNum = roomService.findByExpiryDate(roomId);
     LocalDateTime expiryDate = renewDate.plusMonths(expiryDateNum);
     model.addAttribute("expiryDate", expiryDate);

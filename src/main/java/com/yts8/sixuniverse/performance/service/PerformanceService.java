@@ -5,6 +5,8 @@ import java.util.List;
 public interface PerformanceService {
   void updateSuperHost(Long memberId);
 
+  void updateSuperHostScheduler();
+
   double findByReviewScore(Long memberId);
 
   int findByRoomCount(Long memberId);

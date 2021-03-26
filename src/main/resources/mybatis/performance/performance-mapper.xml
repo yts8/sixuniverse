@@ -10,7 +10,7 @@
   </update>
 
   <select id="findByReviewScore" resultType="double">
-    select (avg(score_clean) + avg(score_location) + avg(score_service)) / 3
+    select ifnull((avg(score_clean) + avg(score_location) + avg(score_service)) / 3, 0)
     from review
            join room on review.room_id = room.room_id
            join member on room.member_id = member.member_id
@@ -55,38 +55,27 @@
   </select>
 
   <select id="findByMonthlyIncome" resultType="int">
-    select SUM(price - commission)
+    select ifnull(SUM(payment.price - payment.commission), 0)
     from payment
            join reservation on reservation.reservation_id = payment.reservation_id
-    where member_id = #{memberId}
+           join room on reservation.room_id = room.room_id
+    where room.member_id = #{memberId}
       and (reservation.status = 'complete')
       and payment.cancel_date is null
       and ((payment.create_date - now()) <![CDATA[ < ]]> 31);
   </select>
 
-  <!--수익있는지 확인 (0이면 수익 0)-->
-  <select id="findByMonthlyIncomeCount" resultType="int">
-    select count(price)
-    from payment
-           join reservation on reservation.reservation_id = payment.reservation_id
-    where member_id = #{memberId}
-      and (reservation.status = 'complete')
-      and payment.cancel_date is null
-      and (payment.create_date - now())  <![CDATA[ < ]]> 31;
-
-  </select>
-
   <!--  now자리에 기준년도 1/1 넣어주면됨-->
   <select id="findByYearlyIncome" resultType="int">
-    select SUM(price - commission)
+    select ifnull(SUM(payment.price - payment.commission), 0)
     from payment
            join reservation on reservation.reservation_id = payment.reservation_id
-    where member_id = #{memberId}
+           join room on reservation.room_id = room.room_id
+    where room.member_id = #{memberId}
       and (reservation.status = 'complete')
       and payment.cancel_date is null
       <![CDATA[
-      and (now() < payment.create_date < now() + interval 1 year)
-        ]]>;
+      and (now() < payment.create_date < now() + interval 1 year)]]>;
   </select>
 
   <select id="findByYearlyIncomeCount" resultType="int">
@@ -104,19 +93,24 @@
   <select id="findByReservationMonthlyCount" resultType="int">
     select count(reservation_id)
     from reservation
-    where member_id = #{memberId}
- <![CDATA[
-      and (now() < create_date < now() + interval 30 day)
-        ]]>;
+           join room on room.room_id = reservation.room_id
+    where room.member_id = #{memberId}
+      <![CDATA[
+      and (reservation.create_date < now() + interval 30 day)]]>;
   </select>
 
   <!--  findByMonthlyIncome이랑 합칠지 생각해보기-->
   <select id="monthlyIncomeList" resultType="int">
-    SELECT ifnull(sum(price - commission), 0) income
+    SELECT ifnull(sum(payment.price - payment.commission), 0)
     FROM payment
            join reservation on reservation.reservation_id = payment.reservation_id
-    where member_id = #{memberId}
-      and  <![CDATA[ (now() - interval (#{interval}+1) month) < payment.create_date < (now() + interval -#{interval} month)
+           join room on reservation.room_id = room.room_id
+    where room.member_id = #{memberId}
+     <![CDATA[
+      and last_day(now() - interval 1 year) + interval (12 - month (now())) month + interval ${interval} month
+        < payment.create_date
+      and payment.create_date <=
+      last_day(now() - interval 1 year) + interval (12 - month (now())) month + interval (1 + ${interval}) month
       and (reservation.status = 'complete')
       and payment.cancel_date is null]]>;
   </select>
@@ -126,6 +120,27 @@
     FROM member
     where member_id = #{memberId};
   </select>
+
+
+  <update id="updateSuperHostScheduler" parameterType="String">
+    update member
+    set host_grade='SUPERHOST'
+    where member_id in (select member_id
+                        from (select m.member_id
+                              from member m
+                                     join room on m.member_id = room.member_id
+                                     join reservation r on room.room_id = r.room_id
+                                     join review r2 on r.reservation_id = r2.reservation_id
+                                     join payment p on r.reservation_id = p.reservation_id
+                              where r.status = 'complete'
+                                and p.cancel_date is null
+                                and (now() - p.create_date) <![CDATA[ < 31
+                              group by m.member_id
+                              having ((avg(r2.score_service) + avg(r2.score_clean) +
+                                       avg(r2.score_location)) / 3) > 4.8
+                                 and (count(r.cancel_date) / count(r.reservation_id)) < 0.01
+                                 and count(room.room_Id) >= 3) as tmp)]]>;
+  </update>
 
 
 </mapper>

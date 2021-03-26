@@ -4,9 +4,17 @@
 (() => {
   let impossibleDayString = [] //예약불가능날짜 담을 리스트
   const today = $('#renew-date').val();
-  const yesterday = $('#yesterday').val();
   const expiryDate = $('#expiry_date').val();
   const expiryDay = $('#expiry_day').val();
+
+
+  const now = new Date();
+  const date = new Date(now.setDate(now.getDate()));
+  const year=("0" + (date.getYear())).slice(-2);
+  const month = ("0" + (1 + date.getMonth())).slice(-2);
+  const day = ("0" + date.getDate()).slice(-2);
+  const today2= ("20"+year+"-"+month + "-" + day);
+  // alert(today2);
 
   document.addEventListener('DOMContentLoaded', function () {
     const calendarEl = document.getElementById('calendar');
@@ -28,7 +36,7 @@
           id: 'past',
           title: 'past',
           start: '0000-00-00',
-          end: yesterday,
+          end: today2,
           display: 'background',
           color: '#787878',
           selectable: false,
