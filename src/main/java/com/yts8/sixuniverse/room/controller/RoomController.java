@@ -4,6 +4,8 @@ import com.yts8.sixuniverse.member.dto.MemberDto;
 import com.yts8.sixuniverse.reservationDate.service.ReservationDateService;
 import com.yts8.sixuniverse.room.dto.RoomDto;
 import com.yts8.sixuniverse.room.service.RoomService;
+import com.yts8.sixuniverse.roomFacility.dto.RoomFacilityDto;
+import com.yts8.sixuniverse.roomFacility.service.RoomFacilityService;
 import com.yts8.sixuniverse.roomHits.dto.RoomHitsDto;
 import com.yts8.sixuniverse.roomHits.service.RoomHitsService;
 import com.yts8.sixuniverse.roomImage.service.RoomImageService;
@@ -27,6 +29,7 @@ public class RoomController {
   private final RoomImageService roomImageService;
   private final RoomHitsService roomHitsService;
   private final ReservationDateService reservationDateService;
+  private final RoomFacilityService roomFacilityService;
 
   @GetMapping("/detail/{roomId}")
   public String detail(Model model, HttpSession httpSession, @PathVariable Long roomId) {
@@ -57,6 +60,18 @@ public class RoomController {
     model.addAttribute("room", roomDto);
     model.addAttribute("reservationDateList", reservationDateList);
     model.addAttribute("roomImages", roomImageService.findByRoomId(roomDto.getRoomId()));
+
+    //편의시설 리스트
+//    model.addAttribute("amenities", roomFacilityService.selectRoomFacility());
+    RoomFacilityDto facilityDto = new RoomFacilityDto();
+    facilityDto.setRoomId(roomId);
+    List<String> roomFacilityList = roomFacilityService.selectRoomFacility(facilityDto);
+    model.addAttribute("roomFacilityList", roomFacilityList);
+//    for(String a2:roomFacilityList){
+//      System.out.println("a2 = " + a2);
+//    }
+
+
     return "room/detail";
   }
 

@@ -11,6 +11,8 @@ public interface RoomFacilityMapper {
 
   List<String> findByRoomIdAndCategoryName(RoomFacilityDto roomFacilityDto);
 
+  List<String> selectRoomFacility(RoomFacilityDto roomFacilityDto);
+
   void removeByRoomIdAndCategoryName(RoomFacilityDto roomFacilityDto);
 
   void removeByRoomId(Long roomId);

@@ -27,6 +27,11 @@ public class RoomFacilityServiceImpl implements RoomFacilityService {
   }
 
   @Override
+  public List<String> selectRoomFacility(RoomFacilityDto roomFacilityDto) {
+    return facilityMapper.selectRoomFacility(roomFacilityDto);
+  }
+
+  @Override
   public void removeByRoomId(Long roomId) {
     facilityMapper.removeByRoomId(roomId);
   }

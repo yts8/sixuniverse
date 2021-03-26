@@ -112,6 +112,7 @@ public class PerformanceController {
   public String views(HttpSession session, Model model) {
 
     MemberDto member = (MemberDto) session.getAttribute("member");
+
     int reservationMonthlyCount = performanceService.findByReservationMonthlyCount(member.getMemberId());
     model.addAttribute("reservationMonthlyCount", reservationMonthlyCount);
 
@@ -132,7 +133,6 @@ public class PerformanceController {
       hitsList.add(hits);
     }
     model.addAttribute("hitsList", hitsList);
-
 
     return "performance/views";
   }

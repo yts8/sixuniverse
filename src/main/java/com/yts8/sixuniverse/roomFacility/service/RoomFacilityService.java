@@ -9,6 +9,8 @@ public interface RoomFacilityService {
 
   List<String> findByRoomIdAndCategoryName(RoomFacilityDto roomFacilityDto);
 
+  List<String> selectRoomFacility(RoomFacilityDto roomFacilityDto);
+
   void removeByRoomId(Long roomId);
 
 }
