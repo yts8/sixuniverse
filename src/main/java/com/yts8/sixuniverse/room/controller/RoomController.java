@@ -82,16 +82,16 @@ public class RoomController {
     model.addAttribute("reviewReservationList", reviewReservationList);
 
     NumberFormat formatter = new DecimalFormat("0.#");
-    double reviewScore = performanceService.findByReviewScore(roomDto.getMemberId());
-    model.addAttribute("reviewScore", formatter.format(reviewScore));
+    double reviewScoreAll = reviewService.reviewScoreAll(roomDto.getRoomId());
+    model.addAttribute("reviewScore", formatter.format(reviewScoreAll));
 
-    double reviewScoreClean = reviewService.reviewScoreClean(roomDto.getMemberId());
+    double reviewScoreClean = reviewService.reviewScoreClean(roomDto.getRoomId());
     model.addAttribute("reviewScoreClean", formatter.format(reviewScoreClean));
 
-    double reviewScoreLocation = reviewService.reviewScoreLocation(roomDto.getMemberId());
+    double reviewScoreLocation = reviewService.reviewScoreLocation(roomDto.getRoomId());
     model.addAttribute("reviewScoreLocation", formatter.format(reviewScoreLocation));
 
-    double reviewScoreService = reviewService.reviewScoreService(roomDto.getMemberId());
+    double reviewScoreService = reviewService.reviewScoreService(roomDto.getRoomId());
     model.addAttribute("reviewScoreService", formatter.format(reviewScoreService));
 
     int reviewCount = reviewService.roomReviewCount(roomDto.getRoomId());

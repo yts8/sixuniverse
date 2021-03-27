@@ -19,7 +19,7 @@
         <div class="g-review-by__main-top">
           <nav>
           <span>
-            <a href="#">프로필</a>
+            <a th:href="@{|/member/profile/${session.member.getMemberId()}|}">프로필</a>
           </span>
             <span> > </span>
             <span> 후기 </span>
@@ -81,7 +81,8 @@
                          th:src="${review.getHostProfileImg()}">
                   </div>
                   <div class="g-review-by__panel-review-profile-text">
-                    <span class="g-review-by__panel-review-profile-text-name" th:text="${review.getHostName()}"></span>에
+                    <span class="g-review-by__panel-review-profile-text-name" th:text="${review.getHostName()}"></span>
+                    에
                     대한 후기
                     <div class="g-review-by__panel-review-text" th:text="${review.getReviewContent()}"></div>
                     <div class="g-review-by__panel-review-day"
@@ -96,6 +97,17 @@
                         <button class="g-review-by__modal-delete" th:data-id="${review.reviewId}">삭제</button>
                       </div>
                     </th:block>
+                  </div>
+                </div>
+                <div th:class="'g-review-by__input_area reply-content-js' + ${review.getReviewId()}">
+                  <div class="g-review-by__reply">
+                  <span class="g-review-by__reply-name">
+                    <span class="g-review-by__panel-review-profile-text-name" th:text="${review.getHostName()}"></span>
+                     의 답변
+                  </span>
+                  <div class="g-review-by__reply-textarea-complete">
+                    <div th:text="${review.getReplyContent()}"></div>
+                  </div>
                   </div>
                 </div>
               </div>
