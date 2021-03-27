@@ -75,7 +75,7 @@
   </select>
 
   <select id="reviewHostList" resultType="ReviewHostDto">
-    select member.username                                    as guest_name,
+    select member.member_id                                   as guest_id member.username                                    as guest_name,
            member.profile_img                                 as guest_profile_img,
            reservation.check_in                               as check_in,
            reservation.check_out                              as check_out,
@@ -174,7 +174,7 @@
 
   <select id="reviewScoreAll" resultType="double">
     select (ifnull(avg(review.score_clean), 0) + ifnull(avg(review.score_location), 0) +
-           ifnull(avg(review.score_service), 0)) / 3 as score_all
+            ifnull(avg(review.score_service), 0)) / 3 as score_all
     from review
            join room on review.room_id = room.room_id
            join member on room.member_id = member.member_id

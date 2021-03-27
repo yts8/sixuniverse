@@ -51,7 +51,7 @@
             </div>
             <div class="review-info__content-profile-container">
             <a href="./${memberId}">
-              <img th:src="${profileImg}" alt="프로필" class="review-info__content-profile-img"/>
+              <img src="${profileImg}" alt="프로필" class="review-info__content-profile-img"/>
             </a>
             <div class="review-info__content-username">${username}</div>
             </div>
