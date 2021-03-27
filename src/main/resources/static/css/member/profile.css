@@ -102,8 +102,9 @@
 
 /* === room === */
 .room-info__container {
-  margin-bottom: 2rem;
+  padding-bottom: 1rem;
   border-bottom: 2px solid #f2f2f2;
+  margin-bottom: 2rem;
 }
 
 .room-info__container > h2 {
@@ -138,7 +139,7 @@
 }
 
 .room-info__item-box > .room-info__content-container {
-  height: 30%;
+  height: calc(30% - 1rem);
 }
 
 .room-info__item-box > .room-info__content-container > div:not(:last-of-type) {
@@ -163,5 +164,12 @@
 }
 
 .review-info__container {
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #f2f2f2;
+}
 
+.review-info__container > h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
 }

@@ -42,7 +42,7 @@ public interface ReviewMapper {
 
   int roomReviewCount(Long roomId);
 
-  int hostReviewCount(Long roomId);
+  int hostReviewCount(Long memberId);
 
   int guestReplyCount(Long memberId);
 

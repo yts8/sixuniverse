@@ -97,8 +97,8 @@ public class ReviewServiceImpl implements ReviewService {
   }
 
   @Override
-  public int hostReviewCount(Long roomId) {
-    return reviewMapper.hostReviewCount(roomId);
+  public int hostReviewCount(Long memberId) {
+    return reviewMapper.hostReviewCount(memberId);
   }
 
   @Override
