@@ -6,6 +6,7 @@ import com.yts8.sixuniverse.review.dto.ReviewHostDto;
 import com.yts8.sixuniverse.review.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,8 +23,8 @@ public class ReviewApiController {
 
   private final ReviewService reviewService;
 
-  @GetMapping("/guest/about")
-  public List<Map<String, Object>> guestAboutMe(Long memberId) {
+  @GetMapping("/guest/about/{memberId}")
+  public List<Map<String, Object>> guestAboutMe(@PathVariable Long memberId) {
     List<Map<String, Object>> reviews = new ArrayList<>();
 
     List<ReviewHostDto> reviewHostDtos = reviewService.reviewHostList(memberId);
@@ -40,8 +41,8 @@ public class ReviewApiController {
     return reviews;
   }
 
-  @GetMapping("/host/about")
-  public List<Map<String, Object>> hostAboutMe(Long memberId) {
+  @GetMapping("/host/about/{memberId}")
+  public List<Map<String, Object>> hostAboutMe(@PathVariable Long memberId) {
     List<Map<String, Object>> reviews = new ArrayList<>();
     List<ReviewGuestDto> reviewGuestDtos = reviewService.guestReplyList(memberId);
 

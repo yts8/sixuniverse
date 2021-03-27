@@ -6,7 +6,7 @@
   const guestReviewBtnEl = document.querySelector(".guest-review-btn-js");
   const hostReviewBtnEl = document.querySelector(".host-review-btn-js");
 
-  const memberId = document.querySelector("#member-id").value;
+  const profileMemberId = document.querySelector("#member-id").value;
 
   // CSRF
   const csrf = document.querySelector("#csrf").value;
@@ -30,9 +30,25 @@
   }
 
   const handleReviewBtnClick = async (e, url) => {
-    const res = await fetch(`http://localhost:8080/api/review/${url}/about`);
-    const map = await res.json();
-    console.log(map);
+    const res = await fetch(`http://localhost:8080/api/review/${url}/about/${profileMemberId}`);
+    const reviews = await res.json();
+    for (const review of reviews) {
+      const {
+        memberId,
+        username,
+        profileImg,
+        reviewContent,
+        reviewRegDate
+      } = review;
+
+      console.log(memberId);
+      console.log(username);
+      console.log(profileImg);
+      console.log(reviewContent);
+      console.log(reviewRegDate);
+      console.log("=================");
+
+    }
   }
 
   // Initialize
