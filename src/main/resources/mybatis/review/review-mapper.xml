@@ -75,7 +75,8 @@
   </select>
 
   <select id="reviewHostList" resultType="ReviewHostDto">
-    select member.member_id                                   as guest_id member.username                                    as guest_name,
+    select member.member_id                                   as guest_id,
+           member.username                                    as guest_name,
            member.profile_img                                 as guest_profile_img,
            reservation.check_in                               as check_in,
            reservation.check_out                              as check_out,
