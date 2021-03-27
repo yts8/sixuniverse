@@ -168,8 +168,48 @@
   border-bottom: 2px solid #f2f2f2;
 }
 
-.review-info__container > h2 {
+.review-info__title-container {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+}
+
+.review-info__title-container > .review-info__icon {
+  align-self: center;
+  font-size: 1.2rem;
+}
+
+.review-info__title-container > h2 {
   font-size: 1.5rem;
   font-weight: bold;
-  margin-bottom: 2rem;
+  margin: 0 2rem 0 0.8rem;
+}
+
+.review-info__title-container > a {
+  font-weight: bold;
+  text-decoration: underline;
+  color: #787878;
+}
+
+.review-info__tab-container {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #f2f2f2;
+  margin-bottom: 1.5rem;
+}
+
+.review-info__tab-container > li {
+  padding-bottom: 1rem;
+}
+
+.review-info__tab-container > li:not(:last-of-type) {
+  margin-right: 1rem;
+}
+
+.review-info__tab-container > li:hover {
+  border-bottom: 2px solid #484848;
+}
+
+.review-info__tab-container > li > button {
+  font-weight: bold;
 }

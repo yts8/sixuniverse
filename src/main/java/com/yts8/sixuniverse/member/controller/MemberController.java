@@ -27,9 +27,7 @@ public class MemberController {
 
     model.addAttribute("memberDto", memberService.findById(memberId));
     model.addAttribute("roomInfoDtos", roomService.roomInfoFindByMemberId(memberId));
-    model.addAttribute("guestReviews", reviewService.reviewHostList(memberId));
     model.addAttribute("guestReviewCount", reviewService.hostReviewCount(memberId));
-    model.addAttribute("hostReviews", reviewService.guestReplyList(memberId));
     model.addAttribute("hostReviewCount", reviewService.guestReplyCount(memberId));
 
     model.addAttribute("title", "프로필");

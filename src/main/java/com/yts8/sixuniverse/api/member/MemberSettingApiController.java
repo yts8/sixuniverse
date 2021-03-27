@@ -17,13 +17,12 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/member")
+@RequestMapping("/api/member/setting")
 public class MemberSettingApiController {
 
   private final MemberService memberService;
   private final PasswordEncoder passwordEncoder;
   private final HttpSession httpSession;
-  private final S3Uploader s3Uploader;
 
   @PostMapping("/update/username")
   public void updateUsername(@RequestBody MemberDto memberDto) {
@@ -76,21 +75,4 @@ public class MemberSettingApiController {
     return member;
   }
 
-  @PostMapping("/update/profile-img")
-  public Map<String, String> updateProfileImg(@RequestParam("profileImg") MultipartFile multipartFile) {
-    String profileImg = null;
-    try {
-      profileImg = s3Uploader.upload(multipartFile, "member/profile");
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    MemberDto member = (MemberDto) httpSession.getAttribute("member");
-    member.setProfileImg(profileImg);
-    memberService.updateProfileImg(member);
-
-    Map<String, String> map = new HashMap<>();
-    map.put("profileImg", profileImg);
-
-    return map;
-  }
 }

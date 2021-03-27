@@ -95,13 +95,11 @@
   </select>
 
   <select id="guestReplyList" resultType="ReviewGuestDto">
-    select member.member_id        as member_id,
-           member.username         as host_name,
-           member.profile_img      as host_profile_img,
-           review.reply_content    as reply_content,
-           review.reply_reg_date   as reply_reg_date,
-           reservation.check_out   as check_out,
-           reservation.cancel_date as cancel_date
+    select member.member_id      as member_id,
+           member.username       as host_name,
+           member.profile_img    as host_profile_img,
+           review.reply_content  as reply_content,
+           review.reply_reg_date as reply_reg_date
     from review
            join reservation on review.reservation_id = reservation.reservation_id
            join room on review.room_id = room.room_id

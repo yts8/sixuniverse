@@ -51,6 +51,7 @@ public class LoginController {
   public String join(MemberDto memberDto) {
     memberDto.setRole("HOST");
     memberDto.setSocial("local");
+    memberDto.setProfileImg("/images/member/default.png");
     memberService.save(memberDto);
     return "redirect:/login";
   }

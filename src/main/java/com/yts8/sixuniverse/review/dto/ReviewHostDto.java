@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 @Data
 public class ReviewHostDto {
+  private String guestId;
   private String guestName;
   private String guestProfileImg;
   private LocalDate checkIn;

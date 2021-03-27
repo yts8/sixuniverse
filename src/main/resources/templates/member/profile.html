@@ -16,8 +16,9 @@
       <div class="member-profile__side-wrap">
         <div class="member-profile__img-wrap">
           <img id="member-profile-img" th:src="${memberDto.getProfileImg()}" alt="프로필">
+          <input type="hidden" id="member-id" th:value="${memberDto.getMemberId()}"/>
+          <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
           <div th:if="${memberDto.getMemberId().equals(session.member.getMemberId())}">
-            <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
             <label for="update-profile-img">
               사진 업데이트하기
             </label>
@@ -98,7 +99,27 @@
       </section>
 
       <section class="review-info__container">
-        <h2 th:text="'후기 ' + ${guestReviewCount + hostReviewCount} + '개'">후기 0개</h2>
+        <div class="review-info__title-container">
+          <div class="review-info__icon">
+            <i class="fas fa-star"></i>
+          </div>
+          <h2 th:text="'후기 ' + ${guestReviewCount + hostReviewCount} + '개'">후기 0개</h2>
+          <a th:if="${memberDto.getMemberId().equals(session.member.getMemberId())}" th:href="@{/review/guest-about}">내가
+            작성한 후기</a>
+        </div>
+
+        <ul class="review-info__tab-container">
+          <li>
+            <button th:text="'게스트가 남긴 후기 (' + ${guestReviewCount} + ')'" class="guest-review-btn-js"></button>
+          </li>
+          <li>
+            <button th:text="'호스트가 남긴 후기 (' + ${hostReviewCount} + ')'" class="host-review-btn-js"></button>
+          </li>
+        </ul>
+
+        <div class="">
+
+        </div>
 
       </section>
 
