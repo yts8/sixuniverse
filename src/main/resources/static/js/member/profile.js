@@ -5,6 +5,7 @@
   const memberProfileImgEl = document.querySelector("#member-profile-img");
   const guestReviewBtnEl = document.querySelector(".guest-review-btn-js");
   const hostReviewBtnEl = document.querySelector(".host-review-btn-js");
+  const reviewContentContainerEl = document.querySelector(".review-content-container-js");
 
   const profileMemberId = document.querySelector("#member-id").value;
 
@@ -32,6 +33,7 @@
   const handleReviewBtnClick = async (e, url) => {
     const res = await fetch(`http://localhost:8080/api/review/${url}/about/${profileMemberId}`);
     const reviews = await res.json();
+    reviewContentContainerEl.innerHTML = "";
     for (const review of reviews) {
       const {
         memberId,
@@ -41,13 +43,20 @@
         reviewRegDate
       } = review;
 
-      console.log(memberId);
-      console.log(username);
-      console.log(profileImg);
-      console.log(reviewContent);
-      console.log(reviewRegDate);
-      console.log("=================");
-
+      reviewContentContainerEl.innerHTML += `
+          <div class="review-info__content-wrap">
+            <div class="review-info__content-review-reg-date">${reviewRegDate}</div>
+            <div class="review-info__content-review-content">
+              ${reviewContent}
+            </div>
+            <div class="review-info__content-profile-container">
+            <a href="./${memberId}">
+              <img th:src="${profileImg}" alt="프로필" class="review-info__content-profile-img"/>
+            </a>
+            <div class="review-info__content-username">${username}</div>
+            </div>
+          </div>
+      `;
     }
   }
 
@@ -56,6 +65,7 @@
     updateProfileImgEl && updateProfileImgEl.addEventListener("change", handleProfileImgChange);
     guestReviewBtnEl.addEventListener("click", (e) => handleReviewBtnClick(e, "guest"));
     hostReviewBtnEl.addEventListener("click", (e) => handleReviewBtnClick(e, "host"));
+    guestReviewBtnEl.click();
   }
   init();
 

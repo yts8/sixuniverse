@@ -118,19 +118,17 @@
         </ul>
 
         <div class="review-content-container-js">
-          <div>
-            <div>9월 2020</div>
-          </div>
-          <div>
-            본인 인증을 마쳤다는 사실을 다른 사용자에게 보여줄 수 있습니다.
-            본인 인증을 마쳤다는 사실을 다른 사용자에게 보여줄 수 있습니다.
-            본인 인증을 마쳤다는 사실을 다른 사용자에게 보여줄 수 있습니다.
-          </div>
-          <div>
-
+          <div class="review-info__content-wrap">
+            <div class="review-info__content-review-reg-date">9월 2020</div>
+            <div class="review-info__content-review-content">
+              리뷰
+            </div>
+            <div class="review-info__content-profile-container">
+              <img th:src="${session.member.getProfileImg()}" alt="프로필" class="review-info__content-profile-img"/>
+              <div class="review-info__content-username">조지헌님</div>
+            </div>
           </div>
         </div>
-
       </section>
 
     </div>
