@@ -100,6 +100,12 @@
   margin-top: 2rem;
 }
 
+/* === room === */
+.room-info__container {
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #f2f2f2;
+}
+
 .room-info__container > h2 {
   font-size: 1.5rem;
   font-weight: bold;
@@ -144,4 +150,8 @@
 
 .room-info__box > div:not(:last-of-type) {
   margin-right: 0.5rem;
+}
+
+.review-info__container {
+
 }

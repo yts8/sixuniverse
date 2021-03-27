@@ -32,11 +32,9 @@
     select room.room_id,
            m.host_grade,
            (select room_img from room_img where room.room_id order by room_img.room_img_id limit 1) as room_img,
-           (select (ifnull(avg(score_clean), 0) + ifnull(avg(score_location), 0) + ifnull(avg(score_service), 0)) /
-                   3
-            from review
-            where room.room_id)                                                                     as reviewScore,
-           (select count(review_id) from review where room.room_id)                                 as reviewCount,
+           (ifnull(avg(score_clean), 0) + ifnull(avg(score_location), 0) + ifnull(avg(score_service), 0)) /
+           3                                                                                        as review_score,
+           count(review.review_id)                                                                  as review_count,
            room.title,
            room.building_type,
            room.room_type,
@@ -48,6 +46,7 @@
            left join review on room.room_id = review.room_id
     where m.member_id = #{memberId}
       and room.status = 'register'
+    group by room.room_id
   </select>
 
   <insert id="save" parameterType="RoomDto" useGeneratedKeys="true" keyProperty="roomId">
