@@ -27,10 +27,19 @@ public class ReviewServiceImpl implements ReviewService {
   }
 
   @Override
-  public List<ReviewGuestDto> reviewBefore(Long memberId) { return reviewMapper.reviewBefore(memberId); }
+  public ReviewDto findByReservationId(Long reservationId) {
+    return reviewMapper.findByReservationId(reservationId);
+  }
 
   @Override
-  public List<ReviewGuestDto> reviewAfter(Long memberId) { return reviewMapper.reviewAfter(memberId); }
+  public List<ReviewGuestDto> reviewBefore(Long memberId) {
+    return reviewMapper.reviewBefore(memberId);
+  }
+
+  @Override
+  public List<ReviewGuestDto> reviewAfter(Long memberId) {
+    return reviewMapper.reviewAfter(memberId);
+  }
 
   @Override
   public List<ReviewGuestDto> reviewGuestList(Long memberId) {
@@ -43,7 +52,14 @@ public class ReviewServiceImpl implements ReviewService {
   }
 
   @Override
-  public List<ReviewHostDto> reviewReservationList(Long memberId) { return reviewMapper.reviewReservationList(memberId); }
+  public List<ReviewHostDto> reviewReservationListAll(Long roomId) {
+    return reviewMapper.reviewReservationListAll(roomId);
+  }
+
+  @Override
+  public List<ReviewHostDto> reviewReservationList(Long memberId) {
+    return reviewMapper.reviewReservationList(memberId);
+  }
 
   @Override
   public ReviewDto getReview(Long reviewId) {
@@ -71,15 +87,23 @@ public class ReviewServiceImpl implements ReviewService {
   }
 
   @Override
-  public int reviewCount(Long memberId) { return reviewMapper.reviewCount(memberId); }
+  public int reviewCount(Long memberId) {
+    return reviewMapper.reviewCount(memberId);
+  }
 
   @Override
-  public double reviewScoreClean(Long memberId) { return reviewMapper.reviewScoreClean(memberId); }
+  public double reviewScoreClean(Long memberId) {
+    return reviewMapper.reviewScoreClean(memberId);
+  }
 
   @Override
-  public double reviewScoreLocation(Long memberId) { return reviewMapper.reviewScoreLocation(memberId); }
+  public double reviewScoreLocation(Long memberId) {
+    return reviewMapper.reviewScoreLocation(memberId);
+  }
 
   @Override
-  public double reviewScoreService(Long memberId) { return reviewMapper.reviewScoreService(memberId); }
+  public double reviewScoreService(Long memberId) {
+    return reviewMapper.reviewScoreService(memberId);
+  }
 
 }

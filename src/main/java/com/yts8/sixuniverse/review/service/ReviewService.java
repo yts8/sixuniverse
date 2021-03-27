@@ -12,6 +12,8 @@ public interface ReviewService {
 
   ReviewDto findById(Long reviewId);
 
+  ReviewDto findByReservationId(Long reservationId);
+
   List<ReviewGuestDto> reviewBefore(Long memberId);
 
   List<ReviewGuestDto> reviewAfter(Long memberId);
@@ -19,6 +21,8 @@ public interface ReviewService {
   List<ReviewGuestDto> reviewGuestList(Long memberId);
 
   List<ReviewHostDto> reviewHostList(Long memberId);
+
+  List<ReviewHostDto> reviewReservationListAll(Long roomId);
 
   List<ReviewHostDto> reviewReservationList(Long memberId);
 
@@ -39,5 +43,4 @@ public interface ReviewService {
   double reviewScoreLocation(Long memberId);
 
   double reviewScoreService(Long memberId);
-
 }

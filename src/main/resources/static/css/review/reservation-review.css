@@ -61,7 +61,7 @@ html, body, .reservation-review__modal-content {
 .reservation-review__review-guest {
   display: flex;
   flex-direction: column;
-  flex: 1 1 40%;
+  width: 40%;
   margin: 20px 10px;
 }
 

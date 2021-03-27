@@ -68,10 +68,17 @@ public class ReviewController {
     LocalDate today = LocalDate.now();
     model.addAttribute("today", today);
 
-//    if (reviewDto != null) {
-//      return "redirect:/review/guest-by";
-//    } else {
-//      return "review/review-form";
+//    for (ReviewGuestDto review : reviewGuestList) {
+//      Long reviewId = review.getReviewId();
+//      ReservationDto reservationDto = reservationService.findById(reviewId);
+//      Long memberId = reservationDto.getMemberId();
+//      if (!member.getMemberId().equals(memberId)) {
+//        return "redirect:/review/guest-by";
+//      }
+//      ReviewDto reviewDto = reviewService.findById(reviewId);
+//      if (reviewDto != null) {
+//        return "redirect:/review/guest-by";
+//      }
 //    }
 
     return "review/guest-review-by";
@@ -87,11 +94,11 @@ public class ReviewController {
     List<ReviewHostDto> reviewHostList = reviewService.reviewHostList(memberId);
     model.addAttribute("reviewHostList", reviewHostList);
 
-//    List<RoomDto> roomDtoList = roomService.findByMemberId(memberId);
-//    ReviewDto reviewDto = reviewService.findById(roomDto.getRoomId());
-//    System.out.println("reviewDto = " + reviewDto);
-//    ReviewDto getReview = reviewService.getReview(reviewDto.getReviewId());
-//    model.addAttribute("getReview", getReview);
+    for (ReviewHostDto review : reviewHostList) {
+      Long reviewId = review.getReviewId();
+      ReviewDto getReview = reviewService.getReview(reviewId);
+      model.addAttribute("getReview", getReview);
+    }
 
     NumberFormat formatter = new DecimalFormat("0.#");
     double reviewScore = performanceService.findByReviewScore(member.getMemberId());
@@ -145,18 +152,22 @@ public class ReviewController {
   }
 
   @GetMapping("/form/{reservationId}")
-  public String reviewForm(@PathVariable Long reservationId, Model model) {
+  public String reviewForm(HttpSession session, @PathVariable Long reservationId, Model model) {
     model.addAttribute("title", "후기 작성");
 
     ReservationDto reservationDto = reservationService.findById(reservationId);
 
-    Long roomId = reservationDto.getRoomId();
-    RoomDto roomDto = roomService.findById(roomId);
+    ReviewDto reviewDto = reviewService.findByReservationId(reservationId);
+
+    MemberDto member = (MemberDto) session.getAttribute("member");
+    if (!member.getMemberId().equals(reservationDto.getMemberId())|| reviewDto != null) {
+      return "redirect:/review/guest-by";
+    }
+
+    RoomDto roomDto = roomService.findById(reservationDto.getRoomId());
     model.addAttribute("roomDto", roomDto);
 
-    Long memberId = roomDto.getMemberId();
-    MemberDto memberDto = memberService.findById(memberId);
-    model.addAttribute("memberDto", memberDto);
+    model.addAttribute("memberDto", memberService.findById(roomDto.getMemberId()));
 
     return "review/review-form";
   }

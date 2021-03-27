@@ -16,6 +16,12 @@
     where review_id = #{reviewId}
   </select>
 
+  <select id="findByReservationId" resultType="ReviewDto">
+    select *
+    from review
+    where reservation_id = #{reservationId}
+  </select>
+
   <select id="reviewBefore" resultType="ReviewGuestDto">
     select member.username            as host_name,
            member.profile_img         as host_profile_img,
@@ -106,6 +112,19 @@
            join member on member.member_id = reservation.member_id
     where room.member_id = #{memberId}
       and #{score} <![CDATA[ <= ]]> (score_clean + score_location + score_service) / 3 <![CDATA[ < ]]> #{score+1}
+    order by review_id desc
+  </select>
+
+  <select id="reviewReservationListAll" resultType="ReviewHostDto">
+    select member.username        as guest_name,
+           member.profile_img     as guest_profile_img,
+           review.review_reg_date as review_reg_date,
+           review.review_content  as review_content
+    from review
+           join room on review.room_id = room.room_id
+           join reservation on review.reservation_id = reservation.reservation_id
+           join member on member.member_id = reservation.member_id
+    where room.room_id = #{roomId}
     order by review_id desc
   </select>
 

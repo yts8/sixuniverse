@@ -14,6 +14,8 @@ public interface ReviewMapper {
 
   ReviewDto findById(Long reviewId);
 
+  ReviewDto findByReservationId(Long reservationId);
+
   List<ReviewGuestDto> reviewBefore(Long memberId);
 
   List<ReviewGuestDto> reviewAfter(Long memberId);
@@ -21,6 +23,8 @@ public interface ReviewMapper {
   List<ReviewGuestDto> reviewGuestList(Long memberId);
 
   List<ReviewHostDto> reviewHostList(Long memberId);
+
+  List<ReviewHostDto> reviewReservationListAll(Long roomId);
 
   List<ReviewHostDto> reviewReservationList(Long memberId);
 
@@ -41,5 +45,4 @@ public interface ReviewMapper {
   double reviewScoreLocation(Long memberId);
 
   double reviewScoreService(Long memberId);
-
 }

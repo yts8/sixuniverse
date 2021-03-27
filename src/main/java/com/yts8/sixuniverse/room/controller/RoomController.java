@@ -42,7 +42,7 @@ public class RoomController {
   public String detail(Model model, HttpSession httpSession, @PathVariable Long roomId) {
 
     RoomDto roomDto = roomService.findById(roomId);
-    if (!roomDto.getStatus().equals("register")) {
+    if (roomDto == null || !roomDto.getStatus().equals("register")) {
       return "redirect:/";
     }
 
@@ -74,12 +74,9 @@ public class RoomController {
     facilityDto.setRoomId(roomId);
     List<String> roomFacilityList = roomFacilityService.selectRoomFacility(facilityDto);
     model.addAttribute("roomFacilityList", roomFacilityList);
-//    for(String a2:roomFacilityList){
-//      System.out.println("a2 = " + a2);
-//    }
 
-    List<ReviewHostDto> reviewHostList = reviewService.reviewHostList(roomDto.getMemberId());
-    model.addAttribute("reviewHostList", reviewHostList);
+    List<ReviewHostDto> reviewReservationListAll = reviewService.reviewReservationListAll(roomDto.getRoomId());
+    model.addAttribute("reviewReservationListAll", reviewReservationListAll);
 
     List<ReviewHostDto> reviewReservationList = reviewService.reviewReservationList(roomDto.getMemberId());
     model.addAttribute("reviewReservationList", reviewReservationList);
