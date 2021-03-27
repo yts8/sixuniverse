@@ -31,10 +31,14 @@
   <select id="roomInfoFindByMemberId" resultType="RoomInfoDto">
     select room.room_id,
            m.host_grade,
-           (select room_img from room_img where room.room_id order by room_img.room_img_id limit 1) as room_img,
+           (select room_img
+            from room_img
+            where room_id = room.room_id
+            order by room_img_id
+            limit 1)               as room_img,
            (ifnull(avg(score_clean), 0) + ifnull(avg(score_location), 0) + ifnull(avg(score_service), 0)) /
-           3                                                                                        as review_score,
-           count(review.review_id)                                                                  as review_count,
+           3                       as review_score,
+           count(review.review_id) as review_count,
            room.title,
            room.building_type,
            room.room_type,

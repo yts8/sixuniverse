@@ -62,30 +62,34 @@
         <div class="room-info__wrap">
           <div th:each="roomInfoDto : ${roomInfoDtos}" class="room-info__item-box">
 
-            <a th:href="@{|/room/detail/${roomInfoDto.getRoomId()}|}">
-              <img th:src="${roomInfoDto.getRoomImg()}" alt="숙소 대표 사진"/>
-            </a>
+            <div class="room-info__img-container">
+              <a th:href="@{|/room/detail/${roomInfoDto.getRoomId()}|}">
+                <img th:src="${roomInfoDto.getRoomImg()}" alt="숙소 대표 사진"/>
+              </a>
+            </div>
 
-            <div class="room-info__box review-score__container">
-              <div class="review-score__star-icon">
-                <i class="fas fa-star"></i>
+            <div class="room-info__content-container">
+              <div class="room-info__box review-score__container">
+                <div class="review-score__star-icon">
+                  <i class="fas fa-star"></i>
+                </div>
+                <div th:text="${#numbers.formatDecimal(roomInfoDto.getReviewScore(), 1, 1, 'COMMA')}">5.0</div>
+                <div th:text="'(' + ${roomInfoDto.getReviewCount()} + ')'">(1)</div>
               </div>
-              <div th:text="${#numbers.formatDecimal(roomInfoDto.getReviewScore(), 1, 1, 'COMMA')}">5.0</div>
-              <div th:text="'(' + ${roomInfoDto.getReviewCount()} + ')'">(1)</div>
-            </div>
 
-            <div class="room-info__box">
-              <div th:text="${roomInfoDto.getBuildingType()}">집 전체</div>
-              <div>·</div>
-              <div th:text="${roomInfoDto.getRoomType()}">House</div>
-            </div>
+              <div class="room-info__box">
+                <div th:text="${roomInfoDto.getBuildingType()}">집 전체</div>
+                <div>·</div>
+                <div th:text="${roomInfoDto.getRoomType()}">House</div>
+              </div>
 
-            <div th:text="${roomInfoDto.getTitle()}">제목</div>
+              <div th:text="${roomInfoDto.getTitle()}">제목</div>
 
-            <div class="room-info__box">
-              <div th:text="${#numbers.formatInteger(roomInfoDto.getPrice(), 3, 'COMMA')} + '원'">10000</div>
-              <div>/</div>
-              <div>1박</div>
+              <div class="room-info__box">
+                <div th:text="${#numbers.formatInteger(roomInfoDto.getPrice(), 3, 'COMMA')} + '원'">10000</div>
+                <div>/</div>
+                <div>1박</div>
+              </div>
             </div>
 
           </div>
