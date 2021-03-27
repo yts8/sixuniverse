@@ -99,15 +99,15 @@
                     </th:block>
                   </div>
                 </div>
-                <div th:class="'g-review-by__input_area reply-content-js' + ${review.getReviewId()}">
+                <div th:if="${review.getReplyContent()} != null" th:class="'g-review-by__input_area reply-content-js' + ${review.getReviewId()}">
                   <div class="g-review-by__reply">
                   <span class="g-review-by__reply-name">
                     <span class="g-review-by__panel-review-profile-text-name" th:text="${review.getHostName()}"></span>
                      의 답변
                   </span>
-                  <div class="g-review-by__reply-textarea-complete">
-                    <div th:text="${review.getReplyContent()}"></div>
-                  </div>
+                    <div class="g-review-by__reply-textarea-complete">
+                      <div th:text="${review.getReplyContent()}"></div>
+                    </div>
                   </div>
                 </div>
               </div>
