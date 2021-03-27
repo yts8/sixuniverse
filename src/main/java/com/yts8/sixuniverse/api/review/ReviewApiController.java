@@ -1,6 +1,5 @@
 package com.yts8.sixuniverse.api.review;
 
-import com.yts8.sixuniverse.member.dto.MemberDto;
 import com.yts8.sixuniverse.review.dto.ReviewGuestDto;
 import com.yts8.sixuniverse.review.dto.ReviewHostDto;
 import com.yts8.sixuniverse.review.service.ReviewService;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
