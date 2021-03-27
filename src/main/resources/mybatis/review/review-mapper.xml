@@ -54,14 +54,14 @@
   </select>
 
   <select id="reviewGuestList" resultType="ReviewGuestDto">
-    select member.username            as host_name,
+    select member.member_id           as member_id,
+           member.username            as host_name,
            member.profile_img         as host_profile_img,
            review.review_id           as review_id,
            review.review_content      as review_content,
            review.review_reg_date     as review_reg_date,
            review.reply_content       as reply_content,
            review.reply_reg_date      as reply_reg_date,
-           member.member_id           as member_id,
            reservation.reservation_id as reservation_id,
            reservation.status         as status,
            reservation.check_out      as check_out,
@@ -91,6 +91,23 @@
            join reservation on review.reservation_id = reservation.reservation_id
            join member on member.member_id = reservation.member_id
     where room.member_id = #{memberId}
+    order by review.review_reg_date desc
+  </select>
+
+  <select id="guestReplyList" resultType="ReviewGuestDto">
+    select member.member_id        as member_id,
+           member.username         as host_name,
+           member.profile_img      as host_profile_img,
+           review.reply_content    as reply_content,
+           review.reply_reg_date   as reply_reg_date,
+           reservation.check_out   as check_out,
+           reservation.cancel_date as cancel_date
+    from review
+           join reservation on review.reservation_id = reservation.reservation_id
+           join room on review.room_id = room.room_id
+           join member on member.member_id = room.member_id
+    where reservation.member_id = #{memberId}
+      and review.reply_content is not null
     order by review.review_reg_date desc
   </select>
 
@@ -137,7 +154,7 @@
            join room on review.room_id = room.room_id
            join reservation on review.reservation_id = reservation.reservation_id
            join member on member.member_id = reservation.member_id
-    where room.member_id = #{memberId}
+    where room.room_id = #{roomId}
     order by review.review_reg_date desc
     limit 6
   </select>
@@ -181,12 +198,27 @@
     where member.member_id = #{memberId}
   </select>
 
-  <select id="reviewCount" resultType="int">
+  <select id="roomReviewCount" resultType="int">
+    select count(*)
+    from review
+           join room on review.room_id = room.room_id
+    where room.room_id = #{roomId}
+  </select>
+
+  <select id="hostReviewCount" resultType="int">
     select count(*)
     from review
            join room on review.room_id = room.room_id
            join member on room.member_id = member.member_id
-    where member.member_id = #{memberId}
+    where room.member_id = #{memberId}
+  </select>
+
+  <select id="guestReplyCount" resultType="int">
+    select count(*)
+    from review
+           join reservation r on review.reservation_id = r.reservation_id
+    where r.member_id = #{memberId}
+      and review.reply_content is not null
   </select>
 
   <update id="updateReview" parameterType="ReviewDto">

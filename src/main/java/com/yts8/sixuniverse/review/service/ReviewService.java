@@ -22,9 +22,11 @@ public interface ReviewService {
 
   List<ReviewHostDto> reviewHostList(Long memberId);
 
+  List<ReviewGuestDto> guestReplyList(Long memberId);
+
   List<ReviewHostDto> reviewReservationListAll(Long roomId);
 
-  List<ReviewHostDto> reviewReservationList(Long memberId);
+  List<ReviewHostDto> reviewReservationList(Long roomId);
 
   ReviewDto getReview(Long reviewId);
 
@@ -36,7 +38,11 @@ public interface ReviewService {
 
   void deleteReply(ReviewDto reviewDto);
 
-  int reviewCount(Long memberId);
+  int roomReviewCount(Long roomId);
+
+  int hostReviewCount(Long roomId);
+
+  int guestReplyCount(Long memberId);
 
   double reviewScoreClean(Long memberId);
 

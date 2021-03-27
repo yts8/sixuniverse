@@ -78,7 +78,7 @@ public class RoomController {
     List<ReviewHostDto> reviewReservationListAll = reviewService.reviewReservationListAll(roomDto.getRoomId());
     model.addAttribute("reviewReservationListAll", reviewReservationListAll);
 
-    List<ReviewHostDto> reviewReservationList = reviewService.reviewReservationList(roomDto.getMemberId());
+    List<ReviewHostDto> reviewReservationList = reviewService.reviewReservationList(roomDto.getRoomId());
     model.addAttribute("reviewReservationList", reviewReservationList);
 
     NumberFormat formatter = new DecimalFormat("0.#");
@@ -94,7 +94,7 @@ public class RoomController {
     double reviewScoreService = reviewService.reviewScoreService(roomDto.getMemberId());
     model.addAttribute("reviewScoreService", formatter.format(reviewScoreService));
 
-    int reviewCount = reviewService.reviewCount(roomDto.getMemberId());
+    int reviewCount = reviewService.roomReviewCount(roomDto.getRoomId());
     model.addAttribute("reviewCount", reviewCount);
 
     return "room/detail";

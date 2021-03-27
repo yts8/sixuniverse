@@ -52,13 +52,18 @@ public class ReviewServiceImpl implements ReviewService {
   }
 
   @Override
+  public List<ReviewGuestDto> guestReplyList(Long memberId) {
+    return reviewMapper.guestReplyList(memberId);
+  }
+
+  @Override
   public List<ReviewHostDto> reviewReservationListAll(Long roomId) {
     return reviewMapper.reviewReservationListAll(roomId);
   }
 
   @Override
-  public List<ReviewHostDto> reviewReservationList(Long memberId) {
-    return reviewMapper.reviewReservationList(memberId);
+  public List<ReviewHostDto> reviewReservationList(Long roomId) {
+    return reviewMapper.reviewReservationList(roomId);
   }
 
   @Override
@@ -87,8 +92,18 @@ public class ReviewServiceImpl implements ReviewService {
   }
 
   @Override
-  public int reviewCount(Long memberId) {
-    return reviewMapper.reviewCount(memberId);
+  public int roomReviewCount(Long roomId) {
+    return reviewMapper.roomReviewCount(roomId);
+  }
+
+  @Override
+  public int hostReviewCount(Long roomId) {
+    return reviewMapper.hostReviewCount(roomId);
+  }
+
+  @Override
+  public int guestReplyCount(Long memberId) {
+    return reviewMapper.guestReplyCount(memberId);
   }
 
   @Override

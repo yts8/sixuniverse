@@ -104,7 +104,7 @@ public class ReviewController {
     double reviewScore = performanceService.findByReviewScore(member.getMemberId());
     model.addAttribute("reviewScore", formatter.format(reviewScore));
 
-    int reviewCount = reviewService.reviewCount(member.getMemberId());
+    int reviewCount = reviewService.hostReviewCount(member.getMemberId());
     model.addAttribute("reviewCount", reviewCount);
 
     LocalDate today = LocalDate.now();
@@ -160,7 +160,7 @@ public class ReviewController {
     ReviewDto reviewDto = reviewService.findByReservationId(reservationId);
 
     MemberDto member = (MemberDto) session.getAttribute("member");
-    if (!member.getMemberId().equals(reservationDto.getMemberId())|| reviewDto != null) {
+    if (!member.getMemberId().equals(reservationDto.getMemberId()) || reviewDto != null) {
       return "redirect:/review/guest-by";
     }
 
