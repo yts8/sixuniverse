@@ -120,7 +120,7 @@
 
 .g-review-by__reply-textarea-complete {
   width: 450px;
-  height: 100px;
+  height: 100%;
   border-radius: 10px;
   border-color: #eeeeee;
   background-color: #eeeeee;

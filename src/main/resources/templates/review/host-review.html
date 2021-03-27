@@ -21,22 +21,23 @@
       <div class="performance__sub-menu-container">
         <div class="performance__sub1"><a th:href="@{/host/performance/income}" class="performance__a">수입</a></div>
         <div class="performance__sub2"><a th:href="@{/host/performance/views}" class="performance__a">조회수</a></div>
-        <div class="performance__sub3"><a th:href="@{/host/performance/super-host}" class="performance__a">슈퍼호스트</a></div>
+        <div class="performance__sub3"><a th:href="@{/host/performance/super-host}" class="performance__a">슈퍼호스트</a>
+        </div>
         <div class="performance__sub4"><a th:href="@{/host/performance/review}" class="performance__a">후기관리</a></div>
       </div>
     </div>
   </div>
   <div class="host-review__main">
-<!--    <div>-->
-<!--      <div class="host-review__score-group">-->
-<!--        <button>모두</button>-->
-<!--        <button id="host-review__scoreFive">5★</button>-->
-<!--        <button id="host-review__scoreFour">4★</button>-->
-<!--        <button id="host-review__scoreThree">3★</button>-->
-<!--        <button id="host-review__scoreTwo">2★</button>-->
-<!--        <button id="host-review__scoreOne">1★</button>-->
-<!--      </div>-->
-<!--    </div>-->
+    <!--    <div>-->
+    <!--      <div class="host-review__score-group">-->
+    <!--        <button>모두</button>-->
+    <!--        <button id="host-review__scoreFive">5★</button>-->
+    <!--        <button id="host-review__scoreFour">4★</button>-->
+    <!--        <button id="host-review__scoreThree">3★</button>-->
+    <!--        <button id="host-review__scoreTwo">2★</button>-->
+    <!--        <button id="host-review__scoreOne">1★</button>-->
+    <!--      </div>-->
+    <!--    </div>-->
     <div class="host-review__review">
       <div class="host-review__review-left">
         <div class="host-review__review-panel">
@@ -84,7 +85,7 @@
                           <button type="submit" class="host-review__reply-btn">완료</button>
                         </div>
                         <div class="host-review__input_area">
-                          <textarea name="replyContent" class="host-review__reply-textarea"></textarea>
+                          <textarea name="replyContent" class="host-review__reply-textarea" maxlength="500"></textarea>
                         </div>
                       </div>
                     </form>
@@ -111,7 +112,10 @@
                         </div>
                       </th:block>
                       <div th:class="'host-review__input_area reply-content-js' + ${review.getReviewId()}">
-                        <div class="host-review__reply-textarea-complete" th:text="${review.getReplyContent()}"></div>
+                        <div class="host-review__reply-textarea-complete">
+                          <div class="host-review__reply-textarea-complete-content"
+                               th:text="${review.getReplyContent()}"></div>
+                        </div>
                       </div>
                     </div>
                   </section>
@@ -127,7 +131,7 @@
                         <button type="submit" class="host-review__reply-btn">완료</button>
                       </div>
                       <div class="host-review__input_area">
-                        <textarea name="replyContent" class="host-review__reply-textarea"></textarea>
+                        <textarea name="replyContent" class="host-review__reply-textarea" maxlength="500"></textarea>
                       </div>
                     </div>
                   </form>
