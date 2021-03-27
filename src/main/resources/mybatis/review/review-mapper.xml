@@ -35,7 +35,7 @@
       and DATE_ADD(reservation.check_out, INTERVAL 1 DAY) <![CDATA[ <= ]]> now()
       and DATE_ADD(reservation.check_out, INTERVAL 4 DAY) > now()
       and reservation.member_id = #{memberId}
-    order by reservation_id desc
+    order by reservation.create_date desc
   </select>
 
   <select id="reviewAfter" resultType="ReviewGuestDto">
@@ -50,7 +50,7 @@
       and reservation.status = 'complete'
       and DATE_ADD(reservation.check_out, INTERVAL 4 DAY) <![CDATA[ < ]]> now()
       and reservation.member_id = #{memberId}
-    order by reservation_id desc
+    order by reservation.create_date desc
   </select>
 
   <select id="reviewGuestList" resultType="ReviewGuestDto">
@@ -71,7 +71,7 @@
            join room on review.room_id = room.room_id
            join member on member.member_id = room.member_id
     where reservation.member_id = #{memberId}
-    order by review_id desc
+    order by review.review_reg_date desc
   </select>
 
   <select id="reviewHostList" resultType="ReviewHostDto">
@@ -91,7 +91,7 @@
            join reservation on review.reservation_id = reservation.reservation_id
            join member on member.member_id = reservation.member_id
     where room.member_id = #{memberId}
-    order by review_id desc
+    order by review.review_reg_date desc
   </select>
 
   <select id="reviewHostStarList" resultType="ReviewHostDto">
@@ -112,7 +112,7 @@
            join member on member.member_id = reservation.member_id
     where room.member_id = #{memberId}
       and #{score} <![CDATA[ <= ]]> (score_clean + score_location + score_service) / 3 <![CDATA[ < ]]> #{score+1}
-    order by review_id desc
+    order by review.review_reg_date desc
   </select>
 
   <select id="reviewReservationListAll" resultType="ReviewHostDto">
@@ -125,7 +125,7 @@
            join reservation on review.reservation_id = reservation.reservation_id
            join member on member.member_id = reservation.member_id
     where room.room_id = #{roomId}
-    order by review_id desc
+    order by review.review_reg_date desc
   </select>
 
   <select id="reviewReservationList" resultType="ReviewHostDto">
@@ -138,7 +138,7 @@
            join reservation on review.reservation_id = reservation.reservation_id
            join member on member.member_id = reservation.member_id
     where room.member_id = #{memberId}
-    order by review_id desc
+    order by review.review_reg_date desc
     limit 6
   </select>
 
