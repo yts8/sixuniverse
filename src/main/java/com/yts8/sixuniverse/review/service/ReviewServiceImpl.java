@@ -107,18 +107,23 @@ public class ReviewServiceImpl implements ReviewService {
   }
 
   @Override
-  public double reviewScoreClean(Long memberId) {
-    return reviewMapper.reviewScoreClean(memberId);
+  public double reviewScoreAll(Long roomId) {
+    return reviewMapper.reviewScoreAll(roomId);
   }
 
   @Override
-  public double reviewScoreLocation(Long memberId) {
-    return reviewMapper.reviewScoreLocation(memberId);
+  public double reviewScoreClean(Long roomId) {
+    return reviewMapper.reviewScoreClean(roomId);
   }
 
   @Override
-  public double reviewScoreService(Long memberId) {
-    return reviewMapper.reviewScoreService(memberId);
+  public double reviewScoreLocation(Long roomId) {
+    return reviewMapper.reviewScoreLocation(roomId);
+  }
+
+  @Override
+  public double reviewScoreService(Long roomId) {
+    return reviewMapper.reviewScoreService(roomId);
   }
 
 }

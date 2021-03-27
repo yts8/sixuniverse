@@ -174,12 +174,21 @@
     where review_id = #{reviewId}
   </select>
 
+  <select id="reviewScoreAll" resultType="double">
+    select (ifnull(avg(review.score_clean), 0) + ifnull(avg(review.score_location), 0) +
+           ifnull(avg(review.score_service), 0)) / 3 as score_all
+    from review
+           join room on review.room_id = room.room_id
+           join member on room.member_id = member.member_id
+    where room.room_id = #{roomId}
+  </select>
+
   <select id="reviewScoreClean" resultType="double">
     select ifnull(avg(score_clean), 0) as score_clean
     from review
            join room on review.room_id = room.room_id
            join member on room.member_id = member.member_id
-    where member.member_id = #{memberId}
+    where room.room_id = #{roomId}
   </select>
 
   <select id="reviewScoreLocation" resultType="double">
@@ -187,7 +196,7 @@
     from review
            join room on review.room_id = room.room_id
            join member on room.member_id = member.member_id
-    where member.member_id = #{memberId}
+    where room.room_id = #{roomId}
   </select>
 
   <select id="reviewScoreService" resultType="double">
@@ -195,7 +204,7 @@
     from review
            join room on review.room_id = room.room_id
            join member on room.member_id = member.member_id
-    where member.member_id = #{memberId}
+    where room.room_id = #{roomId}
   </select>
 
   <select id="roomReviewCount" resultType="int">

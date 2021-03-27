@@ -44,9 +44,12 @@ public interface ReviewService {
 
   int guestReplyCount(Long memberId);
 
-  double reviewScoreClean(Long memberId);
+  double reviewScoreAll(Long roomId);
 
-  double reviewScoreLocation(Long memberId);
+  double reviewScoreClean(Long roomId);
 
-  double reviewScoreService(Long memberId);
+  double reviewScoreLocation(Long roomId);
+
+  double reviewScoreService(Long roomId);
+
 }

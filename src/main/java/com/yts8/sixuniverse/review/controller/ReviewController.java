@@ -68,19 +68,6 @@ public class ReviewController {
     LocalDate today = LocalDate.now();
     model.addAttribute("today", today);
 
-//    for (ReviewGuestDto review : reviewGuestList) {
-//      Long reviewId = review.getReviewId();
-//      ReservationDto reservationDto = reservationService.findById(reviewId);
-//      Long memberId = reservationDto.getMemberId();
-//      if (!member.getMemberId().equals(memberId)) {
-//        return "redirect:/review/guest-by";
-//      }
-//      ReviewDto reviewDto = reviewService.findById(reviewId);
-//      if (reviewDto != null) {
-//        return "redirect:/review/guest-by";
-//      }
-//    }
-
     return "review/guest-review-by";
   }
 

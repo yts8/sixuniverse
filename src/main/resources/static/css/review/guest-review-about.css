@@ -11,7 +11,7 @@
   font-size: 31px;
   font-weight: bold;
   margin-top: 5px;
-  margin-bottom: 50px;
+  margin-bottom: 65px;
 }
 
 .g-review-about__tabs {
@@ -133,9 +133,14 @@
 
 .g-review-about__main-top nav {
   text-decoration: none;
-  color: #707070;
+  color: #484848;
   font-weight: bold;
   font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.g-review-about__main-top nav > span, nav > a {
+  padding: 5px;
 }
 
 .g-review-about__hr {
