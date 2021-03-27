@@ -137,7 +137,8 @@
   </update>
 
   <delete id="reservationDelete">
-    delete from reservation
+    delete
+    from reservation
     where reservation_id = #{reservationId}
   </delete>
 
@@ -163,6 +164,7 @@
            m.username,
            p.payment_id,
            p.price,
+           p.commission,
            room_img.room_img
     from reservation
            join room on reservation.room_id = room.room_id
@@ -170,7 +172,8 @@
            join member m on room.member_id = m.member_id
            left outer join payment p on reservation.reservation_id = p.reservation_id
     where reservation.update_target = #{reservationId}
-       or reservation.reservation_id = #{reservationId};
+       or reservation.reservation_id = #{reservationId}
+    group by reservation.reservation_id
   </select>
 
   <select id="findByCancelReservationId" resultType="ReservationRoomPaymentDto">
@@ -188,12 +191,15 @@
            m.username,
            p.payment_id,
            p.price,
-           p.commission
+           p.commission,
+           room_img.room_img
     from reservation
            join room on reservation.room_id = room.room_id
+           join room_img on room.room_id = room_img.room_id
            join member m on room.member_id = m.member_id
            join payment p on reservation.reservation_id = p.reservation_id
     where reservation.reservation_id = #{reservationId}
+    group by reservation.reservation_id
   </select>
 
 

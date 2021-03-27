@@ -26,7 +26,7 @@
 
 <body>
 <th:block layout:fragment="content">
-
+  <input type="hidden" id="totalPrice">
   <div id="reservation-box">
     <div class="reservation__content">
       <div class="reservation__first">
@@ -45,8 +45,8 @@
             <div class="reservation__small-box">
               <h4 class="reservation__sub-title2">날짜</h4>
               <div class="reservation__date" th:text="${beforeReservation.checkIn + ' ~ ' + beforeReservation.checkOut}">예약날짜</div>
-              <div>[<img th:src="@{/images/reservation/clock.png}" class="reservation__img">
-                체크인: <span th:text="${room.getCheckInTime()}"></span> 시 이후]
+              <div><img th:src="@{/images/reservation/clock.png}" class="reservation__img">
+                체크인: <span th:text="${room.getCheckInTime()}"></span> 시 이후
               </div>
             </div>
             <button id="update-date" class="reservation__update-btn">수정</button>
@@ -291,23 +291,23 @@
 
           <div class="reservation__price-info">
             <div class="reservation__table">
-              <div class="reservation__price" th:text="| 1박 요금 : ${room.price}|"></div>
-              <span class="reservation__price2" id="total-price" th:text="${totalPrice}"></span>
+              <div class="reservation__price" th:text="'1박 요금 : ₩' + ${#numbers.formatInteger(room.price,3,'COMMA')}"></div>
+              <div class="reservation__days-price-info" th:text="'₩' + ${#numbers.formatInteger(totalPrice,3,'COMMA')}"></div>
             </div>
 
             <div class="reservation__table">
               <div class="reservation__price">수수료</div>
-              <span class="reservation__price2" id="commission" th:text="'￦ ' + ${commission} "></span>
+              <div class="reservation__commission-info" th:text="'₩' + ${#numbers.formatInteger(commission,3,'COMMA')}"></div>
             </div>
 
-            <div class="reservation__table">
-              <div class="reservation__price">할인금액</div>
-              <span class="reservation__price2">￦30000</span>
-            </div>
+<!--            <div class="reservation__table">-->
+<!--              <div class="reservation__price">할인금액</div>-->
+<!--              <span class="reservation__price2">￦30000</span>-->
+<!--            </div>-->
 
             <div class="reservation__table">
               <div class="reservation__total">총 합계</div>
-              <span class="reservation__total2" th:text="${totalPrice + commission}"></span>
+              <div class="reservation__total2" th:text="'₩' + ${#numbers.formatInteger((totalPrice + commission),3,'COMMA')}"></div>
             </div>
 
 

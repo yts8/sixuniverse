@@ -10,16 +10,13 @@
       const header = "X-CSRF-TOKEN";
       const csrf = document.querySelector("#csrf").value;
 
-      const data = {
-        checkIn: $('.reservation__check-in').html(),
-        checkOut: $('.reservation__check-out').html(),
-        roomId: $('#room-id').val()
-      };
-      const json = JSON.stringify(data);
-
       $.ajax({
         url: "/api/reservation/before",
-        data: json,
+        data: JSON.stringify({
+          checkIn: $('.reservation__check-in').html(),
+          checkOut: $('.reservation__check-out').html(),
+          roomId: $('#room-id').val()
+        }),
         type: 'post',
         contentType: 'application/json; charset=utf-8',
         beforeSend: function (xhr) {
@@ -27,13 +24,13 @@
         },
         success: function (result) {
           console.log(result);
-          $('#reservation-box-subject').html(result + '/' + days + '박')
+          $('#reservation-box-subject').html('₩' + result.toLocaleString('ko-KR') + '/' + days + '박')
           $('#before-btn').hide();
           $('#reservation-btn').show();
           $('.room__detail-price-info-box').show();
           $('.room__detail-days').html(days + '박');
-          $('.room__detail-total-price').html(result);
-          $('.room__detail-price-commission').html(result * 0.1);
+          $('.room__detail-total-price').html('₩' + result.toLocaleString('ko-KR'));
+          $('.room__detail-price-commission').html('₩' + (result * 0.1).toLocaleString('ko-KR'));
 
           $('input[name=checkIn]').val($('.reservation__check-in').html());
           $('input[name=checkOut]').val($('.reservation__check-out').html());

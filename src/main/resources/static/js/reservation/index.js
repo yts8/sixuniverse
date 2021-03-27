@@ -5,7 +5,7 @@
     $('.reservation__btn').click(function () {
 
       const name = $('#roomName').html();
-      const price = parseInt($('#total-price').html());
+      const price = parseInt($('#totalPrice').val());
       const commission = price * 0.1;
 
       const IMP = window.IMP; // 생략해도 괜찮습니다.

@@ -92,7 +92,6 @@ public class ReservationApiController {
     int days = Period.between(checkIn, checkOut).getDays();
     int price = roomDto.getPrice();
 
-
     int totalPrice = price * days;
     int commission = (int) (totalPrice * 0.1);
 

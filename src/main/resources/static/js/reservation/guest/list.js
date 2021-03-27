@@ -63,9 +63,6 @@
 
       $('.guest-reservation__cancel-update-id').val(reservationId);
 
-      console.log(reservationId)
-      console.log(status)
-
       $.ajax({
         url: '/api/reservation/' + status + '/info/' + reservationId,
         type: 'get',
@@ -73,18 +70,19 @@
           reservationId: reservationId
         },
         success: function (result) {
+          console.log(result)
 
           if (result.length > 1) {
             let before = result[0];
             let after = result[1];
-            let afterPrice = result[result.length - 1];
+            let afterPrice = result[2];
 
             $('.guest-reservation__modal-room-image').attr('src', before.roomImg);
             $('.guest-reservation__modal-guest').html(before.adult + before.kid + before.infant);
             $('.guest-reservation__modal-address').html(before.address);
             $('.guest-reservation__modal-date').html(before.checkIn + ' ~ ' + before.checkOut);
             $('#room-name').html(before.title);
-            $('.guest-reservation__modal-price').html('변경 전 결제한 요금 : ' + before.price);
+            $('.guest-reservation__modal-price').html('변경 전 결제한 요금 : ₩' + before.price.toLocaleString('ko-KR'));
             $('.guest-reservation__modal-before-adult').html(before.adult);
             $('.guest-reservation__modal-before-kid').html(before.kid);
             $('.guest-reservation__modal-before-infant').html(before.infant);
@@ -99,8 +97,8 @@
             } else if (before.price < afterPrice.price) {
               $('.guest-reservation__modal-price').append(
                 '<div>변경 후 결제할 요금 : ' +
-                '<span class="guest-reservation__price">' + afterPrice.price +
-                '</span>, 수수료 10% : <span class="guest-reservation__commission">' + afterPrice.commission + '</span></div>'
+                '<span class="guest-reservation__price">₩' + afterPrice.price.toLocaleString('ko-KR') +
+                '</span>, 수수료 10% : <span class="guest-reservation__commission">₩' + afterPrice.commission.toLocaleString('ko-KR')+ '</span></div>'
               );
 
               if (after.status === 'update-ok') {
@@ -109,9 +107,11 @@
               }
             } else if (before.price > afterPrice.price) {
               $('.guest-reservation__modal-price').append(
-                '<div>부분 환불될 요금 : <span class="guest-reservation__refund-price">' + (before.price - afterPrice.price - afterPrice.commission) +
-                '</span></div><input type="hidden" class="guest-reservation__commission" value="' + afterPrice.commission +
-                '"><input type="hidden" class="guest-reservation__price" value="' + (afterPrice.price + afterPrice.commission) +'">'
+                '<div>변경 후 필요한 요금 : ₩' + afterPrice.price.toLocaleString('ko-KR') + '/ 수수료 10% : ₩' + afterPrice.commission.toLocaleString('ko-KR') + '</div>' +
+                '<div>부분 환불될 요금 : <span class="guest-reservation__refund-price">₩' + (before.price - afterPrice.price - afterPrice.commission).toLocaleString('ko-KR') +
+                '</span></div>'+
+                '<input type="hidden" class="guest-reservation__commission" value="' + afterPrice.commission.toLocaleString('ko-KR') +
+                '"><input type="hidden" class="guest-reservation__price" value="' + (afterPrice.price + afterPrice.commission).toLocaleString('ko-KR') +'">'
               );
               if (after.status === 'update-ok') {
                 $('.guest-reservation__modal-price').append('<button class="guest-reservation__partial-refund">부분 환불하기</button>');
@@ -119,6 +119,7 @@
               }
 
             }
+
 
             $('.guest-reservation__modal-host-name').html(before.username);
             $('.guest-reservation__modal-before-check-in-out').html(before.checkIn + ' ~ ' + before.checkOut);
@@ -131,6 +132,7 @@
             $('#room-name').html(result.title);
             $('.guest-reservation__modal-host-name').html(result.username);
             $('.guest-reservation__modal-price').html(result.price);
+            $('.guest-reservation__modal-refund').html(result.price);
 
           }
 

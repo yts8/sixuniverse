@@ -14,6 +14,7 @@
       const roomName = $('#room-name').html();
       const reservationId = $('.guest-reservation__cancel-update-id').val();
       const commission = parseInt($('.guest-reservation__commission').val());
+      const refundPrice = parseInt($('.guest-reservation__refund-price').html())
 
       alert(paymentId + ", " + price + ", " + commission)
       refund();
@@ -27,7 +28,7 @@
       //     type: 'post',
       //     data: JSON.stringify({
       //       paymentId: paymentId
-      //       price: price + commission
+      //       price: refundPrice
       //     }),
       //     contentType: 'application/json; charset=utf-8',
       //     beforeSend: function (xhr) {

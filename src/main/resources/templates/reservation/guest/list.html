@@ -161,7 +161,7 @@
 
               <div th:if="${status.equals('cancel')}" class="guest-reservation__modal-room-info">
                 <div class="guest-reservation__modal-subtitle">환불 정보</div>
-                <div>환불 금액</div>
+                <div class="guest-reservation__modal-refund">환불 금액</div>
               </div>
 
               <div th:unless="${status.equals('cancel')}" class="guest-reservation__modal-room-info">
@@ -194,13 +194,15 @@
 
               <div class="guest-reservation__modal-room-info">
                 <div class="guest-reservation__modal-subtitle">결제 세부 정보</div>
-                <div class="guest-reservation__modal-price">총 비용</div>
+                  <div class="guest-reservation__modal-price">총 비용</div>
                 <input type="hidden" class="guest-reservation__again-payment-id">
               </div>
 
-              <div class="guest-reservation__modal-room-info">
-                <div>숙소 보기</div>
-              </div>
+              <a th:href="@{|/room/detail/${roomList.get(0).roomId}|}">
+                <div class="guest-reservation__modal-room-info">
+                  <div>숙소 보기</div>
+                </div>
+              </a>
 
 
             </div>

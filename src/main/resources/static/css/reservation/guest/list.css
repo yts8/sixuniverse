@@ -205,3 +205,15 @@
   font-weight: bold;
   border-radius: 10px;
 }
+
+.guest-reservation__modal-price {
+  margin-top: 20px;
+}
+
+.guest-reservation__modal-price > div {
+  margin-top: 8px;
+}
+
+.guest-reservation__refund-price {
+  font-weight: bold;
+}

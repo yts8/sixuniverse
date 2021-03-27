@@ -169,27 +169,26 @@
         const header = "X-CSRF-TOKEN";
         const csrf = document.querySelector("#csrf").value;
 
-        const data = {
-          checkIn: $('#check-in').val(),
-          checkOut: $('#check-out').val(),
-          roomId: $('#room-id').val()
-        };
-        const json = JSON.stringify(data);
-
         console.log(data);
 
         $.ajax({
           url: "/api/reservation/before",
-          data: json,
+          data: JSON.stringify({
+            checkIn: $('#check-in').val(),
+            checkOut: $('#check-out').val(),
+            roomId: $('#room-id').val()
+          }),
           type: 'post',
           contentType: 'application/json; charset=utf-8',
           beforeSend: function (xhr) {
             xhr.setRequestHeader(header, csrf);
           },
           success: function (result) {
-            $('#total-price').html(result);
-            $('#commission').html(result * 0.1);
-            $('.reservation__total2').html(result + (result * 0.1));
+            $('.reservation__days-price-info').html('₩' + result.toLocaleString('ko-KR'));
+            $('.reservation__commission-info').html('₩' + (result * 0.1).toLocaleString('ko-KR'));
+
+            $('#totalPrice').val(result);
+            $('.reservation__total2').html('₩' + (result + (result * 0.1)).toLocaleString('ko-KR'));
           }
         });
 

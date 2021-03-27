@@ -163,9 +163,11 @@ public class ReservationController {
     RoomDto roomDto = roomService.findById(reservationDto.getRoomId());
     MemberDto memberDto = memberService.findById(roomDto.getMemberId());
     List<RoomImageDto> roomImageDtoList = roomImageService.findByRoomId(roomId);
+    PaymentDto paymentDto = paymentService.findByReservationId(reservationId);
 
     model.addAttribute("room", roomDto);
     model.addAttribute("member", memberDto);
+    model.addAttribute("payment", paymentDto);
     model.addAttribute("reservation", reservationDto);
     model.addAttribute("roomImageDtoList", roomImageDtoList);
 
@@ -216,6 +218,7 @@ public class ReservationController {
     ReservationRoomPaymentDto reservationRoomPaymentDto = reservationService.findByCancelReservationId(reservationId);
 
     model.addAttribute("reservationRPDto", reservationRoomPaymentDto);
+    model.addAttribute("roomImages", roomImageService.findByRoomId(reservationRoomPaymentDto.getRoomId()));
 
     return "reservation/guest/cancel";
   }
@@ -225,6 +228,7 @@ public class ReservationController {
     ReservationRoomPaymentDto reservationRoomPaymentDto = reservationService.findByCancelReservationId(reservationId);
 
     model.addAttribute("reservationRPDto", reservationRoomPaymentDto);
+    model.addAttribute("roomImages", roomImageService.findByRoomId(reservationRoomPaymentDto.getRoomId()));
 
     return "reservation/guest/cancel-confirm";
   }
