@@ -23,4 +23,6 @@ public interface ReservationDateMapper {
   List<LocalDate> reservationDateUpdateList(ReservationDto reservationDto);
 
   void guestReservationDateDelete(Long reservationId);
+
+  List<ReservationDateDto> findByReservationIdRoomId(ReservationDto reservationDto);
 }

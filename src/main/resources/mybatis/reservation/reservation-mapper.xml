@@ -12,8 +12,11 @@
     select *
     from reservation
     where member_id = #{memberId}
-      and status = #{status}
-      and update_target is null
+    and update_target is null
+    and status = #{status}
+    <if test='status.equals("upcoming")'>
+      or status = 'update-no'
+    </if>
     order by check_in
   </select>
 
@@ -49,7 +52,7 @@
 
   <update id="hostUpdateNo">
     update reservation
-    set status = 'upcoming'
+    set status = 'update-no'
     where reservation_id = #{reservationId}
   </update>
 
@@ -100,7 +103,7 @@
            check_out,
            room.address,
            room.sub_address,
-           room.price as room_price,
+           room.price  as room_price,
            title,
            m.member_id as host_id,
            m.username,

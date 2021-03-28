@@ -24,10 +24,10 @@
         $('.room__detail-price-info-box').show();
         $('.room__detail-days').html(days + '박');
         $('.room__detail-total-price').html('₩' + result.toLocaleString('ko-KR'));
-        $('.room__detail-price-commission').html('₩' + (result * 0.1).toLocaleString('ko-KR'));
+        $('.room__detail-price-commission').html('₩' + Math.floor(result * 0.1).toLocaleString('ko-KR'));
 
         $('input[name=totalPrice]').val(result);
-        $('input[name=commission]').val(result * 0.1);
+        $('input[name=commission]').val(Math.floor(result * 0.1));
 
         $('input[name=checkIn]').val($('#check-in').val());
         $('input[name=checkOut]').val($('#check-out').val());

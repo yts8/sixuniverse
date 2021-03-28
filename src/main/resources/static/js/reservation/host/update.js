@@ -21,6 +21,8 @@
         success: function (result) {
           if(result==='ok') {
             alert('수락하였습니다.');
+          } else if(result === 'already') {
+            alert('게스트가 변경 요청한 날짜가 이미 예약되어 수락할 수 없습니다.');
           } else {
             alert('거절하였습니다.')
           }
