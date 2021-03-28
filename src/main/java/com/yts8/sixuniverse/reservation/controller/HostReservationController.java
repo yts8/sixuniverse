@@ -38,9 +38,11 @@ public class HostReservationController {
     reservationDto.setStatus(status);
 
     List<HostReservationDto> hostReservationList = reservationService.hostReservationList(reservationDto);
+    List<ReservationDto> updateList = reservationService.updateList();
 
     model.addAttribute("title", "예약정보");
     model.addAttribute("status", status);
+    model.addAttribute("updateList", updateList);
     model.addAttribute("hostReservationList", hostReservationList);
 
     return "reservation/host/list";

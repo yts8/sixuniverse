@@ -168,7 +168,7 @@
               <td class="reservation__detail-btn">
                 <!-- 상태 : 변경요청(update)일 때만 수락/거절 버튼이 보임 -->
                 <div
-                    th:if="${#strings.equals(hostReservation.getStatus(), 'update')}"
+                    th:if="${#strings.equals(hostReservation.getStatus(), 'update') && update.updateTarget==hostReservation.reservationId && update.status.equals('update')}" th:each="update : ${updateList}"
                     class="reservation__host-btn-box-new">
                   <div class="reservation__host-update">
                     <button class="reservation__host-update-ok">수락</button>

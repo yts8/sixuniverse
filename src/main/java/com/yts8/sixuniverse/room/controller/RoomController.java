@@ -68,12 +68,17 @@ public class RoomController {
     model.addAttribute("reservationDateList", reservationDateList);
     model.addAttribute("roomImages", roomImageService.findByRoomId(roomDto.getRoomId()));
 
+
+    String hostName = roomService.findByHostName(roomDto.getRoomId());
+    model.addAttribute("hostName", hostName);
+
     //편의시설 리스트
 //    model.addAttribute("amenities", roomFacilityService.selectRoomFacility());
     RoomFacilityDto facilityDto = new RoomFacilityDto();
     facilityDto.setRoomId(roomId);
     List<String> roomFacilityList = roomFacilityService.selectRoomFacility(facilityDto);
     model.addAttribute("roomFacilityList", roomFacilityList);
+
 
     List<ReviewHostDto> reviewReservationListAll = reviewService.reviewReservationListAll(roomDto.getRoomId());
     model.addAttribute("reviewReservationListAll", reviewReservationListAll);
