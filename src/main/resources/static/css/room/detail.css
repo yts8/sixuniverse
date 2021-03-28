@@ -119,6 +119,15 @@ img {
   margin-bottom: 1.8rem;
 }
 
+.room__detail-chat-link {
+  font-weight: bold;
+  margin-top: 2rem;
+}
+
+.room__detail-chat-link:hover {
+  color: #ff385c;
+}
+
 .room__detail-amenities-item {
   margin-bottom: 1.3rem;
   font-size: 1.3rem;
