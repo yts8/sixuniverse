@@ -71,8 +71,9 @@
 }
 
 .reservation__detail-con {
-  float: right;
-  margin-right: 0;
+  /*float: right;*/
+  /*margin-right: 0;*/
+  margin: 10px auto;
 }
 
 .reservation__request-char {
