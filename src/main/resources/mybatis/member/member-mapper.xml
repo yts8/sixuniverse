@@ -31,7 +31,7 @@
             #{birthdate},
             #{profileImg},
             #{mobile},
-            #{host_grade},
+            #{hostGrade},
             #{social},
             #{role})
   </insert>
