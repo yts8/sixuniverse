@@ -6,12 +6,14 @@
 <th:block layout:fragment="css">
   <link rel="stylesheet" th:href="@{/css/room/detail.css}"/>
   <link rel="stylesheet" th:href="@{/css/reservation/detail-modal.css}">
-<!--  <link rel="stylesheet" th:href="@{/css/reservation/ui-datepicker.css}">-->
+  <link rel="stylesheet" th:href="@{/css/review/reservation-review.css}"/>
+  <!--  <link rel="stylesheet" th:href="@{/css/reservation/ui-datepicker.css}">-->
 </th:block>
 <th:block layout:fragment="js">
   <script type="text/javascript" defer th:src="@{/js/reservation/reservation-date-modal.js}"></script>
   <script type="text/javascript" defer th:src="@{/js/reservation/reservation-modal.js}"></script>
   <script type="text/javascript" defer th:src="@{/js/reservation/reservation-check.js}"></script>
+  <script type="text/javascript" defer th:src="@{/js/review/review.js}"></script>
 </th:block>
 
 <th:block layout:fragment="content">
@@ -74,9 +76,167 @@
           </div>
         </div>
 
-        <div class="room__detail-calendar-container">캘린더 자리</div>
-      </div>
+        <div class="room__detail-third-container">
+          <div class="reservation-review__main">
+            <div class="reservation-review__score-all">
+              <div class="reservation-review__star">
+                <img th:src="@{/images/wishlist/star.JPG}"/>
+              </div>
+              <div>
+                <span th:text="${reviewScore}"></span>
+                <span>점(후기 </span>
+                <span th:text="${reviewCount}"></span>
+                <span>개)</span>
+              </div>
+            </div>
+            <div class="reservation-review__score-sub">
+              <div class="reservation-review__sub-box">
+                <div class="reservation-review__sub-box-left">청결도</div>
+                <div class="reservation-review__sub-box-right">
+                  <div class="reservation-review__sub-box-right-bar">
+            <span class="reservation-review__progressbar">
+              <span class="reservation-review__gauge" th:per="${reviewScoreClean}*100/5.0"></span>
+            </span>
+                  </div>
+                  <div class="reservation-review__sub-box-right-score" th:text="${reviewScoreClean}"></div>
+                </div>
+              </div>
+              <div class="reservation-review__sub-box">
+                <div class="reservation-review__sub-box-left">위치</div>
+                <div class="reservation-review__sub-box-right">
+                  <div class="reservation-review__sub-box-right-bar">
+            <span class="reservation-review__progressbar">
+              <span class="reservation-review__gauge" th:per="${reviewScoreLocation}*100/5.0"></span>
+            </span>
+                  </div>
+                  <div class="reservation-review__sub-box-right-score" th:text="${reviewScoreLocation}"></div>
+                </div>
+              </div>
+              <div class="reservation-review__sub-box">
+                <div class="reservation-review__sub-box-left">서비스</div>
+                <div class="reservation-review__sub-box-right">
+                  <div class="reservation-review__sub-box-right-bar">
+            <span class="reservation-review__progressbar">
+              <span class="reservation-review__gauge" th:per="${reviewScoreService}*100/5.0"></span>
+            </span>
+                  </div>
+                  <div class="reservation-review__sub-box-right-score" th:text="${reviewScoreService}"></div>
+                </div>
+              </div>
+            </div>
+            <div class="reservation-review__review">
+              <th:block th:each="review : ${reviewReservationList}">
+                <div class="reservation-review__review-guest">
+                  <div class="reservation-review__review-profile">
+                    <div class="reservation-review__review-profile-box">
+                      <img class="reservation-review__review-profile-box-img"
+                           th:src="${review.getGuestProfileImg()}">
+                    </div>
+                    <div class="reservation-review__review-profile-text">
+                      <div class="reservation-review__review-profile-text-name"
+                           th:text="${review.getGuestName()}"></div>
+                      <div class="reservation-review__review-profile-text-info"
+                           th:text="${#temporals.format(review.getReviewRegDate(),'yyyy년 M월')}"></div>
+                    </div>
+                  </div>
+                  <div class="reservation-review__review-text" th:text="${review.getReviewContent()}"></div>
+                </div>
+              </th:block>
+            </div>
+            <div class="reservation-review__review-all">
+              <button>
+                <span>후기 </span>
+                <span th:text="${reviewCount}"></span>
+                <span>개 모두 보기</span>
+              </button>
+            </div>
 
+            <!-- 모달창 -->
+            <div class="reservation-review__modal">
+              <div class="reservation-review__modal-content">
+                <div class="reservation-review__update-title">
+                  <button>x</button>
+                </div>
+                <div class="reservation-review__modal-main">
+                  <div class="reservation-review__modal-main-left">
+                    <div class="reservation-review__score-all-modal">
+                      <div class="reservation-review__star">
+                        <img th:src="@{/images/wishlist/star.JPG}"/>
+                      </div>
+                      <div>
+                        <span th:text="${reviewScore}"></span>
+                        <span>점(후기 </span>
+                        <span th:text="${reviewCount}"></span>
+                        <span>개)</span>
+                      </div>
+                    </div>
+                    <div class="reservation-review__score-sub-modal">
+                      <div class="reservation-review__sub-box-modal">
+                        <div class="reservation-review__sub-box-left-modal">청결도</div>
+                        <div class="reservation-review__sub-box-right-modal">
+                          <div class="reservation-review__sub-box-right-bar-modal">
+                    <span class="reservation-review__progressbar">
+                      <span class="reservation-review__gauge" th:per="${reviewScoreClean}*100/5.0"></span>
+                    </span>
+                          </div>
+                          <div class="reservation-review__sub-box-right-score-modal"
+                               th:text="${reviewScoreClean}"></div>
+                        </div>
+                      </div>
+                      <div class="reservation-review__sub-box-modal">
+                        <div class="reservation-review__sub-box-left-modal">위치</div>
+                        <div class="reservation-review__sub-box-right-modal">
+                          <div class="reservation-review__sub-box-right-bar-modal">
+                    <span class="reservation-review__progressbar">
+                      <span class="reservation-review__gauge" th:per="${reviewScoreLocation}*100/5.0"></span>
+                    </span>
+                          </div>
+                          <div class="reservation-review__sub-box-right-score-modal"
+                               th:text="${reviewScoreLocation}"></div>
+                        </div>
+                      </div>
+                      <div class="reservation-review__sub-box-modal">
+                        <div class="reservation-review__sub-box-left-modal">서비스</div>
+                        <div class="reservation-review__sub-box-right-modal">
+                          <div class="reservation-review__sub-box-right-bar-modal">
+                    <span class="reservation-review__progressbar">
+                      <span class="reservation-review__gauge" th:per="${reviewScoreService}*100/5.0"></span>
+                    </span>
+                          </div>
+                          <div class="reservation-review__sub-box-right-score-modal"
+                               th:text="${reviewScoreService}"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="reservation-review__modal-main-right">
+                    <div class="reservation-review__review-modal">
+                      <div class="reservation-review__review-guest-modal">
+                        <th:block th:each="review : ${reviewReservationListAll}">
+                          <div class="reservation-review__review-profile">
+                            <div class="reservation-review__review-profile-box">
+                              <img class="reservation-review__review-profile-box-img"
+                                   th:src="${review.getGuestProfileImg()}">
+                            </div>
+                            <div class="reservation-review__review-profile-text">
+                              <div class="reservation-review__review-profile-text-name"
+                                   th:text="${review.getGuestName()}"></div>
+                              <div class="reservation-review__review-profile-text-info"
+                                   th:text="${#temporals.format(review.getReviewRegDate(),'yyyy년 M월')}"></div>
+                            </div>
+                          </div>
+                          <div class="reservation-review__review-text" th:text="${review.getReviewContent()}"></div>
+                          <hr class="reservation-review__review-hr">
+                        </th:block>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div class="room__detail-second-right-container">
         <div class="room__detail-rule-subject" id="reservation-box-subject">요금을 확인하려면 날짜를 입력하세요</div>
@@ -179,9 +339,9 @@
         <form th:action="@{|/reservation/${roomId}|}" method="post">
           <input type="hidden" name="checkIn">
           <input type="hidden" name="checkOut">
-          <input type="hidden" name="adult" th:value="1">
-          <input type="hidden" name="kid" th:value="0">
-          <input type="hidden" name="infant" th:value="0">
+          <input type="hidden" name="adult" value="1">
+          <input type="hidden" name="kid" value="0">
+          <input type="hidden" name="infant" value="0">
           <input type="hidden" name="totalPrice">
           <input type="hidden" name="commission">
           <button type="submit" class="room__detail-reservation-check-btn" id="reservation-btn">예약 하기</button>
@@ -190,6 +350,7 @@
         <div class="room__detail-price-info-box">
           <div class="room__detail-price-info">
             <div>
+              <input type="hidden" class="room__detail-one-day-price" th:value="${room.price}">
               <span th:text="|${room.price} x |"></span>
               <span class="room__detail-days"></span>
             </div>
@@ -239,21 +400,16 @@
         </div>
 
 
-        <div class="room__detail-third-container">
-          <!--      후기 넣는 자리-->
-
-        </div>
-
-        <div class="room__detail-fourth-container">
-          <!--      지도 넣는 자리-->
-        </div>
-
-        <div class="room__detail-fifth-container">
-          <!--      호스트 프로필 넣는 자리-->
-        </div>
-
       </div>
 
+
+      <div class="room__detail-fourth-container">
+        <!--      지도 넣는 자리-->
+      </div>
+
+      <div class="room__detail-fifth-container">
+        <!--      호스트 프로필 넣는 자리-->
+      </div>
 
     </div>
 

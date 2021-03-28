@@ -10,7 +10,11 @@
 </th:block>
 
 <th:block layout:fragment="js">
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
   <script type="text/javascript" defer th:src="@{/js/reservation/guest/list.js}"></script>
+  <script type="text/javascript" defer th:src="@{/js/reservation/guest/again-payment.js}"></script>
+  <script type="text/javascript" defer th:src="@{/js/reservation/guest/partial-refund.js}"></script>
 </th:block>
 
 
@@ -20,8 +24,12 @@
 </head>
 <body>
 <th:block layout:fragment="content">
+  <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
+
   <div class="guest-reservation__box">
     <div class="guest-reservation__content">
+
+
       <div class="guest-reservation__title">여행</div>
       <nav class="guest-reservation__nav">
         <a th:href="@{|/reservation/guest/list/upcoming|}">
@@ -40,9 +48,14 @@
         </a>
       </nav>
 
+      <div th:if="${reservationList.isEmpty() && roomList.isEmpty() && roomImageList.isEmpty()}">
+        <img th:src="@{/images/reservation/nothing.png}" class="guest-reservation__nothing">
+      </div>
+
       <div class="guest-reservation__room-info" th:if="${status.equals('upcoming') || status.equals('complete')}">
         <a th:href="@{|/reservation/guest/simple-info/${reservation.reservationId}|}"
-           th:each="reservation, i : ${reservationList}" th:if="${reservationList.size()} != 0">
+           th:each="reservation, i : ${reservationList}"
+           th:unless="${reservationList.isEmpty() && roomList.isEmpty() && roomImageList.isEmpty()}">
           <table class="guest-reservation__room-info-table">
             <tr>
               <td>
@@ -77,11 +90,6 @@
 
       </div>
 
-      <div class="guest-reservation__room-info" th:unless="${reservationList.size()} != 0">
-        <img th:src="@{/images/reservation/nothing.png}" class="guest-reservation__nothing">
-      </div>
-
-
       <!-- 취소 / 변경 예약 정보 -->
       <div class="guest-reservation__cancel-update-box"
            th:unless="${status.equals('upcoming') || status.equals('complete')}">
@@ -97,17 +105,13 @@
                 </div>
               </td>
               <td>
-                <div th:text="${roomList.get(i.index).title}">숙소이름</div>
+                <div th:text="${roomList.get(i.index).title}" class="guest-reservation__room-title">숙소이름</div>
               </td>
-
-              <td rowspan="2" th:if="${status.equals('update')}" class="guest-reservation__update-status-box">
-                <div class="guest-reservation__update-status">요청 중</div>
-              </td>
-              <td rowspan="2" th:if="${reservationRPDto.get(1).status.equals('update-ok')}" class="guest-reservation__update-status-box">
-                <div class="guest-reservation__update-status">추가결제 및 부분환불</div>
-              </td>
-              <td rowspan="2" th:if="${reservationRPDto.get(1).status.equals('update-no')}" class="guest-reservation__update-status-box">
-                <div class="guest-reservation__update-status">요청 거절됨</div>
+              <td rowspan="2" class="guest-reservation__update-status-box" th:each="update : ${updateList}"
+                  th:if="${update.updateTarget==reservation.reservationId}" th:switch="${update.status}">
+                <div class="guest-reservation__update-status" th:case="update">요청 중</div>
+                <div class="guest-reservation__update-status" th:case="update-ok">요청 수락됨</div>
+                <div class="guest-reservation__update-status" th:case="update-no">요청 거절됨</div>
               </td>
             </tr>
             <tr>
@@ -117,13 +121,13 @@
                   예약날짜
                 </div>
               </td>
-
             </tr>
           </table>
         </div>
       </div>
 
       <!-- 취소 변경 예약 정보 모달 -->
+      <input type="hidden" class="guest-reservation__cancel-update-id">
       <div id="cancel-update-modal" class="guest-reservation__modal">
         <div class="guest-reservation__modal-content">
           <div class="guest-reservation__detail-info">
@@ -154,14 +158,14 @@
                 <div class="guest-reservation__modal-subtitle" id="room-name">숙소 이름</div>
               </div>
               <div class="guest-reservation__modal-room-info">
-                <div>간략 정보</div>
+                <div class="guest-reservation__simple-info-title">간략 정보</div>
                 <div>호스트 : <span class="guest-reservation__modal-host-name"></span> 님</div>
                 <div>게스트 : <span class="guest-reservation__modal-guest"></span> 명</div>
               </div>
 
               <div th:if="${status.equals('cancel')}" class="guest-reservation__modal-room-info">
                 <div class="guest-reservation__modal-subtitle">환불 정보</div>
-                <div>환불 금액</div>
+                <div class="guest-reservation__modal-refund">환불 금액</div>
               </div>
 
               <div th:unless="${status.equals('cancel')}" class="guest-reservation__modal-room-info">
@@ -195,10 +199,11 @@
               <div class="guest-reservation__modal-room-info">
                 <div class="guest-reservation__modal-subtitle">결제 세부 정보</div>
                 <div class="guest-reservation__modal-price">총 비용</div>
+                <input type="hidden" class="guest-reservation__again-payment-id">
               </div>
 
-              <div class="guest-reservation__modal-room-info">
-                <div>숙소 보기</div>
+              <div class="guest-reservation__modal-room-detail">
+                <div><i class="fas fa-hotel"></i> <span>숙소 보기</span></div>
               </div>
 
 
@@ -211,7 +216,6 @@
       </div>
 
     </div>
-
 
   </div>
 

@@ -1,5 +1,5 @@
 .review-form__main {
-  margin: 55px 220px;
+  margin: 50px 220px;
 }
 
 .review-form__score-part {
@@ -7,7 +7,7 @@
 }
 
 .review-form__score-context {
-  margin-bottom: 60px;
+  margin-bottom: 30px;
 }
 
 .review-form__text-main {
@@ -24,17 +24,13 @@
 }
 
 .review-form__star-part-each {
-  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
-  background-size: auto 100%;
-  width: 25px;
-  height: 25px;
-  display: inline-block;
-  text-indent: -9999px;
+  color: #d9d9d9;
+  font-size: 25px;
   cursor: pointer;
 }
 
 .review-form__star-part-each.on {
-  background-position: 0 0;
+  color: var(--guest-color);
 }
 
 .review-form__score-part-text {
@@ -54,6 +50,7 @@
   width: 700px;
   height: 100px;
   border-radius: 10px;
+  padding: 10px;
 }
 
 .review-form__move {

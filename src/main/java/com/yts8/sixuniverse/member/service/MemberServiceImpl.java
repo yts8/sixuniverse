@@ -57,6 +57,11 @@ public class MemberServiceImpl implements MemberService {
   }
 
   @Override
+  public void updateHostGradeAndRole(MemberDto memberDto) {
+    memberMapper.updateHostGradeAndRole(memberDto);
+  }
+
+  @Override
   public MemberDto findByEmail(String email) {
     return memberMapper.findByEmail(email);
   }

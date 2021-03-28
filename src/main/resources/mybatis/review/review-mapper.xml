@@ -16,9 +16,15 @@
     where review_id = #{reviewId}
   </select>
 
+  <select id="findByReservationId" resultType="ReviewDto">
+    select *
+    from review
+    where reservation_id = #{reservationId}
+  </select>
+
   <select id="reviewBefore" resultType="ReviewGuestDto">
-    select member.username            as hostName,
-           member.profile_img         as hostProfileImg,
+    select member.username            as host_name,
+           member.profile_img         as host_profile_img,
            reservation.reservation_id as reservation_id
     from reservation
            left join review on reservation.reservation_id = review.reservation_id
@@ -29,12 +35,12 @@
       and DATE_ADD(reservation.check_out, INTERVAL 1 DAY) <![CDATA[ <= ]]> now()
       and DATE_ADD(reservation.check_out, INTERVAL 4 DAY) > now()
       and reservation.member_id = #{memberId}
-    order by reservation_id desc
+    order by reservation.create_date desc
   </select>
 
   <select id="reviewAfter" resultType="ReviewGuestDto">
-    select member.username            as hostName,
-           member.profile_img         as hostProfileImg,
+    select member.username            as host_name,
+           member.profile_img         as host_profile_img,
            reservation.reservation_id as reservation_id
     from reservation
            left join review on reservation.reservation_id = review.reservation_id
@@ -44,18 +50,18 @@
       and reservation.status = 'complete'
       and DATE_ADD(reservation.check_out, INTERVAL 4 DAY) <![CDATA[ < ]]> now()
       and reservation.member_id = #{memberId}
-    order by reservation_id desc
+    order by reservation.create_date desc
   </select>
 
   <select id="reviewGuestList" resultType="ReviewGuestDto">
-    select member.username            as hostName,
-           member.profile_img         as hostProfileImg,
+    select member.member_id           as member_id,
+           member.username            as host_name,
+           member.profile_img         as host_profile_img,
            review.review_id           as review_id,
            review.review_content      as review_content,
            review.review_reg_date     as review_reg_date,
            review.reply_content       as reply_content,
            review.reply_reg_date      as reply_reg_date,
-           member.member_id           as member_id,
            reservation.reservation_id as reservation_id,
            reservation.status         as status,
            reservation.check_out      as check_out,
@@ -65,78 +71,162 @@
            join room on review.room_id = room.room_id
            join member on member.member_id = room.member_id
     where reservation.member_id = #{memberId}
-    order by review_id desc
+    order by review.review_reg_date desc
   </select>
 
   <select id="reviewHostList" resultType="ReviewHostDto">
-    select member.username                                    as guestName,
-           member.profile_img                                 as guestProfileImg,
+    select member.member_id                                   as guest_id,
+           member.username                                    as guest_name,
+           member.profile_img                                 as guest_profile_img,
            reservation.check_in                               as check_in,
            reservation.check_out                              as check_out,
            room.title                                         as title,
-           review.review_reg_date                             as review_reg_date,
+           review.review_id                                   as review_id,
            review.review_content                              as review_content,
+           review.review_reg_date                             as review_reg_date,
+           review.reply_content                               as reply_content,
+           review.reply_reg_date                              as reply_reg_date,
            (score_clean + score_location + score_service) / 3 as score
     from review
            join room on review.room_id = room.room_id
            join reservation on review.reservation_id = reservation.reservation_id
            join member on member.member_id = reservation.member_id
     where room.member_id = #{memberId}
-    order by review_id desc
+    order by review.review_reg_date desc
   </select>
 
-  <select id="reviewReservationList" resultType="ReviewHostDto">
-    select member.username                                    as guestName,
-           member.profile_img                                 as guestProfileImg,
+  <select id="guestReplyList" resultType="ReviewGuestDto">
+    select member.member_id      as member_id,
+           member.username       as host_name,
+           member.profile_img    as host_profile_img,
+           review.reply_content  as reply_content,
+           review.reply_reg_date as reply_reg_date
+    from review
+           join reservation on review.reservation_id = reservation.reservation_id
+           join room on review.room_id = room.room_id
+           join member on member.member_id = room.member_id
+    where reservation.member_id = #{memberId}
+      and review.reply_content is not null
+    order by review.review_reg_date desc
+  </select>
+
+  <select id="reviewHostStarList" resultType="ReviewHostDto">
+    select member.username                                    as guest_name,
+           member.profile_img                                 as guest_profile_img,
+           reservation.check_in                               as check_in,
+           reservation.check_out                              as check_out,
+           room.title                                         as title,
+           review.review_id                                   as review_id,
+           review.review_content                              as review_content,
            review.review_reg_date                             as review_reg_date,
-           review.review_content                              as review_content
+           review.reply_content                               as reply_content,
+           review.reply_reg_date                              as reply_reg_date,
+           (score_clean + score_location + score_service) / 3 as score
     from review
            join room on review.room_id = room.room_id
            join reservation on review.reservation_id = reservation.reservation_id
            join member on member.member_id = reservation.member_id
     where room.member_id = #{memberId}
-    order by review_id desc limit 6
+      and #{score} <![CDATA[ <= ]]> (score_clean + score_location + score_service) / 3 <![CDATA[ < ]]> #{score+1}
+    order by review.review_reg_date desc
+  </select>
+
+  <select id="reviewReservationListAll" resultType="ReviewHostDto">
+    select member.username        as guest_name,
+           member.profile_img     as guest_profile_img,
+           review.review_reg_date as review_reg_date,
+           review.review_content  as review_content
+    from review
+           join room on review.room_id = room.room_id
+           join reservation on review.reservation_id = reservation.reservation_id
+           join member on member.member_id = reservation.member_id
+    where room.room_id = #{roomId}
+    order by review.review_reg_date desc
+  </select>
+
+  <select id="reviewReservationList" resultType="ReviewHostDto">
+    select member.username        as guest_name,
+           member.profile_img     as guest_profile_img,
+           review.review_reg_date as review_reg_date,
+           review.review_content  as review_content
+    from review
+           join room on review.room_id = room.room_id
+           join reservation on review.reservation_id = reservation.reservation_id
+           join member on member.member_id = reservation.member_id
+    where room.room_id = #{roomId}
+    order by review.review_reg_date desc
+    limit 6
   </select>
 
   <select id="getReview" resultType="ReviewDto">
-    select score_clean,
+    select review_id,
+           room_id,
+           reservation_id,
+           score_clean,
            score_location,
            score_service,
-           review_content
+           review_content,
+           review_reg_date,
+           reply_content,
+           reply_reg_date
     from review
     where review_id = #{reviewId}
   </select>
 
-  <select id="reviewScoreClean" resultType="double">
-    select avg(score_clean) as score_clean
+  <select id="reviewScoreAll" resultType="double">
+    select (ifnull(avg(review.score_clean), 0) + ifnull(avg(review.score_location), 0) +
+            ifnull(avg(review.score_service), 0)) / 3 as score_all
     from review
            join room on review.room_id = room.room_id
            join member on room.member_id = member.member_id
-    where member.member_id = #{memberId}
+    where room.room_id = #{roomId}
+  </select>
+
+  <select id="reviewScoreClean" resultType="double">
+    select ifnull(avg(score_clean), 0) as score_clean
+    from review
+           join room on review.room_id = room.room_id
+           join member on room.member_id = member.member_id
+    where room.room_id = #{roomId}
   </select>
 
   <select id="reviewScoreLocation" resultType="double">
-    select avg(score_location) as score_location
+    select ifnull(avg(score_location), 0) as score_location
     from review
            join room on review.room_id = room.room_id
            join member on room.member_id = member.member_id
-    where member.member_id = #{memberId}
+    where room.room_id = #{roomId}
   </select>
 
   <select id="reviewScoreService" resultType="double">
-    select avg(score_service) as score_service
+    select ifnull(avg(score_service), 0) as score_service
     from review
            join room on review.room_id = room.room_id
            join member on room.member_id = member.member_id
-    where member.member_id = #{memberId}
+    where room.room_id = #{roomId}
   </select>
 
-  <select id="reviewCount" resultType="int">
+  <select id="roomReviewCount" resultType="int">
+    select count(*)
+    from review
+           join room on review.room_id = room.room_id
+    where room.room_id = #{roomId}
+  </select>
+
+  <select id="hostReviewCount" resultType="int">
     select count(*)
     from review
            join room on review.room_id = room.room_id
            join member on room.member_id = member.member_id
-    where member.member_id = #{memberId}
+    where room.member_id = #{memberId}
+  </select>
+
+  <select id="guestReplyCount" resultType="int">
+    select count(*)
+    from review
+           join reservation r on review.reservation_id = r.reservation_id
+    where r.member_id = #{memberId}
+      and review.reply_content is not null
   </select>
 
   <update id="updateReview" parameterType="ReviewDto">
@@ -148,10 +238,24 @@
     where review_id = #{reviewId}
   </update>
 
+  <update id="updateReply" parameterType="ReviewDto">
+    update review
+    set reply_content  = #{replyContent},
+        reply_reg_date = now()
+    where review_id = #{reviewId}
+  </update>
+
   <delete id="deleteReview" parameterType="ReviewDto">
     delete
     from review
     where review_id = #{reviewId}
   </delete>
+
+  <update id="deleteReply" parameterType="ReviewDto">
+    update review
+    set reply_content  = null,
+        reply_reg_date = null
+    where review_id = #{reviewId}
+  </update>
 
 </mapper>

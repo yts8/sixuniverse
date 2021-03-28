@@ -113,6 +113,35 @@
     where reservation_id = #{reservationId}
   </update>
 
+  <select id="updateList" resultType="ReservationDto">
+    select reservation_id, status, update_target
+    from reservation
+    where update_target is not null
+  </select>
+
+  <select id="findByUpdateTarget" resultType="ReservationDto">
+    select reservation_id, room_id, adult, kid, infant, check_in, check_out
+    from reservation
+    where update_target = #{reservationId}
+  </select>
+
+  <update id="guestReservationUpdate">
+    update reservation
+    set status    = 'upcoming',
+        adult     = #{adult},
+        kid       = #{kid},
+        infant    = #{infant},
+        check_in  = #{checkIn},
+        check_out = #{checkOut}
+    where reservation_id = #{reservationId}
+  </update>
+
+  <delete id="reservationDelete">
+    delete
+    from reservation
+    where reservation_id = #{reservationId}
+  </delete>
+
   <update id="guestReservationCancel">
     update reservation
     set cancel_date = #{cancelDate},
@@ -131,15 +160,22 @@
            check_out,
            room.address,
            room.sub_address,
+           room.price as room_price,
            title,
+           m.member_id as host_id,
            m.username,
-           p.price
+           p.payment_id,
+           p.price,
+           p.commission,
+           room_img.room_img
     from reservation
            join room on reservation.room_id = room.room_id
+           join room_img on room.room_id = room_img.room_id
            join member m on room.member_id = m.member_id
            left outer join payment p on reservation.reservation_id = p.reservation_id
     where reservation.update_target = #{reservationId}
-       or reservation.reservation_id = #{reservationId};
+       or reservation.reservation_id = #{reservationId}
+    group by reservation.reservation_id
   </select>
 
   <select id="findByCancelReservationId" resultType="ReservationRoomPaymentDto">
@@ -154,15 +190,19 @@
            room.address,
            room.sub_address,
            title,
+           m.member_id as host_id,
            m.username,
            p.payment_id,
            p.price,
-           p.commission
+           p.commission,
+           room_img.room_img
     from reservation
            join room on reservation.room_id = room.room_id
+           join room_img on room.room_id = room_img.room_id
            join member m on room.member_id = m.member_id
            join payment p on reservation.reservation_id = p.reservation_id
     where reservation.reservation_id = #{reservationId}
+    group by reservation.reservation_id
   </select>
 
 

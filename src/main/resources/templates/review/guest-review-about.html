@@ -15,7 +15,7 @@
         <div class="g-review-about__main-top">
           <nav>
           <span>
-            <a href="#">프로필</a>
+            <a th:href="@{|/member/profile/${session.member.getMemberId()}|}">프로필</a>
           </span>
             <span> > </span>
             <span> 후기 </span>
@@ -33,21 +33,23 @@
         <div class="g-review-about__panel-header">지난 후기</div>
         <div class="g-review-about__panel-body">
           후기는 에어비앤비 숙박이 완료된 후 작성됩니다. 나에 대한 후기는 이곳과 공개 프로필에서 볼 수 있습니다.
+          <th:block th:each="review : ${reviewHostList}">
           <div class="g-review-about__panel-body-container">
             <div class="g-review-about__panel-body-left">
               <div class="g-review-about__profile-box">
                 <a href="#">
-                  <img class="g-review-about__profile-img" th:src="@{/images/review/sky.jpeg}">
+                  <img class="g-review-about__profile-img" th:src="${review.getGuestProfileImg()}">
                 </a>
               </div>
-              <a class="g-review-about__profile-name" href="#">sungeun park</a>
+              <a class="g-review-about__profile-name" href="#" th:text="${review.getGuestName()}"></a>
             </div>
             <div class="g-review-about__panel-body-right">
-              <div class="g-review-about__panel-body-p-comment">thank you[호스트 후기]</div>
-              <div class="g-review-about__panel-body-p-date">2021년 2월[날짜]</div>
+              <div class="g-review-about__panel-body-p-comment" th:text="${review.getReviewContent()}"></div>
+              <div class="g-review-about__panel-body-p-date" th:text="${#temporals.format(review.getReviewRegDate(),'yyyy년 M월')}"></div>
             </div>
           </div>
           <hr class="g-review-about__hr">
+          </th:block>
         </div>
       </div>
     </div>

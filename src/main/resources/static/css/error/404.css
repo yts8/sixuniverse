@@ -1,0 +1,36 @@
+.far {
+  font-size: 500px;
+  color: #EB4C60;
+  position: relative;
+  margin-top: 50px;
+}
+
+.error__image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error__text {
+  position: absolute;
+  z-index: 10;
+}
+
+.error__logo {
+  display: flex;
+  justify-content: center;
+  color: #ff2b43;
+  font-weight: bold;
+  font-size: 42px;
+  margin-bottom: 40px;
+  cursor: pointer;
+}
+
+.error__text-number {
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.error__text-sub {
+  color: #969696;
+}

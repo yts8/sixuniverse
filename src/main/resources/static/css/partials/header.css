@@ -1,0 +1,53 @@
+.header__profile-menu-box {
+  position: relative;
+  height: 100%;
+  margin-left: 0.5rem;
+}
+
+.header__profile-menu-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 5.2rem;
+  height: 100%;
+  padding: 0.3rem 0.3rem 0.3rem 0.8rem;
+  border: 1px solid #dddddd;
+  border-radius: 999px;
+}
+
+.header__profile-menu-btn > i {
+  color: rgb(113, 113, 113);
+}
+
+.header__profile-menu-btn > img {
+  width: 2rem;
+  height: 2rem;
+  margin-left: 0.5rem;
+  border-radius: 50%;
+}
+
+.header__profile-menu {
+  position: absolute;
+  top: 4rem;
+  right: 1.5rem;
+  background-color: white;
+  width: 15rem;
+  padding: 1rem 0;
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+
+}
+
+.header__profile-menu > li > a {
+  padding: 1rem 2rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.header__profile-menu > li > a:hover {
+  background-color: #f2f2f2;
+}
+
+.header__profile-menu-hide {
+  display: none;
+}

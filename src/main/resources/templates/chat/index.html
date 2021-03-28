@@ -26,7 +26,7 @@
           <h3 class="chat__chatroom-list-header-name">메시지</h3>
         </div>
         <!--채팅리스트 스크롤 적용 영역-->
-        <div class="chat__chatroom-list-scroll">
+        <div class="chat__chatroom-list-scroll chatroom-list-scroll-js">
           <div th:each="last, i : ${lastChat}" th:if="${lastChat.size()} != 0"
                class="chat__chatroom-list-frame chatroom-list-frame-js">
             <a th:href="@{|/chat/host/${hostId}/chatroom/${last.chatRef}|}">
@@ -78,6 +78,7 @@
           <div class="chat__send-chat-container chat-content-js " th:data-chatId="${chat.chatId}"
                th:if="${chat.memberId}==${session.member.getMemberId()}">
 
+
             <img class="chat__sender-img" th:src="${session.member.getProfileImg()}">
             <a th:href="@{|/member/profile/${session.member.getMemberId()}|}">
               <div class="chat__send-chat-content send-chat-content-js">
@@ -103,7 +104,7 @@
                   <span th:text="${otherName}" class="chat__receiver"></span>
                   <div th:text="${chat.content}" class="chat__receive-chat"></div>
                 </div>
-                <img class="chat__receiver-img" src="https://a0.muscache.com/defaults/user_pic-225x225.png?v=3">
+                <img class="chat__receiver-img" th:src="${otherProfile}">
               </div>
             </a>
           </div>

@@ -24,8 +24,12 @@
         <div class="room__guide">기본 요금</div>
         <div class="room__guide-sub">이 요금이 기본 요금이 됩니다.</div>
 
-        <input type="text" id="price" name="price" class="room__price"
-               th:value="${roomDto.getPrice()}">
+        <input type="text"
+               id="price"
+               name="price"
+               class="room__price"
+               th:value="${roomDto.getPrice()}"
+               maxlength="11">
 
         <button type="submit" id="submit" class="room__register-btn">계속</button>
       </form>

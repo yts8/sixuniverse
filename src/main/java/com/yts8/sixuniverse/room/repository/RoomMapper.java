@@ -1,6 +1,7 @@
 package com.yts8.sixuniverse.room.repository;
 
 import com.yts8.sixuniverse.room.dto.RoomDto;
+import com.yts8.sixuniverse.room.dto.RoomInfoDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.time.LocalDateTime;
@@ -16,6 +17,8 @@ public interface RoomMapper {
   LocalDateTime findByRenewDate(Long roomId);
 
   int findByExpiryDate(Long roomId);
+
+  List<RoomInfoDto> roomInfoFindByMemberId(Long memberId);
 
   void save(RoomDto roomDto);
 

@@ -7,163 +7,151 @@
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link th:fragment="guestHeaderCss" rel="stylesheet" th:href="@{/css/partials/guest-header.css}">
-  <link th:fragment="guestHeaderDateModalCss" rel="stylesheet" th:href="@{/css/partials/date-modal.css}">
-
-  <script th:fragment="guestHeaderDateModalJs" defer th:src="@{/js/partials/guest-header-search-date.js}"></script>
-  <script th:fragment="guestHeaderGuestModalJs" defer th:src="@{/js/partials/guest-header-search.js}"></script>
   <title>header</title>
 </head>
 <body>
 <th:block th:fragment="guestHeader">
-  <div class="header__hide"></div>
-  <header class="header__container">
-    <div class="header__menu-container">
-      <div class="header__logo-container">
-        <span>SIXUNIVERSE</span>
-      </div>
-      <div class="header__search-container">
-        <div class="header__finder">
-          <div class="header__finder__outer">
-            <div class="header__finder__inner">
-              <div class="header__finder__icon" ref="icon"></div>
-              <input class="header__finder__input" type="text" name="q" placeholder="검색 시작하기"/>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="header__search-expand-container">
-        <form action="#" method="get">
+  <div class="guest-header__hide"></div>
+  <header class="guest-header__container">
+    <div>
+
+      <a th:href="@{/}" class="guest-header__logo">SIXUNIVERSE</a>
+
+      <button class="guest-header__finder-btn guest-header-finder-btn-js">
+        <span class="guest-header__finder-text">검색 시작하기</span>
+        <span class="guest-header__finder-icon">
+          <i class="fas fa-search"></i>
+        </span>
+      </button>
+
+      <div class="guest-header__search-expand-container guest-header-search-expand-container-js">
+        <form th:action="@{/search}" method="get">
           <input type="hidden" name="checkIn" id="search-check-in">
           <input type="hidden" name="checkOut" id="search-check-out">
           <input type="hidden" name="totalGuest" id="total-guest">
-          <div class="header__search-expand-content">
-            <div class="header__search-keyword-box">
-              <div>
-                <div class="header__search-box">
-                  <div class="header__search-inner">
-                    <div>
-                      <div class="header__search-content">
-                        <div>위치</div>
-                        <div>
-                          <input type="text" name="location" placeholder="어디로 여행가세요?" class="header__search-input">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="header__search-select-date">
-                <div class="header__search-box">
-                  <div class="header__search-inner">
-                    <div>
-                      <div class="header__search-content">
-                        <div>체크인</div>
-                        <div id="header-check-in">날짜추가</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="header__search-select-date">
-                <div class="header__search-box">
-                  <div class="header__search-inner">
-                    <div>
-                      <div class="header__search-content">
-                        <div>체크아웃</div>
-                        <div id="header-check-out">날짜추가</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="header__search-select-guest" id="header-update-guest">
-                <div class="header__search-box">
-                  <div class="header__search-inner">
-                    <div>
-                      <div class="header__search-content">
-                        <div>인원</div>
-                        <div id="header-total-guest" class="header__search-guest-number">게스트추가</div>
-                      </div>
-                    </div>
-                    <div class="header__search-icon">
-                      <button type="submit"><i class="fas fa-search"></i></button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <div class="guest-header__search-expand-box guest-header-location-container-js">
+            <span>위치</span>
+            <input type="text" id="search-location" name="location" placeholder="어디로 여행가세요?"
+            />
+          </div>
+          <div class="guest-header__search-expand-box guest-header-search-select-date-js">
+            <span>체크인</span>
+            <span id="header-check-in">날짜 입력</span>
+          </div>
+          <div class="guest-header__search-expand-box guest-header-search-select-date-js">
+            <span>체크아웃</span>
+            <span id="header-check-out">날짜 입력</span>
+          </div>
+          <div
+              class="guest-header__search-expand-box guest-header__search-people-container guest-header-update-guest-js">
+            <div class="guest-header__search-people-text-container">
+              <span>인원</span>
+              <span id="header-total-guest">게스트추가</span>
             </div>
+            <button class="guest-header__search-icon">
+              <i class="fas fa-search"></i>
+            </button>
           </div>
         </form>
-      </div>
 
-      <div id="header-date-modal" class="header__modal">
-        <div class="header__date-modal-content">
-          <div class="header__modal-cancel"><i class="fas fa-times"></i></div>
-          <div class="header__choose-date">
-            <h2 class="header__sub-title">날짜 선택</h2>
+        <div id="header-date-modal" class="header__modal">
+          <div class="header__date-modal-content">
+            <div class="header__modal-cancel"><i class="fas fa-times"></i></div>
+            <div class="header__choose-date">
+              <h2 class="header__sub-title">날짜 선택</h2>
+            </div>
+            <div class="header__date-wrapper">
+              <div class="dates">
+                <div id="header-range-date"></div>
+              </div>
+            </div>
           </div>
-          <div class="header__date-wrapper">
-            <div class="dates">
-              <div id="header-range-date"></div>
+        </div>
+
+        <div id="header-guest-modal" class="header__modal">
+          <div class="header__modal-content">
+            <div class="header__modal-cancel"><i class="fas fa-times"></i></div>
+            <h2 class="header__sub-title">게스트</h2>
+            <div class="header__guest">
+              <div class="header__people">
+                <div class="header__guest-title">성인</div>
+                <div class="header__number-right">
+                  <div class="header__guest-number">
+                    <button class="header__decrease" id="header-adult-minus"><i class="fas fa-minus"></i></button>
+                    <input type="text" name="adult-number" value="1" id="header-adult-number" readonly>
+                    <button class="header__increase" id="header-adult-plus"><i class="fas fa-plus"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="header__guest">
+              <div class="header__people">
+                <div>
+                  <div class="header__guest-title">어린이</div>
+                  <div class="header__guest-age">2~12세</div>
+                </div>
+                <div class="header__number-right">
+                  <div class="header__guest-number">
+                    <button class="header__decrease" id="header-kid-minus"><i class="fas fa-minus"></i></button>
+                    <input type="text" name="kid-number" value="0" id="header-kid-number" readonly>
+                    <button class="header__increase" id="header-kid-plus"><i class="fas fa-plus"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="header__guest">
+              <div class="header__people">
+                <div>
+                  <div class="header__guest-title">유아</div>
+                  <div class="header__guest-age">2세 미만</div>
+                </div>
+                <div class="header__number-right">
+                  <div class="header__guest-number">
+                    <button class="header__decrease" id="header-infant-minus"><i class="fas fa-minus"></i></button>
+                    <input type="text" name="infant-number" value="0" id="header-infant-number" readonly>
+                    <button class="header__increase" id="header-infant-plus"><i class="fas fa-plus"></i></button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div id="header-guest-modal" class="header__modal">
-        <div class="header__modal-content">
-          <div class="header__modal-cancel"><i class="fas fa-times"></i></div>
-          <h2 class="header__sub-title">게스트</h2>
-          <div class="header__guest">
-            <div class="header__people">
-              <div class="header__guest-title">성인</div>
-              <div class="header__number-right">
-                <div class="header__guest-number">
-                  <button class="header__decrease" id="header-adult-minus"><i class="fas fa-minus"></i></button>
-                  <input type="text" name="adult-number" value="1" id="header-adult-number" readonly>
-                  <button class="header__increase" id="header-adult-plus"><i class="fas fa-plus"></i></button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="header__guest">
-            <div class="header__people">
-              <div>
-                <div class="header__guest-title">어린이</div>
-                <div class="header__guest-age">2~12세</div>
-              </div>
-              <div class="header__number-right">
-                <div class="header__guest-number">
-                  <button class="header__decrease" id="header-kid-minus"><i class="fas fa-minus"></i></button>
-                  <input type="text" name="kid-number" value="0" id="header-kid-number" readonly>
-                  <button class="header__increase" id="header-kid-plus"><i class="fas fa-plus"></i></button>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div class="guest-header__member-container">
+        <a th:href="@{/host/room/register}">호스트 되기</a>
+        <div class="header__profile-menu-box">
+
+          <button class="header__profile-menu-btn header-profile-menu-btn-js">
+            <i class="fas fa-bars"></i>
+            <img sec:authorize="isAnonymous" th:src="@{/images/partials/logoutPic.png}">
+            <img sec:authorize="isAuthenticated" th:src="${session.member.getProfileImg()}" alt="프로필"/>
+          </button>
+
+          <ul sec:authorize="isAnonymous"
+              class="header__profile-menu header__profile-menu-hide header-profile-menu-js">
+            <li>
+              <a th:href="@{/login}">로그인</a>
+            </li>
+            <li>
+              <a th:href="@{/join}">회원가입</a>
+            </li>
+          </ul>
+
+          <ul sec:authorize="isAuthenticated"
+              class="header__profile-menu header__profile-menu-hide header-profile-menu-js">
+            <li>
+              <a th:href="@{|/member/profile/${session.member.getMemberId()}|}">프로필</a>
+            </li>
+            <li>
+              <a th:href="@{/member/setting}">계정관리</a>
+            </li>
+            <li>
+              <a th:href="@{/logout}">로그아웃</a>
+            </li>
+          </ul>
+
         </div>
-      </div>
-      <div class="header__member-container">
-        호스트 되기
-        <!--        <ul>-->
-        <!--          <li sec:authorize="isAnonymous">  // 만들어오기,,,,,,,,,-->
-        <!--            <a th:href="@{/login}">호스트 되기</a>-->
-        <!--          </li>-->
-        <!--          <li sec:authorize="isAuthenticated">-->
-        <!--            <a th:href="@{/logout}">게스트 되기</a>-->
-        <!--          </li>-->
-        <!--        </ul>-->
-      </div>
-      <div class="header__login-container">
-        <ul>
-          <li sec:authorize="isAnonymous">
-            <a th:href="@{/login}">로그인</a>
-          </li>
-          <li sec:authorize="isAuthenticated">
-            <a th:href="@{/logout}">로그아웃</a>
-          </li>
-        </ul>
       </div>
     </div>
   </header>

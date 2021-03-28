@@ -25,6 +25,7 @@
                  name="title"
                  class="room__subject"
                  th:value="${roomDto.getTitle()}"
+                 maxlength="100"
                  required>
 
         </div>
@@ -37,6 +38,7 @@
                   rows="10"
                   class="room__introduce"
                   th:text="${roomDto.getContent()}"
+                  maxlength="3000"
                   required></textarea>
 
         <button type="submit" class="room__register-btn">계속</button>

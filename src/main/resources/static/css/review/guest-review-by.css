@@ -11,7 +11,7 @@
   font-size: 31px;
   font-weight: bold;
   margin-top: 5px;
-  margin-bottom: 50px;
+  margin-bottom: 65px;
 }
 
 .g-review-by__tabs {
@@ -110,6 +110,32 @@
 .g-review-by__a-update:hover, .g-review-by__modal-delete:hover {
   color: red;
   text-decoration: none;
+}
+
+.g-review-by__input_area {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.g-review-by__reply-textarea-complete {
+  width: 450px;
+  height: 100%;
+  border-radius: 10px;
+  border-color: #eeeeee;
+  background-color: #eeeeee;
+  padding: 15px;
+  font-size: 14px;
+}
+
+.g-review-by__reply {
+  display: flex;
+  flex-direction: column;
+}
+
+.g-review-by__reply-name {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .g-review-by__modal {
@@ -238,7 +264,12 @@
 
 .g-review-by__main-top nav {
   text-decoration: none;
-  color: #707070;
+  color: #484848;
   font-weight: bold;
   font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.g-review-by__main-top nav > span, nav > a {
+  padding: 5px;
 }

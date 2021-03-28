@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -51,6 +52,8 @@ public class ReservationController {
 
     MemberDto memberDto = (MemberDto) session.getAttribute("member");
     RoomDto roomDto = roomService.findById(roomId);
+
+    System.out.println(reservationDto);
 
     Long roomMemberId = roomDto.getMemberId();
     Long sessionMemberId = memberDto.getMemberId();
@@ -124,13 +127,13 @@ public class ReservationController {
       roomImageList.add(roomImageDto);
     }
 
-    List<ReservationRoomPaymentDto> reservationRPDto = reservationService.findByUpdateReservationId(reservationDto.getReservationId());
+    List<ReservationDto> updateList = reservationService.updateList();
 
     model.addAttribute("status", status);
     model.addAttribute("roomList", roomList);
     model.addAttribute("roomImageList", roomImageList);
     model.addAttribute("reservationList", reservationList);
-    model.addAttribute("reservationRPDto", reservationRPDto);
+    model.addAttribute("updateList", updateList);
 
     return "reservation/guest/list";
   }
@@ -162,9 +165,11 @@ public class ReservationController {
     RoomDto roomDto = roomService.findById(reservationDto.getRoomId());
     MemberDto memberDto = memberService.findById(roomDto.getMemberId());
     List<RoomImageDto> roomImageDtoList = roomImageService.findByRoomId(roomId);
+    PaymentDto paymentDto = paymentService.findByReservationId(reservationId);
 
     model.addAttribute("room", roomDto);
     model.addAttribute("member", memberDto);
+    model.addAttribute("payment", paymentDto);
     model.addAttribute("reservation", reservationDto);
     model.addAttribute("roomImageDtoList", roomImageDtoList);
 
@@ -187,7 +192,12 @@ public class ReservationController {
     List<LocalDate> reservationDateList = reservationDateService.reservationDateUpdateList(reservationDto1);
     Collections.sort(reservationDateList);
 
+    PaymentDto paymentDto = paymentService.findByReservationId(reservationId);
+    List<RoomImageDto> roomImages = roomImageService.findByRoomId(roomId);
+
     model.addAttribute("room", roomDto);
+    model.addAttribute("payment", paymentDto);
+    model.addAttribute("roomImages", roomImages);
     model.addAttribute("reservation", reservationDto);
     model.addAttribute("reservationDateList", reservationDateList);
 
@@ -201,7 +211,22 @@ public class ReservationController {
                                              @PathVariable Long reservationId) {
 
     ReservationDto reservationDto = reservationService.findById(reservationId);
+    Long roomId = reservationDto.getRoomId();
+    RoomDto roomDto = roomService.findById(roomId);
+    PaymentDto paymentDto = paymentService.findByReservationId(reservationId);
+    List<RoomImageDto> roomImages = roomImageService.findByRoomId(roomId);
 
+    LocalDate checkIn = updateReservationDto.getCheckIn();
+    LocalDate checkOut = updateReservationDto.getCheckOut();
+
+    int days = Period.between(checkIn, checkOut).getDays();
+
+    int price = roomDto.getPrice() * days + (int)((roomDto.getPrice() * days) * 0.1);
+
+    model.addAttribute("room", roomDto);
+    model.addAttribute("price", price);
+    model.addAttribute("payment", paymentDto);
+    model.addAttribute("roomImages", roomImages);
     model.addAttribute("reservation", reservationDto);
     model.addAttribute("updateReservationDto", updateReservationDto);
     model.addAttribute("reservationDateArray", request.getParameter("reservationDateArray"));
@@ -215,6 +240,7 @@ public class ReservationController {
     ReservationRoomPaymentDto reservationRoomPaymentDto = reservationService.findByCancelReservationId(reservationId);
 
     model.addAttribute("reservationRPDto", reservationRoomPaymentDto);
+    model.addAttribute("roomImages", roomImageService.findByRoomId(reservationRoomPaymentDto.getRoomId()));
 
     return "reservation/guest/cancel";
   }
@@ -224,6 +250,7 @@ public class ReservationController {
     ReservationRoomPaymentDto reservationRoomPaymentDto = reservationService.findByCancelReservationId(reservationId);
 
     model.addAttribute("reservationRPDto", reservationRoomPaymentDto);
+    model.addAttribute("roomImages", roomImageService.findByRoomId(reservationRoomPaymentDto.getRoomId()));
 
     return "reservation/guest/cancel-confirm";
   }
@@ -269,6 +296,7 @@ public class ReservationController {
       } else {
         reservationDto.setMemberId(memberId);
         reservationDto.setStatus("upcoming");
+        reservationDto.setCreateDate(LocalDateTime.now());
 
         reservationService.reservationInsert(reservationDto);
 
@@ -300,6 +328,8 @@ public class ReservationController {
         paymentDto.setCommission((int) map.get("commission"));
         paymentDto.setPaymentMethod((String) map.get("pay_method"));
 
+        System.out.println(paymentDto);
+
         paymentService.paymentInsert(paymentDto);
 
         afterPaymentDto = paymentService.findByReservationId(reservationDto.getReservationId());
@@ -310,12 +340,20 @@ public class ReservationController {
       e.printStackTrace();
     }
 
+    model.addAttribute("memberId", memberId);
     model.addAttribute("room", roomDto);
     model.addAttribute("reservation", reservationDto);
     model.addAttribute("payment", afterPaymentDto);
     model.addAttribute("roomImages", roomImageDto);
 
     return "reservation/guest/complete";
+  }
+
+  @GetMapping("/pay/partial/refund/{data}")
+  public String payPartialRefund(@PathVariable Map<String, String> data) {
+    System.out.println(data);
+
+    return "redirect:/reservation/guest/list";
   }
 
   @GetMapping("/host/list")
@@ -327,12 +365,17 @@ public class ReservationController {
   @GetMapping("/host/list/{status}")
   public String hostReservation(HttpSession session, Model model, @PathVariable String status) {
     MemberDto memberDto = (MemberDto) session.getAttribute("member");
+    Long memberId = memberDto.getMemberId();
 
     ReservationDto reservationDto = new ReservationDto();
     reservationDto.setMemberId(memberDto.getMemberId());
     reservationDto.setStatus(status);
+
+    System.out.println(status);
+
     List<HostReservationDto> hostReservationList = reservationService.hostReservationList(reservationDto);
 
+    System.out.println(hostReservationList);
 
     model.addAttribute("title", "예약정보");
     model.addAttribute("status", status);

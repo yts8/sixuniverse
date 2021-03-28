@@ -97,7 +97,6 @@
                    class="reservation__list-tbody">
 
             <tr th:each="hostReservation : ${hostReservationList}">
-              <input type="hidden" th:value="${hostReservation.getReservationId()}" id="reservation-id">
               <td class="reservation__request">
                 <div class="reservation__request-sub">
                   <span th:if='${#strings.equals(hostReservation.getStatus(), "upcoming")}' th:text="'예정'"
@@ -134,17 +133,19 @@
                 </div>
               </td>
               <td class="reservation__check-in-con">
-                <div th:text="${hostReservation.getCheckIn()}" class="reservation__check-in-con-date">
+                <div th:text="${#temporals.format(hostReservation.getCheckIn(),'yyyy년 M월 dd일 ')}"
+                     class="reservation__check-in-con-date">
                   2021년 2월 26일
                 </div>
               </td>
               <td class="reservation__check-out-con">
-                <div th:text="${hostReservation.getCheckOut()}" class="reservation__check-out-con-date">
+                <div th:text="${#temporals.format(hostReservation.getCheckOut(),'yyyy년 M월 dd일 ')}"
+                     class="reservation__check-out-con-date">
                   2021년 2월 27일
                 </div>
               </td>
               <td class="reservation__reserve-con">
-                <div th:text='${#temporals.format(hostReservation.getCreateDate(), "yyyy-MM-dd a hh:mm")}'
+                <div th:text='${#temporals.format(hostReservation.getCreateDate(), "yyyy년 MM월 dd일 a hh:mm")}'
                      class="reservation__reserve-con-date">
                   2021년 2월 26일
                 </div>
@@ -155,7 +156,7 @@
               <td class="reservation__price-con">
                 <!--                TODO: 가격 * 체크인 체크아웃 날짜 빼기-->
                 <div
-                    th:text="${hostReservation.getPrice() - hostReservation.getCommission()}"
+                    th:text="'₩' + ${#numbers.formatInteger(hostReservation.getPrice() - hostReservation.getCommission(),3,'COMMA')}"
                     class="reservation__price-detail">₩11,640
                 </div>
               </td>
@@ -164,6 +165,7 @@
                   <div th:if="${#strings.equals(hostReservation.getStatus(), 'update')}"
                        class="reservation__host-update">
                     <button class="reservation__host-update-ok">수락</button>
+                    <input type="hidden" th:value="${hostReservation.getReservationId()}" id="reservation-id">
                     <button class="reservation__host-update-no">거절</button>
                   </div>
                   <div class="reservation__detail-con">

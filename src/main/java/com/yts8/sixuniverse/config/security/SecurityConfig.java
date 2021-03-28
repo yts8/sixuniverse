@@ -44,6 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/login/**",
             "/api/login/**",
             "/join",
+            "/search/**",
             "/api/reservation/before",
             "/api/reservation/guest/update/today",
             "/member/setting/password/reset",

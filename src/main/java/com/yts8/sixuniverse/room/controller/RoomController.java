@@ -1,7 +1,10 @@
 package com.yts8.sixuniverse.room.controller;
 
 import com.yts8.sixuniverse.member.dto.MemberDto;
+import com.yts8.sixuniverse.performance.service.PerformanceService;
 import com.yts8.sixuniverse.reservationDate.service.ReservationDateService;
+import com.yts8.sixuniverse.review.dto.ReviewHostDto;
+import com.yts8.sixuniverse.review.service.ReviewService;
 import com.yts8.sixuniverse.room.dto.RoomDto;
 import com.yts8.sixuniverse.room.service.RoomService;
 import com.yts8.sixuniverse.roomFacility.dto.RoomFacilityDto;
@@ -17,6 +20,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
@@ -30,12 +35,14 @@ public class RoomController {
   private final RoomHitsService roomHitsService;
   private final ReservationDateService reservationDateService;
   private final RoomFacilityService roomFacilityService;
+  private final ReviewService reviewService;
+  private final PerformanceService performanceService;
 
   @GetMapping("/detail/{roomId}")
   public String detail(Model model, HttpSession httpSession, @PathVariable Long roomId) {
 
     RoomDto roomDto = roomService.findById(roomId);
-    if (!roomDto.getStatus().equals("register")) {
+    if (roomDto == null || !roomDto.getStatus().equals("register")) {
       return "redirect:/";
     }
 
@@ -49,7 +56,7 @@ public class RoomController {
       if (findRoomHitsDto == null) {
         roomHitsService.save(roomHitsDto);
       } else {
-        roomHitsService.updateHits(findRoomHitsDto.getRoomHitsId());
+        roomHitsService.addHits(findRoomHitsDto.getRoomHitsId());
       }
     }
 
@@ -67,13 +74,30 @@ public class RoomController {
     facilityDto.setRoomId(roomId);
     List<String> roomFacilityList = roomFacilityService.selectRoomFacility(facilityDto);
     model.addAttribute("roomFacilityList", roomFacilityList);
-//    for(String a2:roomFacilityList){
-//      System.out.println("a2 = " + a2);
-//    }
 
+    List<ReviewHostDto> reviewReservationListAll = reviewService.reviewReservationListAll(roomDto.getRoomId());
+    model.addAttribute("reviewReservationListAll", reviewReservationListAll);
+
+    List<ReviewHostDto> reviewReservationList = reviewService.reviewReservationList(roomDto.getRoomId());
+    model.addAttribute("reviewReservationList", reviewReservationList);
+
+    NumberFormat formatter = new DecimalFormat("0.#");
+    double reviewScoreAll = reviewService.reviewScoreAll(roomDto.getRoomId());
+    model.addAttribute("reviewScore", formatter.format(reviewScoreAll));
+
+    double reviewScoreClean = reviewService.reviewScoreClean(roomDto.getRoomId());
+    model.addAttribute("reviewScoreClean", formatter.format(reviewScoreClean));
+
+    double reviewScoreLocation = reviewService.reviewScoreLocation(roomDto.getRoomId());
+    model.addAttribute("reviewScoreLocation", formatter.format(reviewScoreLocation));
+
+    double reviewScoreService = reviewService.reviewScoreService(roomDto.getRoomId());
+    model.addAttribute("reviewScoreService", formatter.format(reviewScoreService));
+
+    int reviewCount = reviewService.roomReviewCount(roomDto.getRoomId());
+    model.addAttribute("reviewCount", reviewCount);
 
     return "room/detail";
   }
-
 
 }

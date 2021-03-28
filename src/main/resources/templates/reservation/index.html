@@ -6,7 +6,7 @@
 
 <th:block layout:fragment="css">
   <link rel="stylesheet" th:href="@{/css/reservation/index.css}">
-<!--  <link rel="stylesheet" th:href="@{/css/reservation/ui-datepicker.css}">-->
+  <!--  <link rel="stylesheet" th:href="@{/css/reservation/ui-datepicker.css}">-->
   <link rel="stylesheet" th:href="@{/css/reservation/reservation-datepicker.css}">
   <link rel="stylesheet" th:href="@{/css/reservation/guest/update-guest.css}">
 </th:block>
@@ -17,6 +17,7 @@
   <script type="text/javascript" defer th:src="@{/js/reservation/index.js}"></script>
   <script type="text/javascript" defer th:src="@{/js/reservation/reservation-modal.js}"></script>
   <script type="text/javascript" defer th:src="@{/js/reservation/reservation-date-modal.js}"></script>
+  <script type="text/javascript" defer th:src="@{/js/reservation/date-save.js}"></script>
 </th:block>
 
 <head>
@@ -26,7 +27,6 @@
 
 <body>
 <th:block layout:fragment="content">
-
   <div id="reservation-box">
     <div class="reservation__content">
       <div class="reservation__first">
@@ -44,9 +44,11 @@
           <div class="reservation__box2">
             <div class="reservation__small-box">
               <h4 class="reservation__sub-title2">날짜</h4>
-              <div class="reservation__date" th:text="${beforeReservation.checkIn + ' ~ ' + beforeReservation.checkOut}">예약날짜</div>
-              <div>[<img th:src="@{/images/reservation/clock.png}" class="reservation__img">
-                체크인: <span th:text="${room.getCheckInTime()}"></span> 시 이후]
+              <div class="reservation__date"
+                   th:text="${beforeReservation.checkIn} + ' ~ ' + ${beforeReservation.checkOut}">예약날짜
+              </div>
+              <div><img th:src="@{/images/reservation/clock.png}" class="reservation__img">
+                체크인: <span th:text="${room.getCheckInTime()}"></span> 시 이후
               </div>
             </div>
             <button id="update-date" class="reservation__update-btn">수정</button>
@@ -103,7 +105,8 @@
                 <div class="reservation__number-right">
                   <div class="reservation__guest-number">
                     <button class="reservation__decrease" id="adult-minus"><i class="fas fa-minus"></i></button>
-                    <input type="text" name="adult-number" th:value="${beforeReservation.adult}" id="adult-number" readonly>
+                    <input type="text" name="adult-number" th:value="${beforeReservation.adult}" id="adult-number"
+                           readonly>
                     <button class="reservation__increase" id="adult-plus"><i class="fas fa-plus"></i></button>
                   </div>
                 </div>
@@ -136,7 +139,8 @@
                 <div class="reservation__number-right">
                   <div class="reservation__guest-number">
                     <button class="reservation__decrease" id="infant-minus"><i class="fas fa-minus"></i></button>
-                    <input type="text" name="infant-number" th:value="${beforeReservation.infant}" id="infant-number" readonly>
+                    <input type="text" name="infant-number" th:value="${beforeReservation.infant}" id="infant-number"
+                           readonly>
                     <button class="reservation__increase" id="infant-plus"><i class="fas fa-plus"></i></button>
                   </div>
                 </div>
@@ -164,9 +168,13 @@
               <div>
                 <span>성인 : <span class="reservation__guest-adult" th:text="${beforeReservation.adult}"></span> 명</span>
                 <span>아동 : <span class="reservation__guest-kid" th:text="${beforeReservation.kid}"></span> 명</span>
-                <span>유아 : <span class="reservation__guest-infant" th:text="${beforeReservation.infant}"></span> 명</span>
+                <span>유아 : <span class="reservation__guest-infant"
+                                 th:text="${beforeReservation.infant}"></span> 명</span>
               </div>
-              <div>총 인원 : <span class="reservation__total-guest" th:text="${beforeReservation.adult + beforeReservation.kid + beforeReservation.infant}"></span> 명</div>
+              <div>총 인원 : <span class="reservation__total-guest"
+                                th:text="${beforeReservation.adult + beforeReservation.kid + beforeReservation.infant}"></span>
+                명
+              </div>
             </div>
             <button id="update-guest" class="reservation__update-btn">수정</button>
           </div>
@@ -247,8 +255,10 @@
 
           <form th:action="@{/reservation/pay/complete}" method="post" id="reservation-fr">
             <input type="hidden" name="checkIn" class="reservation__check-in" th:value="${beforeReservation.checkIn}">
-            <input type="hidden" name="checkOut" class="reservation__check-out" th:value="${beforeReservation.checkOut}">
-            <input type="hidden" name="reservationDateArray" class="reservation__date" th:value="${reservationDateArray}">
+            <input type="hidden" name="checkOut" class="reservation__check-out"
+                   th:value="${beforeReservation.checkOut}">
+            <input type="hidden" name="reservationDateArray" class="reservation__date"
+                   th:value="${reservationDateArray}">
             <input type="hidden" name="adult" class="reservation__adult" th:value="${beforeReservation.adult}">
             <input type="hidden" name="kid" class="reservation__kid" th:value="${beforeReservation.kid}">
             <input type="hidden" name="infant" class="reservation__infant" th:value="${beforeReservation.infant}">
@@ -288,28 +298,34 @@
           <div class="reservation__line"></div>
 
           <h2 class="reservation__sub-title">요금 세부 정보</h2>
-
+          <input type="hidden" th:value="${room.price}" class="reservation__one-day-price">
           <div class="reservation__price-info">
             <div class="reservation__table">
-              <div class="reservation__price" th:text="| 1박 요금 : ${room.price}|"></div>
-              <span class="reservation__price2" id="total-price" th:text="${totalPrice}"></span>
+              <div class="reservation__one-day-price">
+              <div class="reservation__price" th:text="'₩' + ${#numbers.formatInteger(room.price,3,'COMMA')}"></div>
+              <div> x <span class="reservation__days" th:text="${totalPrice / room.price}"></span>박</div>
+              </div>
+              <div class="reservation__days-price-info"
+                   th:text="'₩' + ${#numbers.formatInteger(totalPrice,3,'COMMA')}"></div>
             </div>
 
             <div class="reservation__table">
               <div class="reservation__price">수수료</div>
-              <span class="reservation__price2" id="commission" th:text="'￦ ' + ${commission} "></span>
+              <div class="reservation__commission-info"
+                   th:text="'₩' + ${#numbers.formatInteger(commission,3,'COMMA')}"></div>
             </div>
 
-            <div class="reservation__table">
-              <div class="reservation__price">할인금액</div>
-              <span class="reservation__price2">￦30000</span>
-            </div>
+            <!--            <div class="reservation__table">-->
+            <!--              <div class="reservation__price">할인금액</div>-->
+            <!--              <span class="reservation__price2">￦30000</span>-->
+            <!--            </div>-->
 
             <div class="reservation__table">
               <div class="reservation__total">총 합계</div>
-              <span class="reservation__total2" th:text="${totalPrice + commission}"></span>
+              <div class="reservation__total2"
+                   th:text="'₩' + ${#numbers.formatInteger((totalPrice + commission),3,'COMMA')}"></div>
             </div>
-
+            <input type="hidden" id="totalPrice" th:value="${totalPrice}">
 
           </div>
         </div>

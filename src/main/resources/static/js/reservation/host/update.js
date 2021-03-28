@@ -3,13 +3,14 @@
     const header = "X-CSRF-TOKEN";
     const csrf = document.querySelector("#csrf").value;
 
-    const update = function (status) {
+    const update = function (status, reservationId) {
       console.log(status)
+      console.log(reservationId)
 
       $.ajax({
         url: '/api/reservation/host/update/' + status,
         data: JSON.stringify({
-          reservationId: $('#reservation-id').val(),
+          reservationId: reservationId,
           status: status
         }),
         type: 'post',
@@ -30,11 +31,14 @@
     }
 
     $('.reservation__host-update-ok').click(function () {
-      update('update-ok');
+      const reservationId = $(this).next('#reservation-id').val();
+      update('update-ok', reservationId);
     })
 
     $('.reservation__host-update-no').click(function () {
-      update('update-no');
+      const reservationId = $(this).prev('#reservation-id').val();
+      console.log("click : " + reservationId)
+      update('update-no', reservationId);
     })
 
 

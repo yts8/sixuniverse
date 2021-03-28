@@ -12,6 +12,8 @@ public interface ReviewService {
 
   ReviewDto findById(Long reviewId);
 
+  ReviewDto findByReservationId(Long reservationId);
+
   List<ReviewGuestDto> reviewBefore(Long memberId);
 
   List<ReviewGuestDto> reviewAfter(Long memberId);
@@ -20,7 +22,11 @@ public interface ReviewService {
 
   List<ReviewHostDto> reviewHostList(Long memberId);
 
-  List<ReviewHostDto> reviewReservationList(Long memberId);
+  List<ReviewGuestDto> guestReplyList(Long memberId);
+
+  List<ReviewHostDto> reviewReservationListAll(Long roomId);
+
+  List<ReviewHostDto> reviewReservationList(Long roomId);
 
   ReviewDto getReview(Long reviewId);
 
@@ -28,12 +34,22 @@ public interface ReviewService {
 
   void deleteReview(ReviewDto reviewDto);
 
-  int reviewCount(Long memberId);
+  void updateReply(ReviewDto reviewDto);
 
-  double reviewScoreClean(Long memberId);
+  void deleteReply(ReviewDto reviewDto);
 
-  double reviewScoreLocation(Long memberId);
+  int roomReviewCount(Long roomId);
 
-  double reviewScoreService(Long memberId);
+  int hostReviewCount(Long memberId);
+
+  int guestReplyCount(Long memberId);
+
+  double reviewScoreAll(Long roomId);
+
+  double reviewScoreClean(Long roomId);
+
+  double reviewScoreLocation(Long roomId);
+
+  double reviewScoreService(Long roomId);
 
 }

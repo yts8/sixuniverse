@@ -43,4 +43,5 @@ public interface ChatMapper {
   Long countHostRoom(Long hostId);
 
   String findOtherName(ChatListDto chatListDto);
+  String findOtherProfile(ChatListDto chatListDto);
 }

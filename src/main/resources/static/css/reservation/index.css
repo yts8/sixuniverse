@@ -58,7 +58,7 @@
 .reservation__sub-title {
   font-size: 23px;
   font-weight: bold;
-  margin: 30px 0 40px 0;
+  margin: 30px 0 20px 0;
 }
 
 .reservation__sub-title2 {
@@ -297,28 +297,18 @@
 }
 
 .reservation__table {
-  display: table;
-  width: 100%;
-  height: 30px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.reservation__price {
-  display: table-cell;
+.reservation__table > div {
+  margin-top: 10px;
 }
 
-.reservation__price2 {
-  display: table-cell;
-  float: right;
-
-}
-
-.reservation__total {
-  display: table-cell;
+.reservation__total, .reservation__total2 {
   font-weight: bold;
 }
 
-.reservation__total2 {
-  display: table-cell;
-  float: right;
-  font-weight: bold;
+.reservation__one-day-price {
+  display: flex;
 }

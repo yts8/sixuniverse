@@ -25,4 +25,14 @@ public class PaymentServiceImpl implements PaymentService {
   public void paymentCancel(PaymentDto paymentDto) {
     paymentMapper.paymentCancel(paymentDto);
   }
+
+  @Override
+  public void paymentUpdate(PaymentDto paymentDto) {
+    paymentMapper.paymentUpdate(paymentDto);
+  }
+
+  @Override
+  public void paymentDelete(String paymentId) {
+    paymentMapper.paymentDelete(paymentId);
+  }
 }

@@ -9,4 +9,8 @@ public interface PaymentService {
 
   void paymentCancel(PaymentDto paymentDto);
 
+  void paymentUpdate(PaymentDto paymentDto);
+
+  void paymentDelete(String paymentId);
+
 }

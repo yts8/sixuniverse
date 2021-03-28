@@ -1,0 +1,28 @@
+<!doctype html>
+
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" th:href="@{/css/reser.css}">
+  <link rel="stylesheet" th:href="@{/css/error/404.css}"/>
+  <script src="https://kit.fontawesome.com/72ec3ada60.js" crossorigin="anonymous"></script>
+  <title>잘못된 페이지 | Sixuniverse</title>
+</head>
+<body>
+<div class="error__image">
+  <div class="error__text">
+    <a class="error__logo" th:href="@{/}">SIXUNIVERSE</a>
+    <div class="error__text-number">404.</div>
+    <div class="error__text-sub"> That’s an error.</div>
+    <br>
+    <div>The requested URL was not found on this server.</div>
+    <div class="error__text-sub">That’s all we know.</div>
+  </div>
+  <i class="far fa-comment-alt"></i>
+</div>
+</body>
+</html>

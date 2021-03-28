@@ -18,7 +18,7 @@
 
 .guest-reservation__nav {
   display: flex;
-  border-bottom: 1px solid #c3c3c3;
+  border-bottom: 1px solid #d9d9d9;
   margin-top: 30px;
 }
 
@@ -54,7 +54,7 @@
 }
 
 .guest-reservation__nothing {
-  width: 1200px;
+  width: 100%;
 }
 
 .guest-reservation__room-info-table {
@@ -67,7 +67,7 @@
 
 .guest-reservation__detail {
   height: 40px;
-  border-top: 1px solid #c3c3c3;
+  border-top: 1px solid #d9d9d9;
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
@@ -124,14 +124,18 @@
 /* 취소 변경 */
 .guest-reservation__cancel-update-box {
   margin-top: 20px;
+  cursor: pointer;
+}
 
+.guest-reservation__cancel-update:hover {
+  background-color: #f5f4f4;
 }
 
 .guest-reservation__cancel-update-box table {
   width: 100%;
   margin-top: 20px;
   padding: 20px;
-  border-bottom: 1px solid #b3b3b3;
+  border-bottom: 1px solid #d9d9d9;
   vertical-align: middle;
 }
 
@@ -176,6 +180,7 @@
 }
 
 .guest-reservation__update-status-box {
+  width: 300px;
   vertical-align: middle;
 }
 
@@ -191,3 +196,46 @@
   padding: 20px;
   vertical-align: middle;
 }
+
+.guest-reservation__room-title {
+  font-weight: bold;
+}
+
+.guest-reservation__again-payment, .guest-reservation__partial-refund {
+  color: white;
+  background-color: #EB4C60;
+  padding: 15px;
+  margin-top: 20px;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.guest-reservation__modal-price {
+  margin-top: 20px;
+}
+
+.guest-reservation__modal-price > div {
+  margin-top: 8px;
+}
+
+.guest-reservation__important-price {
+  font-weight: bold;
+}
+
+.guest-reservation__modal-room-detail {
+  margin-top: 10px;
+  height: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.guest-reservation__modal-room-detail:hover {
+  background-color: #f5f4f4;
+}
+
+.guest-reservation__modal-room-detail > div > span {
+  margin-left: 20px;
+}
+

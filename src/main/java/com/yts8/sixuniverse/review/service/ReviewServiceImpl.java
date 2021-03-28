@@ -27,10 +27,19 @@ public class ReviewServiceImpl implements ReviewService {
   }
 
   @Override
-  public List<ReviewGuestDto> reviewBefore(Long memberId) { return reviewMapper.reviewBefore(memberId); }
+  public ReviewDto findByReservationId(Long reservationId) {
+    return reviewMapper.findByReservationId(reservationId);
+  }
 
   @Override
-  public List<ReviewGuestDto> reviewAfter(Long memberId) { return reviewMapper.reviewAfter(memberId); }
+  public List<ReviewGuestDto> reviewBefore(Long memberId) {
+    return reviewMapper.reviewBefore(memberId);
+  }
+
+  @Override
+  public List<ReviewGuestDto> reviewAfter(Long memberId) {
+    return reviewMapper.reviewAfter(memberId);
+  }
 
   @Override
   public List<ReviewGuestDto> reviewGuestList(Long memberId) {
@@ -43,7 +52,19 @@ public class ReviewServiceImpl implements ReviewService {
   }
 
   @Override
-  public List<ReviewHostDto> reviewReservationList(Long memberId) { return reviewMapper.reviewReservationList(memberId); }
+  public List<ReviewGuestDto> guestReplyList(Long memberId) {
+    return reviewMapper.guestReplyList(memberId);
+  }
+
+  @Override
+  public List<ReviewHostDto> reviewReservationListAll(Long roomId) {
+    return reviewMapper.reviewReservationListAll(roomId);
+  }
+
+  @Override
+  public List<ReviewHostDto> reviewReservationList(Long roomId) {
+    return reviewMapper.reviewReservationList(roomId);
+  }
 
   @Override
   public ReviewDto getReview(Long reviewId) {
@@ -61,15 +82,48 @@ public class ReviewServiceImpl implements ReviewService {
   }
 
   @Override
-  public int reviewCount(Long memberId) { return reviewMapper.reviewCount(memberId); }
+  public void updateReply(ReviewDto reviewDto) {
+    reviewMapper.updateReply(reviewDto);
+  }
 
   @Override
-  public double reviewScoreClean(Long memberId) { return reviewMapper.reviewScoreClean(memberId); }
+  public void deleteReply(ReviewDto reviewDto) {
+    reviewMapper.deleteReply(reviewDto);
+  }
 
   @Override
-  public double reviewScoreLocation(Long memberId) { return reviewMapper.reviewScoreLocation(memberId); }
+  public int roomReviewCount(Long roomId) {
+    return reviewMapper.roomReviewCount(roomId);
+  }
 
   @Override
-  public double reviewScoreService(Long memberId) { return reviewMapper.reviewScoreService(memberId); }
+  public int hostReviewCount(Long memberId) {
+    return reviewMapper.hostReviewCount(memberId);
+  }
+
+  @Override
+  public int guestReplyCount(Long memberId) {
+    return reviewMapper.guestReplyCount(memberId);
+  }
+
+  @Override
+  public double reviewScoreAll(Long roomId) {
+    return reviewMapper.reviewScoreAll(roomId);
+  }
+
+  @Override
+  public double reviewScoreClean(Long roomId) {
+    return reviewMapper.reviewScoreClean(roomId);
+  }
+
+  @Override
+  public double reviewScoreLocation(Long roomId) {
+    return reviewMapper.reviewScoreLocation(roomId);
+  }
+
+  @Override
+  public double reviewScoreService(Long roomId) {
+    return reviewMapper.reviewScoreService(roomId);
+  }
 
 }

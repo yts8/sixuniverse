@@ -11,22 +11,21 @@
   <!-- Common CSS -->
   <link rel="stylesheet" th:href="@{/css/reset.css}"/>
   <link rel="stylesheet" th:href="@{/css/variables.css}"/>
+  <link rel="stylesheet" th:href="@{/css/partials/header.css}">
 
   <!--  Guest Header-->
   <th:block th:unless='${#httpServletRequest.getServletPath().startsWith("/host")}'>
-    <th:block th:replace="partials/guest-header :: guestHeaderCss"/>
-  </th:block>
-  <th:block th:unless='${#httpServletRequest.getServletPath().startsWith("/host")}'>
-    <th:block th:replace="partials/guest-header :: guestHeaderDateModalCss"/>
+    <link rel="stylesheet" th:href="@{/css/partials/guest-header.css}">
+    <link rel="stylesheet" th:href="@{/css/partials/date-modal.css}">
   </th:block>
 
   <!--  Host Header-->
   <th:block th:if='${#httpServletRequest.getServletPath().startsWith("/host")}'>
-    <th:block th:replace="partials/host-header :: hostHeaderCss"/>
+    <link rel="stylesheet" th:href="@{/css/partials/host-header.css}">
   </th:block>
 
-  <th:block th:replace="partials/footer :: footerCss"/>
   <th:block layout:fragment="css"/>
+  <th:block th:replace="partials/footer :: footerCss"/>
 
   <!-- Common JS -->
   <script src="https://kit.fontawesome.com/72ec3ada60.js" crossorigin="anonymous"></script>
@@ -34,18 +33,13 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-  <!--  Host Header-->
-  <th:block th:if='${#httpServletRequest.getServletPath().startsWith("/host")}'>
-    <th:block th:replace="partials/host-header :: hostHeaderJs"/>
-  </th:block>
+  <script defer th:src="@{/js/partials/header-profile-menu.js}"></script>
 
   <!--  Guest Header-->
   <th:block th:unless='${#httpServletRequest.getServletPath().startsWith("/host")}'>
-    <th:block th:replace="partials/guest-header :: guestHeaderDateModalJs"/>
-  </th:block>
-  <th:block th:unless='${#httpServletRequest.getServletPath().startsWith("/host")}'>
-    <th:block th:replace="partials/guest-header :: guestHeaderGuestModalJs"/>
+    <script defer th:src="@{/js/partials/guest-header.js}"></script>
+    <script defer th:src="@{/js/partials/guest-header-search-date.js}"></script>
+    <script defer th:src="@{/js/partials/guest-header-search.js}"></script>
   </th:block>
 
   <th:block layout:fragment="js"/>

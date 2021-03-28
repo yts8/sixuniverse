@@ -33,7 +33,7 @@
           <div class="guest-reservation-simple-info__room-address" th:text="${room.address} + ' ' + ${room.subAddress}">
             숙소주소
           </div>
-          <div th:text="${reservation.checkIn} + ' ~ ' + ${reservation.checkOut}">예약날짜</div>
+          <div class="guest-reservation-simple-info__reservation-date" th:text="${reservation.checkIn} + ' ~ ' + ${reservation.checkOut}">예약날짜</div>
         </div>
 
         <div class="guest-reservation-simple-info__room-info-box">
@@ -44,9 +44,6 @@
               </div>
               <div th:case="'complete'">
                 <div class="guest-reservation-simple-info__reservation-title">완료된 예약</div>
-              </div>
-              <div th:case="'update'">
-                <div class="guest-reservation-simple-info__reservation-title">변경을 요청한 예약</div>
               </div>
             </div>
             <div class="guest-reservation-simple-info__room-info">

@@ -2,15 +2,21 @@ package com.yts8.sixuniverse.performance.controller;
 
 import com.yts8.sixuniverse.member.dto.MemberDto;
 import com.yts8.sixuniverse.performance.service.PerformanceService;
+import com.yts8.sixuniverse.review.dto.ReviewDto;
+import com.yts8.sixuniverse.review.dto.ReviewHostDto;
+import com.yts8.sixuniverse.review.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +26,7 @@ import java.util.List;
 public class PerformanceController {
 
   private final PerformanceService performanceService;
+  private final ReviewService reviewService;
 
   @GetMapping("/income")
   public String income(HttpSession session, Model model) {
@@ -128,9 +135,71 @@ public class PerformanceController {
     return "performance/views";
   }
 
+  @GetMapping("/review")
+  public String host(HttpSession session, Model model) {
+    model.addAttribute("title", "후기");
 
-//  @GetMapping ("/#") //후기관리 위치
-//  public String review() { return "performance/#";
-//  }
+    MemberDto member = (MemberDto) session.getAttribute("member");
+    Long memberId = member.getMemberId();
+
+    List<ReviewHostDto> reviewHostList = reviewService.reviewHostList(memberId);
+    model.addAttribute("reviewHostList", reviewHostList);
+
+    for (ReviewHostDto review : reviewHostList) {
+      Long reviewId = review.getReviewId();
+      ReviewDto getReview = reviewService.getReview(reviewId);
+      model.addAttribute("getReview", getReview);
+    }
+
+    NumberFormat formatter = new DecimalFormat("0.#");
+    double reviewScore = performanceService.findByReviewScore(member.getMemberId());
+    model.addAttribute("reviewScore", formatter.format(reviewScore));
+
+    int reviewCount = reviewService.hostReviewCount(member.getMemberId());
+    model.addAttribute("reviewCount", reviewCount);
+
+    LocalDate today = LocalDate.now();
+    model.addAttribute("today", today);
+
+    return "review/host-review";
+  }
+
+  @PostMapping("/review/update")
+  public String hostUpdate(ReviewDto reviewDto) {
+
+    ReviewDto review = reviewService.getReview(reviewDto.getReviewId());
+
+    LocalDate today = LocalDate.now();
+    LocalDate reviewRegDate = review.getReviewRegDate();
+    LocalDate reviewLimit = reviewRegDate.plusDays(2);
+    Period period = Period.between(today, reviewLimit);
+
+    if (period.getDays() < 0 || period.getDays() > 2) {
+      return "redirect:/host/performance/review";
+    } else {
+      reviewService.updateReply(reviewDto);
+      return "redirect:/host/performance/review";
+    }
+
+  }
+
+  @PostMapping("/review/delete")
+  public String hostDelete(ReviewDto reviewDto) {
+
+    ReviewDto review = reviewService.getReview(reviewDto.getReviewId());
+
+    LocalDate today = LocalDate.now();
+    LocalDate reviewRegDate = review.getReviewRegDate();
+    LocalDate reviewLimit = reviewRegDate.plusDays(2);
+    Period period = Period.between(today, reviewLimit);
+
+    if (period.getDays() < 0 || period.getDays() > 2) {
+      return "redirect:/host/performance/review";
+    } else {
+      reviewService.deleteReply(reviewDto);
+      return "redirect:/host/performance/review";
+    }
+
+  }
 
 }

@@ -6,16 +6,22 @@
   position: fixed;
   top: 0;
   left: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   width: 100%;
   height: var(--header-height);
-  padding: 1rem 3rem;
   background-color: #ffffff;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
   z-index: 10;
-  color: #000000;
+  color: rgb(34, 34, 34);
+}
+
+.host-header__container > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 1360px;
+  height: 100%;
+  padding: 1rem 0;
+  margin: 0 auto;
 }
 
 .host-header__wrap {
@@ -23,10 +29,13 @@
   height: 100%;
 }
 
-.host-header__logo-box {
-  width: 9rem;
+.host-header__logo {
+  display: flex;
+  align-items: center;
   height: 100%;
-  background-color: var(--host-color);
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--host-color);
 }
 
 .host-header__menu {
@@ -84,58 +93,4 @@
 .host-header__room-register:hover {
   border-radius: 999px;
   background-color: #f2f2f2;
-}
-
-.host-header__profile-menu-box {
-  position: relative;
-  height: 100%;
-  margin-left: 1rem;
-}
-
-.host-header__profile-menu-btn {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 5.2rem;
-  height: 100%;
-  padding: 0.3rem 0.3rem 0.3rem 0.8rem;
-  border: 1px solid #dddddd;
-  border-radius: 999px;
-}
-
-.host-header__profile-menu-btn > i {
-  color: rgb(113, 113, 113);
-}
-
-.host-header__profile-menu-btn > img {
-  width: 2rem;
-  height: 2rem;
-  margin-left: 0.5rem;
-  border-radius: 50%;
-}
-
-.host-header__profile-menu {
-  position: absolute;
-  top: 4rem;
-  right: 1.5rem;
-  background-color: white;
-  width: 15rem;
-  padding: 1rem 0;
-  border-radius: 1rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-
-}
-
-.host-header__profile-menu > li > a {
-  padding: 1rem 2rem;
-  font-size: 0.9rem;
-  font-weight: bold;
-}
-
-.host-header__profile-menu > li > a:hover {
-  background-color: #f2f2f2;
-}
-
-.header__profile-menu-hide {
-  display: none;
 }

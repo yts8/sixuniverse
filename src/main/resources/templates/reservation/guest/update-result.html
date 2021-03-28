@@ -6,7 +6,7 @@
 >
 
 <th:block layout:fragment="css">
-  <link rel="stylesheet" th:href="@{/css/reservation/guest/update-result.css}">
+  <link rel="stylesheet" th:href="@{/css/reservation/guest/update.css}">
 </th:block>
 
 <th:block layout:fragment="js">
@@ -23,8 +23,7 @@
   <div class="guest-reservation-update__box">
     <div class="guest-reservation-update__box2">
 
-
-      <div class="guest-reservation-update__content">
+      <div class="guest-reservation-update__result-content">
         <div class="guest-reservation-update__title">이 내용이 맞나요?</div>
         <input type="hidden" id="reservation-id" th:value="${reservation.reservationId}">
         <div class="guest-reservation-update__small-box">
@@ -33,7 +32,7 @@
             <div id="check-in" th:text="${updateReservationDto.checkIn}">체크인날짜</div>
             <div> ~ </div>
             <div id="check-out" th:text="${updateReservationDto.checkOut}">체크아웃날짜</div>
-            <div class="guest-reservation-update__i-calendar">
+            <div>
               <i class="far fa-calendar"></i>
             </div>
           </div>
@@ -42,51 +41,64 @@
         <div class="guest-reservation-update__small-box">
           <div class="guest-reservation-update__sub-title">신규 게스트</div>
           <div class="guest-reservation-update__new-guest">
-            <div>성인: <span id="adult" th:text="${updateReservationDto.adult}"></span> 명 유아 : <span id="infant" th:text="${updateReservationDto.kid}"></span> 명
-              아동 : <span id="kid" th:text="${updateReservationDto.infant}"></span> 명</div>
+            <div>성인: <span id="adult" th:text="${updateReservationDto.adult}"></span> 명 아동 : <span id="kid" th:text="${updateReservationDto.kid}"></span> 명
+              유아 : <span id="infant" th:text="${updateReservationDto.infant}"></span> 명</div>
             <div>총 인원 수 : <span th:text="${updateReservationDto.adult + updateReservationDto.kid + updateReservationDto.infant}"></span> 명</div>
-
-            <div>변경 전 성인: <span th:text="${reservation.adult}"></span> 명 유아 : <span th:text="${reservation.kid}"></span> 명
-              아동 : <span th:text="${reservation.infant}"></span> 명</div>
+            <hr>
+            <div>변경 전 성인: <span th:text="${reservation.adult}"></span> 명 아동 : <span th:text="${reservation.kid}"></span> 명
+              유아 : <span th:text="${reservation.infant}"></span> 명</div>
             <div>변경 전 총 인원 수 : <span th:text="${reservation.adult + reservation.kid + reservation.infant}"></span> 명</div>
           </div>
 
-          <div>호스트 님이 변경에 동의하면, 내용이 자동으로 변경됩니다. </div>
+          <div>호스트 님이 변경에 동의해야 합니다. </div>
 
         </div>
-
-
 
         <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
         <div class="guest-reservation-update__btn">
           <button class="guest-reservation-update__back-btn">뒤로</button>
-          <button class="guest-reservation-update__next-btn">요청</button>
+          <button class="guest-reservation-update__result-next-btn">요청</button>
         </div>
-
-
 
       </div>
 
 
       <div class="guest-reservation-update__reservation-box">
         <div class="guest-reservation-update__room-info">
-          <div class="guest-reservation-update__room-address">숙소주소</div>
-          <div>숙소사진</div>
+          <div>
+            <div class="guest-reservation-update__room-title" th:text="${room.title}">숙소이름</div>
+            <div class="guest-reservation-update__room-address"
+                 th:text="${room.address + room.subAddress}">숙소주소
+            </div>
+          </div>
+          <div class="guest-reservation-update__room-img-box">
+            <img th:src="${roomImages.get(0).roomImg}" class="guest-reservation-update__room-img">
+          </div>
         </div>
         <div class="guest-reservation-update__info-align">
-          <i class="fas fa-user-friends"></i><div class="guest-reservation-update__content">인원 몇 명</div>
+          <i class="fas fa-user-friends"></i>
+          <div class="guest-reservation-update__content">
+             <span
+                 th:text="|성인 : ${updateReservationDto.adult} 명, 아동 : ${updateReservationDto.kid} 명, 유아 : ${updateReservationDto.infant} 명|">인원 몇 명</span>
+            <div class="guest-reservation-update__total-guest-info"
+                 th:text="|총 인원 : ${updateReservationDto.adult + updateReservationDto.kid + updateReservationDto.infant} 명|"></div>
+          </div>
         </div>
         <div class="guest-reservation-update__info-align">
-          <i class="far fa-calendar-alt"></i><div class="guest-reservation-update__content">예약날짜</div>
+          <i class="far fa-calendar-alt"></i>
+          <div class="guest-reservation-update__content">
+            <span th:text="${#temporals.format(updateReservationDto.checkIn,'yyyy년 M월 dd일 ')}">예약날짜</span> ~
+            <span th:text="${#temporals.format(updateReservationDto.checkOut,'yyyy년 M월 dd일 ')}">예약날짜</span>
+          </div>
         </div>
         <div class="guest-reservation-update__price-info">
-          <div>
-            <span>기존 금액</span>
-            <span>￦ 111111</span>
+          <div class="guest-reservation-update__before-price-info">
+            <div>기존 금액</div>
+            <div th:text="'₩' + ${#numbers.formatInteger(payment.price,3,'COMMA')}">￦ 111111</div>
           </div>
-          <div>
-            <span>변경 후 금액</span>
-            <span>￦ 222222</span>
+          <div class="guest-reservation-update__after-price-info">
+            <div>변경 후 금액</div>
+            <div th:text="'₩' + ${#numbers.formatInteger(price,3,'COMMA')}">￦ 222222</div>
           </div>
         </div>
 
