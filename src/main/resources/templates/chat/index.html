@@ -56,14 +56,13 @@
     <input type="hidden" id="profile" th:value="${session.member.getProfileImg()}"/>
 
 
-
     <!--채팅방영역-->
     <section class="chat__chatroom">
       <div class="chat__chatroom-header">
         <div class="chat__chatroom-wrap">
           <h3 th:text="${hostName}+'님과의 채팅방'" th:value="${name}" class="chat__chatroom-name"></h3>
-          <p th:if="${reply}!=0" th:text="${hostName} + '님의 평균응답율 : '+${reply} + '%'"></p>
-          <p th:unless="${reply}==0"></p>
+          <p th:if="${reply}!=null" th:text="${hostName} + '님의 평균응답율 : '+${reply} + '%'"></p>
+          <p th:unless="${reply}==null"></p>
         </div>
       </div>
 
@@ -76,7 +75,7 @@
 
           <!--보내는 메세지 내용 영역-->
 
-          <div class="chat__send-chat-container chat-content-js "
+          <div class="chat__send-chat-container chat-content-js " th:data-chatId="${chat.chatId}"
                th:if="${chat.memberId}==${session.member.getMemberId()}">
 
             <img class="chat__sender-img" th:src="${session.member.getProfileImg()}">
@@ -85,7 +84,7 @@
                 <div>
                   <span th:text="${session.member.getUsername()}" class="chat__sender"></span>
                   <span th:text="${#temporals.format(chat.createDate, 'yyyy-MM-dd hh:mm')}"
-                       class="chat__send-time"></span></div>
+                        class="chat__send-time"></span></div>
                 <div th:text="${chat.content}" class="chat__send-chat"></div>
                 </img>
               </div>

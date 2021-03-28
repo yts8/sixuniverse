@@ -57,6 +57,8 @@ public class ChatController {
       /* 채팅방 저장 */
       chatroomJoinService.testCreateNewRoom(chatroomJoinDto);
       chatroomJoinService.testCreateNewRoom(chatroomJoinDto2);
+
+
     } else if (chatRef != 0) {
       chatRef = chatroomJoinService.getChatRefTest(memberIdDto);
     }
@@ -66,6 +68,8 @@ public class ChatController {
 
   @GetMapping("/chat/host/{hostId}/chatroom/{chatRef}")
   public String chatTest(@PathVariable Long chatRef, @PathVariable Long hostId, Model model, HttpSession httpSession) {
+
+    String hostName = chatService.findUsernameById(hostId);
 
     MemberDto member = (MemberDto) httpSession.getAttribute("member");
     Long myMemberId = member.getMemberId();
@@ -78,7 +82,7 @@ public class ChatController {
 
     String otherName = chatService.findOtherName(chatListDto);
 
-    String hostName = chatService.findUsernameById(hostId);
+
 
 
     if (chatMessages != 0) {
