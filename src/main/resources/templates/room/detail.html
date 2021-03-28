@@ -339,9 +339,9 @@
         <form th:action="@{|/reservation/${roomId}|}" method="post">
           <input type="hidden" name="checkIn">
           <input type="hidden" name="checkOut">
-          <input type="hidden" name="adult" th:value="1">
-          <input type="hidden" name="kid" th:value="0">
-          <input type="hidden" name="infant" th:value="0">
+          <input type="hidden" name="adult" value="1">
+          <input type="hidden" name="kid" value="0">
+          <input type="hidden" name="infant" value="0">
           <input type="hidden" name="totalPrice">
           <input type="hidden" name="commission">
           <button type="submit" class="room__detail-reservation-check-btn" id="reservation-btn">예약 하기</button>
@@ -350,6 +350,7 @@
         <div class="room__detail-price-info-box">
           <div class="room__detail-price-info">
             <div>
+              <input type="hidden" class="room__detail-one-day-price" th:value="${room.price}">
               <span th:text="|${room.price} x |"></span>
               <span class="room__detail-days"></span>
             </div>

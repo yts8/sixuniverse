@@ -22,8 +22,10 @@ public class ReservationRoomPaymentDto {
 
   private String address;
   private String subAddress;
+  private int roomPrice;
   private String title;
   private String roomImg;
+  private Long hostId;
   private String username;
   private String paymentId;
   private int price;

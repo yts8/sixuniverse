@@ -10,7 +10,7 @@
   <select id="findByReservationId" resultType="PaymentDto">
     select payment_id, price, commission, payment_method
     from payment
-    where reservation_id = #{reservationId}
+    where reservation_id = #{reservationId} and cancel_date is null
   </select>
 
   <update id="paymentCancel">
@@ -24,5 +24,10 @@
     set price = #{price}, commission = #{commission}
     where payment_id = #{paymentId}
   </update>
+
+  <delete id="paymentDelete">
+    delete from payment
+    where payment_id = #{paymentId}
+  </delete>
 
 </mapper>

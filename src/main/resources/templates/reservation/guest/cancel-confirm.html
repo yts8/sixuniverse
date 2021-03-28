@@ -48,7 +48,7 @@
               <div class="guest-reservation-cancel__sub-title">수수료</div>
               <div th:text="'₩' + ${#numbers.formatInteger(reservationRPDto.commission,3,'COMMA')}">요금 얼마</div>
             </div>
-            <div>환불 불가</div>
+            <div>전액 환불</div>
           </div>
 
           <!--          <div class="guest-reservation-cancel__sub-title-box">-->
@@ -71,7 +71,7 @@
             <div class="guest-reservation-cancel__sub-title-content">
               <div class="guest-reservation-cancel__sub-title">총 환불 금액</div>
               <div
-                  th:text="'₩' + ${#numbers.formatInteger((reservationRPDto.price - reservationRPDto.commission),3,'COMMA')}">
+                  th:text="'₩' + ${#numbers.formatInteger(reservationRPDto.price,3,'COMMA')}">
                 요금 얼마
               </div>
             </div>
@@ -126,10 +126,10 @@
             </div>
           </div>
           <div class="guest-reservation-cancel__info-align">
-            <span class="guest-reservation-cancel__total-refund">총 환불금액 (수수료 제외)</span>
+            <span class="guest-reservation-cancel__total-refund">총 환불금액</span>
             <div class="guest-reservation-cancel__info-content">
               <span
-                  th:text="'₩' + ${#numbers.formatInteger((reservationRPDto.price - reservationRPDto.commission),3,'COMMA')}">￦ 111111</span>
+                  th:text="'₩' + ${#numbers.formatInteger(reservationRPDto.price,3,'COMMA')}">￦ 111111</span>
             </div>
           </div>
         </div>

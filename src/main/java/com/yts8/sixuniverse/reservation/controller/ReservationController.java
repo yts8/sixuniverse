@@ -53,6 +53,8 @@ public class ReservationController {
     MemberDto memberDto = (MemberDto) session.getAttribute("member");
     RoomDto roomDto = roomService.findById(roomId);
 
+    System.out.println(reservationDto);
+
     Long roomMemberId = roomDto.getMemberId();
     Long sessionMemberId = memberDto.getMemberId();
 
@@ -190,7 +192,12 @@ public class ReservationController {
     List<LocalDate> reservationDateList = reservationDateService.reservationDateUpdateList(reservationDto1);
     Collections.sort(reservationDateList);
 
+    PaymentDto paymentDto = paymentService.findByReservationId(reservationId);
+    List<RoomImageDto> roomImages = roomImageService.findByRoomId(roomId);
+
     model.addAttribute("room", roomDto);
+    model.addAttribute("payment", paymentDto);
+    model.addAttribute("roomImages", roomImages);
     model.addAttribute("reservation", reservationDto);
     model.addAttribute("reservationDateList", reservationDateList);
 
@@ -204,7 +211,22 @@ public class ReservationController {
                                              @PathVariable Long reservationId) {
 
     ReservationDto reservationDto = reservationService.findById(reservationId);
+    Long roomId = reservationDto.getRoomId();
+    RoomDto roomDto = roomService.findById(roomId);
+    PaymentDto paymentDto = paymentService.findByReservationId(reservationId);
+    List<RoomImageDto> roomImages = roomImageService.findByRoomId(roomId);
 
+    LocalDate checkIn = updateReservationDto.getCheckIn();
+    LocalDate checkOut = updateReservationDto.getCheckOut();
+
+    int days = Period.between(checkIn, checkOut).getDays();
+
+    int price = roomDto.getPrice() * days + (int)((roomDto.getPrice() * days) * 0.1);
+
+    model.addAttribute("room", roomDto);
+    model.addAttribute("price", price);
+    model.addAttribute("payment", paymentDto);
+    model.addAttribute("roomImages", roomImages);
     model.addAttribute("reservation", reservationDto);
     model.addAttribute("updateReservationDto", updateReservationDto);
     model.addAttribute("reservationDateArray", request.getParameter("reservationDateArray"));
@@ -306,6 +328,8 @@ public class ReservationController {
         paymentDto.setCommission((int) map.get("commission"));
         paymentDto.setPaymentMethod((String) map.get("pay_method"));
 
+        System.out.println(paymentDto);
+
         paymentService.paymentInsert(paymentDto);
 
         afterPaymentDto = paymentService.findByReservationId(reservationDto.getReservationId());
@@ -316,6 +340,7 @@ public class ReservationController {
       e.printStackTrace();
     }
 
+    model.addAttribute("memberId", memberId);
     model.addAttribute("room", roomDto);
     model.addAttribute("reservation", reservationDto);
     model.addAttribute("payment", afterPaymentDto);
@@ -346,8 +371,11 @@ public class ReservationController {
     reservationDto.setMemberId(memberDto.getMemberId());
     reservationDto.setStatus(status);
 
+    System.out.println(status);
+
     List<HostReservationDto> hostReservationList = reservationService.hostReservationList(reservationDto);
 
+    System.out.println(hostReservationList);
 
     model.addAttribute("title", "예약정보");
     model.addAttribute("status", status);

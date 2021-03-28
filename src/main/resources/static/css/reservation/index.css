@@ -308,3 +308,7 @@
 .reservation__total, .reservation__total2 {
   font-weight: bold;
 }
+
+.reservation__one-day-price {
+  display: flex;
+}

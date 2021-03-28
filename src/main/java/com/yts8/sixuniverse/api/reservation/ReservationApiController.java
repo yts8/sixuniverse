@@ -96,15 +96,16 @@ public class ReservationApiController {
     int commission = (int) (totalPrice * 0.1);
 
     ReservationRoomPaymentDto reservationRoomPaymentDto = new ReservationRoomPaymentDto();
-    if (reservationRoomPaymentDtos.get(0).getPrice() < totalPrice + commission) {
-      reservationRoomPaymentDto.setPrice(totalPrice);
-      reservationRoomPaymentDto.setCommission(commission);
-    } else if (reservationRoomPaymentDtos.get(0).getPrice() > totalPrice + commission) {
-      reservationRoomPaymentDto.setPrice(totalPrice);
-      reservationRoomPaymentDto.setCommission(commission);
-    }
 
-    reservationRoomPaymentDtos.add(reservationRoomPaymentDto);
+    if(reservationRoomPaymentDtos.get(0).getPrice() != totalPrice + commission) {
+      reservationRoomPaymentDto.setPrice(totalPrice);
+      reservationRoomPaymentDto.setCommission(commission);
+
+      reservationRoomPaymentDtos.add(reservationRoomPaymentDto);
+    } else {
+      reservationRoomPaymentDto.setPrice(0);
+      reservationRoomPaymentDtos.add(reservationRoomPaymentDto);
+    }
 
     return reservationRoomPaymentDtos;
   }
@@ -115,21 +116,21 @@ public class ReservationApiController {
     return reservationService.findByCancelReservationId(reservationId);
   }
 
-  @PostMapping("/before")
-  public int reservationCheck(@RequestBody ReservationDto reservationDto) {
-    LocalDate checkIn = reservationDto.getCheckIn();
-    LocalDate checkOut = reservationDto.getCheckOut();
-
-    int days = Period.between(checkIn, checkOut).getDays();
-    RoomDto roomDto = roomService.findById(reservationDto.getRoomId());
-
-    int oneDayPrice = roomDto.getPrice();
-
-    int totalPrice = oneDayPrice * days;
-
-    return totalPrice;
-
-  }
+//  @PostMapping("/before")
+//  public int reservationCheck(@RequestBody ReservationDto reservationDto) {
+//    LocalDate checkIn = reservationDto.getCheckIn();
+//    LocalDate checkOut = reservationDto.getCheckOut();
+//
+//    int days = Period.between(checkIn, checkOut).getDays();
+//    RoomDto roomDto = roomService.findById(reservationDto.getRoomId());
+//
+//    int oneDayPrice = roomDto.getPrice();
+//
+//    int totalPrice = oneDayPrice * days;
+//
+//    return totalPrice;
+//
+//  }
 
   @PostMapping("/guest/pay/cancel")
   public void reservationPayCancel(@RequestBody Map<String, String> json) throws IOException, IamportResponseException {
@@ -139,6 +140,12 @@ public class ReservationApiController {
 
     CancelData cancelData = new CancelData(json.get("imp_uid"), true);
     iamportClient.cancelPaymentByImpUid(cancelData);
+  }
+
+  @PostMapping("/pay/cancel/again")
+  public void cancelAgain(@RequestBody Map<String, String> json) {
+
+    paymentService.paymentDelete(json.get("paymentId"));
   }
 
 
@@ -160,25 +167,68 @@ public class ReservationApiController {
     paymentService.paymentCancel(paymentDto);
   }
 
-  @PostMapping("/pay/cancel/again")
-  public void cancelAgain(@RequestBody String paymentId) {
-    PaymentDto paymentDto = new PaymentDto();
-    paymentDto.setPaymentId(paymentId);
-    paymentDto.setCancelDate(LocalDateTime.now());
-    paymentService.paymentCancel(paymentDto);
-  }
+
 
   @PostMapping("/host/update/update-ok")
   public String updateOk(@RequestBody ReservationDto reservationDto) {
-    reservationService.hostUpdate(reservationDto);
+
+    List<ReservationRoomPaymentDto> reservationRoomPaymentDto = reservationService.findByUpdateReservationId(reservationDto.getReservationId());
+
+    ReservationRoomPaymentDto original = reservationRoomPaymentDto.get(0);
+    ReservationRoomPaymentDto update = reservationRoomPaymentDto.get(1);
+
+    int paymentPrice = original.getPrice();
+
+    int oneDayPrice = original.getRoomPrice();
+
+    LocalDate checkIn = update.getCheckIn();
+    LocalDate checkOut = update.getCheckOut();
+
+    int days = Period.between(checkIn, checkOut).getDays();
+
+    int updatePrice = oneDayPrice * days + (int)(oneDayPrice * 0.1);
+
+    if(paymentPrice == updatePrice) {
+      Long reservationId = original.getReservationId();
+      ReservationDto updateInfo = reservationService.findByUpdateTarget(reservationId);
+      updateInfo.setReservationId(reservationId);
+
+      reservationDateService.guestReservationDateDelete(reservationId);  // 변경 전 날짜 삭제
+
+      List<ReservationDateDto> reservationDateDtos = new ArrayList<ReservationDateDto>();
+
+      for (int i = 0; i <= days; i++) {
+        ReservationDateDto reservationDateDto = new ReservationDateDto();
+
+        reservationDateDto.setRoomId(updateInfo.getRoomId());
+        reservationDateDto.setReservationId(reservationId);
+        reservationDateDto.setReservationDate(checkIn.plusDays(i));
+        reservationDateDtos.add(reservationDateDto);
+      }
+
+      reservationService.guestReservationUpdate(updateInfo); // 변경 후 정보로 업데이트
+      reservationDateService.reservationDateInsert(reservationDateDtos); // 변경 후 날짜 추가
+
+      reservationService.reservationDelete(update.getReservationId()); // 변경 후 정보 삭제
+    } else {
+      reservationService.hostUpdate(reservationDto);
+    }
+
     return "ok";
   }
 
   @PostMapping("/host/update/update-no")
   public String updateNo(@RequestBody ReservationDto reservationDto) {
-    reservationService.hostUpdateNo(reservationDto.getReservationId());
+    Long originalReservationId = reservationDto.getReservationId();
+    reservationService.hostUpdateNo(originalReservationId); // 기존 정보 upcoming 으로 변경
+
+//    ReservationDto updateReservation = reservationService.findByUpdateTarget(originalReservationId);
+//    Long updateReservationId = updateReservation.getReservationId();
+//    reservationService.reservationDelete(updateReservationId); // update 정보 삭제
     return "no";
   }
+
+
 
   @PostMapping("/pay/again")
   public String payAgain(@RequestBody PaymentDto paymentDto) {
@@ -188,15 +238,11 @@ public class ReservationApiController {
     Long reservationId = paymentDto.getReservationId();
 
     ReservationDto reservationDto = reservationService.findByUpdateTarget(reservationId);
+    Long updateReservationId = reservationDto.getReservationId();
     reservationDto.setReservationId(reservationId);
     System.out.println("reservationDto : " + reservationDto);
 
     reservationDateService.guestReservationDateDelete(reservationId); // 변경 전 날짜 삭제
-
-    PaymentDto paymentCancel = new PaymentDto();
-    paymentDto.setPaymentId(paymentDto.getPaymentId());
-    paymentDto.setCancelDate(LocalDateTime.now());
-    paymentService.paymentCancel(paymentCancel);  // 변경 전 결제 정보 취소날짜 추가
 
     List<ReservationDateDto> reservationDateDtos = new ArrayList<ReservationDateDto>();
 
@@ -212,13 +258,11 @@ public class ReservationApiController {
       reservationDateDtos.add(reservationDateDto);
     }
 
-    System.out.println("reservationDateDtos : " + reservationDateDtos);
-
     paymentService.paymentInsert(paymentDto);  // 재결제 정보
     reservationService.guestReservationUpdate(reservationDto); // 변경 후 정보로 업데이트
     reservationDateService.reservationDateInsert(reservationDateDtos); // 변경 후 날짜 추가
 
-//    reservationService.reservationDelete(reservationDto.getReservationId()); // 변경 후 정보 삭제
+    reservationService.reservationDelete(updateReservationId); // 변경 후 정보 삭제
 
     return "redirect:/reservation/guest/list";
   }
@@ -240,7 +284,9 @@ public class ReservationApiController {
     Long reservationId = paymentDto.getReservationId();
 
     ReservationDto reservationDto = reservationService.findByUpdateTarget(reservationId);
+    Long updateReservationId = reservationDto.getReservationId();
     reservationDto.setReservationId(reservationId);
+    System.out.println("reservationDto : " + reservationDto);
 
     reservationDateService.guestReservationDateDelete(reservationId); // 변경 전 날짜 삭제
 
@@ -258,11 +304,11 @@ public class ReservationApiController {
       reservationDateDtos.add(reservationDateDto);
     }
 
-    paymentService.paymentUpdate(paymentDto);
+    paymentService.paymentUpdate(paymentDto); // 환불 후 금액으로 업데이트
     reservationService.guestReservationUpdate(reservationDto); // 변경 후 정보로 업데이트
     reservationDateService.reservationDateInsert(reservationDateDtos); // 변경 후 날짜 추가
 
-//    reservationService.reservationDelete(reservationDto.getReservationId()); // 변경 후 정보 삭제
+    reservationService.reservationDelete(updateReservationId); // 변경 후 정보 삭제
 
   }
 

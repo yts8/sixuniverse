@@ -13,4 +13,5 @@ public interface PaymentMapper {
 
   void paymentUpdate(PaymentDto paymentDto);
 
+  void paymentDelete(String paymentId);
 }

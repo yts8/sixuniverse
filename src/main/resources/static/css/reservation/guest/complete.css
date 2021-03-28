@@ -15,7 +15,7 @@
 .guest-reservation-complete__reservation-box {
   width: 450px;
   height: max-content;
-  border: 1px solid #c3c3c3;
+  border: 1px solid #d9d9d9;
   border-radius: 10px;
   padding: 20px;
   margin-left: 100px;
@@ -26,6 +26,17 @@
   margin: 30px 0 30px 0;
   font-size: 30px;
   font-weight: bold;
+}
+
+.guest-reservation-complete__list {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #EB4C60;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 10px;
+  text-align: center;
 }
 
 .guest-reservation-complete__content {
@@ -99,7 +110,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid #c3c3c3;
+  border-top: 1px solid #d9d9d9;
 }
 
 .guest-reservation-complete__align > div {

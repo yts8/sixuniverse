@@ -7,30 +7,32 @@
       const header = "X-CSRF-TOKEN";
       const csrf = document.querySelector("#csrf").value;
 
-      // cancelPay();
-      //
-      // function cancelPay() {
-      //     $.ajax({
-      //       url: '/api/reservation/guest/pay/cancel',
-      //       type: 'post',
-      //       data: JSON.stringify({
-      //         imp_uid: $('#payment-id').val()
-      //       }),
-      //       contentType: 'application/json; charset=utf-8',
-      //       beforeSend: function (xhr) {
-      //         xhr.setRequestHeader(header, csrf);
-      //       }
-      //     }).done(function (result) { // 환불 성공시 로직
-      //       alert("환불 성공");
-      //       cancelDelete();
-      //     }).fail(function (error) { // 환불 실패시 로직
-      //       alert("환불 실패");
-      //     });
-      // }
+      const paymentId = $('#payment-id').val();
+
+      cancelPay();
+
+      function cancelPay() {
+          $.ajax({
+            url: '/api/reservation/guest/pay/cancel',
+            type: 'post',
+            data: JSON.stringify({
+              imp_uid: paymentId
+            }),
+            contentType: 'application/json; charset=utf-8',
+            beforeSend: function (xhr) {
+              xhr.setRequestHeader(header, csrf);
+            }
+          }).done(function (result) { // 환불 성공시 로직
+            alert("환불 성공");
+            cancelDelete();
+          }).fail(function (error) { // 환불 실패시 로직
+            alert("환불 실패");
+          });
+      }
 
 
       // -------------------
-      cancelDelete()     // 주석 처리 후 다른 주석 해제하면 결제 취소 가능
+      // cancelDelete()     // 주석 처리 후 다른 주석 해제하면 결제 취소 가능
       // -------------------
 
       function cancelDelete() {
@@ -38,7 +40,7 @@
             url: '/api/reservation/guest/cancel',
             data: JSON.stringify({
               reservationId: $('.guest-reservation-cancel__reservation-id').val(),
-              paymentId: $('#payment-id').val()
+              paymentId: paymentId
             }),
             type: 'post',
             contentType: 'application/json; charset=utf-8',

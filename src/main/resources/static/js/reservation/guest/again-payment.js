@@ -11,15 +11,10 @@
     $('.guest-reservation__modal-room-info').on('click', '.guest-reservation__again-payment', function () {
 
       const paymentId = $('.guest-reservation__again-payment-id').val();
-      const price = parseInt($('.guest-reservation__price').html());
+      const price = parseInt($('.guest-reservation__price').val());
       const roomName = $('#room-name').html();
       const reservationId = $('.guest-reservation__cancel-update-id').val();
-      const commission = parseInt($('.guest-reservation__commission').html());
-
-      console.log('reservationId : ' + reservationId)
-      console.log('price : ' + price)
-      console.log('commission : ' + commission)
-
+      const commission = parseInt($('.guest-reservation__commission').val());
 
       // 취소 후 재결제
       // api 취소와 DB 삭제
@@ -46,7 +41,8 @@
 
       // ---------------------------------------------------------------------
       cancelAgain();
-      // 결제 취소되면 DB 에서 변경 전 결제 정보에 취소날짜 추가
+      // ---------------------------------------------------------------------
+      // 결제 취소되면 DB 에서 변경 전 결제 정보 삭제
       function cancelAgain() {
         $.ajax({
           url: '/api/reservation/pay/cancel/again',
@@ -59,13 +55,13 @@
             xhr.setRequestHeader(header, csrf);
           },
           success: function () {
-            alert('변경 전 결제 정보 취소 날짜 추가 성공');
+            alert('변경 전 결제 정보 삭제 성공');
           }
         }).done(function () {
           // requestPay();
           again();
         }).fail(function () {
-          alert('변경 전 결제 정보 취소 날짜 추가 실패');
+          alert('변경 전 결제 정보 삭제 실패');
         });
       }
       // ---------------------------------------------------------------------
@@ -76,20 +72,12 @@
       //   IMP.request_pay({ // param
       //     pg: "html5_inicis.INIpayTest",
       //     name: roomName,
-      //     // amount: price + commission,
-      //     amount: price
+      //     amount: price + commission,
       //   }, function (rsp) { // callback
       //     if (rsp.success) {
       //      again();
       // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
       // jQuery로 HTTP 요청
-      // 실제 결제한 후 정보 저장 지우지마시오
-      // const data = JSON.stringify({
-      //   imp_uid: rsp.imp_uid,
-      //   paid_amount: rsp.paid_amount,
-      //   pay_method: rsp.pay_method
-      // })
-
       // 이 부분만 주석 처리 후 다른 주석 해제하면 결제 가능
       // -------------------------------------------------------------
       function again() {
@@ -97,7 +85,8 @@
           url: '/api/reservation/pay/again',
           type: 'post',
           data: JSON.stringify({
-            paymentId: 'imp_' + randomNum,
+            paymentId: 'imp_' + randomNum, // 결제 api 사용 시 주석
+            // paymentId: rsp.imp_uid, // requestPay() 사용 시 주석 해제
             reservationId: reservationId,
             price: price + commission,  // 게스트 최종결제금액
             commission: commission,
@@ -122,22 +111,6 @@
       //     }
       //   });
       // }
-
-      // const data = JSON.stringify({
-      //   imp_uid: paymentId,
-      //   price: price,  // 게스트 최종결제금액
-      //   // commission: commission,   // 수수료
-      //   pay_method: 'card'
-      // })
-      //
-      // location.href = '/reservation/pay/again/' + data;
-
-      // const data = JSON.stringify({
-      //   imp_uid: paymentId,
-      //   // paid_amount: price + commission,  // 게스트 최종결제금액
-      //   // commission: commission,   // 수수료
-      //   pay_method: 'card'
-      // })
 
     });
 

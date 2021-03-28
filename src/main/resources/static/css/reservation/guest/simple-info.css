@@ -33,7 +33,7 @@ html, body {
 .guest-reservation-simple-info__detail-room {
   width: 400px;
   padding: 20px;
-  border-bottom: 1px solid #c3c3c3;
+  border-bottom: 1px solid #d9d9d9;
 
 }
 
@@ -57,7 +57,7 @@ html, body {
 }
 
 .guest-reservation-simple-info__title {
-  border-top: 1px solid #c3c3c3;
+  border-top: 1px solid #d9d9d9;
   font-weight: bold;
 }
 
@@ -128,7 +128,7 @@ html, body {
 
 .guest-reservation-simple-info__msg {
   font-weight: normal;
-  border: 1px solid #c3c3c3;
+  border: 1px solid #d9d9d9;
   margin: 10px;
   padding: 10px;
   text-align: center;

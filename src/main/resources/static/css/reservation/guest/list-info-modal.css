@@ -30,7 +30,7 @@
 .guest-reservation__detail-info {
   display: flex;
   line-height: 50px;
-  border-bottom: 1px solid #c3c3c3;
+  border-bottom: 1px solid #d9d9d9;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   background-color: white;
@@ -77,7 +77,7 @@
 
 .guest-reservation__reservation-status {
   color: #888888;
-  border-bottom: 1px solid #bdbdbd;
+  border-bottom: 1px solid #d9d9d9;
 }
 
 .guest-reservation__reservation-status > div {
@@ -115,7 +115,7 @@
   height: max-content;
   padding-bottom: 20px;
   margin-top: 20px;
-  border-bottom: 1px solid #bdbdbd;
+  border-bottom: 1px solid #d9d9d9;
 }
 
 .guest-reservation__modal-room-info > div {
@@ -151,9 +151,22 @@
 }
 
 .guest-reservation__modal-before-after > div:nth-of-type(1) {
-  border-right: 1px solid #c3c3c3;
+  border-right: 1px solid #d9d9d9;
 }
 
 .guest-reservation__modal-before-after-content div {
   margin-bottom: 10px;
+}
+
+.guest-reservation__modal-host-name {
+  font-weight: bold;
+  font-size: 17px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.guest-reservation__simple-info-title {
+  color: #888888;
+  font-size: 14px;
+  font-weight: bold;
 }

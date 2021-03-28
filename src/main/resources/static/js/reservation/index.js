@@ -8,8 +8,8 @@
       const price = parseInt($('#totalPrice').val());
       const commission = price * 0.1;
 
-      const IMP = window.IMP; // 생략해도 괜찮습니다.
-      IMP.init("imp69268966"); // "imp00000000" 대신 발급받은 "가맹점 식별코드"를 사용합니다.
+      // const IMP = window.IMP; // 생략해도 괜찮습니다.
+      // IMP.init("imp69268966"); // "imp00000000" 대신 발급받은 "가맹점 식별코드"를 사용합니다.
 
       // requestPay();
       //
@@ -18,8 +18,8 @@
       //   IMP.request_pay({ // param
       //     pg: "html5_inicis.INIpayTest",
       //     name: name,
-      //     // amount: price + commission,
-      //     amount: 100
+      //     amount: price + commission,
+      //     // amount: 100
       //   }, function (rsp) { // callback
       //     if (rsp.success) {
       //       // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
@@ -48,11 +48,11 @@
       $('#reservation-fr').submit();
 
 
-      //         } else {
-      //           alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
-      //         }
-      //       });
-      //     }
+          //     } else {
+          //       alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
+          //     }
+          //   });
+          // }
 
     });
 

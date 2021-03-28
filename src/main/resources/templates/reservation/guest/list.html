@@ -10,6 +10,8 @@
 </th:block>
 
 <th:block layout:fragment="js">
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
   <script type="text/javascript" defer th:src="@{/js/reservation/guest/list.js}"></script>
   <script type="text/javascript" defer th:src="@{/js/reservation/guest/again-payment.js}"></script>
   <script type="text/javascript" defer th:src="@{/js/reservation/guest/partial-refund.js}"></script>
@@ -26,6 +28,8 @@
 
   <div class="guest-reservation__box">
     <div class="guest-reservation__content">
+
+
       <div class="guest-reservation__title">여행</div>
       <nav class="guest-reservation__nav">
         <a th:href="@{|/reservation/guest/list/upcoming|}">
@@ -44,9 +48,14 @@
         </a>
       </nav>
 
+      <div th:if="${reservationList.isEmpty() && roomList.isEmpty() && roomImageList.isEmpty()}">
+        <img th:src="@{/images/reservation/nothing.png}" class="guest-reservation__nothing">
+      </div>
+
       <div class="guest-reservation__room-info" th:if="${status.equals('upcoming') || status.equals('complete')}">
         <a th:href="@{|/reservation/guest/simple-info/${reservation.reservationId}|}"
-           th:each="reservation, i : ${reservationList}" th:if="${reservationList.size()} != 0">
+           th:each="reservation, i : ${reservationList}"
+           th:unless="${reservationList.isEmpty() && roomList.isEmpty() && roomImageList.isEmpty()}">
           <table class="guest-reservation__room-info-table">
             <tr>
               <td>
@@ -80,11 +89,6 @@
         </a>
 
       </div>
-
-      <div class="guest-reservation__room-info" th:unless="${reservationList.size()} != 0">
-        <img th:src="@{/images/reservation/nothing.png}" class="guest-reservation__nothing">
-      </div>
-
 
       <!-- 취소 / 변경 예약 정보 -->
       <div class="guest-reservation__cancel-update-box"
@@ -154,7 +158,7 @@
                 <div class="guest-reservation__modal-subtitle" id="room-name">숙소 이름</div>
               </div>
               <div class="guest-reservation__modal-room-info">
-                <div>간략 정보</div>
+                <div class="guest-reservation__simple-info-title">간략 정보</div>
                 <div>호스트 : <span class="guest-reservation__modal-host-name"></span> 님</div>
                 <div>게스트 : <span class="guest-reservation__modal-guest"></span> 명</div>
               </div>
@@ -194,15 +198,13 @@
 
               <div class="guest-reservation__modal-room-info">
                 <div class="guest-reservation__modal-subtitle">결제 세부 정보</div>
-                  <div class="guest-reservation__modal-price">총 비용</div>
+                <div class="guest-reservation__modal-price">총 비용</div>
                 <input type="hidden" class="guest-reservation__again-payment-id">
               </div>
 
-              <a th:href="@{|/room/detail/${roomList.get(0).roomId}|}">
-                <div class="guest-reservation__modal-room-info">
-                  <div>숙소 보기</div>
-                </div>
-              </a>
+              <div class="guest-reservation__modal-room-detail">
+                <div><i class="fas fa-hotel"></i> <span>숙소 보기</span></div>
+              </div>
 
 
             </div>
@@ -214,7 +216,6 @@
       </div>
 
     </div>
-
 
   </div>
 

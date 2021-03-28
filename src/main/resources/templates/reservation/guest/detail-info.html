@@ -14,6 +14,7 @@
           src="//dapi.kakao.com/v2/maps/sdk.js?appkey=34aa0f04a8c02352b695cb5574769930&libraries=services"></script>
   <script type="text/javascript" defer th:src="@{/js/common/map.js}"></script>
   <script type="text/javascript" defer th:src="@{/js/reservation/guest/simple-info.js}"></script>
+  <script type="text/javascript" defer th:src="@{/js/reservation/guest/cancel.js}"></script>
 </th:block>
 
 <head>
@@ -25,6 +26,8 @@
 
 <th:block layout:fragment="content" class="guest-reservation-detail-info__box">
   <input type="hidden" th:value="${room.address}" class="room-address-value">
+  <input type="hidden" th:value="${reservation.reservationId}" id="reservationId">
+  <input type="hidden" th:value="${reservation.checkIn}" id="checkIn">
 
   <div class="guest-reservation-detail-info__box">
 
@@ -70,12 +73,11 @@
                       <i class="fas fa-pen"></i><span>예약 변경</span> <i class="fas fa-chevron-right"></i></div>
                   </a>
 
-                  <a th:if="${reservation.status.equals('upcoming')}"
-                     th:href="@{|/reservation/guest/cancel/reason/${reservation.reservationId}|}">
-                    <div class="guest-reservation-detail-info__margin">
+                  <div class="guest-reservation-detail-info__margin" th:if="${reservation.status.equals('upcoming')}">
+                    <div class="guest-reservation-detail-info__cancel">
                       <i class="far fa-window-close"></i><span>예약 취소</span> <i class="fas fa-chevron-right"></i>
                     </div>
-                  </a>
+                  </div>
                 </div>
 
                 <div class="guest-reservation-detail-info__detail-room-date">
@@ -145,7 +147,7 @@
                     <div class="guest-reservation-detail-info__sub-title2">호스트 <span
                         th:text="${member.username}"></span></div>
                     <a th:href="@{|/member/profile/${member.memberId}|}">
-                    <div class="guest-reservation-detail-info__host-profile">프로필 보기</div>
+                      <div class="guest-reservation-detail-info__host-profile">프로필 보기</div>
                     </a>
                   </div>
                   <div class="guest-reservation-detail-info__host-content">

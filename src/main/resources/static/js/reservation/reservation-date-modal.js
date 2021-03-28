@@ -102,6 +102,7 @@
                   const testDate = new Date(testD1.setDate(testD1.getDate() + i));
 
                   arrayDays[i] = moment(testDate).format('YYYY-MM-DD');
+                  $('.reservation__date').val(arrayDays);
                 }
 
                 $('#check-in').val(d1);
@@ -160,49 +161,6 @@
 
       cur = -1;
 
-    });
-
-
-    $('.reservation__save-date').click(function () {
-      if ($('#check-in').val() != '' && $('#check-out').val() != '') {
-
-        const header = "X-CSRF-TOKEN";
-        const csrf = document.querySelector("#csrf").value;
-
-        console.log(data);
-
-        $.ajax({
-          url: "/api/reservation/before",
-          data: JSON.stringify({
-            checkIn: $('#check-in').val(),
-            checkOut: $('#check-out').val(),
-            roomId: $('#room-id').val()
-          }),
-          type: 'post',
-          contentType: 'application/json; charset=utf-8',
-          beforeSend: function (xhr) {
-            xhr.setRequestHeader(header, csrf);
-          },
-          success: function (result) {
-            $('.reservation__days-price-info').html('₩' + result.toLocaleString('ko-KR'));
-            $('.reservation__commission-info').html('₩' + (result * 0.1).toLocaleString('ko-KR'));
-
-            $('#totalPrice').val(result);
-            $('.reservation__total2').html('₩' + (result + (result * 0.1)).toLocaleString('ko-KR'));
-          }
-        });
-
-        $('.reservation__date').html($('#check-in').val() + ' ~ ' + $('#check-out').val());
-        $('.reservation__check-in').val($('#check-in').val());
-        $('.reservation__check-in').html($('#check-in').val());
-        $('.reservation__check-out').val($('#check-out').val());
-        $('.reservation__check-out').html($('#check-out').val());
-        $('.reservation__date').val(arrayDays);
-
-        $('#date-modal').hide();
-
-
-      }
     });
 
 

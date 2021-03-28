@@ -11,4 +11,6 @@ public interface PaymentService {
 
   void paymentUpdate(PaymentDto paymentDto);
 
+  void paymentDelete(String paymentId);
+
 }
