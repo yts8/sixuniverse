@@ -1,18 +1,15 @@
 package com.yts8.sixuniverse.reservation.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.yts8.sixuniverse.member.dto.MemberDto;
 import com.yts8.sixuniverse.member.service.MemberService;
 import com.yts8.sixuniverse.payment.dto.PaymentDto;
 import com.yts8.sixuniverse.payment.service.PaymentService;
-import com.yts8.sixuniverse.reservation.dto.HostDetailInfoDto;
 import com.yts8.sixuniverse.reservation.dto.ReservationDto;
-import com.yts8.sixuniverse.reservation.dto.HostReservationDto;
 import com.yts8.sixuniverse.reservation.dto.ReservationRoomPaymentDto;
 import com.yts8.sixuniverse.reservation.service.ReservationService;
 import com.yts8.sixuniverse.reservationDate.dto.ReservationDateDto;
 import com.yts8.sixuniverse.reservationDate.service.ReservationDateService;
-import com.yts8.sixuniverse.review.service.ReviewService;
 import com.yts8.sixuniverse.room.dto.RoomDto;
 import com.yts8.sixuniverse.room.service.RoomService;
 import com.yts8.sixuniverse.roomImage.dto.RoomImageDto;
@@ -26,7 +23,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -58,7 +54,7 @@ public class ReservationController {
 
     LocalDate checkIn = reservationDto.getCheckIn();
 //    int days = Period.between(checkIn, reservationDto.getCheckOut()).getDays();
-    Long days =  ChronoUnit.DAYS.between(checkIn, reservationDto.getCheckOut());
+    Long days = ChronoUnit.DAYS.between(checkIn, reservationDto.getCheckOut());
 
     List<LocalDate> reservationDateArray = new ArrayList<>();
     reservationDateArray.add(checkIn);
@@ -320,17 +316,14 @@ public class ReservationController {
         reservationDateService.reservationDateInsert(reservationDateDtos);
 
         // 결제 테스트
-        ObjectMapper mapper = new ObjectMapper();
-
-        Map<String, Object> map = null;
-
-        map = mapper.readValue(paymentData, Map.class);
+        Gson gson = new Gson();
+        Map map = gson.fromJson(paymentData, Map.class);
 
         PaymentDto paymentDto = new PaymentDto();
         paymentDto.setPaymentId((String) map.get("imp_uid"));
         paymentDto.setReservationId(reservationDto.getReservationId());
-        paymentDto.setPrice((int) map.get("paid_amount"));
-        paymentDto.setCommission((int) map.get("commission"));
+        paymentDto.setPrice((int) ((double) map.get("paid_amount")));
+        paymentDto.setCommission((int) ((double) map.get("commission")));
         paymentDto.setPaymentMethod((String) map.get("pay_method"));
 
         paymentService.paymentInsert(paymentDto);

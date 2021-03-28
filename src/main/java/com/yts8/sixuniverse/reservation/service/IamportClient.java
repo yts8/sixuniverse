@@ -68,10 +68,11 @@ public class IamportClient {
   }
 
   public IamportResponse<AccessToken> getAuth() throws IamportResponseException, IOException {
-    Call<IamportResponse<AccessToken>> call = this.iamport.token( new AuthData(this.apiKey, this.apiSecret) );
+    Call<IamportResponse<AccessToken>> call = this.iamport.token(new AuthData(this.apiKey, this.apiSecret));
     Response<IamportResponse<AccessToken>> response = call.execute();
 
-    if ( !response.isSuccessful() )	throw new IamportResponseException( getExceptionMessage(response), new HttpException(response) );
+    if (!response.isSuccessful())
+      throw new IamportResponseException(getExceptionMessage(response), new HttpException(response));
 
     return response.body();
   }
@@ -82,18 +83,19 @@ public class IamportClient {
     Call<IamportResponse<Payment>> call = this.iamport.cancel_payment(auth.getToken(), cancelData);
 
     Response<IamportResponse<Payment>> response = call.execute();
-    if ( !response.isSuccessful() )	throw new IamportResponseException( getExceptionMessage(response), new HttpException(response) );
+    if (!response.isSuccessful())
+      throw new IamportResponseException(getExceptionMessage(response), new HttpException(response));
 
     return response.body();
   }
-
 
 
   // ------
   protected String getExceptionMessage(Response<?> response) {
     String error = null;
     try {
-      JsonElement element = new JsonParser().parse(response.errorBody().string());
+      Gson gson = new Gson();
+      JsonElement element = gson.fromJson(response.errorBody().string(), JsonElement.class);
       error = element.getAsJsonObject().get("message").getAsString();
     } catch (JsonSyntaxException e) {
       e.printStackTrace();
@@ -101,7 +103,7 @@ public class IamportClient {
       e.printStackTrace();
     }
 
-    if ( error == null )	error = response.message();
+    if (error == null) error = response.message();
 
     return error;
   }
@@ -124,7 +126,7 @@ public class IamportClient {
         .build();
 
     Retrofit retrofit = new Retrofit.Builder()
-        .baseUrl(useStaticIP ? STATIC_API_URL:API_URL)
+        .baseUrl(useStaticIP ? STATIC_API_URL : API_URL)
         .addConverterFactory(buildGsonConverter())
         .client(client)
         .build();

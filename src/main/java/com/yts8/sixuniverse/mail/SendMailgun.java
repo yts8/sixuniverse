@@ -12,12 +12,12 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class SendMailgun {
 
-  @Value("${mailgun.base.domain}")
+  @Value("${spring.mailgun.base.domain}")
   private String MAILGUN_DOMAIN;
-  @Value("${mailgun.api}")
+  @Value("${spring.mailgun.api}")
   private String MAILGUN_API;
 
-  @Value("${mailgun.to.email}")
+  @Value("${spring.mailgun.to.email}")
   private String TO_EMAIL;
 
 

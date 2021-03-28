@@ -9,8 +9,6 @@ import com.yts8.sixuniverse.chat.service.ChatService;
 import com.yts8.sixuniverse.member.dto.MemberDto;
 import com.yts8.sixuniverse.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import net.minidev.json.JSONObject;
-import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Component;
@@ -81,7 +79,6 @@ public class SocketHandler extends TextWebSocketHandler {
     /* 디비작업 수행 */
     //메시지 발송
 
-    JSONObject obj = jsonToObjectParser(msg);
     for (String key : sessionMap.keySet()) {
       WebSocketSession wss = sessionMap.get(key);
       try {
@@ -130,19 +127,6 @@ public class SocketHandler extends TextWebSocketHandler {
     sessionMap.remove(session.getId());
     super.afterConnectionClosed(session, status);
   }
-
-
-  private static JSONObject jsonToObjectParser(String jsonStr) {
-    JSONParser parser = new JSONParser();
-    JSONObject obj = null;
-    try {
-      obj = (JSONObject) parser.parse(jsonStr);
-    } catch (ParseException e) {
-      e.printStackTrace();
-    }
-    return obj;
-  }
-
 
 }
 
