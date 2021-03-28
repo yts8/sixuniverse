@@ -16,6 +16,8 @@ public interface RoomService {
 
   int findByExpiryDate(Long roomId);
 
+  String findByHostName(Long roomId);
+
   List<RoomInfoDto> roomInfoFindByMemberId(Long memberId);
 
   void save(RoomDto roomDto);

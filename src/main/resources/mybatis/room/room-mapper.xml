@@ -9,6 +9,13 @@
     where room_id = #{roomId}
   </select>
 
+  <select id="findByHostName" resultType="string">
+    select username
+    from member
+           join room on room.member_id = member.member_id
+    where room_id = #{roomId}
+  </select>
+
   <select id="findByMemberId" resultType="RoomDto">
     select *
     from room
@@ -35,7 +42,7 @@
             from room_img
             where room_id = room.room_id
             order by room_img_id
-            limit 1)               as room_img,
+             limit 1)               as room_img,
            (ifnull(avg(score_clean), 0) + ifnull(avg(score_location), 0) + ifnull(avg(score_service), 0)) /
            3                       as review_score,
            count(review.review_id) as review_count,
@@ -46,8 +53,9 @@
            room.sub_address,
            room.price
     from member m
-           join room on m.member_id = room.member_id
-           left join review on room.room_id = review.room_id
+      join room
+    on m.member_id = room.member_id
+      left join review on room.room_id = review.room_id
     where m.member_id = #{memberId}
       and room.status = 'register'
     group by room.room_id

@@ -42,6 +42,11 @@ public class RoomServiceImpl implements RoomService {
   }
 
   @Override
+  public String findByHostName(Long roomId) {
+    return roomMapper.findByHostName(roomId);
+  }
+
+  @Override
   public List<RoomInfoDto> roomInfoFindByMemberId(Long memberId) {
     return roomMapper.roomInfoFindByMemberId(memberId);
   }
