@@ -45,4 +45,9 @@ public class ReservationDateServiceImpl implements ReservationDateService {
   public void guestReservationDateDelete(Long reservationId) {
     reservationDateMapper.guestReservationDateDelete(reservationId);
   }
+
+  @Override
+  public List<ReservationDateDto> findByReservationIdRoomId(ReservationDto reservationDto) {
+    return reservationDateMapper.findByReservationIdRoomId(reservationDto);
+  }
 }

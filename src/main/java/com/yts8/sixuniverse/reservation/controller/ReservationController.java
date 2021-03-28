@@ -77,6 +77,7 @@ public class ReservationController {
       List<LocalDate> reservationDateList = reservationDateService.reservationDateList(roomId);
       Collections.sort(reservationDateList);
 
+      model.addAttribute("title", "예약하기");
       model.addAttribute("room", roomDto);
       model.addAttribute("beforeReservation", reservationDto);
       model.addAttribute("reservationDateArray", reservationDateArray);
@@ -124,6 +125,9 @@ public class ReservationController {
 
     List<ReservationDto> updateList = reservationService.updateList();
 
+    System.out.println(reservationList);
+
+    model.addAttribute("title", "예약목록");
     model.addAttribute("status", status);
     model.addAttribute("roomList", roomList);
     model.addAttribute("roomImageList", roomImageList);
@@ -142,6 +146,7 @@ public class ReservationController {
     MemberDto memberDto = memberService.findById(roomDto.getMemberId());
     List<RoomImageDto> roomImageDtoList = roomImageService.findByRoomId(roomId);
 
+    model.addAttribute("title", "예약정보");
     model.addAttribute("reservation", reservationDto);
     model.addAttribute("room", roomDto);
     model.addAttribute("hostId", memberDto.getMemberId());
@@ -162,6 +167,7 @@ public class ReservationController {
     List<RoomImageDto> roomImageDtoList = roomImageService.findByRoomId(roomId);
     PaymentDto paymentDto = paymentService.findByReservationId(reservationId);
 
+    model.addAttribute("title", "예약정보");
     model.addAttribute("room", roomDto);
     model.addAttribute("member", memberDto);
     model.addAttribute("payment", paymentDto);
@@ -189,6 +195,7 @@ public class ReservationController {
     PaymentDto paymentDto = paymentService.findByReservationId(reservationId);
     List<RoomImageDto> roomImages = roomImageService.findByRoomId(roomId);
 
+    model.addAttribute("title", "예약변경");
     model.addAttribute("room", roomDto);
     model.addAttribute("payment", paymentDto);
     model.addAttribute("roomImages", roomImages);
@@ -217,6 +224,7 @@ public class ReservationController {
 
     int price = roomDto.getPrice() * days + (int) ((roomDto.getPrice() * days) * 0.1);
 
+    model.addAttribute("title", "예약변경");
     model.addAttribute("room", roomDto);
     model.addAttribute("price", price);
     model.addAttribute("payment", paymentDto);
@@ -232,6 +240,7 @@ public class ReservationController {
   public String guestReservationCancel(Model model, @PathVariable Long reservationId) {
     ReservationRoomPaymentDto reservationRoomPaymentDto = reservationService.findByCancelReservationId(reservationId);
 
+    model.addAttribute("title", "예약취소");
     model.addAttribute("reservationRPDto", reservationRoomPaymentDto);
     model.addAttribute("roomImages", roomImageService.findByRoomId(reservationRoomPaymentDto.getRoomId()));
 
@@ -242,6 +251,7 @@ public class ReservationController {
   public String guestReservationCancelConfirm(Model model, @PathVariable Long reservationId) {
     ReservationRoomPaymentDto reservationRoomPaymentDto = reservationService.findByCancelReservationId(reservationId);
 
+    model.addAttribute("title", "예약취소");
     model.addAttribute("reservationRPDto", reservationRoomPaymentDto);
     model.addAttribute("roomImages", roomImageService.findByRoomId(reservationRoomPaymentDto.getRoomId()));
 
@@ -330,6 +340,7 @@ public class ReservationController {
       e.printStackTrace();
     }
 
+    model.addAttribute("title", "예약완료");
     model.addAttribute("memberId", memberId);
     model.addAttribute("room", roomDto);
     model.addAttribute("reservation", reservationDto);
@@ -337,13 +348,6 @@ public class ReservationController {
     model.addAttribute("roomImages", roomImageDto);
 
     return "reservation/guest/complete";
-  }
-
-  @GetMapping("/pay/partial/refund/{data}")
-  public String payPartialRefund(@PathVariable Map<String, String> data) {
-    System.out.println(data);
-
-    return "redirect:/reservation/guest/list";
   }
 
 }

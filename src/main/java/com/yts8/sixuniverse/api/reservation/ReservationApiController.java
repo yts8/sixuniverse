@@ -177,18 +177,28 @@ public class ReservationApiController {
     ReservationRoomPaymentDto original = reservationRoomPaymentDto.get(0);
     ReservationRoomPaymentDto update = reservationRoomPaymentDto.get(1);
 
-    int paymentPrice = original.getPrice();
-
-    int oneDayPrice = original.getRoomPrice();
+    reservationDto.setRoomId(original.getRoomId());
 
     LocalDate checkIn = update.getCheckIn();
     LocalDate checkOut = update.getCheckOut();
+
+    // 수락 전 변경 날짜에 예약이 이미 완료된 경우
+    List<ReservationDateDto> alreadyReservationDateList = reservationDateService.findByReservationIdRoomId(reservationDto);
+    for(int i = 0; i < alreadyReservationDateList.size(); i++) {
+      if(checkIn.equals(alreadyReservationDateList.get(i).getReservationDate())) {
+        return "already";
+      }
+    }
+
+    int paymentPrice = original.getPrice();
+
+    int oneDayPrice = original.getRoomPrice();
 
     int days = Period.between(checkIn, checkOut).getDays();
 
     int updatePrice = oneDayPrice * days + (int)(oneDayPrice * 0.1);
 
-    if(paymentPrice == updatePrice) {
+    if(paymentPrice == updatePrice) { // 재결제 및 부분환불 없이 변경 할 때 호스트가 수락하면 바로 변경
       Long reservationId = original.getReservationId();
       ReservationDto updateInfo = reservationService.findByUpdateTarget(reservationId);
       updateInfo.setReservationId(reservationId);
@@ -220,11 +230,13 @@ public class ReservationApiController {
   @PostMapping("/host/update/update-no")
   public String updateNo(@RequestBody ReservationDto reservationDto) {
     Long originalReservationId = reservationDto.getReservationId();
-    reservationService.hostUpdateNo(originalReservationId); // 기존 정보 upcoming 으로 변경
+    reservationService.hostUpdateNo(originalReservationId); // 기존 정보 update-no 로 변경
 
-//    ReservationDto updateReservation = reservationService.findByUpdateTarget(originalReservationId);
-//    Long updateReservationId = updateReservation.getReservationId();
-//    reservationService.reservationDelete(updateReservationId); // update 정보 삭제
+    ReservationDto updateReservation = reservationService.findByUpdateTarget(originalReservationId);
+    Long updateReservationId = updateReservation.getReservationId();
+    reservationService.reservationDelete(updateReservationId); // update 정보 삭제
+
+
     return "no";
   }
 

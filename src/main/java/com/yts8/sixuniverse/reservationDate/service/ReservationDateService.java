@@ -20,4 +20,6 @@ public interface ReservationDateService {
 
   void guestReservationDateDelete(Long reservationId);
 
+  List<ReservationDateDto> findByReservationIdRoomId(ReservationDto reservationDto);
+
 }

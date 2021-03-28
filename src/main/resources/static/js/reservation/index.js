@@ -6,7 +6,7 @@
 
       const name = $('#roomName').html();
       const price = parseInt($('#totalPrice').val());
-      const commission = price * 0.1;
+      const commission = Math.floor(price * 0.1);
 
       // const IMP = window.IMP; // 생략해도 괜찮습니다.
       // IMP.init("imp69268966"); // "imp00000000" 대신 발급받은 "가맹점 식별코드"를 사용합니다.
