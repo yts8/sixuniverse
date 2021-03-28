@@ -37,8 +37,6 @@ public interface ReservationService {
 
   HostDetailInfoDto HostDetailInfo(Long reservationId);
 
-  ReviewDto findByRoomIdAndMemberId(ReservationDto reservationDto);
-
   List<ReservationDto> updateList();
 
   ReservationDto findByUpdateTarget(Long reservationId);
