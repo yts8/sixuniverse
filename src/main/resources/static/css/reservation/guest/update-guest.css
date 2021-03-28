@@ -11,6 +11,7 @@
     color: white;
     font-weight: bold;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .reservation__guest {

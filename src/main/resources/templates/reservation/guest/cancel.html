@@ -84,7 +84,7 @@
             <span class="guest-reservation-cancel__total-refund">총 환불금액 (수수료 제외)</span>
             <div class="guest-reservation-cancel__info-content">
               <span
-                  th:text="'₩' + ${#numbers.formatInteger((reservationRPDto.price - reservationRPDto.commission),3,'COMMA')}">￦ 111111</span>
+                  th:text="'₩' + ${#numbers.formatInteger(reservationRPDto.price,3,'COMMA')}">￦ 111111</span>
             </div>
           </div>
         </div>

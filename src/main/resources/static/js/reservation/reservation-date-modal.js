@@ -30,11 +30,13 @@
           let d1, d2;
           let maxDate = null;
           let maxDate2 = 0;
-          let maxDateNum = $('.reservation__room-max-date').val();
+          let maxDateNum = parseInt($('.reservation__room-max-date').val());
           expiryDate = $('.reservation__room-expiry-date').val();
 
           let disabledDayList = $('.reservation__reservation-date-list').val();
           const disabledDays = disabledDayList.substring(1, disabledDayList.length - 1).split(", ");
+
+          console.log(disabledDayList)
 
           $('#range-date').datepicker({
             numberOfMonths: [1, 2],
@@ -69,11 +71,12 @@
               if (prv == -1 || prv == cur) {
 
                 const minDate2 = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
-                // const maxTest = minDate2.setDate(minDate2.getDate() + maxDateNum);
-                $('#range-date').datepicker('option', 'minDate', minDate2);
-                // $('#range-date').datepicker('option', 'maxDate', maxTest);
 
-                // console.log("maxTest : " + maxTest);
+                const day = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
+                const days = new Date(day.setDate(day.getDate() + maxDateNum))
+
+                $('#range-date').datepicker('option', 'minDate', minDate2);
+
 
                 prv = cur;
                 $('#check-in').val(dateText);
@@ -85,6 +88,11 @@
                   maxDate = new Date(item);
 
                   maxDate2 = (new Date(maxDate.getFullYear(), maxDate.getMonth() + 1, maxDate.getDate())).getTime();
+
+                  if(days  < maxDate2) {
+                    $('#range-date').datepicker('option', 'maxDate', days);
+                    return;
+                  }
 
                   if (maxCur < maxDate2) {
 

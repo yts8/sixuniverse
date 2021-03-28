@@ -360,7 +360,7 @@
           <div class="room__detail-price-info">
             <div>
               <input type="hidden" class="room__detail-one-day-price" th:value="${room.price}">
-              <span th:text="|${room.price} x |"></span>
+              <span th:text="'₩' + ${#numbers.formatInteger(room.price,3,'COMMA')} + ' x '"></span>
               <span class="room__detail-days"></span>
             </div>
             <div class="room__detail-total-price">총 요금</div>
@@ -376,6 +376,8 @@
         <input type="hidden" name="reservationDateList" th:value="${reservationDateList}"
                class="reservation__reservation-date-list">
         <input type="hidden" name="expriyDate" th:value="${room.expiryDate}" class="reservation__room-expiry-date">
+        <input type="hidden" name="maxDateNumber" th:value="${room.maxDateNumber}" class="reservation__room-max-date">
+
         <div id="date-modal" class="reservation__modal">
           <div class="reservation__date-modal-content">
             <div class="reservation__modal-cancel"><i class="fas fa-times"></i></div>

@@ -41,6 +41,8 @@
     from reservation_date
     where room_id = #{roomId}
       and reservation_id not in (#{reservationId})
+       or room_id = #{roomId} and reservation_id is null
+    order by reservation_date
   </select>
 
   <select id="findByReservationIdRoomId" resultType="ReservationDateDto">
