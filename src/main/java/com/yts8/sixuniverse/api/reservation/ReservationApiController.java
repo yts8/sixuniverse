@@ -22,6 +22,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -89,10 +90,11 @@ public class ReservationApiController {
 
     RoomDto roomDto = roomService.findById(reservationRoomPaymentDtos.get(1).getRoomId());
 
-    int days = Period.between(checkIn, checkOut).getDays();
+//    int days = Period.between(checkIn, checkOut).getDays();
+    Long days = ChronoUnit.DAYS.between(checkIn, checkOut);
     int price = roomDto.getPrice();
 
-    int totalPrice = price * days;
+    int totalPrice = (int) (price * days);
     int commission = (int) (totalPrice * 0.1);
 
     ReservationRoomPaymentDto reservationRoomPaymentDto = new ReservationRoomPaymentDto();
@@ -194,9 +196,10 @@ public class ReservationApiController {
 
     int oneDayPrice = original.getRoomPrice();
 
-    int days = Period.between(checkIn, checkOut).getDays();
+//    int days = Period.between(checkIn, checkOut).getDays();
+    Long days = ChronoUnit.DAYS.between(checkIn, checkOut);
 
-    int updatePrice = oneDayPrice * days + (int)(oneDayPrice * 0.1);
+    int updatePrice = (int) (oneDayPrice * days + (oneDayPrice * 0.1));
 
     if(paymentPrice == updatePrice) { // 재결제 및 부분환불 없이 변경 할 때 호스트가 수락하면 바로 변경
       Long reservationId = original.getReservationId();
@@ -306,7 +309,8 @@ public class ReservationApiController {
 
     LocalDate checkIn = reservationDto.getCheckIn();
 
-    int days = Period.between(checkIn, reservationDto.getCheckOut()).getDays();
+//    int days = Period.between(checkIn, reservationDto.getCheckOut()).getDays();
+    int days = (int) ChronoUnit.DAYS.between(checkIn, reservationDto.getCheckOut());
     for (int i = 0; i <= days; i++) {
       ReservationDateDto reservationDateDto = new ReservationDateDto();
 

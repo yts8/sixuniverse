@@ -30,6 +30,7 @@
           let d1, d2;
           let maxDate = null;
           let maxDate2 = 0;
+          let maxDateNum = $('.reservation__room-max-date').val();
           expiryDate = $('.reservation__room-expiry-date').val();
 
           let disabledDayList = $('.reservation__reservation-date-list').val();
@@ -68,8 +69,11 @@
               if (prv == -1 || prv == cur) {
 
                 const minDate2 = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
-
+                // const maxTest = minDate2.setDate(minDate2.getDate() + maxDateNum);
                 $('#range-date').datepicker('option', 'minDate', minDate2);
+                // $('#range-date').datepicker('option', 'maxDate', maxTest);
+
+                // console.log("maxTest : " + maxTest);
 
                 prv = cur;
                 $('#check-in').val(dateText);

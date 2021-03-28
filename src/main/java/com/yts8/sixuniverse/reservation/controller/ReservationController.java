@@ -27,6 +27,7 @@ import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -56,7 +57,8 @@ public class ReservationController {
     Long sessionMemberId = memberDto.getMemberId();
 
     LocalDate checkIn = reservationDto.getCheckIn();
-    int days = Period.between(checkIn, reservationDto.getCheckOut()).getDays();
+//    int days = Period.between(checkIn, reservationDto.getCheckOut()).getDays();
+    Long days =  ChronoUnit.DAYS.between(checkIn, reservationDto.getCheckOut());
 
     List<LocalDate> reservationDateArray = new ArrayList<>();
     reservationDateArray.add(checkIn);
@@ -220,9 +222,10 @@ public class ReservationController {
     LocalDate checkIn = updateReservationDto.getCheckIn();
     LocalDate checkOut = updateReservationDto.getCheckOut();
 
-    int days = Period.between(checkIn, checkOut).getDays();
+//    int days = Period.between(checkIn, checkOut).getDays();
+    Long days = ChronoUnit.DAYS.between(checkIn, checkOut);
 
-    int price = roomDto.getPrice() * days + (int) ((roomDto.getPrice() * days) * 0.1);
+    Long price = roomDto.getPrice() * days + (int) ((roomDto.getPrice() * days) * 0.1);
 
     model.addAttribute("title", "예약변경");
     model.addAttribute("room", roomDto);
