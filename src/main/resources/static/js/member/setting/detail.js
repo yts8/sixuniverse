@@ -75,7 +75,7 @@
   // AJAX
   const sendAjax = async (id, data) => {
 
-    return await fetch(`http://localhost:8080/api/member/setting/update/${id}`, {
+    return await fetch(`${location.protocol}//${location.host}/api/member/setting/update/${id}`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",

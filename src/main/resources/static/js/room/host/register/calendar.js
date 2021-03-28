@@ -10,10 +10,10 @@
 
   const now = new Date();
   const date = new Date(now.setDate(now.getDate()));
-  const year=("0" + (date.getYear())).slice(-2);
+  const year = ("0" + (date.getYear())).slice(-2);
   const month = ("0" + (1 + date.getMonth())).slice(-2);
   const day = ("0" + date.getDate()).slice(-2);
-  const today2= ("20"+year+"-"+month + "-" + day);
+  const today2 = ("20" + year + "-" + month + "-" + day);
   // alert(today2);
 
   document.addEventListener('DOMContentLoaded', function () {
@@ -118,7 +118,7 @@
     for (const day of impossibleDayString) {
       formData.append("impossibleDayString", day);
     }
-    await fetch("http://localhost:8080/api/host/room/register/calendar", {
+    await fetch(`${location.protocol}//${location.host}/api/host/room/register/calendar`, {
       method: "post",
       headers: {
         "X-CSRF-TOKEN": csrf

@@ -7,7 +7,7 @@
       const csrf = document.querySelector("#csrf").value;
 
       $.ajax({
-        url: '/api/reservation/update/check',
+        url: `${location.protocol}//${location.host}/api/reservation/update/check`,
         data: JSON.stringify({
           reservationId: $('#reservationId').val(),
           checkIn: $('.reservation__check-in').val(),
@@ -17,12 +17,12 @@
           infant: $('.reservation__infant').val(),
         }),
         type: 'post',
-        contentType:'application/json; charset=utf-8',
-        beforeSend: function(xhr){
+        contentType: 'application/json; charset=utf-8',
+        beforeSend: function (xhr) {
           xhr.setRequestHeader(header, csrf);
         },
         success: function (data) {
-          if(data) {
+          if (data) {
             $('.guest-reservation-update__fr').submit();
           } else {
             alert('변경할 내용을 입력해주세요.');

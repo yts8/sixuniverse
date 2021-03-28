@@ -8,7 +8,7 @@
       console.log(reservationId)
 
       $.ajax({
-        url: '/api/reservation/host/update/' + status,
+        url: `${location.protocol}//${location.host}/api/reservation/host/update/` + status,
         data: JSON.stringify({
           reservationId: reservationId,
           status: status

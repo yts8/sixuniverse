@@ -18,7 +18,7 @@
     formData.append("profileImg", e.target.files[0]);
 
     memberProfileImgEl.style.opacity = '0.5';
-    const res = await fetch("http://localhost:8080/api/member/update/profile-img", {
+    const res = await fetch(`${location.protocol}//${location.host}/api/member/update/profile-img`, {
       method: "post",
       headers: {
         "X-CSRF-TOKEN": csrf
@@ -31,7 +31,7 @@
   }
 
   const handleReviewBtnClick = async (e, url) => {
-    const res = await fetch(`http://localhost:8080/api/review/${url}/about/${profileMemberId}`);
+    const res = await fetch(`${location.protocol}//${location.host}/api/review/${url}/about/${profileMemberId}`);
     const reviews = await res.json();
     reviewContentContainerEl.innerHTML = "";
     for (const review of reviews) {

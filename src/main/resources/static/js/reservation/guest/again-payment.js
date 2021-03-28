@@ -45,7 +45,7 @@
       // 결제 취소되면 DB 에서 변경 전 결제 정보 삭제
       function cancelAgain() {
         $.ajax({
-          url: '/api/reservation/pay/cancel/again',
+          url: `${location.protocol}//${location.host}/api/reservation/pay/cancel/again`,
           type: 'post',
           data: JSON.stringify({
             paymentId: paymentId
@@ -64,6 +64,7 @@
           alert('변경 전 결제 정보 삭제 실패');
         });
       }
+
       // ---------------------------------------------------------------------
 
       // 재결제
@@ -82,7 +83,7 @@
       // -------------------------------------------------------------
       function again() {
         $.ajax({
-          url: '/api/reservation/pay/again',
+          url: `${location.protocol}//${location.host}/api/reservation/pay/again`,
           type: 'post',
           data: JSON.stringify({
             paymentId: 'imp_' + randomNum, // 결제 api 사용 시 주석
@@ -104,6 +105,7 @@
           alert('재결제 오류 발생')
         });
       }
+
       // -------------------------------------------------------------
 
       //     } else {

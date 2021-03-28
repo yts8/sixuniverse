@@ -18,9 +18,9 @@
 
     let url;
     if (!roomImgId) { // 등록
-      url = "http://localhost:8080/api/host/room/register/images";
+      url = `${location.protocol}//${location.host}/api/host/room/register/images`;
     } else { // 수정
-      url = "http://localhost:8080/api/host/room/register/images/update";
+      url = `${location.protocol}//${location.host}/api/host/room/register/images/update`;
       formData.append("roomImgId", roomImgId);
     }
 

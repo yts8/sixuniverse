@@ -36,7 +36,7 @@
       //     }
       //   }).done(function (result) { // 환불 성공시 로직
       //     alert("환불 성공");
-          refund();
+      refund();
       //   }).fail(function (error) { // 환불 실패시 로직
       //     alert("환불 실패");
       //   });
@@ -45,7 +45,7 @@
       // -------------------------------------------------------------
       function refund() {
         $.ajax({
-          url: '/api/reservation/partial/refund',
+          url: `${location.protocol}//${location.host}/api/reservation/partial/refund`,
           type: 'post',
           data: JSON.stringify({
             paymentId: paymentId,
@@ -66,6 +66,7 @@
           alert('부분환불 오류 발생')
         });
       }
+
       // -------------------------------------------------------------
     });
 

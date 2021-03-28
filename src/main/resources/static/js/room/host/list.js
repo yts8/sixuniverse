@@ -15,7 +15,7 @@
     }
     const {dataset: {id}} = e.currentTarget;
 
-    await fetch(`http://localhost:8080/api/host/room/${id}/${url}`, {
+    await fetch(`${location.protocol}//${location.host}/api/host/room/${id}/${url}`, {
       method: "post",
       headers: {
         "X-CSRF-TOKEN": csrf
