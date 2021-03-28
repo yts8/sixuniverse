@@ -171,7 +171,7 @@ public class PerformanceController {
     if (today.isBefore(reviewLimit) == false) {
       return "redirect:/host/performance/review";
     } else {
-      reviewService.deleteReview(reviewDto);
+      reviewService.updateReply(reviewDto);
       return "redirect:/host/performance/review";
     }
 
@@ -189,7 +189,7 @@ public class PerformanceController {
     if (today.isBefore(reviewLimit) == false) {
       return "redirect:/host/performance/review";
     } else {
-      reviewService.deleteReview(reviewDto);
+      reviewService.deleteReply(reviewDto);
       return "redirect:/host/performance/review";
     }
 

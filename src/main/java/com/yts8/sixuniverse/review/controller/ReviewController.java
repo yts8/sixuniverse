@@ -20,9 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.util.List;
 
 @Controller
@@ -34,7 +32,6 @@ public class ReviewController {
   private final MemberService memberService;
   private final RoomService roomService;
   private final ReservationService reservationService;
-  private final PerformanceService performanceService;
 
   @GetMapping("/guest-about")
   public String about(HttpSession session, Model model) {
@@ -64,7 +61,7 @@ public class ReviewController {
     List<ReviewGuestDto> reviewGuestList = reviewService.reviewGuestList(member.getMemberId());
     model.addAttribute("reviewGuestList", reviewGuestList);
 
-    LocalDate today = LocalDate.now();
+    LocalDateTime today = LocalDateTime.now();
     model.addAttribute("today", today);
 
     return "review/guest-review-by";
