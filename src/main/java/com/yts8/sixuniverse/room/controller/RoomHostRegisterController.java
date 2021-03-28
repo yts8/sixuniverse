@@ -258,7 +258,7 @@ public class RoomHostRegisterController {
   @PostMapping("/price/update")
   public String postPrice(RoomDto roomDto) {
     roomService.updatePrice(roomDto);
-    return "redirect:/";
+    return "redirect:/host/room/list";
   }
 
 }

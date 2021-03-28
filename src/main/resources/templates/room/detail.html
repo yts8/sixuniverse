@@ -38,18 +38,24 @@
 
         <div class="room__detail-summery-container">
           <div class="room__detail-summery-subject">
-            <!--            호스트네임 가져오기-->
-            보영님이 호스팅하는
+            <span th:text="${hostName}"></span>님이 호스팅하는
             <span th:text="${room.buildingType}"></span>
-            <span th:text="${room.roomType}"></span></div>
+            <span th:text="${room.roomType}"></span>
+          </div>
           <div class="room__detail-summery-sub">
             최대 인원 <span th:text="${room.maxPeople}"></span>명 ·
-            <!--            if문돌려서 값 1 이상일때만 보이게 하기-->
-            침실 <span th:text="${room.bedroomCount}"></span> ·
-            침대 <span th:text="${room.bedCount}"></span>개 ·
-            욕실 <span th:text="${room.bathCount}"></span>개
+            <span th:if="${room.bedroomCount} >0">침실 · <span th:text="${room.bedroomCount}"> </span>
+              <span th:unless="${room.bedroomCount} >0"></span></span>
+
+            <span th:if="${room.bedCount} >0">침대 ·<span th:text="${room.bedroomCount}"> </span>
+            <span th:unless="${room.bedCount} >0"></span></span>
+
+            <span th:if="${room.bathCount} >0">욕실 · <span th:text="${room.bedroomCount}"> </span>
+            <span th:unless="${room.bathCount} >0"></span></span>
+
           </div>
         </div>
+
 
         <div class="room__detail-rule-container">
           <div class="room__detail-rule-subject">집 전체</div>

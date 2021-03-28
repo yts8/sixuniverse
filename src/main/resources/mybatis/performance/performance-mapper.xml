@@ -115,14 +115,14 @@
       and payment.cancel_date is null]]>;
   </select>
 
-  <select id="findBySuperHostIs" resultType="String">
+  <select id="findBySuperHostIs" resultType="string">
     SELECT host_grade
     FROM member
     where member_id = #{memberId};
   </select>
 
 
-  <update id="updateSuperHostScheduler" parameterType="String">
+  <update id="updateSuperHostScheduler" parameterType="string">
     update member
     set host_grade='SUPERHOST'
     where member_id in (select member_id
