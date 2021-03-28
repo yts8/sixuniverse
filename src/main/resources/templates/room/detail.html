@@ -43,15 +43,18 @@
             <span th:text="${room.roomType}"></span>
           </div>
           <div class="room__detail-summery-sub">
-            최대 인원 <span th:text="${room.maxPeople}"></span>명 ·
-            <span th:if="${room.bedroomCount} >0">침실 · <span th:text="${room.bedroomCount}"> </span>
-              <span th:unless="${room.bedroomCount} >0"></span></span>
 
-            <span th:if="${room.bedCount} >0">침대 ·<span th:text="${room.bedroomCount}"> </span>
-            <span th:unless="${room.bedCount} >0"></span></span>
+            <span th:if="${room.maxPeople > 0}">최대인원 : <span th:text="${room.maxPeople}">명 · </span> </span>
+            <span th:unless="${room.maxPeople == 0}">최대인원 : 제한없음 · </span>
 
-            <span th:if="${room.bathCount} >0">욕실 · <span th:text="${room.bedroomCount}"> </span>
-            <span th:unless="${room.bathCount} >0"></span></span>
+            <span th:if="${room.bedroomCount > 0}">침실<span th:text="${room.bedroomCount}"> · </span> </span>
+            <span th:unless="${room.bedroomCount > 0}"></span>
+
+            <span th:if="${room.bedCount > 0}">침대<span th:text="${room.bedCount}"> · </span></span>
+            <span th:unless="${room.bedCount > 0}"></span>
+
+            <span th:if="${room.bathCount > 0}">욕실<span th:text="${room.bathCount}"> · </span></span>
+            <span th:unless="${room.bathCount > 0}"></span>
 
           </div>
         </div>
@@ -68,8 +71,8 @@
 
         <div class="room__detail-introduce-container">
           <span th:text="${room.content}"></span>
-
-          <div><br>호스트한테 연락하기</div><!--          채팅연결 할거면 여기로!!!!-->
+          <br>
+          <a class="room__detail-chat-link" th:href="@{|/chat/${hostId}}">호스트한테 연락하기</a>
         </div>
 
         <div class="room__detail-amenities-container">

@@ -1,6 +1,7 @@
 package com.yts8.sixuniverse.room.controller;
 
 import com.yts8.sixuniverse.member.dto.MemberDto;
+import com.yts8.sixuniverse.member.service.MemberService;
 import com.yts8.sixuniverse.performance.service.PerformanceService;
 import com.yts8.sixuniverse.reservationDate.service.ReservationDateService;
 import com.yts8.sixuniverse.review.dto.ReviewHostDto;
@@ -37,6 +38,8 @@ public class RoomController {
   private final RoomFacilityService roomFacilityService;
   private final ReviewService reviewService;
   private final PerformanceService performanceService;
+  private final MemberService memberService;
+
 
   @GetMapping("/detail/{roomId}")
   public String detail(Model model, HttpSession httpSession, @PathVariable Long roomId) {
@@ -71,6 +74,10 @@ public class RoomController {
 
     String hostName = roomService.findByHostName(roomDto.getRoomId());
     model.addAttribute("hostName", hostName);
+
+
+    MemberDto memberDto = memberService.findById(roomDto.getMemberId());
+    model.addAttribute("hostId", memberDto.getMemberId());
 
     //편의시설 리스트
 //    model.addAttribute("amenities", roomFacilityService.selectRoomFacility());
