@@ -22,6 +22,7 @@
      birthdate,
      profile_img,
      mobile,
+     host_grade,
      social,
      role)
     values (#{email},
@@ -30,6 +31,7 @@
             #{birthdate},
             #{profileImg},
             #{mobile},
+            #{host_grade},
             #{social},
             #{role})
   </insert>
