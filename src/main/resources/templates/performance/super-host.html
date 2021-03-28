@@ -67,11 +67,11 @@
             </div>
             <div class="performance__super-result3">
               <div class="performance__result-sub1"><span
-                  th:text="'₩' +  ${#numbers.formatInteger(${monthlyIncome}, 3, 'COMMA')}"></span>원
+                  th:text="'₩' +  ${#numbers.formatInteger(monthlyIncome, 0, 'COMMA')}"></span>원
               </div>
               <div class="performance__result-sub2">월 매출</div>
               <div class="performance__result-sub3"
-                   th:text="'기준 : ₩' + ${#numbers.formatInteger(1900000, 3, 'COMMA')}"></div>
+                   th:text="'기준 : ₩' + ${#numbers.formatInteger(1900000, 0, 'COMMA')}"></div>
               <div class="performance__result-sub4">
                 <div th:if="${monthlyIncome} >= 1900000">
                   <div>

@@ -87,7 +87,7 @@
               <div th:text="${roomInfoDto.getTitle()}">제목</div>
 
               <div class="room-info__box">
-                <div th:text="'₩' + ${#numbers.formatInteger(roomInfoDto.getPrice(), 3, 'COMMA')}">10000</div>
+                <div th:text="'₩' + ${#numbers.formatInteger(roomInfoDto.getPrice(), 0, 'COMMA')}">10000</div>
                 <div>/</div>
                 <div>1박</div>
               </div>
