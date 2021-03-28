@@ -16,7 +16,8 @@
         <div class="performance__sub-menu-container">
           <div class="performance__sub1"><a th:href="@{/host/performance/income}" class="performance__a">수입</a></div>
           <div class="performance__sub2"><a th:href="@{/host/performance/views}" class="performance__a">조회수</a></div>
-          <div class="performance__sub3"><a th:href="@{/host/performance/super-host}" class="performance__a">슈퍼호스트</a></div>
+          <div class="performance__sub3"><a th:href="@{/host/performance/super-host}" class="performance__a">슈퍼호스트</a>
+          </div>
           <div class="performance__sub4"><a th:href="@{/host/performance/review}" class="performance__a">후기관리</a></div>
         </div>
       </div>
@@ -65,14 +66,25 @@
               </div>
             </div>
             <div class="performance__super-result3">
-              <div class="performance__result-sub1"><span th:text="${monthlyIncome}"></span>원</div>
+              <div class="performance__result-sub1"><span
+                  th:text="'₩' +  ${#numbers.formatInteger(${monthlyIncome}, 3, 'COMMA')}"></span>원
+              </div>
               <div class="performance__result-sub2">월 매출</div>
-              <div class="performance__result-sub3">기준 : 190만 원</div>
+              <div class="performance__result-sub3"
+                   th:text="'기준 : ₩' + ${#numbers.formatInteger(1900000, 3, 'COMMA')}"></div>
               <div class="performance__result-sub4">
-                <span th:if="${monthlyIncome} >= '1900000'"> <div><img th:src="@{/images/performance/check.png}"
-                                                                       class="performance__img">대단해요!</div></span>
-                <span th:unless="${monthlyIncome} >= '1900000'"><div><img th:src="@{/images/performance/not-check.png}"
-                                                                          class="performance__img">아쉽네요</div></span>
+                <div th:if="${monthlyIncome} >= 1900000">
+                  <div>
+                    <img th:src="@{/images/performance/check.png}"
+                         class="performance__img">대단해요!
+                  </div>
+                </div>
+                <div th:unless="${monthlyIncome} >= 1900000">
+                  <div>
+                    <img th:src="@{/images/performance/not-check.png}"
+                         class="performance__img">아쉽네요
+                  </div>
+                </div>
               </div>
             </div>
             <div class="performance__super-result4">

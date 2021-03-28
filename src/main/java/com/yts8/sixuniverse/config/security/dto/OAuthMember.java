@@ -15,6 +15,7 @@ public class OAuthMember {
     authMember.setProfileImg((String) attributes.get("picture"));
     authMember.setSocial(registrationId);
     authMember.setRole("HOST");
+    authMember.setHostGrade("HOST");
     return authMember;
   }
 
