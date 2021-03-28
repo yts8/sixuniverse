@@ -231,6 +231,10 @@
   line-height: 22px;
 }
 
+.g-review-by__panel-body-rate-text {
+  margin-bottom: 10px;
+}
+
 .g-review-by__main-top a {
   text-decoration: none;
   color: #484848;

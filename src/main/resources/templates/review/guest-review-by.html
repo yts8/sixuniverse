@@ -40,9 +40,9 @@
           <div>작성해야 할 후기</div>
         </div>
         <div class="g-review-by__panel-body">
-          <div>현재 작성할 후기가 없습니다. 여행을 한 번 다녀올 때가 된 것 같네요!</div>
+          <div th:if="${reviewBeforeList.isEmpty() == true}">현재 작성할 후기가 없습니다. 여행을 한 번 다녀올 때가 된 것 같네요!</div>
           <th:block th:each="reviewBefore : ${reviewBeforeList}">
-            <div class="g-review-by__panel-body-review">
+            <div th:unless="${reviewBeforeList.isEmpty() == true}" class="g-review-by__panel-body-review">
               <div class="g-review-by__panel-review-profile">
                 <div class="g-review-by__panel-review-profile-box">
                   <img class="g-review-by__panel-review-profile-box-img"
@@ -148,7 +148,7 @@
           <div>만료된 후기</div>
         </div>
         <div class="g-review-by__panel-body-rate">
-          <div>공개 후기를 작성할 수 있는 기한이 지났습니다. 에어비앤비와 공유하고 싶은 사항이 있으신가요? 언제든 비공개 후기를 보내주시면 검토하겠습니다.</div>
+          <div class="g-review-by__panel-body-rate-text">공개 후기를 작성할 수 있는 기한이 지났습니다. 에어비앤비와 공유하고 싶은 사항이 있으신가요? 언제든 비공개 후기를 보내주시면 검토하겠습니다.</div>
           <th:block th:each="reviewAfter : ${reviewAfterList}">
             <div class="g-review-by__panel-body-review">
               <div class="g-review-by__panel-review-profile">
