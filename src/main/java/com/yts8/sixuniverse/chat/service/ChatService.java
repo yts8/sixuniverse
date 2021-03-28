@@ -29,5 +29,7 @@ public interface ChatService {
 
   Long countHostRoom(Long hostId);
 
+
   String findOtherName(ChatListDto chatListDto);
+  String findOtherProfile(ChatListDto chatListDto);
 }

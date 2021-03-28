@@ -19,14 +19,6 @@ import java.util.List;
 public class ChatApiController {
   private final ChatService chatService;
 
-  /* 조지 테스트 */
-  @PostMapping("/{myMemberId}")
-  public List<MessageDto> getChatroom(@PathVariable Long myMemberId) {
-    List<MessageDto> chatDto = chatService.getLastChat(myMemberId);
 
-
-    return chatDto;
-
-  }
 }
 

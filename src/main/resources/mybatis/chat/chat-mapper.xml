@@ -164,5 +164,12 @@
   on r.chat_ref = g.chat_ref
   where r.chat_ref = #{chatRef} and r.member_id not in (#{myMemberId}));
   </select>
+  <!-- 내가 속한 채팅방에서 내가 아닌 상대방이름의 프로필-->
+  <select id="findOtherProfile" parameterType="ChatListDto" resultType="java.lang.String">
+  select profile_img from member where member_id = (select distinct r.member_id
+  from chatroom_join r join chatroom_join g
+  on r.chat_ref = g.chat_ref
+  where r.chat_ref = #{chatRef} and r.member_id not in (#{myMemberId}));
+  </select>
 
 </mapper>

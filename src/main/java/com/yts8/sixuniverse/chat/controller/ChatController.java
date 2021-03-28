@@ -29,6 +29,7 @@ public class ChatController {
   public String Test(HttpSession httpSession, @PathVariable Long hostId, Model model) {
 
     MemberDto member = (MemberDto) httpSession.getAttribute("member");
+    Long myMemberId = member.getMemberId();
 
 
     MemberIdDto memberIdDto = new MemberIdDto();
@@ -57,18 +58,33 @@ public class ChatController {
       /* 채팅방 저장 */
       chatroomJoinService.testCreateNewRoom(chatroomJoinDto);
       chatroomJoinService.testCreateNewRoom(chatroomJoinDto2);
+
+
     } else if (chatRef != 0) {
       chatRef = chatroomJoinService.getChatRefTest(memberIdDto);
     }
+
+
     model.addAttribute("hostId", hostId);
+
+
+    ChatListDto chatListDto = new ChatListDto();
+    chatListDto.setChatRef(chatRef);
+    chatListDto.setMyMemberId(myMemberId);
+    hostId = chatService.findHostId(chatListDto);
     return "redirect:/chat/host/{hostId}/chatroom/" + chatRef;
   }
 
   @GetMapping("/chat/host/{hostId}/chatroom/{chatRef}")
   public String chatTest(@PathVariable Long chatRef, @PathVariable Long hostId, Model model, HttpSession httpSession) {
 
+    /* 호스트 아이디 가져오기 */
+    String hostName = chatService.findUsernameById(hostId);
+
     MemberDto member = (MemberDto) httpSession.getAttribute("member");
     Long myMemberId = member.getMemberId();
+
+    /* 채팅방 번호로 채팅내용 가져오기 */
     Long chatMessages = chatService.findMessages(chatRef);
 
     /* 채팅방 이름 출력 */
@@ -77,16 +93,18 @@ public class ChatController {
     chatListDto.setMyMemberId(myMemberId);
 
     String otherName = chatService.findOtherName(chatListDto);
+    String otherProfile = chatService.findOtherProfile(chatListDto);
 
-    String hostName = chatService.findUsernameById(hostId);
 
-
+    /* 채팅 메세지가 없으면 */
     if (chatMessages != 0) {
       List<ChatDto> chatDto = chatService.findMessageByChatRef(chatRef);
 
       hostId = chatService.findHostId(chatListDto);
+      hostName = chatService.findUsernameById(hostId);
 
       List<MessageDto> lastChatDto = chatService.getLastChat(myMemberId);
+
 
       Long countReply = 0L;
       Long countHostRoom = 0L;
@@ -97,12 +115,14 @@ public class ChatController {
       } else {
         countReply = chatService.countReplyOfHost(hostId);
         countHostRoom = chatService.countHostRoom(hostId);
-        double reply = ((double) countReply / countHostRoom) * 100;
+        int reply = (int) (((double) countReply / countHostRoom) * 100);
         model.addAttribute("reply", reply);
       }
 
       model.addAttribute("hostId", hostId);
       model.addAttribute("hostName", hostName);
+
+
       model.addAttribute("chatDto", chatDto);
       model.addAttribute("lastChat", lastChatDto);
       model.addAttribute("otherName", otherName);
@@ -110,7 +130,9 @@ public class ChatController {
     model.addAttribute("hostId", hostId);
     model.addAttribute("chatRef", chatRef);
     model.addAttribute("otherName", otherName);
+    hostName = chatService.findUsernameById(hostId);
     model.addAttribute("hostName", hostName);
+    model.addAttribute("otherProfile",otherProfile);
 
 
     return "chat/index";
