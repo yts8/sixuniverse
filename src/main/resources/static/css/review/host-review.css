@@ -83,6 +83,7 @@
   font-size: 14px;
   color: #414141;
   margin-top: 20px;
+  line-height: 20px;
 }
 
 .host-review__reply {
@@ -192,6 +193,7 @@
   background-color: #eeeeee;
   padding: 15px;
   font-size: 14px;
+  line-height: 20px;
 }
 
 #host-review__reply-update-form {
@@ -200,8 +202,12 @@
 
 .host-review__review-right {
   flex: 1;
-  display: flex;
   margin: 30px;
+}
+
+.host-review__review-right-top {
+  display: flex;
+  margin: 0 20px;
 }
 
 .host-review__review-right-left {
@@ -226,6 +232,11 @@
   margin-top: 5px;
   font-size: 16px;
   color: #414141;
+}
+
+.host-review__review-right-img {
+  margin-top: 30px;
+  width: 370px;
 }
 
 .host-review__review-hr {

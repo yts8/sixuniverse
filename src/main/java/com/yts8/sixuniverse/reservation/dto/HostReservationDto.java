@@ -19,13 +19,7 @@ public class HostReservationDto {
   private int infant;
   private int commission;
   private String username;
-
-  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate checkIn;
-
-  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate checkOut;
-
-  @DateTimeFormat(pattern = "yyyy-MM-dd a hh:mm")
   private LocalDateTime createDate;
 }

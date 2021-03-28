@@ -224,14 +224,14 @@
     width: 704px;
 }
 
-.reservation_-detail-guest-price-info {
+.reservation__detail-guest-price-info {
     font-size: 16px;
     line-height: 1.375em;
     padding-top: 24px;
     padding-bottom: 12px;
+    width: 704px;
     display: flex;
     justify-content: space-between;
-    width: 704px;
 }
 
 .reservation__detail-host-price-box {
@@ -268,3 +268,12 @@
     padding-top: 24px;
 }
 
+.reservation__detail-review-con-new-ver {
+    border-bottom-color: rgb(235, 235, 235);
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    font-size: 16px;
+    line-height: 1.375em;
+    padding-bottom: 24px;
+    width: 704px;
+}

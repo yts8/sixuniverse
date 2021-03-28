@@ -16,10 +16,10 @@
 
 
         $('.reservation__days-price-info').html('₩' + result.toLocaleString('ko-KR'));
-        $('.reservation__commission-info').html('₩' + (result * 0.1).toLocaleString('ko-KR'));
+        $('.reservation__commission-info').html('₩' + Math.floor(result * 0.1).toLocaleString('ko-KR'));
         $('.reservation__days').html(days)
         $('#totalPrice').val(result);
-        $('.reservation__total2').html('₩' + (result + (result * 0.1)).toLocaleString('ko-KR'));
+        $('.reservation__total2').html('₩' + (result + Math.floor(result * 0.1)).toLocaleString('ko-KR'));
       }
 
       $('.reservation__date').html($('#check-in').val() + ' ~ ' + $('#check-out').val());

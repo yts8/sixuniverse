@@ -15,22 +15,19 @@
   <header class="host-header__container">
     <div>
       <div class="host-header__wrap">
-        <a th:href="@{/host/room/list}" class="host-header__logo">SIXUNIVERSE</a>
+        <a th:href="@{/}" class="host-header__logo">SIXUNIVERSE</a>
         <ul class="host-header__menu">
           <li>
-            <a th:href="@{/host}">홈</a>
+            <a th:href="@{/host/room/list}">숙소</a>
           </li>
           <li>
             <a href="#">메시지</a>
           </li>
           <li>
-            <a href="#">예약</a>
+            <a th:href="@{/host/reservation/list}">예약</a>
           </li>
           <li>
-            <a th:href="@{/host/room/list}">숙소</a>
-          </li>
-          <li>
-            <a href="#">실적</a>
+            <a th:href="@{/host/performance/income}">실적</a>
           </li>
         </ul>
       </div>

@@ -101,6 +101,18 @@
   object-fit: cover;
 }
 
+.guest-reservation__update-no {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px;
+  z-index: 3;
+  font-size: 14px;
+  font-weight: bold;
+}
+
 .guest-reservation__room-simple-info {
   padding: 20px;
 }

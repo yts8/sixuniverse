@@ -49,7 +49,8 @@ public class LoginController {
 
   @PostMapping("/join")
   public String join(MemberDto memberDto) {
-    memberDto.setRole("GUEST");
+    memberDto.setRole("HOST");
+    memberDto.setHostGrade("HOST");
     memberDto.setSocial("local");
     memberDto.setProfileImg("/images/member/default.png");
     memberService.save(memberDto);

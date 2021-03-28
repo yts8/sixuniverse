@@ -61,7 +61,7 @@
               <td>
                 <div class="guest-reservation__room-img-box">
                   <img th:src="${roomImageList.get(i.index).get(0).roomImg}" class="guest-reservation__room-img">
-
+                  <div th:if="${reservation.status.equals('update-no')}" class="guest-reservation__update-no">변경 요청 거절됨</div>
                 </div>
               </td>
             </tr>

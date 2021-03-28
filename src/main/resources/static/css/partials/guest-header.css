@@ -31,7 +31,7 @@
   height: 100% !important;
   font-size: 1.5rem;
   font-weight: bold;
-  color: var(--guest-color);
+  color: var(--guest-color) !important;
 }
 
 /* === search === */
@@ -44,6 +44,10 @@
   border: 1px solid #DDDDDD;
   border-radius: 999px;
   margin-left: 5rem;
+}
+
+.guest-header__finder-btn:hover {
+  box-shadow: 0 2px 4px rgb(0 0 0 / 18%);
 }
 
 .guest-header__finder-btn > .guest-header__finder-text {
@@ -111,11 +115,13 @@
 }
 
 #search-location {
+  padding-right: 1rem;
+  border: none;
+  outline: none;
   font-size: 0.8rem;
   font-weight: bold;
   color: #717171;
-  border: none;
-  outline: none;
+  background-color: transparent;
 }
 
 #search-location:focus {

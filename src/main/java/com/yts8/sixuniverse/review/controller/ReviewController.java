@@ -57,6 +57,8 @@ public class ReviewController {
     List<ReviewGuestDto> reviewBeforeList = reviewService.reviewBefore(member.getMemberId());
     model.addAttribute("reviewBeforeList", reviewBeforeList);
 
+    System.out.println("reviewBeforeList = " + reviewBeforeList);
+
     List<ReviewGuestDto> reviewAfterList = reviewService.reviewAfter(member.getMemberId());
     model.addAttribute("reviewAfterList", reviewAfterList);
 

@@ -4,8 +4,8 @@ import com.yts8.sixuniverse.reservation.dto.HostDetailInfoDto;
 import com.yts8.sixuniverse.reservation.dto.ReservationDto;
 import com.yts8.sixuniverse.reservation.dto.HostReservationDto;
 import com.yts8.sixuniverse.reservation.dto.ReservationRoomPaymentDto;
+import com.yts8.sixuniverse.reservation.repository.HostReservationMapper;
 import com.yts8.sixuniverse.reservation.repository.ReservationMapper;
-import com.yts8.sixuniverse.review.dto.ReviewDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +19,7 @@ import java.util.List;
 public class ReservationServiceImpl implements ReservationService {
 
   private final ReservationMapper reservationMapper;
+  private final HostReservationMapper hostReservationMapper;
 
   @Override
   public void reservationInsert(ReservationDto reservationDto) {
@@ -37,7 +38,7 @@ public class ReservationServiceImpl implements ReservationService {
 
   @Override
   public List<HostReservationDto> hostReservationList(ReservationDto reservationDto) {
-    return reservationMapper.hostReservationList(reservationDto);
+    return hostReservationMapper.hostReservationList(reservationDto);
   }
 
   @Override
@@ -81,12 +82,7 @@ public class ReservationServiceImpl implements ReservationService {
   }
 
   public HostDetailInfoDto HostDetailInfo(Long reservationId) {
-    return reservationMapper.HostDetailInfo(reservationId);
-  }
-
-  @Override
-  public ReviewDto findByRoomIdAndMemberId(ReservationDto reservationDto) {
-    return reservationMapper.findByRoomIdAndMemberId(reservationDto);
+    return hostReservationMapper.HostDetailInfo(reservationId);
   }
 
   @Override
@@ -108,6 +104,5 @@ public class ReservationServiceImpl implements ReservationService {
   public void reservationDelete(Long reservationId) {
     reservationMapper.reservationDelete(reservationId);
   }
-
 
 }

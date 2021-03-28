@@ -43,6 +43,13 @@
       and reservation_id not in (#{reservationId})
   </select>
 
+  <select id="findByReservationIdRoomId" resultType="ReservationDateDto">
+    select reservation_date
+    from reservation_date
+    where reservation_id = #{reservationId}
+    and room_id = #{roomId}
+  </select>
+
   <delete id="guestReservationDateDelete">
     delete
     from reservation_date

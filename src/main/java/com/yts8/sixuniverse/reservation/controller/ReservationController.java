@@ -42,7 +42,6 @@ public class ReservationController {
   private final ReservationDateService reservationDateService;
   private final RoomImageService roomImageService;
   private final PaymentService paymentService;
-  private final ReviewService reviewService;
 
   @PostMapping("/{roomId}")
   public String reservation(HttpSession session, Model model,
@@ -52,8 +51,6 @@ public class ReservationController {
 
     MemberDto memberDto = (MemberDto) session.getAttribute("member");
     RoomDto roomDto = roomService.findById(roomId);
-
-    System.out.println(reservationDto);
 
     Long roomMemberId = roomDto.getMemberId();
     Long sessionMemberId = memberDto.getMemberId();
@@ -80,6 +77,7 @@ public class ReservationController {
       List<LocalDate> reservationDateList = reservationDateService.reservationDateList(roomId);
       Collections.sort(reservationDateList);
 
+      model.addAttribute("title", "예약하기");
       model.addAttribute("room", roomDto);
       model.addAttribute("beforeReservation", reservationDto);
       model.addAttribute("reservationDateArray", reservationDateArray);
@@ -88,10 +86,8 @@ public class ReservationController {
       model.addAttribute("reservationDateList", reservationDateList);
       model.addAttribute("roomImages", roomImageService.findByRoomId(roomId));
 
-
       return "reservation/index";
     }
-
 
   }
 
@@ -129,6 +125,9 @@ public class ReservationController {
 
     List<ReservationDto> updateList = reservationService.updateList();
 
+    System.out.println(reservationList);
+
+    model.addAttribute("title", "예약목록");
     model.addAttribute("status", status);
     model.addAttribute("roomList", roomList);
     model.addAttribute("roomImageList", roomImageList);
@@ -147,6 +146,7 @@ public class ReservationController {
     MemberDto memberDto = memberService.findById(roomDto.getMemberId());
     List<RoomImageDto> roomImageDtoList = roomImageService.findByRoomId(roomId);
 
+    model.addAttribute("title", "예약정보");
     model.addAttribute("reservation", reservationDto);
     model.addAttribute("room", roomDto);
     model.addAttribute("hostId", memberDto.getMemberId());
@@ -157,7 +157,7 @@ public class ReservationController {
 
 
   @GetMapping("/guest/detail-info/{reservationId}")
-  public String detail(HttpServletRequest request, Model model, @PathVariable Long reservationId) {
+  public String detail(Model model, @PathVariable Long reservationId) {
 
     ReservationDto reservationDto = reservationService.findById(reservationId);
     Long roomId = reservationDto.getRoomId();
@@ -167,12 +167,12 @@ public class ReservationController {
     List<RoomImageDto> roomImageDtoList = roomImageService.findByRoomId(roomId);
     PaymentDto paymentDto = paymentService.findByReservationId(reservationId);
 
+    model.addAttribute("title", "예약정보");
     model.addAttribute("room", roomDto);
     model.addAttribute("member", memberDto);
     model.addAttribute("payment", paymentDto);
     model.addAttribute("reservation", reservationDto);
     model.addAttribute("roomImageDtoList", roomImageDtoList);
-
 
     return "reservation/guest/detail-info";
   }
@@ -195,6 +195,7 @@ public class ReservationController {
     PaymentDto paymentDto = paymentService.findByReservationId(reservationId);
     List<RoomImageDto> roomImages = roomImageService.findByRoomId(roomId);
 
+    model.addAttribute("title", "예약변경");
     model.addAttribute("room", roomDto);
     model.addAttribute("payment", paymentDto);
     model.addAttribute("roomImages", roomImages);
@@ -221,8 +222,9 @@ public class ReservationController {
 
     int days = Period.between(checkIn, checkOut).getDays();
 
-    int price = roomDto.getPrice() * days + (int)((roomDto.getPrice() * days) * 0.1);
+    int price = roomDto.getPrice() * days + (int) ((roomDto.getPrice() * days) * 0.1);
 
+    model.addAttribute("title", "예약변경");
     model.addAttribute("room", roomDto);
     model.addAttribute("price", price);
     model.addAttribute("payment", paymentDto);
@@ -234,11 +236,11 @@ public class ReservationController {
     return "reservation/guest/update-result";
   }
 
-
   @GetMapping("/guest/cancel/reason/{reservationId}")
   public String guestReservationCancel(Model model, @PathVariable Long reservationId) {
     ReservationRoomPaymentDto reservationRoomPaymentDto = reservationService.findByCancelReservationId(reservationId);
 
+    model.addAttribute("title", "예약취소");
     model.addAttribute("reservationRPDto", reservationRoomPaymentDto);
     model.addAttribute("roomImages", roomImageService.findByRoomId(reservationRoomPaymentDto.getRoomId()));
 
@@ -249,6 +251,7 @@ public class ReservationController {
   public String guestReservationCancelConfirm(Model model, @PathVariable Long reservationId) {
     ReservationRoomPaymentDto reservationRoomPaymentDto = reservationService.findByCancelReservationId(reservationId);
 
+    model.addAttribute("title", "예약취소");
     model.addAttribute("reservationRPDto", reservationRoomPaymentDto);
     model.addAttribute("roomImages", roomImageService.findByRoomId(reservationRoomPaymentDto.getRoomId()));
 
@@ -260,7 +263,6 @@ public class ReservationController {
                                             HttpServletRequest request,
                                             @RequestParam String paymentData,
                                             Model model) {
-
 
     MemberDto memberDto = (MemberDto) session.getAttribute("member");
     Long memberId = memberDto.getMemberId(); // 세션값 가져오기
@@ -328,8 +330,6 @@ public class ReservationController {
         paymentDto.setCommission((int) map.get("commission"));
         paymentDto.setPaymentMethod((String) map.get("pay_method"));
 
-        System.out.println(paymentDto);
-
         paymentService.paymentInsert(paymentDto);
 
         afterPaymentDto = paymentService.findByReservationId(reservationDto.getReservationId());
@@ -340,6 +340,7 @@ public class ReservationController {
       e.printStackTrace();
     }
 
+    model.addAttribute("title", "예약완료");
     model.addAttribute("memberId", memberId);
     model.addAttribute("room", roomDto);
     model.addAttribute("reservation", reservationDto);
@@ -347,52 +348,6 @@ public class ReservationController {
     model.addAttribute("roomImages", roomImageDto);
 
     return "reservation/guest/complete";
-  }
-
-  @GetMapping("/pay/partial/refund/{data}")
-  public String payPartialRefund(@PathVariable Map<String, String> data) {
-    System.out.println(data);
-
-    return "redirect:/reservation/guest/list";
-  }
-
-  @GetMapping("/host/list")
-  public String hostReservation() {
-
-    return "redirect:/reservation/host/list/upcoming";
-  }
-
-  @GetMapping("/host/list/{status}")
-  public String hostReservation(HttpSession session, Model model, @PathVariable String status) {
-    MemberDto memberDto = (MemberDto) session.getAttribute("member");
-    Long memberId = memberDto.getMemberId();
-
-    ReservationDto reservationDto = new ReservationDto();
-    reservationDto.setMemberId(memberDto.getMemberId());
-    reservationDto.setStatus(status);
-
-    System.out.println(status);
-
-    List<HostReservationDto> hostReservationList = reservationService.hostReservationList(reservationDto);
-
-    System.out.println(hostReservationList);
-
-    model.addAttribute("title", "예약정보");
-    model.addAttribute("status", status);
-    model.addAttribute("hostReservationList", hostReservationList);
-
-    return "reservation/host/list";
-  }
-
-  @GetMapping("/host/detail-info/{reservationId}")
-  public String hostDetail(Model model, HttpSession session, @PathVariable Long reservationId) {
-    MemberDto member = (MemberDto) session.getAttribute("member");
-    HostDetailInfoDto hostDetailInfoDto = reservationService.HostDetailInfo(reservationId);
-    if (!member.getMemberId().equals(hostDetailInfoDto.getHostMemberId())) {
-      return "redirect:/";
-    }
-    model.addAttribute("hostDetailInfoDto", hostDetailInfoDto);
-    return "reservation/host/detail-info";
   }
 
 }

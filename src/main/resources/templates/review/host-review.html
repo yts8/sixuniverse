@@ -28,6 +28,7 @@
     </div>
   </div>
   <div class="host-review__main">
+
     <!--    <div>-->
     <!--      <div class="host-review__score-group">-->
     <!--        <button>모두</button>-->
@@ -38,6 +39,7 @@
     <!--        <button id="host-review__scoreOne">1★</button>-->
     <!--      </div>-->
     <!--    </div>-->
+
     <div class="host-review__review">
       <div class="host-review__review-left">
         <div class="host-review__review-panel">
@@ -170,16 +172,21 @@
       </form>
 
       <div class="host-review__review-right">
-        <div class="host-review__review-right-left">
-          <div class="host-review__review-right-left-body">
-            <div class="host-review__review-right-num" th:text="${reviewScore}"></div>
-            <div>⭐</div>
+        <div class="host-review__review-right-top">
+          <div class="host-review__review-right-left">
+            <div class="host-review__review-right-left-body">
+              <div class="host-review__review-right-num" th:text="${reviewScore}"></div>
+              <div>⭐</div>
+            </div>
+            <div class="host-review__review-right-text">전체 평점</div>
           </div>
-          <div class="host-review__review-right-text">전체 평점</div>
+          <div class="host-review__review-right-right">
+            <div class="host-review__review-right-num" th:text="${reviewCount}"></div>
+            <div class="host-review__review-right-text">총 후기 수</div>
+          </div>
         </div>
-        <div class="host-review__review-right-right">
-          <div class="host-review__review-right-num" th:text="${reviewCount}"></div>
-          <div class="host-review__review-right-text">총 후기 수</div>
+        <div>
+          <img class="host-review__review-right-img" th:src="@{/images/review/host-review-img.jpg}">
         </div>
       </div>
     </div>

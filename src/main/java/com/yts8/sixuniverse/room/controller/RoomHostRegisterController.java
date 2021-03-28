@@ -1,12 +1,18 @@
 package com.yts8.sixuniverse.room.controller;
 
 import com.yts8.sixuniverse.member.dto.MemberDto;
+import com.yts8.sixuniverse.member.service.MemberService;
 import com.yts8.sixuniverse.room.dto.RoomDto;
 import com.yts8.sixuniverse.room.service.RoomService;
 import com.yts8.sixuniverse.roomFacility.dto.RoomFacilityDto;
 import com.yts8.sixuniverse.roomFacility.service.RoomFacilityService;
 import com.yts8.sixuniverse.roomImage.service.RoomImageService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -25,9 +30,20 @@ public class RoomHostRegisterController {
   private final RoomService roomService;
   private final RoomFacilityService roomFacilityService;
   private final RoomImageService roomImageService;
+  private final MemberService memberService;
+  private final HttpSession httpSession;
 
   @GetMapping("")
   public String getAddressRegister(Model model) {
+
+    MemberDto member = (MemberDto) httpSession.getAttribute("member");
+    if (!member.getRole().equals("HOST")) {
+      member.setRole("HOST");
+      member.setHostGrade("HOST");
+
+      memberService.updateHostGradeAndRole(member);
+    }
+
     model.addAttribute("title", "숙소 등록");
     model.addAttribute("isUpdate", false);
     model.addAttribute("url", "/host/room/register/address");
@@ -37,7 +53,7 @@ public class RoomHostRegisterController {
   }
 
   @PostMapping("/address")
-  public String postAddress(HttpSession httpSession, RoomDto roomDto) {
+  public String postAddress(RoomDto roomDto) {
     MemberDto member = (MemberDto) httpSession.getAttribute("member");
     roomDto.setMemberId(member.getMemberId());
     roomService.save(roomDto);

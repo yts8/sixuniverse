@@ -23,19 +23,12 @@ public class RoomHostController {
 
   private final RoomService roomService;
   private final RoomImageService roomImageService;
-  private final MemberService memberService;
   private final HttpSession httpSession;
 
   @GetMapping("/list")
   public String getList(Model model) {
 
     MemberDto member = (MemberDto) httpSession.getAttribute("member");
-
-    if (!member.getRole().equals("HOST")) {
-      member.setRole("HOST");
-      member.setHostGrade("HOST");
-      memberService.updateHostGradeAndRole(member);
-    }
 
     List<RoomDto> roomDtos = roomService.findByMemberId(member.getMemberId());
     List<RoomImageDto> roomImageDtos = new ArrayList<>();

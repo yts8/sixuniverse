@@ -35,7 +35,7 @@
       and DATE_ADD(reservation.check_out, INTERVAL 1 DAY) <![CDATA[ <= ]]> now()
       and DATE_ADD(reservation.check_out, INTERVAL 4 DAY) > now()
       and reservation.member_id = #{memberId}
-    order by reservation.create_date desc
+    order by reservation.check_out desc
   </select>
 
   <select id="reviewAfter" resultType="ReviewGuestDto">
@@ -50,7 +50,7 @@
       and reservation.status = 'complete'
       and DATE_ADD(reservation.check_out, INTERVAL 4 DAY) <![CDATA[ < ]]> now()
       and reservation.member_id = #{memberId}
-    order by reservation.create_date desc
+    order by reservation.check_out desc
   </select>
 
   <select id="reviewGuestList" resultType="ReviewGuestDto">
@@ -110,26 +110,27 @@
     order by review.review_reg_date desc
   </select>
 
-  <select id="reviewHostStarList" resultType="ReviewHostDto">
-    select member.username                                    as guest_name,
-           member.profile_img                                 as guest_profile_img,
-           reservation.check_in                               as check_in,
-           reservation.check_out                              as check_out,
-           room.title                                         as title,
-           review.review_id                                   as review_id,
-           review.review_content                              as review_content,
-           review.review_reg_date                             as review_reg_date,
-           review.reply_content                               as reply_content,
-           review.reply_reg_date                              as reply_reg_date,
-           (score_clean + score_location + score_service) / 3 as score
-    from review
-           join room on review.room_id = room.room_id
-           join reservation on review.reservation_id = reservation.reservation_id
-           join member on member.member_id = reservation.member_id
-    where room.member_id = #{memberId}
-      and #{score} <![CDATA[ <= ]]> (score_clean + score_location + score_service) / 3 <![CDATA[ < ]]> #{score+1}
-    order by review.review_reg_date desc
-  </select>
+<!--  <select id="reviewHostStarList" resultType="ReviewHostDto">-->
+<!--    select member.username                                    as guest_name,-->
+<!--           member.profile_img                                 as guest_profile_img,-->
+<!--           reservation.check_in                               as check_in,-->
+<!--           reservation.check_out                              as check_out,-->
+<!--           room.title                                         as title,-->
+<!--           review.review_id                                   as review_id,-->
+<!--           review.review_content                              as review_content,-->
+<!--           review.review_reg_date                             as review_reg_date,-->
+<!--           review.reply_content                               as reply_content,-->
+<!--           review.reply_reg_date                              as reply_reg_date,-->
+<!--           (score_clean + score_location + score_service) / 3 as score-->
+<!--    from review-->
+<!--           join room on review.room_id = room.room_id-->
+<!--           join reservation on review.reservation_id = reservation.reservation_id-->
+<!--           join member on member.member_id = reservation.member_id-->
+<!--    where room.member_id = #{memberId}-->
+<!--      and #{score} <![CDATA[ <= ]]> (score_clean + score_location + score_service) / 3-->
+<!--      and (score_clean + score_location + score_service) / 3 <![CDATA[ < ]]> #{score+1}-->
+<!--    order by review.review_reg_date desc-->
+<!--  </select>-->
 
   <select id="reviewReservationListAll" resultType="ReviewHostDto">
     select member.username        as guest_name,

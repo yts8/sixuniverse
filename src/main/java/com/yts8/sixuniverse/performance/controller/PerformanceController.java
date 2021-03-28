@@ -85,8 +85,8 @@ public class PerformanceController {
 
     //매출액
     int monthlyIncome = performanceService.findByMonthlyIncome(member.getMemberId());
-    NumberFormat formatter2 = NumberFormat.getNumberInstance();
-    model.addAttribute("monthlyIncome", formatter2.format(monthlyIncome));
+//    NumberFormat formatter2 = NumberFormat.getNumberInstance();
+    model.addAttribute("monthlyIncome", monthlyIncome);
     if (monthlyIncome >= 1900000) {
       condition++;
     }
