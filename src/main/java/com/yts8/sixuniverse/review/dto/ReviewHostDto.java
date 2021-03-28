@@ -3,6 +3,7 @@ package com.yts8.sixuniverse.review.dto;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class ReviewHostDto {
@@ -14,8 +15,8 @@ public class ReviewHostDto {
   private String title;
   private Long reviewId;
   private String reviewContent;
-  private LocalDate reviewRegDate;
+  private LocalDateTime reviewRegDate;
   private String replyContent;
-  private LocalDate replyRegDate;
+  private LocalDateTime replyRegDate;
   private int score;
 }

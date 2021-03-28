@@ -92,7 +92,7 @@
 }
 
 .host-review__reply-write {
-  margin: 10px;
+  margin: 0 15px;
   display: flex;
   justify-content: flex-end;
 }
@@ -106,12 +106,12 @@
 
 .host-review__reply-form {
   display: none;
-  margin: 10px;
 }
 
 .host-review__box {
   display: flex;
   justify-content: flex-end;
+  margin: 15px 10px;
 }
 
 .host-review__input_area {

@@ -63,6 +63,8 @@
       $(`.reply-form-js${id}`).show();
       $(`.reply-content-js${id}`).show();
       $(`.reply-update-form-js${id}`).hide();
+      $(`.review-update-form-btn-js`).show();
+      $(`.g-review-by__modal-delete`).show();
     } else {
       $(`.reply-form-js${id}`).hide();
     }
@@ -72,8 +74,9 @@
     const id = e.target.dataset.id;
     $(`.reply-update-form-js${id}`).show();
     $(`.reply-content-js${id}`).hide();
+    $(`.reply-form-js${id}`).hide();
     $(`.review-update-form-btn-js`).hide();
     $(`.g-review-by__modal-delete`).hide();
-  })
+  });
 
 })();

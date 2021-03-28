@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
@@ -152,7 +153,7 @@ public class PerformanceController {
     int reviewCount = reviewService.hostReviewCount(member.getMemberId());
     model.addAttribute("reviewCount", reviewCount);
 
-    LocalDate today = LocalDate.now();
+    LocalDateTime today = LocalDateTime.now();
     model.addAttribute("today", today);
 
     return "review/host-review";
@@ -163,15 +164,14 @@ public class PerformanceController {
 
     ReviewDto review = reviewService.getReview(reviewDto.getReviewId());
 
-    LocalDate today = LocalDate.now();
-    LocalDate reviewRegDate = review.getReviewRegDate();
-    LocalDate reviewLimit = reviewRegDate.plusDays(2);
-    Period period = Period.between(today, reviewLimit);
+    LocalDateTime today = LocalDateTime.now();
+    LocalDateTime reviewRegDate = review.getReviewRegDate();
+    LocalDateTime reviewLimit = reviewRegDate.plusDays(2);
 
-    if (period.getDays() < 0 || period.getDays() > 2) {
+    if (today.isBefore(reviewLimit) == false) {
       return "redirect:/host/performance/review";
     } else {
-      reviewService.updateReply(reviewDto);
+      reviewService.deleteReview(reviewDto);
       return "redirect:/host/performance/review";
     }
 
@@ -182,15 +182,14 @@ public class PerformanceController {
 
     ReviewDto review = reviewService.getReview(reviewDto.getReviewId());
 
-    LocalDate today = LocalDate.now();
-    LocalDate reviewRegDate = review.getReviewRegDate();
-    LocalDate reviewLimit = reviewRegDate.plusDays(2);
-    Period period = Period.between(today, reviewLimit);
+    LocalDateTime today = LocalDateTime.now();
+    LocalDateTime reviewRegDate = review.getReviewRegDate();
+    LocalDateTime reviewLimit = reviewRegDate.plusDays(2);
 
-    if (period.getDays() < 0 || period.getDays() > 2) {
+    if (today.isBefore(reviewLimit) == false) {
       return "redirect:/host/performance/review";
     } else {
-      reviewService.deleteReply(reviewDto);
+      reviewService.deleteReview(reviewDto);
       return "redirect:/host/performance/review";
     }
 

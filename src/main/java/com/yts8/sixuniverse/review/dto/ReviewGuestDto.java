@@ -12,9 +12,9 @@ public class ReviewGuestDto {
   private String hostProfileImg;
   private Long reviewId;
   private String reviewContent;
-  private LocalDate reviewRegDate;
+  private LocalDateTime reviewRegDate;
   private String replyContent;
-  private LocalDate replyRegDate;
+  private LocalDateTime replyRegDate;
   private Long reservationId;
   private String status;
   private LocalDate checkOut;

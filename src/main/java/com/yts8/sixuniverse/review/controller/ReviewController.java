@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.List;
 
@@ -56,8 +57,6 @@ public class ReviewController {
 
     List<ReviewGuestDto> reviewBeforeList = reviewService.reviewBefore(member.getMemberId());
     model.addAttribute("reviewBeforeList", reviewBeforeList);
-
-    System.out.println("reviewBeforeList = " + reviewBeforeList);
 
     List<ReviewGuestDto> reviewAfterList = reviewService.reviewAfter(member.getMemberId());
     model.addAttribute("reviewAfterList", reviewAfterList);
@@ -111,12 +110,11 @@ public class ReviewController {
     ReviewDto getReview = reviewService.getReview(reviewId);
     model.addAttribute("getReview", getReview);
 
-    LocalDate today = LocalDate.now();
-    LocalDate reviewRegDate = reviewDto.getReviewRegDate();
-    LocalDate reviewLimit = reviewRegDate.plusDays(2);
-    Period period = Period.between(today, reviewLimit);
+    LocalDateTime today = LocalDateTime.now();
+    LocalDateTime reviewRegDate = reviewDto.getReviewRegDate();
+    LocalDateTime reviewLimit = reviewRegDate.plusDays(2);
 
-    if (period.getDays() < 0 || period.getDays() > 2) {
+    if (today.isBefore(reviewLimit) == false) {
       return "redirect:/review/guest-by";
     }
 
@@ -135,12 +133,11 @@ public class ReviewController {
 
     ReviewDto review = reviewService.getReview(reviewDto.getReviewId());
 
-    LocalDate today = LocalDate.now();
-    LocalDate reviewRegDate = review.getReviewRegDate();
-    LocalDate reviewLimit = reviewRegDate.plusDays(2);
-    Period period = Period.between(today, reviewLimit);
+    LocalDateTime today = LocalDateTime.now();
+    LocalDateTime reviewRegDate = review.getReviewRegDate();
+    LocalDateTime reviewLimit = reviewRegDate.plusDays(2);
 
-    if (period.getDays() < 0 || period.getDays() > 2) {
+    if (today.isBefore(reviewLimit) == false) {
       return "redirect:/review/guest-by";
     } else {
       reviewService.deleteReview(reviewDto);
@@ -151,6 +148,7 @@ public class ReviewController {
 
   @PostMapping("/complete")
   public String reviewComplete(ReviewDto reviewDto) {
+    reviewDto.setReviewRegDate(LocalDateTime.now());
     reviewService.insertReview(reviewDto);
 
     return "review/review-complete";
