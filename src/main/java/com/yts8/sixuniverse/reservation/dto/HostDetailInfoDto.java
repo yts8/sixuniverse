@@ -22,8 +22,8 @@ public class HostDetailInfoDto {
   private int adult;
   private int kid;
   private int infant;
-  private DateTime checkIn;
-  private DateTime checkOut;
+  private LocalDate checkIn;
+  private LocalDate checkOut;
   private LocalDateTime createDate;
   private Long guestMemberId;
   private Long hostMemberId;

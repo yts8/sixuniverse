@@ -25,27 +25,27 @@
         </div>
         <div class="reservation__menu-list">
           <div class="reservation__upcoming reservation__status">
-            <a th:href="@{/reservation/host/list/upcoming}">
+            <a th:href="@{/host/reservation/list/upcoming}">
               <button type="button" class="reservation__upcoming-sub">예정된 여행</button>
             </a>
           </div>
           <div class="reservation__complete reservation__status">
-            <a th:href="@{/reservation/host/list/complete}">
+            <a th:href="@{/host/reservation/list/complete}">
               <button type="button" class="reservation__complete-sub">완료</button>
             </a>
           </div>
           <div class="reservation__cancel reservation__status">
-            <a th:href="@{/reservation/host/list/cancel}">
+            <a th:href="@{/host/reservation/list/cancel}">
               <button type="button" class="reservation__cancel-sub">취소됨</button>
             </a>
           </div>
           <div class="reservation__update reservation__status">
-            <a th:href="@{/reservation/host/list/update}">
+            <a th:href="@{/host/reservation/list/update}">
               <button type="button" class="reservation__update-sub">변경됨</button>
             </a>
           </div>
           <div class="reservation__all reservation__status">
-            <a th:href="@{/reservation/host/list/all}">
+            <a th:href="@{/host/reservation/list/all}">
               <button type="button" class="reservation__all-sub">모두</button>
             </a>
           </div>
@@ -156,26 +156,46 @@
               <td class="reservation__price-con">
                 <!--                TODO: 가격 * 체크인 체크아웃 날짜 빼기-->
                 <div
+                    th:unless="${#strings.equals(hostReservation.getStatus(), 'cancel')}"
                     th:text="'₩' + ${#numbers.formatInteger(hostReservation.getPrice() - hostReservation.getCommission(),3,'COMMA')}"
                     class="reservation__price-detail">₩11,640
                 </div>
+                <!-- 취소인 경우 : 결제금액 ₩0 -->
+                <div th:if="${#strings.equals(hostReservation.getStatus(), 'cancel')}"
+                     class="reservation__price-detail">₩0
+                </div>
               </td>
               <td class="reservation__detail-btn">
-                <div class="reservation__host-btn-box">
-                  <div th:if="${#strings.equals(hostReservation.getStatus(), 'update')}"
-                       class="reservation__host-update">
+                <!-- 상태 : 변경요청(update)일 때만 수락/거절 버튼이 보임 -->
+                <div
+                    th:if="${#strings.equals(hostReservation.getStatus(), 'update')}"
+                    class="reservation__host-btn-box-new">
+                  <div class="reservation__host-update">
                     <button class="reservation__host-update-ok">수락</button>
                     <input type="hidden" th:value="${hostReservation.getReservationId()}" id="reservation-id">
                     <button class="reservation__host-update-no">거절</button>
                   </div>
                   <div class="reservation__detail-con">
-                    <a th:href="@{|/reservation/host/detail-info/${hostReservation.getReservationId()}|}"
+                    <a th:href="@{|/host/reservation/detail-info/${hostReservation.getReservationId()}|}"
                        class="reservation__detail-link"
                        target="_blank">
                       <span class="reservation__detail-char">세부사항</span>
                     </a>
                   </div>
                 </div>
+
+                <div
+                    th:unless="${#strings.equals(hostReservation.getStatus(), 'update')}"
+                    class="reservation__host-btn-box">
+                  <div class="reservation__detail-con">
+                    <a th:href="@{|/host/reservation/detail-info/${hostReservation.getReservationId()}|}"
+                       class="reservation__detail-link"
+                       target="_blank">
+                      <span class="reservation__detail-char">세부사항</span>
+                    </a>
+                  </div>
+                </div>
+
               </td>
             </tr>
             </tbody>

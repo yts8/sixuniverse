@@ -42,7 +42,7 @@
 
 .reservation__list-thead > tr > th {
   border-bottom: 1px solid #ebebeb;
-  padding: 1rem 5.5rem 1rem 0;
+  padding: 1rem 4.5rem 1rem 0;
   font-weight: bold;
 }
 
@@ -56,7 +56,7 @@
 
 .reservation__list-tbody > tr > td {
   border-bottom: 1px solid #ebebeb;
-  padding: 1rem 5.5rem 1rem 0;
+  padding: 1rem 4.5rem 1rem 0;
   vertical-align: middle;
 }
 
@@ -128,4 +128,12 @@
   border-radius: 5px;
   padding: 0.7em 1.2em 0.7em 1.2em;
   font-weight: bold;
+}
+
+.reservation__host-update {
+  margin: 1em;
+}
+
+.reservation__host-btn-box-new {
+  vertical-align: middle;
 }
