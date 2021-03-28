@@ -74,7 +74,10 @@
                 <img th:if="${roomImageDtos.get(index) != null}"
                      th:src="${roomImageDtos.get(index).getRoomImg()}"
                      alt="방 타이틀 이미지">
-                <div class="host-room-list__room-title" th:text="${roomDtos.get(index).getTitle()}"></div>
+                <div class="host-room-list__room-title"
+                     th:text="${roomDtos.get(index).getTitle().length() > 15 ?
+                     #strings.substring(roomDtos.get(index).getTitle(),0, 15) + '...' :
+                     roomDtos.get(index).getTitle()}"></div>
               </a>
 
               <div th:unless='${#strings.equals(roomDtos.get(index).getStatus(), "register")}'
