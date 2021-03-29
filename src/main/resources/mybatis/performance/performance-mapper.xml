@@ -95,7 +95,7 @@
     from reservation
            join room on room.room_id = reservation.room_id
     where room.member_id = #{memberId}
-      and room.status in ('upcoming', 'complete', 'update-no')
+      and reservation.status in ('upcoming', 'complete', 'update-no')
       <![CDATA[
       and (reservation.create_date < now() + interval 30 day)]]>;
   </select>
