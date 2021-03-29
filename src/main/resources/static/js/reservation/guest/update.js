@@ -20,7 +20,7 @@
 
     $('.guest-reservation-update__result-next-btn').click(function () {
       $.ajax({
-        url: `${location.protocol}//${location.host}/api/reservation/guest/update/complete`,
+        url: `//${location.host}/api/reservation/guest/update/complete`,
         data: json,
         type: 'post',
         contentType: 'application/json; charset=utf-8',

@@ -7,7 +7,7 @@
       const csrf = document.querySelector("#csrf").value;
 
       $.ajax({
-        url: `${location.protocol}//${location.host}/api/reservation/update/check`,
+        url: `//${location.host}/api/reservation/update/check`,
         data: JSON.stringify({
           reservationId: $('#reservationId').val(),
           checkIn: $('.reservation__check-in').val(),

@@ -18,7 +18,7 @@
         alert('체크인 날짜 당일에는 예약을 취소할 수 없습니다.');
         return;
       } else {
-        location.href = `${location.protocol}//${location.host}/reservation/guest/cancel/reason/` + $('#reservationId').val();
+        location.href = `//${location.host}/reservation/guest/cancel/reason/` + $('#reservationId').val();
       }
 
 

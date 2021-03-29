@@ -45,7 +45,7 @@
       // -------------------------------------------------------------
       function refund() {
         $.ajax({
-          url: `${location.protocol}//${location.host}/api/reservation/partial/refund`,
+          url: `//${location.host}/api/reservation/partial/refund`,
           type: 'post',
           data: JSON.stringify({
             paymentId: paymentId,

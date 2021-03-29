@@ -37,7 +37,7 @@
 
       function cancelDelete() {
         $.ajax({
-          url: `${location.protocol}//${location.host}/api/reservation/guest/cancel`,
+          url: `//${location.host}/api/reservation/guest/cancel`,
           data: JSON.stringify({
             reservationId: $('.guest-reservation-cancel__reservation-id').val(),
             paymentId: paymentId

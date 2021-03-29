@@ -3,7 +3,7 @@
 
   function wsOpen() {
 
-    ws = new WebSocket(`ws://${location.host}/chat`);
+    ws = new WebSocket(`wss://${location.host}/chat`);
     console.log(ws)
 
     wsEvt();

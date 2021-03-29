@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -72,7 +71,7 @@ public class ChatController {
     chatListDto.setChatRef(chatRef);
     chatListDto.setMyMemberId(myMemberId);
     hostId = chatService.findHostId(chatListDto);
-    return "redirect:/chat/host/{hostId}/chatroom/" + chatRef;
+    return "redirect:/chat/host/" + hostId + "/chatroom/" + chatRef;
   }
 
   @GetMapping("/chat/host/{hostId}/chatroom/{chatRef}")
@@ -132,8 +131,9 @@ public class ChatController {
     model.addAttribute("otherName", otherName);
     hostName = chatService.findUsernameById(hostId);
     model.addAttribute("hostName", hostName);
-    model.addAttribute("otherProfile",otherProfile);
+    model.addAttribute("otherProfile", otherProfile);
 
+    model.addAttribute("title", "채팅");
 
     return "chat/index";
   }
