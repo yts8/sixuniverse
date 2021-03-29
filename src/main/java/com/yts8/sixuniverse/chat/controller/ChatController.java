@@ -71,7 +71,6 @@ public class ChatController {
     ChatListDto chatListDto = new ChatListDto();
     chatListDto.setChatRef(chatRef);
     chatListDto.setMyMemberId(myMemberId);
-    hostId = chatService.findHostId(chatListDto);
     return "redirect:/chat/host/{hostId}/chatroom/" + chatRef;
   }
 

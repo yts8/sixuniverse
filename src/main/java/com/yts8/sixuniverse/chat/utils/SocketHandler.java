@@ -81,7 +81,7 @@ public class SocketHandler extends TextWebSocketHandler {
     /* 디비작업 수행 */
     //메시지 발송
 
-    JSONObject obj = jsonToObjectParser(msg);
+  /*  JSONObject obj = jsonToObjectParser(msg);*/
     for (String key : sessionMap.keySet()) {
       WebSocketSession wss = sessionMap.get(key);
       try {
@@ -132,6 +132,7 @@ public class SocketHandler extends TextWebSocketHandler {
   }
 
 
+/*
   private static JSONObject jsonToObjectParser(String jsonStr) {
     JSONParser parser = new JSONParser();
     JSONObject obj = null;
@@ -142,6 +143,7 @@ public class SocketHandler extends TextWebSocketHandler {
     }
     return obj;
   }
+*/
 
 
 }
