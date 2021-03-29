@@ -8,8 +8,6 @@
 
         const price = $('.reservation__one-day-price').val();
 
-        console.log(price)
-
         const days = (checkOut.getTime() - checkIn.getTime()) / 1000 / 60 / 60 / 24;
 
         const result = price * days;

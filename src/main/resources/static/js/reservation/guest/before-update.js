@@ -26,12 +26,9 @@
             $('.guest-reservation-update__fr').submit();
           } else {
             alert('변경할 내용을 입력해주세요.');
-            return;
           }
         }
       })
     });
-
   });
-
 })()

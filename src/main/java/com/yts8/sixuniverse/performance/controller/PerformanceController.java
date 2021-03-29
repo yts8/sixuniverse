@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +44,7 @@ public class PerformanceController {
       incomeList.add(i);
     }
     model.addAttribute("incomeList", incomeList);
+    model.addAttribute("title", "수입");
     return "performance/income";
   }
 
@@ -97,6 +96,7 @@ public class PerformanceController {
       isSuperHost = 1;
     }
     model.addAttribute("isSuperHost", isSuperHost);
+    model.addAttribute("title", "슈퍼호스트");
 
     return "performance/super-host";
   }
@@ -120,12 +120,13 @@ public class PerformanceController {
     }
 
     //chart로 보낼 hitsList
-    ArrayList<Integer> hitsList = new ArrayList<Integer>();
+    ArrayList<Integer> hitsList = new ArrayList<>();
     for (int interval = 0; interval < 7; interval++) {
       int hits = performanceService.findByHitsList(member.getMemberId(), interval);
       hitsList.add(hits);
     }
     model.addAttribute("hitsList", hitsList);
+    model.addAttribute("title", "조회수");
 
     return "performance/views";
   }
@@ -168,12 +169,12 @@ public class PerformanceController {
     LocalDateTime reviewRegDate = review.getReviewRegDate();
     LocalDateTime reviewLimit = reviewRegDate.plusDays(2);
 
-    if (today.isBefore(reviewLimit) == false) {
-      return "redirect:/host/performance/review";
-    } else {
-      reviewService.updateReply(reviewDto);
+    if (!today.isBefore(reviewLimit)) {
       return "redirect:/host/performance/review";
     }
+    reviewService.updateReply(reviewDto);
+    return "redirect:/host/performance/review";
+
 
   }
 
@@ -186,12 +187,11 @@ public class PerformanceController {
     LocalDateTime reviewRegDate = review.getReviewRegDate();
     LocalDateTime reviewLimit = reviewRegDate.plusDays(2);
 
-    if (today.isBefore(reviewLimit) == false) {
-      return "redirect:/host/performance/review";
-    } else {
-      reviewService.deleteReply(reviewDto);
+    if (!today.isBefore(reviewLimit)) {
       return "redirect:/host/performance/review";
     }
+    reviewService.deleteReply(reviewDto);
+    return "redirect:/host/performance/review";
 
   }
 

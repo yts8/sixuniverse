@@ -172,7 +172,6 @@
     const res = await sendAjax(id, data)
     try {
       const member = await res.json();
-      console.log(member);
       updatePasswordTextBoxEl.innerHTML = member.updateDate.split("T")[0];
     } catch (e) {
       alert("기존 비밀번호가 다릅니다.");

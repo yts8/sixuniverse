@@ -2,7 +2,6 @@ package com.yts8.sixuniverse.room.controller;
 
 import com.yts8.sixuniverse.member.dto.MemberDto;
 import com.yts8.sixuniverse.member.service.MemberService;
-import com.yts8.sixuniverse.performance.service.PerformanceService;
 import com.yts8.sixuniverse.reservationDate.service.ReservationDateService;
 import com.yts8.sixuniverse.review.dto.ReviewHostDto;
 import com.yts8.sixuniverse.review.service.ReviewService;
@@ -37,7 +36,6 @@ public class RoomController {
   private final ReservationDateService reservationDateService;
   private final RoomFacilityService roomFacilityService;
   private final ReviewService reviewService;
-  private final PerformanceService performanceService;
   private final MemberService memberService;
 
 
@@ -71,21 +69,16 @@ public class RoomController {
     model.addAttribute("reservationDateList", reservationDateList);
     model.addAttribute("roomImages", roomImageService.findByRoomId(roomDto.getRoomId()));
 
-
     String hostName = roomService.findByHostName(roomDto.getRoomId());
     model.addAttribute("hostName", hostName);
-
 
     MemberDto memberDto = memberService.findById(roomDto.getMemberId());
     model.addAttribute("hostId", memberDto.getMemberId());
 
-    //편의시설 리스트
-//    model.addAttribute("amenities", roomFacilityService.selectRoomFacility());
     RoomFacilityDto facilityDto = new RoomFacilityDto();
     facilityDto.setRoomId(roomId);
     List<String> roomFacilityList = roomFacilityService.selectRoomFacility(facilityDto);
     model.addAttribute("roomFacilityList", roomFacilityList);
-
 
     List<ReviewHostDto> reviewReservationListAll = reviewService.reviewReservationListAll(roomDto.getRoomId());
     model.addAttribute("reviewReservationListAll", reviewReservationListAll);

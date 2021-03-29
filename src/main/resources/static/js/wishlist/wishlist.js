@@ -19,8 +19,4 @@
       $(".wishlist__modal").fadeOut();
     });
   });
-
-
-
-
 })();

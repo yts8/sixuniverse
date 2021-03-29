@@ -2,7 +2,6 @@ package com.yts8.sixuniverse.review.controller;
 
 import com.yts8.sixuniverse.member.dto.MemberDto;
 import com.yts8.sixuniverse.member.service.MemberService;
-import com.yts8.sixuniverse.performance.service.PerformanceService;
 import com.yts8.sixuniverse.reservation.dto.ReservationDto;
 import com.yts8.sixuniverse.reservation.service.ReservationService;
 import com.yts8.sixuniverse.review.dto.ReviewDto;
@@ -134,7 +133,7 @@ public class ReviewController {
     LocalDateTime reviewRegDate = review.getReviewRegDate();
     LocalDateTime reviewLimit = reviewRegDate.plusDays(2);
 
-    if (today.isBefore(reviewLimit) == false) {
+    if (!today.isBefore(reviewLimit)) {
       return "redirect:/review/guest-by";
     } else {
       reviewService.deleteReview(reviewDto);

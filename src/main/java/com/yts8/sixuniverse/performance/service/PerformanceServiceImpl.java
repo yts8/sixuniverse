@@ -6,8 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -31,7 +29,6 @@ public class PerformanceServiceImpl implements PerformanceService {
 
   @Override
   public int findByRoomCount(Long memberId) {
-
     return performanceMapper.findByRoomCount(memberId);
   }
 
@@ -62,19 +59,16 @@ public class PerformanceServiceImpl implements PerformanceService {
 
   @Override
   public int findByReservationMonthlyCount(Long memberId) {
-
     return performanceMapper.findByReservationMonthlyCount(memberId);
   }
 
   @Override
   public int findByMonthlyIncome(Long memberId) {
-
     return performanceMapper.findByMonthlyIncome(memberId);
   }
 
   @Override
   public int findByMonthlyIncomeCount(Long memberId) {
-
     return performanceMapper.findByMonthlyIncomeCount(memberId);
   }
 
@@ -86,15 +80,12 @@ public class PerformanceServiceImpl implements PerformanceService {
 
   @Override
   public int findByYearlyIncomeCount(Long memberId) {
-
     return performanceMapper.findByYearlyIncomeCount(memberId);
   }
 
   @Override
   public int monthlyIncomeList(Long memberId, int interval) {
-
     return performanceMapper.monthlyIncomeList(memberId, interval);
   }
-
 
 }

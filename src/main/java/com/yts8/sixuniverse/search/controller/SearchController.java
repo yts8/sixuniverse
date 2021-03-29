@@ -22,12 +22,7 @@ public class SearchController {
 
     List<RoomInfoDto> searchList = searchService.searchList(searchDto);
 
-    for (RoomInfoDto roomInfoDto : searchList) {
-      System.out.println("roomInfoDto = " + roomInfoDto.getRoomId());
-    }
-
     model.addAttribute("searchList", searchList);
-
     model.addAttribute("title", "검색");
 
     return "search/list";

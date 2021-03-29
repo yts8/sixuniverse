@@ -10,7 +10,6 @@ import com.yts8.sixuniverse.reservation.dto.ReservationRoomPaymentDto;
 import com.yts8.sixuniverse.reservation.service.ReservationService;
 import com.yts8.sixuniverse.reservationDate.dto.ReservationDateDto;
 import com.yts8.sixuniverse.reservationDate.service.ReservationDateService;
-import com.yts8.sixuniverse.review.service.ReviewService;
 import com.yts8.sixuniverse.room.dto.RoomDto;
 import com.yts8.sixuniverse.room.service.RoomService;
 import com.yts8.sixuniverse.roomImage.dto.RoomImageDto;
@@ -69,33 +68,29 @@ public class ReservationController {
     Collections.sort(reservationDateArray);
 
     if (sessionMemberId.equals(roomMemberId)) {
-
       return "redirect:/";
-    } else {
-      int commission = Integer.parseInt(request.getParameter("commission"));
-      int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
-
-      List<LocalDate> reservationDateList = reservationDateService.reservationDateList(roomId);
-      Collections.sort(reservationDateList);
-
-      model.addAttribute("title", "예약하기");
-      model.addAttribute("room", roomDto);
-      model.addAttribute("hostInfo", hostInfo);
-      model.addAttribute("beforeReservation", reservationDto);
-      model.addAttribute("reservationDateArray", reservationDateArray);
-      model.addAttribute("commission", commission);
-      model.addAttribute("totalPrice", totalPrice);
-      model.addAttribute("reservationDateList", reservationDateList);
-      model.addAttribute("roomImages", roomImageService.findByRoomId(roomId));
-
-      return "reservation/index";
     }
+    int commission = Integer.parseInt(request.getParameter("commission"));
+    int totalPrice = Integer.parseInt(request.getParameter("totalPrice"));
 
+    List<LocalDate> reservationDateList = reservationDateService.reservationDateList(roomId);
+    Collections.sort(reservationDateList);
+
+    model.addAttribute("title", "예약하기");
+    model.addAttribute("room", roomDto);
+    model.addAttribute("hostInfo", hostInfo);
+    model.addAttribute("beforeReservation", reservationDto);
+    model.addAttribute("reservationDateArray", reservationDateArray);
+    model.addAttribute("commission", commission);
+    model.addAttribute("totalPrice", totalPrice);
+    model.addAttribute("reservationDateList", reservationDateList);
+    model.addAttribute("roomImages", roomImageService.findByRoomId(roomId));
+
+    return "reservation/index";
   }
 
   @GetMapping("/guest/list")
   public String guestReservation() {
-
     return "redirect:/reservation/guest/list/upcoming";
   }
 
@@ -113,10 +108,7 @@ public class ReservationController {
     List<RoomDto> roomList = new ArrayList<>();
     List<List<RoomImageDto>> roomImageList = new ArrayList<>();
 
-
-    for (int i = 0; i < reservationList.size(); i++) {
-      ReservationDto reservation = reservationList.get(i);
-
+    for (ReservationDto reservation : reservationList) {
       Long roomId = reservation.getRoomId();
 
       RoomDto roomDto = roomService.findById(roomId);
@@ -126,8 +118,6 @@ public class ReservationController {
     }
 
     List<ReservationDto> updateList = reservationService.updateList();
-
-    System.out.println(reservationList);
 
     model.addAttribute("title", "예약목록");
     model.addAttribute("status", status);

@@ -17,15 +17,12 @@
       //소켓이 열리면 동작
     }
 
-
     ws.onmessage = function (data) {
       //메시지를 받으면 동작
 
       let msg = data.data;
       if (msg != null && msg.trim() !== '') {
         let d = JSON.parse(msg);
-        console.log(d);
-
 
         if (d.chatRef === parseInt($("#chatRef").val())) {
 
@@ -53,8 +50,6 @@
         }
       }
     }
-
-
     document.addEventListener("keypress", function (e) {
       if (e.keyCode == 13) { //enter press
         send();

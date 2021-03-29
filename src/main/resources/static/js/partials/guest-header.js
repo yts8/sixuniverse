@@ -7,5 +7,4 @@
   $('.guest-header-location-container-js').click(function () {
     $('#search-location').focus();
   })
-
 })();

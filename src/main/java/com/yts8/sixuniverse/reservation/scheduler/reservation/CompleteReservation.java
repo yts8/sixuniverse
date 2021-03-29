@@ -16,10 +16,7 @@ public class CompleteReservation {
   @Scheduled(cron = "0 0 0 * * *")
   public void cronReservation() {
     LocalDate today = LocalDate.now();
-
     reservationService.reservationCheckOut(today);
-
-    System.out.println(today);
   }
 
 }

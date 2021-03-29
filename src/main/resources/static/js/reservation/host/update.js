@@ -4,8 +4,6 @@
     const csrf = document.querySelector("#csrf").value;
 
     const update = function (status, reservationId) {
-      console.log(status)
-      console.log(reservationId)
 
       $.ajax({
         url: `//${location.host}/api/reservation/host/update/` + status,
@@ -40,7 +38,6 @@
 
     $('.reservation__host-update-no').click(function () {
       const reservationId = $(this).prev('#reservation-id').val();
-      console.log("click : " + reservationId)
       update('update-no', reservationId);
     })
 

@@ -29,8 +29,6 @@ public class ChatController {
 
     MemberDto member = (MemberDto) httpSession.getAttribute("member");
     Long myMemberId = member.getMemberId();
-
-
     MemberIdDto memberIdDto = new MemberIdDto();
     memberIdDto.setMyMemberId(member.getMemberId());
     memberIdDto.setHostId(hostId);
@@ -57,15 +55,11 @@ public class ChatController {
       /* 채팅방 저장 */
       chatroomJoinService.testCreateNewRoom(chatroomJoinDto);
       chatroomJoinService.testCreateNewRoom(chatroomJoinDto2);
-
-
     } else if (chatRef != 0) {
       chatRef = chatroomJoinService.getChatRefTest(memberIdDto);
     }
 
-
     model.addAttribute("hostId", hostId);
-
 
     ChatListDto chatListDto = new ChatListDto();
     chatListDto.setChatRef(chatRef);

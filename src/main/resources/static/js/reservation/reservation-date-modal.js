@@ -89,10 +89,6 @@
 
                   maxDate2 = (new Date(maxDate.getFullYear(), maxDate.getMonth() + 1, maxDate.getDate())).getTime();
 
-                  console.log("day : " + day)
-                  console.log("days : " + days)
-                  console.log("maxDate2 : " + maxDate2)
-
                   if(days  < maxDate2 || isNaN(maxDate2)) {
                     $('#range-date').datepicker('option', 'maxDate', days);
                     return;
@@ -138,8 +134,6 @@
         });
       }
 
-      // console.log('테스트');
-
       // $.ajax({
       //   url: "/api/reservation/guest/update/today",
       //   data: json,
@@ -158,7 +152,6 @@
       //   }
       // },
       // error: function () {
-      //   console.log('ajax 실패');
       // }
 
       // })

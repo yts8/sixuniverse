@@ -63,7 +63,6 @@
           reservationId: reservationId
         },
         success: function (result) {
-          console.log(result)
 
           if (result.length > 1) {
             before = result[0];

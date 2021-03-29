@@ -29,17 +29,14 @@ public class SocketHandler extends TextWebSocketHandler {
   private final ChatService chatService;
   private final MemberService memberService;
 
-
   // 메세지 보내기
   @Override
   public void handleTextMessage(WebSocketSession session, TextMessage message) throws ParseException {
-
 
     String msg = message.getPayload(); //메세지에 담긴 텍스트값을 가져온다.
 
     Gson gson = new Gson();
     ReceiveMessageDto receiveMessageDto = gson.fromJson(msg, ReceiveMessageDto.class);
-    System.out.println(receiveMessageDto);
 
     Long chatRef = receiveMessageDto.getChatRef();
     String content = receiveMessageDto.getMsg();
@@ -51,9 +48,7 @@ public class SocketHandler extends TextWebSocketHandler {
     chatDto.setMemberId(memberId);
     chatDto.setContent(content);
 
-
     chatService.saveMessage(chatDto); // DB
-
 
     SendMessageDto sendMessageDto = gson.fromJson(msg, SendMessageDto.class);
 
@@ -63,19 +58,6 @@ public class SocketHandler extends TextWebSocketHandler {
     sendMessageDto.setProfileImg(member.getProfileImg());
     sendMessageDto.setDate(LocalDateTime.now());
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     /* 디비작업 수행 */
     //메시지 발송
 
@@ -84,33 +66,10 @@ public class SocketHandler extends TextWebSocketHandler {
       try {
         wss.sendMessage(new TextMessage(gson.toJson(sendMessageDto))); // JSON 문자열로 만든다.
 
-
       } catch (Exception e) {
         e.printStackTrace();
       }
     }
-//
-//    JSONParser p = new JSONParser();
-//    JSONObject jboj = (JSONObject) p.parse(String.valueOf(obj));
-
-//    String content = jboj.get("msg").toString();
-//    Long memberId = Long.parseLong(jboj.get("memberId").toString());
-//    Long joinNum = Long.parseLong(jboj.get("joinNum").toString());
-//
-
-
-
-
-
-    /* 채팅 메세지 저장 */
-
-//    ChatDto chatDto = new ChatDto();
-//
-//    chatDto.setContent(content);
-//    chatDto.setMemberId(memberId);
-//    chatDto.setJoinNum(joinNum);
-//
-//    chatService.saveMessage(chatDto);
 
   }
 

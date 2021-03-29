@@ -32,9 +32,6 @@
         $('input[name=checkIn]').val($('#check-in').val());
         $('input[name=checkOut]').val($('#check-out').val());
 
-        console.log($('.reservation__check-in').html())
-
-
         $('#date-modal').hide();
       }
 
@@ -68,7 +65,6 @@
     //       xhr.setRequestHeader(header, csrf);
     //     },
     //     success: function (result) {
-    //       console.log(result);
     //       $('#before-btn').hide();
     //       $('#reservation-btn').show();
     //       $('.room__detail-price-info-box').show();
