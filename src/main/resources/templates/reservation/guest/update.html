@@ -12,20 +12,11 @@
 </th:block>
 
 <th:block layout:fragment="js">
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-  <script type="text/javascript" defer th:src="@{/js/reservation/reservation-modal.js}"></script>
-  <script type="text/javascript" defer th:src="@{/js/reservation/reservation-date-modal.js}"></script>
-  <script type="text/javascript" defer th:src="@{/js/reservation/date-save.js}"></script>
-  <script type="text/javascript" defer th:src="@{/js/reservation/guest/before-update.js}"></script>
+  <script defer th:src="@{/js/reservation/reservation-modal.js}"></script>
+  <script defer th:src="@{/js/reservation/reservation-date-modal.js}"></script>
+  <script defer th:src="@{/js/reservation/date-save.js}"></script>
+  <script defer th:src="@{/js/reservation/guest/before-update.js}"></script>
 </th:block>
-
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
 
 <th:block layout:fragment="content">
 
@@ -68,7 +59,7 @@
                 유아 : <span class="reservation__guest-infant" th:text="${reservation.infant}"></span> 명
               </div>
               <div class="guest-reservation-update__icon">
-              <i class="fas fa-user-friends"></i>
+                <i class="fas fa-user-friends"></i>
               </div>
             </div>
             <div class="guest-reservation-update__total-guest">게스트
@@ -80,7 +71,6 @@
 
           <input type="button" value="계속" class="guest-reservation-update__next-btn">
         </form>
-        <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
         <input type="hidden" id="reservationId" th:value="${reservation.reservationId}">
 
         <!-- 날짜 modal -->
@@ -96,7 +86,9 @@
             <div class="reservation__choose-date">
               <div>
                 <h2 class="reservation__sub-title">날짜 선택</h2>
-                <div class="reservation__max-date">최대 숙박 일수 : <span class="reservation__room-max-date" th:text="${room.maxDateNumber}"></span> 박 </div>
+                <div class="reservation__max-date">최대 숙박 일수 : <span class="reservation__room-max-date"
+                                                                    th:text="${room.maxDateNumber}"></span> 박
+                </div>
               </div>
               <div class="reservation__ch-date">
                 <div class="reservation__ch-in-out-date">
@@ -247,8 +239,4 @@
 
 
 </th:block>
-
-<body>
-
-</body>
 </html>

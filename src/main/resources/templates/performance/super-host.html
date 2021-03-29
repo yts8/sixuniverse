@@ -3,10 +3,10 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
-<div layout:fragment="css">
+<th:block layout:fragment="css">
   <link rel="stylesheet" th:href="@{/css/performance/super-host.css}"/>
-</div>
-<div layout:fragment="content">
+</th:block>
+<th:block layout:fragment="content">
   <section>
 
 
@@ -103,5 +103,5 @@
       </div>
     </div>
   </section>
-</div>
+</th:block>
 </html>

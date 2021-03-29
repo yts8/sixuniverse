@@ -13,7 +13,6 @@
 </th:block>
 
 <th:block layout:fragment="content">
-  <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
 
   <div class="host-room-list__container">
     <div th:text="|숙소 ${roomDtos.size()}개|" class="host-room-list__title"></div>

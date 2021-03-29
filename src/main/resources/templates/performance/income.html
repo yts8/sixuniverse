@@ -3,14 +3,13 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/default">
-<div layout:fragment="css">
+<th:block layout:fragment="css">
   <link rel="stylesheet" th:href="@{/css/performance/income.css}"/>
-</div>
-<div layout:fragment="js">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+</th:block>
+<th:block layout:fragment="js">
   <script type="text/javascript" defer th:src="@{/js/performance/income.js}"></script>
-</div>
-<div layout:fragment="content">
+</th:block>
+<th:block layout:fragment="content">
   <section>
     <div class="performance__container">
 
@@ -50,5 +49,5 @@
       </div>
     </div>
   </section>
-</div>
+</th:block>
 </html>

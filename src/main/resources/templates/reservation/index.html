@@ -6,26 +6,17 @@
 
 <th:block layout:fragment="css">
   <link rel="stylesheet" th:href="@{/css/reservation/index.css}">
-  <!--  <link rel="stylesheet" th:href="@{/css/reservation/ui-datepicker.css}">-->
   <link rel="stylesheet" th:href="@{/css/reservation/reservation-datepicker.css}">
   <link rel="stylesheet" th:href="@{/css/reservation/guest/update-guest.css}">
 </th:block>
 
 <th:block layout:fragment="js">
-  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-
-  <script type="text/javascript" defer th:src="@{/js/reservation/index.js}"></script>
-  <script type="text/javascript" defer th:src="@{/js/reservation/reservation-modal.js}"></script>
-  <script type="text/javascript" defer th:src="@{/js/reservation/reservation-date-modal.js}"></script>
-  <script type="text/javascript" defer th:src="@{/js/reservation/date-save.js}"></script>
+  <script defer th:src="@{/js/reservation/index.js}"></script>
+  <script defer th:src="@{/js/reservation/reservation-modal.js}"></script>
+  <script defer th:src="@{/js/reservation/reservation-date-modal.js}"></script>
+  <script defer th:src="@{/js/reservation/date-save.js}"></script>
 </th:block>
 
-<head>
-  <!--  <meta charset="UTF-8">-->
-  <title>예약하기</title>
-</head>
-
-<body>
 <th:block layout:fragment="content">
   <div id="reservation-box">
     <div class="reservation__content">
@@ -66,7 +57,9 @@
               <div class="reservation__choose-date">
                 <div>
                   <h2 class="reservation__sub-title">날짜 선택</h2>
-                  <div class="reservation__max-date">최대 숙박 일수 : <span class="reservation__room-max-date" th:text="${room.maxDateNumber}"></span> 박 </div>
+                  <div class="reservation__max-date">최대 숙박 일수 : <span class="reservation__room-max-date"
+                                                                      th:text="${room.maxDateNumber}"></span> 박
+                  </div>
                 </div>
                 <div class="reservation__ch-date">
                   <div class="reservation__ch-in-out-date">
@@ -254,9 +247,6 @@
           <!--            </div>-->
           <!--          </div>-->
 
-
-          <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
-
           <form th:action="@{/reservation/pay/complete}" method="post" id="reservation-fr">
             <input type="hidden" name="checkIn" class="reservation__check-in" th:value="${beforeReservation.checkIn}">
             <input type="hidden" name="checkOut" class="reservation__check-out"
@@ -288,12 +278,14 @@
               <div th:text="${room.getTitle()}" id="roomName"></div>
               <div>침대 <span th:text="${room.bedCount}"></span> | 욕실 <span th:text="${room.bathCount}"></span></div>
               <div class="reservation__review-grade">
-<!--                <div>-->
-<!--                  <i class="fas fa-star"></i>-->
-<!--                  <span>5.0</span>-->
-<!--                  <span>(후기 3개)</span>-->
-<!--                </div>-->
-                <div  th:if="${hostInfo.hostGrade != null && hostInfo.hostGrade.equals('SUPER-HOST')}"><i class="fas fa-medal"></i>슈퍼호스트</div>
+                <!--                <div>-->
+                <!--                  <i class="fas fa-star"></i>-->
+                <!--                  <span>5.0</span>-->
+                <!--                  <span>(후기 3개)</span>-->
+                <!--                </div>-->
+                <div th:if="${hostInfo.hostGrade != null && hostInfo.hostGrade.equals('SUPER-HOST')}"><i
+                    class="fas fa-medal"></i>슈퍼호스트
+                </div>
               </div>
             </div>
           </div>
@@ -306,8 +298,8 @@
           <div class="reservation__price-info">
             <div class="reservation__table">
               <div class="reservation__one-day-price">
-              <div class="reservation__price" th:text="'₩' + ${#numbers.formatInteger(room.price,3,'COMMA')}"></div>
-              <div> x <span class="reservation__days" th:text="${totalPrice / room.price}"></span>박</div>
+                <div class="reservation__price" th:text="'₩' + ${#numbers.formatInteger(room.price,3,'COMMA')}"></div>
+                <div> x <span class="reservation__days" th:text="${totalPrice / room.price}"></span>박</div>
               </div>
               <div class="reservation__days-price-info"
                    th:text="'₩' + ${#numbers.formatInteger(totalPrice,3,'COMMA')}"></div>
@@ -338,5 +330,4 @@
     </div>
   </div>
 </th:block>
-</body>
 </html>

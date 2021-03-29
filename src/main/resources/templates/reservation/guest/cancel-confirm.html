@@ -10,19 +10,8 @@
 </th:block>
 
 <th:block layout:fragment="js">
-  <script
-      src="https://code.jquery.com/jquery-3.3.1.min.js"
-      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-      crossorigin="anonymous"></script>
-  <script type="text/javascript" defer th:src="@{/js/reservation/guest/cancel-confirm.js}"></script>
+  <script defer th:src="@{/js/reservation/guest/cancel-confirm.js}"></script>
 </th:block>
-
-
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
 
 <th:block layout:fragment="content">
   <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
@@ -140,5 +129,4 @@
   </div>
 
 </th:block>
-</body>
 </html>

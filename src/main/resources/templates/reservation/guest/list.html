@@ -10,21 +10,12 @@
 </th:block>
 
 <th:block layout:fragment="js">
-  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-
-  <script type="text/javascript" defer th:src="@{/js/reservation/guest/list.js}"></script>
-  <script type="text/javascript" defer th:src="@{/js/reservation/guest/again-payment.js}"></script>
-  <script type="text/javascript" defer th:src="@{/js/reservation/guest/partial-refund.js}"></script>
+  <script defer th:src="@{/js/reservation/guest/list.js}"></script>
+  <script defer th:src="@{/js/reservation/guest/again-payment.js}"></script>
+  <script defer th:src="@{/js/reservation/guest/partial-refund.js}"></script>
 </th:block>
 
-
-<head>
-  <meta charset="UTF-8">
-  <title>게스트 예약 내역</title>
-</head>
-<body>
 <th:block layout:fragment="content">
-  <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
 
   <div class="guest-reservation__box">
     <div class="guest-reservation__content">
@@ -34,7 +25,7 @@
       <nav class="guest-reservation__nav">
         <a th:href="@{|/reservation/guest/list/upcoming|}">
           <button class="guest-reservation__upcoming">
-            <div>예정된 예약</div>
+            <span>예정된 예약</span>
           </button>
         </a>
         <a th:href="@{|/reservation/guest/list/complete|}">
@@ -61,7 +52,9 @@
               <td>
                 <div class="guest-reservation__room-img-box">
                   <img th:src="${roomImageList.get(i.index).get(0).roomImg}" class="guest-reservation__room-img">
-                  <div th:if="${reservation.status.equals('update-no')}" class="guest-reservation__update-no">변경 요청 거절됨</div>
+                  <div th:if="${reservation.status.equals('update-no')}" class="guest-reservation__update-no">변경 요청
+                    거절됨
+                  </div>
                 </div>
               </td>
             </tr>
@@ -219,8 +212,5 @@
 
   </div>
 
-  </div>
-
 </th:block>
-</body>
 </html>

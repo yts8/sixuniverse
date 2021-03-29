@@ -12,6 +12,7 @@
   <link rel="stylesheet" th:href="@{/css/reset.css}"/>
   <link rel="stylesheet" th:href="@{/css/variables.css}"/>
   <link rel="stylesheet" th:href="@{/css/partials/header.css}">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
   <!--  Guest Header-->
   <th:block th:unless='${#httpServletRequest.getServletPath().startsWith("/host")}'>
@@ -28,11 +29,15 @@
   <th:block th:replace="partials/footer :: footerCss"/>
 
   <!-- Common JS -->
-  <script src="//kit.fontawesome.com/72ec3ada60.js" crossorigin="anonymous"></script>
-  <script src="//code.jquery.com/jquery-latest.min.js"></script>
-  <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script defer src="//kit.fontawesome.com/72ec3ada60.js" crossorigin="anonymous"></script>
+  <script defer src="//code.jquery.com/jquery-latest.min.js"></script>
+  <script defer src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script defer src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+  <script defer src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+  <script defer
+          src="//dapi.kakao.com/v2/maps/sdk.js?appkey=34aa0f04a8c02352b695cb5574769930&libraries=services"></script>
+  <script defer src="//cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+  <script defer src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script defer th:src="@{/js/partials/header-profile-menu.js}"></script>
 
   <!--  Guest Header-->
@@ -44,7 +49,7 @@
 
   <th:block layout:fragment="js"/>
 
-  <title th:text="${title} + ' | Sixunsiverse'"></title>
+  <title th:text="${title} + ' | Sixuniverse'"></title>
 </head>
 <body>
 
@@ -59,6 +64,7 @@
 </th:block>
 
 <!-- 각 페이지가 구현 해야할 부분 -->
+<input type="hidden" id="csrf" th:value="${_csrf.token}"/>
 <th:block layout:fragment="content"/>
 
 <!-- Footer -->

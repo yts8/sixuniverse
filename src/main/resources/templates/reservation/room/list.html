@@ -5,15 +5,11 @@
       layout:decorator="layout/default">
 <th:block layout:fragment="css"></th:block>
 <th:block layout:fragment="js"></th:block>
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+
 <th:block layout:fragment="content">
 
   <form th:action="@{|/room/detail/${room.roomId}|}" method="get" th:each="room : ${roomList}">
-    <div  style="border: 1px solid #c3c3c3">
+    <div style="border: 1px solid #c3c3c3">
 
       <div th:text="${room.getTitle()}"></div>
 
@@ -23,7 +19,7 @@
 
     </div>
 
+
   </form>
 </th:block>
-</body>
 </html>

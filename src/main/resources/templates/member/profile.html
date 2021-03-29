@@ -17,7 +17,6 @@
         <div class="member-profile__img-wrap">
           <img id="member-profile-img" th:src="${memberDto.getProfileImg()}" alt="프로필">
           <input type="hidden" id="member-id" th:value="${memberDto.getMemberId()}"/>
-          <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
           <div th:if="${memberDto.getMemberId().equals(session.member.getMemberId())}">
             <label for="update-profile-img">
               사진 업데이트하기

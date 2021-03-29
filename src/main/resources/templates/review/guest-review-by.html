@@ -9,7 +9,7 @@
 </th:block>
 
 <th:block layout:fragment="js">
-  <script type="text/javascript" defer th:src="@{/js/review/review.js}"></script>
+  <script defer th:src="@{/js/review/review.js}"></script>
 </th:block>
 
 <th:block layout:fragment="content">
@@ -99,14 +99,16 @@
                     </th:block>
                   </div>
                 </div>
-                <div th:if="${review.getReplyContent()} != null" th:class="'g-review-by__input_area reply-content-js' + ${review.getReviewId()}">
+                <div th:if="${review.getReplyContent()} != null"
+                     th:class="'g-review-by__input_area reply-content-js' + ${review.getReviewId()}">
                   <div class="g-review-by__reply">
                   <span class="g-review-by__reply-name">
                     <span class="g-review-by__panel-review-profile-text-name" th:text="${review.getHostName()}"></span>
                      의 답변
                   </span>
                     <div class="g-review-by__reply-textarea-complete">
-                      <div class="g-review-by__reply-textarea-complete-content" th:text="${review.getReplyContent()}"></div>
+                      <div class="g-review-by__reply-textarea-complete-content"
+                           th:text="${review.getReplyContent()}"></div>
                     </div>
                   </div>
                 </div>
@@ -148,7 +150,9 @@
           <div>만료된 후기</div>
         </div>
         <div class="g-review-by__panel-body-rate">
-          <div class="g-review-by__panel-body-rate-text">공개 후기를 작성할 수 있는 기한이 지났습니다. 에어비앤비와 공유하고 싶은 사항이 있으신가요? 언제든 비공개 후기를 보내주시면 검토하겠습니다.</div>
+          <div class="g-review-by__panel-body-rate-text">공개 후기를 작성할 수 있는 기한이 지났습니다. 에어비앤비와 공유하고 싶은 사항이 있으신가요? 언제든 비공개
+            후기를 보내주시면 검토하겠습니다.
+          </div>
           <th:block th:each="reviewAfter : ${reviewAfterList}">
             <div class="g-review-by__panel-body-review">
               <div class="g-review-by__panel-review-profile">

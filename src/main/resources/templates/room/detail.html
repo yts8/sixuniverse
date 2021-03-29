@@ -7,17 +7,15 @@
   <link rel="stylesheet" th:href="@{/css/room/detail.css}"/>
   <link rel="stylesheet" th:href="@{/css/reservation/detail-modal.css}">
   <link rel="stylesheet" th:href="@{/css/review/reservation-review.css}"/>
-  <!--  <link rel="stylesheet" th:href="@{/css/reservation/ui-datepicker.css}">-->
 </th:block>
 <th:block layout:fragment="js">
-  <script type="text/javascript" defer th:src="@{/js/reservation/reservation-date-modal.js}"></script>
-  <script type="text/javascript" defer th:src="@{/js/reservation/reservation-modal.js}"></script>
-  <script type="text/javascript" defer th:src="@{/js/reservation/reservation-check.js}"></script>
-  <script type="text/javascript" defer th:src="@{/js/review/review.js}"></script>
+  <script defer th:src="@{/js/reservation/reservation-date-modal.js}"></script>
+  <script defer th:src="@{/js/reservation/reservation-modal.js}"></script>
+  <script defer th:src="@{/js/reservation/reservation-check.js}"></script>
+  <script defer th:src="@{/js/review/review.js}"></script>
 </th:block>
 
 <th:block layout:fragment="content">
-  <input type="hidden" id="csrf" th:value="${_csrf.token}"/>
   <input type="hidden" id="room-id" th:value="${roomId}"/>
 
   <div class="room__detail-container">
@@ -384,7 +382,9 @@
             <div class="reservation__choose-date">
               <div>
                 <h2 class="reservation__sub-title">날짜 선택</h2>
-                <div class="reservation__max-date">최대 숙박 일수 : <span class="reservation__room-max-date" th:text="${room.maxDateNumber}"></span> 박 </div>
+                <div class="reservation__max-date">최대 숙박 일수 : <span class="reservation__room-max-date"
+                                                                    th:text="${room.maxDateNumber}"></span> 박
+                </div>
               </div>
               <div class="reservation__ch-date">
                 <div class="reservation__ch-in-out-date">

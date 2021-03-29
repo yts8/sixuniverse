@@ -10,20 +10,10 @@
 </th:block>
 
 <th:block layout:fragment="js">
-  <script type="text/javascript"
-          src="//dapi.kakao.com/v2/maps/sdk.js?appkey=34aa0f04a8c02352b695cb5574769930&libraries=services"></script>
-  <script type="text/javascript" defer th:src="@{/js/common/map.js}"></script>
-  <script type="text/javascript" defer th:src="@{/js/reservation/guest/simple-info.js}"></script>
-  <script type="text/javascript" defer th:src="@{/js/reservation/guest/cancel.js}"></script>
+  <script defer th:src="@{/js/common/map.js}"></script>
+  <script defer th:src="@{/js/reservation/guest/simple-info.js}"></script>
+  <script defer th:src="@{/js/reservation/guest/cancel.js}"></script>
 </th:block>
-
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-
-<body>
-
 <th:block layout:fragment="content" class="guest-reservation-detail-info__box">
   <input type="hidden" th:value="${room.address}" class="room-address-value">
   <input type="hidden" th:value="${reservation.reservationId}" id="reservationId">
@@ -73,7 +63,8 @@
                       <i class="fas fa-pen"></i><span>예약 변경</span> <i class="fas fa-chevron-right"></i></div>
                   </a>
 
-                  <div class="guest-reservation-detail-info__margin" th:if="${reservation.status.equals('upcoming') || reservation.status.equals('update-no')}">
+                  <div class="guest-reservation-detail-info__margin"
+                       th:if="${reservation.status.equals('upcoming') || reservation.status.equals('update-no')}">
                     <div class="guest-reservation-detail-info__cancel">
                       <i class="far fa-window-close"></i><span>예약 취소</span> <i class="fas fa-chevron-right"></i>
                     </div>
@@ -189,6 +180,4 @@
   </div>
 
 </th:block>
-
-</body>
 </html>
