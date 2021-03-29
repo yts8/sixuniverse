@@ -43,9 +43,11 @@
         reviewRegDate
       } = review;
 
+      const reviewDate = new Date(reviewRegDate);
+
       reviewContentContainerEl.innerHTML += `
           <div class="review-info__content-wrap">
-            <div class="review-info__content-review-reg-date">${reviewRegDate}</div>
+            <div class="review-info__content-review-reg-date">${reviewDate.getMonth() + 1}월 ${reviewDate.getFullYear()}년</div>
             <div class="review-info__content-review-content">
               ${reviewContent}
             </div>
