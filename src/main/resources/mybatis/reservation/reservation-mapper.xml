@@ -15,7 +15,7 @@
     and update_target is null
     and status = #{status}
     <if test='status.equals("upcoming")'>
-      or status = 'update-no'
+      or status = 'update-no' and member_id = #{memberId}
     </if>
     order by check_in
   </select>
