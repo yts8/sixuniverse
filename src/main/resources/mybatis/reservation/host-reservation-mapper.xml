@@ -24,9 +24,14 @@
     join payment p on r.reservation_id = p.reservation_id
     join member m on m.member_id = r.member_id
     where room.member_id = #{memberId}
-    <if test='!status.equals("all")'>
-      and r.status = #{status};
-    </if>
+      <choose>
+        <when test='status.equals("upcoming")'>
+          and r.status = #{status} or r.status = 'update-no'
+        </when>
+        <when test='!status.equals("all")'>
+          and r.status = #{status}
+        </when>
+      </choose>
   </select>
 
   <select id="HostDetailInfo" resultType="HostDetailInfoDto">

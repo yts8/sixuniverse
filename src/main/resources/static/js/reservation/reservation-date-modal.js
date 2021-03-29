@@ -36,8 +36,6 @@
           let disabledDayList = $('.reservation__reservation-date-list').val();
           const disabledDays = disabledDayList.substring(1, disabledDayList.length - 1).split(", ");
 
-          console.log(disabledDayList)
-
           $('#range-date').datepicker({
             numberOfMonths: [1, 2],
             showMonthAfterYear: true,
@@ -75,6 +73,8 @@
                 const day = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
                 const days = new Date(day.setDate(day.getDate() + maxDateNum))
 
+
+
                 $('#range-date').datepicker('option', 'minDate', minDate2);
 
 
@@ -89,7 +89,11 @@
 
                   maxDate2 = (new Date(maxDate.getFullYear(), maxDate.getMonth() + 1, maxDate.getDate())).getTime();
 
-                  if(days  < maxDate2) {
+                  console.log("day : " + day)
+                  console.log("days : " + days)
+                  console.log("maxDate2 : " + maxDate2)
+
+                  if(days  < maxDate2 || isNaN(maxDate2)) {
                     $('#range-date').datepicker('option', 'maxDate', days);
                     return;
                   }

@@ -67,6 +67,14 @@
   margin-bottom: 15px;
 }
 
+.reservation__max-date {
+  color: #888888;
+}
+
+.reservation__room-max-date {
+  font-weight: bold;
+}
+
 .reservation__re-title {
   margin-left: 20px;
   font-size: 32px;

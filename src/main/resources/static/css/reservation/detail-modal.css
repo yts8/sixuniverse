@@ -49,6 +49,14 @@
   justify-content: space-between;
 }
 
+.reservation__max-date {
+  color: #888888;
+}
+
+.reservation__room-max-date {
+  font-weight: bold;
+}
+
 .reservation__ch-date {
   display: flex;
   justify-content: flex-end;

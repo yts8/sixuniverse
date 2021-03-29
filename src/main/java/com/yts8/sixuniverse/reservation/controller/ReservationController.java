@@ -10,6 +10,7 @@ import com.yts8.sixuniverse.reservation.dto.ReservationRoomPaymentDto;
 import com.yts8.sixuniverse.reservation.service.ReservationService;
 import com.yts8.sixuniverse.reservationDate.dto.ReservationDateDto;
 import com.yts8.sixuniverse.reservationDate.service.ReservationDateService;
+import com.yts8.sixuniverse.review.service.ReviewService;
 import com.yts8.sixuniverse.room.dto.RoomDto;
 import com.yts8.sixuniverse.room.service.RoomService;
 import com.yts8.sixuniverse.roomImage.dto.RoomImageDto;
@@ -52,6 +53,8 @@ public class ReservationController {
     Long roomMemberId = roomDto.getMemberId();
     Long sessionMemberId = memberDto.getMemberId();
 
+    MemberDto hostInfo = memberService.findById(roomMemberId);
+
     LocalDate checkIn = reservationDto.getCheckIn();
 //    int days = Period.between(checkIn, reservationDto.getCheckOut()).getDays();
     Long days = ChronoUnit.DAYS.between(checkIn, reservationDto.getCheckOut());
@@ -77,6 +80,7 @@ public class ReservationController {
 
       model.addAttribute("title", "예약하기");
       model.addAttribute("room", roomDto);
+      model.addAttribute("hostInfo", hostInfo);
       model.addAttribute("beforeReservation", reservationDto);
       model.addAttribute("reservationDateArray", reservationDateArray);
       model.addAttribute("commission", commission);

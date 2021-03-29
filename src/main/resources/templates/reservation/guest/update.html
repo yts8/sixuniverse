@@ -94,7 +94,10 @@
           <div class="reservation__date-modal-content">
             <div class="reservation__modal-cancel"><i class="fas fa-times"></i></div>
             <div class="reservation__choose-date">
-              <h2 class="reservation__sub-title">날짜 선택</h2>
+              <div>
+                <h2 class="reservation__sub-title">날짜 선택</h2>
+                <div class="reservation__max-date">최대 숙박 일수 : <span class="reservation__room-max-date" th:text="${room.maxDateNumber}"></span> 박 </div>
+              </div>
               <div class="reservation__ch-date">
                 <div class="reservation__ch-in-out-date">
                   <div class="reservation__check-title">체크인</div>

@@ -45,7 +45,7 @@
           <div class="room__detail-summery-sub">
 
             <span th:if="${room.maxPeople > 0}">최대인원 : <span th:text="${room.maxPeople}">명 · </span> </span>
-            <span th:unless="${room.maxPeople == 0}">최대인원 : 제한없음 · </span>
+            <span th:unless="${room.maxPeople > 0}">최대인원 : 제한없음 · </span>
 
             <span th:if="${room.bedroomCount > 0}">침실<span th:text="${room.bedroomCount}"> · </span> </span>
             <span th:unless="${room.bedroomCount > 0}"></span>
@@ -70,7 +70,7 @@
         </div>
 
         <div class="room__detail-introduce-container">
-          <span th:text="${room.content}"></span>
+          <pre th:text="${room.content}"></pre>
           <br>
           <a class="room__detail-chat-link" th:href="@{|/chat/${hostId}}">호스트한테 연락하기</a>
         </div>
@@ -382,7 +382,10 @@
           <div class="reservation__date-modal-content">
             <div class="reservation__modal-cancel"><i class="fas fa-times"></i></div>
             <div class="reservation__choose-date">
-              <h2 class="reservation__sub-title">날짜 선택</h2>
+              <div>
+                <h2 class="reservation__sub-title">날짜 선택</h2>
+                <div class="reservation__max-date">최대 숙박 일수 : <span class="reservation__room-max-date" th:text="${room.maxDateNumber}"></span> 박 </div>
+              </div>
               <div class="reservation__ch-date">
                 <div class="reservation__ch-in-out-date">
                   <div class="reservation__check-title">체크인</div>

@@ -100,7 +100,7 @@
             <tr th:each="hostReservation : ${hostReservationList}">
               <td class="reservation__request">
                 <div class="reservation__request-sub">
-                  <span th:if='${#strings.equals(hostReservation.getStatus(), "upcoming")}' th:text="'예정'"
+                  <span th:if='${#strings.equals(hostReservation.getStatus(), "upcoming") || #strings.equals(hostReservation.getStatus(), "update-no") }' th:text="'예정'"
                         class="reservation__request-char">
                     확정
                   </span>
@@ -168,13 +168,19 @@
               <td class="reservation__detail-btn">
                 <!-- 상태 : 변경요청(update)일 때만 수락/거절 버튼이 보임 -->
                 <div
-                    th:if="${#strings.equals(hostReservation.getStatus(), 'update') && update.updateTarget==hostReservation.reservationId && update.status.equals('update')}"
-                    th:each="update : ${updateList}"
+                    th:if="${#strings.equals(hostReservation.getStatus(), 'update') && update.updateTarget==hostReservation.reservationId }" th:each="update : ${updateList}"
                     class="reservation__host-btn-box-new">
-                  <div class="reservation__host-update">
+                  <div class="reservation__host-update" th:if="${update.updateTarget==hostReservation.reservationId && update.status.equals('update')}">
                     <button class="reservation__host-update-ok">수락</button>
                     <input type="hidden" th:value="${hostReservation.getReservationId()}" id="reservation-id">
                     <button class="reservation__host-update-no">거절</button>
+                  </div>
+                  <div class="reservation__detail-accept-con" th:if="${update.updateTarget==hostReservation.reservationId && update.status.equals('update-ok')}">
+                    <div class="reservation__detail-accept-char">수락됨</div>
+                    <div class="reservation__detail-accept-sub-char">
+                      <div>게스트 재결제 또는</div>
+                      <div>부분환불을 기다립니다</div>
+                    </div>
                   </div>
                   <div class="reservation__detail-con">
                     <a th:href="@{|/host/reservation/detail-info/${hostReservation.getReservationId()}|}"

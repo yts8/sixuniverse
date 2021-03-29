@@ -3,24 +3,12 @@
     const setCollapsedState = () => {
       if (location.href.indexOf('upcoming') != -1) {
         $('.guest-reservation__upcoming').addClass("guest-reservation__active");
-        $('.guest-reservation__complete').removeClass("guest-reservation__active");
-        $('.guest-reservation__cancel').removeClass("guest-reservation__active");
-        $('.guest-reservation__update').removeClass("guest-reservation__active");
       } else if (location.href.indexOf('complete') != -1) {
         $('.guest-reservation__complete').addClass("guest-reservation__active");
-        $('.guest-reservation__upcoming').removeClass("guest-reservation__active");
-        $('.guest-reservation__cancel').removeClass("guest-reservation__active");
-        $('.guest-reservation__update').removeClass("guest-reservation__active");
       } else if (location.href.indexOf('cancel') != -1) {
         $('.guest-reservation__cancel').addClass("guest-reservation__active");
-        $('.guest-reservation__upcoming').removeClass("guest-reservation__active");
-        $('.guest-reservation__complete').removeClass("guest-reservation__active");
-        $('.guest-reservation__update').removeClass("guest-reservation__active");
       } else if (location.href.indexOf('update') != -1) {
         $('.guest-reservation__update').addClass("guest-reservation__active");
-        $('.guest-reservation__cancel').removeClass("guest-reservation__active");
-        $('.guest-reservation__upcoming').removeClass("guest-reservation__active");
-        $('.guest-reservation__complete').removeClass("guest-reservation__active");
       } else {
         $('.guest-reservation__upcoming').removeClass("guest-reservation__active");
         $('.guest-reservation__cancel').removeClass("guest-reservation__active");
@@ -105,9 +93,9 @@
               $('.guest-reservation__modal-price').append(
                 '<div>변경 후 결제할 요금 : ' +
                 '<span class="guest-reservation__important-price">₩' + afterPrice.price.toLocaleString('ko-KR') +
-                '</span> / 수수료 10% : <span class="guest-reservation__important-price">₩' + afterPrice.commission.toLocaleString('ko-KR')+ '</span></div>' +
+                '</span> / 수수료 10% : <span class="guest-reservation__important-price">₩' + afterPrice.commission.toLocaleString('ko-KR') + '</span></div>' +
                 '<input type="hidden" class="guest-reservation__commission" value="' + afterPrice.commission +
-                '"><input type="hidden" class="guest-reservation__price" value="' + afterPrice.price +'">'
+                '"><input type="hidden" class="guest-reservation__price" value="' + afterPrice.price + '">'
               );
 
               if (after.status === 'update-ok') {
@@ -118,10 +106,10 @@
               $('.guest-reservation__modal-price').append(
                 '<div>변경 후 필요한 요금 : ₩' + afterPrice.price.toLocaleString('ko-KR') + ' / 수수료 10% : ₩' + afterPrice.commission.toLocaleString('ko-KR') + '</div>' +
                 '<div>부분 환불될 요금 : <span class="guest-reservation__important-price">₩' + (before.price - afterPrice.price - afterPrice.commission).toLocaleString('ko-KR') +
-                '</span></div>'+
+                '</span></div>' +
                 '<input type="hidden" class="guest-reservation__commission" value="' + afterPrice.commission +
-                '"><input type="hidden" class="guest-reservation__price" value="' + afterPrice.price +'">' +
-                '<input type="hidden" class="guest-reservation__refund-price" value="'+ (before.price - afterPrice.price - afterPrice.commission) + '">'
+                '"><input type="hidden" class="guest-reservation__price" value="' + afterPrice.price + '">' +
+                '<input type="hidden" class="guest-reservation__refund-price" value="' + (before.price - afterPrice.price - afterPrice.commission) + '">'
               );
               if (after.status === 'update-ok') {
                 $('.guest-reservation__modal-price').append('<button class="guest-reservation__partial-refund">부분 환불하기</button>');
@@ -155,16 +143,24 @@
 
     });
 
+    $('#cancel-update-modal').click(function (e) {
+      const container = $('#cancel-update-modal');
+      if (e.target == e.currentTarget) {
+        container.hide();
+        return;
+      }
+    });
+
     $('.guest-reservation__modal-cancel').bind('click', function () {
       $('#cancel-update-modal').hide();
     });
 
     $('.guest-reservation__modal-room-detail').click(function () {
-      location.href='/room/detail/' + roomId;
+      location.href = '/room/detail/' + roomId;
     })
 
     $('.guest-reservation__modal-host-name').click(function () {
-      location.href='/member/profile/' + hostId;
+      location.href = '/member/profile/' + hostId;
     })
 
   });

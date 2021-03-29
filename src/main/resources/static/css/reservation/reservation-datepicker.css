@@ -92,3 +92,11 @@
   font-weight: bold;
   margin: 30px 0 40px 0;
 }
+
+.reservation__max-date {
+  color: #888888;
+}
+
+.reservation__room-max-date {
+  font-weight: bold;
+}

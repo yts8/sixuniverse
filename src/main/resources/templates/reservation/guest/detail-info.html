@@ -67,13 +67,13 @@
                   <!--                  </div>-->
                   <!--                  <div class="guest-reservation-detail-info__margin">-->
                   <!--                    <i class="fas fa-mobile-alt"></i><span>호스트에게 연락하기</span><i class="fas fa-chevron-right"></i></div>-->
-                  <a th:if="${reservation.status.equals('upcoming')}"
+                  <a th:if="${reservation.status.equals('upcoming') || reservation.status.equals('update-no')}"
                      th:href="@{|/reservation/guest/update/${reservation.reservationId}|}">
                     <div class="guest-reservation-detail-info__margin">
                       <i class="fas fa-pen"></i><span>예약 변경</span> <i class="fas fa-chevron-right"></i></div>
                   </a>
 
-                  <div class="guest-reservation-detail-info__margin" th:if="${reservation.status.equals('upcoming')}">
+                  <div class="guest-reservation-detail-info__margin" th:if="${reservation.status.equals('upcoming') || reservation.status.equals('update-no')}">
                     <div class="guest-reservation-detail-info__cancel">
                       <i class="far fa-window-close"></i><span>예약 취소</span> <i class="fas fa-chevron-right"></i>
                     </div>
