@@ -68,9 +68,10 @@
     display: flex;
 }
 
-.reservation__detail-profile-img {
+.reservation__detail-profile-img-photo {
     height: 64px;
     width: 64px;
+    border-radius: 50%;
 }
 
 .reservation__detail-profile-img-con-photo {
@@ -207,6 +208,7 @@
     border-bottom-style: solid;
     padding-top: 24px;
     padding-bottom: 24px;
+    width: 704px;
 }
 
 .reservation__detail-guest-price, .reservation__detail-host-price, .reservation__detail-guest-price {

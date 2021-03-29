@@ -51,7 +51,9 @@
           </div>
         </div>
         <div class="reservation__content">
-          <table class="reservation__list-table">
+          <table
+              th:unless="${hostReservationList.isEmpty()}"
+              class="reservation__list-table">
             <thead class="reservation__list-thead">
             <tr>
               <th class="reservation__status-sub">
@@ -93,8 +95,7 @@
               </th>
             </tr>
             </thead>
-            <tbody th:unless="${hostReservationList.isEmpty()}"
-                   class="reservation__list-tbody">
+            <tbody class="reservation__list-tbody">
 
             <tr th:each="hostReservation : ${hostReservationList}">
               <td class="reservation__request">
@@ -154,7 +155,6 @@
                 <div th:text="${hostReservation.getTitle()}" class="reservation__room-name">방울 in the house</div>
               </td>
               <td class="reservation__price-con">
-                <!--                TODO: 가격 * 체크인 체크아웃 날짜 빼기-->
                 <div
                     th:unless="${#strings.equals(hostReservation.getStatus(), 'cancel')}"
                     th:text="'₩' + ${#numbers.formatInteger(hostReservation.getPrice() - hostReservation.getCommission(),3,'COMMA')}"
@@ -168,7 +168,8 @@
               <td class="reservation__detail-btn">
                 <!-- 상태 : 변경요청(update)일 때만 수락/거절 버튼이 보임 -->
                 <div
-                    th:if="${#strings.equals(hostReservation.getStatus(), 'update') && update.updateTarget==hostReservation.reservationId && update.status.equals('update')}" th:each="update : ${updateList}"
+                    th:if="${#strings.equals(hostReservation.getStatus(), 'update') && update.updateTarget==hostReservation.reservationId && update.status.equals('update')}"
+                    th:each="update : ${updateList}"
                     class="reservation__host-btn-box-new">
                   <div class="reservation__host-update">
                     <button class="reservation__host-update-ok">수락</button>
@@ -203,13 +204,13 @@
         </div>
       </section>
     </div>
-    <!--        <div th: th:if="${hostReservationList.size() == 0}" class="reservation__empty-box">-->
-    <!--          <div th:if="${status.equals('upcoming')}" class="reservation__empty-upcoming">예정된 예약이 없습니다</div>-->
-    <!--          <div th:if="${status.equals('complete')}" class="reservation__empty-complete">완료된 예약이 없습니다</div>-->
-    <!--          <div th:if="${status.equals('cancel')}" class="reservation__empty-cancel">취소된 예약이 없습니다</div>-->
-    <!--          <div th:if="${status.equals('update')}" class="reservation__empty-update">변경된 예약이 없습니다</div>-->
-    <!--          <div th:if="${status.equals('all')}" class="reservation__empty-all">예약이 없습니다</div>-->
-    <!--        </div>-->
+    <div th:if="${hostReservationList.size() == 0}" class="reservation__empty-box">
+      <div th:if="${status.equals('upcoming')}" class="reservation__empty-upcoming">예정된 예약이 없습니다</div>
+      <div th:if="${status.equals('complete')}" class="reservation__empty-complete">완료된 예약이 없습니다</div>
+      <div th:if="${status.equals('cancel')}" class="reservation__empty-cancel">취소된 예약이 없습니다</div>
+      <div th:if="${status.equals('update')}" class="reservation__empty-update">변경된 예약이 없습니다</div>
+      <div th:if="${status.equals('all')}" class="reservation__empty-all">예약이 없습니다</div>
+    </div>
   </div>
 </th:block>
 <!-- layout/default.html 에 보면 -->

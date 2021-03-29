@@ -57,6 +57,9 @@ public class HostReservationController {
     }
     model.addAttribute("hostDetailInfoDto", hostDetailInfoDto);
     model.addAttribute("title", "예약세부정보");
+
+    System.out.println(hostDetailInfoDto);
+    
     return "reservation/host/detail-info";
   }
 

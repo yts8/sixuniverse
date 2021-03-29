@@ -127,7 +127,13 @@
         </div>
       </div>
       <div class="reservation__detail-mobile">
-        <span th:text="'연락처 : ' + ${hostDetailInfoDto.mobile}" class="reservation__detail-mobile-num">전화번호: +82 10-9606-2908</span>
+        <span
+            th:if="${hostDetailInfoDto.mobile != null}"
+            th:text="'연락처 : ' + ${hostDetailInfoDto.mobile}" class="reservation__detail-mobile-num">전화번호: +82 10-9606-2908</span>
+
+        <span
+            th:if="${hostDetailInfoDto.mobile == null}">
+        </span>
       </div>
     </div>
     <div class="reservation__detail-guest">

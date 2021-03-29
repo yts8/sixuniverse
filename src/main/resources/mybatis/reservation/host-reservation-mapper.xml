@@ -34,7 +34,7 @@
            gm.username,
            gm.profile_img,
            r.status,
-           (r.check_out - r.check_in)                                                as date_sub,
+           datediff(r.check_out, r.check_in)                                         as date_sub,
            room.price,
            room.title,
            ((review.score_service + review.score_clean + review.score_location) / 3) as score_all,

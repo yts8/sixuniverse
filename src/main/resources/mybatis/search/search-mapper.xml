@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yts8.sixuniverse.room.repository.SearchMapper">
+
+  <select id="searchList" resultType="SearchDto">
+    select room.room_id,
+    m.host_grade,
+    (select room_img from room_img where room.room_id order by room_img.room_img_id limit 1) as room_img,
+    (select (ifnull(avg(score_clean), 0) + ifnull(avg(score_location), 0) + ifnull(avg(score_service), 0)) /
+    3
+    from review
+    where room.room_id) as reviewScore,
+    (select count(review_id) from review where room.room_id) as reviewCount,
+    room.title,
+    room.building_type,
+    room.room_type,
+    room.address,
+    room.sub_address,
+    room.price
+    from member m
+    join room on m.member_id = room.member_id
+    left join review on room.room_id = review.room_id
+    <where>
+      <if test="address != null and address != ''">
+        adress like '%'#{location}'%'
+      </if>
+      <if test="checkIn != null and checkIn != ''">
+        checkIn = #{checkIn}
+      </if>
+      <if test="checkOut != null and checkOut != ''">
+        checkOut = #{checkOut}
+      </if>
+      <if test="totalGuest != null and totalGuest != ''">
+        totalGuest = #{totalGuest}
+      </if>
+    </where>
+    and room.status = 'register'
+  </select>
+
+</mapper>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-securit"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/search/list.css}"/>
+</th:block>
+
+<th:block layout:fragment="content">
+  <div th:unless="${searchList.isEmpty()}"
+       class="search__list-container">
+
+    <div th:each="searchInfo : ${searchList}"
+         class="search__list-content">
+      <div class="member-profile__info-wrap">
+        <span>해운대구의 숙소</span>
+      </div>
+
+      <section class="room-info__container">
+        <div class="room-info__wrap">
+          <div class="room-info__item-box">
+            <div class="room-info__img-container">
+              <a th:href="@{|/room/detail/${searchInfo.getRoomId()}|}">
+                <img th:src="${searchInfo.getRoomImg()}" alt="숙소 대표 사진"/>
+              </a>
+            </div>
+
+            <div class="room-info__content-container">
+              <div class="room-info__box review-score__container">
+                <div class="review-score__star-icon">
+                  <i class="fas fa-star"></i>
+                </div>
+                <div th:text="${#numbers.formatDecimal(searchInfo.getReviewScore(), 1, 1, 'POINT')}">
+                  5.0
+                </div>
+                <div th:text="'(' + ${searchInfo.getReviewCount()} + ')'">
+                  (1)
+                </div>
+              </div>
+
+              <div class="room-info__box">
+                <div th:text="${searchInfo.getBuildingType()}">
+                  집 전체
+                </div>
+                <div>·</div>
+                <div th:text="${searchInfo.getRoomType()}">
+                  House
+                </div>
+              </div>
+
+              <div th:text="${searchInfo.getTitle()}">
+                제목
+              </div>
+
+              <div class="room-info__box">
+                <div th:text="'₩' + ${#numbers.formatInteger(searchInfo.getPrice(), 3, 'COMMA')}">
+                  ₩10,000
+                </div>
+                <div>/</div>
+                <div>1박</div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </div>
+</th:block>
+</html>
