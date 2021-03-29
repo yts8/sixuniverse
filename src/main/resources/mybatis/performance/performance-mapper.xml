@@ -114,7 +114,7 @@
       and payment.create_date <=
           last_day(now() - interval 1 year) + interval (12 - month(now())) month + interval (1 + #{interval}) month
       and (reservation.status = 'complete')
-      and payment.cancel_date is null]]>;
+      and payment.cancel_date is null ]]>;
   </select>
 
   <select id="findBySuperHostIs" resultType="string">

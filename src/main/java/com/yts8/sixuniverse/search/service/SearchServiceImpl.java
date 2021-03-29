@@ -1,7 +1,7 @@
 package com.yts8.sixuniverse.search.service;
 
+import com.yts8.sixuniverse.room.dto.RoomInfoDto;
 import com.yts8.sixuniverse.search.dto.SearchDto;
-import com.yts8.sixuniverse.search.dto.SearchRoomInfoDto;
 import com.yts8.sixuniverse.search.repository.SearchMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class SearchServiceImpl implements SearchService {
   private final SearchMapper searchMapper;
 
   @Override
-  public List<SearchRoomInfoDto> searchList(SearchDto searchDto) {
+  public List<RoomInfoDto> searchList(SearchDto searchDto) {
     return searchMapper.searchList(searchDto);
   }
 }
