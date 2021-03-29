@@ -35,14 +35,14 @@
 
       // 이 부분만 주석 처리 후 다른 주석 해제하면 결제 가능
       // -------------------------------------------------------------
-      // const randomNum = Math.floor(Math.random() * 10001);
-      //
-      // const data = JSON.stringify({
-      //   imp_uid: 'imp_' + randomNum,
-      //   paid_amount: price + commission,  // 게스트 최종결제금액
-      //   commission: commission,   // 수수료
-      //   pay_method: 'card'
-      // })
+      const randomNum = Math.floor(Math.random() * 10001);
+
+      const data = JSON.stringify({
+        imp_uid: 'imp_' + randomNum,
+        paid_amount: price + commission,  // 게스트 최종결제금액
+        commission: commission,   // 수수료
+        pay_method: 'card'
+      })
       // -------------------------------------------------------------
 
       $('.reservation__payment').val(data);

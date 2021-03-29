@@ -20,16 +20,17 @@
         $('.reservation__days').html(days)
         $('#totalPrice').val(result);
         $('.reservation__total2').html('₩' + (result + Math.floor(result * 0.1)).toLocaleString('ko-KR'));
+
+        $('.reservation__date').html($('#check-in').val() + ' ~ ' + $('#check-out').val());
+        $('.reservation__check-in').val($('#check-in').val());
+        $('.reservation__check-in').html($('#check-in').val());
+        $('.reservation__check-out').val($('#check-out').val());
+        $('.reservation__check-out').html($('#check-out').val());
+
+        $('#date-modal').hide();
       }
 
-      $('.reservation__date').html($('#check-in').val() + ' ~ ' + $('#check-out').val());
-      $('.reservation__check-in').val($('#check-in').val());
-      $('.reservation__check-in').html($('#check-in').val());
-      $('.reservation__check-out').val($('#check-out').val());
-      $('.reservation__check-out').html($('#check-out').val());
 
-
-      $('#date-modal').hide();
     });
 
 
