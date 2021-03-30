@@ -138,10 +138,10 @@
         joinAuthBtnContainerEl.style.display = "none";
         joinAuthInputContainerEl.style.display = "flex"
 
-        // const res = await fetch(`//${location.host}/api/login/email/${joinEmailInputEl.value}/auth-code`)
-        // const json = await res.json();
-        // authCode = json.authCode;
-        authCode = "1234";
+        const res = await fetch(`//${location.host}/api/login/email/${joinEmailInputEl.value}/auth-code`)
+        const json = await res.json();
+        authCode = json.authCode;
+        // authCode = "1234";
       }
       setSubmit();
     }
