@@ -65,6 +65,10 @@ body {
   word-break: break-all;
 }
 
+pre {
+  white-space: pre-wrap;
+}
+
 a, button {
   all: unset;
   display: block;

@@ -68,7 +68,9 @@
         </div>
 
         <div class="room__detail-introduce-container">
-          <pre th:text="${room.content}"></pre>
+          <div>
+            <pre th:text="${room.content}"></pre>
+          </div>
           <br>
           <a class="room__detail-chat-link" th:href="@{|/chat/${hostId}}">호스트한테 연락하기</a>
         </div>
