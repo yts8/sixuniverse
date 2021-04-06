@@ -73,25 +73,28 @@
               <div class="host-review__reply">
 
                 <th:block th:if="${review.getReplyContent()} == null">
-                  <div class="host-review__reply-write">
-                    <button class="on-reply" th:data-id="${review.getReviewId()}">답글 쓰기</button>
-                  </div>
-                  <section th:class="'host-review__reply-form reply-form-js' + ${review.getReviewId()}">
-                    <form th:action="@{/host/performance/review/update}" method="post">
-                      <input type="hidden" name="reviewId" th:value="${review.getReviewId()}">
-                      <input type="hidden" name="roomId" th:value="${getReview.getRoomId()}">
-                      <input type="hidden" name="reservationId" th:value="${getReview.getReservationId()}">
-                      <input type="hidden" name="reviewContent" th:value="${getReview.getReviewContent()}">
-                      <div class="host-review__box">
-                        <div class="host-review__input_area">
-                          <button type="submit" class="host-review__reply-btn">완료</button>
+                  <th:block th:if="${today} < ${review.getReviewRegDate().plusDays(3)}">
+                    <div class="host-review__reply-write">
+                      <button class="on-reply" th:data-id="${review.getReviewId()}">답글 쓰기</button>
+                    </div>
+                    <section th:class="'host-review__reply-form reply-form-js' + ${review.getReviewId()}">
+                      <form th:action="@{/host/performance/review/update}" method="post">
+                        <input type="hidden" name="reviewId" th:value="${review.getReviewId()}">
+                        <input type="hidden" name="roomId" th:value="${getReview.getRoomId()}">
+                        <input type="hidden" name="reservationId" th:value="${getReview.getReservationId()}">
+                        <input type="hidden" name="reviewContent" th:value="${getReview.getReviewContent()}">
+                        <div class="host-review__box">
+                          <div class="host-review__input_area">
+                            <button type="submit" class="host-review__reply-btn">완료</button>
+                          </div>
+                          <div class="host-review__input_area">
+                            <textarea name="replyContent" class="host-review__reply-textarea"
+                                      maxlength="500"></textarea>
+                          </div>
                         </div>
-                        <div class="host-review__input_area">
-                          <textarea name="replyContent" class="host-review__reply-textarea" maxlength="500"></textarea>
-                        </div>
-                      </div>
-                    </form>
-                  </section>
+                      </form>
+                    </section>
+                  </th:block>
                 </th:block>
 
                 <th:block th:unless="${review.getReplyContent()} == null">
@@ -138,6 +141,7 @@
                     </div>
                   </form>
                 </th:block>
+
               </div>
             </div>
             <hr class="host-review__review-hr">
