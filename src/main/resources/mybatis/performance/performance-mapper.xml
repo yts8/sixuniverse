@@ -127,7 +127,7 @@
 
   <update id="updateSuperHostScheduler" parameterType="string">
     update member
-    set host_grade='SUPERHOST'
+    set host_grade='SUPER-HOST'
     where member_id in (select member_id
                         from (select m.member_id
                               from member m
