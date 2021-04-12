@@ -21,6 +21,7 @@
     select count(room_id)
     from room
     where member_id = #{memberId}
+      and status = 'register'
   </select>
 
   <select id="findByCancelCount" resultType="double">
